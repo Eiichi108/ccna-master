@@ -1,0 +1,163 @@
+{
+ "r": "TB",
+ "n": 8,
+ "t": "Cisco機器を文字で操作する",
+ "d": "d0",
+ "form": "トラブル解決",
+ "need": [4],
+ "goal": ["CLIとプロンプトがわかる", "モードの進み方がわかる", "設定の保存のしかたがわかる"],
+ "terms": ["CLI", "プロンプト", "モード", "running-config", "startup-config"],
+ "pages": [
+  {
+   "t": "画面にボタンがない機械",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 124.0\" role=\"img\" aria-label=\"つかみ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"110\" rx=\"16\" fill=\"#0a5cff\" opacity=\".12\"/><text x=\"180\" y=\"44\" text-anchor=\"middle\" style=\"font:800 19.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ルーターには、マウスもボタンもない</text><text x=\"180\" y=\"74\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">では、どうやって設定するの？</text><text x=\"180\" y=\"94\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">答えは「文字で命令を打つ」です</text></svg>",
+   "b": "パソコンなら、マウスでボタンを押して設定できますよね。ところが、会社で使うCiscoのルーターやスイッチには、画面もボタンもありません。設定するときは、パソコンをつないで、<b>文字で命令（コマンド）を打ち込みます</b>。今日は、その操作の基本を学びます。"
+  },
+  {
+   "t": "今日のゴール",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のゴール\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1. CLIとプロンプトがわかる</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">文字で操作する画面と、行の先頭の印</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2. モードの進み方がわかる</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">受付 → 事務室 → 設定室 → 作業場</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">3. 設定の保存のしかたがわかる</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">保存しないと、電源を切ったら消える</text></svg>"
+  },
+  {
+   "t": "文字で操作する画面（CLI）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 184.0\" role=\"img\" aria-label=\"CLIの画面\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"100\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#e8ecf3;white-space:pre\">Router&gt; enable</text><text x=\"22\" y=\"74\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#e8ecf3;white-space:pre\">Router# configure terminal</text><text x=\"22\" y=\"96\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#ffb400;white-space:pre\">Router(config)#</text><text x=\"180\" y=\"132\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">文字でコマンドを打つ画面 ＝ CLI</text><text x=\"180\" y=\"156\" text-anchor=\"middle\" style=\"font:700 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">行の先頭の Router&gt; などがプロンプト</text></svg>",
+   "b": "文字でコマンドを打って操作する画面を、<b>CLI</b>（Command Line Interface）と言います。行の先頭に出ている「Router&gt;」や「Router#」を<b>プロンプト</b>と言い、<b>今どのモードにいるか</b>を教えてくれます。記号が変わったら、いる場所が変わった合図です。",
+   "p": "プロンプトの記号（&gt;・#・(config)#）で、今いるモードがわかる。"
+  },
+  {
+   "t": "モードは、建物の部屋",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 264.0\" role=\"img\" aria-label=\"モード\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#3d4450\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">&gt;  受付（ユーザーEXEC）</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">見るだけ。設定は変えられない</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">#  事務室（特権EXEC）</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">確認・保存・再起動ができる</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">(config)#  設定室（グローバル設定）</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">機器全体の設定を変える</text><rect x=\"10\" y=\"196.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"222.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">(config-if)#  作業場（IFの設定）</text><text x=\"24\" y=\"241.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ポートごとの設定を変える</text></svg>",
+   "b": "Cisco機器の操作は、建物の部屋を奥へ進んでいくイメージです。入ってすぐの<b>受付</b>（&gt;）では見ることしかできません。<b>enable</b> で<b>事務室</b>（#）へ、<b>configure terminal</b> で<b>設定室</b>（(config)#）へ、<b>interface</b> でポートごとの<b>作業場</b>へ進みます。奥に行くほど、できることが増えます。",
+   "p": "戻るとき：exit ＝ 1つ前の部屋へ、end ＝ 事務室（#）まで一気に。"
+  },
+  {
+   "t": "確認の問題 1",
+   "quiz": {
+    "q": "プロンプトが「Router#」のとき、今いるモードはどれでしょう？",
+    "o": [
+     ["ユーザーEXECモード（受付）", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["特権EXECモード（事務室）", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["グローバル設定モード（設定室）", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "# だけのときは<b>特権EXECモード</b>です。&gt; は受付（ユーザーEXEC）、(config)# は設定室（グローバル設定）です。"
+   }
+  },
+  {
+   "t": "2つの設定ファイル",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"設定ファイル\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">running-config（今動いている設定）</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">メモリの上にある。電源を切ると消える</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">startup-config（起動時に読む設定）</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">保存されている。電源を切っても残る</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">保存のコマンド</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">copy running-config startup-config</text></svg>",
+   "b": "コマンドで設定を変えると、すぐに<b>running-config</b>（今動いている設定）に反映されます。ただし、これは<b>メモリの上</b>にあるので、電源を切ると消えてしまいます。消えないようにするには、<b>copy running-config startup-config</b> で、起動時に読み込まれる<b>startup-config</b> に保存します。ゲームの「セーブ」と同じです。",
+   "p": "設定したら、必ず保存（copy running-config startup-config）。"
+  },
+  {
+   "t": "確認の問題 2",
+   "quiz": {
+    "q": "設定を変えたあと、保存しないまま電源を入れ直しました。起動したときの設定はどうなるでしょう？",
+    "o": [
+     ["変えた設定が、そのまま残っている", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["保存しておいた、変更前の設定（startup-config）に戻る", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["設定がすべて消えて、空っぽになる", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "起動時に読み込まれるのは<b>startup-config</b>です。保存していなければ、変更前の設定に戻ります。"
+   }
+  },
+  {
+   "t": "覚えておくと便利な操作",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 264.0\" role=\"img\" aria-label=\"便利な操作\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">?（はてな）</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">今打てるコマンドの一覧を表示する</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Tabキー</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">コマンドの続きを、自動で補ってくれる</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">省略</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ほかと区別できれば短く打てる：conf t</text><rect x=\"10\" y=\"196.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#8a3ffc\" opacity=\".1\"/><text x=\"24\" y=\"222.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">no</text><text x=\"24\" y=\"241.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">設定を取り消す：no shutdown など</text></svg>",
+   "b": "コマンドを全部覚えている必要はありません。迷ったら <b>?</b> を打てば、今使えるコマンドが一覧で出ます。<b>Tab</b>キーで続きを補えますし、ほかと区別できれば <b>conf t</b> のように短く打つこともできます。また、設定の前に <b>no</b> を付けると、その設定を取り消せます。"
+  },
+  {
+   "t": "確認の問題 3",
+   "quiz": {
+    "q": "設定モードで、次に打てるコマンドを一覧で見たいとき、打つものはどれでしょう？",
+    "o": [
+     ["?", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["no", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["end", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 0,
+    "e": "<b>?</b> を打つと、今使えるコマンドの一覧が表示されます。"
+   }
+  },
+  {
+   "t": "まちがえやすい所",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 264.0\" role=\"img\" aria-label=\"よくある勘違い\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× 設定したら、それで終わり</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">電源を切ると、保存していない設定は消える</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ 最後に必ず保存する</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">保存して初めて、次の起動でも使える</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× 受付（&gt;）でも設定できる</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">受付では見ることしかできない</text><rect x=\"10\" y=\"196.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"222.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ 設定は、configure terminal で設定室へ</text><text x=\"24\" y=\"241.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">プロンプトが (config)# になっているか確かめる</text></svg>",
+   "b": "初心者が一番やりがちなのは、設定したまま<b>保存を忘れる</b>ことです。停電や再起動のあと、「設定が消えた！」と慌てることになります。もう1つは、受付（&gt;）のまま設定コマンドを打ってしまうこと。プロンプトを見て、<b>今どの部屋にいるか</b>を確かめるくせをつけましょう。"
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">CLIとプロンプト</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">文字で操作する画面。行の先頭の印でモードがわかる</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">モード ＝ 建物の部屋</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">受付 → 事務室 → 設定室 → 作業場</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">running と startup</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">保存は copy running-config startup-config</text></svg>",
+   "b": "これで入門はおしまいです。次回からは、試験範囲の「ネットワークの基礎」に入ります。最初は、ネットワーク機器の役割を、もう少しくわしく見ていきます。"
+  }
+ ],
+ "cls": {
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "パソコンの設定は、どうやって変えますか？"},
+   {"sc": 1, "sp": "生徒", "t": "マウスで、設定のボタンを押していきます。"},
+   {"sc": 1, "sp": "先生", "t": "ところが、会社で使うCiscoのルーターには、画面もボタンもありません。", "y": "ところが、会社で使うシスコのルーターには、画面もボタンもありません。"},
+   {"sc": 1, "sp": "生徒", "t": "え、じゃあどうやって設定するんですか？"},
+   {"sc": 1, "sp": "先生", "t": "パソコンをつないで、文字で命令を打ち込むんです。"},
+   {"sc": 1, "sp": "生徒", "t": "映画のハッカーみたいですね！"},
+   {"sc": 1, "sp": "先生", "t": "見た目は似ていますね。でも、慣れると意外と簡単ですよ。"},
+   {"sc": 2, "sp": "先生", "t": "今日のゴールは3つです。"},
+   {"sc": 2, "sp": "先生", "t": "1つ目、CLIとプロンプトがわかること。", "y": "1つ目、シーエルアイとプロンプトがわかること。"},
+   {"sc": 2, "sp": "先生", "t": "2つ目、モードという部屋の進み方がわかること。"},
+   {"sc": 2, "sp": "先生", "t": "3つ目、設定を保存するしかたがわかることです。"},
+   {"sc": 2, "sp": "生徒", "t": "保存しないと、どうなるんですか？"},
+   {"sc": 2, "sp": "先生", "t": "いい疑問です。それも、今日の大事なポイントです。"},
+   {"sc": 3, "sp": "先生", "t": "文字でコマンドを打って操作する画面を、CLIと言います。", "y": "文字でコマンドを打って操作する画面を、シーエルアイと言います。"},
+   {"sc": 3, "sp": "先生", "t": "コマンド・ライン・インターフェースの頭文字です。"},
+   {"sc": 3, "sp": "先生", "t": "画面の行の先頭に、Router、大なり、のような印が出ています。"},
+   {"sc": 3, "sp": "生徒", "t": "あれは何ですか？"},
+   {"sc": 3, "sp": "先生", "t": "プロンプトと言って、今どのモードにいるかを教えてくれる印です。"},
+   {"sc": 3, "sp": "生徒", "t": "記号が変わったら、いる場所が変わった合図なんですね。"},
+   {"sc": 4, "sp": "先生", "t": "Cisco機器の操作は、建物の部屋を奥へ進むイメージです。", "y": "シスコ機器の操作は、建物の部屋を奥へ進むイメージです。"},
+   {"sc": 4, "sp": "先生", "t": "入ってすぐは、受付。大なりの記号です。ここでは、見ることしかできません。"},
+   {"sc": 4, "sp": "先生", "t": "enableと打つと、事務室へ。シャープの記号になります。"},
+   {"sc": 4, "sp": "生徒", "t": "事務室では、何ができるんですか？"},
+   {"sc": 4, "sp": "先生", "t": "確認、保存、再起動ができます。"},
+   {"sc": 4, "sp": "先生", "t": "configure terminalで、設定室へ。機器全体の設定を変える部屋です。"},
+   {"sc": 4, "sp": "先生", "t": "さらにinterfaceで、ポートごとの作業場へ進みます。", "y": "さらにインターフェースで、ポートごとの作業場へ進みます。"},
+   {"sc": 4, "sp": "生徒", "t": "奥に行くほど、できることが増えるんですね。戻るときは？"},
+   {"sc": 4, "sp": "先生", "t": "exitで1つ前の部屋へ、endで事務室まで一気に戻れます。"},
+   {"sc": 5, "sp": "先生", "t": "確認です。プロンプトがRouterシャープのとき、今いるモードはどれでしょう？", "w": 1},
+   {"sc": 5, "sp": "生徒", "t": "シャープだけだから、事務室。特権EXECモードです。"},
+   {"sc": 5, "sp": "先生", "t": "正解です。"},
+   {"sc": 6, "sp": "先生", "t": "では、さっきの疑問。保存の話です。"},
+   {"sc": 6, "sp": "先生", "t": "コマンドで設定を変えると、すぐにrunning-configに反映されます。"},
+   {"sc": 6, "sp": "生徒", "t": "ランニング…今動いている設定、ですか？"},
+   {"sc": 6, "sp": "先生", "t": "その通り。ただ、これはメモリの上にあるので、電源を切ると消えます。"},
+   {"sc": 6, "sp": "生徒", "t": "えっ、せっかく設定したのに！"},
+   {"sc": 6, "sp": "先生", "t": "だから、startup-configという、起動時に読み込む設定に保存します。"},
+   {"sc": 6, "sp": "先生", "t": "コマンドは、copy running-config startup-config です。"},
+   {"sc": 6, "sp": "生徒", "t": "ゲームのセーブと同じですね。セーブしないと、最初からやり直し。"},
+   {"sc": 7, "sp": "先生", "t": "確認です。保存しないまま電源を入れ直すと、設定はどうなるでしょう？", "w": 1},
+   {"sc": 7, "sp": "生徒", "t": "起動時はstartup-configを読むから、変更前に戻る。2つ目です。"},
+   {"sc": 7, "sp": "先生", "t": "正解です。"},
+   {"sc": 8, "sp": "先生", "t": "最後に、覚えておくと便利な操作を紹介します。"},
+   {"sc": 8, "sp": "先生", "t": "迷ったら、はてなマークを打ってください。今使えるコマンドが一覧で出ます。"},
+   {"sc": 8, "sp": "生徒", "t": "コマンドを全部覚えなくていいんですね。助かる！"},
+   {"sc": 8, "sp": "先生", "t": "Tabキーで、コマンドの続きを補ってくれます。"},
+   {"sc": 8, "sp": "先生", "t": "ほかと区別できれば、conf tのように、短く打つこともできます。"},
+   {"sc": 8, "sp": "先生", "t": "それから、頭にnoを付けると、その設定を取り消せます。", "y": "それから、頭にノーを付けると、その設定を取り消せます。"},
+   {"sc": 8, "sp": "生徒", "t": "no shutdown、みたいな感じですか？", "y": "ノー シャットダウン、みたいな感じですか？"},
+   {"sc": 8, "sp": "先生", "t": "その通りです。"},
+   {"sc": 9, "sp": "先生", "t": "確認です。次に打てるコマンドを一覧で見たいとき、打つものはどれでしょう？", "w": 1},
+   {"sc": 9, "sp": "生徒", "t": "はてなです！"},
+   {"sc": 9, "sp": "先生", "t": "正解です。"},
+   {"sc": 10, "sp": "生徒", "t": "先生、私、絶対に保存を忘れそうです。"},
+   {"sc": 10, "sp": "先生", "t": "実は、それが一番多い失敗なんです。"},
+   {"sc": 10, "sp": "先生", "t": "停電や再起動のあとに、設定が消えた、と慌てることになります。"},
+   {"sc": 10, "sp": "生徒", "t": "設定したら、最後に必ずセーブ。"},
+   {"sc": 10, "sp": "先生", "t": "もう1つ。受付のまま、設定のコマンドを打ってしまう失敗もあります。"},
+   {"sc": 10, "sp": "生徒", "t": "プロンプトを見て、今どの部屋にいるか確かめる、ですね。"},
+   {"sc": 10, "sp": "先生", "t": "その通りです。"},
+   {"sc": 11, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 11, "sp": "先生", "t": "1つ目。CLIは文字で操作する画面。プロンプトで、今いるモードがわかる。", "y": "1つ目。シーエルアイは文字で操作する画面。プロンプトで、今いるモードがわかる。"},
+   {"sc": 11, "sp": "先生", "t": "2つ目。モードは建物の部屋。受付、事務室、設定室、作業場。"},
+   {"sc": 11, "sp": "先生", "t": "3つ目。設定したら、copy running-config startup-config で保存。"},
+   {"sc": 11, "sp": "生徒", "t": "これで入門は終わりですか？"},
+   {"sc": 11, "sp": "先生", "t": "はい。次回から、試験範囲のネットワークの基礎に入ります。お疲れさまでした。"}
+  ]
+ }
+}

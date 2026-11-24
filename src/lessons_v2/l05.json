@@ -1,0 +1,160 @@
+{
+ "r": "TB",
+ "n": 5,
+ "t": "0と1で数える",
+ "d": "d0",
+ "form": "一緒に解く",
+ "need": [],
+ "goal": ["2進数とは何かを言える", "ビット・バイト・オクテットがわかる", "8ビットで0〜255まで表せる理由がわかる"],
+ "terms": ["2進数", "ビット", "バイト", "オクテット"],
+ "pages": [
+  {
+   "t": "コンピューターは、指が2本？",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 124.0\" role=\"img\" aria-label=\"つかみ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"110\" rx=\"16\" fill=\"#0a5cff\" opacity=\".12\"/><text x=\"180\" y=\"44\" text-anchor=\"middle\" style=\"font:800 19.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">コンピューターは、0と1だけで数える</text><text x=\"180\" y=\"74\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">電気が「流れる・流れない」の2通りしかないから</text><text x=\"180\" y=\"94\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">今日は、その数え方を一緒に体験します</text></svg>",
+   "b": "私たちは、0から9までの10種類の数字で数えます。指が10本あるから、とも言われます。ところがコンピューターの中は、電気が<b>流れる・流れない</b>の2通りしかありません。だから、<b>0と1の2種類だけ</b>で数を表します。IPアドレスもこの数え方で動いているので、ネットワークを学ぶには避けて通れません。"
+  },
+  {
+   "t": "今日のゴール",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のゴール\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1. 2進数とは何かを言える</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">0と1だけで数を表す方法</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2. ビット・バイト・オクテットがわかる</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">0か1の1けた／8けたのまとまり</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">3. 8けたで 0〜255 まで表せる理由がわかる</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">IPアドレスの数字が 255 までの理由</text></svg>"
+  },
+  {
+   "t": "10進数と2進数",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"10進数と2進数\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">10進数（人間の数え方）</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">0〜9 の10種類。9の次でけたが上がって 10</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2進数（コンピューターの数え方）</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">0と1 の2種類。1の次でけたが上がって 10</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2進数で数えると</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">0 → 1 → 10 → 11 → 100 → 101 …</text></svg>",
+   "b": "10進数では、9まで数えたら次はけたが上がって10になりますね。<b>2進数</b>は、使える数字が0と1だけなので、<b>1の次でもうけたが上がり</b>ます。0、1、10、11、100…と数えていきます。2進数の「10」は「じゅう」ではなく、10進数の<b>2</b>のことです。",
+   "p": "2進数の 10 ＝ 10進数の 2。読むときは「いち・ゼロ」と読む。"
+  },
+  {
+   "t": "確認の問題 1",
+   "quiz": {
+    "q": "2進数で 0、1、10、11 の次に来る数はどれでしょう？",
+    "o": [
+     ["12", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["100", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["20", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "2進数は0と1しか使えないので、11 の次はけたが上がって <b>100</b> になります。10進数でいうと 4 です。"
+   }
+  },
+  {
+   "t": "ビット・バイト・オクテット",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 122.0\" role=\"img\" aria-label=\"ビットとバイト\"><text x=\"180\" y=\"22\" text-anchor=\"middle\" style=\"font:800 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">0か1の1けた ＝ 1ビット、8けた ＝ 1バイト</text><text x=\"87.0\" y=\"46\" text-anchor=\"middle\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">128</text><text x=\"121.0\" y=\"46\" text-anchor=\"middle\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">64</text><text x=\"155.0\" y=\"46\" text-anchor=\"middle\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">32</text><text x=\"189.0\" y=\"46\" text-anchor=\"middle\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">16</text><text x=\"223.0\" y=\"46\" text-anchor=\"middle\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">8</text><text x=\"257.0\" y=\"46\" text-anchor=\"middle\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">4</text><text x=\"291.0\" y=\"46\" text-anchor=\"middle\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2</text><text x=\"325.0\" y=\"46\" text-anchor=\"middle\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1</text><text x=\"8\" y=\"77\" text-anchor=\"start\" style=\"font:800 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">8ビット</text><rect x=\"72\" y=\"56\" width=\"30\" height=\"30\" rx=\"5\" fill=\"#0a5cff\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"1\"/><text x=\"87.0\" y=\"77\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:#fff\">1</text><rect x=\"106\" y=\"56\" width=\"30\" height=\"30\" rx=\"5\" fill=\"#0a5cff\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"1\"/><text x=\"121.0\" y=\"77\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:#fff\">1</text><rect x=\"140\" y=\"56\" width=\"30\" height=\"30\" rx=\"5\" fill=\"none\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"0.5\"/><text x=\"155.0\" y=\"77\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub)\">0</text><rect x=\"174\" y=\"56\" width=\"30\" height=\"30\" rx=\"5\" fill=\"none\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"0.5\"/><text x=\"189.0\" y=\"77\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub)\">0</text><rect x=\"208\" y=\"56\" width=\"30\" height=\"30\" rx=\"5\" fill=\"none\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"0.5\"/><text x=\"223.0\" y=\"77\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub)\">0</text><rect x=\"242\" y=\"56\" width=\"30\" height=\"30\" rx=\"5\" fill=\"none\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"0.5\"/><text x=\"257.0\" y=\"77\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub)\">0</text><rect x=\"276\" y=\"56\" width=\"30\" height=\"30\" rx=\"5\" fill=\"none\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"0.5\"/><text x=\"291.0\" y=\"77\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub)\">0</text><rect x=\"310\" y=\"56\" width=\"30\" height=\"30\" rx=\"5\" fill=\"none\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"0.5\"/><text x=\"325.0\" y=\"77\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub)\">0</text><text x=\"70\" y=\"102\" text-anchor=\"start\" style=\"font:700 12px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">＝ 1バイト（IPでは1オクテット）</text></svg>",
+   "b": "2進数の<b>0か1の1けた</b>を<b>ビット</b>と言います。ビットが<b>8個</b>集まったまとまりを<b>バイト</b>と言います。IPアドレスの話では、この8ビットのまとまりを<b>オクテット</b>と呼ぶことが多いです。オクテットは「8つ組」という意味です。",
+   "p": "1ビット＝0か1の1けた。8ビット＝1バイト＝1オクテット。"
+  },
+  {
+   "t": "IPアドレスは4つのオクテット",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"IPアドレスとオクテット\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">192 . 168 . 1 . 10</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">点で区切られた4つの数字</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1つ1つの数字が、8ビット（1オクテット）</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">8ビット × 4 ＝ 32ビット</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">だから IPv4 アドレスは 32ビット</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">コンピューターの中では、0と1が32個並んでいる</text></svg>",
+   "b": "第3回で見たIPアドレス 192.168.1.10。点で区切られた4つの数字は、それぞれが<b>8ビット（1オクテット）</b>です。つまり、コンピューターの中では <b>0と1が32個</b>並んでいて、それを人間が読みやすいように、8個ずつ区切って10進数で書いているのです。"
+  },
+  {
+   "t": "確認の問題 2",
+   "quiz": {
+    "q": "IPv4アドレス 192.168.1.10 は、全部で何ビットでしょう？",
+    "o": [
+     ["8ビット", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["16ビット", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["32ビット", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 2,
+    "e": "1つの数字が8ビットで、それが4つあるので、8 × 4 ＝ <b>32ビット</b>です。"
+   }
+  },
+  {
+   "t": "8けたで表せるのは 0〜255",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 206.0\" role=\"img\" aria-label=\"0から255\"><text x=\"180\" y=\"22\" text-anchor=\"middle\" style=\"font:800 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">8けたの一番小さい数と、一番大きい数</text><text x=\"87.0\" y=\"46\" text-anchor=\"middle\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">128</text><text x=\"121.0\" y=\"46\" text-anchor=\"middle\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">64</text><text x=\"155.0\" y=\"46\" text-anchor=\"middle\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">32</text><text x=\"189.0\" y=\"46\" text-anchor=\"middle\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">16</text><text x=\"223.0\" y=\"46\" text-anchor=\"middle\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">8</text><text x=\"257.0\" y=\"46\" text-anchor=\"middle\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">4</text><text x=\"291.0\" y=\"46\" text-anchor=\"middle\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2</text><text x=\"325.0\" y=\"46\" text-anchor=\"middle\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1</text><text x=\"8\" y=\"77\" text-anchor=\"start\" style=\"font:800 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">全部0</text><rect x=\"72\" y=\"56\" width=\"30\" height=\"30\" rx=\"5\" fill=\"none\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"0.5\"/><text x=\"87.0\" y=\"77\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub)\">0</text><rect x=\"106\" y=\"56\" width=\"30\" height=\"30\" rx=\"5\" fill=\"none\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"0.5\"/><text x=\"121.0\" y=\"77\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub)\">0</text><rect x=\"140\" y=\"56\" width=\"30\" height=\"30\" rx=\"5\" fill=\"none\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"0.5\"/><text x=\"155.0\" y=\"77\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub)\">0</text><rect x=\"174\" y=\"56\" width=\"30\" height=\"30\" rx=\"5\" fill=\"none\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"0.5\"/><text x=\"189.0\" y=\"77\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub)\">0</text><rect x=\"208\" y=\"56\" width=\"30\" height=\"30\" rx=\"5\" fill=\"none\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"0.5\"/><text x=\"223.0\" y=\"77\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub)\">0</text><rect x=\"242\" y=\"56\" width=\"30\" height=\"30\" rx=\"5\" fill=\"none\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"0.5\"/><text x=\"257.0\" y=\"77\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub)\">0</text><rect x=\"276\" y=\"56\" width=\"30\" height=\"30\" rx=\"5\" fill=\"none\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"0.5\"/><text x=\"291.0\" y=\"77\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub)\">0</text><rect x=\"310\" y=\"56\" width=\"30\" height=\"30\" rx=\"5\" fill=\"none\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"0.5\"/><text x=\"325.0\" y=\"77\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub)\">0</text><text x=\"70\" y=\"102\" text-anchor=\"start\" style=\"font:700 12px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">→ 0</text><text x=\"8\" y=\"137\" text-anchor=\"start\" style=\"font:800 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">全部1</text><rect x=\"72\" y=\"116\" width=\"30\" height=\"30\" rx=\"5\" fill=\"#0a5cff\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"1\"/><text x=\"87.0\" y=\"137\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:#fff\">1</text><rect x=\"106\" y=\"116\" width=\"30\" height=\"30\" rx=\"5\" fill=\"#0a5cff\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"1\"/><text x=\"121.0\" y=\"137\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:#fff\">1</text><rect x=\"140\" y=\"116\" width=\"30\" height=\"30\" rx=\"5\" fill=\"#0a5cff\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"1\"/><text x=\"155.0\" y=\"137\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:#fff\">1</text><rect x=\"174\" y=\"116\" width=\"30\" height=\"30\" rx=\"5\" fill=\"#0a5cff\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"1\"/><text x=\"189.0\" y=\"137\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:#fff\">1</text><rect x=\"208\" y=\"116\" width=\"30\" height=\"30\" rx=\"5\" fill=\"#0a5cff\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"1\"/><text x=\"223.0\" y=\"137\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:#fff\">1</text><rect x=\"242\" y=\"116\" width=\"30\" height=\"30\" rx=\"5\" fill=\"#0a5cff\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"1\"/><text x=\"257.0\" y=\"137\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:#fff\">1</text><rect x=\"276\" y=\"116\" width=\"30\" height=\"30\" rx=\"5\" fill=\"#0a5cff\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"1\"/><text x=\"291.0\" y=\"137\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:#fff\">1</text><rect x=\"310\" y=\"116\" width=\"30\" height=\"30\" rx=\"5\" fill=\"#0a5cff\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"1\"/><text x=\"325.0\" y=\"137\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:#fff\">1</text><text x=\"70\" y=\"162\" text-anchor=\"start\" style=\"font:700 12px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">→ 128+64+32+16+8+4+2+1 ＝ 255</text><text x=\"180\" y=\"190\" text-anchor=\"middle\" style=\"font:700 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">8ビットで表せるのは、0〜255 の256通り</text></svg>",
+   "b": "8けたの2進数で、一番小さいのは<b>全部0</b>の 0、一番大きいのは<b>全部1</b>の 255 です。つまり、1オクテットで表せるのは <b>0〜255 の256通り</b>。だから、IPアドレスの4つの数字は、どれも<b>0から255まで</b>しか出てきません。256 や 300 のような数字があったら、それは書きまちがいです。",
+   "p": "IPアドレスの各数字は 0〜255。256以上は出てこない。"
+  },
+  {
+   "t": "確認の問題 3",
+   "quiz": {
+    "q": "IPv4アドレスとして、正しく書けていないものはどれでしょう？",
+    "o": [
+     ["10.0.0.1", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["172.16.256.1", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["192.168.255.254", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "1つの数字は8ビットで、表せるのは 0〜255 です。<b>256</b> は8ビットでは表せないので、172.16.256.1 は正しくありません。"
+   }
+  },
+  {
+   "t": "まちがえやすい所",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 264.0\" role=\"img\" aria-label=\"よくある勘違い\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× 2進数の 10 は「じゅう」</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">10進数の感覚で読んでしまう</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ 2進数の 10 は、10進数の 2</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">「いち・ゼロ」と読むとまちがえにくい</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× 8ビットだから、最大は 8</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">けたの数と、表せる大きさは別</text><rect x=\"10\" y=\"196.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"222.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ 8ビットの最大は 255</text><text x=\"24\" y=\"241.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">全部1にすると 255</text></svg>",
+   "b": "2進数でよくあるまちがいは2つ。1つ目は、2進数の 10 を「じゅう」と読んでしまうこと。2進数の 10 は10進数の<b>2</b>です。2つ目は、「8ビットだから最大は8」と考えてしまうこと。8は<b>けたの数</b>で、表せる最大の数は全部1の<b>255</b>です。"
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2進数</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">0と1だけで数える。1の次でけたが上がる</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ビット・バイト・オクテット</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1けたがビット、8ビットで1バイト（1オクテット）</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">8ビットで 0〜255</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">IPv4アドレスは 8ビット × 4 ＝ 32ビット</text></svg>",
+   "b": "次回は、2進数と10進数を<b>行き来する計算</b>を練習します。けたに「重さ」があることがわかると、驚くほど簡単に計算できるようになります。"
+  }
+ ],
+ "cls": {
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "今日は、ちょっと算数の話をします。"},
+   {"sc": 1, "sp": "生徒", "t": "算数…苦手なんですけど、大丈夫かな。"},
+   {"sc": 1, "sp": "先生", "t": "大丈夫。足し算ができれば十分です。"},
+   {"sc": 1, "sp": "先生", "t": "私たちは、0から9までの、10種類の数字で数えますよね。"},
+   {"sc": 1, "sp": "生徒", "t": "はい。普通の数え方です。"},
+   {"sc": 1, "sp": "先生", "t": "でもコンピューターの中は、電気が流れるか、流れないか。2通りしかありません。"},
+   {"sc": 1, "sp": "生徒", "t": "じゃあ、2種類の数字しか使えない？"},
+   {"sc": 1, "sp": "先生", "t": "その通り。0と1だけで数を表すんです。IPアドレスも、この数え方で動いています。", "y": "その通り。0と1だけで数を表すんです。アイピーアドレスも、この数え方で動いています。"},
+   {"sc": 2, "sp": "先生", "t": "今日のゴールは3つです。"},
+   {"sc": 2, "sp": "先生", "t": "1つ目、2進数とは何かを言えること。"},
+   {"sc": 2, "sp": "先生", "t": "2つ目、ビット、バイト、オクテットという言葉がわかること。"},
+   {"sc": 2, "sp": "先生", "t": "3つ目、IPアドレスの数字が、255までしかない理由がわかることです。", "y": "3つ目、アイピーアドレスの数字が、255までしかない理由がわかることです。"},
+   {"sc": 2, "sp": "生徒", "t": "255、見たことあります。255.255.255.0 とか。", "y": "255、見たことあります。255、255、255、0 とか。"},
+   {"sc": 2, "sp": "先生", "t": "よく覚えていますね。それも今日の話につながります。"},
+   {"sc": 3, "sp": "先生", "t": "まず、いつもの10進数。9まで数えたら、次はどうなります？"},
+   {"sc": 3, "sp": "生徒", "t": "けたが上がって、10です。"},
+   {"sc": 3, "sp": "先生", "t": "2進数は、使える数字が0と1だけ。だから、1の次で、もうけたが上がります。"},
+   {"sc": 3, "sp": "生徒", "t": "え、じゃあ、0、1、の次は…10？"},
+   {"sc": 3, "sp": "先生", "t": "その通り。0、1、10、11、100、101…と数えていきます。"},
+   {"sc": 3, "sp": "生徒", "t": "10って書いてあるのに、じゅうじゃないんですね。"},
+   {"sc": 3, "sp": "先生", "t": "はい。2進数の10は、10進数の2のことです。"},
+   {"sc": 3, "sp": "先生", "t": "「いち・ゼロ」と読むと、まちがえにくいですよ。"},
+   {"sc": 4, "sp": "先生", "t": "確認です。0、1、10、11、の次に来る数はどれでしょう？ 考えてみてください。", "w": 1},
+   {"sc": 4, "sp": "生徒", "t": "11の次は、けたが上がるから…100！"},
+   {"sc": 4, "sp": "先生", "t": "正解です。10進数でいうと、4ですね。"},
+   {"sc": 5, "sp": "先生", "t": "次は、言葉の話です。2進数の、0か1の1けたを、ビットと言います。"},
+   {"sc": 5, "sp": "生徒", "t": "ビット。よく聞く言葉です。"},
+   {"sc": 5, "sp": "先生", "t": "そのビットが、8個集まったまとまりを、バイトと言います。"},
+   {"sc": 5, "sp": "先生", "t": "IPアドレスの話では、8ビットのまとまりを、オクテットと呼ぶことが多いです。", "y": "アイピーアドレスの話では、8ビットのまとまりを、オクテットと呼ぶことが多いです。"},
+   {"sc": 5, "sp": "生徒", "t": "オクテットって、なんだか楽器みたい。"},
+   {"sc": 5, "sp": "先生", "t": "いい連想です。音楽のオクターブと同じで、8に関係する言葉です。「8つ組」という意味です。"},
+   {"sc": 6, "sp": "先生", "t": "では、IPアドレスで考えてみましょう。192.168.1.10。", "y": "では、アイピーアドレスで考えてみましょう。192、168、1、10。"},
+   {"sc": 6, "sp": "先生", "t": "点で区切られた4つの数字、それぞれが、1オクテットなんです。"},
+   {"sc": 6, "sp": "生徒", "t": "1つの数字が8ビットってことですか？"},
+   {"sc": 6, "sp": "先生", "t": "そうです。8ビットが4つで、全部で何ビットでしょう？"},
+   {"sc": 6, "sp": "生徒", "t": "8かける4で、32ビット！"},
+   {"sc": 6, "sp": "先生", "t": "正解。コンピューターの中では、0と1が32個並んでいるんです。"},
+   {"sc": 6, "sp": "生徒", "t": "人間が読みやすいように、8個ずつ区切ってるんですね。"},
+   {"sc": 7, "sp": "先生", "t": "確認です。IPv4アドレスは、全部で何ビットでしょう？", "y": "確認です。アイピーブイフォーアドレスは、全部で何ビットでしょう？", "w": 1},
+   {"sc": 7, "sp": "生徒", "t": "さっき計算しました。32ビットです！"},
+   {"sc": 7, "sp": "先生", "t": "正解です。"},
+   {"sc": 8, "sp": "先生", "t": "最後のかたまりです。8けたの2進数で、一番小さい数は？"},
+   {"sc": 8, "sp": "生徒", "t": "全部0だから、0です。"},
+   {"sc": 8, "sp": "先生", "t": "では、一番大きい数は？"},
+   {"sc": 8, "sp": "生徒", "t": "全部1…でも、10進数でいくつかわかりません。"},
+   {"sc": 8, "sp": "先生", "t": "次回くわしくやりますが、答えは255です。"},
+   {"sc": 8, "sp": "先生", "t": "つまり8ビットで表せるのは、0から255までの、256通り。"},
+   {"sc": 8, "sp": "生徒", "t": "あ、だからIPアドレスの数字は、255までなんだ！", "y": "あ、だからアイピーアドレスの数字は、255までなんだ！"},
+   {"sc": 8, "sp": "先生", "t": "その通り。256や300が出てきたら、書きまちがいです。"},
+   {"sc": 9, "sp": "先生", "t": "確認です。IPアドレスとして、正しく書けていないものはどれでしょう？", "y": "確認です。アイピーアドレスとして、正しく書けていないものはどれでしょう？", "w": 1},
+   {"sc": 9, "sp": "生徒", "t": "256があるから、2つ目です。"},
+   {"sc": 9, "sp": "先生", "t": "正解です。256は、8ビットでは表せません。"},
+   {"sc": 10, "sp": "生徒", "t": "先生、8ビットだから、最大は8だと思いそうになりました。"},
+   {"sc": 10, "sp": "先生", "t": "それ、よくあるまちがいです。8は、けたの数です。"},
+   {"sc": 10, "sp": "先生", "t": "表せる一番大きい数は、全部1にした255です。"},
+   {"sc": 10, "sp": "生徒", "t": "けたの数と、数の大きさは別、ですね。"},
+   {"sc": 10, "sp": "先生", "t": "その通り。それから、2進数の10を、じゅうと読まないことも大事です。"},
+   {"sc": 11, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 11, "sp": "先生", "t": "1つ目。2進数は、0と1だけで数える。1の次でけたが上がる。"},
+   {"sc": 11, "sp": "先生", "t": "2つ目。1けたがビット、8ビットで1バイト。IPでは1オクテット。", "y": "2つ目。1けたがビット、8ビットで1バイト。アイピーでは1オクテット。"},
+   {"sc": 11, "sp": "先生", "t": "3つ目。8ビットで0から255。IPv4アドレスは32ビット。", "y": "3つ目。8ビットで0から255。アイピーブイフォーアドレスは32ビット。"},
+   {"sc": 11, "sp": "生徒", "t": "全部1が255になる計算、気になります。"},
+   {"sc": 11, "sp": "先生", "t": "次回、その計算を一緒にやりましょう。お疲れさまでした。"}
+  ]
+ }
+}

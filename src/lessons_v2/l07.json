@@ -1,0 +1,159 @@
+{
+ "r": "TB",
+ "n": 7,
+ "t": "仕事を層に分けて考える",
+ "d": "d0",
+ "form": "たとえ話",
+ "need": [4],
+ "goal": ["層に分ける理由がわかる", "OSI参照モデルとは何かを言える", "L2とL3がわかる"],
+ "terms": ["OSI参照モデル", "層（レイヤー）", "L1・L2・L3"],
+ "pages": [
+  {
+   "t": "宅配便の会社は、1人で全部やる？",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 124.0\" role=\"img\" aria-label=\"つかみ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"110\" rx=\"16\" fill=\"#0a5cff\" opacity=\".12\"/><text x=\"180\" y=\"44\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">宅配便、1人で全部やっていたら？</text><text x=\"180\" y=\"74\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">受付・仕分け・トラックの運転・配達…</text><text x=\"180\" y=\"94\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">係に分けると、何がうれしい？</text></svg>",
+   "b": "宅配便の会社では、荷物の受付、仕分け、トラックの運転、最後の配達と、仕事が<b>係ごとに分かれて</b>います。もし1人で全部やっていたら、だれか1人が休んだだけで全体が止まってしまいます。ネットワークの仕事も同じように<b>係に分けて</b>考えます。今日は、その分け方を学びます。"
+  },
+  {
+   "t": "今日のゴール",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のゴール\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1. 層に分ける理由がわかる</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">係ごとに、自分の仕事だけ考えればよい</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2. OSI参照モデルとは何かを言える</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ネットワークの仕事を7つの層に分けた表</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">3. L2とL3がわかる</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">スイッチはL2、ルーターはL3</text></svg>"
+  },
+  {
+   "t": "係に分けると、何がうれしい？",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"層に分ける理由\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">自分の係の仕事だけ考えればよい</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">配達の係は、トラックの運転を知らなくてよい</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1つの係だけ入れかえられる</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">トラックを電気自動車に替えても、ほかの係はそのまま</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ネットワークでも同じ</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ケーブルを光に替えても、上の係の仕組みはそのまま</text></svg>",
+   "b": "仕事を係に分けると、それぞれは<b>自分の仕事だけ</b>考えればよくなります。トラックを電気自動車に替えても、受付や仕分けの係は何も変えなくて済みます。ネットワークでも、ケーブルを銅線から光ファイバーに替えても、その上で動く仕組みはそのまま使えます。この係のことを<b>層（レイヤー）</b>と呼びます。",
+   "p": "層（レイヤー）＝ 仕事の係。1つの層を入れかえても、ほかの層は困らない。"
+  },
+  {
+   "t": "確認の問題 1",
+   "quiz": {
+    "q": "ネットワークの仕事を層に分けて考えるよい点として、正しいものはどれでしょう？",
+    "o": [
+     ["1つの層を入れかえても、ほかの層をそのまま使える", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["層が多いほど、通信の速さが上がる", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["層に分けると、ケーブルがいらなくなる", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 0,
+    "e": "係に分けておくと、<b>1つの層だけ入れかえ</b>られます。速さやケーブルとは関係ありません。"
+   }
+  },
+  {
+   "t": "OSI参照モデル ＝ 7つの係の表",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 327.5\" role=\"img\" aria-label=\"OSI参照モデル\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#8a3ffc\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">第7〜5層：アプリの係</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Webやメールなど、使う人に近い仕事</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">第4層：トランスポート層</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">データを確実に届けるかどうか（あとで学ぶ）</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">第3層：ネットワーク層（L3）</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">住所＝IPアドレスで、遠くまで運ぶ</text><rect x=\"10\" y=\"196.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"222.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">第2層：データリンク層（L2）</text><text x=\"24\" y=\"241.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">名札＝MACアドレスで、同じネットワークの中を運ぶ</text><rect x=\"10\" y=\"260.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#3d4450\" opacity=\".1\"/><text x=\"24\" y=\"285.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">第1層：物理層（L1）</text><text x=\"24\" y=\"304.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ケーブルや電波で、0と1の信号を運ぶ</text></svg>",
+   "b": "ネットワークの仕事を<b>7つの層</b>に分けた表が、<b>OSI参照モデル</b>です。下の層ほど「線や電波」に近く、上の層ほど「使う人」に近い仕事です。全部を一度に覚える必要はありません。今は、<b>第3層が住所（IPアドレス）</b>、<b>第2層が名札（MACアドレス）</b>、<b>第1層がケーブルや電波</b>の係、とだけ押さえておきましょう。",
+   "p": "第何層かを、L3・L2のように「L＋数字」で呼ぶ（L＝Layer、層）。"
+  },
+  {
+   "t": "スイッチはL2、ルーターはL3",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"機器と層\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">スイッチ ＝ L2（第2層）の機器</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">名札（MACアドレス）を見て届ける</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ルーター ＝ L3（第3層）の機器</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">住所（IPアドレス）を見て道を選ぶ</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">「L2スイッチ」という名前もある</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">何層の仕事までできるかを表している</text></svg>",
+   "b": "第4回で学んだ機器を、層で整理してみましょう。スイッチは名札（MACアドレス）を見るので<b>第2層（L2）</b>の機器、ルーターは住所（IPアドレス）を見るので<b>第3層（L3）</b>の機器です。「L2スイッチ」という名前は、「第2層の仕事をするスイッチ」という意味なのです。"
+  },
+  {
+   "t": "確認の問題 2",
+   "quiz": {
+    "q": "IPアドレスを見て道を選ぶルーターは、OSI参照モデルの第何層の機器でしょう？",
+    "o": [
+     ["第1層（L1）", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["第2層（L2）", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["第3層（L3）", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 2,
+    "e": "住所（IPアドレス）を扱うのは<b>第3層（L3）</b>です。MACアドレスは第2層、ケーブルや電波は第1層です。"
+   }
+  },
+  {
+   "t": "包むたびに、層を下りていく",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 264.0\" role=\"img\" aria-label=\"カプセル化と層\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#8a3ffc\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">上の層：データ</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">送りたい中身</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">第3層で IPアドレスの送り状を付ける</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">封筒に入れる</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">第2層で MACアドレスの送り状を付ける</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">配達用の箱に入れる</text><rect x=\"10\" y=\"196.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#3d4450\" opacity=\".1\"/><text x=\"24\" y=\"222.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">第1層で 0と1の信号にして送る</text><text x=\"24\" y=\"241.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ケーブルや電波へ</text></svg>",
+   "b": "第2回の<b>カプセル化</b>を思い出してください。送る側では、データが上の層から下の層へ進むたびに、その層の送り状（ヘッダー）が付きます。第3層でIPアドレスの送り状、第2層でMACアドレスの送り状、最後に第1層で0と1の信号になって送り出されます。受け取る側は逆に、下の層から順に開けていきます。"
+  },
+  {
+   "t": "確認の問題 3",
+   "quiz": {
+    "q": "送る側で、データが層を下りていくとき、MACアドレスの送り状が付くのはどの層でしょう？",
+    "o": [
+     ["第3層", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["第2層", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["第1層", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "名札（MACアドレス）は<b>第2層</b>の係です。第3層ではIPアドレスの送り状が付きます。"
+   }
+  },
+  {
+   "t": "まちがえやすい所",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 264.0\" role=\"img\" aria-label=\"よくある勘違い\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× 7つの層を全部、今すぐ覚えないといけない</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">名前の暗記から入ると、つまずきやすい</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ まずは L1・L2・L3 の3つ</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ケーブル・名札（MAC）・住所（IP）</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× 番号が大きいほど、えらい・大事</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">番号は、使う人に近いかどうかの順番</text><rect x=\"10\" y=\"196.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"222.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ 下から、線に近い順に番号が付く</text><text x=\"24\" y=\"241.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">どの層も、欠けると通信できない</text></svg>",
+   "b": "OSI参照モデルは、7つの層の名前を全部暗記しようとして、つまずく人が多い部分です。まずは<b>L1（ケーブル）・L2（名札）・L3（住所）</b>の3つで十分です。また、番号は大事さの順ではなく、<b>線に近い順</b>に付いているだけ。どの層が欠けても通信はできません。"
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">層に分ける理由</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">自分の係だけ考えればよく、1つの層を入れかえられる</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">OSI参照モデル</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ネットワークの仕事を7つの層に分けた表</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">L1・L2・L3</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ケーブル／名札（MAC）／住所（IP）</text></svg>",
+   "b": "次回は、いよいよCisco機器に触れます。ルーターやスイッチに、<b>文字のコマンド</b>で指示を出す方法を学びます。"
+  }
+ ],
+ "cls": {
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "今日は、宅配便の会社を思い浮かべてください。"},
+   {"sc": 1, "sp": "先生", "t": "荷物の受付、仕分け、トラックの運転、最後の配達。"},
+   {"sc": 1, "sp": "生徒", "t": "いろんな人が、いろんな仕事をしてますね。"},
+   {"sc": 1, "sp": "先生", "t": "もし、これを1人で全部やっていたら、どうなると思いますか？"},
+   {"sc": 1, "sp": "生徒", "t": "大変すぎます！ その人が休んだら、全部止まっちゃう。"},
+   {"sc": 1, "sp": "先生", "t": "そうですね。だから仕事を、係に分けています。"},
+   {"sc": 1, "sp": "先生", "t": "ネットワークの仕事も、同じように係に分けて考えるんです。"},
+   {"sc": 2, "sp": "先生", "t": "今日のゴールは3つです。"},
+   {"sc": 2, "sp": "先生", "t": "1つ目、仕事を層に分ける理由がわかること。"},
+   {"sc": 2, "sp": "先生", "t": "2つ目、OSI参照モデルとは何かを言えること。"},
+   {"sc": 2, "sp": "先生", "t": "3つ目、L2とL3という言葉がわかることです。", "y": "3つ目、エルツーとエルスリーという言葉がわかることです。"},
+   {"sc": 2, "sp": "生徒", "t": "L2スイッチって、聞いたことがあります！", "y": "エルツースイッチって、聞いたことがあります！"},
+   {"sc": 2, "sp": "先生", "t": "いいですね。その意味も、今日わかりますよ。"},
+   {"sc": 3, "sp": "先生", "t": "係に分けると、何がうれしいでしょう？"},
+   {"sc": 3, "sp": "生徒", "t": "自分の仕事だけ、覚えればいい？"},
+   {"sc": 3, "sp": "先生", "t": "その通り。配達の係は、トラックの運転を知らなくても仕事ができます。"},
+   {"sc": 3, "sp": "先生", "t": "もう1つ。トラックを電気自動車に替えたら、受付の係は困りますか？"},
+   {"sc": 3, "sp": "生徒", "t": "困らないですね。受付の仕事は、そのままです。"},
+   {"sc": 3, "sp": "先生", "t": "ネットワークでも、ケーブルを光ファイバーに替えても、上の仕組みはそのまま使えます。"},
+   {"sc": 3, "sp": "先生", "t": "この係のことを、層、英語でレイヤーと言います。"},
+   {"sc": 4, "sp": "先生", "t": "確認です。層に分けて考えるよい点として、正しいものはどれでしょう？", "w": 1},
+   {"sc": 4, "sp": "生徒", "t": "1つの層を入れかえても、ほかはそのまま。1つ目です。"},
+   {"sc": 4, "sp": "先生", "t": "正解です。"},
+   {"sc": 5, "sp": "先生", "t": "ネットワークの仕事を、7つの層に分けた表があります。"},
+   {"sc": 5, "sp": "先生", "t": "これを、OSI参照モデルと言います。"},
+   {"sc": 5, "sp": "生徒", "t": "7つも…覚えられるかな。"},
+   {"sc": 5, "sp": "先生", "t": "今は、全部覚えなくて大丈夫です。下の3つだけ押さえましょう。"},
+   {"sc": 5, "sp": "先生", "t": "第1層は、ケーブルや電波で、0と1の信号を運ぶ係。"},
+   {"sc": 5, "sp": "先生", "t": "第2層は、名札、MACアドレスで、同じネットワークの中を運ぶ係。", "y": "第2層は、名札、マックアドレスで、同じネットワークの中を運ぶ係。"},
+   {"sc": 5, "sp": "先生", "t": "第3層は、住所、IPアドレスで、遠くまで運ぶ係です。", "y": "第3層は、住所、アイピーアドレスで、遠くまで運ぶ係です。"},
+   {"sc": 5, "sp": "生徒", "t": "前に習った、名札と住所が出てきましたね。"},
+   {"sc": 5, "sp": "先生", "t": "はい。第何層かは、L1、L2、L3のように、Lと数字で呼びます。Lはレイヤーの頭文字です。", "y": "はい。第何層かは、エルワン、エルツー、エルスリーのように、Lと数字で呼びます。Lはレイヤーの頭文字です。"},
+   {"sc": 6, "sp": "先生", "t": "では、機器を層で整理してみましょう。スイッチは、何を見て届けていました？"},
+   {"sc": 6, "sp": "生徒", "t": "名札、MACアドレスです。", "y": "名札、マックアドレスです。"},
+   {"sc": 6, "sp": "先生", "t": "だから、スイッチは第2層、L2の機器です。", "y": "だから、スイッチは第2層、エルツーの機器です。"},
+   {"sc": 6, "sp": "生徒", "t": "じゃあ、住所を見るルーターは、L3！", "y": "じゃあ、住所を見るルーターは、エルスリー！"},
+   {"sc": 6, "sp": "先生", "t": "正解です。L2スイッチは、第2層の仕事をするスイッチ、という意味なんです。", "y": "正解です。エルツースイッチは、第2層の仕事をするスイッチ、という意味なんです。"},
+   {"sc": 6, "sp": "生徒", "t": "名前の謎が解けました。"},
+   {"sc": 7, "sp": "先生", "t": "確認です。ルーターは、第何層の機器でしょう？", "w": 1},
+   {"sc": 7, "sp": "生徒", "t": "住所を見るから、第3層です。"},
+   {"sc": 7, "sp": "先生", "t": "正解です。"},
+   {"sc": 8, "sp": "先生", "t": "最後に、第2回のカプセル化と、つなげてみましょう。"},
+   {"sc": 8, "sp": "先生", "t": "送る側では、データが上の層から、下の層へ進んでいきます。"},
+   {"sc": 8, "sp": "先生", "t": "第3層で、IPアドレスの送り状が付きます。封筒に入れるイメージです。", "y": "第3層で、アイピーアドレスの送り状が付きます。封筒に入れるイメージです。"},
+   {"sc": 8, "sp": "生徒", "t": "第2層では、MACアドレスの送り状？", "y": "第2層では、マックアドレスの送り状？"},
+   {"sc": 8, "sp": "先生", "t": "その通り。配達用の箱に入れるイメージです。"},
+   {"sc": 8, "sp": "先生", "t": "最後に第1層で、0と1の信号になって、ケーブルへ出ていきます。"},
+   {"sc": 8, "sp": "生徒", "t": "受け取る側は、逆に下から開けていくんですね。"},
+   {"sc": 9, "sp": "先生", "t": "確認です。MACアドレスの送り状が付くのは、どの層でしょう？", "y": "確認です。マックアドレスの送り状が付くのは、どの層でしょう？", "w": 1},
+   {"sc": 9, "sp": "生徒", "t": "名札は第2層だから、2つ目です。"},
+   {"sc": 9, "sp": "先生", "t": "正解です。"},
+   {"sc": 10, "sp": "生徒", "t": "先生、7つの層の名前、全部覚えないとまずいですか？"},
+   {"sc": 10, "sp": "先生", "t": "最初から全部覚えようとして、つまずく人が多いんです。"},
+   {"sc": 10, "sp": "先生", "t": "まずは、L1、L2、L3の3つで十分です。", "y": "まずは、エルワン、エルツー、エルスリーの3つで十分です。"},
+   {"sc": 10, "sp": "生徒", "t": "あと、番号が大きいほうが大事なのかなって思ってました。"},
+   {"sc": 10, "sp": "先生", "t": "番号は、線に近い順に付いているだけです。どの層が欠けても、通信できません。"},
+   {"sc": 10, "sp": "生徒", "t": "みんな大事な係なんですね。"},
+   {"sc": 11, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 11, "sp": "先生", "t": "1つ目。仕事を層に分けると、自分の係だけ考えればよく、入れかえも簡単。"},
+   {"sc": 11, "sp": "先生", "t": "2つ目。OSI参照モデルは、ネットワークの仕事を7つの層に分けた表。"},
+   {"sc": 11, "sp": "先生", "t": "3つ目。L1はケーブル、L2は名札でスイッチ、L3は住所でルーター。", "y": "3つ目。エルワンはケーブル、エルツーは名札でスイッチ、エルスリーは住所でルーター。"},
+   {"sc": 11, "sp": "生徒", "t": "次は何をするんですか？"},
+   {"sc": 11, "sp": "先生", "t": "次回は、いよいよCisco機器を、文字で操作してみます。お疲れさまでした。", "y": "次回は、いよいよシスコ機器を、文字で操作してみます。お疲れさまでした。"}
+  ]
+ }
+}

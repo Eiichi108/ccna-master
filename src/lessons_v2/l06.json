@@ -1,0 +1,159 @@
+{
+ "r": "TB",
+ "n": 6,
+ "t": "2進数と10進数を行き来する",
+ "d": "d0",
+ "form": "一緒に解く",
+ "need": [5],
+ "goal": ["けたの重さを言える", "2進数を10進数に直せる", "10進数を2進数に直せる"],
+ "terms": ["けたの重さ"],
+ "pages": [
+  {
+   "t": "11000000 は、いくつ？",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 124.0\" role=\"img\" aria-label=\"つかみ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"110\" rx=\"16\" fill=\"#0a5cff\" opacity=\".12\"/><text x=\"180\" y=\"44\" text-anchor=\"middle\" style=\"font:800 16.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2進数の 11000000 は、10進数でいくつ？</text><text x=\"180\" y=\"74\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">サブネットマスクの計算で、毎回出てくる数です</text><text x=\"180\" y=\"94\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">今日は「けたの重さ」で、一瞬で読めるようにします</text></svg>",
+   "b": "前回、8ビットで 0〜255 が表せると学びました。では、11000000 は10進数でいくつでしょう？ これはこの先、サブネットマスクの計算で何度も出てくる数です。今日は、2進数を一瞬で読み書きするコツ、<b>けたの重さ</b>を身につけます。"
+  },
+  {
+   "t": "今日のゴール",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のゴール\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1. けたの重さを言える</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">128・64・32・16・8・4・2・1</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2. 2進数を10進数に直せる</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1が立っているけたの重さを足す</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">3. 10進数を2進数に直せる</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">大きい重さから、引けたら1</text></svg>"
+  },
+  {
+   "t": "けたには「重さ」がある",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 146.0\" role=\"img\" aria-label=\"けたの重さ\"><text x=\"180\" y=\"22\" text-anchor=\"middle\" style=\"font:800 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">左から 128・64・32・16・8・4・2・1</text><text x=\"87.0\" y=\"46\" text-anchor=\"middle\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">128</text><text x=\"121.0\" y=\"46\" text-anchor=\"middle\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">64</text><text x=\"155.0\" y=\"46\" text-anchor=\"middle\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">32</text><text x=\"189.0\" y=\"46\" text-anchor=\"middle\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">16</text><text x=\"223.0\" y=\"46\" text-anchor=\"middle\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">8</text><text x=\"257.0\" y=\"46\" text-anchor=\"middle\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">4</text><text x=\"291.0\" y=\"46\" text-anchor=\"middle\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2</text><text x=\"325.0\" y=\"46\" text-anchor=\"middle\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1</text><text x=\"8\" y=\"77\" text-anchor=\"start\" style=\"font:800 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">11000000</text><rect x=\"72\" y=\"56\" width=\"30\" height=\"30\" rx=\"5\" fill=\"#0a5cff\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"1\"/><text x=\"87.0\" y=\"77\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:#fff\">1</text><rect x=\"106\" y=\"56\" width=\"30\" height=\"30\" rx=\"5\" fill=\"#0a5cff\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"1\"/><text x=\"121.0\" y=\"77\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:#fff\">1</text><rect x=\"140\" y=\"56\" width=\"30\" height=\"30\" rx=\"5\" fill=\"none\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"0.5\"/><text x=\"155.0\" y=\"77\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub)\">0</text><rect x=\"174\" y=\"56\" width=\"30\" height=\"30\" rx=\"5\" fill=\"none\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"0.5\"/><text x=\"189.0\" y=\"77\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub)\">0</text><rect x=\"208\" y=\"56\" width=\"30\" height=\"30\" rx=\"5\" fill=\"none\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"0.5\"/><text x=\"223.0\" y=\"77\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub)\">0</text><rect x=\"242\" y=\"56\" width=\"30\" height=\"30\" rx=\"5\" fill=\"none\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"0.5\"/><text x=\"257.0\" y=\"77\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub)\">0</text><rect x=\"276\" y=\"56\" width=\"30\" height=\"30\" rx=\"5\" fill=\"none\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"0.5\"/><text x=\"291.0\" y=\"77\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub)\">0</text><rect x=\"310\" y=\"56\" width=\"30\" height=\"30\" rx=\"5\" fill=\"none\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"0.5\"/><text x=\"325.0\" y=\"77\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub)\">0</text><text x=\"70\" y=\"102\" text-anchor=\"start\" style=\"font:700 12px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">128 ＋ 64 ＝ 192</text><text x=\"180\" y=\"130\" text-anchor=\"middle\" style=\"font:700 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1が立っているけたの重さを、足すだけ</text></svg>",
+   "b": "8けたの2進数には、左から <b>128・64・32・16・8・4・2・1</b> という<b>重さ</b>があります。右から1、2、4、8…と<b>倍々</b>になっているのがポイントです。2進数を10進数に直すには、<b>1が立っているけたの重さを足すだけ</b>。11000000 なら、128 と 64 のけたが1なので、128＋64＝<b>192</b>です。",
+   "p": "重さは右から 1・2・4・8・16・32・64・128（倍々）。"
+  },
+  {
+   "t": "一緒に読んでみよう",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 182.0\" role=\"img\" aria-label=\"2進数を読む\"><text x=\"180\" y=\"22\" text-anchor=\"middle\" style=\"font:800 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2つ読んでみよう</text><text x=\"87.0\" y=\"46\" text-anchor=\"middle\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">128</text><text x=\"121.0\" y=\"46\" text-anchor=\"middle\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">64</text><text x=\"155.0\" y=\"46\" text-anchor=\"middle\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">32</text><text x=\"189.0\" y=\"46\" text-anchor=\"middle\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">16</text><text x=\"223.0\" y=\"46\" text-anchor=\"middle\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">8</text><text x=\"257.0\" y=\"46\" text-anchor=\"middle\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">4</text><text x=\"291.0\" y=\"46\" text-anchor=\"middle\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2</text><text x=\"325.0\" y=\"46\" text-anchor=\"middle\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1</text><text x=\"8\" y=\"77\" text-anchor=\"start\" style=\"font:800 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">00001010</text><rect x=\"72\" y=\"56\" width=\"30\" height=\"30\" rx=\"5\" fill=\"none\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"0.5\"/><text x=\"87.0\" y=\"77\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub)\">0</text><rect x=\"106\" y=\"56\" width=\"30\" height=\"30\" rx=\"5\" fill=\"none\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"0.5\"/><text x=\"121.0\" y=\"77\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub)\">0</text><rect x=\"140\" y=\"56\" width=\"30\" height=\"30\" rx=\"5\" fill=\"none\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"0.5\"/><text x=\"155.0\" y=\"77\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub)\">0</text><rect x=\"174\" y=\"56\" width=\"30\" height=\"30\" rx=\"5\" fill=\"none\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"0.5\"/><text x=\"189.0\" y=\"77\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub)\">0</text><rect x=\"208\" y=\"56\" width=\"30\" height=\"30\" rx=\"5\" fill=\"#0a5cff\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"1\"/><text x=\"223.0\" y=\"77\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:#fff\">1</text><rect x=\"242\" y=\"56\" width=\"30\" height=\"30\" rx=\"5\" fill=\"none\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"0.5\"/><text x=\"257.0\" y=\"77\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub)\">0</text><rect x=\"276\" y=\"56\" width=\"30\" height=\"30\" rx=\"5\" fill=\"#0a5cff\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"1\"/><text x=\"291.0\" y=\"77\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:#fff\">1</text><rect x=\"310\" y=\"56\" width=\"30\" height=\"30\" rx=\"5\" fill=\"none\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"0.5\"/><text x=\"325.0\" y=\"77\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub)\">0</text><text x=\"70\" y=\"102\" text-anchor=\"start\" style=\"font:700 12px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">8 ＋ 2 ＝ 10</text><text x=\"8\" y=\"137\" text-anchor=\"start\" style=\"font:800 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">10100000</text><rect x=\"72\" y=\"116\" width=\"30\" height=\"30\" rx=\"5\" fill=\"#0a5cff\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"1\"/><text x=\"87.0\" y=\"137\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:#fff\">1</text><rect x=\"106\" y=\"116\" width=\"30\" height=\"30\" rx=\"5\" fill=\"none\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"0.5\"/><text x=\"121.0\" y=\"137\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub)\">0</text><rect x=\"140\" y=\"116\" width=\"30\" height=\"30\" rx=\"5\" fill=\"#0a5cff\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"1\"/><text x=\"155.0\" y=\"137\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:#fff\">1</text><rect x=\"174\" y=\"116\" width=\"30\" height=\"30\" rx=\"5\" fill=\"none\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"0.5\"/><text x=\"189.0\" y=\"137\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub)\">0</text><rect x=\"208\" y=\"116\" width=\"30\" height=\"30\" rx=\"5\" fill=\"none\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"0.5\"/><text x=\"223.0\" y=\"137\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub)\">0</text><rect x=\"242\" y=\"116\" width=\"30\" height=\"30\" rx=\"5\" fill=\"none\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"0.5\"/><text x=\"257.0\" y=\"137\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub)\">0</text><rect x=\"276\" y=\"116\" width=\"30\" height=\"30\" rx=\"5\" fill=\"none\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"0.5\"/><text x=\"291.0\" y=\"137\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub)\">0</text><rect x=\"310\" y=\"116\" width=\"30\" height=\"30\" rx=\"5\" fill=\"none\" stroke=\"#0a5cff\" stroke-width=\"1.5\" opacity=\"0.5\"/><text x=\"325.0\" y=\"137\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub)\">0</text><text x=\"70\" y=\"162\" text-anchor=\"start\" style=\"font:700 12px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">128 ＋ 32 ＝ 160</text></svg>",
+   "b": "00001010 は、8 と 2 のけたが1なので 8＋2＝<b>10</b>。10100000 は、128 と 32 のけたが1なので 128＋32＝<b>160</b>。0のけたは無視して、1のけただけを見ればよいのです。"
+  },
+  {
+   "t": "確認の問題 1",
+   "quiz": {
+    "q": "2進数の 11100000 を10進数に直すと、いくつでしょう？",
+    "o": [
+     ["224", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["192", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["240", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 0,
+    "e": "128・64・32 のけたが1なので、128＋64＋32＝<b>224</b> です。"
+   }
+  },
+  {
+   "t": "10進数を2進数に直す",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 264.0\" role=\"img\" aria-label=\"200を2進数に\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">200 から 128 は引ける → 1</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">残り 72</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">72 から 64 は引ける → 1</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">残り 8</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#3d4450\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">8 から 32・16 は引けない → 0・0</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">残り 8 のまま</text><rect x=\"10\" y=\"196.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"222.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">8 から 8 は引ける → 1、残り 0</text><text x=\"24\" y=\"241.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">あとは全部 0 → 11001000</text></svg>",
+   "b": "反対に、10進数を2進数に直すときは、<b>大きい重さから順に、引けるなら1、引けないなら0</b>を書いていきます。お釣りを、大きいお金から順に渡していくのと同じです。200 なら、128 を引いて残り72、64 を引いて残り8、32と16は引けず、8 を引いて0。答えは <b>11001000</b> です。",
+   "p": "大きい重さから「引けたら1、引けなければ0」。"
+  },
+  {
+   "t": "確認の問題 2",
+   "quiz": {
+    "q": "10進数の 248 を2進数に直したものはどれでしょう？",
+    "o": [
+     ["11110000", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["11111000", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["11111100", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "248 − 128 ＝ 120、120 − 64 ＝ 56、56 − 32 ＝ 24、24 − 16 ＝ 8、8 − 8 ＝ 0。1が5つ並んで <b>11111000</b> です。"
+   }
+  },
+  {
+   "t": "マスクでよく出る数を覚えておこう",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"よく出る数\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">左から1が並ぶ数</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">128 → 192 → 224 → 240</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">その続き</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">248 → 252 → 254 → 255</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">128 から、64・32・16…を順に足した数</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">サブネットマスクには、この数しか出てこない</text></svg>",
+   "b": "サブネットマスクという設定には、<b>左から1が続けて並んだ</b>数しか出てきません。1が1個なら128、2個なら192、3個なら224…と、128に64、32、16…を順に足していった数です。<b>128・192・224・240・248・252・254・255</b>。この8つは、すぐ言えるようにしておくと、あとの計算がとても楽になります。"
+  },
+  {
+   "t": "確認の問題 3",
+   "quiz": {
+    "q": "左から1が4個並んだ 11110000 は、10進数でいくつでしょう？",
+    "o": [
+     ["240", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["248", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["15", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 0,
+    "e": "128＋64＋32＋16＝<b>240</b> です。右に1が4個並ぶ 00001111 なら 15 になります。"
+   }
+  },
+  {
+   "t": "まちがえやすい所",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 264.0\" role=\"img\" aria-label=\"よくあるまちがい\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× けたの重さを左右逆に覚える</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">左が1、右が128 だと思ってしまう</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ 左が一番重い 128</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">10進数でも、左のけたほど大きい（百の位など）</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× 1の数を数えて答えにする</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">11000000 は「1が2個だから2」ではない</text><rect x=\"10\" y=\"196.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"222.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ 1が立っているけたの「重さ」を足す</text><text x=\"24\" y=\"241.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">11000000 ＝ 128＋64 ＝ 192</text></svg>",
+   "b": "まちがいで多いのは、重さを左右逆に覚えてしまうことです。10進数でも、左のけたほど大きい（百の位、十の位…）ですよね。2進数も<b>左が一番重い128</b>です。また、「1が2個あるから2」のように、1の<b>数</b>を答えにしてしまうのもよくあるまちがい。足すのは、1が立っているけたの<b>重さ</b>です。"
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">けたの重さ</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">左から 128・64・32・16・8・4・2・1</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2進数 → 10進数</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1が立っているけたの重さを足す</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">10進数 → 2進数</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">大きい重さから、引けたら1</text></svg>",
+   "b": "これで、IPアドレスの計算に必要な道具がそろいました。次回は、ネットワークの仕事を<b>層</b>に分けて考える、OSI参照モデルの入口を学びます。"
+  }
+ ],
+ "cls": {
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "前回、8ビットで0から255まで表せる、と学びましたね。"},
+   {"sc": 1, "sp": "生徒", "t": "はい。全部1が255、っていうところまでは覚えてます。"},
+   {"sc": 1, "sp": "先生", "t": "では、11000000、これは10進数でいくつでしょう？"},
+   {"sc": 1, "sp": "生徒", "t": "うーん…全然わかりません。"},
+   {"sc": 1, "sp": "先生", "t": "大丈夫。今日は、これを一瞬で読めるようにします。"},
+   {"sc": 1, "sp": "先生", "t": "この数、サブネットマスクの計算で、この先何度も出てきますよ。"},
+   {"sc": 2, "sp": "先生", "t": "今日のゴールは3つです。"},
+   {"sc": 2, "sp": "先生", "t": "1つ目、けたの重さを言えること。"},
+   {"sc": 2, "sp": "先生", "t": "2つ目、2進数を10進数に直せること。"},
+   {"sc": 2, "sp": "先生", "t": "3つ目、10進数を2進数に直せることです。"},
+   {"sc": 2, "sp": "生徒", "t": "重さって、数字に重さがあるんですか？"},
+   {"sc": 2, "sp": "先生", "t": "あるんです。そこが今日の一番のコツです。"},
+   {"sc": 3, "sp": "先生", "t": "10進数の、352という数を思い浮かべてください。"},
+   {"sc": 3, "sp": "先生", "t": "3は百の位、5は十の位、2は一の位ですよね。"},
+   {"sc": 3, "sp": "生徒", "t": "はい。左ほど、大きい位です。"},
+   {"sc": 3, "sp": "先生", "t": "2進数も同じで、けたごとに重さがあります。"},
+   {"sc": 3, "sp": "先生", "t": "右から、1、2、4、8、16、32、64、128。"},
+   {"sc": 3, "sp": "生徒", "t": "倍々になってる！"},
+   {"sc": 3, "sp": "先生", "t": "その通り。そして、1が立っているけたの重さを、足すだけです。"},
+   {"sc": 3, "sp": "先生", "t": "11000000なら、128と64のけたが1。だから？"},
+   {"sc": 3, "sp": "生徒", "t": "128足す64で、192！"},
+   {"sc": 3, "sp": "先生", "t": "正解。最初の謎が解けましたね。"},
+   {"sc": 4, "sp": "先生", "t": "もう2つ、一緒に読んでみましょう。00001010。"},
+   {"sc": 4, "sp": "生徒", "t": "1が立っているのは…8と2のけた。8足す2で、10です。"},
+   {"sc": 4, "sp": "先生", "t": "完璧です。次は、10100000。"},
+   {"sc": 4, "sp": "生徒", "t": "128と、32のけたです。128足す32で、160！"},
+   {"sc": 4, "sp": "先生", "t": "いいですね。0のけたは、気にしなくていいんです。"},
+   {"sc": 5, "sp": "先生", "t": "確認です。11100000は、10進数でいくつでしょう？ 考えてみてください。", "w": 1},
+   {"sc": 5, "sp": "生徒", "t": "128、64、32を足して…224です。"},
+   {"sc": 5, "sp": "先生", "t": "正解です。"},
+   {"sc": 6, "sp": "先生", "t": "今度は反対です。10進数の200を、2進数に直してみましょう。"},
+   {"sc": 6, "sp": "先生", "t": "コツは、大きい重さから順に、引けるなら1、引けないなら0。"},
+   {"sc": 6, "sp": "生徒", "t": "お釣りを、大きいお金から渡すみたいな？"},
+   {"sc": 6, "sp": "先生", "t": "まさにそれです。200から128は引けますか？"},
+   {"sc": 6, "sp": "生徒", "t": "引けます。1で、残りは72。"},
+   {"sc": 6, "sp": "先生", "t": "72から64は？"},
+   {"sc": 6, "sp": "生徒", "t": "引けます。1で、残り8。32と16は引けないから0、0。"},
+   {"sc": 6, "sp": "生徒", "t": "8から8は引けて1、残り0。あとは全部0だから…11001000！"},
+   {"sc": 6, "sp": "先生", "t": "完璧です。"},
+   {"sc": 7, "sp": "先生", "t": "確認です。248を2進数に直したものはどれでしょう？", "w": 1},
+   {"sc": 7, "sp": "生徒", "t": "128、64、32、16、8まで引けるから、1が5個。2つ目です。"},
+   {"sc": 7, "sp": "先生", "t": "正解です。"},
+   {"sc": 8, "sp": "先生", "t": "最後に、よく出る数を覚えておきましょう。"},
+   {"sc": 8, "sp": "先生", "t": "サブネットマスクには、左から1が続けて並んだ数しか出てきません。"},
+   {"sc": 8, "sp": "生徒", "t": "1が1個なら128、2個なら192、3個なら…224？"},
+   {"sc": 8, "sp": "先生", "t": "その調子。128に、64、32、16…と順に足していった数です。"},
+   {"sc": 8, "sp": "生徒", "t": "128、192、224、240、248、252、254、255。"},
+   {"sc": 8, "sp": "先生", "t": "この8つが言えれば、あとの計算がぐっと楽になりますよ。"},
+   {"sc": 9, "sp": "先生", "t": "確認です。左から1が4個並んだ11110000は、いくつでしょう？", "w": 1},
+   {"sc": 9, "sp": "生徒", "t": "224の次だから、240！"},
+   {"sc": 9, "sp": "先生", "t": "正解。もう覚え始めていますね。"},
+   {"sc": 10, "sp": "生徒", "t": "先生、白状すると、最初は左が1、右が128だと思ってました。"},
+   {"sc": 10, "sp": "先生", "t": "よくあるまちがいです。10進数でも、左のほうが大きい位ですよね。"},
+   {"sc": 10, "sp": "先生", "t": "2進数も、左が一番重い128です。"},
+   {"sc": 10, "sp": "生徒", "t": "あと、11000000を、1が2個だから2、と答えそうになりました。"},
+   {"sc": 10, "sp": "先生", "t": "足すのは、1の数ではなく、1が立っているけたの重さです。"},
+   {"sc": 10, "sp": "生徒", "t": "重さを足す。覚えました。"},
+   {"sc": 11, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 11, "sp": "先生", "t": "1つ目。けたの重さは、左から128、64、32、16、8、4、2、1。"},
+   {"sc": 11, "sp": "先生", "t": "2つ目。2進数を10進数にするには、1のけたの重さを足す。"},
+   {"sc": 11, "sp": "先生", "t": "3つ目。10進数を2進数にするには、大きい重さから、引けたら1。"},
+   {"sc": 11, "sp": "生徒", "t": "算数、思ったより楽しかったです！"},
+   {"sc": 11, "sp": "先生", "t": "よかった。次回は、ネットワークの仕事を層に分けて考える話です。お疲れさまでした。"}
+  ]
+ }
+}
