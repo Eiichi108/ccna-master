@@ -1,31 +1,35 @@
 # CCNA Master（公開版）
 
 CCNA 200-301 の学習サイト。GitHub Pages で公開している：https://eiichi108.github.io/ccna-master/
-ビルド不要の静的サイト（index.html が data.json と audio/*.mp3 を読み込むだけ）。
+静的サイト（index.html が data.json と audio/*.mp3 を読み込むだけ）。data.json は `src/` から作る。
 
 ## 大事なルール
 - 問題・教科書・授業台本は**すべてオリジナル**。既存の問題集（特に市販・有料サイトの問題）の文面・図・数値をまねしたものは入れない。
 - 作業者の個人用サイト（別の問題集の問題を含む版）は claude.ai のアーティファクトとして別管理。このリポジトリには入れない。
 - 文章は初心者向けのやさしい日本語。略語は初出で正式名を添える。
+- **push するとすぐ公開される**。commit・push はユーザーに確認してから。
+- **data.json は直接編集しない**。`src/` を直して `python tools/build.py` で作り直す。
 
 ## ファイル構成
-- `index.html` … アプリ本体（HTML/CSS/JS を1ファイルに）。進捗は localStorage（キー `ccna_master_pub1`）に保存。
-- `data.json` … 全データ。レコードの種類は `r` で区別：
-  - `Q` 問題（`k`: one / multi / sel / match / order、`h:1` なら t/e/o の HTML をそのまま表示、`x` 図・出力、`rd` 図の読み方、`rg` 読み方ガイドの種類）
-  - `TB` 各回（1〜50）の教科書 `pages` と授業 `cls`（`lines`: `sp` 先生/生徒、`t` 字幕、`y` 読み上げ用の読み、`w:1` 小テストで止まる行、`seg` 各行の [開始秒, 長さ]）
-  - `CP` 各回の一覧と問題ID、`QP` 問題→[回, 教科書ページ]、`O` 出題順、`RG` 図・出力の読み方ガイド、`L` 図解レッスン、`G` 用語集、`C`/`B` コマンド練習、`D` 分野
-- `audio/lNN.mp3` … 第NN回の授業音声（1回1本）。字幕との対応は `cls.seg`。
-- `tools/` … 作業用
+- `src/` … 編集するのはここ
+  - `lessons/lNN.json` … 第NN回の教科書 `pages`（`t` 見出し、`svg` 図、`b` 本文、`p` ポイント、`quiz` 小テスト）と授業 `cls`（`lines`: `sp` 先生/生徒、`t` 字幕、`y` 読み上げ用の読み、`w:1` 小テストで止まる行、`sc` 場面。`seg` 各行の [開始秒, 長さ]、`a` 音声）。セリフは1行＝1つのオブジェクト
+  - `questions/lNN.json` … 第NN回の問題。形式と作り方のルールは `src/questions/INSTRUCTIONS.md`
+  - `base/` … `glossary`（用語集 G）、`figures`（図解レッスン L）、`commands`（コマンド練習 C）、`labs`（設定演習 B）、`guides`（図・出力の読み方ガイド RG）、`classes`（各回一覧 CP）、`domains`（分野 D）
+- `data.json` … build で作る出力（1行に圧縮）。レコードの種類は `r` で区別し、Q（問題）・O（出題順）・QP（問題→[回, ページ]）と、CP・L の `q`（問題IDの一覧）は問題から自動で作られる（src/base 側の `q` は使われない）
+- `index.html` … アプリ本体（HTML/CSS/JS を1ファイルに）。進捗は localStorage（キー `ccna_master_pub1`）に保存
+- `audio/lNN.mp3` … 第NN回の授業音声（1回1本）。字幕との対応は `cls.seg`
+- `tools/` … `build.py`（src→data.json、最後に check も実行）、`check.py`、`srcio.py`（src の読み書き・整形の共通部品）、`rd.py`（読み `y` の変換表 `auto()`）、`audio/voicevox_build.py`（授業音声づくり）
 
 ## よくある作業
-- **問題を直す・追加する**：`tools/questions/lNN.json`（第NN回の問題。形式は `tools/questions/INSTRUCTIONS.md`）を編集 →
-  `python tools/build_questions.py` → `python tools/check.py`
-- **授業のセリフを直す**：data.json の `TB` → `cls.lines` を直す（読みが特殊なら `y` も）→ その回の音声を作り直す：
-  `python tools/audio/voicevox_build.py NN`（VOICEVOX を起動しておく。ffmpeg と numpy が必要）
-  読み方の変換表は `tools/lecture/rd.py`（`auto()`）。新しい行の `y` を作るときに使える。
-- **教科書を直す**：data.json の `TB` → `pages` を直接編集（図は SVG の文字列）。
+- **問題を直す・追加する**：`src/questions/lNN.json` を編集 → `python tools/build.py`
+- **教科書を直す**：`src/lessons/lNN.json` の `pages` を編集（図は SVG の文字列）→ `python tools/build.py`
+- **授業のセリフを直す**：`src/lessons/lNN.json` の `cls.lines` を編集（読みが特殊なら `y` も。`tools/rd.py` の `auto()` で作れる）→ 音声を作り直す：
+  `python tools/audio/voicevox_build.py NN`（VOICEVOX を起動しておく。ffmpeg と numpy が必要。seg の保存と build まで自動）
+  セリフの行数を変えたのに音声を作り直さないと、check で「seg と lines の数が違う」になる
+- **用語集などを直す**：`src/base/*.json` を編集 → `python tools/build.py`
+- src を Python で書き換えるときは `srcio.save()` を使うと、今の整形のまま保存できる
 - 動作確認：`python -m http.server` → http://localhost:8000/
 
 ## 注意
-- `tools/lecture/` の lessonNN.py などは最初に台本・教科書を作ったときのスクリプトで、**今の data.json より古い**（あとで直した内容が入っていない）。参考用。中のパスも旧環境（/home/claude/...）のまま。正しい最新データは常に data.json。
+- Windows の PowerShell でファイルを表示すると日本語が文字化けすることがある。Read ツールか、`python -X utf8` を使う。
 - 音声は VOICEVOX（四国めたん／ずんだもん、各ノーマル）。サイトにクレジット表記を残すこと。

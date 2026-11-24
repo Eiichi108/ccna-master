@@ -1,0 +1,116 @@
+{
+ "r": "TB",
+ "lt": "nl23",
+ "n": 24,
+ "t": "Rapid PVST+とSTPの保護機能",
+ "pages": [
+  {
+   "t": "RSTPの状態と役割",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 263.90071556350625\" role=\"img\" aria-label=\"RSTPの状態と役割\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.40071556350626\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.40071556350626\" text-anchor=\"start\" style=\"font:800 14.4px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">状態：Discarding／Learning／Forwarding</text><text x=\"24\" y=\"50.40071556350626\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Listeningは従来のSTP（802.1D）の状態</text><rect x=\"10\" y=\"69.40071556350625\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"94.90071556350625\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ルートポート・指定ポート</text><text x=\"24\" y=\"113.90071556350625\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ルートへの近道／各リンクに1つ</text><rect x=\"10\" y=\"132.90071556350625\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.40071556350625\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">代替ポート（Alternate）</text><text x=\"24\" y=\"177.40071556350625\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ルートへの別経路の予備。故障するとすぐ切り替わる</text><rect x=\"10\" y=\"196.40071556350625\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#3d4450\" opacity=\".1\"/><text x=\"24\" y=\"221.90071556350625\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">バックアップポート</text><text x=\"24\" y=\"240.90071556350625\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">同じスイッチの指定ポートと同じセグメントの予備</text></svg>",
+   "b": "<b>RSTP</b>（Rapid Spanning Tree Protocol）は速く切り替わるSTP。リスニングやラーニングは「状態」、ルートや指定は「役割」です。 <b>代替ポート（Alternate）</b>は<b>ルートポートが故障したときの予備</b>でブロックしています。<b>バックアップポート</b>は、<b>同じスイッチの指定ポートと同じセグメントにある予備</b>です。",
+   "p": "RSTPに含まれない状態＝Listening。"
+  },
+  {
+   "t": "Rapid PVST+",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 250\" role=\"img\" aria-label=\"Rapid PVST+\"><g transform=\"translate(80,40) scale(0.8)\"><g transform=\"translate(0,0)\"><ellipse cx=\"0\" cy=\"20\" rx=\"32\" ry=\"4\" fill=\"var(--ink)\" opacity=\".12\"/><rect x=\"-32\" y=\"-14\" width=\"64\" height=\"30\" rx=\"5\" fill=\"#0a5cff\"/><rect x=\"-24\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"-16\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"-8\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"0\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"8\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"16\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"24\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><path d=\"M-14-6h18l-4-4M14-2h-18l4 4\" stroke=\"#fff\" stroke-width=\"2.2\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></g></g><text x=\"80\" y=\"74\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">VLAN 10のルート</text><g transform=\"translate(280,40) scale(0.8)\"><g transform=\"translate(0,0)\"><ellipse cx=\"0\" cy=\"20\" rx=\"32\" ry=\"4\" fill=\"var(--ink)\" opacity=\".12\"/><rect x=\"-32\" y=\"-14\" width=\"64\" height=\"30\" rx=\"5\" fill=\"#00a05a\"/><rect x=\"-24\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"-16\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"-8\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"0\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"8\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"16\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"24\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><path d=\"M-14-6h18l-4-4M14-2h-18l4 4\" stroke=\"#fff\" stroke-width=\"2.2\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></g></g><text x=\"280\" y=\"74\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">VLAN 20のルート</text><g transform=\"translate(180,160) scale(0.8)\"><g transform=\"translate(0,0)\"><ellipse cx=\"0\" cy=\"20\" rx=\"32\" ry=\"4\" fill=\"var(--ink)\" opacity=\".12\"/><rect x=\"-32\" y=\"-14\" width=\"64\" height=\"30\" rx=\"5\" fill=\"#00a05a\"/><rect x=\"-24\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"-16\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"-8\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"0\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"8\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"16\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"24\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><path d=\"M-14-6h18l-4-4M14-2h-18l4 4\" stroke=\"#fff\" stroke-width=\"2.2\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></g></g><path d=\"M96 56L164 144\" stroke=\"#0a5cff\" stroke-width=\"5\"/><path d=\"M264 56L196 144\" stroke=\"#00a05a\" stroke-width=\"5\"/><text x=\"180\" y=\"198\" text-anchor=\"middle\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">VLANごとにルートを変えて負荷を分ける</text><text x=\"180\" y=\"224\" text-anchor=\"middle\" style=\"font:700 12px ui-monospace,Menlo,monospace;fill:var(--ink)\">spanning-tree vlan 10 root primary（24576）</text><text x=\"180\" y=\"244\" text-anchor=\"middle\" style=\"font:700 12px ui-monospace,Menlo,monospace;fill:var(--sub)\">root secondary（28672）・4096の倍数</text></svg>",
+   "b": "<b>Rapid PVST+</b>（Per-VLAN Spanning Tree）はVLANごとにRSTPを動かすCisco独自の方式。<b>spanning-tree mode rapid-pvst</b>で有効にします。 VLANごとにルートブリッジを変えると、<b>リンクを有効に使えます</b>（負荷分散）。",
+   "p": "プライオリティは0〜61440の4096の倍数（8192はOK）。"
+  },
+  {
+   "t": "出力の読み方",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 270\" role=\"img\" aria-label=\"show spanning-treeの読み方\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"196\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" style=\"font:700 13px ui-monospace,Menlo,monospace;fill:#0a5cff\">VLAN0010</text><text x=\"22\" y=\"74\" style=\"font:700 13px ui-monospace,Menlo,monospace;fill:#00a05a\"> Root ID  Priority 4106</text><text x=\"22\" y=\"96\" style=\"font:700 13px ui-monospace,Menlo,monospace;fill:#00a05a\"> Bridge ID Priority 4106</text><text x=\"22\" y=\"118\" style=\"font:700 13px ui-monospace,Menlo,monospace;fill:#3d4450\">Interface Role Sts Cost</text><text x=\"22\" y=\"140\" style=\"font:700 13px ui-monospace,Menlo,monospace;fill:#0a5cff\">Gi0/1     Desg FWD 4</text><text x=\"22\" y=\"162\" style=\"font:700 13px ui-monospace,Menlo,monospace;fill:#e6261f\">Gi0/2     Altn BLK 19</text><text x=\"22\" y=\"184\" style=\"font:700 13px ui-monospace,Menlo,monospace;fill:#ffb400\">protocol rstp</text><text x=\"180\" y=\"232\" text-anchor=\"middle\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">4106 ＝ 4096 ＋ VLAN 10（拡張システムID）</text><text x=\"180\" y=\"254\" text-anchor=\"middle\" style=\"font:700 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Root ID＝Bridge ID → ルートブリッジ／Altn BLK＝代替・ブロック</text></svg>",
+   "b": "表示されるプライオリティ＝設定値＋VLAN番号。24596なら24576＋20でVLAN 20。コスト19は100Mbps、4は1Gbps。",
+   "p": "Root IDとBridge IDが違えば、そのスイッチはルートではない。"
+  },
+  {
+   "t": "STPを守る機能",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 298.0\" role=\"img\" aria-label=\"STPを守る機能\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ルートガード</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">より優れたBPDUを受けたら root-inconsistent で</text><text x=\"24\" y=\"67.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ブロック</text><rect x=\"10\" y=\"86.5\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"112.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ループガード</text><text x=\"24\" y=\"131.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">BPDUが届かなくなっても、ブロック中のポートが勝手に</text><text x=\"24\" y=\"148.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">転送しない</text><rect x=\"10\" y=\"167.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"192.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">errdisable recovery cause bpduguard</text><text x=\"24\" y=\"211.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">BPDUガードで止まったポートを300秒後に自動復旧</text><rect x=\"10\" y=\"230.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"256.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">spanning-tree portfast default</text><text x=\"24\" y=\"275.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">すべてのアクセスポートでPortFast</text></svg>",
+   "b": "<b>ルートガード</b>：より優れたBPDUを受け取ると、<b>root-inconsistent状態になってブロック</b>し、予定外のスイッチがルートになるのを防ぎます。<b>ループガード</b>：<b>BPDUが届かなくなったときに、ブロックしているポートが勝手に転送を始めないように</b>します。グローバル設定の <b>spanning-tree portfast default</b> は、<b>すべてのアクセスポートでPortFastを有効</b>にします。",
+   "p": "予定外のスイッチがルートになるのを防ぐ＝ルートガード。"
+  },
+  {
+   "t": "小テスト",
+   "quiz": {
+    "q": "このスイッチをVLAN 10のルートブリッジにするコマンドは？",
+    "o": [
+     ["spanning-tree vlan 10 root primary", "<g><text x=\"0\" y=\"5\" text-anchor=\"middle\" style=\"font:800 9.5px ui-monospace,Menlo,monospace;fill:#00a05a\">vlan 10 root primary</text></g>"],
+     ["spanning-tree vlan 10 root secondary", "<g><text x=\"0\" y=\"5\" text-anchor=\"middle\" style=\"font:800 9.5px ui-monospace,Menlo,monospace;fill:#0a5cff\">vlan 10 root secondary</text></g>"],
+     ["spanning-tree mode rapid-pvst", "<g><text x=\"0\" y=\"5\" text-anchor=\"middle\" style=\"font:800 9.5px ui-monospace,Menlo,monospace;fill:#3d4450\">mode rapid-pvst</text></g>"]
+    ],
+    "a": 0,
+    "e": "正解は<b>spanning-tree vlan 10 root primary</b>。プライオリティが自動で低い値に設定されます。"
+   }
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 217.09807355516637\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.09807355516637\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.098073555166366\" text-anchor=\"start\" style=\"font:800 14.1px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">RSTP：Discarding・Learning・Forwarding</text><text x=\"24\" y=\"50.098073555166366\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">役割：ルート・指定・代替・バックアップ</text><rect x=\"10\" y=\"69.09807355516637\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"94.59807355516637\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Rapid PVST+：VLANごと</text><text x=\"24\" y=\"113.59807355516637\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">primary 24576／secondary 28672／表示＝設定＋</text><text x=\"24\" y=\"130.59807355516637\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">VLAN番号</text><rect x=\"10\" y=\"149.59807355516637\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"175.09807355516637\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ルートガード・ループガード・BPDUガード</text><text x=\"24\" y=\"194.09807355516637\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">root-inconsistent／片方向故障／err-disable</text></svg>",
+   "b": "次回は「EtherChannel」。",
+   "p": "一問一答の「ネットワークアクセス」で確かめましょう。"
+  }
+ ],
+ "cls": {
+  "a": "audio/l24/",
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "今日は、STPの続きです。速くなったRSTPと、VLANごとに動かすRapid PVST+、そしてSTPを守る機能を学びます。", "y": "今日は、エスティーピーの続きです。速くなったアールエスティーピーと、ブイランごとに動かすラピッドピーブイエスティープラス、そしてエスティーピーを守る機能を学びます。"},
+   {"sc": 1, "sp": "先生", "t": "RSTPは、ラピッドスパニングツリー。従来のSTPより、ずっと速く切り替わります。ポートの状態は、ディスカーディング、ラーニング、フォワーディングの3つです。", "y": "アールエスティーピーは、ラピッドスパニングツリー。従来のエスティーピーより、ずっと速く切り替わります。ポートの状態は、ディスカーディング、ラーニング、フォワーディングの3つです。"},
+   {"sc": 1, "sp": "生徒", "t": "従来のSTPにあった、リスニングは？", "y": "従来のエスティーピーにあった、リスニングは？"},
+   {"sc": 1, "sp": "先生", "t": "RSTPにはありません。リスニングは、従来のSTP、802.1Dの状態です。それから、「状態」と「役割」は別物です。状態は、今そのポートがデータを転送しているかどうか。役割は、ルートポートや指定ポートのような、そのポートの立場です。", "y": "アールエスティーピーにはありません。リスニングは、従来のエスティーピー、ハチマルニーテンイチディーの状態です。それから、「状態」と「役割」は別物です。状態は、今そのポートがデータを転送しているかどうか。役割は、ルートポートや指定ポートのような、そのポートの立場です。"},
+   {"sc": 1, "sp": "先生", "t": "RSTPのポートの役割は4つ。ルートポート、指定ポート、そして代替ポートとバックアップポートです。", "y": "アールエスティーピーのポートの役割は4つ。ルートポート、指定ポート、そして代替ポートとバックアップポートです。"},
+   {"sc": 1, "sp": "先生", "t": "代替ポートは、ルートブリッジへの別の道です。ルートポートが壊れたら、すぐに代わりになる予備です。バックアップポートは、めったに出てこないので、同じスイッチの指定ポートの予備、とだけ覚えておけば大丈夫です。"},
+   {"sc": 2, "sp": "先生", "t": "CiscoのRapid PVST+は、VLANごとにRSTPを動かす方式です。PVSTは、パー・ブイラン・スパニングツリー、つまり「VLANごとのスパニングツリー」の略です。spanning-tree mode rapid-pvstで有効にします。", "y": "シスコのラピッドピーブイエスティープラスは、ブイランごとにアールエスティーピーを動かす方式です。PVSTは、パー・ブイラン・スパニングツリー、つまり「ブイランごとのスパニングツリー」の略です。スパニングツリー モード ラピッドピーブイエスティーで有効にします。"},
+   {"sc": 2, "sp": "先生", "t": "VLANごとにルートブリッジを変えられるので、VLAN10はこちらの線、VLAN20はあちらの線、と負荷を分けて、リンクを有効に使えます。", "y": "ブイランごとにルートブリッジを変えられるので、ブイラン10はこちらの線、ブイラン20はあちらの線、と負荷を分けて、リンクを有効に使えます。"},
+   {"sc": 2, "sp": "先生", "t": "このスイッチをVLAN10のルートにするなら、spanning-tree vlan 10 root primary。プライオリティが自動で低くなり、普通は24576になります。予備のルートなら、root secondaryで28672です。", "y": "このスイッチをブイラン10のルートにするなら、スパニングツリー ブイラン 10 ルートプライマリ。プライオリティが自動で低くなり、普通は24576になります。予備のルートなら、ルートセカンダリで28672です。"},
+   {"sc": 2, "sp": "先生", "t": "手動で設定するなら、プライオリティは0から61440の範囲で、4096の倍数です。8192はOKですが、1000は設定できません。なぜ4096の倍数なのかというと、残りの細かい部分に、次に説明するVLAN番号が入るからです。", "y": "手動で設定するなら、プライオリティは0から61440の範囲で、4096の倍数です。8192はオーケーですが、1000は設定できません。なぜ4096の倍数なのかというと、残りの細かい部分に、次に説明するブイラン番号が入るからです。"},
+   {"sc": 3, "sp": "先生", "t": "では、show spanning-treeの出力の読み方です。表示されるプライオリティは、設定した値に、VLAN番号を足した値です。これを拡張システムIDと言います。", "y": "では、ショー スパニングツリーの出力の読み方です。表示されるプライオリティは、設定した値に、ブイラン番号を足した値です。これを拡張システムIDと言います。"},
+   {"sc": 3, "sp": "生徒", "t": "4106と出ていたら、4096にVLAN10を足したもの、ですか？", "y": "4106と出ていたら、4096にブイラン10を足したもの、ですか？"},
+   {"sc": 3, "sp": "先生", "t": "正解です。逆に24596なら、24576を引いて、VLAN20の出力だと分かります。", "y": "正解です。逆に24596なら、24576を引いて、ブイラン20の出力だと分かります。"},
+   {"sc": 3, "sp": "先生", "t": "まず、Root IDとBridge IDのアドレスを見比べます。同じなら、そのスイッチ自身がルートブリッジです。"},
+   {"sc": 3, "sp": "先生", "t": "次に、Roleの列を見ます。Rootはルートポート、Desgは指定ポート、Altnは代替ポートです。Stsの列は、BLKがブロック、FWDが転送中です。"},
+   {"sc": 3, "sp": "先生", "t": "コストからリンクの速さも分かります。19なら100メガ、4なら1ギガです。protocol rstpと書いてあれば、Rapid PVST+で動いています。", "y": "コストからリンクの速さも分かります。19なら100メガ、4なら1ギガです。protocol rstpと書いてあれば、ラピッドピーブイエスティープラスで動いています。"},
+   {"sc": 4, "sp": "先生", "t": "最後に、STPを守る機能です。前回のBPDUガードに加えて、3つ紹介します。", "y": "最後に、エスティーピーを守る機能です。前回のビーピーディーユーガードに加えて、3つ紹介します。"},
+   {"sc": 4, "sp": "先生", "t": "ルートガードは、予定外のスイッチがルートブリッジになろうとするのを防ぎます。今のルートブリッジよりもブリッジIDが小さい、つまり「自分がルートだ」と名乗るBPDUを受け取ると、そのポートをroot-inconsistentという状態にしてブロックします。", "y": "ルートガードは、予定外のスイッチがルートブリッジになろうとするのを防ぎます。今のルートブリッジよりもブリッジIDが小さい、つまり「自分がルートだ」と名乗るビーピーディーユーを受け取ると、そのポートをルートインコンシステントという状態にしてブロックします。"},
+   {"sc": 4, "sp": "先生", "t": "ループガードは、片方向の故障に備える機能です。ブロックしているポートは、相手からBPDUが届いている間はブロックを続けます。ところが、線が片方向だけ壊れてBPDUが届かなくなると、「もう相手はいない」と勘違いして転送を始め、ループができてしまいます。ループガードは、これを止めます。", "y": "ループガードは、片方向の故障に備える機能です。ブロックしているポートは、相手からビーピーディーユーが届いている間はブロックを続けます。ところが、線が片方向だけ壊れてビーピーディーユーが届かなくなると、「もう相手はいない」と勘違いして転送を始め、ループができてしまいます。ループガードは、これを止めます。"},
+   {"sc": 4, "sp": "先生", "t": "BPDUガードで止まったポートは、errdisable recovery cause bpduguardと設定しておくと、初期値で300秒、つまり5分後に自動で復旧します。", "y": "ビーピーディーユーガードで止まったポートは、エラーディセーブル、リカバリー、コーズ、ビーピーディーユーガードと設定しておくと、初期値で300秒、つまり5分後に自動で復旧します。"},
+   {"sc": 4, "sp": "先生", "t": "また、グローバル設定でspanning-tree portfast defaultと打つと、すべてのアクセスポートで、まとめてPortFastが有効になります。", "y": "また、グローバル設定でスパニングツリー ポートファスト デフォルトと打つと、すべてのアクセスポートで、まとめてポートファストが有効になります。"},
+   {"sc": 5, "sp": "先生", "t": "ここで小テストです。このスイッチを、VLAN10のルートブリッジにするコマンドはどれでしょう？画面で選んでください。", "w": 1, "y": "ここで小テストです。このスイッチを、ブイラン10のルートブリッジにするコマンドはどれでしょう？画面で選んでください。"},
+   {"sc": 5, "sp": "先生", "t": "正解はspanning-tree vlan 10 root primaryです。", "y": "正解はスパニングツリー ブイラン 10 ルートプライマリです。"},
+   {"sc": 6, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 6, "sp": "先生", "t": "1つ目。RSTPの状態は、ディスカーディング、ラーニング、フォワーディング。役割は、ルート、指定、代替、バックアップ。", "y": "1つ目。アールエスティーピーの状態は、ディスカーディング、ラーニング、フォワーディング。役割は、ルート、指定、代替、バックアップ。"},
+   {"sc": 6, "sp": "先生", "t": "2つ目。Rapid PVST+はVLANごと。root primaryで24576、root secondaryで28672。プライオリティは4096の倍数で、表示はVLAN番号を足した値。", "y": "2つ目。ラピッドピーブイエスティープラスはブイランごと。ルートプライマリで24576、ルートセカンダリで28672。プライオリティは4096の倍数で、表示はブイラン番号を足した値。"},
+   {"sc": 6, "sp": "先生", "t": "3つ目。ルートガードはroot-inconsistent、ループガードは片方向の故障対策、BPDUガードの復旧はerrdisable recovery。", "y": "3つ目。ルートガードはルートインコンシステント、ループガードは片方向の故障対策、ビーピーディーユーガードの復旧はerrdisable recovery。"},
+   {"sc": 6, "sp": "生徒", "t": "出力の数字から、VLAN番号まで分かるようになりました！", "y": "出力の数字から、ブイラン番号まで分かるようになりました！"},
+   {"sc": 6, "sp": "先生", "t": "すごいですね。次回は、線を束ねるEtherChannelです。お疲れさまでした。", "y": "すごいですね。次回は、線を束ねるイーサチャネルです。お疲れさまでした。"}
+  ],
+  "seg": [
+   [0.0, 11.029],
+   [11.379, 12.736],
+   [24.465, 3.605],
+   [28.42, 21.141333],
+   [49.911, 7.979],
+   [58.24, 14.709333],
+   [73.3, 18.368],
+   [92.018, 10.229],
+   [102.597, 18.112],
+   [121.059, 20.512],
+   [141.921, 12.053],
+   [154.324, 6.336],
+   [161.01, 9.259],
+   [170.619, 7.552],
+   [178.521, 12.522667],
+   [191.393, 10.901042],
+   [202.644, 7.413],
+   [210.407, 17.130667],
+   [227.888, 22.069333],
+   [250.307, 12.757333],
+   [263.415, 10.069333],
+   [273.834, 7.776],
+   [281.96, 5.536],
+   [287.846, 1.835],
+   [290.031, 10.88],
+   [301.261, 16.16],
+   [317.771, 10.069],
+   [328.19, 4.843],
+   [333.383, 5.355]
+  ]
+ }
+}

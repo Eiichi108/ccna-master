@@ -1,0 +1,108 @@
+{
+ "r": "TB",
+ "lt": "nl47",
+ "n": 48,
+ "t": "REST APIとJSON",
+ "pages": [
+  {
+   "t": "CRUDとHTTPメソッド",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 220\" role=\"img\" aria-label=\"CRUDとHTTPメソッド\"><rect x=\"10\" y=\"20\" width=\"80\" height=\"110\" rx=\"10\" fill=\"#00a05a\" opacity=\".14\"/><text x=\"50\" y=\"48\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">作成</text><text x=\"50\" y=\"80\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">POST</text><text x=\"50\" y=\"108\" text-anchor=\"middle\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Create</text><rect x=\"96\" y=\"20\" width=\"80\" height=\"110\" rx=\"10\" fill=\"#0a5cff\" opacity=\".14\"/><text x=\"136\" y=\"48\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">読み取り</text><text x=\"136\" y=\"80\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">GET</text><text x=\"136\" y=\"108\" text-anchor=\"middle\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Read</text><rect x=\"182\" y=\"20\" width=\"80\" height=\"110\" rx=\"10\" fill=\"#ffb400\" opacity=\".14\"/><text x=\"222\" y=\"48\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">更新</text><text x=\"222\" y=\"80\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">PUT/PATCH</text><text x=\"222\" y=\"108\" text-anchor=\"middle\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Update</text><rect x=\"268\" y=\"20\" width=\"80\" height=\"110\" rx=\"10\" fill=\"#e6261f\" opacity=\".14\"/><text x=\"308\" y=\"48\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">削除</text><text x=\"308\" y=\"80\" text-anchor=\"middle\" style=\"font:800 15px Figtree,'Hiragino Sans',sans-serif;fill:#e6261f;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">DELETE</text><text x=\"308\" y=\"108\" text-anchor=\"middle\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Delete</text><text x=\"180\" y=\"160\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">CRUD＝Create・Read・Update・Delete</text><text x=\"180\" y=\"186\" text-anchor=\"middle\" style=\"font:700 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">REMOVE・POP・REDIRECT はHTTPメソッドではない</text></svg>",
+   "b": "<b>REST</b>（Representational State Transfer）APIは、HTTPのメソッドで操作を表します。",
+   "p": "PUT＝更新（DNSサーバーを更新する、など）。"
+  },
+  {
+   "t": "ステータスコード",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 327.5\" role=\"img\" aria-label=\"ステータスコード\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">200 OK／201 Created</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">成功／作成できた</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">400 Bad Request</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">リクエストがおかしい</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">401 Unauthorized／403 Forbidden</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">認証されていない／権限がない</text><rect x=\"10\" y=\"196.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#3d4450\" opacity=\".1\"/><text x=\"24\" y=\"222.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">404 Not Found／500</text><text x=\"24\" y=\"241.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">見つからない／サーバーのエラー</text><rect x=\"10\" y=\"260.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"285.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">?id=5</text><text x=\"24\" y=\"304.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">クエリパラメーター</text></svg>",
+   "b": "",
+   "p": "401と403の違いがよく出る。"
+  },
+  {
+   "t": "JSONの書き方",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 250\" role=\"img\" aria-label=\"JSONの書き方\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"164\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" style=\"font:700 13px ui-monospace,Menlo,monospace;fill:#3d4450\">{</text><text x=\"22\" y=\"74\" style=\"font:700 13px ui-monospace,Menlo,monospace;fill:#0a5cff\">  \"hostname\": \"R1\",</text><text x=\"22\" y=\"96\" style=\"font:700 13px ui-monospace,Menlo,monospace;fill:#00a05a\">  \"interfaces\": [\"G0/0\", \"G0/1\"],</text><text x=\"22\" y=\"118\" style=\"font:700 13px ui-monospace,Menlo,monospace;fill:#ffb400\">  \"enabled\": true,</text><text x=\"22\" y=\"140\" style=\"font:700 13px ui-monospace,Menlo,monospace;fill:#e6261f\">  \"vlan\": 10</text><text x=\"22\" y=\"162\" style=\"font:700 13px ui-monospace,Menlo,monospace;fill:#3d4450\">}</text><text x=\"180\" y=\"198\" text-anchor=\"middle\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">{ }＝オブジェクト　[ ]＝配列　コロンの左＝キー</text><text x=\"180\" y=\"222\" text-anchor=\"middle\" style=\"font:700 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">キーと文字列はダブルクォート／最後の要素にカンマなし</text></svg>",
+   "b": "<b>JSON</b>（JavaScript Object Notation）は「\"キー\": 値」の組で書きます。 正しい例：<b>{\"hostname\": \"R1\"}</b>。キーも文字列も<b>ダブルクォート</b>で囲み、<b>最後の要素の後ろにカンマを付けません</b>。true/false は<b>真偽値（boolean）</b>。",
+   "p": "'text'（シングルクォート）はJSONとして正しくない。"
+  },
+  {
+   "t": "JSONを読む",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 217.5\" role=\"img\" aria-label=\"JSONを読む\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">型</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">文字列・数値・真偽値（true/false）・null・配列・</text><text x=\"24\" y=\"67.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">オブジェクト</text><rect x=\"10\" y=\"86.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"112.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">数え方</text><text x=\"24\" y=\"131.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">{ }の組＝オブジェクト、コロンの左＝キー、右＝値</text><rect x=\"10\" y=\"150.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"175.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Content-Type: application/json</text><text x=\"24\" y=\"194.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">送るデータがJSON</text></svg>",
+   "b": "<b>コロンの左がキー（Key）、右が値</b>。{ } が<b>オブジェクト</b>、[ ] が配列（リスト）です。数えるときは、{ }の組の数＝オブジェクト数、コロンの数＝キーの数、[ ]の組の数＝JSONリスト値の数（中の要素がいくつあっても、[ ]1つで1つと数える）。データの形式：<b>JSON</b>＝{ }と[ ]で表し、REST APIでよく使う。<b>XML</b>＝タグで囲む（NETCONF）。<b>YAML</b>＝インデント（字下げ）で構造を表す（Ansible）。",
+   "p": "\"port\" のようにコロンの左にあるのはキー、\"FW18\" のように右にあるのは値。"
+  },
+  {
+   "t": "小テスト",
+   "quiz": {
+    "q": "REST APIで情報を「取得」するメソッドは？",
+    "o": [
+     ["GET", "<g><g transform=\"translate(0,0)\"><rect x=\"-40.0\" y=\"-13\" width=\"80\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#0a5cff\">GET</text></g></g>"],
+     ["POST", "<g><g transform=\"translate(0,0)\"><rect x=\"-40.0\" y=\"-13\" width=\"80\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#00a05a\">POST</text></g></g>"],
+     ["DELETE", "<g><g transform=\"translate(0,0)\"><rect x=\"-40.0\" y=\"-13\" width=\"80\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#e6261f\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#e6261f\">DELETE</text></g></g>"]
+    ],
+    "a": 0,
+    "e": "正解は<b>GET</b>。POST＝作成、PUT/PATCH＝更新、DELETE＝削除です。"
+   }
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">POST・GET・PUT/PATCH・DELETE</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">作成・読み取り・更新・削除</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">200・201・401・403・404</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">OK・作成・未認証・権限なし・見つからない</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">{ }＝オブジェクト・[ ]＝配列</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ダブルクォート・最後にカンマなし</text></svg>",
+   "b": "次回は「REST APIの特徴と認証」。",
+   "p": "一問一答の「自動化とプログラマビリティ」で確かめましょう。"
+  }
+ ],
+ "cls": {
+  "a": "audio/l48/",
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "今日は、REST APIとJSONです。プログラムからネットワークを操作するときの、言葉と文法のようなものです。", "y": "今日は、レスト エーピーアイとジェイソンです。プログラムからネットワークを操作するときの、言葉と文法のようなものです。"},
+   {"sc": 1, "sp": "先生", "t": "REST APIは、HTTPのメソッドで操作を表します。メソッドは、サーバーへのお願いの種類のことです。操作は4つで、頭文字をとってCRUD、作成、読み取り、更新、削除です。", "y": "レスト エーピーアイは、エイチティーティーピーのメソッドで操作を表します。メソッドは、サーバーへのお願いの種類のことです。操作は4つで、頭文字をとってクラッド、作成、読み取り、更新、削除です。"},
+   {"sc": 1, "sp": "先生", "t": "作成がPOST、読み取りがGET、更新がPUTかPATCH、削除がDELETEです。", "y": "作成がポスト、読み取りがゲット、更新がプットかパッチ、削除がデリートです。"},
+   {"sc": 1, "sp": "生徒", "t": "情報を取得するならGET、新しく作るならPOST、ですね。", "y": "情報を取得するならゲット、新しく作るならポスト、ですね。"},
+   {"sc": 1, "sp": "先生", "t": "その通り。REMOVEやPOPのような名前は、HTTPのメソッドではないので、ひっかけに注意しましょう。", "y": "その通り。REMOVEやPOPのような名前は、エイチティーティーピーのメソッドではないので、ひっかけに注意しましょう。"},
+   {"sc": 2, "sp": "先生", "t": "サーバーからの返事には、ステータスコードが付きます。200はOK、201は作成できた、Created。", "y": "サーバーからの返事には、ステータスコードが付きます。200はオーケー、201は作成できた、クリエイテッド。"},
+   {"sc": 2, "sp": "先生", "t": "400番台は、頼む側、つまりクライアントの問題です。400はリクエストがおかしい。401は、誰だか分からない、認証されていない。403は、誰かは分かったけど権限がない。404は、見つからない。そして、500番台はサーバー側のエラーです。"},
+   {"sc": 2, "sp": "先生", "t": "URLの後ろに、はてなマークを付けて、例えば「はてな、id イコール 5」のように書く部分を、クエリパラメーターと言います。5番のデータをください、のような条件を、サーバーに渡すときに使います。", "y": "ユーアールエルの後ろに、はてなマークを付けて、例えば「はてな、id イコール 5」のように書く部分を、クエリパラメーターと言います。5番のデータをください、のような条件を、サーバーに渡すときに使います。"},
+   {"sc": 3, "sp": "先生", "t": "次はJSONです。データを、キーと値の組で書きます。コロンの左がキー、右が値です。", "y": "次はジェイソンです。データを、キーと値の組で書きます。コロンの左がキー、右が値です。"},
+   {"sc": 3, "sp": "先生", "t": "波かっこで囲んだ、キーと値のまとまりがオブジェクト。角かっこで囲んで並べたものが配列です。"},
+   {"sc": 3, "sp": "先生", "t": "例えば、波かっこを開いて、ダブルクォートで囲んだhostname、コロン、ダブルクォートで囲んだR1、波かっこを閉じる。これで、ホスト名がR1、というオブジェクトが1つです。", "y": "例えば、波かっこを開いて、ダブルクォートで囲んだホストネーム、コロン、ダブルクォートで囲んだR1、波かっこを閉じる。これで、ホスト名がR1、というオブジェクトが1つです。"},
+   {"sc": 3, "sp": "生徒", "t": "波かっこがオブジェクト、角かっこが配列、ですね。"},
+   {"sc": 3, "sp": "先生", "t": "値の型は、文字列、数値、真偽値のtrueとfalse、値がないことを表すnull、それから配列とオブジェクトです。日付という型はなく、文字列で書きます。", "y": "値の型は、文字列、数値、真偽値のトゥルーとフォルス、値がないことを表すヌル、それから配列とオブジェクトです。日付という型はなく、文字列で書きます。"},
+   {"sc": 3, "sp": "先生", "t": "大事なルールが2つ。キーと文字列は、必ずダブルクォートで囲みます。シングルクォートは使えません。そして、最後の要素の後ろに、カンマを付けてはいけません。"},
+   {"sc": 3, "sp": "先生", "t": "ダブルクォートのないtrueは真偽値、ダブルクォートで囲んだtrueは文字列です。", "y": "ダブルクォートのないトゥルーは真偽値、ダブルクォートで囲んだトゥルーは文字列です。"},
+   {"sc": 4, "sp": "先生", "t": "試験では、JSONの図を見て、オブジェクトとキーと値の数を数える問題が出ます。波かっこの組がオブジェクト、コロンの左がキーです。それから、角かっこの配列は、中に要素がいくつ入っていても、1組で1つと数えます。", "y": "試験では、ジェイソンの図を見て、オブジェクトとキーと値の数を数える問題が出ます。波かっこの組がオブジェクト、コロンの左がキーです。それから、角かっこの配列は、中に要素がいくつ入っていても、1組で1つと数えます。"},
+   {"sc": 4, "sp": "先生", "t": "HTTPでは、データ本体とは別に、ヘッダーという、送り状のような付け札を付けて送ります。送るデータがJSONだと伝えるヘッダーは、Content-Type、application/jsonです。", "y": "エイチティーティーピーでは、データ本体とは別に、ヘッダーという、送り状のような付け札を付けて送ります。送るデータがジェイソンだと伝えるヘッダーは、コンテントタイプ、アプリケーション、スラッシュ、ジェイソンです。"},
+   {"sc": 5, "sp": "先生", "t": "ここで小テストです。REST APIで、情報を取得するメソッドはどれでしょう？画面で選んでください。", "w": 1, "y": "ここで小テストです。レスト エーピーアイで、情報を取得するメソッドはどれでしょう？画面で選んでください。"},
+   {"sc": 5, "sp": "先生", "t": "正解はGETです。", "y": "正解はゲットです。"},
+   {"sc": 6, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 6, "sp": "先生", "t": "1つ目。CRUDは、POSTで作成、GETで読み取り、PUTとPATCHで更新、DELETEで削除。", "y": "1つ目。クラッドは、ポストで作成、ゲットで読み取り、プットとパッチで更新、デリートで削除。"},
+   {"sc": 6, "sp": "先生", "t": "2つ目。200はOK、201は作成、401は未認証、403は権限なし、404は見つからない。", "y": "2つ目。200はオーケー、201は作成、401は未認証、403は権限なし、404は見つからない。"},
+   {"sc": 6, "sp": "先生", "t": "3つ目。JSONは、波かっこがオブジェクト、角かっこが配列、コロンの左がキー。ダブルクォート、最後にカンマなし。", "y": "3つ目。ジェイソンは、波かっこがオブジェクト、角かっこが配列、コロンの左がキー。ダブルクォート、最後にカンマなし。"},
+   {"sc": 6, "sp": "生徒", "t": "JSONの図、数えられるようになりました！", "y": "ジェイソンの図、数えられるようになりました！"},
+   {"sc": 6, "sp": "先生", "t": "いいですね。次回は、REST APIの特徴と認証を学びます。お疲れさまでした。", "y": "いいですね。次回は、レスト エーピーアイの特徴と認証を学びます。お疲れさまでした。"}
+  ],
+  "seg": [
+   [0.0, 8.597],
+   [8.947, 15.733333],
+   [25.03, 6.101],
+   [31.481, 5.291],
+   [37.122, 8.650958],
+   [46.123, 8.171042],
+   [54.644, 20.341333],
+   [75.336, 15.925333],
+   [91.611, 6.763],
+   [98.724, 6.667],
+   [105.741, 13.717333],
+   [119.808, 4.576],
+   [124.734, 11.52],
+   [136.604, 11.797],
+   [148.751, 5.301],
+   [154.402, 16.085333],
+   [170.838, 14.901333],
+   [186.089, 7.925042],
+   [194.364, 1.472],
+   [196.186, 1.835],
+   [198.371, 7.68],
+   [206.401, 9.781],
+   [216.532, 9.408],
+   [226.29, 3.477],
+   [230.117, 6.795]
+  ]
+ }
+}

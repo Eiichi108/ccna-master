@@ -1,0 +1,114 @@
+{
+ "r": "TB",
+ "lt": "nl30",
+ "n": 31,
+ "t": "スタティックルート",
+ "pages": [
+  {
+   "t": "書き方の基本",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 250\" role=\"img\" aria-label=\"スタティックルートの書き方\"><text x=\"180\" y=\"34\" text-anchor=\"middle\" style=\"font:800 13px ui-monospace,Menlo,monospace\"><tspan fill=\"var(--ink)\">ip route </tspan><tspan fill=\"#0a5cff\">192.168.2.0 </tspan><tspan fill=\"#00a05a\">255.255.255.0 </tspan><tspan fill=\"#e6261f\">10.1.1.2</tspan></text><text x=\"100\" y=\"58\" text-anchor=\"middle\" style=\"font:800 11.5px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">宛先ネットワーク</text><text x=\"205\" y=\"58\" text-anchor=\"middle\" style=\"font:800 11.5px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">サブネットマスク</text><text x=\"300\" y=\"58\" text-anchor=\"middle\" style=\"font:800 11.5px Figtree,'Hiragino Sans',sans-serif;fill:#e6261f;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ネクストホップ</text><g transform=\"translate(70,120) scale(0.8)\"><g transform=\"translate(0,0)\"><ellipse cx=\"0\" cy=\"22\" rx=\"28\" ry=\"4\" fill=\"var(--ink)\" opacity=\".12\"/><path d=\"M-28-6v14c0 8 12 14 28 14s28-6 28-14v-14\" fill=\"#e6261f\"/><ellipse cy=\"-6\" rx=\"28\" ry=\"12\" fill=\"#e6261f\"/><ellipse cy=\"-6\" rx=\"28\" ry=\"12\" fill=\"#fff\" opacity=\".18\"/><path d=\"M-14-6h28M0-14v16M-10-6l-4-4v8zM10-6l4-4v8z\" stroke=\"#fff\" stroke-width=\"2.4\" fill=\"#fff\" stroke-linecap=\"round\"/></g></g><text x=\"70\" y=\"156\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">R1（.1）</text><g transform=\"translate(290,120) scale(0.8)\"><g transform=\"translate(0,0)\"><ellipse cx=\"0\" cy=\"22\" rx=\"28\" ry=\"4\" fill=\"var(--ink)\" opacity=\".12\"/><path d=\"M-28-6v14c0 8 12 14 28 14s28-6 28-14v-14\" fill=\"#e6261f\"/><ellipse cy=\"-6\" rx=\"28\" ry=\"12\" fill=\"#e6261f\"/><ellipse cy=\"-6\" rx=\"28\" ry=\"12\" fill=\"#fff\" opacity=\".18\"/><path d=\"M-14-6h28M0-14v16M-10-6l-4-4v8zM10-6l4-4v8z\" stroke=\"#fff\" stroke-width=\"2.4\" fill=\"#fff\" stroke-linecap=\"round\"/></g></g><text x=\"290\" y=\"156\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">R2（.2）</text><path d=\"M106 120h148\" stroke=\"var(--ink)\" stroke-width=\"3\"/><text x=\"180\" y=\"110\" text-anchor=\"middle\" style=\"font:700 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">10.1.1.0/24</text><text x=\"180\" y=\"190\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:#e6261f;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ネクストホップ＝相手のIP（自分の.1ではない）</text><text x=\"180\" y=\"216\" text-anchor=\"middle\" style=\"font:700 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">マスクはサブネットマスク（ワイルドカード✕）</text><text x=\"180\" y=\"238\" text-anchor=\"middle\" style=\"font:700 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">/29＝255.255.255.248、ネットワーク全体か1台かも確認</text></svg>",
+   "b": "<b>ip route 宛先ネットワーク サブネットマスク ネクストホップ</b>。順番が逆のもの、ワイルドカードを使ったもの、日本語が混ざったものはコマンドとしてありえません。 <b>デフォルトゲートウェイ（静的なデフォルトルート）のADは1</b>。予備にするなら1より大きいADを付けます。",
+   "p": "デフォルトゲートウェイ（静的なデフォルトルート）のAD＝1。"
+  },
+  {
+   "t": "出口の指定と再帰検索",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 281.0\" role=\"img\" aria-label=\"出口の指定と再帰検索\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">出口インターフェースを指定</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ip route 192.168.5.0 255.255.255.0 g0/1（</text><text x=\"24\" y=\"67.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">直接接続スタティック）</text><rect x=\"10\" y=\"86.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"112.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ネクストホップだけ</text><text x=\"24\" y=\"131.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ネクストホップへの出口をもう一度探す（再帰検索）</text><rect x=\"10\" y=\"150.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"175.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">イーサネットではネクストホップも書く</text><text x=\"24\" y=\"194.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">出口だけだと宛先ごとにARPが必要</text><rect x=\"10\" y=\"213.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"239.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">表から消える</text><text x=\"24\" y=\"258.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">出口がダウン／ネクストホップへの経路がない</text></svg>",
+   "b": "出口インターフェースだけを指定したものを<b>直接接続スタティックルート</b>と言います。ネクストホップだけを指定すると、ルーターは<b>ネクストホップへの経路を、もう一度ルーティングテーブルで探します（再帰検索）</b>。イーサネットで出口だけを指定すると、<b>宛先ごとにARPを送る（プロキシARPに頼る）</b>ことになるので、ネクストホップも指定するほうがよいです。<b>出口のインターフェースがダウンした</b>ら、スタティックルートはテーブルから消えます。",
+   "p": "スタティックルートが消えた → 出口のインターフェースがダウン。"
+  },
+  {
+   "t": "3つの特別なルート",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 300\" role=\"img\" aria-label=\"3つの特別なスタティックルート\"><rect x=\"10\" y=\"8\" width=\"340\" height=\"62\" rx=\"10\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"32\" text-anchor=\"start\" style=\"font:800 14px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">デフォルトルート</text><text x=\"24\" y=\"56\" style=\"font:700 12.5px ui-monospace,Menlo,monospace;fill:#0a5cff\">ip route 0.0.0.0 0.0.0.0 203.0.113.1</text><rect x=\"10\" y=\"76\" width=\"340\" height=\"62\" rx=\"10\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"100\" text-anchor=\"start\" style=\"font:800 14px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ホストルート（1台だけ）</text><text x=\"24\" y=\"124\" style=\"font:700 12.5px ui-monospace,Menlo,monospace;fill:#00a05a\">ip route 10.80.65.10 255.255.255.255 …</text><rect x=\"10\" y=\"144\" width=\"340\" height=\"150\" rx=\"10\" fill=\"#ffb400\" opacity=\".12\"/><text x=\"24\" y=\"168\" text-anchor=\"start\" style=\"font:800 14px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">フローティングスタティック（予備）</text><text x=\"24\" y=\"192\" style=\"font:700 11px ui-monospace,Menlo,monospace;fill:#b77d00\">ip route 10.0.2.0 255.255.255.248 10.0.0.6 91</text><text x=\"24\" y=\"218\" text-anchor=\"start\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">メインのADより大きい数字を最後に</text><text x=\"24\" y=\"240\" text-anchor=\"start\" style=\"font:700 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">OSPF 110→125・130／EIGRP 90→91</text><text x=\"24\" y=\"260\" text-anchor=\"start\" style=\"font:700 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">外部EIGRP 170→171／スタティック 1→5・6</text><text x=\"24\" y=\"282\" text-anchor=\"start\" style=\"font:700 12px Figtree,'Hiragino Sans',sans-serif;fill:#e6261f;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">メインがある間は表に出ない</text></svg>",
+   "b": "<b>フローティングスタティック</b>は、ADをわざと大きくした予備の経路。メインの経路（例：OSPFのAD 110）が消えたときだけ使われます。 たとえば<b>ADが130</b>のスタティックは、<b>OSPFの110より大きい</b>ので、OSPFが生きている間は表に出ません（予備）。<b>外部EIGRPのADは170</b>なので、予備にするなら171以上。種類：<b>デフォルトルート</b>＝0.0.0.0/0（IPv6は::/0）、<b>ホストルート</b>＝/32（IPv6は/128）で<b>1台だけを指す</b>（マスク255.255.255.255）、<b>フローティングスタティック</b>＝<b>ADを大きくした予備の経路</b>、<b>ネットワークルート</b>＝<b>特定のネットワーク宛ての経路</b>。",
+   "p": "ADの数字が付いているのが、フローティングの目印。"
+  },
+  {
+   "t": "IPv6のスタティック",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 279.81679073614555\" role=\"img\" aria-label=\"IPv6のスタティックルート\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ipv6 route ::/0 2001:db8::1</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">IPv6のデフォルトルート</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">/128</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">IPv6のホストルート</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"56.31679073614558\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"157.31679073614555\" text-anchor=\"start\" style=\"font:800 13.3px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ipv6 route 2001:db8:2::/64 g0/0 fe80::2</text><text x=\"24\" y=\"176.31679073614555\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">リンクローカルのネクストホップは出口も書く</text><rect x=\"10\" y=\"195.31679073614558\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#3d4450\" opacity=\".1\"/><text x=\"24\" y=\"220.81679073614558\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">中継するルーターをはさむとき</text><text x=\"24\" y=\"239.81679073614558\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">両側がそれぞれ相手へのルートを持つ。ネクストホップ</text><text x=\"24\" y=\"256.81679073614555\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">は中継ルーター</text></svg>",
+   "b": "IPv6でルーティングするには、先に ipv6 unicast-routing が必要です。 ネクストホップに<b>リンクローカルアドレス（FE80::）</b>を使うときは、<b>出口インターフェースも一緒に指定</b>します。IPv6のフローティングスタティックも、最後にADを付けます（例：ipv6 route … 201）。",
+   "p": "確認：show ipv6 route"
+  },
+  {
+   "t": "小テスト",
+   "quiz": {
+    "q": "OSPF（AD 110）の予備としてフローティングスタティックルートを作るときのADは？",
+    "o": [
+     ["130", "<g><g transform=\"translate(0,0)\"><rect x=\"-35.0\" y=\"-13\" width=\"70\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#00a05a\">130</text></g></g>"],
+     ["100", "<g><g transform=\"translate(0,0)\"><rect x=\"-35.0\" y=\"-13\" width=\"70\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#e6261f\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#e6261f\">100</text></g></g>"],
+     ["1", "<g><g transform=\"translate(0,0)\"><rect x=\"-35.0\" y=\"-13\" width=\"70\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#3d4450\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#3d4450\">1</text></g></g>"]
+    ],
+    "a": 0,
+    "e": "正解は<b>130</b>。メインの110より大きくすれば、OSPFの経路が消えたときだけ使われます。"
+   }
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ip route 宛先 マスク ネクストホップ</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ネクストホップは相手のIP</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">0.0.0.0 0.0.0.0／/32</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">IPv6は ::/0 と /128</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">フローティング＝最後に大きいAD</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">メインのADより大きく</text></svg>",
+   "b": "次回は「OSPF（シングルエリア）」。",
+   "p": "一問一答の「IP接続」で、スタティックルートの問題を解いて確かめましょう。"
+  }
+ ],
+ "cls": {
+  "a": "audio/l31/",
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "今日は、ルートを手で書く、スタティックルートです。書き方の問題がたくさん出るので、形をしっかり覚えましょう。"},
+   {"sc": 1, "sp": "先生", "t": "書き方は、ip route、宛先ネットワーク、サブネットマスク、ネクストホップ、の順です。例えば、宛先が192.168.2.0、マスクが255.255.255.0、ネクストホップが10.1.1.2なら、この3つをこの順番で、ip routeのあとに並べます。", "y": "書き方は、アイピールート、宛先ネットワーク、サブネットマスク、ネクストホップ、の順です。例えば、宛先が192、168、2、0、マスクが255、255、255、0、ネクストホップが10、1、1、2なら、この3つをこの順番で、アイピールートのあとに並べます。"},
+   {"sc": 1, "sp": "先生", "t": "ネクストホップは、隣のルーターの、自分の側を向いたインターフェースのIPアドレスです。自分のアドレスを書いてはいけません。", "y": "ネクストホップは、隣のルーターの、自分の側を向いたインターフェースのアイピーアドレスです。自分のアドレスを書いてはいけません。"},
+   {"sc": 1, "sp": "生徒", "t": "R1からR2のネットワークへ送るなら、ネクストホップはR2側の10.1.1.2で、自分の.1じゃないんですね。", "y": "R1からR2のネットワークへ送るなら、ネクストホップはR2側の10、1、1、2で、自分の.1じゃないんですね。"},
+   {"sc": 1, "sp": "先生", "t": "マスクは、255.255.255.0のような普通のサブネットマスクで書きます。0.0.0.7のように0と1の意味が逆になった、ワイルドカードマスクという書き方もありますが、これは次回のOSPFや、あとで習うACLで使うもので、ip routeでは使いません。/29なら255.255.255.248です。", "y": "マスクは、255、255、255、0のような普通のサブネットマスクで書きます。0、0、0、7のように0と1の意味が逆になった、ワイルドカードマスクという書き方もありますが、これは次回のオーエスピーエフや、あとで習うエーシーエルで使うもので、アイピールートでは使いません。スラッシュ29なら255、255、255、248です。"},
+   {"sc": 1, "sp": "先生", "t": "それから、宛先は、ネットワーク全体なのか、1台だけなのかを確認しましょう。支社のネットワーク全体へ行くなら/24、1台だけなら/32です。", "y": "それから、宛先は、ネットワーク全体なのか、1台だけなのかを確認しましょう。支社のネットワーク全体へ行くならスラッシュ24、1台だけならスラッシュ32です。"},
+   {"sc": 2, "sp": "先生", "t": "ネクストホップの代わりに、出口のインターフェースを書くこともできます。ip route 192.168.5.0 255.255.255.0 g0/1のような形で、直接接続スタティックルートと言います。", "y": "ネクストホップの代わりに、出口のインターフェースを書くこともできます。アイピールート 192、168、5、0 255、255、255、0 g0スラッシュ1のような形で、直接接続スタティックルートと言います。"},
+   {"sc": 2, "sp": "先生", "t": "ネクストホップだけを書いた場合、ルーターは、そのネクストホップへどこから出ればいいか、もう一度テーブルを探します。これを再帰検索と言います。"},
+   {"sc": 2, "sp": "先生", "t": "イーサネットで出口だけを書くと、ルーターは次に渡す相手が分からないので、宛先のアドレスそのものについてARPで問い合わせることになります。宛先ごとにARPが必要になって効率が悪いので、ネクストホップも書くほうがおすすめです。", "y": "イーサネットで出口だけを書くと、ルーターは次に渡す相手が分からないので、宛先のアドレスそのものについてアープで問い合わせることになります。宛先ごとにアープが必要になって効率が悪いので、ネクストホップも書くほうがおすすめです。"},
+   {"sc": 2, "sp": "生徒", "t": "スタティックルートが、急に表から消えることはありますか？"},
+   {"sc": 2, "sp": "先生", "t": "あります。出口のインターフェースがダウンしたり、ネクストホップへの経路がなくなったりすると、消えます。"},
+   {"sc": 3, "sp": "先生", "t": "特別なスタティックルートを3つ。1つ目はデフォルトルート。ip route 0.0.0.0 0.0.0.0、ネクストホップ。マスクも0.0.0.0です。設定すると、Gateway of last resortに、そのネクストホップが表示されます。", "y": "特別なスタティックルートを3つ。1つ目はデフォルトルート。アイピールート 0、0、0、0 0、0、0、0、ネクストホップ。マスクも0、0、0、0です。設定すると、ゲートウェイ、オブ、ラストリゾートに、そのネクストホップが表示されます。"},
+   {"sc": 3, "sp": "先生", "t": "2つ目はホストルート。1台だけを指す経路で、マスクは255.255.255.255、/32です。ロンゲストマッチで一番優先されるので、1台だけ別の道を通したいときに使います。", "y": "2つ目はホストルート。1台だけを指す経路で、マスクは255、255、255、255、スラッシュ32です。ロンゲストマッチで一番優先されるので、1台だけ別の道を通したいときに使います。"},
+   {"sc": 3, "sp": "先生", "t": "3つ目はフローティングスタティック。最後にADの数字を付けて、わざとADを大きくした、予備の経路です。", "y": "3つ目はフローティングスタティック。最後にエーディーの数字を付けて、わざとエーディーを大きくした、予備の経路です。"},
+   {"sc": 3, "sp": "先生", "t": "考え方は、メインのADより少しだけ大きくする、です。例えばメインがOSPFなら、ADは110なので、125や130にします。ほかのプロトコルのときも同じで、EIGRPの90なら91、メインもスタティックの1なら5や6、という具合です。", "y": "考え方は、メインのエーディーより少しだけ大きくする、です。例えばメインがオーエスピーエフなら、エーディーは110なので、125や130にします。ほかのプロトコルのときも同じで、イーアイジーアールピーの90なら91、メインもスタティックの1なら5や6、という具合です。"},
+   {"sc": 3, "sp": "生徒", "t": "メインより大きくしないと、予備にならないんですね。"},
+   {"sc": 3, "sp": "先生", "t": "その通り。同じ値だと同点、小さいとメインを追い越してしまいます。メインの経路がある間は、予備は表に表示されません。メインが消えたときだけ、表に入ります。"},
+   {"sc": 4, "sp": "先生", "t": "IPv6でも考え方は同じです。ipv6 route、プレフィックス、ネクストホップ。デフォルトルートは::/0、ホストルートは/128です。", "y": "アイピーブイシックスでも考え方は同じです。アイピーブイシックスルート、プレフィックス、ネクストホップ。デフォルトルートはコロンコロンスラッシュ0、ホストルートはスラッシュ128です。"},
+   {"sc": 4, "sp": "先生", "t": "なお、IPv6でルーティングするには、先にipv6 unicast-routingを設定しておく必要があります。ネクストホップにリンクローカルアドレスを使うときは、同じアドレスがどのリンクにもありえて区別できないので、出口のインターフェースも一緒に書きます。確認は、show ipv6 routeです。", "y": "なお、アイピーブイシックスでルーティングするには、先にipv6 unicast-ルーティングを設定しておく必要があります。ネクストホップにリンクローカルアドレスを使うときは、同じアドレスがどのリンクにもありえて区別できないので、出口のインターフェースも一緒に書きます。確認は、ショー、アイピーブイシックス、ルートです。"},
+   {"sc": 4, "sp": "先生", "t": "真ん中のルーターを通って、両側どうしが通信するには、両側のルーターが、それぞれ相手のネットワークへのルートを持つ必要があります。ネクストホップは、どちらも真ん中のルーターのアドレスです。"},
+   {"sc": 5, "sp": "先生", "t": "ここで小テストです。OSPF、AD110の予備として、フローティングスタティックルートを作るときのADとして適切なのはどれでしょう？画面で選んでください。", "w": 1, "y": "ここで小テストです。オーエスピーエフ、エーディー110の予備として、フローティングスタティックルートを作るときのエーディーとして適切なのはどれでしょう？画面で選んでください。"},
+   {"sc": 5, "sp": "先生", "t": "正解は130です。選択肢は90、110、130でした。90と110は、110より大きくないので予備になりません。110より大きい130なら、OSPFが生きている間は隠れていて、消えたときだけ使われます。", "y": "正解は130です。選択肢は90、110、130でした。90と110は、110より大きくないので予備になりません。110より大きい130なら、オーエスピーエフが生きている間は隠れていて、消えたときだけ使われます。"},
+   {"sc": 6, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 6, "sp": "先生", "t": "1つ目。ip route、宛先、サブネットマスク、ネクストホップ。ネクストホップは相手のIP。ワイルドカードは使わない。", "y": "1つ目。アイピールート、宛先、サブネットマスク、ネクストホップ。ネクストホップは相手のアイピー。ワイルドカードは使わない。"},
+   {"sc": 6, "sp": "先生", "t": "2つ目。デフォルトは0.0.0.0 0.0.0.0、ホストルートは/32、IPv6は::/0と/128。", "y": "2つ目。デフォルトは0、0、0、0 0、0、0、0、ホストルートはスラッシュ32、アイピーブイシックスはコロンコロンスラッシュ0とスラッシュ128。"},
+   {"sc": 6, "sp": "先生", "t": "3つ目。フローティングスタティックは、メインのADより大きい数字を最後に付ける。", "y": "3つ目。フローティングスタティックは、メインのエーディーより大きい数字を最後に付ける。"},
+   {"sc": 6, "sp": "生徒", "t": "形と数字、しっかり覚えました！"},
+   {"sc": 6, "sp": "先生", "t": "よかったです。次回は、自動で経路を交換するOSPFを学びます。お疲れさまでした。", "y": "よかったです。次回は、自動で経路を交換するオーエスピーエフを学びます。お疲れさまでした。"}
+  ],
+  "seg": [
+   [0.0, 7.947],
+   [8.297, 26.581333],
+   [35.228, 8.757],
+   [44.335, 12.096],
+   [56.781, 29.632],
+   [86.763, 12.267],
+   [99.38, 20.235],
+   [119.965, 9.899],
+   [130.214, 15.605333],
+   [146.17, 4.363],
+   [150.883, 7.072],
+   [158.305, 24.234958],
+   [182.89, 17.077],
+   [200.317, 7.861],
+   [208.528, 20.704],
+   [229.582, 3.947],
+   [233.879, 12.203],
+   [246.432, 12.661],
+   [259.443, 22.442667],
+   [282.235, 13.408],
+   [295.993, 11.467],
+   [307.81, 18.24],
+   [326.4, 1.835],
+   [328.585, 9.728],
+   [338.663, 14.677],
+   [353.69, 5.899],
+   [359.939, 3.211],
+   [363.5, 6.763]
+  ]
+ }
+}

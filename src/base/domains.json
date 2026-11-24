@@ -1,0 +1,9 @@
+[
+ {"r": "D", "id": "d0", "name": "ゼロからの入門", "en": "Introduction（試験範囲の前提知識）", "w": 0, "c": "#3d4450"},
+ {"r": "D", "id": "d1", "name": "ネットワークの基礎", "en": "Network Fundamentals", "w": 20, "c": "#0a5cff"},
+ {"r": "D", "id": "d2", "name": "ネットワークアクセス", "en": "Network Access", "w": 20, "c": "#00a05a"},
+ {"r": "D", "id": "d3", "name": "IP接続", "en": "IP Connectivity", "w": 25, "c": "#e6261f"},
+ {"r": "D", "id": "d4", "name": "IPサービス", "en": "IP Services", "w": 10, "c": "#ffb400"},
+ {"r": "D", "id": "d5", "name": "セキュリティの基礎", "en": "Security Fundamentals", "w": 15, "c": "#8a3ffc"},
+ {"r": "D", "id": "d6", "name": "自動化とプログラマビリティ", "en": "Automation and Programmability", "w": 10, "c": "#00a3b4"}
+]

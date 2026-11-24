@@ -1,0 +1,610 @@
+[
+ {
+  "r": "L",
+  "id": "kl1",
+  "d": "d0",
+  "t": "図解：ネットワークって何？",
+  "full": "ネットワークって何？",
+  "s": "ゴール：データがスマホからYouTubeまで届く流れと、登場する機器の役割がわかる",
+  "q": ["P01-01", "P01-02", "P01-03", "P01-04", "P01-05"],
+  "rel": [],
+  "kiso": 1,
+  "cards": ["<h3>そもそもネットワークとは</h3>\n<p>ネットワークとは、<b>機器と機器をつないで、データをやりとりできるようにしたもの</b>です。スマホでYouTubeを見るのも、LINEを送るのも、オンラインゲームで遊ぶのも、全部ネットワークのおかげです。</p>\n<p>CCNA<span class=\"abbr\">（Cisco Certified Network Associate）</span>は、このネットワークを「作る・管理する・直す」ための基本を学ぶ資格です。</p>", "<h3>データが届くまでの旅</h3>\n<p>スマホでYouTubeを見るとき、データはこんな道を通っています。</p>\n<svg viewBox=\"0 0 360 250\" class=\"dg\" role=\"img\" aria-label=\"スマホからYouTubeまでの経路\">\n<defs><marker id=\"ar\" markerWidth=\"8\" markerHeight=\"8\" refX=\"7\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8z\" fill=\"currentColor\"/></marker></defs>\n<g font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">\n<text x=\"180\" y=\"18\" font-size=\"12\">データは「行き」も「帰り」もこの道を通る</text>\n<rect x=\"8\" y=\"34\" width=\"96\" height=\"56\" rx=\"10\" class=\"b1\"/><text x=\"56\" y=\"58\">📱 スマホ</text><text x=\"56\" y=\"77\" font-size=\"11\">端末</text>\n<rect x=\"132\" y=\"34\" width=\"96\" height=\"56\" rx=\"10\" class=\"b2\"/><text x=\"180\" y=\"58\">📶 AP</text><text x=\"180\" y=\"77\" font-size=\"11\">Wi-Fiの電波</text>\n<rect x=\"256\" y=\"34\" width=\"96\" height=\"56\" rx=\"10\" class=\"b2\"/><text x=\"304\" y=\"58\">🔀 スイッチ</text><text x=\"304\" y=\"77\" font-size=\"11\">建物の中</text>\n<rect x=\"256\" y=\"140\" width=\"96\" height=\"56\" rx=\"10\" class=\"b3\"/><text x=\"304\" y=\"164\">🚪 ルーター</text><text x=\"304\" y=\"183\" font-size=\"11\">外への出口</text>\n<rect x=\"132\" y=\"140\" width=\"96\" height=\"56\" rx=\"10\" class=\"b4\"/><text x=\"180\" y=\"164\">🌐 ネット</text><text x=\"180\" y=\"183\" font-size=\"11\">インターネット</text>\n<rect x=\"8\" y=\"140\" width=\"96\" height=\"56\" rx=\"10\" class=\"b1\"/><text x=\"56\" y=\"164\">🖥️ サーバー</text><text x=\"56\" y=\"183\" font-size=\"11\">YouTube</text>\n<g stroke=\"currentColor\" stroke-width=\"1.6\" fill=\"none\" marker-end=\"url(#ar)\"><line x1=\"106\" y1=\"62\" x2=\"130\" y2=\"62\"/><line x1=\"230\" y1=\"62\" x2=\"254\" y2=\"62\"/><line x1=\"304\" y1=\"92\" x2=\"304\" y2=\"138\"/><line x1=\"254\" y1=\"168\" x2=\"230\" y2=\"168\"/><line x1=\"130\" y1=\"168\" x2=\"106\" y2=\"168\"/></g>\n<rect x=\"4\" y=\"100\" width=\"352\" height=\"30\" rx=\"8\" class=\"zone\" opacity=\".0\"/>\n<text x=\"180\" y=\"228\" font-size=\"11\">ルーターが「建物の中（LAN）」と「外の世界」の境目</text>\n</g></svg>\n<p>登場人物の役割を、<b>町の郵便</b>にたとえるとこうなります。</p>\n<table class=\"tb\">\n<tr><th>機器</th><th>やること</th><th>たとえ</th></tr>\n<tr><td><b>端末</b>（スマホ・PC<span class=\"abbr\">（Personal Computer）</span>）</td><td>データを使う人</td><td>手紙を出す人・受け取る人</td></tr>\n<tr><td><b>AP<span class=\"abbr\">（Access Point）</span></b>（アクセスポイント）</td><td>Wi-Fiの電波を出して、無線の端末をつなぐ</td><td>家の郵便受け</td></tr>\n<tr><td><b>スイッチ</b></td><td>同じ建物の中で、宛先の機器にだけデータを届ける</td><td>マンションの管理人</td></tr>\n<tr><td><b>ルーター</b></td><td>別のネットワーク（外）へ、道を選んでデータを届ける</td><td>町と町をつなぐ郵便局</td></tr>\n<tr><td><b>サーバー</b></td><td>サービス（動画・Webページなど）を提供する</td><td>お店・図書館</td></tr>\n</table>\n<div class=\"pt\">💡 ポイント：<b>スイッチは「建物の中」担当、ルーターは「建物の外へ」担当</b>。CCNAで一番よく出る区別です。</div>", "<h3>LANとWAN</h3>\n<p>・<b>LAN<span class=\"abbr\">（Local Area Network）</span></b>：家や会社の中など、<b>せまい範囲</b>のネットワーク<br>・<b>WAN<span class=\"abbr\">（Wide Area Network）</span></b>：東京の本社と大阪の支社など、<b>遠く離れた場所どうし</b>をつなぐネットワーク<br>インターネットは、世界中のネットワークをつないだ巨大なWANのようなものです。</p>", "<h3>データは「小包」にして送る</h3>\n<p>大きな動画も、そのまま一気には送りません。<b>小さく分けて、1つずつに宛先（住所）を書いて</b>送ります。この小分けにしたデータを、<b>パケット</b>や<b>フレーム</b>と呼びます。</p>\n<p>宛先を書いたラベルを貼っていくことを<b>カプセル化</b>（包むこと）と言います。封筒に入れて、さらに段ボールに入れて…と、何重にも包んでいくイメージです。</p>", "<h3>OSI参照モデル ＝ 仕事の分担表</h3>\n<p>ネットワークの仕事はとても多いので、<b>7つの係（層）</b>に分けて考えます。これを<b>OSI<span class=\"abbr\">（Open Systems Interconnection）</span>参照モデル</b>と言います。全部を暗記しなくてOKです。CCNAで大事なのは<b>太字の4つ</b>です。</p>\n<table class=\"tb\">\n<tr><th>層</th><th>名前</th><th>何をする係？</th><th>代表選手</th></tr>\n<tr><td>7</td><td><b>アプリケーション層</b></td><td>アプリが使うルール</td><td>HTTP（Web）、DNS<span class=\"abbr\">（Domain Name System）</span></td></tr>\n<tr><td>6・5</td><td>プレゼンテーション層・セッション層</td><td>データの形式・会話の管理</td><td>（CCNAではほぼ出ない）</td></tr>\n<tr><td>4</td><td><b>トランスポート層</b></td><td>確実に届けるか、速く届けるか</td><td>TCP<span class=\"abbr\">（Transmission Control Protocol）</span>、UDP<span class=\"abbr\">（User Datagram Protocol）</span></td></tr>\n<tr><td>3</td><td><b>ネットワーク層</b></td><td>遠くの相手まで道を選ぶ</td><td><b>ルーター</b>、IP<span class=\"abbr\">（Internet Protocol）</span>アドレス</td></tr>\n<tr><td>2</td><td><b>データリンク層</b></td><td>同じネットワークの中で隣に届ける</td><td><b>スイッチ</b>、MAC<span class=\"abbr\">（Media Access Control）</span>アドレス</td></tr>\n<tr><td>1</td><td>物理層</td><td>電気・光・電波で0と1を送る</td><td>ケーブル、電波</td></tr>\n</table>\n<div class=\"pt\">💡 よく「L2スイッチ」「L3の機能」と言います。<b>L2＝データリンク層（スイッチ・MAC）</b>、<b>L3＝ネットワーク層（ルーター・IP）</b>のことです。</div>"]
+ },
+ {
+  "r": "L",
+  "id": "kl2",
+  "d": "d0",
+  "t": "図解：住所のしくみ",
+  "full": "住所のしくみ（MACアドレス・IPアドレス）",
+  "s": "ゴール：MAC<span class=\"abbr\">（Media Access Control）</span>アドレスとIP<span class=\"abbr\">（Internet Protocol）</span>アドレスの違い、サブネットマスクと「/24」の意味がわかる",
+  "q": ["P02-01", "P02-02", "P02-03", "P02-04", "P02-05", "P02-06"],
+  "rel": [],
+  "kiso": 1,
+  "cards": ["<h3>ネットワークには2種類の「名前」がある</h3>\n<p>手紙を届けるには住所が必要ですよね。ネットワークの機器には、<b>2種類の住所</b>があります。</p>\n<table class=\"tb\">\n<tr><th></th><th>MACアドレス</th><th>IPアドレス</th></tr>\n<tr><td>たとえ</td><td><b>顔</b>（生まれつき）</td><td><b>住所</b>（引っ越すと変わる）</td></tr>\n<tr><td>例</td><td>00:1A:2B:3C:4D:5E</td><td>192.168.1.10</td></tr>\n<tr><td>誰が決める？</td><td>工場で機器につけられる</td><td>ネットワークに合わせてつける</td></tr>\n<tr><td>使う場所</td><td><b>同じネットワークの中</b>で隣に届ける</td><td><b>ネットワークをまたいで</b>遠くに届ける</td></tr>\n<tr><td>使う機器</td><td><b>スイッチ</b>（L2）</td><td><b>ルーター</b>（L3）</td></tr>\n</table>\n<div class=\"pt\">💡 同じ部屋の中なら「顔（MAC）」で相手がわかる。遠くの相手には「住所（IP）」が必要。</div>\n<p>ちなみに、ルーターを通るたびに<b>MACアドレス（次の配達先）は書き換わる</b>けれど、<b>IPアドレス（最終目的地）は変わらない</b>、というのもよく出ます。</p>", "<h3>IPアドレスの中身</h3>\n<p>IPアドレス（IPv4<span class=\"abbr\">（Internet Protocol version 4）</span>）は、<b>0〜255の数字4つ</b>を点でつないだものです。例：<code>192.168.1.10</code></p>\n<p>この住所は、<b>前半＝町の名前（ネットワーク部）</b>と、<b>後半＝家の番号（ホスト部）</b>に分かれています。</p>\n<svg viewBox=\"0 0 640 150\" class=\"dg\" role=\"img\" aria-label=\"IPアドレスのネットワーク部とホスト部\">\n<g font-size=\"15\" text-anchor=\"middle\" fill=\"currentColor\">\n<rect x=\"40\" y=\"30\" width=\"420\" height=\"50\" rx=\"8\" class=\"b3\"/><text x=\"250\" y=\"62\">192 . 168 . 1</text>\n<rect x=\"470\" y=\"30\" width=\"130\" height=\"50\" rx=\"8\" class=\"b1\"/><text x=\"535\" y=\"62\">. 10</text>\n<text x=\"250\" y=\"108\" font-size=\"13\">ネットワーク部（町の名前）</text>\n<text x=\"535\" y=\"108\" font-size=\"13\">ホスト部（家の番号）</text>\n<text x=\"320\" y=\"138\" font-size=\"12\">255.255.255.0（/24）なら「前から3つ目まで」が町の名前</text>\n</g></svg>\n<p>同じ町（ネットワーク部が同じ）なら、ルーターなしで直接話せます。町が違うと、ルーターに頼む必要があります。</p>", "<h3>サブネットマスク ＝ 「どこまでが町の名前か」の印</h3>\n<p>どこまでが町の名前なのかを教えるのが<b>サブネットマスク</b>です。</p>\n<p><code>255.255.255.0</code> → 255の部分が町の名前、0の部分が家の番号<br>\nつまり 192.168.1.<b>10</b> と 192.168.1.<b>20</b> は同じ町（192.168.1）の住人です。</p>\n<p>サブネットマスクは、<b>「/24」のように短く書く</b>こともできます（<b>プレフィックス</b>）。/24は「前から24ビットが町の名前」という意味で、255.255.255.0と同じです。</p>", "<h3>ちょっとだけ2進数</h3>\n<p>コンピューターは0と1だけで数えます（<b>2進数</b>）。IPアドレスの数字1つは、<b>8ケタの0と1</b>（8ビット）でできています。</p>\n<table class=\"tb\">\n<tr><th>ケタ</th><td>128</td><td>64</td><td>32</td><td>16</td><td>8</td><td>4</td><td>2</td><td>1</td></tr>\n<tr><th>255</th><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>\n<tr><th>248</th><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td></tr>\n</table>\n<p>だから 255.255.255.0 は1が「8+8+8＝24個」→ <b>/24</b>。<br>255.255.255.248 は「8+8+8+5＝29個」→ <b>/29</b>です。</p>\n<p>覚えておくと便利な表（4つ目の数字）：</p>\n<table class=\"tb\">\n<tr><th>/</th><td>/24</td><td>/25</td><td>/26</td><td>/27</td><td>/28</td><td>/29</td><td>/30</td></tr>\n<tr><th>マスク</th><td>0</td><td>128</td><td>192</td><td>224</td><td>240</td><td>248</td><td>252</td></tr>\n<tr><th>区切り幅</th><td>256</td><td>128</td><td>64</td><td>32</td><td>16</td><td>8</td><td>4</td></tr>\n<tr><th>使える台数</th><td>254</td><td>126</td><td>62</td><td>30</td><td>14</td><td>6</td><td>2</td></tr>\n</table>\n<div class=\"pt\">💡 <b>区切り幅＝256−マスクの数字</b>。使える台数は「区切り幅−2」（最初の1つは町そのものの番号＝ネットワークアドレス、最後の1つは全員宛て＝ブロードキャストアドレスに使うので、家には使えない）。</div>", "<h3>計算してみよう</h3>\n<p>問題：<code>192.168.1.42 255.255.255.248</code> はどの町（ネットワーク）？</p>\n<p>① 248 → 区切り幅は 256−248＝<b>8</b><br>\n② 8の倍数で区切る：0, 8, 16, 24, 32, <b>40</b>, 48…<br>\n③ 42は「40〜47」の中 → 町の番号は <b>192.168.1.40/29</b><br>\n④ 使えるのは .41〜.46（.40はネットワークアドレス、.47はブロードキャスト）</p>", "<h3>プライベートアドレス</h3>\n<p>IPv4の住所は約43億個しかなく、世界中の機器には足りません。そこで、<b>家や会社の中だけで自由に使っていい住所</b>が決められています。これが<b>プライベートアドレス</b>です。</p>\n<p>・10.0.0.0〜10.255.255.255（10.0.0.0/8）<br>・172.16.0.0〜172.31.255.255（172.16.0.0/12）<br>・192.168.0.0〜192.168.255.255（192.168.0.0/16）</p>\n<p>内線番号のようなもので、どの会社でも同じ番号を使い回せます。インターネットに出るときは、ルーターが<b>NAT<span class=\"abbr\">（Network Address Translation）</span></b>で外向けの住所（<b>グローバルアドレス</b>）に変換します（NATは第6回で詳しく）。</p>"]
+ },
+ {
+  "r": "L",
+  "id": "nl0",
+  "d": "d0",
+  "t": "ネットワークって何？",
+  "s": "パソコンやスマホなどの機器を<b>つないで、データをやり取りできるようにした仕組み</b>のことです。CCNA<span class=\"abbr\">（Cisco Certified Network Associate）</span>は、このつなぎ方と動かし方の資格です。",
+  "q": ["P01-01", "P01-02", "P01-03", "P01-04", "P01-05"],
+  "cards": ["<p><b>ネットワーク</b>とは、パソコン・スマホ・プリンターなどの機器をケーブルや電波でつなぎ、データを送り合えるようにしたものです。</p>\n<table><tr><th>言葉</th><th>意味</th><th>身近な例</th></tr><tr><td>LAN<span class=\"abbr\">（Local Area Network）</span></td><td>家や会社の中など、狭い範囲のネットワーク</td><td>家のWi-Fi</td></tr><tr><td>WAN<span class=\"abbr\">（Wide Area Network）</span></td><td>離れた場所どうしをつなぐ、広い範囲のネットワーク</td><td>東京と大阪の支社をつなぐ回線</td></tr><tr><td>インターネット</td><td>世界中のネットワークがつながった、巨大なネットワーク</td><td>YouTubeやGoogleを見るとき</td></tr></table>", "<h3>クライアントとサーバー</h3><p>サービスを<b>使う側</b>をクライアント（例：あなたのスマホ）、サービスを<b>提供する側</b>をサーバー（例：YouTubeのコンピューター）といいます。</p>\n<div class=\"point\">🔎 たとえると：ネットワークは「道路」、データは「荷物」、クライアントは「お客さん」、サーバーは「お店」です。</div>", "<h3>CCNAで学ぶこと</h3><p>荷物（データ）を正しい相手に、速く安全に届けるために、道路をどうつなぎ、どう交通整理するかを学びます。</p>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "nl1",
+  "d": "d0",
+  "t": "住所と名札：IPアドレスとMACアドレス",
+  "s": "データを届けるには宛先が必要です。<b>IP<span class=\"abbr\">（Internet Protocol）</span>アドレスは「住所」</b>、<b>MAC<span class=\"abbr\">（Media Access Control）</span>アドレスは機器に最初から付いている「名札」</b>、<b>ポート番号は「部屋番号」</b>のようなものです。",
+  "q": ["P02-01", "P02-02", "P02-03", "P02-04", "P02-05", "P02-06"],
+  "cards": ["<table><tr><th></th><th>IPアドレス</th><th>MACアドレス</th></tr><tr><td>たとえ</td><td>住所（引っ越すと変わる）</td><td>名札（生まれつき決まっている）</td></tr><tr><td>例</td><td>192.168.1.10</td><td>00:11:22:33:44:55</td></tr><tr><td>長さ</td><td>32ビット（IPv4<span class=\"abbr\">（Internet Protocol version 4）</span>）</td><td>48ビット</td></tr><tr><td>使う場面</td><td>遠くのネットワークまで届けるとき</td><td>同じネットワークの中で、隣の機器に渡すとき</td></tr><tr><td>決め方</td><td>設定する（手動、またはDHCP<span class=\"abbr\">（Dynamic Host Configuration Protocol）</span>で自動）</td><td>工場で機器に書き込まれている</td></tr></table>", "<h3>ポート番号</h3><p>1台のサーバーの中には、Webやメールなど、いろいろなサービスが動いています。どのサービス宛てかを区別する番号が<b>ポート番号</b>です（例：Webは80や443）。</p>\n<div class=\"point\">🔎 たとえると：「〇〇マンション（IPアドレス）の 443号室（ポート番号）」に届ける。マンションの入口では、配達員が名札（MACアドレス）を見て、次に誰に渡すかを決める。</div>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "nl2",
+  "d": "d0",
+  "t": "ネットワーク機器の役割",
+  "s": "<b>スイッチは「建物の中の配達係」</b>、<b>ルーターは「別の町へ荷物を送る郵便局」</b>、<b>アクセスポイントは「無線の窓口」</b>、<b>ファイアウォールは「警備員」</b>です。",
+  "q": ["P03-01", "P03-02", "P03-03", "P03-04", "P03-05"],
+  "cards": ["<table><tr><th>機器</th><th>やること</th><th>たとえ</th></tr><tr><td>スイッチ</td><td>同じネットワークの中で、MAC<span class=\"abbr\">（Media Access Control）</span>アドレスを見てデータを届ける</td><td>同じ建物の中の配達係</td></tr><tr><td>ルーター</td><td>違うネットワークへ、IP<span class=\"abbr\">（Internet Protocol）</span>アドレスを見てデータを送り出す</td><td>別の町へ送る郵便局</td></tr><tr><td>アクセスポイント（AP<span class=\"abbr\">（Access Point）</span>）</td><td>スマホやPC<span class=\"abbr\">（Personal Computer）</span>を、電波（Wi-Fi）でネットワークにつなぐ</td><td>無線の受付窓口</td></tr><tr><td>ファイアウォール</td><td>通してよい通信と、だめな通信を見分ける</td><td>入口の警備員</td></tr></table>\n<p>家庭用の「Wi-Fiルーター」は、実はこれら全部が1台に入った機器です。会社では、それぞれ別の専用の機器を使います。</p>", "<h3>ネットワークの図で見る記号</h3><p>試験の図では、ルーターは丸い筒の形、スイッチは四角い箱の形で描かれることが多いです。線はケーブル、ギザギザの線はWAN<span class=\"abbr\">（Wide Area Network）</span>の回線を表します。</p>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "nl3",
+  "d": "d0",
+  "t": "データの送り方：パケットと「層」",
+  "s": "データは小さく分けて、宛先などを書いた<b>「ラベル（ヘッダー）」を付けて送ります</b>。ラベルを重ねて付ける順番を整理したものが「層」で、OSI<span class=\"abbr\">（Open Systems Interconnection）</span>参照モデルはその地図です。",
+  "q": ["P05-01", "P05-02", "P05-03", "P05-04", "P05-05"],
+  "cards": ["<p>大きなデータは、そのままでは送らずに小さく分けて送ります。分けたそれぞれに、宛先や順番などの情報（<b>ヘッダー</b>）を付けます。</p>", "<h3>カプセル化</h3><p>送る側では、データに次々とヘッダーを付けていきます。</p>\n<pre>データ（例：Webページ）\n ＋TCPヘッダー（ポート番号）     → セグメント\n ＋IPヘッダー（IPアドレス）      → パケット\n ＋イーサネットヘッダー（MAC）   → フレーム\n → 電気信号・光・電波（ビット）として送る</pre>\n<p>受け取る側では、外側から順にヘッダーを外していきます。</p>\n<div class=\"point\">🔎 たとえると：手紙（データ）を封筒（TCP<span class=\"abbr\">（Transmission Control Protocol）</span>）に入れ、さらに住所を書いた袋（IP<span class=\"abbr\">（Internet Protocol）</span>）に入れ、配達用の箱（フレーム）に入れて運ぶ。届いたら箱→袋→封筒の順に開ける。</div>", "<h3>プロトコル</h3><p>通信するときの<b>決まりごと</b>です。HTTP（Webを見る）、TCP（確実に届ける）、IP（住所で届ける）など、役割ごとにたくさんあります。</p>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "nl4",
+  "d": "d0",
+  "t": "2進数と10進数",
+  "s": "コンピューターは<b>0と1だけ（2進数）</b>で数を表します。IP<span class=\"abbr\">（Internet Protocol）</span>アドレスやサブネットの計算は2進数が分かるとぐっと楽になります。まずは「128・64・32・16・8・4・2・1」を覚えましょう。",
+  "q": ["P04-01", "P04-02", "P04-03", "P04-04", "P04-05"],
+  "cards": ["<p>ふだん使う数は10進数（0〜9の10種類）ですが、コンピューターは0と1の2種類だけで数を表します。これが<b>2進数</b>です。0か1の1けたを<b>ビット</b>、8ビットのまとまりを<b>バイト</b>（IPアドレスでは<b>オクテット</b>）といいます。</p>", "<h3>8ビットの重さ</h3><table><tr><th>128</th><th>64</th><th>32</th><th>16</th><th>8</th><th>4</th><th>2</th><th>1</th></tr><tr><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></table>\n<p>1が立っている場所の数を足します。上の例は 128＋64＝<b>192</b> です。8ビットで表せるのは0〜255なので、IPアドレスの各数字は0〜255になります。</p>", "<h3>10進数 → 2進数</h3><p>大きい重さから順に「引けるなら1、引けないなら0」と決めていきます。</p><pre>200 → 128を引ける(1) 残り72 → 64を引ける(1) 残り8\n     → 32(0) 16(0) → 8を引ける(1) 残り0 → 4(0) 2(0) 1(0)\n200 = 11001000</pre>", "<h3>サブネットマスクでよく出る値</h3><table><tr><td>10000000</td><td>128</td></tr><tr><td>11000000</td><td>192</td></tr><tr><td>11100000</td><td>224</td></tr><tr><td>11110000</td><td>240</td></tr><tr><td>11111000</td><td>248</td></tr><tr><td>11111100</td><td>252</td></tr><tr><td>11111110</td><td>254</td></tr><tr><td>11111111</td><td>255</td></tr></table>\n<div class=\"point\">2のべき乗も覚えておくと便利です：2,4,8,16,32,64,128,256,512,1024</div>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "nl5",
+  "d": "d0",
+  "t": "Cisco機器の操作の基本（CLI）",
+  "s": "Cisco機器は、文字でコマンドを打って操作します（CLI<span class=\"abbr\">（Command Line Interface）</span>）。<b>モードという「部屋」</b>を移動しながら設定するのが基本で、プロンプトの記号（&gt; # (config)#）を見れば今いる部屋が分かります。",
+  "q": ["P06-01", "P06-02", "P06-03", "P06-04", "P06-05"],
+  "cards": ["<table><tr><th>モード</th><th>プロンプト</th><th>できること</th><th>入り方</th></tr><tr><td>ユーザーEXEC<span class=\"abbr\">（Executive（実行））</span></td><td>Router&gt;</td><td>簡単な確認だけ</td><td>ログインした直後</td></tr><tr><td>特権EXEC</td><td>Router#</td><td>すべての確認（show）、保存、再起動</td><td>enable</td></tr><tr><td>グローバル設定</td><td>Router(config)#</td><td>機器全体の設定</td><td>configure terminal</td></tr><tr><td>インターフェース設定</td><td>Router(config-if)#</td><td>ポートごとの設定</td><td>interface g0/0</td></tr></table>\n<p>1つ前のモードに戻るのは <code>exit</code>、特権EXECまで一気に戻るのは <code>end</code> です。</p>", "<h3>2つの設定ファイル</h3><ul><li><b>running-config</b>：今動いている設定（メモリ上。電源を切ると消える）</li><li><b>startup-config</b>：起動時に読み込む設定（保存されている）</li></ul><p>設定したら <code>copy running-config startup-config</code> で保存します。</p>", "<h3>便利な操作</h3><ul><li><b>?</b>：使えるコマンドの一覧を表示する</li><li><b>Tabキー</b>：コマンドの続きを補完する</li><li><b>省略</b>：ほかと区別できれば短くできる（configure terminal → conf t）</li><li><b>no</b>：設定を取り消す（例：no shutdown）</li></ul>\n<div class=\"point\">🔎 たとえると：モードは建物の部屋。受付（&gt;）→ 事務室（#）→ 設定室（(config)#）→ 各ポートの作業場（(config-if)#）と奥に進んでいく。</div>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "kl5",
+  "d": "d1",
+  "t": "図解：IPv6",
+  "full": "IPv6（新しい住所）",
+  "s": "ゴール：IPv6<span class=\"abbr\">（Internet Protocol version 6）</span>アドレスの書き方・省略ルール、主なアドレスの種類、EUI-64<span class=\"abbr\">（Extended Unique Identifier 64）</span>・SLAAC<span class=\"abbr\">（Stateless Address Autoconfiguration）</span>がわかる",
+  "q": ["P14-01", "P14-02", "P14-03", "P14-04", "P14-05", "P16-01"],
+  "rel": [],
+  "kiso": 1,
+  "cards": ["<h3>なぜIPv6？</h3>\n<p>IPv4（192.168.1.1のような住所）は約43億個しかなく、足りなくなりました。<b>IPv6は128ビット</b>で、ほぼ無限に使えます。</p>\n<p>書き方は<b>16進数4桁×8ブロック</b>を「:」でつなぎます。例：<code>2001:0db8:0000:0000:0000:0000:0000:0001</code></p>", "<h3>省略ルールは2つだけ</h3>\n<table class=\"tb\">\n<tr><th>ルール</th><th>例</th></tr>\n<tr><td>① 各ブロックの<b>先頭の0</b>は消せる</td><td>0db8 → db8、0001 → 1</td></tr>\n<tr><td>② <b>0だけのブロックが続く所</b>は「::」にまとめられる（<b>1回だけ</b>）</td><td>2001:db8:0:0:0:0:0:1 → <b>2001:db8::1</b></td></tr>\n</table>\n<p class=\"pt\">⚠️ 「::」を2回使うのはNG（何個の0を省いたかわからなくなる）。末尾の0（例 db80 の0）は消せない。</p>", "<h3>アドレスの種類（先頭で見分ける）</h3>\n<table class=\"tb\">\n<tr><th>種類</th><th>先頭</th><th>たとえ／用途</th></tr>\n<tr><td><b>グローバルユニキャスト</b></td><td>2000::/3（2や3で始まる）</td><td>インターネットで使える住所（IPv4のグローバル）</td></tr>\n<tr><td><b>ユニークローカル</b></td><td>FC00::/7（ふつう<b>FD</b>）</td><td>社内だけの住所（IPv4のプライベート）</td></tr>\n<tr><td><b>リンクローカル</b></td><td><b>FE80</b>::/10</td><td>同じ線の中だけ。<b>自動で必ず作られる</b>。ルーターの隣同士の会話に使う</td></tr>\n<tr><td><b>マルチキャスト</b></td><td><b>FF</b>00::/8</td><td>グループあて。FF02::1＝全ノード、FF02::2＝全ルーター</td></tr>\n<tr><td>ループバック</td><td>::1</td><td>自分自身（IPv4の127.0.0.1）</td></tr>\n<tr><td><b>エニーキャスト</b></td><td>（形はユニキャストと同じ）</td><td>同じ住所を複数台に付け、<b>一番近い1台</b>に届く</td></tr>\n</table>\n<p>IPv6には<b>ブロードキャストがありません</b>（マルチキャストで代わりをする）。</p>", "<h3>EUI-64＝MACアドレスから後半を自動で作る</h3>\n<p>アドレスの後半64ビット（インターフェースID<span class=\"abbr\">（Identifier）</span>）を、MAC<span class=\"abbr\">（Media Access Control）</span>アドレスから作る方法です。</p>\n<ol>\n<li>MAC（48ビット）を真ん中で半分に分け、間に <b>FFFE</b> を入れる</li>\n<li>先頭から<b>7ビット目を反転</b>する（先頭バイトの「2」の位を足す／引く）</li>\n</ol>\n<p>例：MAC <code>00:1A:2B:3C:4D:5E</code> → 001A:2B<b>FF:FE</b>3C:4D5E → 先頭00を<b>02</b>に → <b>021A:2BFF:FE3C:4D5E</b></p>", "<h3>自動設定（SLAAC）</h3>\n<ul>\n<li><b>SLAAC</b>：ルーターが送る<b>RA（ルーター広告）</b>でネットワーク部（プレフィックス）を知り、後半は自分で作る。DHCP<span class=\"abbr\">（Dynamic Host Configuration Protocol）</span>サーバーがなくても住所が決まる</li>\n<li><b>NDP<span class=\"abbr\">（Neighbor Discovery Protocol）</span></b>：IPv4のARP<span class=\"abbr\">（Address Resolution Protocol）</span>の代わり。NS（近隣要請）／NA（近隣広告）で相手のMACを調べる。RS<span class=\"abbr\">（Router Solicitation）</span>／RAでルーターを探す</li>\n<li><b>DAD<span class=\"abbr\">（Duplicate Address Detection）</span></b>：作った住所がかぶっていないか確認するしくみ</li>\n<li>ルーターでIPv6ルーティングを有効にするコマンド：<code>ipv6 unicast-routing</code></li>\n</ul>"]
+ },
+ {
+  "r": "L",
+  "id": "nl6",
+  "d": "d1",
+  "t": "機器の役割とPoE",
+  "s": "ネットワークに出てくる機器それぞれの「担当」を知る講座です。あわせて、LAN<span class=\"abbr\">（Local Area Network）</span>ケーブル1本で電気も送る<b>PoE<span class=\"abbr\">（Power over Ethernet）</span></b>（IP<span class=\"abbr\">（Internet Protocol）</span>電話やカメラをコンセントなしで動かす仕組み）を学びます。",
+  "q": ["P07-01", "P07-02", "P07-03", "P07-04", "P07-05", "P07-06"],
+  "cards": ["<table><tr><td>ルーター</td><td>異なるネットワーク間でパケットを転送する（L3）</td></tr><tr><td>L2スイッチ</td><td>同じネットワーク内でフレームを転送する</td></tr><tr><td>L3スイッチ</td><td>スイッチングとルーティングの両方ができる（SVI<span class=\"abbr\">（Switch Virtual Interface）</span>でVLAN<span class=\"abbr\">（Virtual LAN）</span>間ルーティング）</td></tr><tr><td>次世代ファイアウォール</td><td>通信の許可・拒否に加えて、アプリケーションを識別して制御する</td></tr><tr><td>IPS<span class=\"abbr\">（Intrusion Prevention System）</span></td><td>通信の中身から攻撃のパターン（シグネチャ）を見つけて遮断する</td></tr><tr><td>AP<span class=\"abbr\">（Access Point）</span> / WLC<span class=\"abbr\">（Wireless LAN Controller）</span></td><td>無線の電波を出す機器 ／ 複数のAPをまとめて管理する機器</td></tr><tr><td>エンドポイント・サーバー</td><td>PC<span class=\"abbr\">（Personal Computer）</span>やスマホなどの端末 ／ サービスを提供するコンピューター</td></tr></table>", "<h3>PoE（Power over Ethernet）</h3><p>LANケーブルで電力も送る仕組みです。電力を送る側（スイッチ）を<b>PSE<span class=\"abbr\">（Power Sourcing Equipment）</span></b>、受け取る側（IP電話・AP・カメラ）を<b>PD<span class=\"abbr\">（Powered Device）</span></b>といいます。</p>\n<table><tr><td>802.3af（PoE）</td><td>最大15.4W</td></tr><tr><td>802.3at（PoE+）</td><td>最大30W</td></tr><tr><td>802.3bt（PoE++）</td><td>最大60W／90W</td></tr></table>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "nl7",
+  "d": "d1",
+  "t": "OSI参照モデルとTCP/IP",
+  "s": "通信の仕事を<b>7つの階（層）に分けた地図</b>です。「L2＝MAC<span class=\"abbr\">（Media Access Control）</span>アドレス＝スイッチ」「L3＝IP<span class=\"abbr\">（Internet Protocol）</span>アドレス＝ルーター」の2つをまず押さえましょう。",
+  "q": ["P08-01", "P08-02", "P08-03", "P08-04", "P08-05", "P08-06"],
+  "cards": ["<p>通信の仕組みを役割ごとに7つの層に分けたものが<b>OSI<span class=\"abbr\">（Open Systems Interconnection）</span>参照モデル</b>です。試験では特にL1〜L4がよく出ます。</p>\n<table><tr><th>層</th><th>名前</th><th>使うもの</th><th>機器</th></tr>\n<tr><td>L7〜5</td><td>アプリケーション層など</td><td>HTTP<span class=\"abbr\">（Hypertext Transfer Protocol）</span>, DNS<span class=\"abbr\">（Domain Name System）</span> など</td><td>-</td></tr>\n<tr><td>L4</td><td>トランスポート層</td><td>TCP<span class=\"abbr\">（Transmission Control Protocol）</span> / UDP<span class=\"abbr\">（User Datagram Protocol）</span>、ポート番号</td><td>ファイアウォール</td></tr>\n<tr><td>L3</td><td>ネットワーク層</td><td>IPアドレス（パケット）</td><td>ルーター、L3スイッチ</td></tr>\n<tr><td>L2</td><td>データリンク層</td><td>MACアドレス（フレーム）</td><td>スイッチ</td></tr>\n<tr><td>L1</td><td>物理層</td><td>電気信号・光（ビット）</td><td>ハブ、ケーブル</td></tr></table>\n<p><b>TCP/IPモデル</b>は実際に使われている4層モデルです（アプリケーション／トランスポート／インターネット／リンク）。</p>\n<div class=\"point\">💡 覚え方：L2＝MAC＝スイッチ、L3＝IP＝ルーター。データの呼び名は「L4セグメント → L3パケット → L2フレーム」。</div>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "nl8",
+  "d": "d1",
+  "t": "TCPとUDP・ポート番号",
+  "s": "<b>TCP<span class=\"abbr\">（Transmission Control Protocol）</span>は書留郵便</b>（届いたか確認して、届かなければ送り直す）、<b>UDP<span class=\"abbr\">（User Datagram Protocol）</span>はチラシ配り</b>（確認しないけど速い）です。ポート番号は、サービスごとの部屋番号です。",
+  "q": ["P09-01", "P09-02", "P09-03", "P09-04", "P09-05", "P09-06"],
+  "cards": ["<table><tr><th></th><th>TCP</th><th>UDP</th></tr>\n<tr><td>特徴</td><td>確実に届ける（コネクション型）</td><td>速さ優先（コネクションレス型）</td></tr>\n<tr><td>仕組み</td><td>3ウェイハンドシェイク、再送、順序制御</td><td>確認なしで送るだけ</td></tr>\n<tr><td>例</td><td>Web、メール、SSH<span class=\"abbr\">（Secure Shell）</span></td><td>音声・動画、DNS<span class=\"abbr\">（Domain Name System）</span>問い合わせ、DHCP<span class=\"abbr\">（Dynamic Host Configuration Protocol）</span></td></tr></table>", "<h3>3ウェイハンドシェイク</h3><p>SYN<span class=\"abbr\">（Synchronize）</span> → SYN-ACK → ACK<span class=\"abbr\">（Acknowledgment）</span> の順に送って接続を始めます。</p>", "<h3>よく出るポート番号</h3>\n<table><tr><td>FTP<span class=\"abbr\">（File Transfer Protocol）</span></td><td>20, 21 (TCP)</td></tr><tr><td>SSH</td><td>22 (TCP)</td></tr><tr><td>Telnet</td><td>23 (TCP)</td></tr><tr><td>SMTP<span class=\"abbr\">（Simple Mail Transfer Protocol）</span></td><td>25 (TCP)</td></tr><tr><td>DNS</td><td>53 (UDP/TCP)</td></tr><tr><td>DHCP</td><td>67, 68 (UDP)</td></tr><tr><td>TFTP<span class=\"abbr\">（Trivial File Transfer Protocol）</span></td><td>69 (UDP)</td></tr><tr><td>HTTP<span class=\"abbr\">（Hypertext Transfer Protocol）</span></td><td>80 (TCP)</td></tr><tr><td>NTP<span class=\"abbr\">（Network Time Protocol）</span></td><td>123 (UDP)</td></tr><tr><td>SNMP<span class=\"abbr\">（Simple Network Management Protocol）</span></td><td>161, 162 (UDP)</td></tr><tr><td>HTTPS<span class=\"abbr\">（Hypertext Transfer Protocol Secure）</span></td><td>443 (TCP)</td></tr><tr><td>Syslog</td><td>514 (UDP)</td></tr></table>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "nl9",
+  "d": "d1",
+  "t": "ケーブル・スイッチの動き",
+  "s": "ケーブルの種類と、スイッチが<b>「誰がどのポートにいるか」を覚えて配達する</b>仕組みを学びます。知らない宛先は、とりあえず全員に配ります（フラッディング）。",
+  "q": ["P10-01", "P10-02", "P10-03", "P10-04", "P10-05", "P10-06"],
+  "cards": ["<h3>ケーブル</h3><ul><li><b>ストレートケーブル</b>：違う種類の機器どうし（PC<span class=\"abbr\">（Personal Computer）</span>–スイッチ）をつなぐ</li><li><b>クロスケーブル</b>：同じ種類の機器どうし（スイッチ–スイッチ）をつなぐ。今はAuto-MDIXで自動判別されることが多い</li><li><b>光ファイバー</b>：シングルモードは長距離向け、マルチモードは短距離で安価</li></ul>", "<h3>スイッチがフレームを転送する仕組み</h3><ol><li><b>学習</b>：受け取ったフレームの<b>送信元</b>MAC<span class=\"abbr\">（Media Access Control）</span>アドレスをMACアドレステーブルに登録する</li><li><b>転送</b>：<b>宛先</b>MACアドレスがテーブルにあれば、そのポートだけに送る</li><li><b>フラッディング</b>：宛先が分からない、またはブロードキャストなら、受信ポート以外の全ポートに送る</li></ol>\n<div class=\"point\">スイッチはポートごとにコリジョンドメインを分けます。ブロードキャストドメインを分けるのはルーター（またはVLAN<span class=\"abbr\">（Virtual LAN）</span>）です。</div>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "nl10",
+  "d": "d1",
+  "t": "インターフェースとケーブルの障害",
+  "s": "ポートの調子が悪いときに、<b>どの数字を見れば原因が分かるか</b>を学ぶ講座です。「つながるけど遅い」はデュプレックスの不一致、「つながらない」は速度の不一致やケーブルを疑います。",
+  "q": ["P11-01", "P11-02", "P11-03", "P11-04", "P11-05", "P11-06"],
+  "cards": ["<p><code>show interfaces</code> のカウンターで、どんな問題が起きているかを判断します。</p>\n<table><tr><th>カウンター</th><th>意味・主な原因</th></tr><tr><td>runts</td><td>64バイト未満の短すぎるフレーム（コリジョンなど）</td></tr><tr><td>giants</td><td>1518バイトを超える長すぎるフレーム</td></tr><tr><td>CRC<span class=\"abbr\">（Cyclic Redundancy Check）</span></td><td>中身が壊れたフレーム。ケーブルの不良やノイズ</td></tr><tr><td>input errors</td><td>受信時のエラーの合計</td></tr><tr><td>collisions</td><td>半二重での衝突</td></tr><tr><td>late collisions</td><td>遅れて起きる衝突。<b>デュプレックスの不一致</b>の典型的な症状</td></tr></table>\n<ul><li><b>デュプレックスの不一致</b>：片方が全二重、もう片方が半二重。リンクはつながるが遅くなる。半二重の側でlate collisionsが、全二重の側でCRCやrunts が増える</li><li><b>速度の不一致</b>：リンクが<b>ダウン</b>する</li><li>相手がオートネゴシエーションを無効にしていると、速度は信号から判断できる。ただし10/100Mbpsでは、デュプレックスは半二重になってしまう</li></ul>", "<h3>インターフェースの状態の読み方</h3><table><tr><th>Status / Protocol</th><th>意味</th></tr><tr><td>up / up</td><td>正常</td></tr><tr><td>administratively down / down</td><td>shutdownで止められている → <code>no shutdown</code></td></tr><tr><td>down / down</td><td>L1の問題（ケーブルが抜けている、相手が止まっている、速度の不一致など）</td></tr><tr><td>up / down</td><td>L1はつながっているが、L2に問題がある（カプセル化の不一致など）</td></tr><tr><td>down / down (err-disabled)</td><td>ポートセキュリティやBPDU<span class=\"abbr\">（Bridge Protocol Data Unit）</span>ガードで止められた</td></tr></table>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "nl11",
+  "d": "d1",
+  "t": "IPv4アドレスとサブネット",
+  "s": "IP<span class=\"abbr\">（Internet Protocol）</span>アドレスを「町名（ネットワーク部）」と「番地（ホスト部）」に分ける考え方です。<b>サブネットマスクは、どこまでが町名かを示す線引き</b>です。",
+  "q": ["P12-01", "P12-02", "P12-03", "P12-04", "P12-05", "P12-06"],
+  "cards": ["<p>IPv4<span class=\"abbr\">（Internet Protocol version 4）</span>アドレスは32ビットで、「ネットワーク部」と「ホスト部」に分かれます。その境目を示すのが<b>サブネットマスク</b>（/24 = 255.255.255.0）です。</p>", "<h3>プライベートアドレス（RFC 1918）</h3>\n<table><tr><td>10.0.0.0/8</td><td>10.0.0.0〜10.255.255.255</td></tr><tr><td>172.16.0.0/12</td><td>172.16.0.0〜172.31.255.255</td></tr><tr><td>192.168.0.0/16</td><td>192.168.0.0〜192.168.255.255</td></tr></table>\n<p>そのほか、127.0.0.0/8はループバック、169.254.0.0/16はAPIPA（DHCP<span class=\"abbr\">（Dynamic Host Configuration Protocol）</span>からアドレスをもらえなかったときに自動で付くアドレス）です。</p>", "<h3>ブロックサイズ法（最速の計算方法）</h3>\n<ol><li>プレフィックス長から、区切りがどのオクテットにあるかを見る（/17〜/24なら第3オクテット、/25〜/32なら第4オクテット）</li>\n<li>そのオクテットのマスク値を出す（例：/26 → 255.255.255.<b>192</b>）</li>\n<li>ブロックサイズ = 256 − マスク値（256 − 192 = <b>64</b>）</li>\n<li>ネットワークアドレスは64の倍数：0, 64, 128, 192</li></ol>\n<div class=\"point\">例：192.168.1.100/26 → 100は64〜127のブロックに入る<br>ネットワーク 192.168.1.64、ブロードキャスト 192.168.1.127、使えるホストは 2^6 − 2 = 62台</div>\n<table><tr><th>/</th><th>マスク</th><th>ホスト数</th></tr><tr><td>/24</td><td>255.255.255.0</td><td>254</td></tr><tr><td>/25</td><td>.128</td><td>126</td></tr><tr><td>/26</td><td>.192</td><td>62</td></tr><tr><td>/27</td><td>.224</td><td>30</td></tr><tr><td>/28</td><td>.240</td><td>14</td></tr><tr><td>/29</td><td>.248</td><td>6</td></tr><tr><td>/30</td><td>.252</td><td>2</td></tr></table>\n<p>「サブネット」タブのドリルで、何度でも練習できます。</p>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "nl12",
+  "d": "d1",
+  "t": "VLSMと経路集約",
+  "s": "VLSM<span class=\"abbr\">（Variable Length Subnet Mask）</span>は<b>人数に合わせて部屋の大きさを変える</b>分け方、経路集約は<b>「1丁目〜4丁目」をまとめて「〇〇町」と呼ぶ</b>ような、まとめ方です。",
+  "q": ["P13-01", "P13-02", "P13-03", "P13-04", "P13-05"],
+  "cards": ["<h3>VLSM（可変長サブネットマスク）</h3><p>必要なホスト数に合わせて、サブネットごとに違う大きさ（プレフィックス長）で分ける方法です。アドレスの無駄が減ります。</p>\n<ol><li>必要なホスト数が<b>多い順</b>に並べる</li><li>それぞれ「ホスト数＋2」以上になる、最も小さい2のべき乗をブロックサイズにする</li><li>先頭のアドレスから、大きいブロック順に詰めて割り当てる</li></ol>\n<div class=\"point\">例：192.168.1.0/24 を 営業100台・開発50台・総務20台・ルーター間2台 に分ける<br>営業 → 128 → 192.168.1.0/25<br>開発 → 64 → 192.168.1.128/26<br>総務 → 32 → 192.168.1.192/27<br>ルーター間 → 4 → 192.168.1.224/30</div>\n<p>小さいブロックから割り当てると、大きいブロックの境界とずれてしまい、うまく詰められなくなります。</p>", "<h3>経路集約（サマライズ）</h3><p>連続した複数のネットワークを、1つの短いプレフィックスにまとめることです。ルーティングテーブルが小さくなります。</p>\n<ol><li>違いのあるオクテットを2進数にする</li><li>先頭から何ビットが共通かを数える</li><li>共通部分だけを残し、残りを0にしたものが集約ルート</li></ol>\n<pre>172.16.8.0/24  → 第3オクテット 8  = 00001 000\n172.16.15.0/24 → 第3オクテット 15 = 00001 111\n共通は先頭5ビット → 16＋5 ＝ /21\n→ 集約ルート 172.16.8.0/21（8.0〜15.255）</pre>\n<div class=\"point\">早見表：/23=2個、/22=4個、/21=8個、/20=16個の/24をまとめられる。先頭のネットワークは、その個数の倍数でないとまとめられない。</div>\n<p>「サブネット」タブで、VLSMと経路集約のドリルを何問でも練習できます。</p>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "nl13",
+  "d": "d1",
+  "t": "IPv6",
+  "s": "IPv4<span class=\"abbr\">（Internet Protocol version 4）</span>のアドレスが足りなくなったので作られた、<b>とても長い（128ビット）新しい住所</b>です。長いので、0を省略して短く書くルールがあります。",
+  "q": ["P14-01", "P14-02", "P14-03", "P14-04", "P14-05", "P14-06"],
+  "cards": ["<p>IPv6<span class=\"abbr\">（Internet Protocol version 6）</span>は128ビットで、16進数4桁ずつ8つのブロックで書きます。</p>", "<h3>省略のルール</h3><ul><li>各ブロックの先頭の0は省略できる（0db8 → db8）</li><li>0だけのブロックが続く部分は「::」にまとめられる。ただし<b>1回だけ</b></li></ul>\n<pre>2001:0db8:0000:0000:0000:ff00:0042:8329\n→ 2001:db8::ff00:42:8329</pre>", "<h3>アドレスの種類</h3>\n<table><tr><td>グローバルユニキャスト</td><td>2000::/3</td><td>インターネットで使える</td></tr><tr><td>リンクローカル</td><td>FE80::/10</td><td>同じリンク内だけ。自動で付く</td></tr><tr><td>ユニークローカル</td><td>FC00::/7</td><td>IPv4のプライベートアドレスに相当</td></tr><tr><td>マルチキャスト</td><td>FF00::/8</td><td>IPv6にブロードキャストはない</td></tr><tr><td>ループバック</td><td>::1</td><td></td></tr></table>", "<h3>EUI-64</h3><p>48ビットのMAC<span class=\"abbr\">（Media Access Control）</span>アドレスを真ん中で分けて<b>FFFE</b>を挟み、先頭から7ビット目を反転させて、64ビットのインターフェースID<span class=\"abbr\">（Identifier）</span>を作る方法です。</p>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "nl14",
+  "d": "d1",
+  "t": "IPv6の設定とVRF",
+  "s": "Cisco機器でIPv6<span class=\"abbr\">（Internet Protocol version 6）</span>アドレスを設定するコマンドと、<b>1台のルーターの中に、別々の地図（ルーティングテーブル）を複数持たせる</b>VRF<span class=\"abbr\">（Virtual Routing and Forwarding）</span>を学びます。",
+  "q": ["P15-01", "P15-02", "P15-03", "P15-04", "P15-05"],
+  "cards": ["<pre>R1(config)# ipv6 unicast-routing          ← IPv6でルーティングするのに必要\nR1(config-if)# ipv6 address 2001:db8:1::1/64  ← 手動で設定\nR1(config-if)# ipv6 address 2001:db8:1::/64 eui-64 ← MACアドレスから自動で作る\nR1(config-if)# ipv6 enable                ← リンクローカルだけを付ける</pre>\n<ul><li><b>SLAAC<span class=\"abbr\">（Stateless Address Autoconfiguration）</span></b>：ルーターから届くRA（ルーター通知）のプレフィックスを使って、端末が自分でアドレスを作る</li><li><b>エニーキャスト</b>：同じアドレスを複数の機器に付け、最も近い機器に届ける</li><li>よく出るマルチキャスト：FF02::1（全ノード）、FF02::2（全ルーター）、FF02::1:FFxx:xxxx（要請ノードマルチキャスト）</li></ul>", "<h3>EUI-64の計算例</h3><pre>MAC 0011.2233.4455\n① 真ん中にFFFEを挟む → 0011:22FF:FE33:4455\n② 先頭から7ビット目を反転 00→02 → 0211:22FF:FE33:4455</pre>", "<h3>VRF</h3><p>1台のルーターの中に、<b>独立したルーティングテーブルを複数</b>持たせる仕組みです。同じIP<span class=\"abbr\">（Internet Protocol）</span>アドレスを使うお客さんどうしでも、分けて扱えます。</p>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "nl15",
+  "d": "d1",
+  "t": "IPv6のNDP・SLAAC・DHCPv6",
+  "s": "IPv6<span class=\"abbr\">（Internet Protocol version 6）</span>で<b>「近所の人の名札を調べる」「自分で住所を決める」</b>仕組みです。IPv4<span class=\"abbr\">（Internet Protocol version 4）</span>のARP<span class=\"abbr\">（Address Resolution Protocol）</span>やDHCP<span class=\"abbr\">（Dynamic Host Configuration Protocol）</span>の役割を、NDP<span class=\"abbr\">（Neighbor Discovery Protocol）</span>やSLAAC<span class=\"abbr\">（Stateless Address Autoconfiguration）</span>が担当します。",
+  "q": ["P16-01", "P16-02", "P16-03", "P16-04", "P16-05", "P16-06"],
+  "cards": ["<p>IPv6にはARPもブロードキャストもありません。代わりに <b>NDP（近隣探索プロトコル）</b> がICMPv6<span class=\"abbr\">（Internet Control Message Protocol for IPv6）</span>で同じ役割をします。</p>\n<table><tr><th>メッセージ</th><th>役割</th></tr><tr><td>NS（近隣要請）</td><td>「このIPv6アドレスのMAC<span class=\"abbr\">（Media Access Control）</span>は？」と聞く（ARP要求にあたる）</td></tr><tr><td>NA（近隣広告）</td><td>NSに答える（ARP応答にあたる）</td></tr><tr><td>RS（ルーター要請）</td><td>端末が「ルーターはいますか？」と聞く</td></tr><tr><td>RA（ルーター広告）</td><td>ルーターがプレフィックスやデフォルトゲートウェイを知らせる</td></tr></table>\n<ul><li><b>DAD（重複アドレス検出）</b>：自分で作ったアドレスを使う前に、NSを送ってほかに使っている機器がいないか確かめる</li></ul>", "<h3>アドレスをもらう3つの方法</h3><table><tr><td>SLAAC</td><td>RAのプレフィックスと、自分で作ったインターフェースID<span class=\"abbr\">（Identifier）</span>を組み合わせる。DHCPサーバーはいらない</td></tr><tr><td>ステートレスDHCPv6<span class=\"abbr\">（Dynamic Host Configuration Protocol for IPv6）</span></td><td>アドレスはSLAACで作り、DNS<span class=\"abbr\">（Domain Name System）</span>サーバーなどの<b>その他の情報だけ</b>をDHCPv6でもらう</td></tr><tr><td>ステートフルDHCPv6</td><td>アドレスもDHCPv6サーバーからもらう（IPv4のDHCPに近い）</td></tr></table>\n<pre>R1(config-if)# ipv6 address autoconfig   ← SLAACでアドレスを作る\nR1(config-if)# ipv6 address dhcp         ← DHCPv6でアドレスをもらう</pre>\n<p>SLAACでの流れ：RSを送る → RAを受け取る → プレフィックス＋インターフェースIDでアドレスを作る → DADで重複を確認する</p>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "nl16",
+  "d": "d1",
+  "t": "端末でIP設定を確認する",
+  "s": "WindowsやMac、Linuxで<b>「自分の住所（IP<span class=\"abbr\">（Internet Protocol）</span>）がちゃんと設定されているか」を見るコマンド</b>を学びます。トラブルのときに最初に確認する場所です。",
+  "q": ["P17-01", "P17-02", "P17-03", "P17-04", "P17-05"],
+  "cards": ["<table><tr><th>OS<span class=\"abbr\">（Operating System）</span></th><th>コマンド</th></tr><tr><td>Windows</td><td><code>ipconfig</code>、詳しく見るなら <code>ipconfig /all</code>（MAC<span class=\"abbr\">（Media Access Control）</span>・DHCP<span class=\"abbr\">（Dynamic Host Configuration Protocol）</span>・DNS<span class=\"abbr\">（Domain Name System）</span>も表示）</td></tr><tr><td>macOS</td><td><code>ifconfig</code>、<code>networksetup -getinfo Wi-Fi</code></td></tr><tr><td>Linux</td><td><code>ip addr</code>（<code>ip a</code>）、<code>ip route</code>、古い環境では <code>ifconfig</code></td></tr></table>\n<p>共通して使うもの：<code>ping</code>（疎通確認）、<code>tracert</code>（Windows）／<code>traceroute</code>（mac・Linux）、<code>nslookup</code>（DNS）、<code>arp -a</code></p>\n<div class=\"point\">確認するのはIPアドレス・サブネットマスク・デフォルトゲートウェイ・DNSサーバーの4つ。169.254.x.x になっていたらDHCPの失敗を疑います。</div>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "nl17",
+  "d": "d1",
+  "t": "無線LANの電波と規格",
+  "s": "Wi-Fiの<b>電波の種類（2.4GHzと5GHz）と規格の違い</b>です。2.4GHzは遠くまで届くが混みやすい、5GHzは届く範囲は狭いが空いている、と覚えましょう。",
+  "q": ["P18-01", "P18-02", "P18-03", "P18-04", "P18-05", "P18-06"],
+  "cards": ["<table><tr><th></th><th>2.4GHz帯</th><th>5GHz帯</th></tr><tr><td>電波の届く範囲</td><td>広い（障害物に強い）</td><td>狭い</td></tr><tr><td>重ならないチャネル</td><td>3つ（1・6・11）</td><td>多い</td></tr><tr><td>干渉</td><td>多い（電子レンジやBluetoothなど）</td><td>少ない</td></tr></table>\n<p>6GHz帯はWi-Fi 6E以降で使える新しい帯域です。</p>", "<h3>規格</h3><table><tr><td>802.11b / g</td><td>2.4GHz</td></tr><tr><td>802.11a</td><td>5GHz</td></tr><tr><td>802.11n（Wi-Fi 4）</td><td>2.4 / 5GHz</td></tr><tr><td>802.11ac（Wi-Fi 5）</td><td>5GHz</td></tr><tr><td>802.11ax（Wi-Fi 6 / 6E）</td><td>2.4 / 5 / 6GHz</td></tr></table>", "<h3>用語</h3><ul><li><b>チャネル幅</b>：20/40/80/160MHz。広くするほど速くなるが、重ならないチャネルの数が減る</li><li><b>RSSI<span class=\"abbr\">（Received Signal Strength Indicator）</span></b>：受信した電波の強さ（dBm）。0に近いほど強い（−60dBmは−80dBmより強い）</li><li><b>SNR<span class=\"abbr\">（Signal-to-Noise Ratio）</span></b>：電波の強さとノイズの差。大きいほどよい</li><li><b>BSS<span class=\"abbr\">（Basic Service Set）</span></b>：1台のAP<span class=\"abbr\">（Access Point）</span>とクライアントのまとまり。<b>BSSID<span class=\"abbr\">（Basic Service Set Identifier）</span></b>はAPの無線のMAC<span class=\"abbr\">（Media Access Control）</span>アドレス</li><li><b>ESS<span class=\"abbr\">（Extended Service Set）</span></b>：同じSSID<span class=\"abbr\">（Service Set Identifier）</span>の複数のAPで作るエリア。この中を移動しながら接続を続けることを<b>ローミング</b>という</li><li>無線LAN<span class=\"abbr\">（Local Area Network）</span>は衝突を検知できないので、<b>CSMA/CA<span class=\"abbr\">（Carrier Sense Multiple Access with Collision Avoidance）</span></b>（衝突を避ける方式）を使う</li></ul>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "nl18",
+  "d": "d1",
+  "t": "無線・仮想化・クラウド",
+  "s": "無線LAN<span class=\"abbr\">（Local Area Network）</span>の基本、<b>1台のコンピューターの中で何台分も動かす仮想化</b>、そして<b>自分で機械を持たずに借りるクラウド</b>を学びます。",
+  "q": ["P19-01", "P19-02", "P19-03", "P19-04", "P19-05", "P19-06"],
+  "cards": ["<h3>無線LANの基本</h3><ul><li>2.4GHz帯で電波が重ならないチャネルは<b>1・6・11</b></li><li>5GHz帯はチャネル数が多く、干渉しにくい</li><li>SSID<span class=\"abbr\">（Service Set Identifier）</span>＝ネットワーク名</li></ul>", "<h3>仮想化</h3><ul><li><b>仮想マシン（VM<span class=\"abbr\">（Virtual Machine）</span>）</b>：ハイパーバイザー上で、OS<span class=\"abbr\">（Operating System）</span>ごと動かす</li><li><b>コンテナ</b>：OSを共有するので軽い（例：Docker）</li></ul>", "<h3>クラウドのサービス形態</h3><table><tr><td>IaaS<span class=\"abbr\">（Infrastructure as a Service）</span></td><td>サーバーやネットワークなどの基盤を借りる</td></tr><tr><td>PaaS<span class=\"abbr\">（Platform as a Service）</span></td><td>アプリを動かす環境を借りる</td></tr><tr><td>SaaS<span class=\"abbr\">（Software as a Service）</span></td><td>完成したアプリを使う（例：Webメール）</td></tr></table>", "<h3>ネットワーク構成（トポロジ）</h3><p>2階層（コラプストコア）、3階層（コア／ディストリビューション／アクセス）、スパインリーフ（データセンター向け）、WAN<span class=\"abbr\">（Wide Area Network）</span>、SOHO<span class=\"abbr\">（Small Office/Home Office）</span>などがあります。</p>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "kl3",
+  "d": "d2",
+  "t": "図解：スイッチとVLAN",
+  "full": "スイッチとVLAN（建物の中のしくみ）",
+  "s": "ゴール：スイッチがMAC<span class=\"abbr\">（Media Access Control）</span>アドレスで転送するしくみ、VLAN<span class=\"abbr\">（Virtual LAN）</span>・トランク・STP<span class=\"abbr\">（Spanning Tree Protocol）</span>・EtherChannelの役割がわかる",
+  "q": ["P10-01", "P10-02", "P20-01", "P23-01", "P23-02", "P25-01"],
+  "rel": [],
+  "kiso": 1,
+  "cards": ["<h3>スイッチは「MACアドレス表」で配達する</h3>\n<p>スイッチは、どのポートの先にどのMACアドレス（顔）の機器がいるかを<b>MACアドレステーブル</b>に覚えていきます。</p>\n<table class=\"tb\">\n<tr><th>動き</th><th>何をする？</th></tr>\n<tr><td><b>学習</b></td><td>届いたフレームの<b>送信元MAC</b>と、届いたポートをメモする</td></tr>\n<tr><td><b>転送</b></td><td>宛先MACが表にあれば、<b>そのポートだけ</b>に送る</td></tr>\n<tr><td><b>フラッディング</b></td><td>宛先が表にない／ブロードキャストなら、<b>受信ポート以外の全部</b>に送る</td></tr>\n</table>\n<p class=\"pt\">💡 覚え方：<b>学習は「送信元」、転送は「宛先」</b>を見る。</p>", "<h3>VLAN＝1台のスイッチを「部屋分け」する</h3>\n<p>VLANを使うと、1台のスイッチを<b>見えない壁で複数のネットワークに分けられます</b>。たとえば「営業部屋（VLAN10）」と「経理部屋（VLAN20）」。</p>\n<ul>\n<li>違うVLAN同士は、<b>ルーター（またはL3スイッチ）を通らないと通信できない</b></li>\n<li>ブロードキャスト（全員への呼びかけ）は<b>同じVLANの中だけ</b>に届く → ムダな通信が減り、安全にもなる</li>\n</ul>\n<svg viewBox=\"0 0 360 170\" class=\"dg\" role=\"img\" aria-label=\"VLANとトランク\">\n<g font-size=\"12\" text-anchor=\"middle\" fill=\"currentColor\">\n<rect x=\"20\" y=\"60\" width=\"110\" height=\"50\" rx=\"10\" class=\"b2\"/><text x=\"75\" y=\"90\">SW1</text>\n<rect x=\"230\" y=\"60\" width=\"110\" height=\"50\" rx=\"10\" class=\"b2\"/><text x=\"285\" y=\"90\">SW2</text>\n<line x1=\"130\" y1=\"85\" x2=\"230\" y2=\"85\" stroke=\"currentColor\" stroke-width=\"4\"/>\n<text x=\"180\" y=\"76\">トランク</text><text x=\"180\" y=\"104\" font-size=\"10\">VLAN10も20も通す</text>\n<rect x=\"5\" y=\"130\" width=\"60\" height=\"30\" rx=\"6\" class=\"b1\"/><text x=\"35\" y=\"150\">営業10</text>\n<rect x=\"80\" y=\"130\" width=\"60\" height=\"30\" rx=\"6\" class=\"b3\"/><text x=\"110\" y=\"150\">経理20</text>\n<rect x=\"220\" y=\"130\" width=\"60\" height=\"30\" rx=\"6\" class=\"b1\"/><text x=\"250\" y=\"150\">営業10</text>\n<rect x=\"295\" y=\"130\" width=\"60\" height=\"30\" rx=\"6\" class=\"b3\"/><text x=\"325\" y=\"150\">経理20</text>\n<g stroke=\"currentColor\"><line x1=\"35\" y1=\"130\" x2=\"60\" y2=\"110\"/><line x1=\"110\" y1=\"130\" x2=\"90\" y2=\"110\"/><line x1=\"250\" y1=\"130\" x2=\"270\" y2=\"110\"/><line x1=\"325\" y1=\"130\" x2=\"300\" y2=\"110\"/></g>\n<text x=\"180\" y=\"30\">PCがつながるポート＝アクセスポート（VLANは1つだけ）</text>\n</g></svg>", "<h3>アクセスポートとトランクポート</h3>\n<table class=\"tb\">\n<tr><th></th><th>アクセスポート</th><th>トランクポート</th></tr>\n<tr><td>つなぐ相手</td><td>PC<span class=\"abbr\">（Personal Computer）</span>・プリンターなど</td><td>スイッチ同士・ルーター</td></tr>\n<tr><td>通すVLAN</td><td><b>1つだけ</b></td><td><b>複数</b></td></tr>\n<tr><td>目印（タグ）</td><td>つけない</td><td><b>802.1Q</b>タグで「何番VLANか」を書く</td></tr>\n</table>\n<ul>\n<li><b>ネイティブVLAN</b>：トランクで<b>タグをつけずに</b>送るVLAN（初期値はVLAN1）。<b>両端で同じ番号</b>にしないと不具合になる</li>\n<li><b>DTP<span class=\"abbr\">（Dynamic Trunking Protocol）</span></b>：トランクにするかを自動で相談するしくみ。dynamic desirable は積極的、dynamic auto は受け身（auto同士だとトランクにならない）</li>\n<li><b>音声VLAN</b>：IP<span class=\"abbr\">（Internet Protocol）</span>電話用のVLAN。PCとIP電話を1つのポートでつなぐとき、データと音声を分ける</li>\n</ul>", "<h3>STP＝ループ（ぐるぐる回り）を防ぐ</h3>\n<p>スイッチを輪っか状につなぐと、ブロードキャストが永遠に回り続ける<b>ブロードキャストストーム</b>が起きます。<b>STP（スパニングツリー）</b>は、一部のポートを<b>わざと止めて（ブロッキング）</b>輪っかを切ります。</p>\n<table class=\"tb\">\n<tr><th>用語</th><th>意味</th></tr>\n<tr><td><b>ルートブリッジ</b></td><td>木の「根っこ」になるスイッチ。<b>ブリッジID（優先度＋MAC）が一番小さい</b>ものが選ばれる。優先度の初期値は32768</td></tr>\n<tr><td><b>ルートポート</b></td><td>各スイッチで、ルートブリッジへ<b>一番近い</b>ポート</td></tr>\n<tr><td><b>指定ポート</b></td><td>各リンクで転送を担当するポート。ルートブリッジのポートは全部これ</td></tr>\n<tr><td><b>PortFast</b></td><td>PCをつなぐポートで、待ち時間なしですぐ通信できるようにする設定</td></tr>\n<tr><td><b>BPDU<span class=\"abbr\">（Bridge Protocol Data Unit）</span>ガード</b></td><td>PortFastのポートにスイッチ（BPDU）が来たら、ポートを止めて守る</td></tr>\n</table>\n<p>今は改良版の<b>RSTP（高速STP）</b>が主流で、切り替えがとても速いです。ポートの役割に<b>代替ポート（予備）</b>があります。</p>", "<h3>EtherChannel＝複数のケーブルを1本にまとめる</h3>\n<p>スイッチ間を2〜8本でつなぎ、<b>1本の太い線</b>として扱います。速くなるうえ、1本切れても通信が続きます（STPに止められない）。</p>\n<table class=\"tb\">\n<tr><th>方式</th><th>モード（自分から／受け身）</th></tr>\n<tr><td><b>LACP<span class=\"abbr\">（Link Aggregation Control Protocol）</span></b>（業界標準）</td><td><b>active</b> ／ passive</td></tr>\n<tr><td><b>PAgP<span class=\"abbr\">（Port Aggregation Protocol）</span></b>（Cisco独自）</td><td><b>desirable</b> ／ auto</td></tr>\n<tr><td>交渉なし</td><td>on（両方onのみ）</td></tr>\n</table>\n<p class=\"pt\">💡 受け身同士（passive×passive、auto×auto）では束にならない。<b>どちらかが積極的</b>であることが条件。</p>"]
+ },
+ {
+  "r": "L",
+  "id": "kl8",
+  "d": "d2",
+  "t": "図解：無線LAN",
+  "full": "無線LAN（Wi-Fi）",
+  "s": "ゴール：2.4GHz/5GHzの違い、チャネル、SSID<span class=\"abbr\">（Service Set Identifier）</span>、自律型AP<span class=\"abbr\">（Access Point）</span>とWLC<span class=\"abbr\">（Wireless LAN Controller）</span>、APのモードなど無線LAN<span class=\"abbr\">（Local Area Network）</span>の基本がわかる",
+  "q": ["P18-01", "P28-01", "P27-01", "P27-02", "P27-03", "P18-02"],
+  "rel": [],
+  "kiso": 1,
+  "cards": ["<h3>電波の「道路」＝周波数帯とチャネル</h3>\n<table class=\"tb\">\n<tr><th></th><th>2.4GHz帯</th><th>5GHz帯</th></tr>\n<tr><td>届く距離</td><td><b>遠くまで届く</b>・壁に強い</td><td>短め</td></tr>\n<tr><td>速さ・混雑</td><td>電子レンジやBluetoothと干渉しやすく<b>混む</b></td><td><b>速く、空いている</b></td></tr>\n<tr><td>重ならないチャネル</td><td><b>1・6・11</b>の3つだけ</td><td>たくさんある</td></tr>\n</table>\n<p>隣のAP同士は<b>重ならないチャネル</b>（例：1・6・11）を順番に使い、干渉を防ぎます。新しい規格では<b>6GHz帯</b>も使えます（Wi-Fi 6E）。</p>\n<table class=\"tb\">\n<tr><th>規格</th><th>呼び名</th><th>周波数</th></tr>\n<tr><td>802.11n</td><td>Wi-Fi 4</td><td>2.4 / 5GHz</td></tr>\n<tr><td>802.11ac</td><td>Wi-Fi 5</td><td>5GHz</td></tr>\n<tr><td>802.11ax</td><td>Wi-Fi 6 / 6E</td><td>2.4 / 5（/ 6）GHz</td></tr>\n</table>", "<h3>無線の用語</h3>\n<table class=\"tb\">\n<tr><th>用語</th><th>意味</th></tr>\n<tr><td><b>SSID</b></td><td>無線ネットワークの名前（スマホのWi-Fi一覧に出る名前）</td></tr>\n<tr><td><b>BSSID<span class=\"abbr\">（Basic Service Set Identifier）</span></b></td><td>APの無線部分のMAC<span class=\"abbr\">（Media Access Control）</span>アドレス</td></tr>\n<tr><td><b>BSS<span class=\"abbr\">（Basic Service Set）</span></b></td><td>AP1台とその利用者のまとまり</td></tr>\n<tr><td><b>ESS<span class=\"abbr\">（Extended Service Set）</span></b></td><td>同じSSIDの複数のAPをまとめたもの → 移動してもつながったまま（<b>ローミング</b>）</td></tr>\n<tr><td><b>アドホック（IBSS<span class=\"abbr\">（Independent Basic Service Set）</span>）</b></td><td>APなしで端末同士が直接つながる</td></tr>\n<tr><td><b>RSSI<span class=\"abbr\">（Received Signal Strength Indicator）</span> / SNR<span class=\"abbr\">（Signal-to-Noise Ratio）</span></b></td><td>電波の強さ／雑音に対してどれだけ強いか（大きいほど良い）</td></tr>\n</table>", "<h3>APの2つのタイプ</h3>\n<table class=\"tb\">\n<tr><th></th><th>自律型AP</th><th>軽量AP（LAP<span class=\"abbr\">（Lightweight Access Point）</span>）＋WLC</th></tr>\n<tr><td>設定</td><td>1台ずつ個別に設定</td><td><b>WLC（無線LANコントローラー）</b>でまとめて管理</td></tr>\n<tr><td>向いている所</td><td>小さなオフィス</td><td>大きな会社・学校</td></tr>\n</table>\n<ul>\n<li>LAPとWLCは<b>CAPWAP<span class=\"abbr\">（Control And Provisioning of Wireless Access Points）</span></b>というトンネルでつながる（制御用とデータ用の2本、UDP<span class=\"abbr\">（User Datagram Protocol）</span> 5246/5247）</li>\n<li><b>スプリットMAC</b>：電波の細かい仕事はAP、認証やローミングなどの管理はWLCが分担</li>\n<li>WLCのポートは<b>トランク</b>につなぐことが多い（複数のSSID＝複数のVLAN<span class=\"abbr\">（Virtual LAN）</span>を運ぶ）</li>\n<li>APがつながるスイッチのポートは、ローカルモードなら<b>アクセスポート</b>でOK</li>\n<li>WLCとスイッチの複数ポートをまとめるのが <b>LAG<span class=\"abbr\">（Link Aggregation Group）</span></b>（EtherChannelと同じ考え）</li>\n</ul>", "<h3>APのモード</h3>\n<table class=\"tb\">\n<tr><th>モード</th><th>役割</th></tr>\n<tr><td><b>ローカル</b></td><td>ふつうのAP（初期値）。データはWLCへトンネルで送る</td></tr>\n<tr><td><b>FlexConnect</b></td><td>支店向け。WLCとの回線が切れても<b>現地で通信を続けられる</b></td></tr>\n<tr><td><b>モニター</b></td><td>電波を出さず、<b>監視専用</b>（不正APの検知など）</td></tr>\n<tr><td><b>スニファー</b></td><td>無線の通信を<b>キャプチャー</b>して分析ツールへ送る</td></tr>\n<tr><td><b>ブリッジ</b></td><td>AP同士をつなぎ、建物間を無線でつなぐ</td></tr>\n<tr><td>SE-Connect</td><td>電波の混み具合（スペクトラム）を分析</td></tr>\n</table>\n<p class=\"pt\">💡 WLCの管理画面は<b>HTTPS<span class=\"abbr\">（Hypertext Transfer Protocol Secure）</span></b>でアクセスするのが安全。WLAN<span class=\"abbr\">（Wireless LAN）</span>の作成では SSID・セキュリティ（WPA2<span class=\"abbr\">（Wi-Fi Protected Access 2）</span>/WPA3）・どのVLAN（インターフェース）に流すかを設定します。</p>"]
+ },
+ {
+  "r": "L",
+  "id": "nl19",
+  "d": "d2",
+  "t": "VLANとトランク",
+  "s": "1台のスイッチを、見えない壁で<b>いくつかの部屋（VLAN<span class=\"abbr\">（Virtual LAN）</span>）に分ける</b>機能です。スイッチ間で複数の部屋のデータを運ぶ通路が<b>トランク</b>です。",
+  "q": ["P20-01", "P20-02", "P20-03", "P20-04", "P20-05", "P20-06"],
+  "cards": ["<p><b>VLAN</b>は、1台のスイッチを論理的に複数のネットワークに分ける機能です。VLANごとにブロードキャストドメインが分かれます。</p>\n<ul><li><b>アクセスポート</b>：1つのVLANだけに所属する（PC<span class=\"abbr\">（Personal Computer）</span>をつなぐポート）</li><li><b>トランクポート</b>：複数のVLANのフレームを運ぶ（スイッチ間をつなぐ）。<b>IEEE<span class=\"abbr\">（Institute of Electrical and Electronics Engineers）</span> 802.1Q</b>でVLANタグを付ける</li><li><b>ネイティブVLAN</b>：トランク上でタグを付けずに送るVLAN。初期値はVLAN 1。両端で一致させる必要がある</li></ul>\n<pre>Switch(config)# vlan 10\nSwitch(config-vlan)# name SALES\nSwitch(config)# interface g0/1\nSwitch(config-if)# switchport mode access\nSwitch(config-if)# switchport access vlan 10\nSwitch(config)# interface g0/24\nSwitch(config-if)# switchport mode trunk\nSwitch(config-if)# switchport trunk allowed vlan 10,20</pre>\n<p>VLAN間で通信するには、ルーター（ルーターオンアスティック）か、L3スイッチのSVI<span class=\"abbr\">（Switch Virtual Interface）</span>が必要です。</p>\n<div class=\"point\">確認コマンド：show vlan brief ／ show interfaces trunk</div>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "nl20",
+  "d": "d2",
+  "t": "VLAN間ルーティング（ルーターオンアスティック・SVI）",
+  "s": "VLAN<span class=\"abbr\">（Virtual LAN）</span>で分けた部屋どうしは、そのままでは話せません。<b>ルーター（またはL3スイッチ）が部屋どうしの通訳</b>になって、通信できるようにする方法です。",
+  "q": ["P21-01", "P21-02", "P21-03", "P21-04", "P21-05"],
+  "cards": ["<h3>ルーターオンアスティック（ROAS）</h3><p>ルーターの1つの物理ポートを<b>サブインターフェース</b>に分けて、VLANごとのゲートウェイにする方法です。スイッチ側のポートは<b>トランク</b>にします。</p>\n<pre>R1(config)# interface g0/0\nR1(config-if)# no shutdown\nR1(config)# interface g0/0.10\nR1(config-subif)# encapsulation dot1Q 10\nR1(config-subif)# ip address 192.168.10.1 255.255.255.0\nR1(config)# interface g0/0.20\nR1(config-subif)# encapsulation dot1Q 20\nR1(config-subif)# ip address 192.168.20.1 255.255.255.0</pre>\n<p>ネイティブVLANのサブインターフェースには <code>encapsulation dot1Q 1 native</code> と書きます。</p>", "<h3>L3スイッチのSVI</h3><pre>SW1(config)# ip routing                 ← ルーティングを有効にする\nSW1(config)# interface vlan 10\nSW1(config-if)# ip address 192.168.10.1 255.255.255.0\nSW1(config-if)# no shutdown</pre>\n<p>SVI<span class=\"abbr\">（Switch Virtual Interface）</span>がup/upになる条件：①そのVLANが作られている　②そのVLANに、upしているポート（またはトランク）が1つ以上ある　③SVIがshutdownになっていない</p>\n<p>L3スイッチのポートをルーターのポートのように使うには <code>no switchport</code> を設定します（ルーテッドポート）。</p>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "nl21",
+  "d": "d2",
+  "t": "音声VLAN・管理アクセス",
+  "s": "IP<span class=\"abbr\">（Internet Protocol）</span>電話のために<b>電話専用の部屋（音声VLAN<span class=\"abbr\">（Virtual LAN）</span>）</b>を用意する方法と、ネットワーク機器を<b>安全に遠くから操作する方法</b>（SSH<span class=\"abbr\">（Secure Shell）</span>など）を学びます。",
+  "q": ["P22-01", "P22-02", "P22-03", "P22-04", "P22-05", "P22-06"],
+  "cards": ["<h3>音声VLAN</h3><p>IP電話の後ろにPC<span class=\"abbr\">（Personal Computer）</span>をつなぐときに使います。電話の通信には音声VLANのタグを付け、PCの通信はタグなしでデータVLANに流します。</p><pre>interface g0/5\n switchport mode access\n switchport access vlan 10\n switchport voice vlan 20</pre>\n<p>どのVLANにも設定していないポートは、<b>VLAN 1</b>（デフォルトVLAN）に所属します。</p>", "<h3>機器を管理するときの接続方法</h3><table><tr><td>コンソール</td><td>ケーブルで直接つなぐ。ネットワークが落ちていても使える（アウトオブバンド）</td></tr><tr><td>Telnet</td><td>TCP<span class=\"abbr\">（Transmission Control Protocol）</span> 23。<b>平文</b>なので使わないのが基本</td></tr><tr><td>SSH</td><td>TCP 22。暗号化されている</td></tr><tr><td>HTTP<span class=\"abbr\">（Hypertext Transfer Protocol）</span> / HTTPS<span class=\"abbr\">（Hypertext Transfer Protocol Secure）</span></td><td>Web画面（GUI<span class=\"abbr\">（Graphical User Interface）</span>）での管理。<code>ip http secure-server</code></td></tr><tr><td>TACACS<span class=\"abbr\">（Terminal Access Controller Access-Control System）</span>+ / RADIUS<span class=\"abbr\">（Remote Authentication Dial-In User Service）</span></td><td>ログインの認証をサーバーでまとめて行う</td></tr><tr><td>クラウド管理</td><td>Merakiなど、ブラウザからクラウド経由で管理する</td></tr></table>\n<p>L2スイッチに管理用のIPを付けるには、SVI<span class=\"abbr\">（Switch Virtual Interface）</span>を使います：<code>interface vlan 1</code> → <code>ip address …</code>、さらに <code>ip default-gateway …</code></p>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "nl22",
+  "d": "d2",
+  "t": "STP（スパニングツリー）",
+  "s": "スイッチを輪っか状につなぐと、データが<b>ぐるぐる回り続けてネットワークが止まります</b>。STP<span class=\"abbr\">（Spanning Tree Protocol）</span>は、わざと一部の道を通行止めにして、輪をなくす仕組みです。",
+  "q": ["P23-01", "P23-02", "P23-03", "P23-04", "P23-05", "P23-06"],
+  "cards": ["<p>スイッチをループ状につなぐと、ブロードキャストストームが起きます。<b>STP</b>は一部のポートをブロックして、ループを防ぐ仕組みです。</p>", "<h3>決まる順番</h3><ol><li><b>ルートブリッジ</b>：ブリッジID（プライオリティ＋MAC<span class=\"abbr\">（Media Access Control）</span>アドレス）が<b>最も小さい</b>スイッチ。プライオリティの初期値は32768で、4096刻みで設定する</li><li><b>ルートポート</b>：ルート以外の各スイッチで、ルートブリッジへのコストが最小のポート</li><li><b>指定ポート</b>：セグメントごとに1つ選ばれる転送ポート</li><li>残りのポートは<b>ブロック</b>される（RSTP<span class=\"abbr\">（Rapid Spanning Tree Protocol）</span>では代替ポート／バックアップポート）</li></ol>\n<p>同じ値で並んだときは「送信元ブリッジID → ポートIDが小さいほう」で決めます。</p>", "<h3>RSTP（802.1w）</h3><p>収束がとても速いSTPです。ポートの状態はDiscarding／Learning／Forwardingの3つです。</p>", "<h3>関連する機能</h3><ul><li><b>PortFast</b>：PC<span class=\"abbr\">（Personal Computer）</span>をつなぐアクセスポートで、すぐにフォワーディング状態にする</li><li><b>BPDU<span class=\"abbr\">（Bridge Protocol Data Unit）</span>ガード</b>：PortFastのポートでBPDUを受け取ったら、err-disable状態にしてポートを止める</li></ul>", "<h3>従来のSTP（802.1D）のポートの状態</h3><p>Blocking → Listening（15秒）→ Learning（15秒）→ Forwarding。転送を始めるまでに30秒以上かかるため、PortFastやRSTPが使われます。Learningの状態では、まだ転送はせず、MACアドレスの学習だけを行います。</p>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "nl23",
+  "d": "d2",
+  "t": "Rapid PVST+とSTPの保護機能",
+  "s": "STP<span class=\"abbr\">（Spanning Tree Protocol）</span>を<b>速く、VLAN<span class=\"abbr\">（Virtual LAN）</span>ごとに動かす</b>方法と、PC<span class=\"abbr\">（Personal Computer）</span>をつなぐポートを<b>すぐ使えるようにしたり、勝手につながれたスイッチから守ったりする</b>機能です。",
+  "q": ["P24-01", "P24-02", "P24-03", "P24-04", "P24-05", "P24-06"],
+  "cards": ["<p><b>Rapid PVST<span class=\"abbr\">（Per-VLAN Spanning Tree）</span>+</b>は、VLANごとにRSTP<span class=\"abbr\">（Rapid Spanning Tree Protocol）</span>を動かすCisco独自の方式です。<code>spanning-tree mode rapid-pvst</code></p>\n<pre>spanning-tree vlan 10 root primary      ← このスイッチをルートにする\nspanning-tree vlan 10 priority 4096     ← プライオリティは4096の倍数で設定</pre>\n<table><tr><th>帯域幅</th><th>STPのコスト（ショート方式）</th></tr><tr><td>10Mbps</td><td>100</td></tr><tr><td>100Mbps</td><td>19</td></tr><tr><td>1Gbps</td><td>4</td></tr><tr><td>10Gbps</td><td>2</td></tr></table>", "<h3>保護機能</h3><table><tr><td>PortFast</td><td>端末をつなぐポートを、すぐにフォワーディング状態にする</td></tr><tr><td>BPDU<span class=\"abbr\">（Bridge Protocol Data Unit）</span>ガード</td><td>BPDUを受け取ったら、err-disableにしてポートを止める</td></tr><tr><td>BPDUフィルター</td><td>BPDUを送受信しない。グローバルで設定した場合、BPDUを受け取るとPortFastが解除される</td></tr><tr><td>ルートガード</td><td>より優れたBPDUを受け取ったら、root-inconsistent状態にしてブロックする（予定外のスイッチがルートになるのを防ぐ）</td></tr><tr><td>ループガード</td><td>BPDUが届かなくなっても、ブロックしているポートが勝手に転送を始めないようにする（loop-inconsistent）</td></tr></table>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "nl24",
+  "d": "d2",
+  "t": "EtherChannel",
+  "s": "<b>複数のケーブルを束ねて、1本の太い道として使う</b>技術です。速くなり、1本切れても通信が続きます。",
+  "q": ["P25-01", "P25-02", "P25-03", "P25-04", "P25-05", "P25-06"],
+  "cards": ["<p>複数の物理リンクを束ねて、1本の論理リンクとして扱う機能です。帯域が増え、STP<span class=\"abbr\">（Spanning Tree Protocol）</span>でブロックされません。</p>\n<table><tr><th>方式</th><th>モード</th><th>成立する組み合わせ</th></tr>\n<tr><td>LACP（IEEE<span class=\"abbr\">（Institute of Electrical and Electronics Engineers）</span>標準）</td><td>active / passive</td><td>active–active、active–passive</td></tr>\n<tr><td>PAgP（Cisco独自）</td><td>desirable / auto</td><td>desirable–desirable、desirable–auto</td></tr>\n<tr><td>静的</td><td>on</td><td>on–onのみ</td></tr></table>\n<div class=\"point\">passive–passive や auto–auto では成立しません（どちらも相手からの開始を待つだけだから）。</div>\n<pre>interface range g0/1 - 2\n channel-group 1 mode active</pre>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "nl25",
+  "d": "d2",
+  "t": "CDP / LLDP",
+  "s": "ケーブルの先に<b>「誰がつながっているか」を教え合う自己紹介</b>の仕組みです。CDP<span class=\"abbr\">（Cisco Discovery Protocol）</span>はCisco専用、LLDP<span class=\"abbr\">（Link Layer Discovery Protocol）</span>はどのメーカーでも使えます。",
+  "q": ["P26-01", "P26-02", "P26-03", "P26-04", "P26-05"],
+  "cards": ["<p>隣につながっている機器の情報（機器名、IP<span class=\"abbr\">（Internet Protocol）</span>、機種など）を教え合うプロトコルです。</p><ul><li><b>CDP</b>：Cisco独自。初期状態で有効。<code>show cdp neighbors</code></li><li><b>LLDP</b>：IEEE<span class=\"abbr\">（Institute of Electrical and Electronics Engineers）</span> 802.1ABの標準規格。Cisco機器では初期状態で無効。<code>lldp run</code>で有効にする</li></ul>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "nl26",
+  "d": "d2",
+  "t": "無線LANの構成",
+  "s": "たくさんのアクセスポイントを、<b>1台ずつ設定するか、司令塔（WLC<span class=\"abbr\">（Wireless LAN Controller）</span>）でまとめて管理するか</b>、という無線LAN<span class=\"abbr\">（Local Area Network）</span>の作り方の違いを学びます。",
+  "q": ["P27-01", "P27-02", "P27-03", "P27-04", "P27-05", "P27-06"],
+  "cards": ["<ul><li><b>自律型AP<span class=\"abbr\">（Access Point）</span></b>：1台ずつ個別に設定する</li><li><b>軽量AP（LAP<span class=\"abbr\">（Lightweight Access Point）</span>）＋WLC</b>：無線LANコントローラーでまとめて管理する。APとWLCの間は<b>CAPWAP<span class=\"abbr\">（Control And Provisioning of Wireless Access Points）</span></b>でトンネルを作る</li><li><b>クラウド管理型</b>：Merakiのように、クラウドから管理する</li></ul>", "<h3>APのモード</h3><p>Local（通常）、FlexConnect（WLCとの接続が切れてもローカルで転送できる）、Monitor、Sniffer、Bridge などがあります。</p>", "<h3>WLCのポート</h3><p>WLCのポートは、スイッチのトランクポートにつなぐのが基本です。複数ポートはLAG（EtherChannel）で束ねます。管理画面にはHTTPS<span class=\"abbr\">（Hypertext Transfer Protocol Secure）</span>、SSH<span class=\"abbr\">（Secure Shell）</span>、コンソールなどでアクセスします。</p>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "nl27",
+  "d": "d2",
+  "t": "WLCのGUIでWLANを作る",
+  "s": "司令塔（WLC<span class=\"abbr\">（Wireless LAN Controller）</span>）の<b>画面で、新しいWi-Fi（SSID<span class=\"abbr\">（Service Set Identifier）</span>）を作る手順</b>です。名前、つなぐVLAN<span class=\"abbr\">（Virtual LAN）</span>、パスワード（WPA2<span class=\"abbr\">（Wi-Fi Protected Access 2）</span> PSK<span class=\"abbr\">（Pre-Shared Key）</span>）の設定場所を覚えましょう。",
+  "q": ["P28-01", "P28-02", "P28-03", "P28-04", "P28-05", "P28-06"],
+  "cards": ["<p>WLCのWeb画面で、WLAN<span class=\"abbr\">（Wireless LAN）</span>は次の順に作ります。</p><ol><li><b>WLANs</b>タブ → Create New：プロファイル名、<b>SSID</b>、WLAN ID<span class=\"abbr\">（Identifier）</span>を入力する</li><li><b>General</b>：Statusを有効（Enabled）にし、通信を流す<b>インターフェース</b>（＝どのVLANに流すか）を選ぶ</li><li><b>Security → Layer 2</b>：WPA2 Policyと、暗号化方式の<b>AES<span class=\"abbr\">（Advanced Encryption Standard）</span></b>を選び、認証キー管理を<b>PSK</b>にしてパスフレーズを入力する</li><li><b>QoS<span class=\"abbr\">（Quality of Service）</span></b>：Platinum（音声）／Gold（動画）／Silver（ベストエフォート、初期値）／Bronze（優先度の低い通信）</li><li><b>Advanced</b>：セッションのタイムアウトなどを設定する</li></ol>\n<p>WLCとスイッチをつなぐポートは<b>トランク</b>にします。複数ポートをLAG<span class=\"abbr\">（Link Aggregation Group）</span>で束ねるときは、LACP<span class=\"abbr\">（Link Aggregation Control Protocol）</span>やPAgP<span class=\"abbr\">（Port Aggregation Protocol）</span>は使えず、<b>channel-group … mode on</b>（静的）にします。</p>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "kl4",
+  "d": "d3",
+  "t": "図解：ルーティング",
+  "full": "ルーティング（ネットワーク同士をつなぐ）",
+  "s": "ゴール：ルーティングテーブルの読み方、経路の選び方（最長一致・AD<span class=\"abbr\">（Administrative Distance）</span>・メトリック）、スタティックルート・OSPF<span class=\"abbr\">（Open Shortest Path First）</span>・FHRP<span class=\"abbr\">（First Hop Redundancy Protocol）</span>の基本がわかる",
+  "q": ["P30-01", "P30-02", "P30-03", "P31-01", "P32-01", "P34-01"],
+  "rel": [],
+  "kiso": 1,
+  "cards": ["<h3>ルーターは「地図（ルーティングテーブル）」で道を決める</h3>\n<p>ルーターは、宛先IP<span class=\"abbr\">（Internet Protocol）</span>アドレスを見て<b>ルーティングテーブル</b>から次に渡す相手（ネクストホップ）を決めます。テーブルの1行はこんな形です。</p>\n<table class=\"tb\">\n<tr><td><code>O 10.1.1.0/24 [110/20] via 192.168.1.2, Gi0/0</code></td></tr>\n</table>\n<table class=\"tb\">\n<tr><th>部分</th><th>意味</th></tr>\n<tr><td><b>O</b></td><td>どうやって知ったか（O＝OSPF、S＝スタティック、C＝直接接続、L＝自分のアドレス、D＝EIGRP<span class=\"abbr\">（Enhanced Interior Gateway Routing Protocol）</span>）</td></tr>\n<tr><td><b>10.1.1.0/24</b></td><td>宛先ネットワーク</td></tr>\n<tr><td><b>[110/20]</b></td><td>[<b>AD</b>（信頼度）/ <b>メトリック</b>（距離）]</td></tr>\n<tr><td><b>via 192.168.1.2</b></td><td>ネクストホップ（次に渡す相手）</td></tr>\n<tr><td><b>Gi0/0</b></td><td>出ていくインターフェース</td></tr>\n</table>", "<h3>道の選び方は3段階</h3>\n<p class=\"pt\">① <b>最長一致</b>（/が一番長い＝一番詳しい行）→ ② <b>AD</b>が小さい → ③ <b>メトリック</b>が小さい</p>\n<ul>\n<li><b>最長一致が最優先</b>：10.1.1.5 宛てなら、10.0.0.0/8 より 10.1.1.0/24 の行が使われる（ADは関係ない）</li>\n<li>同じ宛先・同じ長さの行が複数のプロトコルから来たら <b>AD</b> で比べる</li>\n<li>同じプロトコルの中では <b>メトリック</b> で比べる</li>\n</ul>\n<table class=\"tb\">\n<tr><th>経路の種類</th><th>AD（小さいほど信頼）</th></tr>\n<tr><td>直接接続</td><td>0</td></tr>\n<tr><td>スタティック</td><td>1</td></tr>\n<tr><td>eBGP<span class=\"abbr\">（external BGP）</span></td><td>20</td></tr>\n<tr><td>EIGRP</td><td>90</td></tr>\n<tr><td>OSPF</td><td>110</td></tr>\n<tr><td>RIP<span class=\"abbr\">（Routing Information Protocol）</span></td><td>120</td></tr>\n</table>", "<h3>スタティックルート＝手で道を書く</h3>\n<ul>\n<li><code>ip route 10.1.1.0 255.255.255.0 192.168.1.2</code>（宛先・マスク・ネクストホップ）</li>\n<li><b>デフォルトルート</b>：<code>ip route 0.0.0.0 0.0.0.0 ネクストホップ</code>。「どの行にも当てはまらないときの行き先」＝インターネットへの出口</li>\n<li><b>フローティングスタティック</b>：最後にADを大きく書く（例 <code>... 192.168.2.2 130</code>）。普段は使われない<b>予備の道</b>になる</li>\n<li>IPv6<span class=\"abbr\">（Internet Protocol version 6）</span>では <code>ipv6 route 2001:db8:1::/64 ネクストホップ</code></li>\n</ul>", "<h3>OSPF＝ルーター同士が地図を教え合う</h3>\n<table class=\"tb\">\n<tr><th>用語</th><th>意味</th></tr>\n<tr><td><b>コスト</b></td><td>OSPFのメトリック。<b>基準帯域÷インターフェース帯域</b>（初期値の基準は100Mbps）。道の合計コストが小さい方を選ぶ</td></tr>\n<tr><td><b>ルーターID<span class=\"abbr\">（Identifier）</span></b></td><td>ルーターの名札。①手動設定 ②ループバックの最大IP ③物理インターフェースの最大IP の順で決まる</td></tr>\n<tr><td><b>ネイバー</b></td><td>Helloパケットで見つけた隣のルーター。<b>エリア・Hello/Deadタイマー・サブネット・MTU<span class=\"abbr\">（Maximum Transmission Unit）</span></b>などが一致しないと仲良くなれない</td></tr>\n<tr><td><b>DR<span class=\"abbr\">（Designated Router）</span> / BDR<span class=\"abbr\">（Backup Designated Router）</span></b></td><td>イーサネットのような多人数の線で、まとめ役（DR）と副まとめ役（BDR）を選ぶ。<b>優先度が最大</b>→同じならルーターIDが最大が勝つ。優先度0は不参加</td></tr>\n<tr><td><b>FULL</b></td><td>地図の交換が終わった完成状態。DR以外同士は <b>2WAY</b> で止まるのが正常</td></tr>\n<tr><td><b>エリア0</b></td><td>バックボーン（中心）エリア。シングルエリアなら全部エリア0</td></tr>\n</table>\n<p><code>network 10.0.0.0 0.0.0.255 area 0</code> の <b>0.0.0.255</b> はワイルドカードマスク（サブネットマスクの0と1を逆にしたもの）です。</p>", "<h3>FHRP＝デフォルトゲートウェイを二重化</h3>\n<p>PC<span class=\"abbr\">（Personal Computer）</span>の出口（デフォルトゲートウェイ）のルーターが壊れても通信が止まらないよう、2台のルーターで<b>仮想IPアドレス</b>を共有します。</p>\n<table class=\"tb\">\n<tr><th>方式</th><th>特徴</th></tr>\n<tr><td><b>HSRP<span class=\"abbr\">（Hot Standby Router Protocol）</span></b></td><td>Cisco独自。アクティブ1台＋スタンバイ</td></tr>\n<tr><td><b>VRRP<span class=\"abbr\">（Virtual Router Redundancy Protocol）</span></b></td><td>業界標準。マスター＋バックアップ</td></tr>\n<tr><td><b>GLBP<span class=\"abbr\">（Gateway Load Balancing Protocol）</span></b></td><td>Cisco独自。複数台で<b>負荷分散</b>もできる</td></tr>\n</table>"]
+ },
+ {
+  "r": "L",
+  "id": "nl28",
+  "d": "d3",
+  "t": "パケットが届くまでの流れ（ARPとMACの書き換え）",
+  "s": "PC<span class=\"abbr\">（Personal Computer）</span>からデータが届くまでの<b>リレー</b>です。宛先の住所（IP<span class=\"abbr\">（Internet Protocol）</span>）は最後まで同じですが、<b>次に渡す人の名札（MAC<span class=\"abbr\">（Media Access Control）</span>）はルーターを通るたびに書き換わります</b>。",
+  "q": ["P29-01", "P29-02", "P29-03", "P29-04", "P29-05", "P29-06"],
+  "cards": ["<ol><li>PCは、自分のIPアドレスとサブネットマスクから、宛先が<b>同じネットワークかどうか</b>を判断する</li><li>違うネットワークなら、<b>デフォルトゲートウェイ</b>に送る。ゲートウェイのMACアドレスが分からなければ<b>ARP<span class=\"abbr\">（Address Resolution Protocol）</span></b>で調べる（要求はブロードキャスト、応答はユニキャスト）</li><li>ルーターはフレームを受け取ってFCS<span class=\"abbr\">（Frame Check Sequence）</span>を確認し、宛先IPでルーティングテーブルを検索する</li><li>TTL<span class=\"abbr\">（Time To Live）</span>を1減らし、ネクストホップのMACアドレス（ARPで解決）を宛先にした<b>新しいフレーム</b>を作って送る</li></ol>\n<div class=\"point\">ルーターを通るたびに<b>MACアドレスは書き換わります</b>が、送信元と宛先の<b>IPアドレスは変わりません</b>（NAT<span class=\"abbr\">（Network Address Translation）</span>がない場合）。</div>\n<pre>PC1 ──── R1 ──── R2 ──── Server\nPC1→R1：送信元MAC=PC1、宛先MAC=R1、IPはPC1→Server\nR1→R2：送信元MAC=R1、 宛先MAC=R2、IPはPC1→Server</pre>\n<p>確認コマンド：<code>show ip arp</code>（ルーター）、<code>arp -a</code>（PC）</p>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "nl29",
+  "d": "d3",
+  "t": "ルーティングテーブルの読み方",
+  "s": "ルーターが持つ<b>「この宛先ならこの道へ」という道案内の表</b>の読み方です。いちばん詳しく当てはまる行（ロンゲストマッチ）が選ばれます。",
+  "q": ["P30-01", "P30-02", "P30-03", "P30-04", "P30-05", "P30-06"],
+  "cards": ["<pre>R1# show ip route\nC  10.1.1.0/24 is directly connected, G0/0\nS  0.0.0.0/0 [1/0] via 203.0.113.1\nO  192.168.2.0/24 [110/2] via 10.1.1.2</pre>\n<ul><li>コード：C＝直接接続、L＝ローカル、S＝スタティック、O＝OSPF<span class=\"abbr\">（Open Shortest Path First）</span>、D＝EIGRP<span class=\"abbr\">（Enhanced Interior Gateway Routing Protocol）</span>、R＝RIP<span class=\"abbr\">（Routing Information Protocol）</span></li><li>[110/2] は [アドミニストレーティブディスタンス/メトリック]</li></ul>", "<h3>経路を選ぶ順番</h3><ol><li><b>ロンゲストマッチ</b>：宛先に一致する経路のうち、プレフィックスが最も長い（/が大きい）経路を優先する</li><li>プレフィックスが同じなら、<b>AD<span class=\"abbr\">（Administrative Distance）</span></b>（信頼度）が小さい経路</li><li>ADも同じなら、<b>メトリック</b>が小さい経路</li></ol>\n<table><tr><th>経路の種類</th><th>AD</th></tr><tr><td>直接接続</td><td>0</td></tr><tr><td>スタティック</td><td>1</td></tr><tr><td>eBGP<span class=\"abbr\">（external BGP）</span></td><td>20</td></tr><tr><td>EIGRP</td><td>90</td></tr><tr><td>OSPF</td><td>110</td></tr><tr><td>RIP</td><td>120</td></tr><tr><td>iBGP<span class=\"abbr\">（internal BGP）</span></td><td>200</td></tr></table>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "nl30",
+  "d": "d3",
+  "t": "スタティックルート",
+  "s": "道案内の表に、<b>人が手で道を書き込む</b>方法です。小さなネットワークや、「どこにも当てはまらないときの道（デフォルトルート）」によく使います。",
+  "q": ["P31-01", "P31-02", "P31-03", "P31-04", "P31-05", "P31-06"],
+  "cards": ["<pre>ip route 192.168.2.0 255.255.255.0 10.1.1.2   ← ネクストホップを指定\nip route 0.0.0.0 0.0.0.0 203.0.113.1          ← デフォルトルート\nip route 192.168.2.0 255.255.255.0 10.2.2.2 130 ← フローティング</pre>\n<ul><li><b>デフォルトルート</b>：どの経路にも当てはまらない宛先のための経路（0.0.0.0/0）</li><li><b>ホストルート</b>：/32で、1台のホストだけを指す経路</li><li><b>フローティングスタティック</b>：AD<span class=\"abbr\">（Administrative Distance）</span>をわざと大きくした予備の経路。メインの経路（例：OSPF<span class=\"abbr\">（Open Shortest Path First）</span>のAD 110）が消えたときだけ使われる</li></ul>\n<p>IPv6<span class=\"abbr\">（Internet Protocol version 6）</span>の場合：<code>ipv6 route ::/0 2001:db8::1</code>（事前に <code>ipv6 unicast-routing</code> が必要）</p>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "nl31",
+  "d": "d3",
+  "t": "OSPF（シングルエリア）",
+  "s": "ルーターどうしが<b>地図を交換し合って、自動で最短の道を計算する</b>仕組みです。CCNA<span class=\"abbr\">（Cisco Certified Network Associate）</span>で最も重要なルーティングプロトコルです。",
+  "q": ["P32-01", "P32-02", "P32-03", "P32-04", "P32-05", "P32-06"],
+  "cards": ["<p>リンクステート型のルーティングプロトコルで、AD<span class=\"abbr\">（Administrative Distance）</span> 110です。メトリックは<b>コスト</b>です。</p>\n<p>コスト = 参照帯域幅（初期値100Mbps）÷ インターフェースの帯域幅。たとえば10Mbpsなら10、100Mbps以上はすべて1になります。</p>", "<h3>ルーターIDの決め方</h3><ol><li><code>router-id</code> コマンドで手動設定した値</li><li>なければ、ループバックインターフェースの中で最大のIP<span class=\"abbr\">（Internet Protocol）</span></li><li>それもなければ、アクティブな物理インターフェースの中で最大のIP</li></ol>", "<h3>ネイバーになるための条件</h3><p>エリアID<span class=\"abbr\">（Identifier）</span>、Hello/Deadタイマー（ブロードキャスト型のネットワークでは初期値10秒/40秒）、サブネット、認証、MTU<span class=\"abbr\">（Maximum Transmission Unit）</span>が一致していること。ルーターIDは重複していないこと。</p>", "<h3>DR/BDRの選出</h3><p>イーサネットのようなマルチアクセスネットワークで選ばれます。<b>プライオリティが最も高い</b>ルーターがDR<span class=\"abbr\">（Designated Router）</span>になり、同じ値ならルーターIDが大きいほうが選ばれます。プライオリティ0のルーターはDRにもBDR<span class=\"abbr\">（Backup Designated Router）</span>にもなりません。また、あとから優先度の高いルーターが加わってもDRは交代しません（プリエンプトなし）。</p>\n<pre>router ospf 1\n router-id 1.1.1.1\n network 10.1.1.0 0.0.0.255 area 0\n! インターフェースで直接有効にすることもできる\ninterface g0/0\n ip ospf 1 area 0</pre>\n<div class=\"point\">確認コマンド：show ip ospf neighbor ／ show ip ospf interface ／ show ip route ospf</div>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "nl32",
+  "d": "d3",
+  "t": "OSPFのネットワークタイプと状態",
+  "s": "OSPF<span class=\"abbr\">（Open Shortest Path First）</span>のルーターが<b>知り合い（ネイバー）になるまでの段階</b>と、つながり方による違いです。最終的に「FULL（完全に仲良し）」になれば成功です。",
+  "q": ["P33-01", "P33-02", "P33-03", "P33-04", "P33-05", "P33-06"],
+  "cards": ["<table><tr><th>ネットワークタイプ</th><th>DR<span class=\"abbr\">（Designated Router）</span>/BDR</th><th>Hello/Dead</th><th>使われる場所</th></tr><tr><td>broadcast</td><td>あり</td><td>10 / 40秒</td><td>イーサネットの初期値</td></tr><tr><td>point-to-point</td><td><b>なし</b></td><td>10 / 40秒</td><td>シリアル回線の初期値。ルーター2台だけのイーサネットにも設定する</td></tr></table>\n<pre>interface g0/0\n ip ospf network point-to-point</pre>", "<h3>ネイバーの状態</h3><p>Down → Init → <b>2-Way</b> → ExStart → Exchange → Loading → <b>Full</b></p><ul><li>DR/BDRとは<b>Full</b>の状態になる</li><li>DR/BDRではないルーター（DROTHER<span class=\"abbr\">（DR以外のルーター（DR Other））</span>）どうしは<b>2-Way</b>のまま。これは正常な状態</li></ul>", "<h3>その他の設定</h3><ul><li><code>passive-interface g0/1</code>：Helloを送らなくする（そのネットワークの経路は広告し続ける）</li><li><code>default-information originate</code>：デフォルトルートをOSPFで配る</li><li><code>auto-cost reference-bandwidth 10000</code>：参照帯域幅を大きくして、1Gbpsと10Gbpsのコストを区別できるようにする</li><li>マルチキャストアドレス：224.0.0.5（OSPFルーター全部）、224.0.0.6（DR/BDR）</li></ul>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "nl33",
+  "d": "d3",
+  "t": "FHRP（デフォルトゲートウェイの冗長化）",
+  "s": "PC<span class=\"abbr\">（Personal Computer）</span>の出口（デフォルトゲートウェイ）のルーターが壊れても困らないように、<b>2台のルーターで1つの「仮想の出口」を共有する</b>仕組みです。",
+  "q": ["P34-01", "P34-02", "P34-03", "P34-04", "P34-05", "P34-06"],
+  "cards": ["<p>複数のルーターで1つの仮想IP<span class=\"abbr\">（Internet Protocol）</span>を共有し、デフォルトゲートウェイが故障しても通信を続けられるようにする仕組みです。</p><table><tr><td>HSRP<span class=\"abbr\">（Hot Standby Router Protocol）</span></td><td>Cisco独自。アクティブ／スタンバイ構成</td></tr><tr><td>VRRP<span class=\"abbr\">（Virtual Router Redundancy Protocol）</span></td><td>標準規格。マスター／バックアップ構成</td></tr><tr><td>GLBP<span class=\"abbr\">（Gateway Load Balancing Protocol）</span></td><td>Cisco独自。複数のルーターで負荷分散できる</td></tr></table>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "kl6",
+  "d": "d4",
+  "t": "図解：IPサービス",
+  "full": "IPサービス（DHCP・NAT・DNSなど）",
+  "s": "ゴール：ネットワークを便利にする裏方サービス（DHCP<span class=\"abbr\">（Dynamic Host Configuration Protocol）</span>・DNS<span class=\"abbr\">（Domain Name System）</span>・NAT<span class=\"abbr\">（Network Address Translation）</span>・NTP<span class=\"abbr\">（Network Time Protocol）</span>・SNMP<span class=\"abbr\">（Simple Network Management Protocol）</span>・Syslog・QoS<span class=\"abbr\">（Quality of Service）</span>・SSH<span class=\"abbr\">（Secure Shell）</span>）の役割がわかる",
+  "q": ["P36-01", "P36-02", "P35-01", "P35-02", "P37-01", "P37-02"],
+  "rel": [],
+  "kiso": 1,
+  "cards": ["<h3>ネットワークの「裏方さん」たち</h3>\n<table class=\"tb\">\n<tr><th>サービス</th><th>やること</th><th>たとえ</th></tr>\n<tr><td><b>DHCP</b></td><td>PC<span class=\"abbr\">（Personal Computer）</span>にIP<span class=\"abbr\">（Internet Protocol）</span>アドレス・マスク・ゲートウェイ・DNSを<b>自動で配る</b></td><td>部屋番号の受付係</td></tr>\n<tr><td><b>DNS</b></td><td>名前（www.example.com）を<b>IPアドレスに変換</b></td><td>電話帳</td></tr>\n<tr><td><b>NAT</b></td><td>プライベートIPを<b>グローバルIPに変換</b>して外に出す</td><td>会社の代表番号</td></tr>\n<tr><td><b>NTP</b></td><td>機器の<b>時計を合わせる</b></td><td>時報</td></tr>\n<tr><td><b>SNMP</b></td><td>機器の状態を<b>監視</b>する</td><td>健康診断</td></tr>\n<tr><td><b>Syslog</b></td><td>機器の<b>ログ（出来事の記録）</b>を集める</td><td>日記</td></tr>\n<tr><td><b>SSH</b></td><td>機器に<b>暗号化して</b>リモート接続（Telnetは暗号化なし）</td><td>鍵付きの電話</td></tr>\n</table>", "<h3>DHCPの4ステップ「DORA」</h3>\n<p class=\"pt\"><b>D</b>iscover（誰か配って！）→ <b>O</b>ffer（これどう？）→ <b>R</b>equest（それください）→ <b>A</b>ck（どうぞ）</p>\n<ul>\n<li>最初のDiscoverは<b>ブロードキャスト</b>なので、ルーターを越えられない</li>\n<li>DHCPサーバーが別ネットワークにあるときは、ルーターに <b>ip helper-address サーバーのIP</b> を設定（<b>DHCPリレー</b>）</li>\n<li>ルーター自身をクライアントにするなら <code>ip address dhcp</code></li>\n</ul>", "<h3>NATの種類</h3>\n<table class=\"tb\">\n<tr><th>種類</th><th>内容</th></tr>\n<tr><td><b>スタティックNAT</b></td><td>1対1で固定。外から社内サーバーに入ってもらうときに使う</td></tr>\n<tr><td><b>ダイナミックNAT</b></td><td>グローバルIPのプール（束）から空いているものを貸す</td></tr>\n<tr><td><b>PAT<span class=\"abbr\">（Port Address Translation）</span></b>（NATオーバーロード）</td><td><b>1つのグローバルIPを大勢で共有</b>（ポート番号で区別）。家庭のルーターはこれ。設定に <code>overload</code></td></tr>\n</table>\n<table class=\"tb\">\n<tr><th>NAT用語</th><th>意味</th></tr>\n<tr><td><b>inside local</b></td><td>社内PCの<b>本当の（プライベート）</b>アドレス</td></tr>\n<tr><td><b>inside global</b></td><td>社内PCが<b>外から見える（変換後の）</b>アドレス</td></tr>\n<tr><td>outside global</td><td>外のサーバーの本当のアドレス</td></tr>\n</table>\n<p>インターフェースに <code>ip nat inside</code>（社内側）／<code>ip nat outside</code>（外側）を設定します。</p>", "<h3>NTP・Syslog・SNMPの細かい点</h3>\n<ul>\n<li><b>NTPのstratum（階層）</b>：数字が<b>小さいほど正確な時計に近い</b>。ルーターを時計の配り役にするなら <code>ntp master</code></li>\n<li><b>Syslogの重大度</b>：0〜7。<b>数字が小さいほど深刻</b>（0 emergency … 7 debugging）。レベル指定すると<b>その数字以下</b>が全部記録される</li>\n<li>覚え方：「<b>E</b>very <b>A</b>wesome <b>C</b>isco <b>E</b>ngineer <b>W</b>ill <b>N</b>eed <b>I</b>ce-cream <b>D</b>aily」＝emergency, alert, critical, error, warning, notification, informational, debugging</li>\n<li><b>SNMP</b>：マネージャー（監視する側）がエージェント（機器）に Get で質問。機器から異常を知らせるのが <b>Trap</b>（確認応答ありは Inform）。<b>SNMPv3<span class=\"abbr\">（Simple Network Management Protocol version 3）</span></b>は暗号化・認証つきで安全。情報の辞書は<b>MIB<span class=\"abbr\">（Management Information Base）</span></b></li>\n</ul>", "<h3>QoS＝大事な通信を優先する</h3>\n<p>電話や会議の音声は、遅れたり途切れたりすると困ります。<b>QoS</b>は通信に優先順位をつけるしくみです。</p>\n<ul>\n<li><b>分類・マーキング</b>：パケットに優先度の札（<b>DSCP<span class=\"abbr\">（Differentiated Services Code Point）</span></b>。音声は <b>EF<span class=\"abbr\">（Expedited Forwarding）</span></b>）をつける</li>\n<li><b>キューイング</b>：混んだときの並び順。音声は<b>LLQ（優先キュー）</b>で先に出す</li>\n<li><b>ポリシング</b>は上限を超えた分を<b>捨てる</b>、<b>シェーピング</b>は<b>ためて後で送る</b></li>\n<li>音声の目安：遅延150ms以下、ジッター（ゆらぎ）30ms以下、ロス1%以下</li>\n</ul>"]
+ },
+ {
+  "r": "L",
+  "id": "nl34",
+  "d": "d4",
+  "t": "NAT / PAT",
+  "s": "会社の中で使う住所（プライベートIP<span class=\"abbr\">（Internet Protocol）</span>）を、<b>インターネットに出るときだけ会社の代表の住所に付け替える</b>仕組みです。PAT<span class=\"abbr\">（Port Address Translation）</span>は1つの代表住所をみんなで使い回します。",
+  "q": ["P35-01", "P35-02", "P35-03", "P35-04", "P35-05", "P35-06"],
+  "cards": ["<p>プライベートIPアドレスをグローバルIPアドレスに変換する仕組みです。</p><ul><li><b>スタティックNAT<span class=\"abbr\">（Network Address Translation）</span></b>：1対1で固定して変換（公開サーバー向け）</li><li><b>ダイナミックNAT</b>：アドレスプールから順に割り当てる</li><li><b>PAT（NATオーバーロード）</b>：1つのグローバルIPを、ポート番号で区別して多数の端末で共有する</li></ul>\n<table><tr><td>inside local</td><td>内部の端末の本当のアドレス（プライベート）</td></tr><tr><td>inside global</td><td>内部の端末が外から見えるときのアドレス（グローバル）</td></tr><tr><td>outside global</td><td>外部の相手の本当のアドレス</td></tr></table>\n<pre>access-list 1 permit 192.168.1.0 0.0.0.255\nip nat inside source list 1 interface g0/1 overload\ninterface g0/0\n ip nat inside\ninterface g0/1\n ip nat outside</pre>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "nl35",
+  "d": "d4",
+  "t": "DHCP・DNS・NTP",
+  "s": "<b>住所を自動で配る係（DHCP<span class=\"abbr\">（Dynamic Host Configuration Protocol）</span>）</b>、<b>名前を住所に変換する電話帳（DNS<span class=\"abbr\">（Domain Name System）</span>）</b>、<b>みんなの時計を合わせる係（NTP<span class=\"abbr\">（Network Time Protocol）</span>）</b>の3つを学びます。",
+  "q": ["P36-01", "P36-02", "P36-03", "P36-04", "P36-05", "P36-06"],
+  "cards": ["<h3>DHCP（DORA）</h3><p>Discover → Offer → Request → Ack の順にやり取りして、IP<span class=\"abbr\">（Internet Protocol）</span>アドレスを受け取ります。DHCPサーバーが別のネットワークにあるときは、ルーターに <code>ip helper-address サーバーのIP</code> を設定します（DHCPリレー）。</p>", "<h3>DNS</h3><p>名前（例：www.example.com）をIPアドレスに変換します。</p>", "<h3>NTP</h3><p>機器の時刻を合わせるプロトコルです。<b>stratum</b>の値が小さいほど、正確な時刻源に近くなります。<code>ntp server 10.1.1.1</code></p>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "nl36",
+  "d": "d4",
+  "t": "SNMP・Syslog",
+  "s": "ネットワーク機器の<b>健康診断（SNMP<span class=\"abbr\">（Simple Network Management Protocol）</span>）</b>と<b>日記・事件の記録（Syslog）</b>の仕組みです。Syslogは、数字が小さいほど深刻な知らせです。",
+  "q": ["P37-01", "P37-02", "P37-03", "P37-04", "P37-05", "P37-06"],
+  "cards": ["<h3>SNMP</h3><p>機器を監視・管理するプロトコルです。マネージャーがエージェントの情報（MIB<span class=\"abbr\">（Management Information Base）</span>）を取得します。機器から異常を知らせる通知はTrapといいます。認証と暗号化が使えるのは<b>SNMPv3<span class=\"abbr\">（Simple Network Management Protocol version 3）</span></b>だけです。</p>", "<h3>Syslogの重大度レベル</h3><table><tr><td>0</td><td>Emergency（緊急）</td></tr><tr><td>1</td><td>Alert</td></tr><tr><td>2</td><td>Critical</td></tr><tr><td>3</td><td>Error</td></tr><tr><td>4</td><td>Warning</td></tr><tr><td>5</td><td>Notification</td></tr><tr><td>6</td><td>Informational</td></tr><tr><td>7</td><td>Debugging</td></tr></table>\n<div class=\"point\">数字が小さいほど深刻です。覚え方：「Every Awesome Cisco Engineer Will Need Ice cream Daily」</div>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "nl37",
+  "d": "d4",
+  "t": "QoS・SSH・ファイル転送",
+  "s": "<b>大事な通信（電話など）を優先して通す</b>QoS<span class=\"abbr\">（Quality of Service）</span>と、安全なリモート操作（SSH<span class=\"abbr\">（Secure Shell）</span>）、ファイルの送り方（TFTP<span class=\"abbr\">（Trivial File Transfer Protocol）</span>・FTP<span class=\"abbr\">（File Transfer Protocol）</span>）を学びます。",
+  "q": ["P38-01", "P38-02", "P38-03", "P38-04", "P38-05", "P38-06"],
+  "cards": ["<h3>QoS</h3><p>大事な通信（音声など）を優先して流す仕組みです。分類 → マーキング → キューイング／ポリシング・シェーピングの順に処理します。音声のパケットには一般的にDSCP<span class=\"abbr\">（Differentiated Services Code Point）</span>の<b>EF（46）</b>を付けます。</p>", "<h3>SSHの設定</h3><pre>hostname R1\nip domain-name example.com\ncrypto key generate rsa modulus 2048\nusername admin secret P@ss\nline vty 0 4\n login local\n transport input ssh</pre>", "<h3>TFTP / FTP</h3><p>TFTPはUDP<span class=\"abbr\">（User Datagram Protocol）</span>を使う簡単な転送方式で、認証がありません。FTPはTCP<span class=\"abbr\">（Transmission Control Protocol）</span>を使い、ユーザー認証があります。</p>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "nl38",
+  "d": "d4",
+  "t": "QoSのPHB（詳しく）",
+  "s": "道が混んだときに<b>「救急車を先に通す」ための具体的な方法</b>です。印を付けて、優先レーンに並べ、多すぎる分は待たせるか捨てます。",
+  "q": ["P39-01", "P39-02", "P39-03", "P39-04", "P39-05", "P39-06"],
+  "cards": ["<table><tr><td>分類・マーキング</td><td>通信の種類を見分けて印を付ける。L2では<b>CoS<span class=\"abbr\">（Class of Service）</span></b>（802.1Qタグの中の3ビット）、L3では<b>DSCP<span class=\"abbr\">（Differentiated Services Code Point）</span></b>（6ビット）</td></tr><tr><td>キューイング</td><td>混雑しているときの送る順番を決める。<b>LLQ<span class=\"abbr\">（Low Latency Queuing）</span></b>は音声用の完全優先キューと、CBWFQ（帯域を保証するキュー）を組み合わせた方式</td></tr><tr><td>輻輳回避</td><td><b>WRED<span class=\"abbr\">（Weighted Random Early Detection）</span></b>：キューが満杯になる前に、TCP<span class=\"abbr\">（Transmission Control Protocol）</span>のパケットを少しずつ捨てて速度を下げさせる</td></tr><tr><td>ポリシング</td><td>上限を超えた分を<b>破棄</b>（または再マーキング）する。遅延は増えない</td></tr><tr><td>シェーピング</td><td>上限を超えた分を<b>バッファにためて</b>あとで送る。遅延は増える。主に送信側で使う</td></tr></table>\n<ul><li><b>トラストバウンダリ</b>：どこから先のマーキングを信用するかの境目（例：IP<span class=\"abbr\">（Internet Protocol）</span>電話）</li><li>AFxy：xはクラス、yは<b>捨てられやすさ</b>（AF43はAF41より先に捨てられる）</li><li>音声の目安：片道の遅延150ms以下、ジッター30ms以下、パケットロス1%以下</li></ul>", "<h3>NATとDHCPの補足</h3><pre>ip nat inside source static 192.168.1.10 203.0.113.10  ← スタティックNAT\nip nat pool POOL1 203.0.113.20 203.0.113.30 netmask 255.255.255.0\nip nat inside source list 1 pool POOL1              ← ダイナミックNAT\nshow ip nat translations                            ← 変換表を確認\ninterface g0/1\n ip address dhcp                                    ← DHCPクライアントにする\nntp master 3                                        ← 自分がNTPサーバーになる</pre>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "kl7",
+  "d": "d5",
+  "t": "図解：セキュリティ",
+  "full": "セキュリティ（ネットワークを守る）",
+  "s": "ゴール：よくある攻撃、ACL<span class=\"abbr\">（Access Control List）</span>、スイッチの防御機能（ポートセキュリティ・DHCP<span class=\"abbr\">（Dynamic Host Configuration Protocol）</span>スヌーピング・DAI<span class=\"abbr\">（Dynamic ARP Inspection）</span>）、AAA<span class=\"abbr\">（Authentication, Authorization, Accounting）</span>・VPN<span class=\"abbr\">（Virtual Private Network）</span>・無線の暗号化がわかる",
+  "q": ["P43-01", "P43-02", "P44-01", "P44-02", "P40-01", "P40-02"],
+  "rel": [],
+  "kiso": 1,
+  "cards": ["<h3>まず言葉を整理</h3>\n<table class=\"tb\">\n<tr><th>用語</th><th>意味</th></tr>\n<tr><td><b>脆弱性</b></td><td>弱点（鍵のかけ忘れ）</td></tr>\n<tr><td><b>脅威</b></td><td>弱点を狙う可能性のあるもの（泥棒）</td></tr>\n<tr><td><b>エクスプロイト</b></td><td>弱点を実際に突く方法・道具（ピッキング）</td></tr>\n<tr><td><b>緩和策</b></td><td>被害を減らす対策（鍵をかける）</td></tr>\n</table>", "<h3>よく出る攻撃</h3>\n<table class=\"tb\">\n<tr><th>攻撃</th><th>内容</th></tr>\n<tr><td><b>フィッシング</b></td><td>本物そっくりのメールやサイトでパスワードなどをだまし取る。特定の人を狙うのはスピアフィッシング、偉い人を狙うのはホエーリング</td></tr>\n<tr><td><b>DoS<span class=\"abbr\">（Denial of Service）</span> / DDoS<span class=\"abbr\">（Distributed Denial of Service）</span></b></td><td>大量の通信でサービスを止める（DDoSは多数のPC<span class=\"abbr\">（Personal Computer）</span>から）</td></tr>\n<tr><td><b>中間者攻撃</b></td><td>通信の間に割り込んで盗み見・改ざん</td></tr>\n<tr><td><b>スプーフィング</b></td><td>送信元のIP<span class=\"abbr\">（Internet Protocol）</span>やMAC<span class=\"abbr\">（Media Access Control）</span>を偽る</td></tr>\n<tr><td><b>ソーシャルエンジニアリング</b></td><td>人をだまして情報を聞き出す（IT<span class=\"abbr\">（Information Technology）</span>の技術ではない）</td></tr>\n<tr><td><b>ブルートフォース</b></td><td>パスワードを総当たりで試す</td></tr>\n</table>\n<p>対策の基本は、<b>ユーザー教育</b>、強いパスワード（長く・複雑に）、<b>多要素認証（MFA<span class=\"abbr\">（Multi-Factor Authentication）</span>）</b>＝「知っているもの（パスワード）」＋「持っているもの（スマホ）」＋「本人自身（指紋）」の組み合わせです。</p>", "<h3>ACL＝通してよい通信のリスト</h3>\n<p>ルーターに「この通信は通す／止める」というルール（ACE）を並べたものです。</p>\n<table class=\"tb\">\n<tr><th></th><th>標準ACL</th><th>拡張ACL</th></tr>\n<tr><td>番号</td><td>1〜99、1300〜1999</td><td>100〜199、2000〜2699</td></tr>\n<tr><td>見るもの</td><td><b>送信元IPだけ</b></td><td>送信元・宛先IP、プロトコル、<b>ポート番号</b></td></tr>\n<tr><td>置く場所</td><td><b>宛先の近く</b></td><td><b>送信元の近く</b></td></tr>\n</table>\n<ul>\n<li><b>上から順に</b>チェックし、最初に当てはまった行で決定（それ以降は見ない）</li>\n<li>最後には見えない <b>deny any（暗黙の拒否）</b>がある → permit を1つも書かないと全部止まる</li>\n<li>マスクは<b>ワイルドカード</b>（0＝一致必須、255＝何でもよい）。host 10.1.1.1 ＝ 10.1.1.1 0.0.0.0</li>\n<li>インターフェースに <code>ip access-group 番号 in/out</code> で適用</li>\n</ul>", "<h3>スイッチの防御機能</h3>\n<table class=\"tb\">\n<tr><th>機能</th><th>防ぐもの</th></tr>\n<tr><td><b>ポートセキュリティ</b></td><td>知らないPCの接続。ポートに許すMACアドレス数を決める。違反時の動作は <b>shutdown</b>（初期値・ポート停止）／<b>restrict</b>（捨てて記録）／<b>protect</b>（捨てるだけ）。<b>sticky</b>で学習したMACを設定に保存</td></tr>\n<tr><td><b>DHCPスヌーピング</b></td><td>偽のDHCPサーバー。DHCPサーバーがいるポートだけ <b>trusted</b> にする</td></tr>\n<tr><td><b>DAI</b>（ダイナミックARP<span class=\"abbr\">（Address Resolution Protocol）</span>インスペクション）</td><td>偽のARP（ARPスプーフィング）。DHCPスヌーピングの表を使ってチェック</td></tr>\n</table>", "<h3>AAA・VPN・無線の暗号化</h3>\n<ul>\n<li><b>AAA</b>：<b>認証</b>（あなたは誰？）・<b>認可</b>（何をしてよい？）・<b>アカウンティング</b>（何をした？の記録）</li>\n<li>AAAサーバーの方式：<b>TACACS<span class=\"abbr\">（Terminal Access Controller Access-Control System）</span>+</b>（Cisco・TCP<span class=\"abbr\">（Transmission Control Protocol）</span>・<b>全体を暗号化</b>・機器管理向き）／<b>RADIUS<span class=\"abbr\">（Remote Authentication Dial-In User Service）</span></b>（標準・UDP<span class=\"abbr\">（User Datagram Protocol）</span>・パスワードだけ暗号化・ユーザー接続向き）</li>\n<li><b>802.1X</b>：LAN<span class=\"abbr\">（Local Area Network）</span>や無線につなぐ前に認証する。登場人物は サプリカント（PC）→ オーセンティケーター（スイッチ/AP）→ 認証サーバー（RADIUS）</li>\n<li><b>VPN</b>：インターネット上に暗号化したトンネルを作る。拠点同士は<b>サイト間VPN（IPsec<span class=\"abbr\">（IP Security）</span>）</b>、社員の在宅勤務は<b>リモートアクセスVPN</b>（AnyConnectなど）</li>\n<li>無線の暗号化：<b>WPA2<span class=\"abbr\">（Wi-Fi Protected Access 2）</span></b>はAES<span class=\"abbr\">（Advanced Encryption Standard）</span>、<b>WPA3<span class=\"abbr\">（Wi-Fi Protected Access 3）</span></b>はさらに強い（<b>SAE<span class=\"abbr\">（Simultaneous Authentication of Equals）</span></b>で総当たりに強い）。PSK（共有パスワード）方式＝パーソナル、802.1X方式＝エンタープライズ</li>\n</ul>"]
+ },
+ {
+  "r": "L",
+  "id": "nl39",
+  "d": "d5",
+  "t": "セキュリティの基本用語",
+  "s": "攻撃の種類と、守るための考え方の基本です。<b>弱点（脆弱性）・それを突く手口（エクスプロイト）・その危険（脅威）</b>を区別しましょう。",
+  "q": ["P40-01", "P40-02", "P40-03", "P40-04", "P40-05", "P40-06"],
+  "cards": ["<ul><li><b>CIA<span class=\"abbr\">（Confidentiality, Integrity, Availability）</span></b>：機密性（Confidentiality）、完全性（Integrity）、可用性（Availability）</li><li>脅威の例：フィッシング、DoS<span class=\"abbr\">（Denial of Service）</span>/DDoS、中間者攻撃（MITM<span class=\"abbr\">（Man-in-the-Middle）</span>）、マルウェア、ソーシャルエンジニアリング</li><li><b>脆弱性</b>＝弱点、<b>エクスプロイト</b>＝弱点を突く手段、<b>脅威</b>＝それを悪用される可能性</li><li>対策：利用者教育、多要素認証（MFA<span class=\"abbr\">（Multi-Factor Authentication）</span>）、物理的なアクセス制御</li></ul>", "<h3>AAA</h3><p>認証（Authentication）、認可（Authorization）、アカウンティング（Accounting）の3つです。</p><table><tr><th></th><th>RADIUS<span class=\"abbr\">（Remote Authentication Dial-In User Service）</span></th><th>TACACS<span class=\"abbr\">（Terminal Access Controller Access-Control System）</span>+</th></tr><tr><td>規格</td><td>標準</td><td>Cisco独自</td></tr><tr><td>通信</td><td>UDP<span class=\"abbr\">（User Datagram Protocol）</span></td><td>TCP<span class=\"abbr\">（Transmission Control Protocol）</span> 49</td></tr><tr><td>暗号化</td><td>パスワードだけ</td><td>パケット全体</td></tr></table>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "nl40",
+  "d": "d5",
+  "t": "パスワードと機器の保護",
+  "s": "ネットワーク機器に<b>他人が勝手にログインできないようにする</b>設定です。パスワードは「secret」で、元に戻せない形（ハッシュ）で保存します。",
+  "q": ["P41-01", "P41-02", "P41-03", "P41-04", "P41-05"],
+  "cards": ["<pre>enable secret Str0ng!        ← ハッシュ化して保存（推奨）\nservice password-encryption   ← 平文のパスワードを弱く暗号化\nline console 0\n password cisco\n login\nbanner motd #Authorized only#</pre><p><code>enable password</code> と <code>enable secret</code> が両方設定されているときは、<b>secretが優先</b>されます。</p>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "nl41",
+  "d": "d5",
+  "t": "パスワードポリシーとIPsec",
+  "s": "<b>パスワードを強くするルール</b>と、パスワードに加えてスマホなども使う<b>多要素認証</b>、そしてインターネット上に<b>暗号化した専用の通り道</b>を作るIPsec<span class=\"abbr\">（IP Security）</span>を学びます。",
+  "q": ["P42-01", "P42-02", "P42-03", "P42-04", "P42-05", "P42-06"],
+  "cards": ["<h3>パスワードポリシー</h3><ul><li>長さ・複雑さ・有効期限・再利用の禁止を決める</li><li><b>多要素認証（MFA<span class=\"abbr\">（Multi-Factor Authentication）</span>）</b>：知識（パスワード）、所持（スマホやトークン）、生体（指紋や顔）のうち、<b>違う種類</b>を2つ以上組み合わせる</li><li><b>証明書</b>：PKI<span class=\"abbr\">（Public Key Infrastructure）</span>のデジタル証明書で、本人であることを確かめる</li></ul>\n<pre>security passwords min-length 10           ← パスワードの最低文字数\nlogin block-for 120 attempts 3 within 60   ← 60秒以内に3回失敗したら120秒ログイン禁止\nenable algorithm-type scrypt secret Pa55!  ← type 9（scrypt）で保存</pre>\n<p>パスワードの保存形式：type 7は簡単に元に戻せる（service password-encryption）、type 5はMD5<span class=\"abbr\">（Message Digest 5）</span>、type 8と9はより強い方式です。</p>", "<h3>IPsec</h3><ul><li><b>ESP<span class=\"abbr\">（Encapsulating Security Payload）</span></b>：暗号化と認証の両方ができる（よく使われる）</li><li><b>AH<span class=\"abbr\">（Authentication Header）</span></b>：認証だけで、暗号化はしない</li><li>サイト間VPN<span class=\"abbr\">（Virtual Private Network）</span>：拠点のルーターやファイアウォールどうしでトンネルを作る。利用者はVPNを意識しない</li><li>リモートアクセスVPN：PC<span class=\"abbr\">（Personal Computer）</span>にVPNクライアント（Cisco Secure Clientなど）を入れて接続する</li></ul>", "<h3>WPAの違い</h3><table><tr><td>WPA<span class=\"abbr\">（Wi-Fi Protected Access）</span></td><td>TKIP（古い）</td></tr><tr><td>WPA2<span class=\"abbr\">（Wi-Fi Protected Access 2）</span></td><td>AES-CCMP</td></tr><tr><td>WPA3<span class=\"abbr\">（Wi-Fi Protected Access 3）</span></td><td>SAE<span class=\"abbr\">（Simultaneous Authentication of Equals）</span>、GCMP<span class=\"abbr\">（Galois/Counter Mode Protocol）</span>、PMF（管理フレームの保護）が必須</td></tr></table><p>Enterpriseモードでは、<b>802.1X／EAP<span class=\"abbr\">（Extensible Authentication Protocol）</span></b>を使い、RADIUS<span class=\"abbr\">（Remote Authentication Dial-In User Service）</span>サーバーで利用者ごとに認証します。</p>", "<h3>ACLの補足</h3><pre>ip access-list extended BLOCK-TELNET\n deny tcp 10.1.1.0 0.0.0.255 host 10.2.2.10 eq 23\n permit ip any any</pre><p>ACL<span class=\"abbr\">（Access Control List）</span>は「インターフェースごと・向き（in/out）ごと・プロトコルごとに1つ」しか適用できません。</p>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "nl42",
+  "d": "d5",
+  "t": "ACL（アクセスコントロールリスト）",
+  "s": "ルーターに置く<b>「通してよい人・だめな人のリスト」</b>です。上から順にチェックして、最初に当てはまった行で決まり、どれにも当てはまらなければ通しません。",
+  "q": ["P43-01", "P43-02", "P43-03", "P43-04", "P43-05", "P43-06"],
+  "cards": ["<table><tr><th></th><th>標準ACL<span class=\"abbr\">（Access Control List）</span></th><th>拡張ACL</th></tr><tr><td>番号</td><td>1〜99</td><td>100〜199</td></tr><tr><td>チェックする項目</td><td>送信元IP<span class=\"abbr\">（Internet Protocol）</span>だけ</td><td>送信元・宛先・プロトコル・ポート</td></tr><tr><td>置く場所</td><td>宛先の近く</td><td>送信元の近く</td></tr></table>\n<ul><li>上から順に照合し、最初に一致したルールが適用される</li><li>最後には目に見えない<b>暗黙のdeny any</b>がある</li><li><b>ワイルドカードマスク</b>：0のビットは一致が必要、1のビットは無視。/24なら 0.0.0.255（＝255からサブネットマスクを引いた値）</li></ul>\n<pre>access-list 110 permit tcp 192.168.1.0 0.0.0.255 any eq 443\naccess-list 110 deny ip any any\ninterface g0/0\n ip access-group 110 in</pre>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "nl43",
+  "d": "d5",
+  "t": "L2セキュリティ",
+  "s": "スイッチのポートで<b>「知らない機器をつながせない」「偽物のDHCP<span class=\"abbr\">（Dynamic Host Configuration Protocol）</span>サーバーやなりすましを止める」</b>機能です。",
+  "q": ["P44-01", "P44-02", "P44-03", "P44-04", "P44-05", "P44-06"],
+  "cards": ["<ul><li><b>ポートセキュリティ</b>：ポートで許可するMAC<span class=\"abbr\">（Media Access Control）</span>アドレスの数を制限する。違反時の動作は protect／restrict／<b>shutdown（初期値）</b>。sticky を使うと、学習したMACアドレスを設定に保存できる</li><li><b>DHCPスヌーピング</b>：信頼しないポートから届くDHCPサーバーの応答を遮断し、偽のDHCPサーバーを防ぐ</li><li><b>DAI（ダイナミックARP<span class=\"abbr\">（Address Resolution Protocol）</span>インスペクション）</b>：DHCPスヌーピングで作ったバインディングテーブルを使って、偽のARPを遮断する</li></ul>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "nl44",
+  "d": "d5",
+  "t": "VPN・無線LANのセキュリティ",
+  "s": "離れた場所から<b>安全に会社のネットワークに入る方法（VPN<span class=\"abbr\">（Virtual Private Network）</span>）</b>と、<b>Wi-Fiの鍵のかけ方（WPA2<span class=\"abbr\">（Wi-Fi Protected Access 2）</span>・WPA3<span class=\"abbr\">（Wi-Fi Protected Access 3）</span>）</b>です。",
+  "q": ["P45-01", "P45-02", "P45-03", "P45-04", "P45-05", "P45-06"],
+  "cards": ["<ul><li><b>サイト間VPN</b>：拠点どうしをIPsec<span class=\"abbr\">（IP Security）</span>でつなぐ</li><li><b>リモートアクセスVPN</b>：個人の端末から社内につなぐ（TLS<span class=\"abbr\">（Transport Layer Security）</span>やIPsec）</li></ul>\n<table><tr><td>WPA2</td><td>AES（CCMP<span class=\"abbr\">（Counter Mode CBC-MAC Protocol）</span>）で暗号化。Personalは事前共有キー（PSK<span class=\"abbr\">（Pre-Shared Key）</span>）、Enterpriseは802.1X/RADIUSで認証</td></tr><tr><td>WPA3</td><td>Personalでは<b>SAE<span class=\"abbr\">（Simultaneous Authentication of Equals）</span></b>を使い、辞書攻撃に強い</td></tr></table><p>WEP<span class=\"abbr\">（Wired Equivalent Privacy）</span>は脆弱なので使いません。</p>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "kl9",
+  "d": "d6",
+  "t": "図解：自動化・SDN・クラウド",
+  "full": "自動化・SDN・クラウド",
+  "s": "ゴール：コントロールプレーン/データプレーン、SDN<span class=\"abbr\">（Software-Defined Networking）</span>、REST<span class=\"abbr\">（Representational State Transfer）</span> API<span class=\"abbr\">（Application Programming Interface）</span>とJSON<span class=\"abbr\">（JavaScript Object Notation）</span>、Ansibleなどの構成管理ツール、仮想化・クラウドの基本がわかる",
+  "q": ["P46-01", "P46-02", "P48-01", "P48-02", "P50-01", "P19-01"],
+  "rel": [],
+  "kiso": 1,
+  "cards": ["<h3>機器の仕事は3つの「プレーン（層）」</h3>\n<table class=\"tb\">\n<tr><th>プレーン</th><th>仕事</th><th>たとえ</th></tr>\n<tr><td><b>データプレーン</b></td><td>パケットを実際に<b>転送</b>する</td><td>手足</td></tr>\n<tr><td><b>コントロールプレーン</b></td><td>どこへ送るか<b>決める</b>（OSPF<span class=\"abbr\">（Open Shortest Path First）</span>・STP<span class=\"abbr\">（Spanning Tree Protocol）</span>など）</td><td>頭脳</td></tr>\n<tr><td><b>管理プレーン</b></td><td>機器を<b>管理</b>する（SSH<span class=\"abbr\">（Secure Shell）</span>・SNMP<span class=\"abbr\">（Simple Network Management Protocol）</span>など）</td><td>管理人</td></tr>\n</table>", "<h3>SDN＝頭脳を1か所に集める</h3>\n<p>昔は機器1台1台が自分で考え、人が1台ずつ設定していました。<b>SDN</b>では<b>コントローラー</b>が頭脳（コントロールプレーン）をまとめて持ち、各機器は転送に集中します。</p>\n<table class=\"tb\">\n<tr><th>API（窓口）</th><th>向き</th><th>つなぐ相手</th></tr>\n<tr><td><b>ノースバウンドAPI</b></td><td>上向き</td><td>コントローラー ⇔ <b>アプリ・管理者</b>（REST APIが多い）</td></tr>\n<tr><td><b>サウスバウンドAPI</b></td><td>下向き</td><td>コントローラー ⇔ <b>ネットワーク機器</b>（OpenFlow、NETCONF<span class=\"abbr\">（Network Configuration Protocol）</span>など）</td></tr>\n</table>\n<ul>\n<li><b>Cisco DNA<span class=\"abbr\">（Digital Network Architecture）</span> Center（Catalyst Center）</b>：Ciscoの企業向けSDNコントローラー。画面から一括設定・分析ができる</li>\n<li><b>アンダーレイ</b>＝実際の物理ネットワーク、<b>オーバーレイ</b>＝その上に作る仮想のネットワーク（トンネル）、<b>ファブリック</b>＝全体の網</li>\n<li>メリット：設定ミスが減る、一括で変更できる、早い。「インテントベース」＝やりたいこと（意図）を伝えると自動で設定してくれる</li>\n</ul>", "<h3>REST API＝プログラムからの注文窓口</h3>\n<p>Webと同じHTTP<span class=\"abbr\">（Hypertext Transfer Protocol）</span>を使って、プログラムから機器やコントローラーを操作します。</p>\n<table class=\"tb\">\n<tr><th>HTTPメソッド</th><th>CRUD<span class=\"abbr\">（Create, Read, Update, Delete）</span></th><th>意味</th></tr>\n<tr><td><b>POST</b></td><td>Create</td><td>新しく作る</td></tr>\n<tr><td><b>GET</b></td><td>Read</td><td>読む（取得）</td></tr>\n<tr><td><b>PUT / PATCH</b></td><td>Update</td><td>変更する（PUTは丸ごと置き換え、PATCHは一部）</td></tr>\n<tr><td><b>DELETE</b></td><td>Delete</td><td>消す</td></tr>\n</table>\n<p>返事の番号（ステータスコード）：<b>200</b> OK／<b>201</b> 作成できた／<b>400</b> リクエストが変／<b>401</b> 認証されてない／<b>403</b> 権限なし／<b>404</b> 見つからない／<b>500</b> サーバーのエラー</p>", "<h3>JSON＝データの書き方</h3>\n<pre style=\"font-size:12px;background:var(--bg);padding:8px;border-radius:8px;overflow:auto\">{\n  \"hostname\": \"R1\",\n  \"interfaces\": [\"Gi0/0\", \"Gi0/1\"],\n  \"enabled\": true,\n  \"vlan\": 10\n}</pre>\n<ul>\n<li><b>{ }</b> はオブジェクト（\"キー\": 値 の組の集まり）、<b>[ ]</b> は配列（リスト）</li>\n<li>キーは必ず<b>ダブルクォート</b>で囲む。組と組の間は<b>カンマ</b>（最後の後ろには付けない）</li>\n<li>値の種類：文字列（\"R1\"）・数値（10）・true/false・null・オブジェクト・配列</li>\n</ul>\n<p>ほかのデータ形式：<b>XML<span class=\"abbr\">（Extensible Markup Language）</span></b>（&lt;タグ&gt;で囲む）、<b>YAML<span class=\"abbr\">（YAML Ain't Markup Language）</span></b>（インデントで表す。Ansibleで使う）。</p>", "<h3>構成管理ツール＝設定を自動で配る</h3>\n<table class=\"tb\">\n<tr><th>ツール</th><th>エージェント</th><th>方式</th><th>書き方</th></tr>\n<tr><td><b>Ansible</b></td><td><b>不要</b>（SSHで接続）</td><td><b>プッシュ</b>（送り込む）</td><td>YAML（プレイブック）</td></tr>\n<tr><td><b>Puppet</b></td><td>必要</td><td>プル（取りに来る）</td><td>独自言語（マニフェスト）</td></tr>\n<tr><td><b>Chef</b></td><td>必要</td><td>プル</td><td>Ruby（レシピ・クックブック）</td></tr>\n</table>\n<p class=\"pt\">💡 「エージェント不要・プッシュ・YAML」＝<b>Ansible</b> と覚えればほぼ解ける。</p>", "<h3>仮想化とクラウド</h3>\n<ul>\n<li><b>ハイパーバイザー</b>：1台の物理サーバーで複数の<b>仮想マシン（VM<span class=\"abbr\">（Virtual Machine）</span>）</b>を動かすソフト。タイプ1は直接ハードの上（VMware ESXiなど）、タイプ2はOS<span class=\"abbr\">（Operating System）</span>の上（VirtualBoxなど）</li>\n<li><b>コンテナ</b>：OSを共有する軽い仮想化（Dockerなど）。VMより起動が速く軽い</li>\n<li><b>VRF<span class=\"abbr\">（Virtual Routing and Forwarding）</span></b>：1台のルーターの中でルーティングテーブルを複数に分ける</li>\n<li>クラウドの形：<b>IaaS<span class=\"abbr\">（Infrastructure as a Service）</span></b>（サーバーなど土台を借りる）／<b>PaaS<span class=\"abbr\">（Platform as a Service）</span></b>（開発環境まで借りる）／<b>SaaS<span class=\"abbr\">（Software as a Service）</span></b>（完成したアプリを使う。Gmailなど）</li>\n<li>置き場所：パブリック（誰でも）／プライベート（自社専用）／ハイブリッド（組み合わせ）</li>\n</ul>"]
+ },
+ {
+  "r": "L",
+  "id": "nl45",
+  "d": "d6",
+  "t": "コントローラーとSDN",
+  "s": "ネットワーク機器を1台ずつ設定するのではなく、<b>司令塔（コントローラー）からまとめて操る</b>考え方です。",
+  "q": ["P46-01", "P46-02", "P46-03", "P46-04", "P46-05", "P46-06"],
+  "cards": ["<p>ネットワーク機器の働きは3つのプレーンに分けられます。</p><ul><li><b>データプレーン</b>：実際にパケットを転送する</li><li><b>コントロールプレーン</b>：経路を決める（OSPF<span class=\"abbr\">（Open Shortest Path First）</span>、STP<span class=\"abbr\">（Spanning Tree Protocol）</span>など）</li><li><b>管理プレーン</b>：機器を管理する（SSH<span class=\"abbr\">（Secure Shell）</span>、SNMP<span class=\"abbr\">（Simple Network Management Protocol）</span>など）</li></ul>\n<p>SDN<span class=\"abbr\">（Software-Defined Networking）</span>ではコントロールプレーンをコントローラーに集めます。</p><ul><li><b>ノースバウンドAPI<span class=\"abbr\">（Application Programming Interface）</span></b>：コントローラーとアプリケーションの間（REST<span class=\"abbr\">（Representational State Transfer）</span> APIなど）</li><li><b>サウスバウンドAPI</b>：コントローラーと機器の間（NETCONF<span class=\"abbr\">（Network Configuration Protocol）</span>、OpenFlowなど）</li></ul><p>Cisco DNA<span class=\"abbr\">（Digital Network Architecture）</span> Center（Catalyst Center）は、コントローラー型の管理の代表例です。従来の方法は機器を1台ずつ設定するのに対して、コントローラー型ではまとめて自動で設定できます。</p>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "nl46",
+  "d": "d6",
+  "t": "アンダーレイ・オーバーレイ・ファブリック",
+  "s": "<b>実際の道路（アンダーレイ）</b>の上に、<b>トンネルで作った見えない専用道路（オーバーレイ）</b>を重ねる考え方です。",
+  "q": ["P47-01", "P47-02", "P47-03", "P47-04", "P47-05"],
+  "cards": ["<ul><li><b>アンダーレイ</b>：実際の物理ネットワーク（スイッチ、ケーブル、IP<span class=\"abbr\">（Internet Protocol）</span>ルーティング）</li><li><b>オーバーレイ</b>：アンダーレイの上に、トンネル（VXLAN<span class=\"abbr\">（Virtual Extensible LAN）</span>など）で作る仮想的なネットワーク</li><li><b>ファブリック</b>：アンダーレイとオーバーレイを合わせた全体</li></ul>\n<p>例：Cisco SD-Access<span class=\"abbr\">（Software-Defined Access）</span> では、コントローラーにCatalyst Center（旧DNA<span class=\"abbr\">（Digital Network Architecture）</span> Center）を使います。オーバーレイのデータの運搬にはVXLAN、制御にはLISP<span class=\"abbr\">（Locator/ID Separation Protocol）</span>を使います。</p>", "<h3>自動化で変わること</h3><p>手作業による設定ミスが減り、多くの機器を同じ設定に保てます。変更も速くなり、記録も残せます。</p>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "nl47",
+  "d": "d6",
+  "t": "REST APIとJSON",
+  "s": "プログラムがネットワーク機器やコントローラーと<b>Webの仕組みで会話する方法（REST<span class=\"abbr\">（Representational State Transfer）</span> API<span class=\"abbr\">（Application Programming Interface）</span>）</b>と、そのときに使う<b>データの書き方（JSON<span class=\"abbr\">（JavaScript Object Notation）</span>）</b>です。",
+  "q": ["P48-01", "P48-02", "P48-03", "P48-04", "P48-05", "P48-06"],
+  "cards": ["<table><tr><th>操作（CRUD<span class=\"abbr\">（Create, Read, Update, Delete）</span>）</th><th>HTTP<span class=\"abbr\">（Hypertext Transfer Protocol）</span>メソッド</th></tr><tr><td>Create（作成）</td><td>POST</td></tr><tr><td>Read（読み取り）</td><td>GET</td></tr><tr><td>Update（更新）</td><td>PUT / PATCH</td></tr><tr><td>Delete（削除）</td><td>DELETE</td></tr></table>\n<p>ステータスコード：200 OK、201 Created、400 Bad Request、401 Unauthorized（未認証）、403 Forbidden（権限なし）、404 Not Found、500 サーバーエラー</p>", "<h3>JSON</h3><pre>{\n  \"hostname\": \"R1\",\n  \"interfaces\": [\"G0/0\", \"G0/1\"],\n  \"enabled\": true,\n  \"vlan\": 10\n}</pre><p>キーは必ず<b>ダブルクォート</b>で囲みます。{ }はオブジェクト、[ ]は配列です。</p>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "nl48",
+  "d": "d6",
+  "t": "REST APIの特徴と認証",
+  "s": "REST<span class=\"abbr\">（Representational State Transfer）</span> API<span class=\"abbr\">（Application Programming Interface）</span>で<b>「あなたは誰？」を確かめる方法</b>と、返ってくる番号（ステータスコード）の意味を学びます。",
+  "q": ["P49-01", "P49-02", "P49-03", "P49-04", "P49-05", "P49-06"],
+  "cards": ["<ul><li><b>ステートレス</b>：サーバーは前回のやり取りを覚えていない。毎回のリクエストに必要な情報（認証など）を全部含める</li><li>クライアントとサーバーに分かれ、URI（URL<span class=\"abbr\">（Uniform Resource Locator）</span>）でリソースを指定する</li><li>データの形式：<b>JSON<span class=\"abbr\">（JavaScript Object Notation）</span></b>、XML<span class=\"abbr\">（Extensible Markup Language）</span>、YAML<span class=\"abbr\">（YAML Ain't Markup Language）</span></li></ul>", "<h3>認証の方式</h3><table><tr><td>Basic認証</td><td>「ユーザー名:パスワード」をBase64にしてヘッダーに入れる。<b>暗号化ではない</b>ので、HTTPS<span class=\"abbr\">（Hypertext Transfer Protocol Secure）</span>と一緒に使う</td></tr><tr><td>トークン（Bearer）</td><td>最初にもらったトークンを <code>Authorization: Bearer …</code> に入れて送る</td></tr><tr><td>APIキー</td><td>発行されたキーをヘッダーなどに入れる</td></tr><tr><td>OAuth</td><td>パスワードを渡さずに、ほかのサービスに権限を与える</td></tr></table>\n<p>401は「認証されていない」、403は「認証はされたが権限がない」です。</p>"],
+  "rel": []
+ },
+ {
+  "r": "L",
+  "id": "nl49",
+  "d": "d6",
+  "t": "構成管理ツール（Ansible・Terraform）・AI",
+  "s": "たくさんの機器の設定を、<b>手順書やあるべき姿をファイルに書いて自動で適用する</b>ツールと、ネットワーク運用でのAI<span class=\"abbr\">（Artificial Intelligence）</span>の使い方を学びます。",
+  "q": ["P50-01", "P50-02", "P50-03", "P50-04", "P50-05", "P50-06"],
+  "cards": ["<p>v1.1の出題範囲で名前が挙がっているツールは<b>AnsibleとTerraform</b>です（古い教材に載っているPuppetとChefは、範囲から外れました）。</p>\n<table><tr><th></th><th>Ansible</th><th>Terraform</th></tr><tr><td>開発元</td><td>Red Hat</td><td>HashiCorp</td></tr><tr><td>エージェント</td><td><b>不要</b></td><td><b>不要</b></td></tr><tr><td>書き方</td><td>プレイブック（YAML<span class=\"abbr\">（YAML Ain't Markup Language）</span>）</td><td>HCL（HashiCorp Configuration Language）</td></tr><tr><td>動き方</td><td>SSH<span class=\"abbr\">（Secure Shell）</span>などで機器に接続し、タスクを順に実行する（プッシュ型）</td><td>「あるべき状態」を書いておくと、API<span class=\"abbr\">（Application Programming Interface）</span>を使ってその状態に合わせる（<b>宣言型</b>のIaC<span class=\"abbr\">（Infrastructure as Code）</span>）</td></tr><tr><td>得意なこと</td><td>機器の設定変更、手順の自動化</td><td>インフラの構築・変更。現在の状態を状態ファイル（state）で管理する</td></tr><tr><td>主なコマンド</td><td>ansible-playbook</td><td>terraform plan（変更内容の確認）→ terraform apply（適用）</td></tr></table>\n<p>Ansibleでは、操作する機器の一覧を<b>インベントリ</b>に書きます。</p>", "<h3>AI・機械学習（v1.1で追加）</h3><ul><li><b>予測AI</b>：過去のデータから異常の検知や故障の予測をする</li><li><b>生成AI</b>：文章や設定の例などを作る（例：運用を助けるアシスタント）</li></ul><p>クラウドでネットワークを管理する方式（Merakiなど）も出題範囲に含まれます。</p>"],
+  "rel": []
+ }
+]

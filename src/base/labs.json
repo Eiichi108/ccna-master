@@ -1,0 +1,177 @@
+[
+ {
+  "r": "B",
+  "id": "L1",
+  "t": "ルーターの初期設定",
+  "g": "新しいルーターを使える状態にします。\n・ホスト名 R1\n・特権パスワード（ハッシュ化）Cisco123\n・G0/0 に 192.168.1.1/24 を設定して有効にする\n・最後に設定を保存する",
+  "e": "ルーターの初期設定の基本の流れです。end（またはCtrl+Z）で、どのモードからでも特権EXECモードに戻れます。",
+  "s": [
+   {"p": "Router>", "re": "^en(able)?$", "ans": "enable", "h": "特権EXECモードに入る"},
+   {"p": "Router#", "re": "^conf\\w* t\\w*$", "ans": "configure terminal", "h": "設定モードに入る"},
+   {"p": "Router(config)#", "re": "^hostname r1$", "ans": "hostname R1", "h": "ホスト名をR1にする"},
+   {"p": "R1(config)#", "re": "^enable secret cisco123$", "ans": "enable secret Cisco123", "h": "特権パスワードを設定する"},
+   {"p": "R1(config)#", "re": "^int\\w* g0\\/0$", "ans": "interface g0/0", "h": "G0/0の設定に入る"},
+   {"p": "R1(config-if)#", "re": "^ip add\\w* 192\\.168\\.1\\.1 255\\.255\\.255\\.0$", "ans": "ip address 192.168.1.1 255.255.255.0", "h": "IPアドレスを設定する"},
+   {"p": "R1(config-if)#", "re": "^no shut(d\\w*)?$", "ans": "no shutdown", "h": "インターフェースを有効にする"},
+   {"p": "R1(config-if)#", "re": "^end$", "ans": "end", "h": "特権EXECモードに戻る"},
+   {"p": "R1#", "re": "^(copy run\\S* start\\S*|wr(ite)?( mem\\w*)?)$", "ans": "copy running-config startup-config", "h": "設定を保存する"}
+  ]
+ },
+ {
+  "r": "B",
+  "id": "L2",
+  "t": "VLANとトランクの設定",
+  "g": "SW1に次の設定をします。\n・VLAN 10（名前 SALES）とVLAN 20（名前 ENG）を作る\n・Gi0/1をVLAN 10のアクセスポートにする\n・Gi0/24をトランクにして、VLAN 10と20だけを通す",
+  "e": "確認は show vlan brief と show interfaces trunk で行います。",
+  "s": [
+   {"p": "SW1(config)#", "re": "^vlan 10$", "ans": "vlan 10", "h": "VLAN 10を作る"},
+   {"p": "SW1(config-vlan)#", "re": "^name sales$", "ans": "name SALES", "h": "名前を付ける"},
+   {"p": "SW1(config-vlan)#", "re": "^vlan 20$", "ans": "vlan 20", "h": "VLAN 20を作る"},
+   {"p": "SW1(config-vlan)#", "re": "^name eng$", "ans": "name ENG", "h": "名前を付ける"},
+   {"p": "SW1(config-vlan)#", "re": "^int\\w* g0\\/1$", "ans": "interface g0/1", "h": "Gi0/1の設定に入る"},
+   {"p": "SW1(config-if)#", "re": "^sw\\w* mode acc\\w*$", "ans": "switchport mode access", "h": "アクセスポートにする"},
+   {"p": "SW1(config-if)#", "re": "^sw\\w* acc\\w* vlan 10$", "ans": "switchport access vlan 10", "h": "VLAN 10に所属させる"},
+   {"p": "SW1(config-if)#", "re": "^int\\w* g0\\/24$", "ans": "interface g0/24", "h": "Gi0/24の設定に入る"},
+   {"p": "SW1(config-if)#", "re": "^sw\\w* mode trunk$", "ans": "switchport mode trunk", "h": "トランクにする"},
+   {"p": "SW1(config-if)#", "re": "^sw\\w* trunk allowed vlan 10,20$", "ans": "switchport trunk allowed vlan 10,20", "h": "通すVLANを10と20に限定する"}
+  ]
+ },
+ {
+  "r": "B",
+  "id": "L3",
+  "t": "ルーターオンアスティック",
+  "g": "R1のG0/0（SW1のトランクにつながっている）で、VLAN 10と20のゲートウェイを作ります。\n・VLAN 10：192.168.10.1/24\n・VLAN 20：192.168.20.1/24",
+  "e": "サブインターフェースは、物理インターフェースがupしていないと使えません。encapsulation は IPアドレスより先に設定します。",
+  "s": [
+   {"p": "R1(config)#", "re": "^int\\w* g0\\/0$", "ans": "interface g0/0", "h": "物理インターフェースに入る"},
+   {"p": "R1(config-if)#", "re": "^no shut(d\\w*)?$", "ans": "no shutdown", "h": "物理インターフェースを有効にする"},
+   {"p": "R1(config-if)#", "re": "^int\\w* g0\\/0\\.10$", "ans": "interface g0/0.10", "h": "VLAN 10用のサブインターフェースを作る"},
+   {"p": "R1(config-subif)#", "re": "^enc\\w* dot1q 10$", "ans": "encapsulation dot1Q 10", "h": "VLAN 10のタグを扱う"},
+   {"p": "R1(config-subif)#", "re": "^ip add\\w* 192\\.168\\.10\\.1 255\\.255\\.255\\.0$", "ans": "ip address 192.168.10.1 255.255.255.0", "h": "ゲートウェイのIPを設定する"},
+   {"p": "R1(config-subif)#", "re": "^int\\w* g0\\/0\\.20$", "ans": "interface g0/0.20", "h": "VLAN 20用のサブインターフェースを作る"},
+   {"p": "R1(config-subif)#", "re": "^enc\\w* dot1q 20$", "ans": "encapsulation dot1Q 20", "h": "VLAN 20のタグを扱う"},
+   {"p": "R1(config-subif)#", "re": "^ip add\\w* 192\\.168\\.20\\.1 255\\.255\\.255\\.0$", "ans": "ip address 192.168.20.1 255.255.255.0", "h": "ゲートウェイのIPを設定する"}
+  ]
+ },
+ {
+  "r": "B",
+  "id": "L4",
+  "t": "OSPFの設定",
+  "g": "R1でOSPFを設定します。\n・プロセスID 1、ルーターID 1.1.1.1\n・10.0.0.0/30（R2との間）と192.168.1.0/24（LAN）をエリア0に入れる\n・LAN側のG0/1にはHelloを送らない",
+  "e": "/30のワイルドカードマスクは 0.0.0.3 です。ネイバーがFULLになっていれば成功です。",
+  "s": [
+   {"p": "R1(config)#", "re": "^router ospf 1$", "ans": "router ospf 1", "h": "OSPFを開始する"},
+   {"p": "R1(config-router)#", "re": "^router-id 1\\.1\\.1\\.1$", "ans": "router-id 1.1.1.1", "h": "ルーターIDを設定する"},
+   {"p": "R1(config-router)#", "re": "^net\\w* 10\\.0\\.0\\.0 0\\.0\\.0\\.3 area 0$", "ans": "network 10.0.0.0 0.0.0.3 area 0", "h": "/30のネットワークをエリア0に入れる"},
+   {"p": "R1(config-router)#", "re": "^net\\w* 192\\.168\\.1\\.0 0\\.0\\.0\\.255 area 0$", "ans": "network 192.168.1.0 0.0.0.255 area 0", "h": "LANをエリア0に入れる"},
+   {"p": "R1(config-router)#", "re": "^passive-int\\w* g0\\/1$", "ans": "passive-interface g0/1", "h": "LAN側でHelloを送らないようにする"},
+   {"p": "R1(config-router)#", "re": "^end$", "ans": "end", "h": "特権EXECモードに戻る"},
+   {"p": "R1#", "re": "^sh\\w* ip ospf nei\\w*$", "ans": "show ip ospf neighbor", "h": "ネイバーを確認する"}
+  ]
+ },
+ {
+  "r": "B",
+  "id": "L5",
+  "t": "PATの設定",
+  "g": "LAN（192.168.1.0/24、G0/0側）の端末が、G0/1のアドレスでインターネットに出られるようにします。",
+  "e": "確認は show ip nat translations で行います。",
+  "s": [
+   {
+    "p": "R1(config)#",
+    "re": "^access-list 1 permit 192\\.168\\.1\\.0 0\\.0\\.0\\.255$",
+    "ans": "access-list 1 permit 192.168.1.0 0.0.0.255",
+    "h": "変換する対象をACLで決める"
+   },
+   {"p": "R1(config)#", "re": "^int\\w* g0\\/0$", "ans": "interface g0/0", "h": "LAN側に入る"},
+   {"p": "R1(config-if)#", "re": "^ip nat inside$", "ans": "ip nat inside", "h": "内側に設定する"},
+   {"p": "R1(config-if)#", "re": "^int\\w* g0\\/1$", "ans": "interface g0/1", "h": "インターネット側に入る"},
+   {"p": "R1(config-if)#", "re": "^ip nat outside$", "ans": "ip nat outside", "h": "外側に設定する"},
+   {"p": "R1(config-if)#", "re": "^exit$", "ans": "exit", "h": "グローバル設定モードに戻る"},
+   {
+    "p": "R1(config)#",
+    "re": "^ip nat inside source list 1 int\\w* g0\\/1 overload$",
+    "ans": "ip nat inside source list 1 interface g0/1 overload",
+    "h": "PATを有効にする"
+   }
+  ]
+ },
+ {
+  "r": "B",
+  "id": "L6",
+  "t": "SSHの設定",
+  "g": "R1にSSHで安全にログインできるようにします。\n・ドメイン名 example.com\n・RSA鍵 2048ビット\n・ユーザー admin／パスワード P@ss\n・VTYではSSHだけを許可し、ローカルのユーザーで認証する",
+  "e": "ip ssh version 2 を設定して、SSHv2だけを使うようにするのもおすすめです。",
+  "s": [
+   {"p": "R1(config)#", "re": "^ip domain[- ]name example\\.com$", "ans": "ip domain-name example.com", "h": "ドメイン名を設定する"},
+   {"p": "R1(config)#", "re": "^crypto key gen\\w* rsa( mod\\w* 2048)?$", "ans": "crypto key generate rsa modulus 2048", "h": "RSA鍵を作る"},
+   {"p": "R1(config)#", "re": "^username admin secret p@ss$", "ans": "username admin secret P@ss", "h": "ログイン用のユーザーを作る"},
+   {"p": "R1(config)#", "re": "^line vty 0 (4|15)$", "ans": "line vty 0 4", "h": "VTYラインに入る"},
+   {"p": "R1(config-line)#", "re": "^login local$", "ans": "login local", "h": "ローカルのユーザーで認証する"},
+   {"p": "R1(config-line)#", "re": "^transport input ssh$", "ans": "transport input ssh", "h": "SSHだけを許可する"}
+  ]
+ },
+ {
+  "r": "B",
+  "id": "L7",
+  "t": "ポートセキュリティの設定",
+  "g": "SW1のGi0/5で、次の設定をします。\n・アクセスポートにする\n・ポートセキュリティを有効にする\n・MACアドレスは2つまで\n・違反したら破棄して記録する（ポートは止めない）\n・学習したMACアドレスを設定に保存する",
+  "e": "確認は show port-security interface g0/5 で行います。",
+  "s": [
+   {"p": "SW1(config)#", "re": "^int\\w* g0\\/5$", "ans": "interface g0/5", "h": "Gi0/5に入る"},
+   {"p": "SW1(config-if)#", "re": "^sw\\w* mode acc\\w*$", "ans": "switchport mode access", "h": "アクセスポートにする"},
+   {"p": "SW1(config-if)#", "re": "^sw\\w* port-sec\\w*$", "ans": "switchport port-security", "h": "ポートセキュリティを有効にする"},
+   {"p": "SW1(config-if)#", "re": "^sw\\w* port-sec\\w* max\\w* 2$", "ans": "switchport port-security maximum 2", "h": "最大数を2にする"},
+   {"p": "SW1(config-if)#", "re": "^sw\\w* port-sec\\w* vio\\w* restrict$", "ans": "switchport port-security violation restrict", "h": "違反時のモードをrestrictにする"},
+   {"p": "SW1(config-if)#", "re": "^sw\\w* port-sec\\w* mac-add\\S* sticky$", "ans": "switchport port-security mac-address sticky", "h": "stickyで学習する"}
+  ]
+ },
+ {
+  "r": "B",
+  "id": "L8",
+  "t": "名前付き拡張ACL",
+  "g": "LAN（192.168.1.0/24）からは、HTTPS（443）の通信だけを許可します。\n・ACL名 WEB-ONLY\n・LAN側のG0/0の受信方向に適用する",
+  "e": "最後の deny ip any any は暗黙のdenyと同じ働きですが、明示的に書くとヒット数を確認できます。",
+  "s": [
+   {"p": "R1(config)#", "re": "^ip access-list ext\\w* web-only$", "ans": "ip access-list extended WEB-ONLY", "h": "名前付き拡張ACLを作る"},
+   {
+    "p": "R1(config-ext-nacl)#",
+    "re": "^permit tcp 192\\.168\\.1\\.0 0\\.0\\.0\\.255 any eq (443|https)$",
+    "ans": "permit tcp 192.168.1.0 0.0.0.255 any eq 443",
+    "h": "HTTPSを許可する"
+   },
+   {"p": "R1(config-ext-nacl)#", "re": "^deny ip any any( log)?$", "ans": "deny ip any any", "h": "残りをすべて拒否する（明示的に書く）"},
+   {"p": "R1(config-ext-nacl)#", "re": "^int\\w* g0\\/0$", "ans": "interface g0/0", "h": "LAN側に入る"},
+   {"p": "R1(config-if)#", "re": "^ip access-group web-only in$", "ans": "ip access-group WEB-ONLY in", "h": "受信方向に適用する"}
+  ]
+ },
+ {
+  "r": "B",
+  "id": "L9",
+  "t": "IPv6の設定",
+  "g": "R1でIPv6を使えるようにします。\n・IPv6のルーティングを有効にする\n・G0/0 に 2001:db8:1:1::1/64\n・デフォルトルートのネクストホップは 2001:db8:ffff::1",
+  "e": "IPv6はプレフィックス長（/64）で書きます。確認は show ipv6 interface brief と show ipv6 route で行います。",
+  "s": [
+   {"p": "R1(config)#", "re": "^ipv6 unicast-routing$", "ans": "ipv6 unicast-routing", "h": "IPv6のルーティングを有効にする"},
+   {"p": "R1(config)#", "re": "^int\\w* g0\\/0$", "ans": "interface g0/0", "h": "G0/0に入る"},
+   {"p": "R1(config-if)#", "re": "^ipv6 add\\w* 2001:db8:1:1::1\\/64$", "ans": "ipv6 address 2001:db8:1:1::1/64", "h": "IPv6アドレスを設定する"},
+   {"p": "R1(config-if)#", "re": "^exit$", "ans": "exit", "h": "グローバル設定モードに戻る"},
+   {"p": "R1(config)#", "re": "^ipv6 route ::\\/0 2001:db8:ffff::1$", "ans": "ipv6 route ::/0 2001:db8:ffff::1", "h": "IPv6のデフォルトルートを設定する"}
+  ]
+ },
+ {
+  "r": "B",
+  "id": "L10",
+  "t": "STPとEtherChannel",
+  "g": "SW1に次の設定をします。\n・STPをRapid PVST+にする\n・VLAN 10のルートブリッジにする\n・Gi0/1〜2をLACP（active）でEtherChannelのグループ1にまとめる\n・PCがつながるGi0/5でPortFastとBPDUガードを有効にする",
+  "e": "確認は show spanning-tree vlan 10 と show etherchannel summary で行います。",
+  "s": [
+   {"p": "SW1(config)#", "re": "^spanning-tree mode rapid-pvst$", "ans": "spanning-tree mode rapid-pvst", "h": "Rapid PVST+にする"},
+   {"p": "SW1(config)#", "re": "^spanning-tree vlan 10 root primary$", "ans": "spanning-tree vlan 10 root primary", "h": "VLAN 10のルートにする"},
+   {"p": "SW1(config)#", "re": "^int\\w* range g0\\/1 ?- ?2$", "ans": "interface range g0/1 - 2", "h": "2つのポートをまとめて設定する"},
+   {"p": "SW1(config-if-range)#", "re": "^channel-group 1 mode active$", "ans": "channel-group 1 mode active", "h": "LACPでグループ1に入れる"},
+   {"p": "SW1(config-if-range)#", "re": "^int\\w* g0\\/5$", "ans": "interface g0/5", "h": "Gi0/5に入る"},
+   {"p": "SW1(config-if)#", "re": "^spanning-tree portfast$", "ans": "spanning-tree portfast", "h": "PortFastを有効にする"},
+   {"p": "SW1(config-if)#", "re": "^spanning-tree bpduguard enable$", "ans": "spanning-tree bpduguard enable", "h": "BPDUガードを有効にする"}
+  ]
+ }
+]

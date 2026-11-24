@@ -1,0 +1,98 @@
+{
+ "r": "TB",
+ "lt": "nl37",
+ "n": 38,
+ "t": "QoS・SSH・ファイル転送",
+ "pages": [
+  {
+   "t": "QoSの入口",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 134.0\" role=\"img\" aria-label=\"QoSの入口\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"54.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"28.5\" text-anchor=\"start\" style=\"font:800 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">分類 → マーキング → キューイング／ポリシング・シェーピング</text><text x=\"24\" y=\"47.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">QoSの処理の順番</text><rect x=\"10\" y=\"66.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"92.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">マーキング：IPヘッダーのDSCP</text><text x=\"24\" y=\"111.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">音声には EF（DSCP 46）</text></svg>",
+   "b": "<b>QoS</b>（Quality of Service）は大事な通信を優先して流す仕組み。DSCP（Differentiated Services Code Point）はIPヘッダーにある6ビットのフィールドです。",
+   "p": "くわしくは次回。"
+  },
+  {
+   "t": "SSHの設定",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 270\" role=\"img\" aria-label=\"SSHの設定\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"190\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" style=\"font:700 11.5px ui-monospace,Menlo,monospace;fill:#0a5cff\">hostname R1</text><text x=\"22\" y=\"74\" style=\"font:700 11.5px ui-monospace,Menlo,monospace;fill:#0a5cff\">ip domain-name example.com</text><text x=\"22\" y=\"96\" style=\"font:700 11.5px ui-monospace,Menlo,monospace;fill:#00a05a\">crypto key generate rsa modulus 2048</text><text x=\"22\" y=\"118\" style=\"font:700 11.5px ui-monospace,Menlo,monospace;fill:#ffb400\">username admin privilege 15 secret P@ss</text><text x=\"22\" y=\"140\" style=\"font:700 11.5px ui-monospace,Menlo,monospace;fill:#3d4450\">line vty 0 15</text><text x=\"22\" y=\"162\" style=\"font:700 11.5px ui-monospace,Menlo,monospace;fill:#3d4450\"> login local</text><text x=\"22\" y=\"184\" style=\"font:700 11.5px ui-monospace,Menlo,monospace;fill:#e6261f\"> transport input ssh</text><text x=\"180\" y=\"226\" text-anchor=\"middle\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">①ホスト名 ②ドメイン名 ③RSA鍵 ④ユーザー ⑤vty</text><text x=\"180\" y=\"250\" text-anchor=\"middle\" style=\"font:700 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">secret＝安全に保存／privilege 15＝すぐ特権モード</text></svg>",
+   "b": "<b>RSA</b>は公開鍵暗号（鍵がペア）、<b>AES</b>は共通鍵暗号。図で鍵がない（show crypto key mypubkey rsaが空）なら crypto key generate rsa、vtyがSSHだけでないなら transport input ssh。 RSAは<b>公開鍵暗号システム</b>です。SSHに必要なのは、ホスト名・ドメイン名・<b>crypto key generate rsa</b>・ローカルユーザー（例：<b>username admin privilege 15 secret …</b>）・vtyで <b>login local</b> と <b>transport input ssh</b>。 SSHで通信を<b>暗号化</b>するにはRSA鍵が必要で、<b>transport input ssh</b>はTelnetのような暗号化されない接続を断り、SSHだけを受け付けます。ユーザー名はログインする人を確かめるための設定で、暗号化そのものとは別の役割です。",
+   "p": "password 0（平文）ではなく secret を使う。"
+  },
+  {
+   "t": "ファイル転送",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 217.5\" role=\"img\" aria-label=\"ファイル転送\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">TFTP（UDP 69）</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">認証なし。ブロックごとに確認。IOSのアップグレード</text><text x=\"24\" y=\"67.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">・設定のバックアップ</text><rect x=\"10\" y=\"86.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"112.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">FTP（TCP 20・21）</text><text x=\"24\" y=\"131.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">制御とデータの2つの接続。認証あり（平文）</text><rect x=\"10\" y=\"150.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#3d4450\" opacity=\".1\"/><text x=\"24\" y=\"175.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">SCP・SFTP</text><text x=\"24\" y=\"194.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ログインが必要</text></svg>",
+   "b": "<b>TFTP</b>は、<b>ファームウェアのアップグレードのためにサーバーからルーターへIOSイメージを転送</b>するのによく使います。<b>FTP</b>は<b>TCPを使い、制御用（21）とデータ用（20など）の2つの接続</b>を使います。",
+   "p": "認証なしで送ったデータを確認する＝TFTP。"
+  },
+  {
+   "t": "小テスト",
+   "quiz": {
+    "q": "SSHを使えるようにするために必要ないものは？",
+    "o": [
+     ["DHCPプール", "<g><g transform=\"translate(0,0)\"><rect x=\"-45.0\" y=\"-13\" width=\"90\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#e6261f\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#e6261f\">DHCPプール</text></g></g>"],
+     ["RSA鍵", "<g><g transform=\"translate(0,0)\"><rect x=\"-45.0\" y=\"-13\" width=\"90\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#00a05a\">RSA鍵</text></g></g>"],
+     ["ドメイン名", "<g><g transform=\"translate(0,0)\"><rect x=\"-45.0\" y=\"-13\" width=\"90\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#0a5cff\">ドメイン名</text></g></g>"]
+    ],
+    "a": 0,
+    "e": "正解は<b>DHCPプール</b>。SSHにはホスト名・ドメイン名・RSA鍵・ユーザー設定が必要です。"
+   }
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 199.81974248927037\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">QoS：分類→マーキング→キューイング</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">音声＝DSCP EF（46）</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"56.81974248927038\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"94.31974248927038\" text-anchor=\"start\" style=\"font:800 13.8px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">SSH：ホスト名・ドメイン名・RSA・secret・vty</text><text x=\"24\" y=\"113.31974248927038\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">login local＋transport input ssh</text><rect x=\"10\" y=\"132.31974248927037\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"157.81974248927037\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">TFTP＝UDP 69・認証なし</text><text x=\"24\" y=\"176.81974248927037\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">FTP＝TCP・2つの接続・認証</text></svg>",
+   "b": "次回は「QoSのPHB（詳しく）」。",
+   "p": "一問一答の「IPサービス」で確かめましょう。"
+  }
+ ],
+ "cls": {
+  "a": "audio/l38/",
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "今日は、3つのテーマ。大事な通信を優先するQoS、安全なリモート管理のSSHの設定、そしてファイル転送です。", "y": "今日は、3つのテーマ。大事な通信を優先するキューオーエス、安全なリモート管理のエスエスエイチの設定、そしてファイル転送です。"},
+   {"sc": 1, "sp": "先生", "t": "QoSは、音声などの大事な通信を、優先して流す仕組みです。流れは、まず通信の種類を見分ける分類、次にパケットに優先度の印を付けるマーキング、最後に、混んでいるときの送る順番を決めるキューイングなどです。くわしくは次回やります。", "y": "キューオーエスは、音声などの大事な通信を、優先して流す仕組みです。流れは、まず通信の種類を見分ける分類、次にパケットに優先度の印を付けるマーキング、最後に、混んでいるときの送る順番を決めるキューイングなどです。くわしくは次回やります。"},
+   {"sc": 1, "sp": "先生", "t": "マーキングでは、パケットに優先度の印を付けます。IPヘッダーでは、DSCPというフィールドに入れます。音声には、遅延の少ないEF、数字で46を付けるのが一般的です。", "y": "マーキングでは、パケットに優先度の印を付けます。アイピーヘッダーでは、ディーエスシーピーというフィールドに入れます。音声には、遅延の少ないイーエフ、数字で46を付けるのが一般的です。"},
+   {"sc": 1, "sp": "生徒", "t": "くわしくは次回ですか？"},
+   {"sc": 1, "sp": "先生", "t": "そうです。次回、QoSの細かい部分を学びます。", "y": "そうです。次回、キューオーエスの細かい部分を学びます。"},
+   {"sc": 2, "sp": "先生", "t": "次は、SSHの設定です。SSHを使えるようにするには、いくつかの準備が必要です。", "y": "次は、エスエスエイチの設定です。エスエスエイチを使えるようにするには、いくつかの準備が必要です。"},
+   {"sc": 2, "sp": "先生", "t": "1つ目、hostnameでホスト名。2つ目、ip domain-nameでドメイン名。この2つから、鍵の名前が作られます。", "y": "1つ目、ホストネームでホスト名。2つ目、アイピー、ドメインネームでドメイン名。この2つから、鍵の名前が作られます。"},
+   {"sc": 2, "sp": "先生", "t": "3つ目、crypto key generate rsaで、RSAの鍵を作ります。RSAは、公開鍵と秘密鍵のペアを使う、公開鍵暗号です。SSHは、この鍵を使って通信を暗号化します。", "y": "3つ目、クリプト、キー、ジェネレート、アールエスエーで、アールエスエーの鍵を作ります。アールエスエーは、公開鍵と秘密鍵のペアを使う、公開鍵暗号です。エスエスエイチは、この鍵を使って通信を暗号化します。"},
+   {"sc": 2, "sp": "先生", "t": "4つ目、username admin secretで、ログイン用のユーザーを作ります。passwordではなく、secretを使うと、パスワードが安全に保存されます。privilege 15を付けると、ログインしてすぐに特権モードに入れます。", "y": "4つ目、ユーザーネーム admin シークレットで、ログイン用のユーザーを作ります。パスワードではなく、シークレットを使うと、パスワードが安全に保存されます。プリビレッジ、じゅうごを付けると、ログインしてすぐに特権モードに入れます。"},
+   {"sc": 2, "sp": "先生", "t": "5つ目、リモートからログインするための入口、vtyの設定です。line vty 0 4、または0 15と書くと、0番から4番、または15番までの入口をまとめて設定できます。そこにlogin localとtransport input sshを設定します。login localは、登録したユーザーでログインすること、transport input sshは、SSHだけを受け付けることです。", "y": "5つ目、リモートからログインするための入口、vtyの設定です。ライン、ブイティーワイ 0 4、または0 15と書くと、0番から4番、または15番までの入口をまとめて設定できます。そこにログイン、ローカルとトランスポート、インプット、エスエスエイチを設定します。ログイン、ローカルは、登録したユーザーでログインすること、トランスポート、インプット、エスエスエイチは、エスエスエイチだけを受け付けることです。"},
+   {"sc": 2, "sp": "生徒", "t": "準備は5つなんですね。逆に、関係ない設定もありますか？"},
+   {"sc": 2, "sp": "先生", "t": "その通り。試験では、設定の画面を見せられて、足りないものを選ぶ問題が出ます。例えば、show crypto key mypubkey rsaで何も出なければ、鍵がまだない、ということです。", "y": "その通り。試験では、設定の画面を見せられて、足りないものを選ぶ問題が出ます。例えば、ショー crypto key mypubkey rsaで何も出なければ、鍵がまだない、ということです。"},
+   {"sc": 3, "sp": "先生", "t": "最後に、ファイル転送です。TFTPは、UDPの69番を使う簡単な方式で、ユーザー名もパスワードもいりません。送ったブロックごとに確認をもらいます。", "y": "最後に、ファイル転送です。TFTPは、ユーディーピーの69番を使う簡単な方式で、ユーザー名もパスワードもいりません。送ったブロックごとに確認をもらいます。"},
+   {"sc": 3, "sp": "先生", "t": "ルーターのIOSのイメージを、サーバーから機器にコピーしてアップグレードしたり、設定をバックアップしたりするのに、よく使われます。", "y": "ルーターのアイオーエスのイメージを、サーバーから機器にコピーしてアップグレードしたり、設定をバックアップしたりするのに、よく使われます。"},
+   {"sc": 3, "sp": "先生", "t": "FTPはTCPを使い、制御用の21番と、データ用の20番などの、2つの接続を使います。認証はありますが、パスワードも平文です。SCPやSFTPは、今日設定したSSHを使って暗号化する方式で、こちらもログインが必要です。", "y": "FTPはティーシーピーを使い、制御用の21番と、データ用の20番などの、2つの接続を使います。認証はありますが、パスワードも平文です。エスシーピーやエスエフティーピーは、今日設定したエスエスエイチを使って暗号化する方式で、こちらもログインが必要です。"},
+   {"sc": 4, "sp": "先生", "t": "ここで小テストです。SSHを使えるようにするために、必要ないものはどれでしょう？画面で選んでください。", "w": 1, "y": "ここで小テストです。エスエスエイチを使えるようにするために、必要ないものはどれでしょう？画面で選んでください。"},
+   {"sc": 4, "sp": "先生", "t": "正解はDHCPプールです。", "y": "正解はディーエイチシーピープールです。"},
+   {"sc": 5, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 5, "sp": "先生", "t": "1つ目。QoSは、分類、マーキング、キューイング。音声にはDSCPのEF、46。", "y": "1つ目。キューオーエスは、分類、マーキング、キューイング。音声にはディーエスシーピーのイーエフ、46。"},
+   {"sc": 5, "sp": "先生", "t": "2つ目。SSHには、ホスト名、ドメイン名、RSAの鍵、username secret、vtyでlogin localとtransport input ssh。", "y": "2つ目。エスエスエイチには、ホスト名、ドメイン名、アールエスエーの鍵、ユーザーネーム シークレット、vtyでログイン、ローカルとトランスポート、インプット、エスエスエイチ。"},
+   {"sc": 5, "sp": "先生", "t": "3つ目。TFTPはUDP69で認証なし、IOSのコピーに使う。FTPはTCPで2つの接続と認証。", "y": "3つ目。TFTPはユーディーピー69で認証なし、アイオーエスのコピーに使う。FTPはティーシーピーで2つの接続と認証。"},
+   {"sc": 5, "sp": "生徒", "t": "SSHの5つの準備、手順で覚えます！", "y": "エスエスエイチの5つの準備、手順で覚えます！"},
+   {"sc": 5, "sp": "先生", "t": "いいですね。次回は、QoSをくわしく学びます。お疲れさまでした。", "y": "いいですね。次回は、キューオーエスをくわしく学びます。お疲れさまでした。"}
+  ],
+  "seg": [
+   [0.0, 9.6],
+   [9.95, 18.666667],
+   [28.967, 13.877],
+   [43.194, 1.899042],
+   [45.443, 4.287958],
+   [50.081, 7.476958],
+   [57.908, 9.237],
+   [67.495, 17.088],
+   [84.933, 17.792],
+   [103.075, 33.258667],
+   [136.683, 5.482667],
+   [142.516, 13.333333],
+   [156.199, 12.832],
+   [169.381, 9.269],
+   [179.0, 20.586667],
+   [199.937, 7.957],
+   [208.244, 2.517],
+   [211.111, 1.835],
+   [213.296, 8.864],
+   [222.51, 13.931],
+   [236.791, 10.048],
+   [247.189, 4.149],
+   [251.688, 5.354958]
+  ]
+ }
+}

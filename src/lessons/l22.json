@@ -1,0 +1,100 @@
+{
+ "r": "TB",
+ "lt": "nl21",
+ "n": 22,
+ "t": "音声VLAN・管理アクセス",
+ "pages": [
+  {
+   "t": "音声VLAN",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 250\" role=\"img\" aria-label=\"音声VLANのしくみ\"><g transform=\"translate(50,60) scale(0.8)\"><g transform=\"translate(0,0)\"><ellipse cx=\"0\" cy=\"20\" rx=\"32\" ry=\"4\" fill=\"var(--ink)\" opacity=\".12\"/><rect x=\"-32\" y=\"-14\" width=\"64\" height=\"30\" rx=\"5\" fill=\"#00a05a\"/><rect x=\"-24\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"-16\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"-8\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"0\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"8\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"16\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"24\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><path d=\"M-14-6h18l-4-4M14-2h-18l4 4\" stroke=\"#fff\" stroke-width=\"2.2\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></g></g><text x=\"50\" y=\"96\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">スイッチ</text><g transform=\"translate(180,60) scale(0.8)\"><g transform=\"translate(0,0)\"><ellipse cx=\"0\" cy=\"26\" rx=\"16\" ry=\"4\" fill=\"var(--ink)\" opacity=\".12\"/><rect x=\"-14\" y=\"-24\" width=\"28\" height=\"48\" rx=\"6\" fill=\"#00a05a\"/><rect x=\"-10\" y=\"-18\" width=\"20\" height=\"32\" rx=\"2\" fill=\"#fff\"/><path d=\"M-6-8h12M-6-2h8M-6 4h10\" stroke=\"#00a05a\" stroke-width=\"2\" opacity=\".5\"/><circle cy=\"19\" r=\"2\" fill=\"#fff\"/></g></g><text x=\"180\" y=\"96\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">IP電話</text><g transform=\"translate(310,60) scale(0.7)\"><g transform=\"translate(0,0)\"><ellipse cx=\"0\" cy=\"26\" rx=\"22\" ry=\"4\" fill=\"var(--ink)\" opacity=\".12\"/><rect x=\"-26\" y=\"-22\" width=\"52\" height=\"34\" rx=\"4\" fill=\"#0a5cff\"/><rect x=\"-22\" y=\"-18\" width=\"44\" height=\"26\" rx=\"2\" fill=\"#fff\"/><path d=\"M-4 12v8M-12 22h24\" stroke=\"#0a5cff\" stroke-width=\"4\" stroke-linecap=\"round\"/></g></g><text x=\"310\" y=\"96\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">PC</text><path d=\"M84 60h70M206 60h76\" stroke=\"var(--ink)\" stroke-width=\"3\"/><g transform=\"translate(118,126)\"><rect x=\"-85.0\" y=\"-13\" width=\"170\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#00a05a\">音声VLAN 20：タグあり</text></g><g transform=\"translate(240,160)\"><rect x=\"-105.0\" y=\"-13\" width=\"210\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#0a5cff\">PC：タグなし→データVLAN 10</text></g><rect x=\"10\" y=\"182\" width=\"340\" height=\"60\" rx=\"10\" fill=\"var(--card)\" stroke=\"var(--line)\" stroke-width=\"2\"/><text x=\"22\" y=\"206\" style=\"font:700 12px ui-monospace,Menlo,monospace;fill:var(--ink)\">switchport access vlan 10</text><text x=\"22\" y=\"228\" style=\"font:700 12px ui-monospace,Menlo,monospace;fill:#00a05a\">switchport voice vlan 20</text></svg>",
+   "b": "IP電話の後ろにPCをつなぐとき、電話の通信には<b>音声VLAN</b>のタグを付け、PCの通信はタグなしで<b>データVLAN</b>（access vlan）に流します。Ciscoの電話は、スイッチから<b>CDP</b>や<b>LLDP-MED</b>で音声VLANを教えてもらいます。 音声VLANは、スイッチから<b>CDP（またはLLDP-MED）で知らされます</b>。",
+   "p": "確認：show interfaces g0/1 switchport"
+  },
+  {
+   "t": "TelnetとSSH",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 217.5\" role=\"img\" aria-label=\"TelnetとSSH\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Telnet（TCP 23）</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">平文。パスワードを盗み見られる</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">SSH（TCP 22）</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">通信を暗号化。リモート管理はこちら</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Web管理</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ip http secure-server（HTTPS）＋ no ip htt</text><text x=\"24\" y=\"194.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">p server</text></svg>",
+   "b": "<b>SSH</b>（Secure Shell）は暗号化、<b>Telnet</b>は平文。Web管理もHTTPSにして、平文のHTTPは止めます。 Web管理を暗号化だけにするには、<b>ip http secure-server を有効にし、no ip http server で平文のHTTPを止めます</b>。",
+   "p": "暗号化されたリモート操作＝SSH。"
+  },
+  {
+   "t": "L2スイッチの管理",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 298.0\" role=\"img\" aria-label=\"L2スイッチの管理\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">管理IPはSVIに</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">interface vlan 1 などに ip address（L2スイッ</text><text x=\"24\" y=\"67.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">チのポートには付けられない）</text><rect x=\"10\" y=\"86.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"112.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ip default-gateway</text><text x=\"24\" y=\"131.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">別のネットワークの管理PCに返事を返すため</text><rect x=\"10\" y=\"150.0\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#3d4450\" opacity=\".1\"/><text x=\"24\" y=\"175.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">コンソール接続</text><text x=\"24\" y=\"194.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ケーブルで直接。ネットワークが落ちても使える（アウ</text><text x=\"24\" y=\"211.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">トオブバンド）</text><rect x=\"10\" y=\"230.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"256.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">exec-timeout 5 0</text><text x=\"24\" y=\"275.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">5分操作がなければ自動でログアウト</text></svg>",
+   "b": "L2スイッチの管理用IPアドレスは<b>SVI</b>に付け、<b>ip default-gateway</b>を設定します。 <b>ip default-gateway</b> は、<b>別のネットワークからスイッチを管理できるようにする</b>ための設定です。line con 0 で <b>exec-timeout 5 0</b> にすると、<b>5分間操作がなければ自動でログアウト</b>します。",
+   "p": "放置された画面対策 → exec-timeout。"
+  },
+  {
+   "t": "小テスト",
+   "quiz": {
+    "q": "暗号化された通信で、リモートから機器のCLIを操作する方法は？",
+    "o": [
+     ["SSH", "<g><g transform=\"translate(0,0)\"><rect x=\"-45.0\" y=\"-13\" width=\"90\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#00a05a\">SSH</text></g></g>"],
+     ["Telnet", "<g><g transform=\"translate(0,0)\"><rect x=\"-45.0\" y=\"-13\" width=\"90\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#e6261f\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#e6261f\">Telnet</text></g></g>"],
+     ["HTTP", "<g><g transform=\"translate(0,0)\"><rect x=\"-45.0\" y=\"-13\" width=\"90\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#0a5cff\">HTTP</text></g></g>"]
+    ],
+    "a": 0,
+    "e": "正解は<b>SSH</b>（TCP 22）。Telnetは平文です。"
+   }
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 217.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">音声VLAN：電話はタグ付き、PCはタグなし</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">switchport voice vlan／CDP・LLDP-MEDで電話</text><text x=\"24\" y=\"67.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">に伝える</text><rect x=\"10\" y=\"86.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"112.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Telnet＝平文、SSH＝暗号化</text><text x=\"24\" y=\"131.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">WebもHTTPSに</text><rect x=\"10\" y=\"150.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"175.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">管理IPはSVI＋ip default-gateway</text><text x=\"24\" y=\"194.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">コンソールはアウトオブバンド</text></svg>",
+   "b": "次回は「STP（スパニングツリー）」。",
+   "p": "一問一答の「ネットワークアクセス」で確かめましょう。"
+  }
+ ],
+ "cls": {
+  "a": "audio/l22/",
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "今日は、IP電話のための音声VLANと、スイッチやルーターを管理する方法を学びます。", "y": "今日は、アイピー電話のための音声ブイランと、スイッチやルーターを管理する方法を学びます。"},
+   {"sc": 1, "sp": "先生", "t": "会社の机では、壁のポートにIP電話をつなぎ、その電話の後ろにPCをつなぐことがよくあります。ケーブル1本で、電話とPCの両方を使うんです。", "y": "会社の机では、壁のポートにアイピー電話をつなぎ、その電話の後ろにピーシーをつなぐことがよくあります。ケーブル1本で、電話とピーシーの両方を使うんです。"},
+   {"sc": 1, "sp": "生徒", "t": "電話とPCの通信が、混ざっちゃいませんか？", "y": "電話とピーシーの通信が、混ざっちゃいませんか？"},
+   {"sc": 1, "sp": "先生", "t": "そこで音声VLANです。電話の通信には音声VLANのタグを付け、PCの通信はタグなしで、データVLANに流します。", "y": "そこで音声ブイランです。電話の通信には音声ブイランのタグを付け、ピーシーの通信はタグなしで、データブイランに流します。"},
+   {"sc": 1, "sp": "先生", "t": "設定は3つです。まず、switchport mode accessで、アクセスポートにします。次に、switchport access vlan 10。これがPC用のデータVLANです。最後に、switchport voice vlan 20。これが電話用の音声VLANです。", "y": "設定は3つです。まず、スイッチポート モード アクセスで、アクセスポートにします。次に、スイッチポート アクセス ブイラン 10。これがピーシー用のデータブイランです。最後に、スイッチポート ボイス ブイラン 20。これが電話用の音声ブイランです。"},
+   {"sc": 1, "sp": "先生", "t": "Ciscoの電話は、使う音声VLANの番号を、スイッチから教えてもらいます。そのときに使うのが、CDPやLLDP-MEDという、隣の機器と情報を交換する仕組みです。くわしくは第26回で学びます。", "y": "シスコの電話は、使う音声ブイランの番号を、スイッチから教えてもらいます。そのときに使うのが、シーディーピーやエルエルディーピーメッドという、隣の機器と情報を交換する仕組みです。くわしくは第26回で学びます。"},
+   {"sc": 1, "sp": "先生", "t": "ポートのアクセスVLAN、音声VLAN、動いているモードは、show interfaces g0/1 switchportでまとめて確認できます。", "y": "ポートのアクセスブイラン、音声ブイラン、動いているモードは、ショー インターフェーシズ g0スラッシュ1 スイッチポートでまとめて確認できます。"},
+   {"sc": 2, "sp": "先生", "t": "次は、機器の管理です。リモートからCLIを操作する方法は2つ。TelnetとSSHです。", "y": "次は、機器の管理です。リモートからシーエルアイを操作する方法は2つ。テルネットとエスエスエイチです。"},
+   {"sc": 2, "sp": "先生", "t": "Telnetは通信が平文、つまり暗号化されないので、パスワードを盗み見られる危険があります。SSHはTCP 22番で、通信を暗号化します。必ずSSHを使いましょう。", "y": "テルネットは通信が平文、つまり暗号化されないので、パスワードを盗み見られる危険があります。エスエスエイチはティーシーピー 22番で、通信を暗号化します。必ずエスエスエイチを使いましょう。"},
+   {"sc": 2, "sp": "先生", "t": "Webの画面で管理する場合も同じです。暗号化されたHTTPSを使うコマンドは、ip http secure-server。secureは「安全な」という意味です。そして、暗号化されていないHTTPは、頭にnoを付けて、no ip http serverで止めます。", "y": "Webの画面で管理する場合も同じです。暗号化されたエイチティーティーピーエスを使うコマンドは、アイピー http セキュアサーバー。secureは「安全な」という意味です。そして、暗号化されていないエイチティーティーピーは、頭にノーを付けて、ノー アイピー http サーバーで止めます。"},
+   {"sc": 2, "sp": "生徒", "t": "暗号化されている方を使う、が鉄則ですね。"},
+   {"sc": 3, "sp": "先生", "t": "では、L2スイッチに、管理用のIPアドレスはどこに付けるでしょう？", "y": "では、エルツースイッチに、管理用のアイピーアドレスはどこに付けるでしょう？"},
+   {"sc": 3, "sp": "先生", "t": "L2スイッチのポートには、IPアドレスを付けられません。そこで、interface vlan 1のようなSVIに付けます。前回はL3スイッチのSVIでしたが、L2スイッチでもSVIは作れます。ただし、ここでは「スイッチ自身の住所」として使うだけで、ルーティングはしません。", "y": "エルツースイッチのポートには、アイピーアドレスを付けられません。そこで、インターフェース ブイラン 1のようなエスブイアイに付けます。前回はエルスリースイッチのエスブイアイでしたが、エルツースイッチでもエスブイアイは作れます。ただし、ここでは「スイッチ自身の住所」として使うだけで、ルーティングはしません。"},
+   {"sc": 3, "sp": "先生", "t": "さらに、ip default-gatewayでゲートウェイを設定します。これがないと、別のネットワークの管理用PCに、スイッチが返事を返せません。", "y": "さらに、アイピー デフォルトゲートウェイでゲートウェイを設定します。これがないと、別のネットワークの管理用ピーシーに、スイッチが返事を返せません。"},
+   {"sc": 3, "sp": "先生", "t": "ネットワークが落ちていても使えるのが、コンソール接続です。コンソールケーブルという専用のケーブルで、PCと機器のコンソールポートを直接つなぎます。普段のネットワークとは別の道を使うので、アウトオブバンド管理とも言います。", "y": "ネットワークが落ちていても使えるのが、コンソール接続です。コンソールケーブルという専用のケーブルで、ピーシーと機器のコンソールポートを直接つなぎます。普段のネットワークとは別の道を使うので、アウトオブバンド管理とも言います。"},
+   {"sc": 3, "sp": "先生", "t": "line con 0で、exec-timeout、5、スペース、0、と設定します。前の5が分、後ろの0が秒なので、5分0秒です。5分間操作がなければ自動でログアウトして、放置された画面を、ほかの人に操作されるのを防ぎます。", "y": "ライン、コン 0で、エグゼックタイムアウト、5、スペース、0、と設定します。前の5が分、後ろの0が秒なので、5分0秒です。5分間操作がなければ自動でログアウトして、放置された画面を、ほかの人に操作されるのを防ぎます。"},
+   {"sc": 4, "sp": "先生", "t": "ここで小テストです。暗号化された通信で、リモートから機器のCLIを操作する方法はどれでしょう？画面で選んでください。", "w": 1, "y": "ここで小テストです。暗号化された通信で、リモートから機器のシーエルアイを操作する方法はどれでしょう？画面で選んでください。"},
+   {"sc": 4, "sp": "先生", "t": "正解はSSHです。Telnetは平文でしたね。", "y": "正解はエスエスエイチです。テルネットは平文でしたね。"},
+   {"sc": 5, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 5, "sp": "先生", "t": "1つ目。IP電話は音声VLANのタグ付き、PCはタグなしでデータVLAN。switchport voice vlanで設定し、電話はCDPやLLDPで教えてもらう。", "y": "1つ目。アイピー電話は音声ブイランのタグ付き、ピーシーはタグなしでデータブイラン。スイッチポート ボイス ブイランで設定し、電話はシーディーピーやエルエルディーピーで教えてもらう。"},
+   {"sc": 5, "sp": "先生", "t": "2つ目。Telnetは平文、SSHは暗号化。WebもHTTPSにする。", "y": "2つ目。テルネットは平文、エスエスエイチは暗号化。Webもエイチティーティーピーエスにする。"},
+   {"sc": 5, "sp": "先生", "t": "3つ目。L2スイッチの管理IPはSVIに付けて、ip default-gateway。コンソールはネットワークが落ちても使える。", "y": "3つ目。エルツースイッチの管理アイピーはエスブイアイに付けて、アイピー デフォルトゲートウェイ。コンソールはネットワークが落ちても使える。"},
+   {"sc": 5, "sp": "生徒", "t": "電話の後ろのPC、これで仕組みが分かりました！", "y": "電話の後ろのピーシー、これで仕組みが分かりました！"},
+   {"sc": 5, "sp": "先生", "t": "よかったです。次回は、スパニングツリー、STPを学びます。お疲れさまでした。", "y": "よかったです。次回は、スパニングツリー、エスティーピーを学びます。お疲れさまでした。"}
+  ],
+  "seg": [
+   [0.0, 6.784],
+   [7.134, 11.808],
+   [19.292, 3.989],
+   [23.631, 9.195],
+   [33.176, 21.301333],
+   [54.827, 15.552],
+   [70.729, 11.029],
+   [82.108, 7.499],
+   [89.957, 15.115],
+   [105.422, 22.453333],
+   [128.226, 4.0],
+   [132.576, 5.195],
+   [138.121, 21.888],
+   [160.359, 10.965],
+   [171.674, 15.68],
+   [187.704, 19.552],
+   [207.606, 9.227],
+   [217.183, 4.075],
+   [221.608, 1.835042],
+   [223.793, 13.429],
+   [237.572, 6.965],
+   [244.887, 9.643],
+   [254.88, 4.128],
+   [259.358, 6.336]
+  ]
+ }
+}

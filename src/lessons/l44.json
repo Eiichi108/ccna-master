@@ -1,0 +1,108 @@
+{
+ "r": "TB",
+ "lt": "nl43",
+ "n": 44,
+ "t": "L2セキュリティ",
+ "pages": [
+  {
+   "t": "ポートセキュリティ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"ポートセキュリティ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">MACアドレスの数を制限</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">maximum の初期値は1</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#3d4450\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">switchport mode access が先</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">dynamic のポートには設定できない</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">sticky</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">学習したMACをrunning-configに書き込む</text></svg>",
+   "b": "<b>ポートセキュリティ</b>は、ポートにつないでよい機器をMACアドレスで制限する機能です。動的に学習して保存するなら <b>sticky</b>。 <b>sticky</b> は<b>学習したMACアドレスを実行中の設定（running-config）に保存</b>します。「dynamic port」エラーが出たら、<b>switchport mode access でアクセスポートに固定</b>します。",
+   "p": "「dynamic port」エラー → switchport mode access。"
+  },
+  {
+   "t": "違反モード",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 217.5\" role=\"img\" aria-label=\"違反モード\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">protect</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">違反フレームを捨てるだけ（記録なし）</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">restrict</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">捨てて、ログとカウンター（ポートは止まらない）</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">shutdown（初期値）</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">err-disable（Secure-shutdown）。原因を外して </text><text x=\"24\" y=\"194.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">shutdown → no shutdown</text></svg>",
+   "b": "違反時の初期動作は <b>shutdown（ポートを停止）</b>してerr-disabled。<b>protect</b>＝破棄するだけで記録しない、<b>restrict</b>＝<b>違反したフレームを破棄し、ログを出してカウンターを増やす（ポートは止まらない）</b>。止まったポートは、<b>原因を取り除いてから shutdown → no shutdown</b> で復旧します。",
+   "p": "ポートを止めずに記録だけ残す → restrict。"
+  },
+  {
+   "t": "DHCPスヌーピング",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 250\" role=\"img\" aria-label=\"DHCPスヌーピング\"><g transform=\"translate(180,50) scale(0.9)\"><g transform=\"translate(0,0)\"><ellipse cx=\"0\" cy=\"20\" rx=\"32\" ry=\"4\" fill=\"var(--ink)\" opacity=\".12\"/><rect x=\"-32\" y=\"-14\" width=\"64\" height=\"30\" rx=\"5\" fill=\"#00a05a\"/><rect x=\"-24\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"-16\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"-8\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"0\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"8\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"16\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"24\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><path d=\"M-14-6h18l-4-4M14-2h-18l4 4\" stroke=\"#fff\" stroke-width=\"2.2\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></g></g><g transform=\"translate(60,140) scale(0.7)\"><g transform=\"translate(0,0)\"><ellipse cx=\"0\" cy=\"30\" rx=\"22\" ry=\"4\" fill=\"var(--ink)\" opacity=\".12\"/><rect x=\"-20\" y=\"-28\" width=\"40\" height=\"56\" rx=\"5\" fill=\"#ffb400\"/><path d=\"M-12-16h24M-12-6h24M-12 4h24\" stroke=\"#fff\" stroke-width=\"3\" stroke-linecap=\"round\" opacity=\".85\"/><circle cx=\"10\" cy=\"17\" r=\"3\" fill=\"#fff\"/><path d=\"M-12 14l8 4-8 4z\" fill=\"#fff\"/></g></g><text x=\"60\" y=\"178\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">正規のDHCP</text><g transform=\"translate(110,96)\"><rect x=\"-30.0\" y=\"-13\" width=\"60\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#00a05a\">trust</text></g><g transform=\"translate(300,140) scale(0.7)\"><g transform=\"translate(0,0)\"><ellipse cx=\"0\" cy=\"26\" rx=\"22\" ry=\"4\" fill=\"var(--ink)\" opacity=\".12\"/><rect x=\"-26\" y=\"-22\" width=\"52\" height=\"34\" rx=\"4\" fill=\"#e6261f\"/><rect x=\"-22\" y=\"-18\" width=\"44\" height=\"26\" rx=\"2\" fill=\"#fff\"/><path d=\"M-4 12v8M-12 22h24\" stroke=\"#e6261f\" stroke-width=\"4\" stroke-linecap=\"round\"/></g></g><text x=\"300\" y=\"176\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:#e6261f;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">偽のDHCP</text><path d=\"M166 66L74 120M196 66L286 120\" stroke=\"var(--ink)\" stroke-width=\"2.5\"/><path d=\"M250 100l20 20M270 100l-20 20\" stroke=\"#e6261f\" stroke-width=\"4\"/><text x=\"260\" y=\"90\" text-anchor=\"middle\" style=\"font:800 11px Figtree,'Hiragino Sans',sans-serif;fill:#e6261f;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Offer/Ack遮断</text><text x=\"180\" y=\"206\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ip dhcp snooping ＋ ip dhcp snooping vlan 10</text><text x=\"180\" y=\"228\" text-anchor=\"middle\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">limit rate でDHCPスタベーション対策／バインディングテーブルを作る</text></svg>",
+   "b": "<b>DHCPスヌーピング</b>は、信頼しないポートから届くDHCPサーバーの応答（Offer・Ack）を遮断し、偽のDHCPサーバーを防ぎます。 <b>ip dhcp snooping limit rate</b> は、<b>DHCPの要求を大量に送ってアドレスを使い切らせる攻撃（DHCPスタベーション）</b>を防ぎます。用語：<b>スヌーピングバインディングデータベース</b>＝ホストのMAC・IP・ポートの一覧、<b>スプリアス（不正な）DHCPサーバー</b>、初期状態のポートはすべて<b>untrusted</b>、管理者の管理下の機器につながるポートは<b>trusted</b>。",
+   "p": "trustにするのは正規のDHCPサーバーがある方向のポート。"
+  },
+  {
+   "t": "DAI",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 217.5\" role=\"img\" aria-label=\"DAI\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">DAI（ダイナミックARPインスペクション）</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">偽のARPによる中間者攻撃を防ぐ</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">バインディングテーブルと照合</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">DHCPスヌーピングで作ったIPとMACの対応表</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ip arp inspection vlan 10</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ほかのスイッチ・ルーター側は ip arp inspection</text><text x=\"24\" y=\"194.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\"> trust</text></svg>",
+   "b": "<b>DAI</b>（Dynamic ARP Inspection）は、DHCPスヌーピングのバインディングテーブルを使って偽のARPを遮断します。 DAIで<b>trust</b>にするのは、<b>ほかのスイッチやルーターにつながるポート</b>です。対策と攻撃の組み合わせ：<b>DHCPスヌーピング</b>→不正なDHCPサーバー、<b>DAI</b>→ARPの<b>キャッシュポイズニング</b>、<b>ストームコントロール</b>→フラッディング攻撃、<b>IP Source Guard</b>→なりすましの不正クライアント。",
+   "p": "信頼できる機器側のポートはtrust。"
+  },
+  {
+   "t": "小テスト",
+   "quiz": {
+    "q": "ポートセキュリティで、違反したときの動作の初期値は？",
+    "o": [
+     ["shutdown", "<g><g transform=\"translate(0,0)\"><rect x=\"-45.0\" y=\"-13\" width=\"90\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#e6261f\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#e6261f\">shutdown</text></g></g>"],
+     ["restrict", "<g><g transform=\"translate(0,0)\"><rect x=\"-45.0\" y=\"-13\" width=\"90\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#ffb400\">restrict</text></g></g>"],
+     ["protect", "<g><g transform=\"translate(0,0)\"><rect x=\"-45.0\" y=\"-13\" width=\"90\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#00a05a\">protect</text></g></g>"]
+    ],
+    "a": 0,
+    "e": "正解は<b>shutdown</b>。ポートがerr-disable状態になります。"
+   }
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ポートセキュリティ：初期1台・アクセスに固定</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">sticky＝学習したMACを保存</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">protect／restrict／shutdown（初期値）</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">捨てる／捨てて記録／err-disable</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">DHCPスヌーピング→DAI</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">正規の方向をtrust、その表で偽ARPを遮断</text></svg>",
+   "b": "次回は「VPN・無線LANのセキュリティ」。",
+   "p": "一問一答の「セキュリティの基礎」で確かめましょう。"
+  }
+ ],
+ "cls": {
+  "a": "audio/l44/",
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "今日は、スイッチを守る、L2セキュリティを学びます。主役は3つ。ポートセキュリティ、DHCPスヌーピング、DAIです。", "y": "今日は、スイッチを守る、エルツーセキュリティを学びます。主役は3つ。ポートセキュリティ、ディーエイチシーピースヌーピング、ダイです。"},
+   {"sc": 1, "sp": "先生", "t": "ポートセキュリティは、ポートにつないでよい機器を、MACアドレスで制限する機能です。何も設定しなければ、許可されるMACアドレスは1つだけです。", "y": "ポートセキュリティは、ポートにつないでよい機器を、マックアドレスで制限する機能です。何も設定しなければ、許可されるマックアドレスは1つだけです。"},
+   {"sc": 1, "sp": "先生", "t": "設定するには、先にswitchport mode accessで、アクセスポートに固定します。dynamicのポートには設定できず、エラーになります。", "y": "設定するには、先にスイッチポート モード アクセスで、アクセスポートに固定します。ダイナミックのポートには設定できず、エラーになります。"},
+   {"sc": 1, "sp": "先生", "t": "stickyを使うと、学習したMACアドレスを、running-configに書き込みます。保存すれば、再起動しても残ります。MACを手で書く方法もあります。", "y": "スティッキーを使うと、学習したマックアドレスを、running-configに書き込みます。保存すれば、再起動しても残ります。マックを手で書く方法もあります。"},
+   {"sc": 2, "sp": "先生", "t": "許可していない機器がつながったときの動作、違反モードは3つです。"},
+   {"sc": 2, "sp": "先生", "t": "protectは、違反したフレームを、記録せずに捨てるだけ。restrictは、捨てて、ログを出し、カウンターを増やします。どちらもポートは止まりません。", "y": "プロテクトは、違反したフレームを、記録せずに捨てるだけ。リストリクトは、捨てて、ログを出し、カウンターを増やします。どちらもポートは止まりません。"},
+   {"sc": 2, "sp": "先生", "t": "shutdownは初期値で、ポートを止めて、err-disable状態にします。show port-securityで、Secure-shutdownと出ます。", "y": "シャットダウンは初期値で、ポートを止めて、エラーディセーブル状態にします。ショー port-securityで、セキュアシャットダウンと出ます。"},
+   {"sc": 2, "sp": "生徒", "t": "止まったポートは、どうやって戻すんですか？"},
+   {"sc": 2, "sp": "先生", "t": "原因の機器を外してから、shutdown、no shutdownで戻します。errdisable recoveryを設定しておけば、自動で戻すこともできます。", "y": "原因の機器を外してから、シャットダウン、ノー シャットダウンで戻します。errdisable recoveryを設定しておけば、自動で戻すこともできます。"},
+   {"sc": 3, "sp": "先生", "t": "次は、DHCPスヌーピングです。DHCPサーバーは、IPアドレスと一緒に、デフォルトゲートウェイのアドレスも配りましたね。攻撃者が偽のDHCPサーバーを置いて、ゲートウェイは自分です、という情報を配ると、みんなの通信が攻撃者を通るようになってしまいます。これを防ぐのがDHCPスヌーピングです。", "y": "次は、ディーエイチシーピースヌーピングです。ディーエイチシーピーサーバーは、アイピーアドレスと一緒に、デフォルトゲートウェイのアドレスも配りましたね。攻撃者が偽のディーエイチシーピーサーバーを置いて、ゲートウェイは自分です、という情報を配ると、みんなの通信が攻撃者を通るようになってしまいます。これを防ぐのがディーエイチシーピースヌーピングです。"},
+   {"sc": 3, "sp": "先生", "t": "DHCPスヌーピングを有効にすると、最初はすべてのポートが、信頼しないuntrustedになります。そこで、正規のDHCPサーバーがある方向のポートだけを、trust、信頼するポートにします。信頼しないポートから、サーバーの応答であるOfferやAckが届いたら、偽物とみなして遮断します。", "y": "ディーエイチシーピースヌーピングを有効にすると、最初はすべてのポートが、信頼しないuntrustedになります。そこで、正規のディーエイチシーピーサーバーがある方向のポートだけを、トラスト、信頼するポートにします。信頼しないポートから、サーバーの応答であるオファーやアックが届いたら、偽物とみなして遮断します。"},
+   {"sc": 3, "sp": "先生", "t": "設定は、グローバルでip dhcp snoopingと、対象のVLANを指定するip dhcp snooping vlan 10の両方が必要です。また、DHCPの要求を大量に送って、配れるアドレスを使い切らせる、DHCPスタベーション攻撃という攻撃もあります。これは、limit rateで、要求の数に上限をかけて防ぎます。", "y": "設定は、グローバルでアイピー、ディーエイチシーピー、スヌーピングと、対象のブイランを指定するアイピー、ディーエイチシーピー、スヌーピング ブイラン 10の両方が必要です。また、ディーエイチシーピーの要求を大量に送って、配れるアドレスを使い切らせる、ディーエイチシーピースタベーション攻撃という攻撃もあります。これは、リミットレートで、要求の数に上限をかけて防ぎます。"},
+   {"sc": 3, "sp": "先生", "t": "DHCPスヌーピングは、誰にどのIPアドレスが配られたか、IPとMACの対応表、バインディングテーブルを作ります。", "y": "ディーエイチシーピースヌーピングは、誰にどのアイピーアドレスが配られたか、アイピーとマックの対応表、バインディングテーブルを作ります。"},
+   {"sc": 4, "sp": "先生", "t": "最後はDAI、ダイナミックARPインスペクションです。ARPは、IPアドレスからMACアドレスを調べる仕組みでしたね。攻撃者が、ゲートウェイのMACアドレスは自分です、という偽のARP応答を送ると、通信が攻撃者に届くようになります。この中間者攻撃を防ぐのがDAIです。", "y": "最後はダイ、ダイナミックアープインスペクションです。アープは、アイピーアドレスからマックアドレスを調べる仕組みでしたね。攻撃者が、ゲートウェイのマックアドレスは自分です、という偽のアープ応答を送ると、通信が攻撃者に届くようになります。この中間者攻撃を防ぐのがダイです。"},
+   {"sc": 4, "sp": "先生", "t": "DAIは、DHCPスヌーピングで作ったバインディングテーブルと照らし合わせて、合わないARPを遮断します。", "y": "ダイは、ディーエイチシーピースヌーピングで作ったバインディングテーブルと照らし合わせて、合わないアープを遮断します。"},
+   {"sc": 4, "sp": "生徒", "t": "DHCPスヌーピングが先に必要なんですね。", "y": "ディーエイチシーピースヌーピングが先に必要なんですね。"},
+   {"sc": 4, "sp": "先生", "t": "その通り。設定はip arp inspection vlan 10。ほかのスイッチやルーターにつながる、信頼できるポートは、ip arp inspection trustにして、検査を省きます。", "y": "その通り。設定はアイピー、アープ、インスペクション ブイラン 10。ほかのスイッチやルーターにつながる、信頼できるポートは、アイピー、アープ、インスペクション トラストにして、検査を省きます。"},
+   {"sc": 5, "sp": "先生", "t": "ここで小テストです。ポートセキュリティで、違反したときの動作の初期値はどれでしょう？画面で選んでください。", "w": 1},
+   {"sc": 5, "sp": "先生", "t": "正解はshutdownです。", "y": "正解はシャットダウンです。"},
+   {"sc": 6, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 6, "sp": "先生", "t": "1つ目。ポートセキュリティはMACの数を制限、初期値1、アクセスポートに固定してから。stickyで学習したMACを保存。", "y": "1つ目。ポートセキュリティはマックの数を制限、初期値1、アクセスポートに固定してから。スティッキーで学習したマックを保存。"},
+   {"sc": 6, "sp": "先生", "t": "2つ目。違反時は、protectが捨てるだけ、restrictが捨てて記録、shutdownが初期値でerr-disable。", "y": "2つ目。違反時は、プロテクトが捨てるだけ、リストリクトが捨てて記録、シャットダウンが初期値でエラーディセーブル。"},
+   {"sc": 6, "sp": "先生", "t": "3つ目。DHCPスヌーピングは偽のDHCPサーバーを防ぎ、正規の方向をtrustに。DAIはその表で偽のARPを防ぐ。", "y": "3つ目。ディーエイチシーピースヌーピングは偽のディーエイチシーピーサーバーを防ぎ、正規の方向をトラストに。ダイはその表で偽のアープを防ぐ。"},
+   {"sc": 6, "sp": "生徒", "t": "3つの守り、つながりが分かりました！"},
+   {"sc": 6, "sp": "先生", "t": "よかったです。次回は、VPNと無線LANのセキュリティを学びます。お疲れさまでした。", "y": "よかったです。次回は、ブイピーエヌと無線ランのセキュリティを学びます。お疲れさまでした。"}
+  ],
+  "seg": [
+   [0.0, 9.717],
+   [10.067, 10.037],
+   [20.454, 10.347],
+   [31.151, 11.317],
+   [42.818, 4.491],
+   [47.659, 10.688],
+   [58.697, 9.824],
+   [68.871, 3.296042],
+   [72.517, 10.367958],
+   [83.235, 23.68],
+   [107.265, 22.005333],
+   [129.62, 28.672],
+   [158.642, 9.151958],
+   [168.144, 19.733333],
+   [188.228, 7.413],
+   [195.991, 4.075],
+   [200.416, 16.107],
+   [216.873, 7.392],
+   [224.615, 1.792],
+   [226.757, 1.835],
+   [228.942, 8.928],
+   [238.22, 7.872],
+   [246.442, 10.251],
+   [257.043, 3.264],
+   [260.657, 6.293]
+  ]
+ }
+}

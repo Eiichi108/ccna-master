@@ -1,0 +1,106 @@
+{
+ "r": "TB",
+ "lt": "nl44",
+ "n": 45,
+ "t": "VPN・無線LANのセキュリティ",
+ "pages": [
+  {
+   "t": "VPNのおさらい",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 137.0\" role=\"img\" aria-label=\"VPNの種類\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">サイト間VPN</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">拠点どうしをIPsecでつなぐ</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">リモートアクセスVPN</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1人の利用者が外（公衆Wi-Fiなど）から会社へ</text></svg>",
+   "b": "",
+   "p": "従業員が公衆Wi-Fiからサーバーへ → リモートアクセスVPN。"
+  },
+  {
+   "t": "暗号化の進化",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 210\" role=\"img\" aria-label=\"無線の暗号化の進化\"><rect x=\"10\" y=\"30\" width=\"80\" height=\"90\" rx=\"10\" fill=\"#e6261f\" opacity=\"0.15\"/><text x=\"50\" y=\"58\" text-anchor=\"middle\" style=\"font:800 14px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">WEP</text><text x=\"50\" y=\"86\" text-anchor=\"middle\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:#e6261f;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">RC4</text><text x=\"50\" y=\"108\" text-anchor=\"middle\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">使わない</text><rect x=\"96\" y=\"30\" width=\"80\" height=\"90\" rx=\"10\" fill=\"#ffb400\" opacity=\"0.22999999999999998\"/><text x=\"136\" y=\"58\" text-anchor=\"middle\" style=\"font:800 14px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">WPA</text><text x=\"136\" y=\"86\" text-anchor=\"middle\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">TKIP</text><text x=\"136\" y=\"108\" text-anchor=\"middle\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">古い</text><rect x=\"182\" y=\"30\" width=\"80\" height=\"90\" rx=\"10\" fill=\"#0a5cff\" opacity=\"0.31\"/><text x=\"222\" y=\"58\" text-anchor=\"middle\" style=\"font:800 14px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">WPA2</text><text x=\"222\" y=\"86\" text-anchor=\"middle\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">AES-CCMP</text><text x=\"222\" y=\"108\" text-anchor=\"middle\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">今の標準</text><rect x=\"268\" y=\"30\" width=\"80\" height=\"90\" rx=\"10\" fill=\"#00a05a\" opacity=\"0.39\"/><text x=\"308\" y=\"58\" text-anchor=\"middle\" style=\"font:800 14px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">WPA3</text><text x=\"308\" y=\"86\" text-anchor=\"middle\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">GCMP</text><text x=\"308\" y=\"108\" text-anchor=\"middle\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">最も強い</text><path d=\"M20 140L331.0 140.0\" stroke=\"#00a05a\" stroke-width=\"3\" stroke-linecap=\"round\"/><path d=\"M340 140L331.0 135.0L331.0 145.0z\" fill=\"#00a05a\"/><text x=\"180\" y=\"164\" text-anchor=\"middle\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">右へいくほど強い</text><text x=\"180\" y=\"190\" text-anchor=\"middle\" style=\"font:700 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">SHA・MD5＝ハッシュ／EAP・PEAP＝認証方式（暗号化ではない）</text></svg>",
+   "b": "暗号化は、傍受されたデータを簡単に読み取られないようにします。<b>WEP</b>（Wired Equivalent Privacy）は脆弱。WPA2だけでサポートされる暗号＝<b>AES</b>。 無線の暗号化は、<b>傍受されたデータが簡単に読み取られるのを防ぎます</b>。WPA2のPSKなら、暗号化は<b>AES（CCMP128）</b>、認証キー管理は<b>PSK</b>を選びます。",
+   "p": "WPA1＝TKIP、WPA3＝GCMP。"
+  },
+  {
+   "t": "PersonalとEnterprise",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 234.5\" role=\"img\" aria-label=\"PersonalとEnterprise\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Personal（PSK）</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">全員共通のパスワード。家庭向け。1人から漏れると全体</text><text x=\"24\" y=\"67.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">が危険</text><rect x=\"10\" y=\"86.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"112.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Enterprise（802.1X/EAP＋RADIUS）</text><text x=\"24\" y=\"131.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">利用者ごとに認証。企業向け</text><rect x=\"10\" y=\"150.0\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"175.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">iPSK</text><text x=\"24\" y=\"194.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">機器ごとに違うPSKをRADIUSから配る（802.1X非対応</text><text x=\"24\" y=\"211.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">の機器向け）</text></svg>",
+   "b": "PSK認証を使うWPAのモード＝<b>Personal</b>。 <b>WPA2-Enterprise</b>は<b>802.1X／EAPとRADIUSサーバー</b>で1人ずつ認証します。PSK認証を使うのは<b>Personal（個人）</b>モード。<b>WPA2-Personal</b>は<b>全員で同じキーを使うので、1人から漏れると全体が危険</b>になります。802.1Xの役割：<b>サプリカント</b>＝認証を受けるクライアント、<b>オーセンティケーター</b>＝仲介するスイッチやAP（WLC）、<b>認証サーバー</b>＝RADIUS。WLCで1台ずつ違うPSKを配るなら、Layer 2タブで<b>AutoConfig iPSK</b>を有効にし、AAAサーバータブで認証サーバーを選びます。",
+   "p": "WPA2で事前共有キー → 暗号化AES（CCMP）＋認証キー管理PSK。"
+  },
+  {
+   "t": "WPA3",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"WPA3の特徴\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">SAE（Personal）</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">辞書攻撃に強い・前方秘匿性（PFS）</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">PMF（802.11w）が必須</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">WLCではPMFをRequiredに（WPA2では任意）</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">MACフィルタリングだけ ✕</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">MACは簡単に偽装できる</text></svg>",
+   "b": "<b>SAE</b>（Simultaneous Authentication of Equals）。<b>PMF</b>（Protected Management Frames）。 WPA3は<b>PersonalモードでSAEを使い</b>、<b>PMF（保護された管理フレーム、802.11w）が必須</b>です（WLCではPMFを<b>Required</b>に）。<b>Perfect Forward Secrecy</b>（鍵が漏れても<b>過去の通信は解読できない</b>）に依存するのはWPA3。<b>MACアドレスフィルタリングだけでは不十分</b>なのは、<b>MACアドレスは簡単に偽装できる</b>からです。",
+   "p": "Perfect Forward Secrecyに依存する＝WPA3。"
+  },
+  {
+   "t": "小テスト",
+   "quiz": {
+    "q": "WPA3-Personalで使われる認証方式は？",
+    "o": [
+     ["SAE", "<g><g transform=\"translate(0,0)\"><rect x=\"-40.0\" y=\"-13\" width=\"80\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#00a05a\">SAE</text></g></g>"],
+     ["TKIP", "<g><g transform=\"translate(0,0)\"><rect x=\"-40.0\" y=\"-13\" width=\"80\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#ffb400\">TKIP</text></g></g>"],
+     ["WEP", "<g><g transform=\"translate(0,0)\"><rect x=\"-40.0\" y=\"-13\" width=\"80\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#e6261f\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#e6261f\">WEP</text></g></g>"]
+    ],
+    "a": 0,
+    "e": "正解は<b>SAE</b>。オフラインの辞書攻撃に強くなっています。"
+   }
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">公衆Wi-Fiから会社 → リモートアクセスVPN</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">拠点どうし → サイト間VPN</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">WEP✕・WPA＝TKIP</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">WPA2＝AES-CCMP・WPA3＝GCMP</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Personal＝PSK／Enterprise＝802.1X</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">WPA3＝SAE＋PMF必須</text></svg>",
+   "b": "これで「セキュリティの基礎」はおしまい。次回から「自動化とプログラマビリティ」に入ります。",
+   "p": "一問一答の「セキュリティの基礎」で確かめましょう。"
+  }
+ ],
+ "cls": {
+  "a": "audio/l45/",
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "今日は、セキュリティの分野の最後。VPNのおさらいと、無線LANのセキュリティを学びます。", "y": "今日は、セキュリティの分野の最後。ブイピーエヌのおさらいと、無線ランのセキュリティを学びます。"},
+   {"sc": 1, "sp": "先生", "t": "VPNは2種類でした。拠点どうしをIPsecでつなぐのがサイト間VPN。カフェの公衆Wi-Fiのような外から、1人の利用者が会社につなぐのが、リモートアクセスVPNです。", "y": "ブイピーエヌは2種類でした。拠点どうしをアイピーセックでつなぐのがサイト間ブイピーエヌ。カフェの公衆ワイファイのような外から、1人の利用者が会社につなぐのが、リモートアクセスブイピーエヌです。"},
+   {"sc": 2, "sp": "先生", "t": "無線では、電波が誰にでも届きます。暗号化の役割は、電波を傍受されても、中身を読めなくすることです。"},
+   {"sc": 2, "sp": "先生", "t": "暗号化の方式は、時代とともに進化しました。一番古いWEPは、弱点があるので今は使いません。次の初代WPAは、TKIPという方式。今の標準のWPA2は、AESを使うCCMPという方式です。そして新しいWPA3では、さらに強いGCMPも使えます。古い順に、WEP、WPA、WPA2、WPA3です。", "y": "暗号化の方式は、時代とともに進化しました。一番古いウェップは、弱点があるので今は使いません。次の初代ダブリューピーエーは、ティーキップという方式。今の標準のダブリューピーエーツーは、エーイーエスを使うシーシーエムピーという方式です。そして新しいダブリューピーエースリーでは、さらに強いジーシーエムピーも使えます。古い順に、ウェップ、ダブリューピーエー、ダブリューピーエーツー、ダブリューピーエースリーです。"},
+   {"sc": 2, "sp": "生徒", "t": "WEP、TKIP、CCMP、GCMPの順に強くなるんですね。", "y": "ウェップ、ティーキップ、シーシーエムピー、ジーシーエムピーの順に強くなるんですね。"},
+   {"sc": 2, "sp": "先生", "t": "その通り。ただ、WEPは規格の名前で、TKIP、CCMP、GCMPは暗号化の方式の名前です。それから、WPA3でもAES-CCMPは使われていて、GCMPは、より強くしたいときの方式です。試験では、WPA3とGCMPの組み合わせで覚えておけば大丈夫です。", "y": "その通り。ただ、ウェップは規格の名前で、ティーキップ、シーシーエムピー、ジーシーエムピーは暗号化の方式の名前です。それから、ダブリューピーエースリーでもエーイーエス、シーシーエムピーは使われていて、ジーシーエムピーは、より強くしたいときの方式です。試験では、ダブリューピーエースリーとジーシーエムピーの組み合わせで覚えておけば大丈夫です。"},
+   {"sc": 2, "sp": "先生", "t": "その通り。なお、SHAやMD5はハッシュで、PEAPやEAPは認証の方式です。暗号化の方式ではないので、ひっかけに注意しましょう。", "y": "その通り。なお、シャーやエムディーファイブはハッシュで、ピープやイープは認証の方式です。暗号化の方式ではないので、ひっかけに注意しましょう。"},
+   {"sc": 3, "sp": "先生", "t": "WPAには2つのモードがあります。Personalは、全員で同じパスワード、事前共有キーのPSKを使う、家庭向けのモードです。", "y": "ダブリューピーエーには2つのモードがあります。パーソナルは、全員で同じパスワード、事前共有キーのピーエスケーを使う、家庭向けのモードです。"},
+   {"sc": 3, "sp": "先生", "t": "Enterpriseは、802.1Xを使って、利用者ごとにRADIUSサーバーで認証する、企業向けのモードです。そのとき、IDとパスワードや証明書をやりとりする決まりごとが、EAPです。", "y": "エンタープライズは、ハチマルニーテンイチエックスを使って、利用者ごとにラディウスサーバーで認証する、企業向けのモードです。そのとき、IDとパスワードや証明書をやりとりする決まりごとが、イープです。"},
+   {"sc": 3, "sp": "先生", "t": "PSKの弱点は、全員で同じキーを使うので、1人から漏れると全体が危険になることです。人の出入りが多い組織では、Enterpriseがおすすめです。", "y": "ピーエスケーの弱点は、全員で同じキーを使うので、1人から漏れると全体が危険になることです。人の出入りが多い組織では、エンタープライズがおすすめです。"},
+   {"sc": 3, "sp": "先生", "t": "802.1Xに対応していない機器があるときは、iPSK、機器ごとに違うパスワードをRADIUSから配る方式も使えます。", "y": "ハチマルニーテンイチエックスに対応していない機器があるときは、アイピーエスケー、機器ごとに違うパスワードをラディウスから配る方式も使えます。"},
+   {"sc": 4, "sp": "先生", "t": "WPA3の特徴は2つ。1つ目、Personalモードでは、SAEという方式で認証します。WPA2では、接続するときのやりとりを盗聴しておけば、あとから手元で、パスワードの候補を次々に試す辞書攻撃ができました。SAEでは、それができないので、辞書攻撃に強くなりました。", "y": "ダブリューピーエースリーの特徴は2つ。1つ目、パーソナルモードでは、サエという方式で認証します。ダブリューピーエーツーでは、接続するときのやりとりを盗聴しておけば、あとから手元で、パスワードの候補を次々に試す辞書攻撃ができました。サエでは、それができないので、辞書攻撃に強くなりました。"},
+   {"sc": 4, "sp": "先生", "t": "さらに、SAEでは、接続のたびに使い捨ての鍵を作ります。だから、もし将来パスワードがばれても、録画しておいた過去の通信は解読できません。この性質を、前方秘匿性、PFSと言います。", "y": "さらに、サエでは、接続のたびに使い捨ての鍵を作ります。だから、もし将来パスワードがばれても、録画しておいた過去の通信は解読できません。この性質を、前方秘匿性、ピーエフエスと言います。"},
+   {"sc": 4, "sp": "先生", "t": "もう1つ、WPA3では、PMF、保護された管理フレームが必須です。管理フレームは、接続や切断の手続きをするフレームでしたね。これを偽造されると、勝手に接続を切られてしまいます。PMFは、それを防ぐ仕組みで、802.11wとも呼ばれます。WPA2では任意でした。", "y": "もう1つ、ダブリューピーエースリーでは、ピーエムエフ、保護された管理フレームが必須です。管理フレームは、接続や切断の手続きをするフレームでしたね。これを偽造されると、勝手に接続を切られてしまいます。ピーエムエフは、それを防ぐ仕組みで、ハチマルニーテンイチイチダブリューとも呼ばれます。ダブリューピーエーツーでは任意でした。"},
+   {"sc": 4, "sp": "生徒", "t": "WLCの画面で802.11wを有効にするなら、PMFをRequiredにするんですね。", "y": "ダブリューエルシーの画面でハチマルニーテンイチイチダブリューを有効にするなら、ピーエムエフをRequiredにするんですね。"},
+   {"sc": 4, "sp": "先生", "t": "完璧です。最後に、MACアドレスのフィルタリングだけでは不十分です。MACアドレスは電波から分かり、簡単に偽装できるからです。WPA2やWPA3で認証と暗号化をしましょう。", "y": "完璧です。最後に、マックアドレスのフィルタリングだけでは不十分です。マックアドレスは電波から分かり、簡単に偽装できるからです。ダブリューピーエーツーやダブリューピーエースリーで認証と暗号化をしましょう。"},
+   {"sc": 5, "sp": "先生", "t": "ここで小テストです。WPA3-Personalで使われる認証方式はどれでしょう？画面で選んでください。", "w": 1, "y": "ここで小テストです。ダブリューピーエースリー、パーソナルで使われる認証方式はどれでしょう？画面で選んでください。"},
+   {"sc": 5, "sp": "先生", "t": "正解はSAEです。", "y": "正解はサエです。"},
+   {"sc": 6, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 6, "sp": "先生", "t": "1つ目。公衆Wi-Fiから会社へはリモートアクセスVPN、拠点どうしはサイト間VPN。", "y": "1つ目。公衆ワイファイから会社へはリモートアクセスブイピーエヌ、拠点どうしはサイト間ブイピーエヌ。"},
+   {"sc": 6, "sp": "先生", "t": "2つ目。WEPは使わない、WPAはTKIP、WPA2はAES-CCMP、WPA3はGCMP。", "y": "2つ目。ウェップは使わない、ダブリューピーエーはティーキップ、ダブリューピーエーツーはエーイーエス、シーシーエムピー、ダブリューピーエースリーはジーシーエムピー。"},
+   {"sc": 6, "sp": "先生", "t": "3つ目。PersonalはPSK、Enterpriseは802.1XとRADIUS。WPA3はSAEとPMFが必須。", "y": "3つ目。パーソナルはピーエスケー、エンタープライズはハチマルニーテンイチエックスとラディウス。ダブリューピーエースリーはサエとピーエムエフが必須。"},
+   {"sc": 6, "sp": "生徒", "t": "これでセキュリティの分野も終わりです！"},
+   {"sc": 6, "sp": "先生", "t": "よく頑張りました。次回からは、最後の分野、自動化とプログラマビリティです。お疲れさまでした。"}
+  ],
+  "seg": [
+   [0.0, 6.656],
+   [7.006, 13.311958],
+   [20.668, 8.180958],
+   [29.199, 30.101333],
+   [59.65, 6.955],
+   [66.955, 24.896],
+   [92.201, 10.592],
+   [103.143, 10.603],
+   [114.096, 14.08],
+   [128.526, 11.328],
+   [140.204, 9.429],
+   [149.983, 21.717333],
+   [172.051, 15.157333],
+   [187.558, 23.253333],
+   [211.161, 8.683],
+   [220.194, 14.315],
+   [234.859, 8.341],
+   [243.55, 1.397],
+   [245.297, 1.835],
+   [247.482, 7.168],
+   [255.0, 11.275],
+   [266.625, 9.792],
+   [276.767, 2.603],
+   [279.72, 7.125]
+  ]
+ }
+}

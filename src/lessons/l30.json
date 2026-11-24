@@ -1,0 +1,136 @@
+{
+ "r": "TB",
+ "lt": "nl29",
+ "n": 30,
+ "t": "ルーティングテーブルの読み方",
+ "pages": [
+  {
+   "t": "コードの読み方",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 260\" role=\"img\" aria-label=\"ルーティングテーブルのコード\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"140\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" style=\"font:700 11.5px ui-monospace,Menlo,monospace;fill:#00a05a\">R1# show ip route</text><text x=\"22\" y=\"74\" style=\"font:700 11.5px ui-monospace,Menlo,monospace;fill:#0a5cff\">C  10.1.1.0/24 is directly connected</text><text x=\"22\" y=\"96\" style=\"font:700 11.5px ui-monospace,Menlo,monospace;fill:#0a5cff\">L  10.1.1.1/32 is directly connected</text><text x=\"22\" y=\"118\" style=\"font:700 11.5px ui-monospace,Menlo,monospace;fill:#ffb400\">O  192.168.2.0/24 [110/2] via 10.1.1.2</text><text x=\"22\" y=\"140\" style=\"font:700 11.5px ui-monospace,Menlo,monospace;fill:#e6261f\">S* 0.0.0.0/0 [1/0] via 203.0.113.1</text><text x=\"180\" y=\"176\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">C＝直接接続　L＝ローカル（自分のIP /32）　S＝スタティック</text><text x=\"180\" y=\"200\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">O＝OSPF　D＝EIGRP　R＝RIP　*＝デフォルトの候補</text><text x=\"180\" y=\"232\" text-anchor=\"middle\" style=\"font:700 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">CとLは、IPがあってup/upなら自動で載る</text></svg>",
+   "b": "<b>show ip route</b>の行の先頭の記号で、経路の知り方が分かります。<b>D＝EIGRP</b>（Enhanced Interior Gateway Routing Protocol）、<b>O＝OSPF</b>（Open Shortest Path First）、<b>R＝RIP</b>（Routing Information Protocol）。 <b>C</b>＝<b>直接接続されたネットワーク</b>（<b>インターフェースにIPアドレスがあり、up/upになっている</b>と載る）、<b>L</b>＝<b>インターフェースに付けた自分のIP（/32）</b>、<b>S</b>＝<b>スタティックルート</b>、<b>O</b>＝<b>OSPFで学んだ経路</b>。 「/24」のような<b>プレフィックス長</b>は、<b>サブネットマスク</b>の先頭から何ビットが1かを表します。/19＝255.255.224.0、/21＝255.255.248.0、/22＝255.255.252.0、/23＝255.255.254.0、/24＝255.255.255.0、/25＝255.255.255.128、/26＝255.255.255.192、/28＝255.255.255.240、/29＝255.255.255.248、/30＝255.255.255.252です。",
+   "p": "L 172.16.1.1/32 ＝ 自分のインターフェースのIPアドレス。"
+  },
+  {
+   "t": "ADとメトリック",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 280\" role=\"img\" aria-label=\"アドミニストレーティブディスタンス\"><text x=\"180\" y=\"22\" text-anchor=\"middle\" style=\"font:800 14px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">[ AD ／ メトリック ]　例：[110/2]</text><rect x=\"20\" y=\"40\" width=\"154\" height=\"38\" rx=\"8\" fill=\"#e8ecf2\" opacity=\"0.8\"/><text x=\"32\" y=\"64\" text-anchor=\"start\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">直接接続</text><text x=\"160\" y=\"64\" text-anchor=\"end\" style=\"font:800 15px ui-monospace,Menlo,monospace;fill:#0a5cff\">0</text><rect x=\"186\" y=\"40\" width=\"154\" height=\"38\" rx=\"8\" fill=\"#0a5cff\" opacity=\"0.15\"/><text x=\"198\" y=\"64\" text-anchor=\"start\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">スタティック</text><text x=\"326\" y=\"64\" text-anchor=\"end\" style=\"font:800 15px ui-monospace,Menlo,monospace;fill:#0a5cff\">1</text><rect x=\"20\" y=\"86\" width=\"154\" height=\"38\" rx=\"8\" fill=\"#e8ecf2\" opacity=\"0.8\"/><text x=\"32\" y=\"110\" text-anchor=\"start\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">eBGP</text><text x=\"160\" y=\"110\" text-anchor=\"end\" style=\"font:800 15px ui-monospace,Menlo,monospace;fill:#0a5cff\">20</text><rect x=\"186\" y=\"86\" width=\"154\" height=\"38\" rx=\"8\" fill=\"#0a5cff\" opacity=\"0.15\"/><text x=\"198\" y=\"110\" text-anchor=\"start\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">EIGRP</text><text x=\"326\" y=\"110\" text-anchor=\"end\" style=\"font:800 15px ui-monospace,Menlo,monospace;fill:#0a5cff\">90</text><rect x=\"20\" y=\"132\" width=\"154\" height=\"38\" rx=\"8\" fill=\"#0a5cff\" opacity=\"0.15\"/><text x=\"32\" y=\"156\" text-anchor=\"start\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">OSPF</text><text x=\"160\" y=\"156\" text-anchor=\"end\" style=\"font:800 15px ui-monospace,Menlo,monospace;fill:#0a5cff\">110</text><rect x=\"186\" y=\"132\" width=\"154\" height=\"38\" rx=\"8\" fill=\"#0a5cff\" opacity=\"0.15\"/><text x=\"198\" y=\"156\" text-anchor=\"start\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">RIP</text><text x=\"326\" y=\"156\" text-anchor=\"end\" style=\"font:800 15px ui-monospace,Menlo,monospace;fill:#0a5cff\">120</text><rect x=\"20\" y=\"178\" width=\"154\" height=\"38\" rx=\"8\" fill=\"#e8ecf2\" opacity=\"0.8\"/><text x=\"32\" y=\"202\" text-anchor=\"start\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">iBGP</text><text x=\"160\" y=\"202\" text-anchor=\"end\" style=\"font:800 15px ui-monospace,Menlo,monospace;fill:#0a5cff\">200</text><rect x=\"186\" y=\"178\" width=\"154\" height=\"38\" rx=\"8\" fill=\"#e8ecf2\" opacity=\"0.8\"/><text x=\"198\" y=\"202\" text-anchor=\"start\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">信頼しない</text><text x=\"326\" y=\"202\" text-anchor=\"end\" style=\"font:800 15px ui-monospace,Menlo,monospace;fill:#0a5cff\">255</text><text x=\"180\" y=\"240\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ADは小さいほど信頼できる</text><text x=\"180\" y=\"262\" text-anchor=\"middle\" style=\"font:700 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">RIPなのに[90/1] → ADが変更されている</text></svg>",
+   "b": "<b>AD</b>（Administrative Distance：管理距離）は経路の信頼度。<b>メトリック</b>はそのプロトコルの中での距離（OSPFはコスト）。viaの後ろはネクストホップ。 [110/30] の30は<b>OSPFのコスト（メトリック）</b>。スタティックの [5/0] は<b>ADを5に変更して設定</b>したもの。<b>ADが255</b>の経路は<b>信頼できないとみなされ、テーブルに載りません</b>。「via 10.0.0.2」は<b>ネクストホップのIPアドレス</b>です。",
+   "p": "[1/0] の1＝AD（スタティック）。"
+  },
+  {
+   "t": "経路を選ぶ順番",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 281.0\" role=\"img\" aria-label=\"経路を選ぶ順番\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">① ロンゲストマッチ</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">宛先を含む経路のうち、プレフィックスが一番長い</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">② ADが小さい</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">プレフィックスが同じとき（EIGRP 90 ＜ OSPF 110</text><text x=\"24\" y=\"131.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">）</text><rect x=\"10\" y=\"150.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"175.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">③ メトリックが小さい</text><text x=\"24\" y=\"194.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ADも同じとき（コスト20 ＜ 30）</text><rect x=\"10\" y=\"213.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#3d4450\" opacity=\".1\"/><text x=\"24\" y=\"239.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">すべて同じなら負荷分散</text><text x=\"24\" y=\"258.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">等コストロードバランス</text></svg>",
+   "b": "メトリックはプロトコルごとに計算方法が違うので比べられません。だから違うプロトコルどうしはADで比べます。 違うプロトコルは<b>メトリックの計算方法が違い、比べられない</b>のでADで比べます。同じ宛先・同じAD・同じメトリックの経路が2本あれば、<b>両方に負荷分散</b>します。",
+   "p": "0.0.0.0/0 と 10.0.0.0/8 → 10.5.5.5 には /8。"
+  },
+  {
+   "t": "ロンゲストマッチの確認",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 240\" role=\"img\" aria-label=\"ロンゲストマッチの確認\"><text x=\"180\" y=\"22\" text-anchor=\"middle\" style=\"font:800 14px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">宛先 192.168.12.16 はどれ？</text><rect x=\"10\" y=\"36\" width=\"340\" height=\"38\" rx=\"8\" fill=\"#e8ecf2\" opacity=\"0.8\"/><text x=\"24\" y=\"60\" text-anchor=\"start\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">O</text><text x=\"60\" y=\"60\" style=\"font:700 13px ui-monospace,Menlo,monospace;fill:var(--ink)\">192.168.12.0/28</text><text x=\"336\" y=\"60\" text-anchor=\"end\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:#e6261f;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">0〜15 ✕含まない</text><rect x=\"10\" y=\"80\" width=\"340\" height=\"38\" rx=\"8\" fill=\"#00a05a\" opacity=\"0.15\"/><text x=\"24\" y=\"104\" text-anchor=\"start\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:#8a3ffc;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">R</text><text x=\"60\" y=\"104\" style=\"font:700 13px ui-monospace,Menlo,monospace;fill:var(--ink)\">192.168.12.0/27</text><text x=\"336\" y=\"104\" text-anchor=\"end\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">0〜31 ○</text><rect x=\"10\" y=\"124\" width=\"340\" height=\"38\" rx=\"8\" fill=\"#00a05a\" opacity=\"0.15\"/><text x=\"24\" y=\"148\" text-anchor=\"start\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">D</text><text x=\"60\" y=\"148\" style=\"font:700 13px ui-monospace,Menlo,monospace;fill:var(--ink)\">192.168.12.0/24</text><text x=\"336\" y=\"148\" text-anchor=\"end\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">0〜255 ○</text><text x=\"180\" y=\"190\" text-anchor=\"middle\" style=\"font:800 13.5px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">含む中で一番長い /27（RIP）が選ばれる</text><text x=\"180\" y=\"214\" text-anchor=\"middle\" style=\"font:700 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ADより先にロンゲストマッチ</text></svg>",
+   "b": "まず各経路の<b>範囲を計算</b>して、宛先を含まない経路を消します。それから長さを比べます。 範囲に含まれるアドレスの個数は、/24が256個、/25が128個、/26が64個、/27が32個、/28が16個、/29が8個、/30が4個で、<b>プレフィックスが1増えるごとに半分</b>になります。/23・/22・/19のように/24より短いときは、3つ目の数字がそれぞれ2つ分・4つ分・32個分の幅になります。範囲は<b>ネットワークアドレスからその個数ぶん</b>で、たとえば10.1.5.64/26は10.1.5.64〜10.1.5.127、10.1.4.0/22は10.1.4.0〜10.1.7.255です。",
+   "p": "一番長くても、宛先を含まない経路は使われない。"
+  },
+  {
+   "t": "特別な経路",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 264.0\" role=\"img\" aria-label=\"特別な経路\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">デフォルトルート 0.0.0.0/0</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">何でも含むが長さ0。最後の手段（S*）</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Gateway of last resort is not set</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">一致もデフォルトもない → 破棄</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#3d4450\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Null0</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ごみ箱。一致したパケットは捨てる</text><rect x=\"10\" y=\"196.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"222.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">OSPFの経路が使えなくなったら</text><text x=\"24\" y=\"241.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">残りの候補から合計コストが最小の経路へ</text></svg>",
+   "b": "<b>S*</b> の * は<b>デフォルトルートの候補</b>。「<b>Gateway of last resort</b> is …」は<b>デフォルトルートが設定されている</b>ことを表します。一致する経路もデフォルトルートもなければ、パケットは<b>破棄</b>されます。<b>Null0</b>（ゴミ箱）宛ての経路に一致したパケットも<b>ドロップ</b>されます。",
+   "p": "一致する経路もデフォルトルートもない → 破棄（ICMPの到達不能が返る）。"
+  },
+  {
+   "t": "小テスト",
+   "quiz": {
+    "q": "ルーティングテーブルで最初に優先されるルールは？",
+    "o": [
+     ["ロンゲストマッチ（最長一致）", "<g><g transform=\"translate(0,0)\"><rect x=\"-50.0\" y=\"-13\" width=\"100\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#0a5cff\">最長一致</text></g></g>"],
+     ["ADが小さい", "<g><g transform=\"translate(0,0)\"><rect x=\"-50.0\" y=\"-13\" width=\"100\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#00a05a\">AD</text></g></g>"],
+     ["メトリックが小さい", "<g><g transform=\"translate(0,0)\"><rect x=\"-50.0\" y=\"-13\" width=\"100\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#ffb400\">メトリック</text></g></g>"]
+    ],
+    "a": 0,
+    "e": "正解は<b>ロンゲストマッチ</b>。次にAD、最後にメトリックです。"
+   }
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">C・L・S・O・D・R</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">[AD/メトリック]・viaはネクストホップ</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">AD：S 1・EIGRP 90・OSPF 110・RIP 120</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">小さいほど信頼</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ロンゲストマッチ→AD→メトリック</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">まず含むか確認。なければデフォルト、なければ破棄</text></svg>",
+   "b": "次回は「スタティックルート」。",
+   "p": "一問一答の「IP接続」で、ルーティングテーブルの問題をたくさん解いて確かめましょう。"
+  }
+ ],
+ "cls": {
+  "a": "audio/l30/",
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "今日は、ルーターの地図、ルーティングテーブルの読み方です。試験では、show ip routeの出力を見て、パケットがどこへ行くかを答える問題が、本当にたくさん出ます。", "y": "今日は、ルーターの地図、ルーティングテーブルの読み方です。試験では、ショー、アイピー、ルートの出力を見て、パケットがどこへ行くかを答える問題が、本当にたくさん出ます。"},
+   {"sc": 1, "sp": "先生", "t": "1行ずつの読み方から始めます。行の先頭の記号が、その経路をどうやって知ったかを表します。"},
+   {"sc": 1, "sp": "先生", "t": "Cは直接接続、Lはローカル、Sはスタティック、つまり手で書いた経路です。そして、ルーター同士が自動で経路を教え合う仕組みを、ルーティングプロトコルと言います。その種類で、OはOSPF、DはEIGRP、RはRIPです。OSPFは後の回でくわしく学びます。", "y": "Cは直接接続、Lはローカル、Sはスタティック、つまり手で書いた経路です。そして、ルーター同士が自動で経路を教え合う仕組みを、ルーティングプロトコルと言います。その種類で、Oはオーエスピーエフ、Dはイーアイジーアールピー、Rはリップです。オーエスピーエフは後の回でくわしく学びます。"},
+   {"sc": 1, "sp": "生徒", "t": "DがEIGRPなのは、なぜですか？", "y": "Dがイーアイジーアールピーなのは、なぜですか？"},
+   {"sc": 1, "sp": "先生", "t": "EIGRPの中で使っている計算方法の名前が、DUALだからです。それから、Sの横のアスタリスク、星印は、デフォルトルートの候補という意味です。デフォルトルートは、どこにも当てはまらないときに使う経路で、最後にくわしく説明します。", "y": "イーアイジーアールピーの中で使っている計算方法の名前が、デュアルだからです。それから、Sの横のアスタリスク、星印は、デフォルトルートの候補という意味です。デフォルトルートは、どこにも当てはまらないときに使う経路で、最後にくわしく説明します。"},
+   {"sc": 1, "sp": "先生", "t": "Lは、インターフェースに付けた、自分自身のIPアドレスを/32で表したものです。CとLは、インターフェースにIPアドレスがあって、up、upになっていれば、ルーティングプロトコルがなくても自動で載ります。", "y": "Lは、インターフェースに付けた、自分自身のアイピーアドレスをスラッシュ32で表したものです。CとLは、インターフェースにアイピーアドレスがあって、up、upになっていれば、ルーティングプロトコルがなくても自動で載ります。"},
+   {"sc": 2, "sp": "先生", "t": "次に、かっこの中の数字です。例えば、かっこの中に110、スラッシュ、2と書いてあったら、前の110がAD、アドミニストレーティブディスタンス、後ろの2がメトリックです。メトリックは、そのプロトコルで測った、目的地までの遠さです。", "y": "次に、かっこの中の数字です。例えば、かっこの中に110、スラッシュ、2と書いてあったら、前の110がエーディー、アドミニストレーティブディスタンス、後ろの2がメトリックです。メトリックは、そのプロトコルで測った、目的地までの遠さです。"},
+   {"sc": 2, "sp": "先生", "t": "そして、viaの後ろはネクストホップ、つまり次に渡すルーターのアドレスです。", "y": "そして、ヴィアの後ろはネクストホップ、つまり次に渡すルーターのアドレスです。"},
+   {"sc": 2, "sp": "先生", "t": "ADは、経路の信頼度です。小さいほど信頼できます。直接接続が0、スタティックが1、EIGRPが90、OSPFが110、RIPが120です。255は信頼しないという意味で、その経路は使われません。", "y": "エーディーは、経路の信頼度です。小さいほど信頼できます。直接接続が0、スタティックが1、イーアイジーアールピーが90、オーエスピーエフが110、リップが120です。255は信頼しないという意味で、その経路は使われません。"},
+   {"sc": 2, "sp": "先生", "t": "ほかに、インターネットで使うBGPというプロトコルもあって、外部のeBGPが20、内部のiBGPが200です。", "y": "ほかに、インターネットで使うビージーピーというプロトコルもあって、外部のイービージーピーが20、内部のアイビージーピーが200です。"},
+   {"sc": 2, "sp": "生徒", "t": "数字がたくさんで大変です…"},
+   {"sc": 2, "sp": "先生", "t": "よく出るのは、スタティック1、EIGRP90、OSPF110、RIP120の4つです。ADからプロトコルを当てる問題も出ます。90ならEIGRP。RIPなのに90と書いてあったら、ADが変更されている、と分かります。", "y": "よく出るのは、スタティック1、イーアイジーアールピー90、オーエスピーエフ110、リップ120の4つです。エーディーからプロトコルを当てる問題も出ます。90ならイーアイジーアールピー。リップなのに90と書いてあったら、エーディーが変更されている、と分かります。"},
+   {"sc": 2, "sp": "先生", "t": "スタティックの5/0のように、1以外の数字なら、ADを指定して設定されています。", "y": "スタティックの5スラッシュ0のように、1以外の数字なら、エーディーを指定して設定されています。"},
+   {"sc": 3, "sp": "先生", "t": "では、いよいよ経路の選び方。順番は3つです。"},
+   {"sc": 3, "sp": "先生", "t": "1つ目、ロンゲストマッチ。宛先を含む経路の中で、プレフィックスが一番長い、つまりスラッシュの数字が一番大きい経路を選びます。プレフィックスが長いほど、範囲が狭くて、宛先をより具体的に指しているからです。住所で言えば、「神奈川県」より「〇〇市〇〇町」のほうが確かですよね。"},
+   {"sc": 3, "sp": "先生", "t": "2つ目、プレフィックスが同じなら、ADが小さいほう。同じ192.168.5.0/24をOSPFとEIGRPから学んだら、90のEIGRPが勝ちます。", "y": "2つ目、プレフィックスが同じなら、エーディーが小さいほう。同じ192、168、5、0スラッシュ24をオーエスピーエフとイーアイジーアールピーから学んだら、90のイーアイジーアールピーが勝ちます。"},
+   {"sc": 3, "sp": "先生", "t": "3つ目、ADも同じなら、メトリックが小さいほう。メトリックもプロトコルが違うと計算方法が違って比べられないので、先にADで比べるんです。", "y": "3つ目、エーディーも同じなら、メトリックが小さいほう。メトリックもプロトコルが違うと計算方法が違って比べられないので、先にエーディーで比べるんです。"},
+   {"sc": 3, "sp": "生徒", "t": "長さ、AD、メトリック、の順ですね。", "y": "長さ、エーディー、メトリック、の順ですね。"},
+   {"sc": 3, "sp": "先生", "t": "その通り。そしてメトリックまで同じ経路が2本あれば、両方に負荷分散します。等コストロードバランスと言います。"},
+   {"sc": 4, "sp": "先生", "t": "ロンゲストマッチの一番のひっかけは、含むかどうかの確認です。例えば、宛先192.168.12.16。", "y": "ロンゲストマッチの一番のひっかけは、含むかどうかの確認です。例えば、宛先192、168、12、16。"},
+   {"sc": 4, "sp": "先生", "t": "まず、OSPFの/28です。/28は、アドレスが16個のまとまりなので、範囲は0から15。16は入りません。次に、RIPの/27は32個なので、0から31。16は入ります。EIGRPの/24は、0から255なので、もちろん入ります。", "y": "まず、オーエスピーエフのスラッシュ28です。スラッシュ28は、アドレスが16個のまとまりなので、範囲は0から15。16は入りません。次に、リップのスラッシュ27は32個なので、0から31。16は入ります。イーアイジーアールピーのスラッシュ24は、0から255なので、もちろん入ります。"},
+   {"sc": 4, "sp": "先生", "t": "含む中で一番長いのは、RIPの/27です。ADはRIPが一番大きいですが、ロンゲストマッチが先なので、RIPが選ばれます。", "y": "含む中で一番長いのは、リップのスラッシュ27です。エーディーはリップが一番大きいですが、ロンゲストマッチが先なので、リップが選ばれます。"},
+   {"sc": 4, "sp": "生徒", "t": "一番長い/28を選びそうになりました…", "y": "一番長いスラッシュ28を選びそうになりました…"},
+   {"sc": 4, "sp": "先生", "t": "みんな引っかかります。まず範囲を計算して、含まない経路を消してから、長さを比べましょう。"},
+   {"sc": 5, "sp": "先生", "t": "最後に、特別な経路です。どの経路にも当てはまらないときは、デフォルトルート、0.0.0.0/0を使います。何でも含みますが、長さは0なので、最後の手段です。", "y": "最後に、特別な経路です。どの経路にも当てはまらないときは、デフォルトルート、0、0、0、0スラッシュ0を使います。何でも含みますが、長さは0なので、最後の手段です。"},
+   {"sc": 5, "sp": "先生", "t": "デフォルトルートもなく、Gateway of last resort is not setと出ていたら、そのパケットは破棄されます。", "y": "デフォルトルートもなく、ゲートウェイ、オブ、ラストリゾート is not setと出ていたら、そのパケットは破棄されます。"},
+   {"sc": 5, "sp": "先生", "t": "Null0に向かう経路は、ごみ箱です。そこに一致したパケットは捨てられます。", "y": "ヌルゼロに向かう経路は、ごみ箱です。そこに一致したパケットは捨てられます。"},
+   {"sc": 5, "sp": "先生", "t": "それから、今使っている経路が使えなくなったら、残った候補の中から、また同じ順番、ロンゲストマッチ、AD、メトリックの順で選び直します。例えば、OSPFの経路どうしなら、合計コストが一番小さい経路に切り替わります。", "y": "それから、今使っている経路が使えなくなったら、残った候補の中から、また同じ順番、ロンゲストマッチ、エーディー、メトリックの順で選び直します。例えば、オーエスピーエフの経路どうしなら、合計コストが一番小さい経路に切り替わります。"},
+   {"sc": 6, "sp": "先生", "t": "ここで小テストです。ルーティングテーブルで、最初に優先されるルールはどれでしょう？画面で選んでください。", "w": 1},
+   {"sc": 6, "sp": "先生", "t": "正解は、ロンゲストマッチ、最長一致です。"},
+   {"sc": 7, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 7, "sp": "先生", "t": "1つ目。CとLは直接接続とローカル、Sはスタティック、OはOSPF、DはEIGRP、RはRIP。かっこはADとメトリック、viaはネクストホップ。", "y": "1つ目。CとLは直接接続とローカル、Sはスタティック、Oはオーエスピーエフ、Dはイーアイジーアールピー、Rはリップ。かっこはエーディーとメトリック、ヴィアはネクストホップ。"},
+   {"sc": 7, "sp": "先生", "t": "2つ目。ADはスタティック1、EIGRP90、OSPF110、RIP120。", "y": "2つ目。エーディーはスタティック1、イーアイジーアールピー90、オーエスピーエフ110、リップ120。"},
+   {"sc": 7, "sp": "先生", "t": "3つ目。選ぶ順は、ロンゲストマッチ、AD、メトリック。まず含むか確認。なければデフォルトルート、それもなければ破棄。", "y": "3つ目。選ぶ順は、ロンゲストマッチ、エーディー、メトリック。まず含むか確認。なければデフォルトルート、それもなければ破棄。"},
+   {"sc": 7, "sp": "生徒", "t": "範囲を先に計算する、を徹底します！"},
+   {"sc": 7, "sp": "先生", "t": "それが一番大事です。次回は、手で経路を書く、スタティックルートを学びます。お疲れさまでした。"}
+  ],
+  "seg": [
+   [0.0, 13.099],
+   [13.449, 7.115],
+   [20.914, 21.546667],
+   [42.811, 3.604958],
+   [46.766, 17.589333],
+   [64.705, 16.116958],
+   [81.172, 17.792],
+   [99.314, 5.44],
+   [105.104, 18.272],
+   [123.726, 9.194667],
+   [133.271, 2.293],
+   [135.914, 19.563],
+   [155.827, 6.571],
+   [162.748, 4.043],
+   [167.141, 22.506667],
+   [189.997, 15.893],
+   [206.24, 10.912],
+   [217.502, 4.448],
+   [222.3, 8.011],
+   [230.661, 10.357],
+   [241.368, 24.32],
+   [266.038, 10.304],
+   [276.692, 3.979],
+   [281.021, 6.677],
+   [288.048, 15.072],
+   [303.47, 8.373],
+   [312.193, 5.237],
+   [317.78, 17.898667],
+   [336.029, 7.605],
+   [343.984, 3.690958],
+   [348.025, 1.834958],
+   [350.21, 13.483],
+   [364.043, 8.171],
+   [372.564, 10.08],
+   [382.994, 3.616],
+   [386.96, 7.136]
+  ]
+ }
+}

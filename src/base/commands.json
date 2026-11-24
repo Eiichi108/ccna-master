@@ -1,0 +1,226 @@
+[
+ {"r": "C", "id": "c1", "g": "特権EXECモードに入る", "p": "R1>", "re": "^en(able)?$", "ans": "enable", "e": "enable（en）で「#」の特権EXECモードに入ります。"},
+ {"r": "C", "id": "c2", "g": "グローバルコンフィギュレーションモードに入る", "p": "R1#", "re": "^conf\\w* t\\w*$", "ans": "configure terminal", "e": "conf t で設定モードに入ります。"},
+ {"r": "C", "id": "c3", "g": "ホスト名をR1にする", "p": "Router(config)#", "re": "^hostname r1$", "ans": "hostname R1", "e": "プロンプトの表示が R1(config)# に変わります。"},
+ {
+  "r": "C",
+  "id": "c4",
+  "g": "特権モードのパスワードを、ハッシュ化して Cisco123 に設定する",
+  "p": "R1(config)#",
+  "re": "^enable secret cisco123$",
+  "ans": "enable secret Cisco123",
+  "e": "enable secret はハッシュ化して保存されるので、enable password より安全です。"
+ },
+ {
+  "r": "C",
+  "id": "c5",
+  "g": "GigabitEthernet0/0のインターフェース設定に入る",
+  "p": "R1(config)#",
+  "re": "^int\\w* g0\\/0$",
+  "ans": "interface g0/0",
+  "e": "interface gigabitEthernet 0/0 を省略して int g0/0 と打てます。"
+ },
+ {
+  "r": "C",
+  "id": "c6",
+  "g": "インターフェースにIPアドレス 192.168.1.1/24 を設定する",
+  "p": "R1(config-if)#",
+  "re": "^ip add\\w* 192\\.168\\.1\\.1 255\\.255\\.255\\.0$",
+  "ans": "ip address 192.168.1.1 255.255.255.0",
+  "e": "Cisco IOSでは、プレフィックス長ではなくサブネットマスクで書きます。"
+ },
+ {
+  "r": "C",
+  "id": "c7",
+  "g": "インターフェースを有効にする（ルーターは初期状態で無効）",
+  "p": "R1(config-if)#",
+  "re": "^no shut(d\\w*)?$",
+  "ans": "no shutdown",
+  "e": "ルーターのインターフェースは、初期状態ではshutdown（無効）になっています。"
+ },
+ {
+  "r": "C",
+  "id": "c8",
+  "g": "実行中の設定を保存する（起動時の設定にコピーする）",
+  "p": "R1#",
+  "re": "^(copy run\\S* start\\S*|wr(ite)?( mem\\w*)?)$",
+  "ans": "copy running-config startup-config",
+  "e": "running-configは電源を切ると消えるので、startup-configにコピーして保存します。"
+ },
+ {"r": "C", "id": "c9", "g": "ルーティングテーブルを表示する", "p": "R1#", "re": "^sh\\w* ip ro\\w*$", "ans": "show ip route", "e": "コード（C/L/S/O/D）と [AD/メトリック] を読めるようにしましょう。"},
+ {
+  "r": "C",
+  "id": "c10",
+  "g": "全インターフェースのIPと状態を一覧で表示する",
+  "p": "R1#",
+  "re": "^sh\\w* ip int\\w* br\\w*$",
+  "ans": "show ip interface brief",
+  "e": "Status（L1）とProtocol（L2）が両方 up なら正常です。"
+ },
+ {"r": "C", "id": "c11", "g": "VLAN 10を作る", "p": "SW1(config)#", "re": "^vlan 10$", "ans": "vlan 10", "e": "実行すると SW1(config-vlan)# に変わります。"},
+ {"r": "C", "id": "c12", "g": "VLANの名前をSALESにする", "p": "SW1(config-vlan)#", "re": "^name sales$", "ans": "name SALES", "e": ""},
+ {"r": "C", "id": "c13", "g": "ポートをアクセスポートに固定する", "p": "SW1(config-if)#", "re": "^sw\\w* mode acc\\w*$", "ans": "switchport mode access", "e": ""},
+ {"r": "C", "id": "c14", "g": "アクセスポートをVLAN 10に所属させる", "p": "SW1(config-if)#", "re": "^sw\\w* acc\\w* vlan 10$", "ans": "switchport access vlan 10", "e": ""},
+ {"r": "C", "id": "c15", "g": "ポートをトランクに固定する", "p": "SW1(config-if)#", "re": "^sw\\w* mode trunk$", "ans": "switchport mode trunk", "e": ""},
+ {
+  "r": "C",
+  "id": "c16",
+  "g": "トランクでVLAN 10と20だけを通す",
+  "p": "SW1(config-if)#",
+  "re": "^sw\\w* trunk allowed vlan 10,20$",
+  "ans": "switchport trunk allowed vlan 10,20",
+  "e": "あとからVLANを足すときは allowed vlan add 30 のように書きます（addを忘れると上書きされます）。"
+ },
+ {
+  "r": "C",
+  "id": "c17",
+  "g": "VLANと所属するポートの一覧を表示する",
+  "p": "SW1#",
+  "re": "^sh\\w* vlan br\\w*$",
+  "ans": "show vlan brief",
+  "e": "トランクのポートはこの一覧に表示されません。show interfaces trunk で確認します。"
+ },
+ {"r": "C", "id": "c18", "g": "ポートに音声VLAN 20を設定する", "p": "SW1(config-if)#", "re": "^sw\\w* voice vlan 20$", "ans": "switchport voice vlan 20", "e": ""},
+ {
+  "r": "C",
+  "id": "c19",
+  "g": "192.168.2.0/24 宛ての経路を、ネクストホップ10.1.1.2で設定する",
+  "p": "R1(config)#",
+  "re": "^ip route 192\\.168\\.2\\.0 255\\.255\\.255\\.0 10\\.1\\.1\\.2$",
+  "ans": "ip route 192.168.2.0 255.255.255.0 10.1.1.2",
+  "e": ""
+ },
+ {
+  "r": "C",
+  "id": "c20",
+  "g": "デフォルトルートを、ネクストホップ203.0.113.1で設定する",
+  "p": "R1(config)#",
+  "re": "^ip route 0\\.0\\.0\\.0 0\\.0\\.0\\.0 203\\.0\\.113\\.1$",
+  "ans": "ip route 0.0.0.0 0.0.0.0 203.0.113.1",
+  "e": ""
+ },
+ {"r": "C", "id": "c21", "g": "OSPFのプロセス1を開始する", "p": "R1(config)#", "re": "^router ospf 1$", "ans": "router ospf 1", "e": "プロセスIDは、ルーターの中だけで使う番号です。"},
+ {
+  "r": "C",
+  "id": "c22",
+  "g": "ルーターIDを1.1.1.1にする",
+  "p": "R1(config-router)#",
+  "re": "^router-id 1\\.1\\.1\\.1$",
+  "ans": "router-id 1.1.1.1",
+  "e": "ネイバーが成立したあとに変更した場合は、clear ip ospf process で反映させます。"
+ },
+ {
+  "r": "C",
+  "id": "c23",
+  "g": "10.1.1.0/24のインターフェースをエリア0に入れる",
+  "p": "R1(config-router)#",
+  "re": "^net\\w* 10\\.1\\.1\\.0 0\\.0\\.0\\.255 area 0$",
+  "ans": "network 10.1.1.0 0.0.0.255 area 0",
+  "e": "サブネットマスクではなく、ワイルドカードマスクで書きます。"
+ },
+ {
+  "r": "C",
+  "id": "c24",
+  "g": "OSPFのネイバーの一覧を表示する",
+  "p": "R1#",
+  "re": "^sh\\w* ip ospf nei\\w*$",
+  "ans": "show ip ospf neighbor",
+  "e": "Stateが FULL/DR や 2WAY/DROTHER のように表示されます。"
+ },
+ {"r": "C", "id": "c25", "g": "インターフェースをNATの内側に設定する", "p": "R1(config-if)#", "re": "^ip nat inside$", "ans": "ip nat inside", "e": ""},
+ {
+  "r": "C",
+  "id": "c26",
+  "g": "ACL 1に一致する通信を、g0/1のIPアドレスを使ってPATで変換する",
+  "p": "R1(config)#",
+  "re": "^ip nat inside source list 1 int\\w* g0\\/1 overload$",
+  "ans": "ip nat inside source list 1 interface g0/1 overload",
+  "e": ""
+ },
+ {
+  "r": "C",
+  "id": "c27",
+  "g": "DHCPのメッセージを10.0.0.5のサーバーへ転送する（DHCPリレー）",
+  "p": "R1(config-if)#",
+  "re": "^ip helper-add\\w* 10\\.0\\.0\\.5$",
+  "ans": "ip helper-address 10.0.0.5",
+  "e": "端末側（DHCPのDiscoverを受け取る側）のインターフェースに設定します。"
+ },
+ {
+  "r": "C",
+  "id": "c28",
+  "g": "標準ACL 1で 192.168.1.0/24 を許可する",
+  "p": "R1(config)#",
+  "re": "^access-list 1 permit 192\\.168\\.1\\.0 0\\.0\\.0\\.255$",
+  "ans": "access-list 1 permit 192.168.1.0 0.0.0.255",
+  "e": ""
+ },
+ {
+  "r": "C",
+  "id": "c29",
+  "g": "ACL 110をインターフェースの受信方向に適用する",
+  "p": "R1(config-if)#",
+  "re": "^ip access-group 110 in$",
+  "ans": "ip access-group 110 in",
+  "e": "VTYラインに適用するときは access-class を使います。"
+ },
+ {
+  "r": "C",
+  "id": "c30",
+  "g": "ポートセキュリティを有効にする",
+  "p": "SW1(config-if)#",
+  "re": "^sw\\w* port-sec\\w*$",
+  "ans": "switchport port-security",
+  "e": "トランクやdynamicのポートでは有効にできないので、先にアクセスポートにしておきます。"
+ },
+ {
+  "r": "C",
+  "id": "c31",
+  "g": "ポートセキュリティで許可するMACアドレスを2つまでにする",
+  "p": "SW1(config-if)#",
+  "re": "^sw\\w* port-sec\\w* max\\w* 2$",
+  "ans": "switchport port-security maximum 2",
+  "e": ""
+ },
+ {"r": "C", "id": "c32", "g": "VTYラインでSSHだけを許可する", "p": "R1(config-line)#", "re": "^transport input ssh$", "ans": "transport input ssh", "e": ""},
+ {
+  "r": "C",
+  "id": "c33",
+  "g": "SSH用に2048ビットのRSA鍵を作る",
+  "p": "R1(config)#",
+  "re": "^crypto key gen\\w* rsa( mod\\w* 2048)?$",
+  "ans": "crypto key generate rsa modulus 2048",
+  "e": "鍵を作る前に、ホスト名とドメイン名（ip domain-name）が必要です。"
+ },
+ {
+  "r": "C",
+  "id": "c34",
+  "g": "STPをRapid PVST+にする",
+  "p": "SW1(config)#",
+  "re": "^spanning-tree mode rapid-pvst$",
+  "ans": "spanning-tree mode rapid-pvst",
+  "e": ""
+ },
+ {"r": "C", "id": "c35", "g": "アクセスポートでPortFastを有効にする", "p": "SW1(config-if)#", "re": "^spanning-tree portfast$", "ans": "spanning-tree portfast", "e": ""},
+ {
+  "r": "C",
+  "id": "c36",
+  "g": "BPDUガードを有効にする",
+  "p": "SW1(config-if)#",
+  "re": "^spanning-tree bpduguard enable$",
+  "ans": "spanning-tree bpduguard enable",
+  "e": ""
+ },
+ {
+  "r": "C",
+  "id": "c37",
+  "g": "ポートをLACP（active）でEtherChannelのグループ1に入れる",
+  "p": "SW1(config-if-range)#",
+  "re": "^channel-group 1 mode active$",
+  "ans": "channel-group 1 mode active",
+  "e": ""
+ },
+ {"r": "C", "id": "c38", "g": "IPv6のルーティングを有効にする", "p": "R1(config)#", "re": "^ipv6 unicast-routing$", "ans": "ipv6 unicast-routing", "e": ""},
+ {"r": "C", "id": "c39", "g": "10.1.1.1をNTPサーバーとして使う", "p": "R1(config)#", "re": "^ntp server 10\\.1\\.1\\.1$", "ans": "ntp server 10.1.1.1", "e": ""},
+ {"r": "C", "id": "c40", "g": "隣につながっているCisco機器の一覧を表示する", "p": "R1#", "re": "^sh\\w* cdp nei\\w*$", "ans": "show cdp neighbors", "e": ""}
+]

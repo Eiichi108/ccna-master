@@ -1,0 +1,94 @@
+{
+ "r": "TB",
+ "lt": "nl46",
+ "n": 47,
+ "t": "アンダーレイ・オーバーレイ・ファブリック",
+ "pages": [
+  {
+   "t": "3つの言葉",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 230\" role=\"img\" aria-label=\"アンダーレイ・オーバーレイ・ファブリック\"><rect x=\"20\" y=\"20\" width=\"320\" height=\"60\" rx=\"12\" fill=\"#00a05a\" opacity=\".12\" stroke=\"#00a05a\" stroke-width=\"2\" stroke-dasharray=\"6 5\"/><text x=\"180\" y=\"44\" text-anchor=\"middle\" style=\"font:800 13.5px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">オーバーレイ（仮想・トンネル）</text><text x=\"180\" y=\"66\" text-anchor=\"middle\" style=\"font:700 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">VXLANなどで作る論理ネットワーク</text><rect x=\"20\" y=\"100\" width=\"320\" height=\"70\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><g transform=\"translate(60,136) scale(0.55)\"><g transform=\"translate(0,0)\"><ellipse cx=\"0\" cy=\"20\" rx=\"32\" ry=\"4\" fill=\"var(--ink)\" opacity=\".12\"/><rect x=\"-32\" y=\"-14\" width=\"64\" height=\"30\" rx=\"5\" fill=\"#00a05a\"/><rect x=\"-24\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"-16\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"-8\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"0\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"8\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"16\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"24\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><path d=\"M-14-6h18l-4-4M14-2h-18l4 4\" stroke=\"#fff\" stroke-width=\"2.2\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></g></g><g transform=\"translate(140,136) scale(0.55)\"><g transform=\"translate(0,0)\"><ellipse cx=\"0\" cy=\"20\" rx=\"32\" ry=\"4\" fill=\"var(--ink)\" opacity=\".12\"/><rect x=\"-32\" y=\"-14\" width=\"64\" height=\"30\" rx=\"5\" fill=\"#00a05a\"/><rect x=\"-24\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"-16\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"-8\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"0\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"8\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"16\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"24\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><path d=\"M-14-6h18l-4-4M14-2h-18l4 4\" stroke=\"#fff\" stroke-width=\"2.2\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></g></g><g transform=\"translate(220,136) scale(0.55)\"><g transform=\"translate(0,0)\"><ellipse cx=\"0\" cy=\"20\" rx=\"32\" ry=\"4\" fill=\"var(--ink)\" opacity=\".12\"/><rect x=\"-32\" y=\"-14\" width=\"64\" height=\"30\" rx=\"5\" fill=\"#00a05a\"/><rect x=\"-24\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"-16\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"-8\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"0\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"8\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"16\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"24\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><path d=\"M-14-6h18l-4-4M14-2h-18l4 4\" stroke=\"#fff\" stroke-width=\"2.2\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></g></g><g transform=\"translate(300,136) scale(0.55)\"><g transform=\"translate(0,0)\"><ellipse cx=\"0\" cy=\"20\" rx=\"32\" ry=\"4\" fill=\"var(--ink)\" opacity=\".12\"/><rect x=\"-32\" y=\"-14\" width=\"64\" height=\"30\" rx=\"5\" fill=\"#00a05a\"/><rect x=\"-24\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"-16\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"-8\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"0\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"8\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"16\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"24\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><path d=\"M-14-6h18l-4-4M14-2h-18l4 4\" stroke=\"#fff\" stroke-width=\"2.2\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></g></g><path d=\"M80 136h40M160 136h40M240 136h40\" stroke=\"var(--ink)\" stroke-width=\"2\"/><text x=\"180\" y=\"162\" text-anchor=\"middle\" style=\"font:800 11.5px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">アンダーレイ（物理：スイッチ・ケーブル・IPルーティング）</text><text x=\"180\" y=\"198\" text-anchor=\"middle\" style=\"font:800 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">アンダーレイ＋オーバーレイ＝ファブリック</text><text x=\"180\" y=\"220\" text-anchor=\"middle\" style=\"font:700 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">配線を変えずに論理ネットワークを作り変えられる</text></svg>",
+   "b": "<b>アンダーレイ</b>：実際の物理ネットワーク。<b>オーバーレイ</b>：その上にトンネルで作る仮想ネットワーク。<b>ファブリック</b>：両方を合わせた全体。 オーバーレイの利点は、<b>物理ネットワークを変えずに、論理的なネットワークを柔軟に作り変えられる</b>ことです。",
+   "p": "道路＝アンダーレイ、バスの路線＝オーバーレイ。"
+  },
+  {
+   "t": "SD-Access",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"SD-Access\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Cisco SD-Access</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">コントローラー：Catalyst Center</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">VXLAN</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">オーバーレイでデータを運ぶ</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">LISP</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">オーバーレイの制御</text></svg>",
+   "b": "<b>VXLAN</b>（Virtual Extensible LAN）、<b>LISP</b>（Locator/ID Separation Protocol）。 コントローラーが<b>エッジ機器とやりとりするAPIはサウスバウンド（southbound）</b>。Catalyst Centerの<b>全体のヘルスダッシュボード</b>は、<b>上位10の全体的な問題の概要</b>を見せます。",
+   "p": "エッジデバイスとのやりとり＝サウスバウンドAPI。"
+  },
+  {
+   "t": "仮想化とネットワーク",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 220\" role=\"img\" aria-label=\"仮想マシンと仮想スイッチ\"><rect x=\"40\" y=\"14\" width=\"280\" height=\"150\" rx=\"14\" fill=\"#3d4450\" opacity=\".06\" stroke=\"var(--line)\" stroke-width=\"2\"/><text x=\"180\" y=\"34\" text-anchor=\"middle\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">物理サーバー（ハイパーバイザー）</text><rect x=\"60\" y=\"48\" width=\"70\" height=\"40\" rx=\"6\" fill=\"#0a5cff\" opacity=\".2\"/><text x=\"95\" y=\"74\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">VM</text><rect x=\"150\" y=\"48\" width=\"70\" height=\"40\" rx=\"6\" fill=\"#0a5cff\" opacity=\".2\"/><text x=\"185\" y=\"74\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">VM</text><rect x=\"240\" y=\"48\" width=\"70\" height=\"40\" rx=\"6\" fill=\"#0a5cff\" opacity=\".2\"/><text x=\"275\" y=\"74\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">VM</text><rect x=\"100\" y=\"104\" width=\"160\" height=\"30\" rx=\"6\" fill=\"#00a05a\" opacity=\".3\"/><text x=\"180\" y=\"124\" text-anchor=\"middle\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">仮想スイッチ</text><path d=\"M95 88L150 104M185 88v16M275 88L220 104M180 134v34\" stroke=\"var(--ink)\" stroke-width=\"2\"/><text x=\"214\" y=\"152\" text-anchor=\"start\" style=\"font:700 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">物理NIC</text><g transform=\"translate(180,190) scale(0.6)\"><g transform=\"translate(0,0)\"><ellipse cx=\"0\" cy=\"20\" rx=\"32\" ry=\"4\" fill=\"var(--ink)\" opacity=\".12\"/><rect x=\"-32\" y=\"-14\" width=\"64\" height=\"30\" rx=\"5\" fill=\"#00a05a\"/><rect x=\"-24\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"-16\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"-8\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"0\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"8\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"16\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"24\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><path d=\"M-14-6h18l-4-4M14-2h-18l4 4\" stroke=\"#fff\" stroke-width=\"2.2\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></g></g><text x=\"250\" y=\"194\" text-anchor=\"start\" style=\"font:700 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">外のネットワーク</text></svg>",
+   "b": "VMは、物理ネットワークにつながったハイパーバイザー上の<b>ソフトウェアスイッチ</b>に接続します。 VMは、<b>物理的にネットワークにつながったハイパーバイザー上のソフトウェアスイッチ</b>を通ってネットワークにつながります。",
+   "p": "1台で複数のOSを独立して動かせる。"
+  },
+  {
+   "t": "自動化の利点",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 90.5\" role=\"img\" aria-label=\"自動化の利点\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">自動化で変わること</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">設定ミスが減る・設定をそろえやすい・変更が速い・記</text><text x=\"24\" y=\"67.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">録が残る</text></svg>",
+   "b": "自動化すると、<b>手作業による設定ミスが減り、設定をそろえやすく</b>なります。",
+   "p": "手作業の設定ミスが減る。"
+  },
+  {
+   "t": "小テスト",
+   "quiz": {
+    "q": "オーバーレイで、データを運ぶのによく使われるトンネル技術は？",
+    "o": [
+     ["VXLAN", "<g><g transform=\"translate(0,0)\"><rect x=\"-40.0\" y=\"-13\" width=\"80\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#00a05a\">VXLAN</text></g></g>"],
+     ["STP", "<g><g transform=\"translate(0,0)\"><rect x=\"-40.0\" y=\"-13\" width=\"80\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#3d4450\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#3d4450\">STP</text></g></g>"],
+     ["ARP", "<g><g transform=\"translate(0,0)\"><rect x=\"-40.0\" y=\"-13\" width=\"80\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#0a5cff\">ARP</text></g></g>"]
+    ],
+    "a": 0,
+    "e": "正解は<b>VXLAN</b>。SD-Accessでは制御にLISPを使います。"
+   }
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 182.72549019607843\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">アンダーレイ＝物理・オーバーレイ＝仮想</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">合わせてファブリック</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"39.72549019607843\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"94.22549019607843\" text-anchor=\"start\" style=\"font:800 13.7px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">SD-Access：Catalyst Center・VXLAN・LISP</text><rect x=\"10\" y=\"115.22549019607843\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"140.72549019607843\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">VM→仮想スイッチ→物理NIC</text><text x=\"24\" y=\"159.72549019607843\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">自動化＝ミスが減り設定がそろう</text></svg>",
+   "b": "次回は「REST APIとJSON」。",
+   "p": "一問一答の「自動化とプログラマビリティ」で確かめましょう。"
+  }
+ ],
+ "cls": {
+  "a": "audio/l47/",
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "今日は短めの回です。アンダーレイ、オーバーレイ、ファブリックという言葉を学びます。"},
+   {"sc": 1, "sp": "先生", "t": "アンダーレイは、実際の物理ネットワークです。スイッチやケーブル、IPのルーティングがここです。", "y": "アンダーレイは、実際の物理ネットワークです。スイッチやケーブル、アイピーのルーティングがここです。"},
+   {"sc": 1, "sp": "先生", "t": "オーバーレイは、アンダーレイの上に、トンネルで作る仮想的なネットワークです。そして、アンダーレイとオーバーレイを合わせた全体を、ファブリックと言います。"},
+   {"sc": 1, "sp": "生徒", "t": "道路がアンダーレイで、その上を走るバスの路線がオーバーレイ、みたいな感じですか？"},
+   {"sc": 1, "sp": "先生", "t": "とても良いたとえです。オーバーレイの利点は、物理的な配線を変えずに、論理的なネットワークを柔軟に作り変えられることです。"},
+   {"sc": 2, "sp": "先生", "t": "これを実際に使っているのが、CiscoのSD-Accessです。コントローラーには、前回のCatalyst Centerを使います。オーバーレイのトンネルでデータを運ぶのはVXLAN、バスのたとえで言えば、バスそのものです。そして、どの宛先がどこにいるかを調べる、案内係のような制御の役割がLISPです。", "y": "これを実際に使っているのが、シスコのエスディーアクセスです。コントローラーには、前回のカタリストセンターを使います。オーバーレイのトンネルでデータを運ぶのはブイエックスラン、バスのたとえで言えば、バスそのものです。そして、どの宛先がどこにいるかを調べる、案内係のような制御の役割がリスプです。"},
+   {"sc": 2, "sp": "先生", "t": "機器とやりとりするAPIは、前回のサウスバウンドAPIです。", "y": "機器とやりとりするエーピーアイは、前回のサウスバウンドエーピーアイです。"},
+   {"sc": 3, "sp": "先生", "t": "仮想環境では、仮想マシンは、ハイパーバイザーの中にある、ソフトウェアのスイッチ、仮想スイッチにつながります。そこから、物理のNIC、つまりサーバーのネットワークの差し込み口を通って、外のネットワークへ出ます。", "y": "仮想環境では、仮想マシンは、ハイパーバイザーの中にある、ソフトウェアのスイッチ、仮想スイッチにつながります。そこから、物理のニック、つまりサーバーのネットワークの差し込み口を通って、外のネットワークへ出ます。"},
+   {"sc": 3, "sp": "先生", "t": "1台の物理サーバーで、複数のOSを独立して動かせることと、仮想スイッチが、仮想マシンと物理ネットワークの間で通信を運ぶこと。この2つが仮想化の基本です。"},
+   {"sc": 4, "sp": "先生", "t": "最後に、自動化で変わることです。手作業による設定ミスが減り、たくさんの機器を同じ設定に保てます。変更も速くなり、記録も残せます。"},
+   {"sc": 5, "sp": "先生", "t": "ここで小テストです。オーバーレイネットワークで、データを運ぶのによく使われるトンネル技術はどれでしょう？画面で選んでください。", "w": 1},
+   {"sc": 5, "sp": "先生", "t": "正解はVXLANです。", "y": "正解はブイエックスランです。"},
+   {"sc": 6, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 6, "sp": "先生", "t": "1つ目。アンダーレイは物理、オーバーレイはトンネルの仮想、合わせてファブリック。"},
+   {"sc": 6, "sp": "先生", "t": "2つ目。SD-Accessは、Catalyst Center、VXLAN、LISP。", "y": "2つ目。エスディーアクセスは、カタリストセンター、ブイエックスラン、リスプ。"},
+   {"sc": 6, "sp": "先生", "t": "3つ目。仮想マシンは、ハイパーバイザーの仮想スイッチにつながる。自動化でミスが減り、設定がそろう。"},
+   {"sc": 6, "sp": "生徒", "t": "道路とバスのたとえで覚えます！"},
+   {"sc": 6, "sp": "先生", "t": "いいですね。次回は、REST APIとJSONを学びます。お疲れさまでした。", "y": "いいですね。次回は、レスト エーピーアイとジェイソンを学びます。お疲れさまでした。"}
+  ],
+  "seg": [
+   [0.0, 6.133],
+   [6.483, 6.944],
+   [13.777, 10.56],
+   [24.687, 6.709],
+   [31.746, 8.992],
+   [41.088, 21.077333],
+   [62.515, 4.821],
+   [67.686, 15.690667],
+   [83.727, 12.468958],
+   [96.546, 10.795],
+   [107.691, 8.811],
+   [116.852, 2.005],
+   [119.207, 1.835],
+   [121.392, 5.76],
+   [127.502, 5.931],
+   [133.783, 7.893],
+   [142.026, 2.4],
+   [144.776, 6.251]
+  ]
+ }
+}

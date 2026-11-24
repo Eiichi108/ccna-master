@@ -1,0 +1,114 @@
+{
+ "r": "TB",
+ "lt": "nl36",
+ "n": 37,
+ "t": "SNMP・Syslog",
+ "pages": [
+  {
+   "t": "SNMPとは",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200\" role=\"img\" aria-label=\"SNMPのしくみ\"><g transform=\"translate(60,70) scale(0.8)\"><g transform=\"translate(0,0)\"><ellipse cx=\"0\" cy=\"30\" rx=\"22\" ry=\"4\" fill=\"var(--ink)\" opacity=\".12\"/><rect x=\"-20\" y=\"-28\" width=\"40\" height=\"56\" rx=\"5\" fill=\"#ffb400\"/><path d=\"M-12-16h24M-12-6h24M-12 4h24\" stroke=\"#fff\" stroke-width=\"3\" stroke-linecap=\"round\" opacity=\".85\"/><circle cx=\"10\" cy=\"17\" r=\"3\" fill=\"#fff\"/><path d=\"M-12 14l8 4-8 4z\" fill=\"#fff\"/></g></g><text x=\"60\" y=\"108\" text-anchor=\"middle\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">マネージャー</text><g transform=\"translate(280,70) scale(0.8)\"><g transform=\"translate(0,0)\"><ellipse cx=\"0\" cy=\"22\" rx=\"28\" ry=\"4\" fill=\"var(--ink)\" opacity=\".12\"/><path d=\"M-28-6v14c0 8 12 14 28 14s28-6 28-14v-14\" fill=\"#e6261f\"/><ellipse cy=\"-6\" rx=\"28\" ry=\"12\" fill=\"#e6261f\"/><ellipse cy=\"-6\" rx=\"28\" ry=\"12\" fill=\"#fff\" opacity=\".18\"/><path d=\"M-14-6h28M0-14v16M-10-6l-4-4v8zM10-6l4-4v8z\" stroke=\"#fff\" stroke-width=\"2.4\" fill=\"#fff\" stroke-linecap=\"round\"/></g></g><text x=\"280\" y=\"108\" text-anchor=\"middle\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">エージェント（機器）</text><path d=\"M90 70h154\" stroke=\"var(--ink)\" stroke-width=\"3\"/><rect x=\"240\" y=\"122\" width=\"80\" height=\"30\" rx=\"6\" fill=\"#ffb400\" opacity=\".25\"/><text x=\"280\" y=\"142\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">MIB（OID）</text><text x=\"180\" y=\"180\" text-anchor=\"middle\" style=\"font:700 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">CPU・インターフェースの状態などを取得／設定のバックアップにも</text></svg>",
+   "b": "<b>SNMP</b>（Simple Network Management Protocol）で、マネージャーがエージェントの<b>MIB</b>（Management Information Base）を取得します。 <b>MIB</b>は、<b>機器が管理する情報（変数）の集まり</b>です。SNMPは<b>機器を監視・管理する</b>プロトコルです。",
+   "p": "20台のルーターの設定をまとめてバックアップ → SNMP。"
+  },
+  {
+   "t": "ポーリングとTrap",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 220\" role=\"img\" aria-label=\"ポーリング・Trap・Inform\"><g transform=\"translate(50,40) scale(0.7)\"><g transform=\"translate(0,0)\"><ellipse cx=\"0\" cy=\"30\" rx=\"22\" ry=\"4\" fill=\"var(--ink)\" opacity=\".12\"/><rect x=\"-20\" y=\"-28\" width=\"40\" height=\"56\" rx=\"5\" fill=\"#ffb400\"/><path d=\"M-12-16h24M-12-6h24M-12 4h24\" stroke=\"#fff\" stroke-width=\"3\" stroke-linecap=\"round\" opacity=\".85\"/><circle cx=\"10\" cy=\"17\" r=\"3\" fill=\"#fff\"/><path d=\"M-12 14l8 4-8 4z\" fill=\"#fff\"/></g></g><text x=\"50\" y=\"72\" text-anchor=\"middle\" style=\"font:800 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">マネージャー</text><g transform=\"translate(310,40) scale(0.7)\"><g transform=\"translate(0,0)\"><ellipse cx=\"0\" cy=\"22\" rx=\"28\" ry=\"4\" fill=\"var(--ink)\" opacity=\".12\"/><path d=\"M-28-6v14c0 8 12 14 28 14s28-6 28-14v-14\" fill=\"#e6261f\"/><ellipse cy=\"-6\" rx=\"28\" ry=\"12\" fill=\"#e6261f\"/><ellipse cy=\"-6\" rx=\"28\" ry=\"12\" fill=\"#fff\" opacity=\".18\"/><path d=\"M-14-6h28M0-14v16M-10-6l-4-4v8zM10-6l4-4v8z\" stroke=\"#fff\" stroke-width=\"2.4\" fill=\"#fff\" stroke-linecap=\"round\"/></g></g><text x=\"310\" y=\"72\" text-anchor=\"middle\" style=\"font:800 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">機器</text><path d=\"M80 40L275.0 40.0\" stroke=\"#0a5cff\" stroke-width=\"3\" stroke-linecap=\"round\"/><path d=\"M284 40L275.0 35.0L275.0 45.0z\" fill=\"#0a5cff\"/><text x=\"180\" y=\"32\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ポーリング：マネージャーから聞く</text><path d=\"M284 100L89.0 100.0\" stroke=\"#e6261f\" stroke-width=\"3\" stroke-linecap=\"round\"/><path d=\"M80 100L89.0 105.0L89.0 95.0z\" fill=\"#e6261f\"/><text x=\"180\" y=\"92\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:#e6261f;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Trap：機器から通知（送りっぱなし）</text><path d=\"M284 150L89.0 150.0\" stroke=\"#00a05a\" stroke-width=\"3\" stroke-linecap=\"round\"/><path d=\"M80 150L89.0 155.0L89.0 145.0z\" fill=\"#00a05a\"/><text x=\"180\" y=\"142\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Inform：機器から通知</text><path d=\"M80 172L275.0 172.0\" stroke=\"#00a05a\" stroke-width=\"2\" stroke-linecap=\"round\"/><path d=\"M284 172L275.0 167.0L275.0 177.0z\" fill=\"#00a05a\"/><text x=\"180\" y=\"192\" text-anchor=\"middle\" style=\"font:700 11.5px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">確認応答あり → 信頼性が高い</text></svg>",
+   "b": "<b>Trap</b>は機器が始めるプッシュ型、<b>ポーリング</b>はサーバーが始めます。<b>Inform</b>はマネージャーからの確認応答があるので信頼性が高い。 <b>Trap</b>は<b>ネットワーク機器がプッシュ型で始め</b>、<b>ポーリングはサーバー（マネージャー）が始めます</b>。<b>Inform</b>（試験の訳では「通知」）は、マネージャーから<b>確認応答</b>が返るので信頼性が高いです。",
+   "p": "Trapは機器から、ポーリングはサーバーから始まる。"
+  },
+  {
+   "t": "SNMPのバージョン",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 137.0\" role=\"img\" aria-label=\"SNMPのバージョン\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">v1・v2c</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">コミュニティ名を平文で送る → 盗み見られる</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">SNMPv3</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">認証と暗号化に対応（最高のセキュリティ）</text></svg>",
+   "b": "v1・v2cの<b>コミュニティ名は平文で送られるので、盗み見られます</b>。<b>SNMPv3</b>は<b>ユーザーの認証</b>と<b>通信の暗号化</b>ができ、<b>最高のセキュリティ</b>で監視できます。",
+   "p": "最高のセキュリティでの監視 → SNMPv3。"
+  },
+  {
+   "t": "Syslogの重大度",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 290\" role=\"img\" aria-label=\"Syslogの重大度レベル\"><rect x=\"10\" y=\"8\" width=\"340\" height=\"30\" rx=\"6\" fill=\"#e6261f\" opacity=\"0.25\"/><text x=\"30\" y=\"28\" text-anchor=\"middle\" style=\"font:800 15px ui-monospace,Menlo,monospace;fill:var(--ink)\">0</text><text x=\"54\" y=\"28\" text-anchor=\"start\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Emergency</text><text x=\"336\" y=\"28\" text-anchor=\"end\" style=\"font:700 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">緊急</text><rect x=\"10\" y=\"42\" width=\"340\" height=\"30\" rx=\"6\" fill=\"#e6261f\" opacity=\"0.23\"/><text x=\"30\" y=\"62\" text-anchor=\"middle\" style=\"font:800 15px ui-monospace,Menlo,monospace;fill:var(--ink)\">1</text><text x=\"54\" y=\"62\" text-anchor=\"start\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Alert</text><text x=\"336\" y=\"62\" text-anchor=\"end\" style=\"font:700 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">警報</text><rect x=\"10\" y=\"76\" width=\"340\" height=\"30\" rx=\"6\" fill=\"#e6261f\" opacity=\"0.21\"/><text x=\"30\" y=\"96\" text-anchor=\"middle\" style=\"font:800 15px ui-monospace,Menlo,monospace;fill:var(--ink)\">2</text><text x=\"54\" y=\"96\" text-anchor=\"start\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Critical</text><text x=\"336\" y=\"96\" text-anchor=\"end\" style=\"font:700 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">重大</text><rect x=\"10\" y=\"110\" width=\"340\" height=\"30\" rx=\"6\" fill=\"#ffb400\" opacity=\"0.19\"/><text x=\"30\" y=\"130\" text-anchor=\"middle\" style=\"font:800 15px ui-monospace,Menlo,monospace;fill:var(--ink)\">3</text><text x=\"54\" y=\"130\" text-anchor=\"start\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Error</text><text x=\"336\" y=\"130\" text-anchor=\"end\" style=\"font:700 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">エラー</text><rect x=\"10\" y=\"144\" width=\"340\" height=\"30\" rx=\"6\" fill=\"#ffb400\" opacity=\"0.16999999999999998\"/><text x=\"30\" y=\"164\" text-anchor=\"middle\" style=\"font:800 15px ui-monospace,Menlo,monospace;fill:var(--ink)\">4</text><text x=\"54\" y=\"164\" text-anchor=\"start\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Warning</text><text x=\"336\" y=\"164\" text-anchor=\"end\" style=\"font:700 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">警告</text><rect x=\"10\" y=\"178\" width=\"340\" height=\"30\" rx=\"6\" fill=\"#0a5cff\" opacity=\"0.15\"/><text x=\"30\" y=\"198\" text-anchor=\"middle\" style=\"font:800 15px ui-monospace,Menlo,monospace;fill:var(--ink)\">5</text><text x=\"54\" y=\"198\" text-anchor=\"start\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Notification</text><text x=\"336\" y=\"198\" text-anchor=\"end\" style=\"font:700 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">通知</text><rect x=\"10\" y=\"212\" width=\"340\" height=\"30\" rx=\"6\" fill=\"#0a5cff\" opacity=\"0.13\"/><text x=\"30\" y=\"232\" text-anchor=\"middle\" style=\"font:800 15px ui-monospace,Menlo,monospace;fill:var(--ink)\">6</text><text x=\"54\" y=\"232\" text-anchor=\"start\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Informational</text><text x=\"336\" y=\"232\" text-anchor=\"end\" style=\"font:700 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">情報</text><rect x=\"10\" y=\"246\" width=\"340\" height=\"30\" rx=\"6\" fill=\"#0a5cff\" opacity=\"0.10999999999999999\"/><text x=\"30\" y=\"266\" text-anchor=\"middle\" style=\"font:800 15px ui-monospace,Menlo,monospace;fill:var(--ink)\">7</text><text x=\"54\" y=\"266\" text-anchor=\"start\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Debugging</text><text x=\"336\" y=\"266\" text-anchor=\"end\" style=\"font:700 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">デバッグ</text></svg>",
+   "b": "数字が小さいほど深刻。覚え方：「<b>E</b>very <b>A</b>wesome <b>C</b>isco <b>E</b>ngineer <b>W</b>ill <b>N</b>eed <b>I</b>ce cream <b>D</b>aily」。 <b>5（Notification＝通知）</b>は、<b>インターフェースのline protocolのup/down（ステータスの変化）</b>のレベルです。",
+   "p": "インターフェースのUP/DOWN＝5（通知）。"
+  },
+  {
+   "t": "ログの形とlogging trap",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 230\" role=\"img\" aria-label=\"ログの形とlogging trap\"><text x=\"180\" y=\"40\" text-anchor=\"middle\" style=\"font:800 17px ui-monospace,Menlo,monospace\"><tspan fill=\"var(--ink)\">%</tspan><tspan fill=\"#0a5cff\">LINK</tspan><tspan fill=\"var(--ink)\">-</tspan><tspan fill=\"#e6261f\">3</tspan><tspan fill=\"var(--ink)\">-</tspan><tspan fill=\"#00a05a\">UPDOWN</tspan></text><text x=\"116\" y=\"66\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ファシリティ</text><text x=\"172\" y=\"86\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:#e6261f;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">重大度</text><text x=\"236\" y=\"66\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ニーモニック</text><text x=\"180\" y=\"110\" text-anchor=\"middle\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ファシリティ＝ログを出した機能・プロセス</text><path d=\"M10 128h340\" stroke=\"var(--line)\" stroke-width=\"2\"/><text x=\"180\" y=\"156\" text-anchor=\"middle\" style=\"font:800 14px ui-monospace,Menlo,monospace;fill:var(--ink)\">logging trap warnings</text><text x=\"180\" y=\"180\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:#b77d00;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">→ 0〜4 を送る（指定したレベル以下の数字）</text><text x=\"180\" y=\"206\" text-anchor=\"middle\" style=\"font:700 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">デバッグを止めたい → informational（6）</text></svg>",
+   "b": "%OSPF-5-ADJCHG なら、OSPFがファシリティ（発生元）、5（Notification）が重大度です。 <b>ファシリティ</b>は、<b>Syslogイベントを生成したプログラム・プロセス</b>を示します。<b>logging trap warnings</b> なら <b>0〜4（Warning以上に深刻なもの）</b>が送られます。debugのメッセージ（7）が多すぎるときは、<b>ロギングトラップの重大度を情報（6）レベルに設定</b>すると、debugだけ止めてほかは送れます。",
+   "p": "指定したレベル＋それより深刻なレベルが送られる。"
+  },
+  {
+   "t": "小テスト",
+   "quiz": {
+    "q": "Syslogで最も深刻な重大度レベルは？",
+    "o": [
+     ["0 Emergency", "<g><g transform=\"translate(0,0)\"><rect x=\"-50.0\" y=\"-13\" width=\"100\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#e6261f\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#e6261f\">0</text></g></g>"],
+     ["7 Debugging", "<g><g transform=\"translate(0,0)\"><rect x=\"-50.0\" y=\"-13\" width=\"100\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#0a5cff\">7</text></g></g>"],
+     ["4 Warning", "<g><g transform=\"translate(0,0)\"><rect x=\"-50.0\" y=\"-13\" width=\"100\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#ffb400\">4</text></g></g>"]
+    ],
+    "a": 0,
+    "e": "正解は<b>0 Emergency</b>。数字が小さいほど深刻です。"
+   }
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.4136078782453\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.4136078782453\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.4136078782453\" text-anchor=\"start\" style=\"font:800 14.4px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">SNMP：マネージャーがエージェントのMIBを取得</text><text x=\"24\" y=\"50.4136078782453\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ポーリング＝聞く／Trap＝通知／Inform＝確認つき</text><rect x=\"10\" y=\"69.4136078782453\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"94.9136078782453\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">認証・暗号化はSNMPv3だけ</text><text x=\"24\" y=\"113.9136078782453\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">v2cのコミュニティ名は平文</text><rect x=\"10\" y=\"132.9136078782453\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.4136078782453\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Syslog 0〜7、小さいほど深刻</text><text x=\"24\" y=\"177.4136078782453\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">UP/DOWN＝5 Notification</text></svg>",
+   "b": "次回は「QoS・SSH・ファイル転送」。",
+   "p": "一問一答の「IPサービス」で確かめましょう。"
+  }
+ ],
+ "cls": {
+  "a": "audio/l37/",
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "今日は、ネットワークを見張る2つの仕組み、SNMPとSyslogを学びます。", "y": "今日は、ネットワークを見張る2つの仕組み、エスエヌエムピーとシスログを学びます。"},
+   {"sc": 1, "sp": "先生", "t": "SNMPは、機器を監視・管理するプロトコルです。管理サーバーをマネージャー、監視される機器をエージェントと言います。", "y": "エスエヌエムピーは、機器を監視・管理するプロトコルです。管理サーバーをマネージャー、監視される機器をエージェントと言います。"},
+   {"sc": 1, "sp": "先生", "t": "エージェントは、CPUの使い方やインターフェースの状態などの管理情報を持っています。この情報の集まりをMIBと言います。MIBの中の1つ1つの項目には、OIDという番号が付いていて、マネージャーはこの番号で、どの情報が欲しいかを指定します。", "y": "エージェントは、CPUの使い方やインターフェースの状態などの管理情報を持っています。この情報の集まりをミブと言います。ミブの中の1つ1つの項目には、オーアイディーという番号が付いていて、マネージャーはこの番号で、どの情報が欲しいかを指定します。"},
+   {"sc": 1, "sp": "先生", "t": "多くの機器の設定を、管理ツールからまとめて取得して、バックアップするのにも使えます。"},
+   {"sc": 2, "sp": "先生", "t": "情報の集め方は2つ。ポーリングは、マネージャーから機器に、調子はどう、と定期的に聞きに行く方法です。"},
+   {"sc": 2, "sp": "先生", "t": "Trapは、何かが起きたときに、機器のほうから、大変です、と知らせるプッシュ型の通知です。送りっぱなしで、届いたかは確かめません。", "y": "トラップは、何かが起きたときに、機器のほうから、大変です、と知らせるプッシュ型の通知です。送りっぱなしで、届いたかは確かめません。"},
+   {"sc": 2, "sp": "先生", "t": "Informは、マネージャーが受け取ったよ、と返事をする通知です。確認応答があるので、Trapより信頼性が高いです。", "y": "インフォームは、マネージャーが受け取ったよ、と返事をする通知です。確認応答があるので、トラップより信頼性が高いです。"},
+   {"sc": 2, "sp": "生徒", "t": "誰から始めるかが、ポーリングとTrapで逆なんですね。", "y": "誰から始めるかが、ポーリングとトラップで逆なんですね。"},
+   {"sc": 3, "sp": "先生", "t": "バージョンも大事です。v1とv2cは、コミュニティ名というパスワードのようなものを、平文で送ります。盗み見られる危険があります。", "y": "バージョンも大事です。ブイワンとブイツーシーは、コミュニティ名というパスワードのようなものを、平文で送ります。盗み見られる危険があります。"},
+   {"sc": 3, "sp": "先生", "t": "認証と暗号化ができるのは、SNMPv3だけです。最高のセキュリティで監視したいなら、v3を選びます。", "y": "認証と暗号化ができるのは、エスエヌエムピーブイスリーだけです。最高のセキュリティで監視したいなら、ブイスリーを選びます。"},
+   {"sc": 4, "sp": "先生", "t": "次はSyslog。機器のログを、Syslogサーバーに送って保存する仕組みです。ログには、重大度レベルが0から7まであります。", "y": "次はシスログ。機器のログを、シスログサーバーに送って保存する仕組みです。ログには、重大度レベルが0から7まであります。"},
+   {"sc": 4, "sp": "先生", "t": "0がEmergency、1がAlert、2がCritical、3がError、4がWarning、5がNotification、6がInformational、7がDebuggingです。数字が小さいほど深刻です。", "y": "0がエマージェンシー、1がアラート、2がクリティカル、3がエラー、4がワーニング、5がノーティフィケーション、6がインフォメーショナル、7がデバッギングです。数字が小さいほど深刻です。"},
+   {"sc": 4, "sp": "生徒", "t": "8つも覚えられるかな…"},
+   {"sc": 4, "sp": "先生", "t": "英語の頭文字で、Every Awesome Cisco Engineer Will Need Ice cream Dailyと覚えます。インターフェースのline protocolのアップダウン、つまり状態の変化は、5のNotificationです。", "y": "英語の頭文字で、Every Awesome シスコ Engineer Will Need Ice cream Dailyと覚えます。インターフェースのline protocolのアップダウン、つまり状態の変化は、5のノーティフィケーションです。"},
+   {"sc": 5, "sp": "先生", "t": "ログの形は、パーセント記号のあとに、ファシリティ、ハイフン、重大度の数字、ハイフン、ニーモニックと並びます。例えば、パーセント・LINK・3・UPDOWNなら、LINKがファシリティ、つまりログを出した機能。3が重大度でError。最後のUPDOWNがニーモニック、つまり出来事の短い名前です。", "y": "ログの形は、パーセント記号のあとに、ファシリティ、ハイフン、重大度の数字、ハイフン、ニーモニックと並びます。例えば、パーセント・LINK・3・UPDOWNなら、LINKがファシリティ、つまりログを出した機能。3が重大度でエラー。最後のUPDOWNがニーモニック、つまり出来事の短い名前です。"},
+   {"sc": 5, "sp": "先生", "t": "logging trapで、Syslogサーバーに送るレベルを決めます。名前にtrapと付いていますが、SNMPのTrapとは別物です。指定したレベルと、それより深刻な、数字の小さいレベルが送られます。logging trap warningsなら、0から4です。", "y": "ロギングトラップで、シスログサーバーに送るレベルを決めます。名前にtrapと付いていますが、エスエヌエムピーのトラップとは別物です。指定したレベルと、それより深刻な、数字の小さいレベルが送られます。ロギングトラップ ワーニングズなら、0から4です。"},
+   {"sc": 5, "sp": "先生", "t": "デバッグのログが多すぎて困るときは、informational、つまり6にすれば、7のデバッグだけを止められます。", "y": "デバッグのログが多すぎて困るときは、インフォメーショナル、つまり6にすれば、7のデバッグだけを止められます。"},
+   {"sc": 6, "sp": "先生", "t": "ここで小テストです。Syslogで最も深刻な重大度レベルはどれでしょう？画面で選んでください。", "w": 1, "y": "ここで小テストです。シスログで最も深刻な重大度レベルはどれでしょう？画面で選んでください。"},
+   {"sc": 6, "sp": "先生", "t": "正解は0、Emergencyです。", "y": "正解は0、エマージェンシーです。"},
+   {"sc": 7, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 7, "sp": "先生", "t": "1つ目。SNMPは、マネージャーがエージェントのMIBを取得する。ポーリングはマネージャーから、Trapは機器から、Informは確認応答つき。", "y": "1つ目。エスエヌエムピーは、マネージャーがエージェントのミブを取得する。ポーリングはマネージャーから、トラップは機器から、インフォームは確認応答つき。"},
+   {"sc": 7, "sp": "先生", "t": "2つ目。認証と暗号化はSNMPv3だけ。v2cのコミュニティ名は平文。", "y": "2つ目。認証と暗号化はエスエヌエムピーブイスリーだけ。ブイツーシーのコミュニティ名は平文。"},
+   {"sc": 7, "sp": "先生", "t": "3つ目。Syslogは0から7、小さいほど深刻。指定したレベル以下の数字が送られる。ファシリティはログを出したプロセス。", "y": "3つ目。シスログは0から7、小さいほど深刻。指定したレベル以下の数字が送られる。ファシリティはログを出したプロセス。"},
+   {"sc": 7, "sp": "生徒", "t": "Every Awesome Cisco Engineer、覚えました！", "y": "Every Awesome シスコ Engineer、覚えました！"},
+   {"sc": 7, "sp": "先生", "t": "いいですね。次回は、QoS、SSH、ファイル転送を学びます。お疲れさまでした。", "y": "いいですね。次回は、キューオーエス、エスエスエイチ、ファイル転送を学びます。お疲れさまでした。"}
+  ],
+  "seg": [
+   [0.0, 5.696],
+   [6.046, 8.896],
+   [15.292, 18.133333],
+   [33.775, 6.251],
+   [40.376, 8.075],
+   [48.801, 9.813],
+   [58.964, 8.842958],
+   [68.157, 4.447958],
+   [72.955, 9.877],
+   [83.182, 8.629042],
+   [92.161, 8.885],
+   [101.396, 13.909],
+   [115.655, 1.952],
+   [117.957, 13.610667],
+   [131.918, 25.92],
+   [158.188, 18.378667],
+   [176.917, 7.563],
+   [184.83, 6.763],
+   [191.943, 2.592],
+   [194.885, 1.835],
+   [197.07, 10.571],
+   [207.991, 6.827],
+   [215.168, 9.045],
+   [224.563, 4.693],
+   [229.606, 7.509]
+  ]
+ }
+}

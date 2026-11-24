@@ -1,5 +1,6 @@
-"""data.json の問題データをざっと点検する。  python tools/check.py"""
+"""data.json の問題データをざっと点検する。  python tools/check.py（build.py の最後にも自動で実行される）"""
 import json, os, sys
+sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 d = json.load(open(os.path.join(ROOT, "data.json"), encoding="utf-8"))
 TB = {x["n"]: x for x in d if x.get("r") == "TB"}

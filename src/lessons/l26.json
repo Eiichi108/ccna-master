@@ -1,0 +1,94 @@
+{
+ "r": "TB",
+ "lt": "nl25",
+ "n": 26,
+ "t": "CDP / LLDP",
+ "pages": [
+  {
+   "t": "隣の機器を知る",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 180\" role=\"img\" aria-label=\"CDP/LLDPで隣の機器を知る\"><g transform=\"translate(70,70) scale(0.9)\"><g transform=\"translate(0,0)\"><ellipse cx=\"0\" cy=\"22\" rx=\"28\" ry=\"4\" fill=\"var(--ink)\" opacity=\".12\"/><path d=\"M-28-6v14c0 8 12 14 28 14s28-6 28-14v-14\" fill=\"#e6261f\"/><ellipse cy=\"-6\" rx=\"28\" ry=\"12\" fill=\"#e6261f\"/><ellipse cy=\"-6\" rx=\"28\" ry=\"12\" fill=\"#fff\" opacity=\".18\"/><path d=\"M-14-6h28M0-14v16M-10-6l-4-4v8zM10-6l4-4v8z\" stroke=\"#fff\" stroke-width=\"2.4\" fill=\"#fff\" stroke-linecap=\"round\"/></g></g><text x=\"70\" y=\"110\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">R1</text><g transform=\"translate(290,70) scale(0.9)\"><g transform=\"translate(0,0)\"><ellipse cx=\"0\" cy=\"20\" rx=\"32\" ry=\"4\" fill=\"var(--ink)\" opacity=\".12\"/><rect x=\"-32\" y=\"-14\" width=\"64\" height=\"30\" rx=\"5\" fill=\"#00a05a\"/><rect x=\"-24\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"-16\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"-8\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"0\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"8\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"16\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"24\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><path d=\"M-14-6h18l-4-4M14-2h-18l4 4\" stroke=\"#fff\" stroke-width=\"2.2\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></g></g><text x=\"290\" y=\"110\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">SW1</text><path d=\"M106 70h150\" stroke=\"var(--ink)\" stroke-width=\"3\"/><path d=\"M110 52L241.0 52.0\" stroke=\"#0a5cff\" stroke-width=\"3\" stroke-linecap=\"round\"/><path d=\"M250 52L241.0 47.0L241.0 57.0z\" fill=\"#0a5cff\"/><path d=\"M250 90L119.0 90.0\" stroke=\"#00a05a\" stroke-width=\"3\" stroke-linecap=\"round\"/><path d=\"M110 90L119.0 95.0L119.0 85.0z\" fill=\"#00a05a\"/><text x=\"180\" y=\"44\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">機器名・IP・機種・ポート</text><text x=\"180\" y=\"152\" text-anchor=\"middle\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ケーブルをたどらなくても、つながっている相手が分かる</text></svg>",
+   "b": "<b>CDP</b>（Cisco Discovery Protocol）と<b>LLDP</b>（Link Layer Discovery Protocol）は、隣につながっている機器の情報を教え合うプロトコルです。",
+   "p": "機器名・IPアドレス・機種・ポートが分かる。"
+  },
+  {
+   "t": "CDPとLLDP",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 264.0\" role=\"img\" aria-label=\"CDPとLLDP\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">CDP（Cisco独自）</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">初期状態で有効。60秒ごとに送信、180秒で消える</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">show cdp neighbors (detail)</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">detailでIPアドレスやIOSのバージョンまで</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">LLDP（IEEE 802.1AB）</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Ciscoでは初期状態で無効 → lldp run</text><rect x=\"10\" y=\"196.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"222.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">show lldp neighbors</text><text x=\"24\" y=\"241.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">LLDPで見つけた隣の機器の一覧</text></svg>",
+   "b": "<b>CDP</b>はCisco独自で初期状態で有効。<b>60秒ごと</b>に送信し、<b>180秒</b>（保持時間）で消えます。<b>LLDP</b>はIEEE標準で、Ciscoでは初期状態で無効（lldp run で有効）。",
+   "p": "CDPの送信間隔60秒、保持時間180秒。"
+  },
+  {
+   "t": "出力の読み方",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 220\" role=\"img\" aria-label=\"show cdp neighborsの読み方\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"104\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" style=\"font:700 13px ui-monospace,Menlo,monospace;fill:#00a05a\">SW1# show cdp neighbors</text><text x=\"22\" y=\"74\" style=\"font:700 13px ui-monospace,Menlo,monospace;fill:#3d4450\">Device ID Local Intrfce Port ID</text><text x=\"22\" y=\"96\" style=\"font:700 13px ui-monospace,Menlo,monospace;fill:#0a5cff\">R1        Gig 0/1      Gig 0/0/0</text><text x=\"180\" y=\"140\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Local Intrfce＝自分（SW1）側のポート</text><text x=\"180\" y=\"164\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Port ID＝相手（R1）側のポート</text><text x=\"180\" y=\"196\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">→ R1のGig 0/0/0がSW1につながっている</text></svg>",
+   "b": "show cdp neighbors の <b>Device ID</b>＝相手の名前、<b>Local Intrfce</b>＝自分のポート、<b>Port ID</b>＝相手のポート。detail を付けるとIPアドレスやIOSのバージョンも見えます。",
+   "p": "Port IDは相手側のポート。"
+  },
+  {
+   "t": "セキュリティの注意",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 73.5\" role=\"img\" aria-label=\"セキュリティの注意\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">外部とつながるポートではCDPを止める</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">機器名やIOSのバージョンが漏れるのを防ぐ</text></svg>",
+   "b": "CDPの情報は攻撃のヒントになるので、信頼できない相手とつながるポートでは無効にします。 止める理由は、<b>機器名やIOSのバージョンなどの情報が漏れるのを防ぐ</b>ためです。",
+   "p": "interface で no cdp enable。"
+  },
+  {
+   "t": "小テスト",
+   "quiz": {
+    "q": "LLDPについて正しい説明は？",
+    "o": [
+     ["IEEE標準で、Cisco機器では初期状態で無効", "<g><g transform=\"translate(0,0)\"><rect x=\"-50.0\" y=\"-13\" width=\"100\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#00a05a\">IEEE標準</text></g></g>"],
+     ["Cisco独自で、初期状態で有効", "<g><g transform=\"translate(0,0)\"><rect x=\"-50.0\" y=\"-13\" width=\"100\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#0a5cff\">Cisco独自</text></g></g>"],
+     ["IPアドレスを配るプロトコル", "<g><g transform=\"translate(0,0)\"><rect x=\"-50.0\" y=\"-13\" width=\"100\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#3d4450\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#3d4450\">アドレス配布</text></g></g>"]
+    ],
+    "a": 0,
+    "e": "正解は<b>IEEE標準で、Cisco機器では初期状態で無効</b>。lldp run で有効にします。"
+   }
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">CDP＝Cisco独自・初期有効</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">60秒ごと・180秒で消える</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">LLDP＝IEEE標準・Ciscoでは初期無効</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">lldp run で有効</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Local Intrfce＝自分、Port ID＝相手</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">外部向けポートではCDPを止める</text></svg>",
+   "b": "次回は「無線LANの構成」。",
+   "p": "一問一答の「ネットワークアクセス」で確かめましょう。"
+  }
+ ],
+ "cls": {
+  "a": "audio/l26/",
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "今日は短めの回です。隣につながっている機器の情報を教え合う、CDPとLLDPを学びます。", "y": "今日は短めの回です。隣につながっている機器の情報を教え合う、シーディーピーとエルエルディーピーを学びます。"},
+   {"sc": 1, "sp": "先生", "t": "どちらも、機器の名前、IPアドレス、機種、どのポートでつながっているかなどを、隣の機器に知らせるプロトコルです。", "y": "どちらも、機器の名前、アイピーアドレス、機種、どのポートでつながっているかなどを、隣の機器に知らせるプロトコルです。"},
+   {"sc": 1, "sp": "生徒", "t": "ケーブルをたどらなくても、何がつながっているか分かるんですね。"},
+   {"sc": 2, "sp": "先生", "t": "CDPはCisco独自で、Cisco機器では最初から有効です。60秒ごとに送られ、180秒届かないと情報が消えます。", "y": "シーディーピーはシスコ独自で、シスコ機器では最初から有効です。60秒ごとに送られ、180秒届かないと情報が消えます。"},
+   {"sc": 2, "sp": "先生", "t": "確認は、show cdp neighborsです。後ろにdetailを付けると、隣の機器のIPアドレスや、IOSのバージョンまで表示されます。IOSは、Cisco機器を動かしているOS、つまり基本ソフトのことです。", "y": "確認は、ショー cdp ネイバーズです。後ろにディテールを付けると、隣の機器のアイピーアドレスや、アイオーエスのバージョンまで表示されます。アイオーエスは、シスコ機器を動かしているOS、つまり基本ソフトのことです。"},
+   {"sc": 2, "sp": "先生", "t": "LLDPは、IEEEという団体が決めた標準規格で、番号は802.1ABです。だからCisco以外の機器ともやりとりできます。ただ、Cisco機器では最初は無効なので、lldp runで有効にします。確認はshow lldp neighborsです。", "y": "エルエルディーピーは、アイトリプルイーという団体が決めた標準規格で、番号はハチマルニーテンイチエービーです。だからシスコ以外の機器ともやりとりできます。ただ、シスコ機器では最初は無効なので、エルエルディーピー、ランで有効にします。確認はショー lldp ネイバーズです。"},
+   {"sc": 3, "sp": "先生", "t": "出力の読み方が、試験によく出ます。show cdp neighborsには、Local IntrfceとPort IDという2つの欄があります。", "y": "出力の読み方が、試験によく出ます。ショー cdp ネイバーズには、ローカルインターフェースとポートアイディーという2つの欄があります。"},
+   {"sc": 3, "sp": "先生", "t": "Local Intrfceは自分側のポート、Port IDは相手側のポートです。例えば、SW1でこのコマンドを打って、Device IDがR1、Local Intrfceがギガ0/1、Port IDがギガ0/0/0と出たとします。これは、SW1のギガ0/1と、R1のギガ0/0/0がつながっている、という意味です。", "y": "ローカルインターフェースは自分側のポート、ポートアイディーは相手側のポートです。例えば、SW1でこのコマンドを打って、Device IDがR1、ローカルインターフェースがギガ0スラッシュ1、ポートアイディーがギガ0スラッシュ0スラッシュ0と出たとします。これは、SW1のギガ0スラッシュ1と、R1のギガ0スラッシュ0スラッシュ0がつながっている、という意味です。"},
+   {"sc": 3, "sp": "生徒", "t": "Localが自分、Port IDが相手、ですね。", "y": "ローカルが自分、ポートアイディーが相手、ですね。"},
+   {"sc": 4, "sp": "先生", "t": "最後に注意点。CDPには、機器名やIOSのバージョンなど、攻撃者が喜ぶ情報が入っています。だから、インターネットなど信頼できない相手とつながるポートでは、CDPを止めておきます。", "y": "最後に注意点。シーディーピーには、機器名やアイオーエスのバージョンなど、攻撃者が喜ぶ情報が入っています。だから、インターネットなど信頼できない相手とつながるポートでは、シーディーピーを止めておきます。"},
+   {"sc": 5, "sp": "先生", "t": "ここで小テストです。LLDPについて正しい説明はどれでしょう？画面で選んでください。", "w": 1, "y": "ここで小テストです。エルエルディーピーについて正しい説明はどれでしょう？画面で選んでください。"},
+   {"sc": 5, "sp": "先生", "t": "正解は、IEEE標準で、Cisco機器では初期状態で無効、です。", "y": "正解は、アイトリプルイー標準で、シスコ機器では初期状態で無効、です。"},
+   {"sc": 6, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 6, "sp": "先生", "t": "1つ目。CDPはCisco独自で最初から有効、60秒ごとに送って180秒で消える。LLDPはIEEE標準で、Ciscoではlldp runで有効にする。", "y": "1つ目。シーディーピーはシスコ独自で最初から有効、60秒ごとに送って180秒で消える。エルエルディーピーはアイトリプルイー標準で、シスコではエルエルディーピー、ランで有効にする。"},
+   {"sc": 6, "sp": "先生", "t": "2つ目。detailでIPアドレスやバージョンまで見える。Local Intrfceは自分、Port IDは相手のポート。", "y": "2つ目。ディテールでアイピーアドレスやバージョンまで見える。ローカルインターフェースは自分、ポートアイディーは相手のポート。"},
+   {"sc": 6, "sp": "先生", "t": "3つ目。外部とつながるポートでは、情報漏れを防ぐためにCDPを止める。", "y": "3つ目。外部とつながるポートでは、情報漏れを防ぐためにシーディーピーを止める。"},
+   {"sc": 6, "sp": "生徒", "t": "短いけど、出力の読み方がよく分かりました！"},
+   {"sc": 6, "sp": "先生", "t": "よかったです。次回は、無線LANの構成を学びます。お疲れさまでした。", "y": "よかったです。次回は、無線ランの構成を学びます。お疲れさまでした。"}
+  ],
+  "seg": [
+   [0.0, 7.701],
+   [8.051, 8.619],
+   [17.02, 4.757],
+   [22.127, 9.589],
+   [32.066, 16.053333],
+   [48.469, 19.968],
+   [68.787, 9.632],
+   [78.769, 25.952],
+   [105.071, 4.235],
+   [109.656, 14.528],
+   [124.534, 6.603],
+   [131.487, 5.867],
+   [137.704, 1.835],
+   [139.889, 13.973],
+   [154.212, 8.288042],
+   [162.85, 5.663958],
+   [168.864, 4.107],
+   [173.321, 5.387]
+  ]
+ }
+}

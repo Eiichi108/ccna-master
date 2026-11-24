@@ -1,0 +1,118 @@
+{
+ "r": "TB",
+ "lt": "nl12",
+ "n": 13,
+ "t": "VLSMと経路集約",
+ "pages": [
+  {
+   "t": "VLSMとは",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 220\" role=\"img\" aria-label=\"VLSMの考え方\"><text x=\"180\" y=\"22\" text-anchor=\"middle\" style=\"font:800 13.5px Figtree,'Hiragino Sans',sans-serif;fill:#e6261f;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">同じ大きさ（/25）で分けると…</text><rect x=\"20\" y=\"36\" width=\"320\" height=\"34\" rx=\"6\" fill=\"#e6261f\" opacity=\".12\"/><rect x=\"20\" y=\"36\" width=\"8\" height=\"34\" fill=\"#e6261f\"/><text x=\"180\" y=\"58\" text-anchor=\"middle\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ルーター間の線：2台しか使わず124個が余る</text><text x=\"180\" y=\"104\" text-anchor=\"middle\" style=\"font:800 13.5px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">VLSM：必要な大きさで分ける</text><rect x=\"20\" y=\"118\" width=\"200\" height=\"34\" rx=\"6\" fill=\"#00a05a\" opacity=\".25\"/><text x=\"120\" y=\"140\" text-anchor=\"middle\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">部署 100台 → /25</text><rect x=\"226\" y=\"118\" width=\"30\" height=\"34\" rx=\"6\" fill=\"#0a5cff\" opacity=\".35\"/><text x=\"298\" y=\"140\" text-anchor=\"middle\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">線 → /30</text><text x=\"180\" y=\"190\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">アドレスの無駄が減る</text></svg>",
+   "b": "<b>VLSM</b>（Variable Length Subnet Mask：可変長サブネットマスク）は、必要なホスト数に合わせて、サブネットごとに違う大きさで分ける方法です。アドレスの無駄が減ります。",
+   "p": "ルーター間の線には /30 を使う。"
+  },
+  {
+   "t": "VLSMの手順",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 217.5\" role=\"img\" aria-label=\"VLSMの手順\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">① ホスト数が多い順に並べる</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">大きいブロックを先に置くと境目がそろう</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">② 入るいちばん小さいブロックを選ぶ</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ホスト数＋2 以上の、2のべき乗</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">③ 先頭から詰めて割り当てる</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ブロックは自分の大きさの倍数から始まる（/27は32刻</text><text x=\"24\" y=\"194.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">み）</text></svg>",
+   "b": "必要なホスト数が<b>多いサブネットから</b>割り当てます。 ホスト1000台前後なら /22（1022台、マスク255.255.252.0）。",
+   "p": "ホスト500台 → /23（510台）。"
+  },
+  {
+   "t": "試験の例",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 230\" role=\"img\" aria-label=\"VLSMの試験の例\"><text x=\"180\" y=\"22\" text-anchor=\"middle\" style=\"font:800 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">10.10.225.0 〜 に20人のオフィスを追加</text><rect x=\"20.0\" y=\"44\" width=\"49.2\" height=\"40\" rx=\"4\" fill=\"#3d4450\" opacity=\"0.7\"/><text x=\"45.6\" y=\"69\" text-anchor=\"middle\" style=\"font:800 11px sans-serif;fill:#fff\">使用中</text><rect x=\"71.2\" y=\"44\" width=\"49.2\" height=\"40\" rx=\"4\" fill=\"#3d4450\" opacity=\"0.7\"/><text x=\"96.80000000000001\" y=\"69\" text-anchor=\"middle\" style=\"font:800 11px sans-serif;fill:#fff\">使用中</text><rect x=\"122.4\" y=\"44\" width=\"100.4\" height=\"40\" rx=\"4\" fill=\"#00a05a\" opacity=\"0.35\"/><text x=\"173.60000000000002\" y=\"69\" text-anchor=\"middle\" style=\"font:800 11px sans-serif;fill:#00a05a\">空き</text><rect x=\"224.8\" y=\"44\" width=\"49.2\" height=\"40\" rx=\"4\" fill=\"#3d4450\" opacity=\"0.7\"/><text x=\"250.4\" y=\"69\" text-anchor=\"middle\" style=\"font:800 11px sans-serif;fill:#fff\">使用中</text><text x=\"20.0\" y=\"102\" style=\"font:700 11px ui-monospace,Menlo,monospace;fill:var(--sub)\">.0</text><text x=\"122.4\" y=\"102\" style=\"font:700 11px ui-monospace,Menlo,monospace;fill:var(--sub)\">.32</text><text x=\"224.8\" y=\"102\" style=\"font:700 11px ui-monospace,Menlo,monospace;fill:var(--sub)\">.64</text><text x=\"327.20000000000005\" y=\"102\" style=\"font:700 11px ui-monospace,Menlo,monospace;fill:var(--sub)\">.96</text><text x=\"180\" y=\"130\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">20台 → /28(14台)は不足 → /27(30台)</text><text x=\"180\" y=\"154\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">/27の候補 .0／.32／.64 → 空いているのは .32</text><g transform=\"translate(180,186)\"><rect x=\"-125.0\" y=\"-13\" width=\"250\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#00a05a\">10.10.225.32 255.255.255.224</text></g><text x=\"180\" y=\"216\" text-anchor=\"middle\" style=\"font:700 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">600台 → /23(510)は不足 → /22（255.255.252.0）</text></svg>",
+   "b": "20台なら/27。/27は32刻みなので、候補は.0・.32・.64…。使用中と重ならない<b>.32/27</b>が答え。.48は32の倍数でないので/27の区切りになりません。",
+   "p": "「無駄を最小限に」＝入るいちばん小さいブロック。"
+  },
+  {
+   "t": "経路集約",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 250\" role=\"img\" aria-label=\"経路集約の計算\"><text x=\"180\" y=\"22\" text-anchor=\"middle\" style=\"font:800 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">192.168.0.0〜192.168.3.0 をまとめる</text><text x=\"70\" y=\"57\" text-anchor=\"end\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">0</text><text x=\"84\" y=\"58\" style=\"font:800 16px ui-monospace,Menlo,monospace;letter-spacing:2px\"><tspan fill=\"#0a5cff\">000000</tspan><tspan fill=\"#ffb400\">00</tspan></text><text x=\"70\" y=\"85\" text-anchor=\"end\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1</text><text x=\"84\" y=\"86\" style=\"font:800 16px ui-monospace,Menlo,monospace;letter-spacing:2px\"><tspan fill=\"#0a5cff\">000000</tspan><tspan fill=\"#ffb400\">01</tspan></text><text x=\"70\" y=\"113\" text-anchor=\"end\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2</text><text x=\"84\" y=\"114\" style=\"font:800 16px ui-monospace,Menlo,monospace;letter-spacing:2px\"><tspan fill=\"#0a5cff\">000000</tspan><tspan fill=\"#ffb400\">10</tspan></text><text x=\"70\" y=\"141\" text-anchor=\"end\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">3</text><text x=\"84\" y=\"142\" style=\"font:800 16px ui-monospace,Menlo,monospace;letter-spacing:2px\"><tspan fill=\"#0a5cff\">000000</tspan><tspan fill=\"#ffb400\">11</tspan></text><path d=\"M84 150h124\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text x=\"146\" y=\"170\" text-anchor=\"middle\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">上の6ビットが共通</text><text x=\"180\" y=\"200\" text-anchor=\"middle\" style=\"font:800 14px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">16 ＋ 6 ＝ /22 → 192.168.0.0/22</text><text x=\"180\" y=\"228\" text-anchor=\"middle\" style=\"font:700 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2つで1ビット、4つで2ビット、8つで3ビット短く</text></svg>",
+   "b": "<b>経路集約</b>は、連続したネットワークを1つにまとめて伝える方法。ルーティングテーブルが小さくなります。共通のビット数が新しいプレフィックス長です。",
+   "p": "始まりの数字が、まとめる個数の倍数であること。"
+  },
+  {
+   "t": "範囲と集約の例",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 217.5\" role=\"img\" aria-label=\"範囲と集約の例\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">172.16.32.0/20 の最後のアドレス</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">/20は第3オクテットで16刻み → 32〜47 → 172.16</text><text x=\"24\" y=\"67.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">.47.255</text><rect x=\"10\" y=\"86.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"112.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">10.1.4.0〜10.1.7.0 の集約</text><text x=\"24\" y=\"131.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">4は4の倍数 → 10.1.4.0/22</text><rect x=\"10\" y=\"150.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"175.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">192.168.1.0/25 と 192.168.1.128/25</text><text x=\"24\" y=\"194.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">連続した2つの/25 → 192.168.1.0/24</text></svg>",
+   "b": "範囲の最後のアドレス（ブロードキャスト）は、次のブロックの1つ前です。",
+   "p": "区切り幅の考え方は、サブネットでも集約でも同じ。"
+  },
+  {
+   "t": "小テスト",
+   "quiz": {
+    "q": "192.168.0.0/24 〜 192.168.3.0/24 をまとめる集約ルートは？",
+    "o": [
+     ["192.168.0.0/22", "<g><g transform=\"translate(0,0)\"><rect x=\"-56.0\" y=\"-13\" width=\"112\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#00a05a\">192.168.0.0/22</text></g></g>"],
+     ["192.168.0.0/23", "<g><g transform=\"translate(0,0)\"><rect x=\"-56.0\" y=\"-13\" width=\"112\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#0a5cff\">192.168.0.0/23</text></g></g>"],
+     ["192.168.0.0/16", "<g><g transform=\"translate(0,0)\"><rect x=\"-56.0\" y=\"-13\" width=\"112\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#3d4450\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#3d4450\">192.168.0.0/16</text></g></g>"]
+    ],
+    "a": 0,
+    "e": "正解は<b>192.168.0.0/22</b>。0〜3は上位6ビットが共通で、16＋6＝22です。"
+   }
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">VLSM＝必要な大きさで分ける</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">多い順に、入るいちばん小さいブロック</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ブロックは倍数から始まる</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">/27なら .0 .32 .64 …</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">経路集約＝共通ビットでまとめる</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2つ→1ビット、4つ→2ビット、8つ→3ビット</text></svg>",
+   "b": "次回は「IPv6」。",
+   "p": "一問一答の「ネットワークの基礎」で確かめましょう。"
+  }
+ ],
+ "cls": {
+  "a": "audio/l13/",
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "今日は、アドレスを無駄なく使う方法、VLSMと、ルートをまとめる経路集約を学びます。", "y": "今日は、アドレスを無駄なく使う方法、ブイエルエスエムと、ルートをまとめる経路集約を学びます。"},
+   {"sc": 1, "sp": "先生", "t": "VLSMは、可変長サブネットマスク。サブネットごとに、必要なホスト数に合わせて、違う大きさで分ける方法です。", "y": "ブイエルエスエムは、可変長サブネットマスク。サブネットごとに、必要なホスト数に合わせて、違う大きさで分ける方法です。"},
+   {"sc": 1, "sp": "生徒", "t": "全部同じ大きさじゃだめなんですか？"},
+   {"sc": 1, "sp": "先生", "t": "例えば、100台の部署と、2台しかないルーター間の線を、同じ/25で分けたら、線のほうは124個も余ってしまいますよね。VLSMなら、線には/30を使えます。", "y": "例えば、100台の部署と、2台しかないルーター間の線を、同じスラッシュ25で分けたら、線のほうは124個も余ってしまいますよね。ブイエルエスエムなら、線にはスラッシュ30を使えます。"},
+   {"sc": 2, "sp": "先生", "t": "VLSMの手順は3つです。1つ目、必要なホスト数が多い順に並べる。2つ目、それぞれホスト数が入る、いちばん小さいブロックを選ぶ。3つ目、先頭から順に詰めて割り当てる。", "y": "ブイエルエスエムの手順は3つです。1つ目、必要なホスト数が多い順に並べる。2つ目、それぞれホスト数が入る、いちばん小さいブロックを選ぶ。3つ目、先頭から順に詰めて割り当てる。"},
+   {"sc": 2, "sp": "生徒", "t": "大きいほうからやるのは、どうしてですか？"},
+   {"sc": 2, "sp": "先生", "t": "例えば、先に/30の4個を.0に置くと、次に/26の64個を置けるのは.64からになって、.4から.63がすき間になってしまいます。大きいほうから置けば、.0から/26、.64から/30と、すき間なく詰められるんです。", "y": "例えば、先にスラッシュ30の4個を.0に置くと、次にスラッシュ26の64個を置けるのは.64からになって、.4から.63がすき間になってしまいます。大きいほうから置けば、.0からスラッシュ26、.64からスラッシュ30と、すき間なく詰められるんです。"},
+   {"sc": 2, "sp": "先生", "t": "大事なのは、ブロックは必ず自分の大きさの倍数から始まることです。/27は32刻みなので、.32や.64からは始められますが、.48からは始められません。", "y": "大事なのは、ブロックは必ず自分の大きさの倍数から始まることです。スラッシュ27は32刻みなので、.32や.64からは始められますが、.48からは始められません。"},
+   {"sc": 3, "sp": "先生", "t": "試験に出た例を見てみましょう。新しいオフィスに20人追加します。/28は14台なので足りません。30台入る/27を選びます。", "y": "試験に出た例を見てみましょう。新しいオフィスに20人追加します。スラッシュ28は14台なので足りません。30台入るスラッシュ27を選びます。"},
+   {"sc": 3, "sp": "先生", "t": "10.10.225の0番から31番と、64番から79番は、もう使われています。/27は32刻みなので、置ける場所は0番、32番、64番…です。0番と64番の箱は使用中なので、空いているのは32番から63番。答えは10.10.225.32、マスク255.255.255.224です。", "y": "10、10、225の0番から31番と、64番から79番は、もう使われています。スラッシュ27は32刻みなので、置ける場所は0番、32番、64番…です。0番と64番の箱は使用中なので、空いているのは32番から63番。答えは10、10、225、32、マスク255、255、255、224です。"},
+   {"sc": 3, "sp": "生徒", "t": ".48は32の倍数じゃないから、/27には使えないんですね。", "y": ".48は32の倍数じゃないから、スラッシュ27には使えないんですね。"},
+   {"sc": 3, "sp": "先生", "t": "その通りです。もう1つ。600台のサーバーが入るサブネットなら、510台の/23では足りず、1022台入る/22、マスク255.255.252.0を選びます。", "y": "その通りです。もう1つ。600台のサーバーが入るサブネットなら、510台のスラッシュ23では足りず、1022台入るスラッシュ22、マスク255、255、252、0を選びます。"},
+   {"sc": 4, "sp": "先生", "t": "次は経路集約です。ルーターは、どのネットワークへはどの道を行くか、という一覧表を持っています。これをルーティングテーブルと言います。経路集約は、連続したいくつかのネットワークを、1つの大きなネットワークとしてまとめて、ほかのルーターに教える方法です。一覧表の行が減って、ルーターの仕事が楽になります。"},
+   {"sc": 4, "sp": "先生", "t": "192.168.0.0/24から192.168.3.0/24の4つをまとめてみましょう。第3オクテットの0、1、2、3を2進数にすると、0は0が8個、1は最後だけ1、2は最後の2けたが1と0、3は最後の2けたが1と1です。違うのは最後の2けただけで、前の6ビットは全部0でそろっていますね。", "y": "192、168、0、0スラッシュ24から192、168、3、0スラッシュ24の4つをまとめてみましょう。第3オクテットの0、1、2、3を2進数にすると、0は0が8個、1は最後だけ1、2は最後の2けたが1と0、3は最後の2けたが1と1です。違うのは最後の2けただけで、前の6ビットは全部0でそろっていますね。"},
+   {"sc": 4, "sp": "先生", "t": "共通の部分は、16ビットと6ビットで22ビット。だから集約ルートは192.168.0.0/22です。", "y": "共通の部分は、16ビットと6ビットで22ビット。だから集約ルートは192、168、0、0スラッシュ22です。"},
+   {"sc": 4, "sp": "生徒", "t": "4つなら2ビット減らす、ってことですか？"},
+   {"sc": 4, "sp": "先生", "t": "いい気づきです。2つなら1ビット、4つなら2ビット、8つなら3ビット短くなります。ただし条件が2つあります。まとめる個数が2、4、8のような数であること。そして、始まりの数字がその個数の倍数であることです。そうでないと、ぴったり1つにはまとまりません。"},
+   {"sc": 4, "sp": "先生", "t": "10.1.4.0から10.1.7.0の4つなら、4は4の倍数なので、10.1.4.0/22。192.168.1.0/25と192.168.1.128/25の2つなら、192.168.1.0/24になります。", "y": "10、1、4、0から10、1、7、0の4つなら、4は4の倍数なので、10、1、4、0スラッシュ22。192、168、1、0スラッシュ25と192、168、1、128スラッシュ25の2つなら、192、168、1、0スラッシュ24になります。"},
+   {"sc": 5, "sp": "先生", "t": "最後に、範囲の最後のアドレス、つまりブロードキャストアドレスの求め方です。172.16.32.0/20なら、20は16足す4なので、第3オクテットは前から4つが1で240。256引く240で区切り幅は16です。32から47までの箱なので、最後は172.16.47.255です。", "y": "最後に、範囲の最後のアドレス、つまりブロードキャストアドレスの求め方です。172、16、32、0スラッシュ20なら、20は16足す4なので、第3オクテットは前から4つが1で240。256引く240で区切り幅は16です。32から47までの箱なので、最後は172、16、47、255です。"},
+   {"sc": 6, "sp": "先生", "t": "ここで小テストです。192.168.0.0/24から192.168.3.0/24の4つをまとめる集約ルートはどれでしょう？画面で選んでください。", "w": 1, "y": "ここで小テストです。192、168、0、0スラッシュ24から192、168、3、0スラッシュ24の4つをまとめる集約ルートはどれでしょう？画面で選んでください。"},
+   {"sc": 6, "sp": "先生", "t": "正解は192.168.0.0/22です。4つなので2ビット短くなりますね。", "y": "正解は192、168、0、0スラッシュ22です。4つなので2ビット短くなりますね。"},
+   {"sc": 7, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 7, "sp": "先生", "t": "1つ目。VLSMは、必要な大きさで分ける方法。ホスト数が多い順に、入るいちばん小さいブロックを割り当てる。", "y": "1つ目。ブイエルエスエムは、必要な大きさで分ける方法。ホスト数が多い順に、入るいちばん小さいブロックを割り当てる。"},
+   {"sc": 7, "sp": "先生", "t": "2つ目。ブロックは、自分の大きさの倍数から始まる。"},
+   {"sc": 7, "sp": "先生", "t": "3つ目。経路集約は、共通のビットまでで1つにまとめる。2つで1ビット、4つで2ビット、8つで3ビット短くなる。"},
+   {"sc": 7, "sp": "生徒", "t": "大きい順に詰める、倍数から始まる、覚えました！"},
+   {"sc": 7, "sp": "先生", "t": "よかったです。次回は、いよいよIPv6を学びます。お疲れさまでした。", "y": "よかったです。次回は、いよいよアイピーブイシックスを学びます。お疲れさまでした。"}
+  ],
+  "seg": [
+   [0.0, 7.317],
+   [7.667, 9.067],
+   [17.084, 2.827],
+   [20.261, 14.464],
+   [35.075, 14.208],
+   [49.633, 3.168],
+   [53.151, 20.714667],
+   [74.216, 14.037],
+   [88.603, 11.147],
+   [100.1, 33.696],
+   [134.146, 6.315],
+   [140.811, 16.117],
+   [157.278, 22.794667],
+   [180.422, 31.616],
+   [212.388, 11.072],
+   [223.81, 3.36],
+   [227.52, 20.8],
+   [248.67, 32.971],
+   [281.991, 28.597333],
+   [310.939, 16.832],
+   [328.121, 8.767958],
+   [337.239, 1.834958],
+   [339.424, 9.045],
+   [348.819, 4.32],
+   [353.489, 9.973],
+   [363.812, 4.725],
+   [368.887, 5.845]
+  ]
+ }
+}

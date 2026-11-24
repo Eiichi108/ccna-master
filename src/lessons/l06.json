@@ -1,0 +1,120 @@
+{
+ "r": "TB",
+ "lt": "nl5",
+ "n": 6,
+ "t": "Cisco機器の操作の基本（CLI）",
+ "pages": [
+  {
+   "t": "CLIとプロンプト",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200\" role=\"img\" aria-label=\"CLIの画面とプロンプト\"><rect x=\"14\" y=\"10\" width=\"332\" height=\"130\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"28\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"42\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"56\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"26\" y=\"52\" style=\"font:700 14px ui-monospace,Menlo,monospace;fill:#00a05a\">Router></text><text x=\"26\" y=\"74\" style=\"font:700 14px ui-monospace,Menlo,monospace;fill:#00a05a\">Router> enable</text><text x=\"26\" y=\"96\" style=\"font:700 14px ui-monospace,Menlo,monospace;fill:#0a5cff\">Router#</text><text x=\"26\" y=\"118\" style=\"font:700 14px ui-monospace,Menlo,monospace;fill:#0a5cff\">Router# configure terminal</text><text x=\"180\" y=\"166\" text-anchor=\"middle\" style=\"font:800 14px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">文字でコマンドを打つ画面 ＝ CLI</text><text x=\"180\" y=\"188\" text-anchor=\"middle\" style=\"font:700 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">行の先頭の「Router>」などがプロンプト</text></svg>",
+   "b": "Ciscoの機器は、文字でコマンドを打って操作します。この画面が<b>CLI</b>（Command Line Interface）です。行の先頭の「Router&gt;」などを<b>プロンプト</b>と言い、今いるモードが分かります。",
+   "p": "プロンプトの記号でモードを見分ける。"
+  },
+  {
+   "t": "モードは建物の部屋",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 296\" role=\"img\" aria-label=\"4つのモードとプロンプト\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"58\" rx=\"10\" fill=\"#9aa4b2\" opacity=\".12\" stroke=\"#9aa4b2\" stroke-width=\"2\"/><text x=\"22\" y=\"34\" style=\"font:800 14px ui-monospace,Menlo,monospace;fill:var(--ink)\">Router></text><text x=\"22\" y=\"56\" text-anchor=\"start\" style=\"font:700 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ユーザーEXEC　受付：簡単な確認だけ</text><rect x=\"22\" y=\"76\" width=\"328\" height=\"58\" rx=\"10\" fill=\"#0a5cff\" opacity=\".12\" stroke=\"#0a5cff\" stroke-width=\"2\"/><text x=\"34\" y=\"100\" style=\"font:800 14px ui-monospace,Menlo,monospace;fill:#0a5cff\">Router#</text><text x=\"34\" y=\"122\" text-anchor=\"start\" style=\"font:700 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">特権EXEC　事務室：確認・保存・再起動</text><text x=\"344\" y=\"100\" text-anchor=\"end\" style=\"font:700 11.5px ui-monospace,Menlo,monospace;fill:var(--sub)\">enable</text><rect x=\"34\" y=\"142\" width=\"316\" height=\"58\" rx=\"10\" fill=\"#00a05a\" opacity=\".12\" stroke=\"#00a05a\" stroke-width=\"2\"/><text x=\"46\" y=\"166\" style=\"font:800 14px ui-monospace,Menlo,monospace;fill:#00a05a\">Router(config)#</text><text x=\"46\" y=\"188\" text-anchor=\"start\" style=\"font:700 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">グローバル設定　設定室：機器全体の設定</text><text x=\"344\" y=\"166\" text-anchor=\"end\" style=\"font:700 11.5px ui-monospace,Menlo,monospace;fill:var(--sub)\">configure terminal</text><rect x=\"46\" y=\"208\" width=\"304\" height=\"58\" rx=\"10\" fill=\"#e6261f\" opacity=\".12\" stroke=\"#e6261f\" stroke-width=\"2\"/><text x=\"58\" y=\"232\" style=\"font:800 14px ui-monospace,Menlo,monospace;fill:#e6261f\">Router(config-if)#</text><text x=\"58\" y=\"254\" text-anchor=\"start\" style=\"font:700 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">インターフェース設定　作業場：ポートごとの設定</text><text x=\"344\" y=\"232\" text-anchor=\"end\" style=\"font:700 11.5px ui-monospace,Menlo,monospace;fill:var(--sub)\">interface g0/0</text><text x=\"180\" y=\"284\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">戻る：exit＝1つ前へ／end＝特権EXECまで</text></svg>",
+   "b": "<b>ユーザーEXEC</b>（&gt;）→ enable → <b>特権EXEC</b>（#）→ configure terminal → <b>グローバル設定</b>（(config)#）→ interface g0/0 → <b>インターフェース設定</b>（(config-if)#）と、奥に進むほどできることが増えます。<br>戻るときは <b>exit</b>（1つ前）、<b>end</b>（特権EXECまで）。",
+   "p": "＃は特権EXEC。確認（show）・保存・再起動ができる。"
+  },
+  {
+   "t": "2つの設定ファイル",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 250\" role=\"img\" aria-label=\"running-configとstartup-config\"><rect x=\"10\" y=\"10\" width=\"160\" height=\"140\" rx=\"14\" fill=\"#ffb400\" opacity=\".14\"/><text x=\"90\" y=\"36\" text-anchor=\"middle\" style=\"font:800 14px Figtree,'Hiragino Sans',sans-serif;fill:#b77d00;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">running-config</text><text x=\"90\" y=\"60\" text-anchor=\"middle\" style=\"font:700 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">今動いている設定</text><text x=\"90\" y=\"80\" text-anchor=\"middle\" style=\"font:700 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">メモリの上</text><text x=\"90\" y=\"132\" text-anchor=\"middle\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:#e6261f;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">電源を切ると消える</text><rect x=\"190\" y=\"10\" width=\"160\" height=\"140\" rx=\"14\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"270\" y=\"36\" text-anchor=\"middle\" style=\"font:800 14px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">startup-config</text><text x=\"270\" y=\"60\" text-anchor=\"middle\" style=\"font:700 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">起動時に読み込む設定</text><text x=\"270\" y=\"80\" text-anchor=\"middle\" style=\"font:700 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">保存されている</text><text x=\"270\" y=\"132\" text-anchor=\"middle\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">電源を切っても残る</text><path d=\"M150 104L203.0 104.0\" stroke=\"#00a05a\" stroke-width=\"4\" stroke-linecap=\"round\"/><path d=\"M212 104L203.0 99.0L203.0 109.0z\" fill=\"#00a05a\"/><text x=\"180\" y=\"96\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">保存</text><rect x=\"14\" y=\"166\" width=\"332\" height=\"72\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"28\" cy=\"179\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"42\" cy=\"179\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"56\" cy=\"179\" r=\"4\" fill=\"#28c840\"/><text x=\"26\" y=\"208\" style=\"font:700 14px ui-monospace,Menlo,monospace;fill:#0a5cff\">Router# copy running-config</text><text x=\"26\" y=\"230\" style=\"font:700 14px ui-monospace,Menlo,monospace;fill:#0a5cff\">        startup-config</text></svg>",
+   "b": "<b>running-config</b>：今動いている設定（メモリ上。電源を切ると消える）<br><b>startup-config</b>：起動時に読み込む設定（保存されている）<br>設定したら <b>copy running-config startup-config</b> で保存します。",
+   "p": "ゲームのセーブと同じ。保存しないと消える。"
+  },
+  {
+   "t": "便利な操作",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 276\" role=\"img\" aria-label=\"便利な4つの操作\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"62\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"33.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">?（はてな）</text><text x=\"24\" y=\"54.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">使えるコマンドの一覧を表示</text><rect x=\"10\" y=\"74\" width=\"340\" height=\"62\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"101.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Tabキー</text><text x=\"24\" y=\"122.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">コマンドの続きを補完</text><rect x=\"10\" y=\"142\" width=\"340\" height=\"62\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"169.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">省略</text><text x=\"24\" y=\"190.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">configure terminal → conf t</text><rect x=\"10\" y=\"210\" width=\"340\" height=\"62\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"237.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">no</text><text x=\"24\" y=\"258.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">設定を取り消す（例：no shutdown）</text></svg>",
+   "b": "<b>?</b>：使えるコマンドの一覧　<b>Tabキー</b>：続きを補完　<b>省略</b>：区別できれば短く（conf t）　<b>no</b>：設定を取り消す（no shutdown）",
+   "p": "迷ったら、まず ? を打つ。"
+  },
+  {
+   "t": "小テスト",
+   "quiz": {
+    "q": "プロンプトが「Router#」のときのモードは？",
+    "o": [
+     ["特権EXECモード", "<g><g transform=\"translate(0,0)\"><rect x=\"-50.0\" y=\"-13\" width=\"100\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#0a5cff\">Router#</text></g></g>"],
+     ["ユーザーEXECモード", "<g><g transform=\"translate(0,0)\"><rect x=\"-50.0\" y=\"-13\" width=\"100\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#3d4450\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#3d4450\">Router></text></g></g>"],
+     ["グローバル設定モード", "<g><g transform=\"translate(0,0)\"><rect x=\"-50.0\" y=\"-13\" width=\"100\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#00a05a\">(config)#</text></g></g>"]
+    ],
+    "a": 0,
+    "e": "正解は<b>特権EXECモード</b>。「&gt;」はユーザーEXEC、「(config)#」はグローバル設定です。"
+   }
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 220\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"62\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"33.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">プロンプトでモードを見分ける</text><text x=\"24\" y=\"54.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">> ユーザーEXEC／# 特権EXEC／(config)# 設定</text><rect x=\"10\" y=\"74\" width=\"340\" height=\"62\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"101.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">running と startup</text><text x=\"24\" y=\"122.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">保存は copy running-config startup-config</text><rect x=\"10\" y=\"142\" width=\"340\" height=\"62\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"169.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">? ・Tab・省略・no</text><text x=\"24\" y=\"190.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">一覧・補完・短く・取り消し</text></svg>",
+   "b": "これで入門はおしまい。次回からは試験範囲の「ネットワークの基礎」に入ります。",
+   "p": "一問一答の「入門」で、CLIの問題を解いて確かめましょう。"
+  }
+ ],
+ "cls": {
+  "a": "audio/l06/",
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "今日は、入門の最後。Ciscoのルーターやスイッチに、指示を出す方法を学びます。", "y": "今日は、入門の最後。シスコのルーターやスイッチに、指示を出す方法を学びます。"},
+   {"sc": 1, "sp": "生徒", "t": "画面のボタンを押して設定するんですか？"},
+   {"sc": 1, "sp": "先生", "t": "いいえ。文字でコマンドを打ち込んで操作します。この画面をCLI、コマンドラインインターフェースと言います。", "y": "いいえ。文字でコマンドを打ち込んで操作します。この画面を、シーエルアイ、コマンドラインインターフェースと言います。"},
+   {"sc": 1, "sp": "先生", "t": "行の先頭に出ている、ルーター、そのあとに大なり記号、のような文字を、プロンプトと言います。プロンプトを見ると、今どのモードにいるかが分かります。"},
+   {"sc": 2, "sp": "先生", "t": "モードは、建物の部屋のようなものです。奥の部屋ほど、できることが増えます。"},
+   {"sc": 2, "sp": "先生", "t": "ログインした直後は、ユーザーEXECモード。プロンプトは「>」です。受付のようなもので、簡単な確認しかできません。", "y": "ログインした直後は、ユーザーエグゼックモード。プロンプトは、だいなり、です。受付のようなもので、簡単な確認しかできません。"},
+   {"sc": 2, "sp": "先生", "t": "enableと打つと、特権EXECモードに入ります。プロンプトは「#」。事務室のように、すべての確認や、設定の保存、再起動ができます。", "y": "イネーブル、と打つと、特権エグゼックモードに入ります。プロンプトは、シャープ。事務室のように、すべての確認や、設定の保存、再起動ができます。"},
+   {"sc": 2, "sp": "先生", "t": "configure terminalと打つと、グローバル設定モード。プロンプトは「(config)#」で、機器全体の設定をする設定室です。", "y": "コンフィギュア、ターミナル、と打つと、グローバル設定モード。プロンプトは、かっこコンフィグ、シャープ、で、機器全体の設定をする設定室です。"},
+   {"sc": 2, "sp": "先生", "t": "さらに、interface g0/0のように打つと、インターフェース設定モードです。インターフェースは、ケーブルを差す口、ポートのこと。g0/0は、ギガビットイーサネットの0の0番、というポートの名前です。プロンプトは、かっこコンフィグハイフンイフ、かっことじシャープで、ポートごとの作業場です。", "y": "さらに、インターフェース g0スラッシュ0のように打つと、インターフェース設定モードです。インターフェースは、ケーブルを差す口、ポートのこと。g0スラッシュ0は、ギガビットイーサネットの0の0番、というポートの名前です。プロンプトは、かっこコンフィグハイフンイフ、かっことじシャープで、ポートごとの作業場です。"},
+   {"sc": 2, "sp": "生徒", "t": "大なりが受付、シャープが事務室、かっこコンフィグが設定室…ですね。"},
+   {"sc": 2, "sp": "先生", "t": "その通り。戻るときは、exitで1つ前の部屋へ、endで特権EXECまで一気に戻れます。", "y": "その通り。戻るときは、エグジットで1つ前の部屋へ、エンドで特権エグゼックまで一気に戻れます。"},
+   {"sc": 3, "sp": "先生", "t": "次に、設定ファイルの話です。Ciscoの機器には、設定が2つあります。", "y": "次に、設定ファイルの話です。シスコの機器には、設定が2つあります。"},
+   {"sc": 3, "sp": "先生", "t": "1つ目はrunning-config。今動いている設定で、作業用の一時的なメモリに置かれています。パソコンで、保存していない書きかけの文書と同じで、電源を切ると消えてしまいます。"},
+   {"sc": 3, "sp": "先生", "t": "2つ目はstartup-config。保存されていて、起動するときに読み込まれる設定です。電源を切っても残ります。", "y": "2つ目は、スタートアップコンフィグ。保存されていて、起動するときに読み込まれる設定です。電源を切っても残ります。"},
+   {"sc": 3, "sp": "生徒", "t": "せっかく設定しても、保存しないと消えちゃうんですか？"},
+   {"sc": 3, "sp": "先生", "t": "そうなんです。だから最後に、copy running-config startup-configと打って保存します。今の設定を、起動用にコピーするという意味です。", "y": "そうなんです。だから最後に、コピー、ランニングコンフィグ、スタートアップコンフィグ、と打って保存します。今の設定を、起動用にコピーするという意味です。"},
+   {"sc": 3, "sp": "生徒", "t": "ゲームの、セーブみたいなものですね。"},
+   {"sc": 4, "sp": "先生", "t": "最後に、便利な操作を4つ紹介します。"},
+   {"sc": 4, "sp": "先生", "t": "1つ目、はてなマーク。打つと、そこで使えるコマンドの一覧が出ます。迷ったら、まずはてなです。"},
+   {"sc": 4, "sp": "先生", "t": "2つ目、Tabキー。コマンドの途中まで打ってTabを押すと、続きを自動で補ってくれます。", "y": "2つ目、タブキー。コマンドの途中まで打ってタブを押すと、続きを自動で補ってくれます。"},
+   {"sc": 4, "sp": "先生", "t": "3つ目、省略。ほかのコマンドと区別できれば、短く打てます。configure terminalは、conf tでOKです。", "y": "3つ目、省略。ほかのコマンドと区別できれば、短く打てます。コンフィギュア、ターミナル、は、コンフ、ティー、でオーケーです。"},
+   {"sc": 4, "sp": "先生", "t": "4つ目、no。コマンドの前にnoを付けると、その設定を取り消せます。例えば、ルーターのポートは、最初はshutdown、つまり止まった状態になっています。no shutdownと打つと、その止める設定を取り消して、ポートを使えるようにできます。", "y": "4つ目、ノー。コマンドの前にノーを付けると、その設定を取り消せます。例えば、ルーターのポートは、最初はシャットダウン、つまり止まった状態になっています。ノー シャットダウンと打つと、その止める設定を取り消して、ポートを使えるようにできます。"},
+   {"sc": 4, "sp": "生徒", "t": "はてな、Tab、省略、no。これなら覚えられそうです！", "y": "はてな、タブ、省略、ノー。これなら覚えられそうです！"},
+   {"sc": 5, "sp": "先生", "t": "ここで小テストです。プロンプトが「Router#」のとき、いるのはどのモードでしょう？画面で選んでください。", "w": 1, "y": "ここで小テストです。プロンプトが、ルーター、シャープ、のとき、いるのはどのモードでしょう？画面で選んでください。"},
+   {"sc": 5, "sp": "先生", "t": "正解は特権EXECモードです。シャープは事務室でしたね。", "y": "正解は、特権エグゼックモードです。シャープは事務室でしたね。"},
+   {"sc": 6, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 6, "sp": "先生", "t": "1つ目。モードはプロンプトで見分ける。大なりがユーザーEXEC、シャープが特権EXEC、かっこコンフィグが設定モード。", "y": "1つ目。モードはプロンプトで見分ける。だいなりが、ユーザーエグゼック、シャープが、特権エグゼック、かっこコンフィグが、設定モード。"},
+   {"sc": 6, "sp": "先生", "t": "2つ目。running-configは今の設定で、電源を切ると消える。startup-configは保存された設定。copy running-config startup-configで保存する。", "y": "2つ目。ランニングコンフィグは今の設定で、電源を切ると消える。スタートアップコンフィグは保存された設定。コピー、ランニングコンフィグ、スタートアップコンフィグ、で保存する。"},
+   {"sc": 6, "sp": "先生", "t": "3つ目。はてなで一覧、Tabで補完、短く省略、noで取り消し。", "y": "3つ目。はてなで一覧、タブで補完、短く省略、ノーで取り消し。"},
+   {"sc": 6, "sp": "生徒", "t": "これで入門は全部終わりですね！"},
+   {"sc": 6, "sp": "先生", "t": "よく頑張りました。次からは、いよいよ試験範囲の、ネットワークの基礎に入ります。お疲れさまでした。"}
+  ],
+  "seg": [
+   [0.0, 6.144],
+   [6.494, 3.061],
+   [9.905, 8.139],
+   [18.394, 10.901333],
+   [29.645, 5.6],
+   [35.595, 9.792042],
+   [45.737, 12.149],
+   [58.236, 11.499],
+   [70.085, 22.666667],
+   [93.102, 6.432],
+   [99.884, 7.221],
+   [107.455, 5.739],
+   [113.544, 13.290667],
+   [127.185, 8.448],
+   [135.983, 4.181],
+   [140.514, 11.36],
+   [152.224, 3.050958],
+   [155.625, 3.285],
+   [159.26, 7.306958],
+   [166.917, 6.453],
+   [173.72, 10.464],
+   [184.534, 18.282667],
+   [203.166, 5.333],
+   [208.849, 8.341],
+   [217.54, 4.725],
+   [222.615, 1.835],
+   [224.8, 10.219],
+   [235.369, 13.152],
+   [248.871, 5.770958],
+   [254.992, 2.677],
+   [258.019, 7.488]
+  ]
+ }
+}

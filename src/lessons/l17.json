@@ -1,0 +1,106 @@
+{
+ "r": "TB",
+ "lt": "nl16",
+ "n": 17,
+ "t": "端末でIP設定を確認する",
+ "pages": [
+  {
+   "t": "OSごとのコマンド",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 298.0\" role=\"img\" aria-label=\"OSごとのコマンド\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Windows</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ipconfig ／ 詳しく：ipconfig /all（MAC・DHCP</text><text x=\"24\" y=\"67.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">・DNSも）</text><rect x=\"10\" y=\"86.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#3d4450\" opacity=\".1\"/><text x=\"24\" y=\"112.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">macOS</text><text x=\"24\" y=\"131.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ifconfig ／ networksetup -getinfo Wi-Fi</text><rect x=\"10\" y=\"150.0\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"175.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Linux</text><text x=\"24\" y=\"194.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ip addr（ip a）・ip route ／ 古い環境では ifc</text><text x=\"24\" y=\"211.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">onfig</text><rect x=\"10\" y=\"230.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"256.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">共通</text><text x=\"24\" y=\"275.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ping・tracert／traceroute・nslookup・arp -a</text></svg>",
+   "b": "端末のIP設定はOSごとにコマンドが違います。<b>ipconfig</b>はWindows、<b>ip addr</b>はLinux、<b>show ip interface</b>はCisco機器のコマンドです。",
+   "p": "Linux＝ip addr／ifconfig、Windows＝ipconfig。"
+  },
+  {
+   "t": "確かめる4つの項目",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 250\" role=\"img\" aria-label=\"確かめる4つの項目\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"150\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" style=\"font:700 14px ui-monospace,Menlo,monospace;fill:#0a5cff\">C:\\> ipconfig /all</text><text x=\"22\" y=\"74\" style=\"font:700 14px ui-monospace,Menlo,monospace;fill:#00a05a\">  IPv4 Address : 192.168.1.20</text><text x=\"22\" y=\"96\" style=\"font:700 14px ui-monospace,Menlo,monospace;fill:#00a05a\">  Subnet Mask  : 255.255.255.0</text><text x=\"22\" y=\"118\" style=\"font:700 14px ui-monospace,Menlo,monospace;fill:#00a05a\">  Default Gateway: 192.168.1.1</text><text x=\"22\" y=\"140\" style=\"font:700 14px ui-monospace,Menlo,monospace;fill:#00a05a\">  DNS Servers  : 8.8.8.8</text><text x=\"180\" y=\"186\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">IP・マスク・ゲートウェイ・DNS の4つを確かめる</text><g transform=\"translate(180,222)\"><rect x=\"-150.0\" y=\"-13\" width=\"300\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#e6261f\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#e6261f\">169.254.x.x → DHCPからもらえていない</text></g></svg>",
+   "b": "IPアドレス・サブネットマスク・デフォルトゲートウェイ・DNSサーバーの4つを確認します。<b>169.254.x.x</b>（APIPA）なら、DHCPサーバーからアドレスをもらえていません。",
+   "p": "ipconfig /all ならMACアドレスやDHCPの情報も見える。"
+  },
+  {
+   "t": "ゲートウェイのまちがい",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 220\" role=\"img\" aria-label=\"ゲートウェイが別のサブネットにある例\"><text x=\"180\" y=\"24\" text-anchor=\"middle\" style=\"font:800 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">IP 192.168.1.130 / 255.255.255.128（/25）</text><text x=\"180\" y=\"50\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:#e6261f;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ゲートウェイ 192.168.1.1</text><rect x=\"20\" y=\"70\" width=\"158\" height=\"40\" rx=\"6\" fill=\"#e6261f\" opacity=\".2\"/><text x=\"99\" y=\"95\" text-anchor=\"middle\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:#e6261f;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">192.168.1.0〜127</text><rect x=\"182\" y=\"70\" width=\"158\" height=\"40\" rx=\"6\" fill=\"#00a05a\" opacity=\".25\"/><text x=\"261\" y=\"95\" text-anchor=\"middle\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">192.168.1.128〜255</text><text x=\"99\" y=\"136\" text-anchor=\"middle\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:#e6261f;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">GW .1 はこっち</text><text x=\"261\" y=\"136\" text-anchor=\"middle\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">PC .130 はこっち</text><text x=\"180\" y=\"176\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ゲートウェイが同じサブネットにない → 外に出られない</text><text x=\"180\" y=\"200\" text-anchor=\"middle\" style=\"font:700 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">デフォルトゲートウェイは自分と同じサブネットに</text></svg>",
+   "b": "/25（255.255.255.128）なので、PCは192.168.1.128〜255のネットワークにいます。ゲートウェイ192.168.1.1は別のサブネットなので届きません。",
+   "p": "ゲートウェイがマスクの範囲内にあるかを計算で確かめる。"
+  },
+  {
+   "t": "試験の例",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 250\" role=\"img\" aria-label=\"試験の例\"><g transform=\"translate(180,40) scale(0.8)\"><g transform=\"translate(0,0)\"><ellipse cx=\"0\" cy=\"20\" rx=\"32\" ry=\"4\" fill=\"var(--ink)\" opacity=\".12\"/><rect x=\"-32\" y=\"-14\" width=\"64\" height=\"30\" rx=\"5\" fill=\"#8a3ffc\"/><rect x=\"-24\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"-16\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"-8\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"0\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"8\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"16\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"24\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><path d=\"M-14-6h18l-4-4M14-2h-18l4 4\" stroke=\"#fff\" stroke-width=\"2.2\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></g></g><text x=\"180\" y=\"78\" text-anchor=\"middle\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">SW1（L3スイッチ）</text><g transform=\"translate(70,150) scale(0.7)\"><g transform=\"translate(0,0)\"><ellipse cx=\"0\" cy=\"26\" rx=\"22\" ry=\"4\" fill=\"var(--ink)\" opacity=\".12\"/><rect x=\"-26\" y=\"-22\" width=\"52\" height=\"34\" rx=\"4\" fill=\"#0a5cff\"/><rect x=\"-22\" y=\"-18\" width=\"44\" height=\"26\" rx=\"2\" fill=\"#fff\"/><path d=\"M-4 12v8M-12 22h24\" stroke=\"#0a5cff\" stroke-width=\"4\" stroke-linecap=\"round\"/></g></g><text x=\"70\" y=\"182\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">クライアントA</text><text x=\"70\" y=\"200\" text-anchor=\"middle\" style=\"font:700 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Linux・VLAN10</text><g transform=\"translate(290,150) scale(0.7)\"><g transform=\"translate(0,0)\"><ellipse cx=\"0\" cy=\"26\" rx=\"22\" ry=\"4\" fill=\"var(--ink)\" opacity=\".12\"/><rect x=\"-26\" y=\"-22\" width=\"52\" height=\"34\" rx=\"4\" fill=\"#00a05a\"/><rect x=\"-22\" y=\"-18\" width=\"44\" height=\"26\" rx=\"2\" fill=\"#fff\"/><path d=\"M-4 12v8M-12 22h24\" stroke=\"#00a05a\" stroke-width=\"4\" stroke-linecap=\"round\"/></g></g><text x=\"290\" y=\"182\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">クライアントB</text><text x=\"290\" y=\"200\" text-anchor=\"middle\" style=\"font:700 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Windows・VLAN20</text><path d=\"M160 56L80 130M200 56L280 130\" stroke=\"var(--ink)\" stroke-width=\"2.5\"/><text x=\"70\" y=\"112\" text-anchor=\"middle\" style=\"font:800 11.5px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">10.0.0.0/15</text><text x=\"290\" y=\"112\" text-anchor=\"middle\" style=\"font:800 11.5px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">10.2.0.0/15</text><g transform=\"translate(180,232)\"><rect x=\"-125.0\" y=\"-13\" width=\"250\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#0a5cff\">ifconfig ＋ 255.254.0.0（/15）</text></g></svg>",
+   "b": "OSに合うコマンド（Linux＝ifconfig）と、図のサブネットに合うマスク（/15＝255.254.0.0）を組み合わせて選びます。",
+   "p": "/15は第2オクテットが254。"
+  },
+  {
+   "t": "小テスト",
+   "quiz": {
+    "q": "Windowsで、MACアドレスやDNSサーバーまで含めて詳しく表示するコマンドは？",
+    "o": [
+     ["ipconfig /all", "<g><g transform=\"translate(0,0)\"><rect x=\"-55.0\" y=\"-13\" width=\"110\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#0a5cff\">ipconfig /all</text></g></g>"],
+     ["ip addr", "<g><g transform=\"translate(0,0)\"><rect x=\"-55.0\" y=\"-13\" width=\"110\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#ffb400\">ip addr</text></g></g>"],
+     ["show ip interface", "<g><g transform=\"translate(0,0)\"><rect x=\"-55.0\" y=\"-13\" width=\"110\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#3d4450\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#3d4450\">show ip int</text></g></g>"]
+    ],
+    "a": 0,
+    "e": "正解は<b>ipconfig /all</b>。ip addrはLinux、show ip interfaceはCisco機器のコマンドです。"
+   }
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Windows＝ipconfig（/all）</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Linux＝ip addr・ifconfig／macOS＝ifconfig</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">IP・マスク・GW・DNS</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">169.254.x.x＝DHCPの失敗</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ゲートウェイは同じサブネットに</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">/25なら128ずつ区切って確かめる</text></svg>",
+   "b": "次回は「無線LANの電波と規格」。",
+   "p": "一問一答の「ネットワークの基礎」で確かめましょう。"
+  }
+ ],
+ "cls": {
+  "a": "audio/l17/",
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "今日は、パソコンの側で、IPアドレスなどの設定を確かめる方法を学びます。つながらないとき、まず端末を調べるのが基本です。", "y": "今日は、パソコンの側で、アイピーアドレスなどの設定を確かめる方法を学びます。つながらないとき、まず端末を調べるのが基本です。"},
+   {"sc": 1, "sp": "先生", "t": "OSによってコマンドが違います。Windowsは、ipconfig。MACアドレスやDHCP、DNSサーバーまで詳しく見るなら、ipconfig /allです。", "y": "OSによってコマンドが違います。ウィンドウズは、アイピーコンフィグ。マックアドレスやディーエイチシーピー、ディーエヌエスサーバーまで詳しく見るなら、アイピーコンフィグ スラッシュオールです。"},
+   {"sc": 1, "sp": "先生", "t": "macOSは、ifconfigや、networksetup。Linuxは、ip addr、短くip a。古い環境では、Linuxでもifconfigを使います。", "y": "マックオーエスは、アイエフコンフィグや、ネットワークセットアップ。リナックスは、アイピーアドレス、短くアイピーエー。古い環境では、リナックスでもアイエフコンフィグを使います。"},
+   {"sc": 1, "sp": "生徒", "t": "その通り、と言いたいところですが、少しだけ補足です。今のLinuxの基本はip addrで、ifconfigは古い環境やmacOSで使います。試験の選択肢にip addrがなく、ifconfigがあれば、Linuxでもifconfigを選びましょう。", "y": "その通り、と言いたいところですが、少しだけ補足です。今のリナックスの基本はアイピーアドレスで、アイエフコンフィグは古い環境やマックオーエスで使います。試験の選択肢にアイピーアドレスがなく、アイエフコンフィグがあれば、リナックスでもアイエフコンフィグを選びましょう。"},
+   {"sc": 1, "sp": "先生", "t": "どのOSでも使える共通のコマンドもあります。まずping。相手に『届いてる？』と呼びかけて、返事が来るかで、通じるかを確かめます。次にtracert、LinuxやmacOSではtraceroute。相手までの途中で、どのルーターを通っているかを調べます。最後にnslookup。名前からIPアドレスを、DNSで正しく調べられるかを確かめます。", "y": "どのOSでも使える共通のコマンドもあります。まずピング。相手に『届いてる？』と呼びかけて、返事が来るかで、通じるかを確かめます。次にトレースアールティー、リナックスやマックオーエスではトレースルート。相手までの途中で、どのルーターを通っているかを調べます。最後にエヌエスルックアップ。名前からアイピーアドレスを、ディーエヌエスで正しく調べられるかを確かめます。"},
+   {"sc": 2, "sp": "先生", "t": "確かめるのは4つ。IPアドレス、サブネットマスク、デフォルトゲートウェイ、DNSサーバーです。", "y": "確かめるのは4つ。アイピーアドレス、サブネットマスク、デフォルトゲートウェイ、ディーエヌエスサーバーです。"},
+   {"sc": 2, "sp": "先生", "t": "まず、IPアドレスが169.254で始まっていたら、APIPAです。DHCPサーバーからアドレスをもらえていないので、DHCPの問題を疑います。", "y": "まず、アイピーアドレスが169、254で始まっていたら、エーピパです。ディーエイチシーピーサーバーからアドレスをもらえていないので、ディーエイチシーピーの問題を疑います。"},
+   {"sc": 2, "sp": "生徒", "t": "基礎の回で習いました！"},
+   {"sc": 3, "sp": "先生", "t": "次の例です。IPアドレスが192.168.1.130、マスクが255.255.255.128、デフォルトゲートウェイが192.168.1.1。どこがおかしいでしょう？", "y": "次の例です。アイピーアドレスが192、168、1、130、マスクが255、255、255、128、デフォルトゲートウェイが192、168、1、1。どこがおかしいでしょう？"},
+   {"sc": 3, "sp": "生徒", "t": "えっと、/25だから、区切りは128ずつ…。", "y": "えっと、スラッシュ25だから、区切りは128ずつ…。"},
+   {"sc": 3, "sp": "先生", "t": "そうです。このPCは192.168.1.128から255のネットワークにいます。でもゲートウェイの192.168.1.1は、0から127の別のネットワーク。同じサブネットにないので、出口に届きません。", "y": "そうです。このピーシーは192、168、1、128から255のネットワークにいます。でもゲートウェイの192、168、1、1は、0から127の別のネットワーク。同じサブネットにないので、出口に届きません。"},
+   {"sc": 3, "sp": "先生", "t": "デフォルトゲートウェイは、必ず自分と同じサブネットにある必要があります。"},
+   {"sc": 4, "sp": "先生", "t": "最後に、試験の例です。VLANは、1台のスイッチの中をいくつかのネットワークに分ける仕組みで、くわしくは第20回で学びます。ここでは、VLAN10とVLAN20は別々の町、L3スイッチはその間をつなぐルーターの役目、と考えてください。VLAN10にいるLinuxのクライアントAが、VLAN20のWindowsのクライアントBにpingできません。", "y": "最後に、試験の例です。ブイランは、1台のスイッチの中をいくつかのネットワークに分ける仕組みで、くわしくは第20回で学びます。ここでは、ブイラン10とブイラン20は別々の町、エルスリースイッチはその間をつなぐルーターの役目、と考えてください。ブイラン10にいるリナックスのクライアントAが、ブイラン20のウィンドウズのクライアントBにピングできません。"},
+   {"sc": 4, "sp": "先生", "t": "VLAN10のネットワークは10.0.0.0/15で、ゲートウェイは10.0.0.1です。クライアントAの設定を確かめるには、何をすればいいでしょう？", "y": "ブイラン10のネットワークは10、0、0、0スラッシュ15で、ゲートウェイは10、0、0、1です。クライアントAの設定を確かめるには、何をすればいいでしょう？"},
+   {"sc": 4, "sp": "生徒", "t": "Linuxだから、ifconfigですね。", "y": "リナックスだから、アイエフコンフィグですね。"},
+   {"sc": 4, "sp": "先生", "t": "正解。そして、/15に合うマスクになっているかを確かめます。15は8足す7なので、第1オクテットは255、第2オクテットは前から7つが1で254。だから255.254.0.0です。OSに合うコマンドと、図に合うマスク、2つを組み合わせて選びます。", "y": "正解。そして、スラッシュ15に合うマスクになっているかを確かめます。15は8足す7なので、第1オクテットは255、第2オクテットは前から7つが1で254。だから255、254、0、0です。OSに合うコマンドと、図に合うマスク、2つを組み合わせて選びます。"},
+   {"sc": 5, "sp": "先生", "t": "ここで小テストです。Windowsで、MACアドレスやDNSサーバーまで含めて詳しく表示するコマンドはどれでしょう？画面で選んでください。", "w": 1, "y": "ここで小テストです。ウィンドウズで、マックアドレスやディーエヌエスサーバーまで含めて詳しく表示するコマンドはどれでしょう？画面で選んでください。"},
+   {"sc": 5, "sp": "先生", "t": "正解はipconfig /allです。", "y": "正解はアイピーコンフィグ スラッシュオールです。"},
+   {"sc": 6, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 6, "sp": "先生", "t": "1つ目。Windowsはipconfig、詳しくはipconfig /all。Linuxはip addrかifconfig、macOSはifconfig。", "y": "1つ目。ウィンドウズはアイピーコンフィグ、詳しくはアイピーコンフィグ スラッシュオール。リナックスはアイピーアドレスかアイエフコンフィグ、マックオーエスはアイエフコンフィグ。"},
+   {"sc": 6, "sp": "先生", "t": "2つ目。確かめるのは、IP、マスク、ゲートウェイ、DNSの4つ。169.254はDHCPの失敗。", "y": "2つ目。確かめるのは、アイピー、マスク、ゲートウェイ、ディーエヌエスの4つ。169、254はディーエイチシーピーの失敗。"},
+   {"sc": 6, "sp": "先生", "t": "3つ目。デフォルトゲートウェイは、自分と同じサブネットに。"},
+   {"sc": 6, "sp": "生徒", "t": "OSごとのコマンド、もう間違えません！"},
+   {"sc": 6, "sp": "先生", "t": "いいですね。次回は、無線LANの電波と規格を学びます。お疲れさまでした。", "y": "いいですね。次回は、無線ランの電波と規格を学びます。お疲れさまでした。"}
+  ],
+  "seg": [
+   [0.0, 9.76],
+   [10.11, 12.756958],
+   [23.217, 13.024],
+   [36.591, 20.725333],
+   [57.666, 26.464],
+   [84.48, 7.563],
+   [92.393, 13.131],
+   [105.874, 1.931],
+   [108.155, 20.288042],
+   [128.793, 5.163],
+   [134.306, 21.035],
+   [155.691, 5.098958],
+   [161.14, 25.109333],
+   [186.6, 14.261],
+   [201.211, 3.211],
+   [204.772, 23.456],
+   [228.578, 9.792],
+   [238.72, 3.253],
+   [242.323, 1.835],
+   [244.508, 11.371],
+   [256.229, 10.859],
+   [267.438, 4.276958],
+   [272.065, 3.413],
+   [275.828, 5.6]
+  ]
+ }
+}

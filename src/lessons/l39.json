@@ -1,0 +1,104 @@
+{
+ "r": "TB",
+ "lt": "nl38",
+ "n": 39,
+ "t": "QoSのPHB（詳しく）",
+ "pages": [
+  {
+   "t": "分類とマーキング",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"分類とマーキング\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">L2：CoS（802.1Qタグの3ビット・PCP）</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">L3：DSCP（IPヘッダーの6ビット）</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">EF＝音声／AF41＝ビデオ会議</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">CS1＝低優先／BE＝ベストエフォート</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">AFxy：x＝クラス、y＝捨てられやすさ</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">AF43はAF41より先に捨てられる</text></svg>",
+   "b": "<b>PHB</b>（Per-Hop Behavior）は各ルーターでのQoSの動作。QoSマーキングでCisco機器が変更するIPヘッダーのフィールドは<b>DSCP</b>です。<b>CoS</b>（Class of Service）はL2の印。 TCPは<b>受信側への速度を最適化</b>し（フロー制御）、<b>接続を制御</b>して<b>到達を保証</b>します。UDPは<b>マルチキャスト</b>もでき、<b>小さなパケットで遅延が少ない</b>ので<b>ライブ・リアルタイムのデータ</b>向きです。",
+   "p": "後ろの数字が大きいAFほど捨てられやすい。"
+  },
+  {
+   "t": "トラストバウンダリと音声",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 137.0\" role=\"img\" aria-label=\"トラストバウンダリと音声の目安\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">トラストバウンダリ</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">マーキングを信用する境目（IP電話が多い）</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">音声の目安</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">遅延150ms以下・ジッター30ms以下・ロス1%以下</text></svg>",
+   "b": "",
+   "p": "音声は遅延とジッターに弱い。"
+  },
+  {
+   "t": "キューイング",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 154.0\" role=\"img\" aria-label=\"キューイング\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">LLQ</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">音声用の完全優先キュー＋CBWFQ（帯域保証）</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">WRED（輻輳回避）</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">満杯になる前にTCPのパケットを少しずつ捨てて速度を</text><text x=\"24\" y=\"131.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">下げさせる</text></svg>",
+   "b": "<b>LLQ</b>（Low Latency Queuing）、<b>WRED</b>（Weighted Random Early Detection）。 <b>LLQ</b>は、<b>音声などに使う完全優先キュー</b>を持つキューイングです。",
+   "p": "音声はいつも先に送られる。"
+  },
+  {
+   "t": "ポリシングとシェーピング",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 230\" role=\"img\" aria-label=\"ポリシングとシェーピング\"><rect x=\"10\" y=\"10\" width=\"164\" height=\"210\" rx=\"12\" fill=\"#e6261f\" opacity=\".08\"/><text x=\"92\" y=\"36\" text-anchor=\"middle\" style=\"font:800 16px Figtree,'Hiragino Sans',sans-serif;fill:#e6261f;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ポリシング</text><path d=\"M30 100h120\" stroke=\"var(--ink)\" stroke-dasharray=\"5 5\" stroke-width=\"2\"/><rect x=\"34\" y=\"70\" width=\"16\" height=\"30\" fill=\"#0a5cff\" opacity=\".6\"/><rect x=\"56\" y=\"40\" width=\"16\" height=\"60\" fill=\"#e6261f\" opacity=\".6\"/><rect x=\"78\" y=\"75\" width=\"16\" height=\"25\" fill=\"#0a5cff\" opacity=\".6\"/><rect x=\"100\" y=\"30\" width=\"16\" height=\"70\" fill=\"#e6261f\" opacity=\".6\"/><rect x=\"122\" y=\"65\" width=\"16\" height=\"35\" fill=\"#0a5cff\" opacity=\".6\"/><text x=\"92\" y=\"124\" text-anchor=\"middle\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">超えた分を捨てる</text><text x=\"92\" y=\"146\" text-anchor=\"middle\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">（または再マーキング）</text><text x=\"92\" y=\"176\" text-anchor=\"middle\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">遅延は増えない</text><text x=\"92\" y=\"200\" text-anchor=\"middle\" style=\"font:700 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">受信・送信どちらも</text><rect x=\"186\" y=\"10\" width=\"164\" height=\"210\" rx=\"12\" fill=\"#0a5cff\" opacity=\".08\"/><text x=\"268\" y=\"36\" text-anchor=\"middle\" style=\"font:800 16px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">シェーピング</text><path d=\"M206 100h120\" stroke=\"var(--ink)\" stroke-dasharray=\"5 5\" stroke-width=\"2\"/><rect x=\"210\" y=\"60\" width=\"16\" height=\"40\" fill=\"#0a5cff\" opacity=\".6\"/><rect x=\"232\" y=\"60\" width=\"16\" height=\"40\" fill=\"#0a5cff\" opacity=\".6\"/><rect x=\"254\" y=\"60\" width=\"16\" height=\"40\" fill=\"#0a5cff\" opacity=\".6\"/><rect x=\"276\" y=\"60\" width=\"16\" height=\"40\" fill=\"#0a5cff\" opacity=\".6\"/><rect x=\"298\" y=\"60\" width=\"16\" height=\"40\" fill=\"#0a5cff\" opacity=\".6\"/><text x=\"268\" y=\"124\" text-anchor=\"middle\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">超えた分をためてあとで</text><text x=\"268\" y=\"146\" text-anchor=\"middle\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">（バッファ・キュー）</text><text x=\"268\" y=\"176\" text-anchor=\"middle\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:#e6261f;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">遅延が増える</text><text x=\"268\" y=\"200\" text-anchor=\"middle\" style=\"font:700 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">主に送信側</text></svg>",
+   "b": "<b>シェーピング</b>は過剰なトラフィックをキューに入れ、遅らせてバーストを平準化します。<b>ポリシング</b>は着信・発信の両方向で使えます。 <b>シェーピング</b>は、<b>上限を超えた分（過剰なトラフィック）をバッファにためて（キューに入れて）</b>後で送るので、<b>遅延が増えます</b>が、<b>バーストを平準化</b>します。<b>ポリシング</b>は超えた分を捨てる（または印を付け直す）方式で、<b>着信と発信の両方向</b>で使えます。",
+   "p": "「シェーピングが捨てる」は逆。"
+  },
+  {
+   "t": "小テスト",
+   "quiz": {
+    "q": "ポリシングとシェーピングの違いとして正しいものは？",
+    "o": [
+     ["シェーピングは超えた分をためるので遅延が増える", "<g><g transform=\"translate(0,0)\"><rect x=\"-45.0\" y=\"-13\" width=\"90\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#0a5cff\">ためる</text></g></g>"],
+     ["シェーピングは超えた分を捨てる", "<g><g transform=\"translate(0,0)\"><rect x=\"-45.0\" y=\"-13\" width=\"90\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#e6261f\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#e6261f\">捨てる</text></g></g>"],
+     ["ポリシングは超えた分をためる", "<g><g transform=\"translate(0,0)\"><rect x=\"-45.0\" y=\"-13\" width=\"90\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#3d4450\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#3d4450\">ポリシング</text></g></g>"]
+    ],
+    "a": 0,
+    "e": "正解は<b>シェーピングは超えた分をバッファにためるので、遅延が増える</b>。ポリシングは超えた分を破棄（または再マーキング）します。"
+   }
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 217.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">CoS（L2）・DSCP（L3）</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">EF＝音声、AF41＝ビデオ会議、AF43はAF41より先に捨</text><text x=\"24\" y=\"67.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">てられる</text><rect x=\"10\" y=\"86.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"112.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">LLQ・WRED</text><text x=\"24\" y=\"131.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">音声の完全優先／満杯前に少しずつ捨てる</text><rect x=\"10\" y=\"150.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"175.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ポリシング＝捨てる・遅延なし</text><text x=\"24\" y=\"194.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">シェーピング＝ためる・遅延あり</text></svg>",
+   "b": "これで「IPサービス」はおしまい。次回から「セキュリティの基礎」に入ります。",
+   "p": "一問一答の「IPサービス」で確かめましょう。"
+  }
+ ],
+ "cls": {
+  "a": "audio/l39/",
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "今日は、IPサービスの最後。QoSをくわしく学びます。QoSの各ルーターでの動きを、PHB、ホップごとの動作と言います。", "y": "今日は、アイピーサービスの最後。キューオーエスをくわしく学びます。キューオーエスの各ルーターでの動きを、ピーエイチビー、ホップごとの動作と言います。"},
+   {"sc": 1, "sp": "先生", "t": "まず、分類とマーキング。通信の種類を見分けて、印を付けます。L2では、802.1Qタグの中の3ビット、CoS。L3では、IPヘッダーの6ビット、DSCPです。", "y": "まず、分類とマーキング。通信の種類を見分けて、印を付けます。エルツーでは、ハチマルニーテンイチキュータグの中の3ビット、コス。エルスリーでは、アイピーヘッダーの6ビット、ディーエスシーピーです。"},
+   {"sc": 1, "sp": "先生", "t": "DSCPの値には名前があります。音声はEF、ビデオ会議はAF41。この2つがよく出ます。ほかに、優先度の低い通信はCS1、普通の通信はBE、ベストエフォートです。", "y": "ディーエスシーピーの値には名前があります。音声はイーエフ、ビデオ会議はエーエフよんいち。この2つがよく出ます。ほかに、優先度の低い通信はシーエスワン、普通の通信はビーイー、ベストエフォートです。"},
+   {"sc": 1, "sp": "先生", "t": "AFは、AFのあとに2つの数字が付きます。最初の数字がクラスで、大きいほど優先されます。2つ目が捨てられやすさです。AF41とAF43なら、AF43のほうが、混雑したとき先に捨てられます。", "y": "AFは、AFのあとに2つの数字が付きます。最初の数字がクラスで、大きいほど優先されます。2つ目が捨てられやすさです。エーエフよんいちとエーエフよんさんなら、エーエフよんさんのほうが、混雑したとき先に捨てられます。"},
+   {"sc": 1, "sp": "生徒", "t": "後ろの数字が大きいほど、捨てられやすいんですね。"},
+   {"sc": 2, "sp": "先生", "t": "次は、トラストバウンダリです。PCが勝手に自分の通信を最優先の印にすると困るので、どこから先の印を信用するかの境目を決めます。IP電話の付けた印は信用できるので、IP電話を境目にすることが多いです。", "y": "次は、トラストバウンダリです。ピーシーが勝手に自分の通信を最優先の印にすると困るので、どこから先の印を信用するかの境目を決めます。アイピー電話の付けた印は信用できるので、アイピー電話を境目にすることが多いです。"},
+   {"sc": 2, "sp": "先生", "t": "音声の品質の目安も覚えましょう。片道の遅延150ミリ秒以下、ジッター、つまり遅れのばらつき30ミリ秒以下、パケットロス1パーセント以下です。"},
+   {"sc": 3, "sp": "先生", "t": "次は、キューイング。混雑しているとき、どの順番で送るかを決めます。"},
+   {"sc": 3, "sp": "先生", "t": "LLQは、音声のための特別な列、完全優先キューを持つ方式です。この列にあるものは、いつも一番先に送られます。ほかの通信には、それぞれ最低限の帯域を保証する、CBWFQという仕組みを組み合わせます。", "y": "エルエルキューは、音声のための特別な列、完全優先キューを持つ方式です。この列にあるものは、いつも一番先に送られます。ほかの通信には、それぞれ最低限の帯域を保証する、シービーダブリューエフキューという仕組みを組み合わせます。"},
+   {"sc": 3, "sp": "先生", "t": "混雑、つまり輻輳を防ぐWREDは、キューが満杯になる前に、TCPのパケットを少しずつ捨てます。TCPは、パケットが届かないと、混んでいると判断して自分で送る速度を下げます。その性質を利用するんです。", "y": "混雑、つまり輻輳を防ぐダブリューレッドは、キューが満杯になる前に、ティーシーピーのパケットを少しずつ捨てます。ティーシーピーは、パケットが届かないと、混んでいると判断して自分で送る速度を下げます。その性質を利用するんです。"},
+   {"sc": 4, "sp": "先生", "t": "最後に、ポリシングとシェーピング。どちらも速度を制限しますが、超えた分の扱いが違います。"},
+   {"sc": 4, "sp": "先生", "t": "ポリシングは、超えた分を捨てるか、印を付け直します。ためないので遅延は増えません。受信と送信、どちらの方向でも使えます。"},
+   {"sc": 4, "sp": "先生", "t": "シェーピングは、超えた分をバッファのキューにためて、あとで送ります。一度にどっと来る通信、バーストを平らにならせますが、待たせる分、遅延は増えます。主に送信側で使います。"},
+   {"sc": 4, "sp": "生徒", "t": "捨てるのがポリシング、ためるのがシェーピング、ですね。"},
+   {"sc": 4, "sp": "先生", "t": "その通り。シェーピングが捨てる、という選択肢は逆なので選ばないように。"},
+   {"sc": 5, "sp": "先生", "t": "ここで小テストです。ポリシングとシェーピングの違いとして、正しいものはどれでしょう？画面で選んでください。", "w": 1},
+   {"sc": 5, "sp": "先生", "t": "正解は、シェーピングは超えた分をバッファにためるので、遅延が増える、です。"},
+   {"sc": 6, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 6, "sp": "先生", "t": "1つ目。L2はCoS、L3はDSCP。音声はEF、ビデオ会議はAF41。AFの後ろの数字が大きいほど捨てられやすい。", "y": "1つ目。エルツーはコス、エルスリーはディーエスシーピー。音声はイーエフ、ビデオ会議はエーエフよんいち。AFの後ろの数字が大きいほど捨てられやすい。"},
+   {"sc": 6, "sp": "先生", "t": "2つ目。LLQは音声の完全優先キュー。WREDは満杯になる前に少しずつ捨てる。", "y": "2つ目。エルエルキューは音声の完全優先キュー。ダブリューレッドは満杯になる前に少しずつ捨てる。"},
+   {"sc": 6, "sp": "先生", "t": "3つ目。ポリシングは捨てて遅延なし、どちらの方向も。シェーピングはためて遅延あり、送信側。"},
+   {"sc": 6, "sp": "生徒", "t": "これでIPサービスの分野も終わりです！", "y": "これでアイピーサービスの分野も終わりです！"},
+   {"sc": 6, "sp": "先生", "t": "よく頑張りました。次回からは、セキュリティの基礎の分野です。お疲れさまでした。"}
+  ],
+  "seg": [
+   [0.0, 10.624],
+   [10.974, 15.328],
+   [26.652, 15.296],
+   [42.298, 16.234667],
+   [58.883, 4.085],
+   [63.318, 16.725333],
+   [80.393, 11.659],
+   [92.402, 5.44],
+   [98.192, 17.248],
+   [115.79, 16.48],
+   [132.62, 6.933],
+   [139.903, 10.197],
+   [150.45, 13.258667],
+   [164.059, 4.523],
+   [168.932, 5.429],
+   [174.711, 7.488],
+   [182.549, 5.931042],
+   [188.83, 1.835],
+   [191.015, 11.467],
+   [202.832, 7.115],
+   [210.297, 7.573],
+   [218.22, 3.115],
+   [221.685, 5.643]
+  ]
+ }
+}

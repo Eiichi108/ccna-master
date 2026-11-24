@@ -1,0 +1,114 @@
+{
+ "r": "TB",
+ "lt": "nl32",
+ "n": 33,
+ "t": "OSPFのネットワークタイプと状態",
+ "pages": [
+  {
+   "t": "ネットワークタイプ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 281.0\" role=\"img\" aria-label=\"OSPFのネットワークタイプ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">broadcast（イーサネットの初期値）</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">DR/BDRあり・Hello 10秒/Dead 40秒</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">point-to-point（シリアルの初期値）</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">DR/BDRなし。2台だけのイーサネットにも設定 → すぐ</text><text x=\"24\" y=\"131.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Full</text><rect x=\"10\" y=\"150.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"175.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ip ospf network point-to-point</text><text x=\"24\" y=\"194.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">インターフェースで設定</text><rect x=\"10\" y=\"213.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#3d4450\" opacity=\".1\"/><text x=\"24\" y=\"239.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">DR/BDRが選ばれるタイプ</text><text x=\"24\" y=\"258.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">broadcast と non-broadcast（NBMA）</text></svg>",
+   "b": "ギガビットイーサネットをOSPFでアドバタイズすると、初期値は<b>broadcast</b>。クロスケーブルで2台を直結しているなら<b>point-to-point</b>にすると、DR/BDRの選出がなくなりすぐFullになります。 point-to-pointでは<b>DR/BDRの選出がなくなり</b>、<b>相手と直接Full</b>になります。そのため show ip ospf neighbor では「<b>FULL/ -</b>」と表示されます。broadcastは日本語で「<b>ブロードキャスト</b>」。2台だけなのにbroadcastのままだと、DR/BDRの選出に時間がかかります。",
+   "p": "point-to-point＝相手と直接Full。"
+  },
+  {
+   "t": "ネイバーの状態",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 220\" role=\"img\" aria-label=\"ネイバーの状態\"><rect x=\"8\" y=\"30\" width=\"46\" height=\"40\" rx=\"6\" fill=\"#e8ecf2\" opacity=\"1\"/><text x=\"31\" y=\"55\" text-anchor=\"middle\" style=\"font:800 9.5px sans-serif;fill:var(--ink)\">Down</text><rect x=\"58\" y=\"30\" width=\"46\" height=\"40\" rx=\"6\" fill=\"#e8ecf2\" opacity=\"1\"/><text x=\"81\" y=\"55\" text-anchor=\"middle\" style=\"font:800 9.5px sans-serif;fill:var(--ink)\">Init</text><rect x=\"108\" y=\"30\" width=\"46\" height=\"40\" rx=\"6\" fill=\"#ffb400\" opacity=\"0.8\"/><text x=\"131\" y=\"55\" text-anchor=\"middle\" style=\"font:800 9.5px sans-serif;fill:#fff\">2-Way</text><rect x=\"158\" y=\"30\" width=\"46\" height=\"40\" rx=\"6\" fill=\"#e8ecf2\" opacity=\"1\"/><text x=\"181\" y=\"55\" text-anchor=\"middle\" style=\"font:800 9.5px sans-serif;fill:var(--ink)\">ExStart</text><rect x=\"208\" y=\"30\" width=\"46\" height=\"40\" rx=\"6\" fill=\"#e8ecf2\" opacity=\"1\"/><text x=\"231\" y=\"55\" text-anchor=\"middle\" style=\"font:800 9.5px sans-serif;fill:var(--ink)\">Exchange</text><rect x=\"258\" y=\"30\" width=\"46\" height=\"40\" rx=\"6\" fill=\"#e8ecf2\" opacity=\"1\"/><text x=\"281\" y=\"55\" text-anchor=\"middle\" style=\"font:800 9.5px sans-serif;fill:var(--ink)\">Loading</text><rect x=\"308\" y=\"30\" width=\"46\" height=\"40\" rx=\"6\" fill=\"#00a05a\" opacity=\"0.8\"/><text x=\"331\" y=\"55\" text-anchor=\"middle\" style=\"font:800 9.5px sans-serif;fill:#fff\">Full</text><text x=\"180\" y=\"100\" text-anchor=\"middle\" style=\"font:800 13.5px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">DR・BDRとは Full</text><text x=\"180\" y=\"126\" text-anchor=\"middle\" style=\"font:800 13.5px Figtree,'Hiragino Sans',sans-serif;fill:#b77d00;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">DROTHERどうしは 2-Way（正常）</text><text x=\"180\" y=\"160\" text-anchor=\"middle\" style=\"font:700 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Hello：ネイバーの発見と維持・DR/BDRの選出</text><text x=\"180\" y=\"182\" text-anchor=\"middle\" style=\"font:700 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">経路の情報はLSAでやりとり（Helloではない）</text></svg>",
+   "b": "Fullはデータベースの交換が終わって同期した状態です。 Helloの役割はネイバーを見つけて生きているか確かめること。<b>ルーティングテーブル全体を送る</b>ことはしません。",
+   "p": "DROTHERどうしの2-Wayは故障ではない。"
+  },
+  {
+   "t": "出力を読む",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 270\" role=\"img\" aria-label=\"OSPFの出力を読む\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"144\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" style=\"font:700 12.5px ui-monospace,Menlo,monospace;fill:#00a05a\">R1# show ip ospf neighbor</text><text x=\"22\" y=\"74\" style=\"font:700 12.5px ui-monospace,Menlo,monospace;fill:#3d4450\">Neighbor ID  State</text><text x=\"22\" y=\"96\" style=\"font:700 12.5px ui-monospace,Menlo,monospace;fill:#0a5cff\">2.2.2.2      FULL/DR</text><text x=\"22\" y=\"118\" style=\"font:700 12.5px ui-monospace,Menlo,monospace;fill:#ffb400\">3.3.3.3      2WAY/DROTHER</text><text x=\"22\" y=\"140\" style=\"font:700 12.5px ui-monospace,Menlo,monospace;fill:#e6261f\">4.4.4.4      FULL/ -</text><text x=\"180\" y=\"178\" text-anchor=\"middle\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:#b77d00;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">DROTHERと2WAY → R1もDROTHER</text><text x=\"180\" y=\"200\" text-anchor=\"middle\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:#e6261f;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">FULL/ - → point-to-point（DR/BDRなし）</text><text x=\"180\" y=\"226\" text-anchor=\"middle\" style=\"font:700 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">show ip ospf interface：State P2P／DR</text><text x=\"180\" y=\"248\" text-anchor=\"middle\" style=\"font:700 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Adjacent neighbor count＝Fullの相手の数</text></svg>",
+   "b": "R1がBDRならDROTHERともFullになるはずなので、2WAYならR1もDROTHERです。",
+   "p": "DRは、ほかのすべてのルーターとFullになる。"
+  },
+  {
+   "t": "便利な設定",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 281.0\" role=\"img\" aria-label=\"便利な設定\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">passive-interface g0/1</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Helloを送らない。そのネットワークの経路は広告し続</text><text x=\"24\" y=\"67.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ける</text><rect x=\"10\" y=\"86.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"112.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">default-information originate</text><text x=\"24\" y=\"131.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">デフォルトルートをOSPFで配る</text><rect x=\"10\" y=\"150.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"175.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">auto-cost reference-bandwidth</text><text x=\"24\" y=\"194.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1Gbpsと10Gbpsのコストを区別</text><rect x=\"10\" y=\"213.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#3d4450\" opacity=\".1\"/><text x=\"24\" y=\"239.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">224.0.0.5／224.0.0.6</text><text x=\"24\" y=\"258.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">OSPFルーター全部／DR・BDR</text></svg>",
+   "b": "<b>passive-interface</b> は<b>OSPFのHelloを送らなくなるが、そのネットワークの経路は広告される</b>設定です。",
+   "p": "PCしかつながっていないポート → passive-interface。"
+  },
+  {
+   "t": "小テスト",
+   "quiz": {
+    "q": "DROTHERどうしのOSPFのネイバーの状態として正常なものは？",
+    "o": [
+     ["2-Way", "<g><g transform=\"translate(0,0)\"><rect x=\"-40.0\" y=\"-13\" width=\"80\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#ffb400\">2-Way</text></g></g>"],
+     ["Full", "<g><g transform=\"translate(0,0)\"><rect x=\"-40.0\" y=\"-13\" width=\"80\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#00a05a\">Full</text></g></g>"],
+     ["Init", "<g><g transform=\"translate(0,0)\"><rect x=\"-40.0\" y=\"-13\" width=\"80\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#3d4450\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#3d4450\">Init</text></g></g>"]
+    ],
+    "a": 0,
+    "e": "正解は<b>2-Way</b>。DROTHERどうしは2-Wayで止まり、DR/BDRとはFullになります。"
+   }
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">broadcast＝DR/BDRあり／P2P＝なし</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2台だけのイーサネットはP2Pで速く</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Down→Init→2-Way→…→Full</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">DROTHERどうしは2-Wayが正常</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">FULL/ - ＝ point-to-point</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">passive-interface＝Helloを止めても経路は広告</text></svg>",
+   "b": "次回は「FHRP（デフォルトゲートウェイの冗長化）」。",
+   "p": "一問一答の「IP接続」で確かめましょう。"
+  }
+ ],
+ "cls": {
+  "a": "audio/l33/",
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "今日は、OSPFの続きです。ネットワークタイプと、ネイバーの状態を学びます。出力を読む問題が多いので、表示の意味を押さえましょう。", "y": "今日は、オーエスピーエフの続きです。ネットワークタイプと、ネイバーの状態を学びます。出力を読む問題が多いので、表示の意味を押さえましょう。"},
+   {"sc": 1, "sp": "先生", "t": "ネットワークタイプは、主に2つ。broadcastとpoint-to-pointです。", "y": "ネットワークタイプは、主に2つ。ブロードキャストとポイントツーポイントです。"},
+   {"sc": 1, "sp": "先生", "t": "broadcastは、イーサネットの初期値です。たくさんのルーターがつながる前提なので、DRとBDRを選びます。HelloとDeadは10秒と40秒です。", "y": "ブロードキャストは、イーサネットの初期値です。たくさんのルーターがつながる前提なので、ディーアールとビーディーアールを選びます。ハローとデッドは10秒と40秒です。"},
+   {"sc": 1, "sp": "先生", "t": "point-to-pointは、シリアル回線の初期値です。2台しかいないので、DRとBDRを選びません。", "y": "ポイントツーポイントは、シリアル回線の初期値です。2台しかいないので、ディーアールとビーディーアールを選びません。"},
+   {"sc": 1, "sp": "生徒", "t": "ルーター2台だけを、イーサネットでつないだときは？"},
+   {"sc": 1, "sp": "先生", "t": "初期値はbroadcastなので、ほかにルーターが来ないか、しばらく待ってからDRを選びます。その分、つながるまで時間がかかります。そこで、ip ospf network point-to-pointを設定すると、選出がなくなり、すぐにFullになります。", "y": "初期値はブロードキャストなので、ほかにルーターが来ないか、しばらく待ってからディーアールを選びます。その分、つながるまで時間がかかります。そこで、アイピー、オーエスピーエフ ネットワーク ポイントツーポイントを設定すると、選出がなくなり、すぐにフルになります。"},
+   {"sc": 1, "sp": "先生", "t": "ちなみに、DRとBDRが選ばれるのは、broadcastのほかに、non-broadcast、NBMAという、昔のWAN回線で使われたタイプもあります。試験では、broadcastとNBMAはDRあり、と覚えておけば大丈夫です。", "y": "ちなみに、ディーアールとビーディーアールが選ばれるのは、ブロードキャストのほかに、ノンブロードキャスト、エヌビーエムエーという、昔のワン回線で使われたタイプもあります。試験では、ブロードキャストとエヌビーエムエーはディーアールあり、と覚えておけば大丈夫です。"},
+   {"sc": 2, "sp": "先生", "t": "次は、ネイバーの状態です。ざっくり言うと、Downは何もなし、Initは相手のHelloが届いた、2-Wayはお互いを確認できた、ExStartからLoadingは地図のデータベースを交換している途中、そしてFullは交換が終わった状態です。", "y": "次は、ネイバーの状態です。ざっくり言うと、ダウンは何もなし、イニットは相手のハローが届いた、ツーウェイはお互いを確認できた、エクススタートからローディングは地図のデータベースを交換している途中、そしてフルは交換が終わった状態です。"},
+   {"sc": 2, "sp": "先生", "t": "Fullは、データベースの交換が終わって、完全に同期した状態です。", "y": "フルは、データベースの交換が終わって、完全に同期した状態です。"},
+   {"sc": 2, "sp": "先生", "t": "大事なのは、DR、BDRとは、Fullになりますが、DROTHERどうしは2-Wayで止まることです。DROTHERは、地図の情報をDRとBDRからもらうので、DROTHERどうしで直接交換する必要がないんです。だから、これは正常です。", "y": "大事なのは、ディーアール、ビーディーアールとは、フルになりますが、ディーアールアザーどうしはツーウェイで止まることです。ディーアールアザーは、地図の情報をディーアールとビーディーアールからもらうので、ディーアールアザーどうしで直接交換する必要がないんです。だから、これは正常です。"},
+   {"sc": 2, "sp": "生徒", "t": "2-Wayで止まっていても、故障じゃないんですね。", "y": "ツーウェイで止まっていても、故障じゃないんですね。"},
+   {"sc": 2, "sp": "先生", "t": "そうです。Helloの役割は、ネイバーを見つけて、関係を保ち、DRとBDRを選ぶことです。経路の情報そのものは、LSAでやりとりします。Helloでルーティングテーブル全体を送るわけではありません。", "y": "そうです。ハローの役割は、ネイバーを見つけて、関係を保ち、ディーアールとビーディーアールを選ぶことです。経路の情報そのものは、エルエスエーでやりとりします。ハローでルーティングテーブル全体を送るわけではありません。"},
+   {"sc": 3, "sp": "先生", "t": "では出力を読みます。show ip ospf neighborで、相手2.2.2.2の状態がFULL、役割がDR。相手3.3.3.3の状態が2WAY、役割がDROTHER、と出ていたら、R1の役割は何でしょう？", "y": "では出力を読みます。ショー、アイピー、オーエスピーエフ、ネイバーで、相手2、2、2、2の状態がフル、役割がディーアール。相手3、3、3、3の状態がツーウェイ、役割がディーアールアザー、と出ていたら、R1の役割は何でしょう？"},
+   {"sc": 3, "sp": "生徒", "t": "DROTHERと2-Wayだから、R1もDROTHERですか？", "y": "ディーアールアザーとツーウェイだから、R1もディーアールアザーですか？"},
+   {"sc": 3, "sp": "先生", "t": "正解です。もしR1がBDRなら、DROTHERともFullになるはずですからね。", "y": "正解です。もしR1がビーディーアールなら、ディーアールアザーともフルになるはずですからね。"},
+   {"sc": 3, "sp": "先生", "t": "FULLのあとが、ハイフンになっていたら、point-to-pointで、DRとBDRを選んでいない、という意味です。show ip ospf interfaceで、StateがP2Pなら、point-to-pointです。", "y": "フルのあとが、ハイフンになっていたら、ポイントツーポイントで、ディーアールとビーディーアールを選んでいない、という意味です。ショー、アイピー、オーエスピーエフ、インターフェースで、Stateがピーツーピーなら、ポイントツーポイントです。"},
+   {"sc": 3, "sp": "先生", "t": "StateがDRで、Designated Routerが自分のIDなら、自分がDRです。Adjacent neighbor countは、Fullになっている相手の数です。DRなら、ほかの全部のルーターとFullになります。", "y": "Stateがディーアールで、Designated Routerが自分のIDなら、自分がディーアールです。アジェイセントネイバーカウントは、フルになっている相手の数です。ディーアールなら、ほかの全部のルーターとフルになります。"},
+   {"sc": 4, "sp": "先生", "t": "最後に、便利な設定を3つ。passive-interfaceは、Helloを送らなくする設定です。PCしかつながっていないポートでは、Helloを送っても受け取るルーターがいないので無駄ですし、悪い人にOSPFの情報を見られる心配もあります。そういうポートに設定します。そのネットワークの経路は、ちゃんと広告され続けます。", "y": "最後に、便利な設定を3つ。パッシブインターフェースは、ハローを送らなくする設定です。ピーシーしかつながっていないポートでは、ハローを送っても受け取るルーターがいないので無駄ですし、悪い人にオーエスピーエフの情報を見られる心配もあります。そういうポートに設定します。そのネットワークの経路は、ちゃんと広告され続けます。"},
+   {"sc": 4, "sp": "先生", "t": "default-information originateは、デフォルトルートをOSPFで配る設定。auto-cost reference-bandwidthは、前回の、参照帯域幅を大きくする設定です。", "y": "デフォルトインフォメーション、オリジネートは、デフォルトルートをオーエスピーエフで配る設定。オートコスト、リファレンスバンドウィドスは、前回の、参照帯域幅を大きくする設定です。"},
+   {"sc": 4, "sp": "先生", "t": "マルチキャストアドレスは、224.0.0.5がOSPFルーター全員、224.0.0.6がDRとBDR宛てです。", "y": "マルチキャストアドレスは、224、0、0、5がオーエスピーエフルーター全員、224、0、0、6がディーアールとビーディーアール宛てです。"},
+   {"sc": 5, "sp": "先生", "t": "ここで小テストです。DROTHERどうしのネイバーの状態として、正常なものはどれでしょう？画面で選んでください。", "w": 1, "y": "ここで小テストです。ディーアールアザーどうしのネイバーの状態として、正常なものはどれでしょう？画面で選んでください。"},
+   {"sc": 5, "sp": "先生", "t": "正解は2-Wayです。", "y": "正解はツーウェイです。"},
+   {"sc": 6, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 6, "sp": "先生", "t": "1つ目。イーサネットはbroadcastでDRとBDRあり、シリアルはpoint-to-pointでなし。2台だけのイーサネットはpoint-to-pointにすると速い。", "y": "1つ目。イーサネットはブロードキャストでディーアールとビーディーアールあり、シリアルはポイントツーポイントでなし。2台だけのイーサネットはポイントツーポイントにすると速い。"},
+   {"sc": 6, "sp": "先生", "t": "2つ目。状態は、Down、Init、2-Way、ExStart、Exchange、Loading、Full。DROTHERどうしは2-Wayが正常。", "y": "2つ目。状態は、ダウン、イニット、ツーウェイ、エクススタート、エクスチェンジ、ローディング、フル。ディーアールアザーどうしはツーウェイが正常。"},
+   {"sc": 6, "sp": "先生", "t": "3つ目。FULLのあとのハイフンはpoint-to-point。passive-interfaceはHelloを止めても経路は広告する。", "y": "3つ目。フルのあとのハイフンはポイントツーポイント。パッシブインターフェースはハローを止めても経路は広告する。"},
+   {"sc": 6, "sp": "生徒", "t": "出力の読み方、自信がついてきました！"},
+   {"sc": 6, "sp": "先生", "t": "いいですね。次回は、デフォルトゲートウェイを冗長化するFHRPを学びます。お疲れさまでした。", "y": "いいですね。次回は、デフォルトゲートウェイを冗長化するエフエイチアールピーを学びます。お疲れさまでした。"}
+  ],
+  "seg": [
+   [0.0, 10.72],
+   [11.07, 5.204958],
+   [16.625, 10.987],
+   [27.962, 7.659],
+   [35.971, 3.979],
+   [40.3, 19.178667],
+   [59.829, 17.632],
+   [77.811, 17.109333],
+   [95.27, 5.162958],
+   [100.783, 18.730667],
+   [119.864, 3.648],
+   [123.862, 15.531],
+   [139.743, 21.589333],
+   [161.682, 5.013],
+   [167.045, 6.251],
+   [173.646, 16.053],
+   [190.049, 14.164958],
+   [204.564, 22.826667],
+   [227.741, 12.832],
+   [240.923, 13.237],
+   [254.51, 8.267],
+   [263.127, 1.643],
+   [265.12, 1.835],
+   [267.305, 11.051],
+   [278.706, 11.712],
+   [290.768, 7.733],
+   [298.851, 3.499],
+   [302.7, 7.413]
+  ]
+ }
+}

@@ -1,0 +1,108 @@
+{
+ "r": "TB",
+ "lt": "nl39",
+ "n": 40,
+ "t": "セキュリティの基本用語",
+ "pages": [
+  {
+   "t": "CIAと3つの言葉",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 281.0\" role=\"img\" aria-label=\"CIAと3つの言葉\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">機密性（Confidentiality）</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">見てはいけない人に見せない</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">完全性（Integrity）</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">書き換えられない</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">可用性（Availability）</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">使いたいときに使える</text><rect x=\"10\" y=\"196.5\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#3d4450\" opacity=\".1\"/><text x=\"24\" y=\"222.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">脆弱性／エクスプロイト／脅威</text><text x=\"24\" y=\"241.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">弱点／弱点を突く手段／悪用される可能性。ゼロデイ＝</text><text x=\"24\" y=\"258.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">パッチ前を狙う</text></svg>",
+   "b": "<b>CIA</b>（Confidentiality, Integrity, Availability）はセキュリティで守る3つの性質です。 <b>脆弱性（vulnerability）</b>＝<b>システムの弱点</b>。",
+   "p": "ゼロデイ攻撃＝修正プログラムが出る前の脆弱性を狙う。"
+  },
+  {
+   "t": "攻撃の種類",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 344.5\" role=\"img\" aria-label=\"攻撃の種類\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">フィッシング</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">偽メール・偽サイトでだまし取る</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">DoS／DDoS</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">サービスを止める／多数の機器（ボットネット）から一</text><text x=\"24\" y=\"131.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">斉に</text><rect x=\"10\" y=\"150.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"175.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">スプーフィング・中間者攻撃（MITM）</text><text x=\"24\" y=\"194.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">送信元を偽る／間に入って盗み見・改ざん</text><rect x=\"10\" y=\"213.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#3d4450\" opacity=\".1\"/><text x=\"24\" y=\"239.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">バックドア</text><text x=\"24\" y=\"258.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">あとでこっそり入るための裏口</text><rect x=\"10\" y=\"277.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#8a3ffc\" opacity=\".1\"/><text x=\"24\" y=\"302.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ソーシャルエンジニアリング</text><text x=\"24\" y=\"321.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">人をだます。テールゲーティング（共連れ）など</text></svg>",
+   "b": "<b>DDoS</b>は、<b>多数の機器（ボットネットなど）から一斉に攻撃</b>します。<b>バックドア</b>は、<b>権限のない人があとでこっそりアクセスできるように仕込まれる悪意のあるコード</b>です。フィッシングの種類：<b>スピアフィッシング</b>＝特定の人や組織を狙う、<b>ホエーリング</b>＝経営者などの重要人物を狙う、<b>ビッシング</b>＝電話（音声）でだます、<b>スミッシング</b>＝SMSでだます。フィッシング被害には<b>ユーザーの意識向上トレーニング</b>。",
+   "p": "フィッシングの被害が増えた → ユーザー意識向上トレーニング。"
+  },
+  {
+   "t": "3つの対策",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 234.5\" role=\"img\" aria-label=\"3つの対策\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">利用者教育</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">訓練用の偽メール・啓発キャンペーン（フィッシング・</text><text x=\"24\" y=\"67.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">うっかり漏えい対策）</text><rect x=\"10\" y=\"86.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"112.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">物理的なアクセス制御</text><text x=\"24\" y=\"131.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">社員証（バッジ）・サーバールームの施錠</text><rect x=\"10\" y=\"150.0\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"175.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">技術的な対策</text><text x=\"24\" y=\"194.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ファイアウォール・ACL・多要素認証・未使用ポートのs</text><text x=\"24\" y=\"211.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">hutdown・802.1X</text></svg>",
+   "b": "<b>利用者教育</b>の例：<b>偽のフィッシングメールを送って見抜けるか訓練する</b>、<b>ユーザー啓発（認知）キャンペーン</b>で<b>うっかりメールで機密情報を漏らす</b>のを防ぐ。<b>物理的アクセス制御</b>の例：<b>社員証（バッジ）で入室を管理し、サーバールームを施錠</b>する。オフィスのネットワークポートの悪用対策は、<b>未使用のポートをシャットダウン</b>し、<b>ポートベース認証（802.1X）</b>を使うことです。",
+   "p": "1人のバッジで何人も入る → 物理的アクセス制御の違反。"
+  },
+  {
+   "t": "AAA",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 281.0\" role=\"img\" aria-label=\"AAA\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">認証（Authentication）</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">あなたは誰？（本人確認）</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">認可（Authorization）</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">何をしてよい？（権限）</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">アカウンティング（Accounting）</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">何をした？（記録）</text><rect x=\"10\" y=\"196.5\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"222.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">RADIUS：標準・UDP・パスワードだけ暗号化</text><text x=\"24\" y=\"241.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">TACACS+：Cisco独自・TCP 49・パケット全体を暗号</text><text x=\"24\" y=\"258.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">化</text></svg>",
+   "b": "<b>AAA</b>は認証・認可・アカウンティング。aaa new-model で有効にします。 <b>認証</b>は<b>誰なのかを確かめ（ユーザーを識別し）</b>、ログインを許可・拒否します（ローカル・RADIUS・TACACS+などを使える）。<b>認可</b>は<b>何をしてよいか（アクセスできるリソース・使えるCLIコマンド・ユーザーやグループごとの属性）を決めます</b>。<b>アカウンティング</b>は<b>何をしたかを記録</b>します（<b>利用したサービスを追跡</b>、アクセスした時間、入力した設定コマンドのログ）。<b>TACACS+</b>は<b>TCP 49を使い、パケット全体を暗号化</b>します。マルウェアの種類：<b>ウイルス</b>＝ほかのファイルに寄生して広がる、<b>ワーム</b>＝自分をコピーしてネットワークに広がる、<b>トロイの木馬</b>＝役に立つソフトのふりをして入り込む、<b>ランサムウェア</b>＝データを暗号化して身代金を要求する。",
+   "p": "パケット全体を暗号化しTCPを使う＝TACACS+。"
+  },
+  {
+   "t": "小テスト",
+   "quiz": {
+    "q": "AAAの「認可」とは？",
+    "o": [
+     ["何をしてよいかを決める", "<g><g transform=\"translate(0,0)\"><rect x=\"-45.0\" y=\"-13\" width=\"90\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#00a05a\">権限</text></g></g>"],
+     ["誰かを確認する", "<g><g transform=\"translate(0,0)\"><rect x=\"-45.0\" y=\"-13\" width=\"90\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#0a5cff\">本人確認</text></g></g>"],
+     ["何をしたか記録する", "<g><g transform=\"translate(0,0)\"><rect x=\"-45.0\" y=\"-13\" width=\"90\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#ffb400\">記録</text></g></g>"]
+    ],
+    "a": 0,
+    "e": "正解は<b>何をしてよいかを決める</b>。認証＝誰か、アカウンティング＝記録です。"
+   }
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">CIA＝機密性・完全性・可用性</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">脆弱性＝弱点、エクスプロイト＝手段、脅威＝可能性</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">フィッシング→教育、共連れ→物理</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">DDoS＝多数の機器から</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">AAA＝認証・認可・アカウンティング</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">RADIUS＝UDP／TACACS+＝TCP 49・全体暗号化</text></svg>",
+   "b": "次回は「パスワードと機器の保護」。",
+   "p": "一問一答の「セキュリティの基礎」で確かめましょう。"
+  }
+ ],
+ "cls": {
+  "a": "audio/l40/",
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "今日から、セキュリティの基礎の分野です。最初は、セキュリティの基本用語を整理します。"},
+   {"sc": 1, "sp": "先生", "t": "セキュリティで守るものは3つ。頭文字でCIAです。機密性は、見てはいけない人に見せないこと。完全性は、データを書き換えられないこと。可用性は、使いたいときに使えることです。", "y": "セキュリティで守るものは3つ。頭文字でシーアイエーです。機密性は、見てはいけない人に見せないこと。完全性は、データを書き換えられないこと。可用性は、使いたいときに使えることです。"},
+   {"sc": 1, "sp": "先生", "t": "次に、3つの言葉の違いです。家で例えると、鍵のかかっていない窓が脆弱性、つまり弱点。その窓から入る方法がエクスプロイト。そして、泥棒に入られるかもしれない危険が、脅威です。"},
+   {"sc": 1, "sp": "先生", "t": "まだ修正プログラムが出ていない脆弱性を狙うのが、ゼロデイ攻撃です。"},
+   {"sc": 2, "sp": "先生", "t": "攻撃の種類を見ていきましょう。フィッシングは、偽のメールや偽のサイトで、パスワードなどをだまし取る攻撃です。"},
+   {"sc": 2, "sp": "先生", "t": "DoS攻撃は、大量の通信を送ってサービスを止める攻撃。DDoSは、ウイルスに乗っ取られたたくさんのパソコン、ボットネットなどを使って、多数の機器から一斉に攻撃します。", "y": "ドス攻撃は、大量の通信を送ってサービスを止める攻撃。ディードスは、ウイルスに乗っ取られたたくさんのパソコン、ボットネットなどを使って、多数の機器から一斉に攻撃します。"},
+   {"sc": 2, "sp": "先生", "t": "スプーフィングは、送信元のIPアドレスなどを偽る、なりすまし。中間者攻撃は、通信の間に入り込んで、盗み見たり書き換えたりします。", "y": "スプーフィングは、送信元のアイピーアドレスなどを偽る、なりすまし。中間者攻撃は、通信の間に入り込んで、盗み見たり書き換えたりします。"},
+   {"sc": 2, "sp": "先生", "t": "悪意のあるソフトをまとめてマルウェアと言います。その一つ、バックドアは、攻撃者があとでこっそり入れるように仕込む、裏口のプログラムです。"},
+   {"sc": 2, "sp": "生徒", "t": "人をだます攻撃もありますか？"},
+   {"sc": 2, "sp": "先生", "t": "あります。ソーシャルエンジニアリングです。社員の後ろについて、セキュリティゲートを一緒に通り抜けるテールゲーティング、共連れもその一つです。"},
+   {"sc": 3, "sp": "先生", "t": "対策は3つに分けて考えます。1つ目は利用者教育。会社が訓練用の偽メールを送って、見抜けるかを確かめるのは、利用者の意識向上の取り組みです。うっかりの情報漏れも、教育や啓発で防ぎます。"},
+   {"sc": 3, "sp": "先生", "t": "2つ目は物理的なアクセス制御。社員証で入室を管理する、サーバールームに鍵をかける、などです。1人のバッジで何人も入るのは、物理的なアクセス制御の違反です。"},
+   {"sc": 3, "sp": "先生", "t": "3つ目は技術的な対策。ファイアウォール、あとで習う通信を許可・拒否するリストのACL、パスワードとスマホの確認のように複数の方法で本人確認する多要素認証などです。壁のLANの口なら、使っていないポートをshutdownし、802.1Xのポートベース認証を使います。", "y": "3つ目は技術的な対策。ファイアウォール、あとで習う通信を許可・拒否するリストのエーシーエル、パスワードとスマホの確認のように複数の方法で本人確認する多要素認証などです。壁のランの口なら、使っていないポートをシャットダウンし、ハチマルニーテンイチエックスのポートベース認証を使います。"},
+   {"sc": 4, "sp": "先生", "t": "最後にAAAです。認証、認可、アカウンティングの3つです。", "y": "最後にトリプルエーです。認証、認可、アカウンティングの3つです。"},
+   {"sc": 4, "sp": "先生", "t": "認証は、あなたは誰か、という本人確認。認可は、何をしてよいか、という権限。アカウンティングは、何をしたか、の記録です。CiscoルーターでAAAを使い始めるには、aaa new-modelです。", "y": "認証は、あなたは誰か、という本人確認。認可は、何をしてよいか、という権限。アカウンティングは、何をしたか、の記録です。シスコルーターでトリプルエーを使い始めるには、トリプルエー、ニューモデルです。"},
+   {"sc": 4, "sp": "先生", "t": "AAAのサーバーとのやりとりには、RADIUSとTACACS+があります。RADIUSは標準で、UDPを使い、パスワードだけを暗号化します。TACACS+はCisco独自で、TCPの49番を使い、パケット全体を暗号化します。", "y": "トリプルエーのサーバーとのやりとりには、ラディウスとタカクスプラスがあります。ラディウスは標準で、ユーディーピーを使い、パスワードだけを暗号化します。タカクスプラスはシスコ独自で、ティーシーピーの49番を使い、パケット全体を暗号化します。"},
+   {"sc": 4, "sp": "生徒", "t": "TACACS+のほうが、しっかり守るんですね。", "y": "タカクスプラスのほうが、しっかり守るんですね。"},
+   {"sc": 5, "sp": "先生", "t": "ここで小テストです。AAAの認可とは、何でしょう？画面で選んでください。", "w": 1, "y": "ここで小テストです。トリプルエーの認可とは、何でしょう？画面で選んでください。"},
+   {"sc": 5, "sp": "先生", "t": "正解は、何をしてよいかを決める、です。"},
+   {"sc": 6, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 6, "sp": "先生", "t": "1つ目。CIAは機密性、完全性、可用性。脆弱性は弱点、エクスプロイトは手段、脅威は可能性。", "y": "1つ目。シーアイエーは機密性、完全性、可用性。脆弱性は弱点、エクスプロイトは手段、脅威は可能性。"},
+   {"sc": 6, "sp": "先生", "t": "2つ目。フィッシングは教育、テールゲーティングは物理的な対策。DDoSは多数の機器から。", "y": "2つ目。フィッシングは教育、テールゲーティングは物理的な対策。ディードスは多数の機器から。"},
+   {"sc": 6, "sp": "先生", "t": "3つ目。AAAは認証、認可、アカウンティング。RADIUSはUDPでパスワードだけ、TACACS+はTCP49で全体を暗号化。", "y": "3つ目。トリプルエーは認証、認可、アカウンティング。ラディウスはユーディーピーでパスワードだけ、タカクスプラスはティーシーピー49で全体を暗号化。"},
+   {"sc": 6, "sp": "生徒", "t": "用語がすっきり整理できました！"},
+   {"sc": 6, "sp": "先生", "t": "よかったです。次回は、パスワードと機器の守り方を学びます。お疲れさまでした。"}
+  ],
+  "seg": [
+   [0.0, 6.133],
+   [6.483, 13.909],
+   [20.742, 14.848],
+   [35.94, 5.152],
+   [41.442, 7.893],
+   [49.685, 12.490667],
+   [62.526, 11.157],
+   [74.033, 9.536],
+   [83.919, 2.442958],
+   [86.712, 9.632],
+   [96.694, 15.627],
+   [112.671, 12.853],
+   [125.874, 21.002667],
+   [147.226, 5.098958],
+   [152.675, 15.989],
+   [169.014, 17.739],
+   [187.103, 3.691],
+   [191.144, 5.824],
+   [197.318, 3.403],
+   [201.071, 1.835],
+   [203.256, 9.803],
+   [213.409, 6.944],
+   [220.703, 11.093],
+   [232.146, 2.420958],
+   [234.917, 5.899]
+  ]
+ }
+}

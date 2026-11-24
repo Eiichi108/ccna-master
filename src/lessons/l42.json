@@ -1,0 +1,110 @@
+{
+ "r": "TB",
+ "lt": "nl41",
+ "n": 42,
+ "t": "パスワードポリシーとIPsec",
+ "pages": [
+  {
+   "t": "パスワードポリシー",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 215.98387096774195\" role=\"img\" aria-label=\"パスワードポリシー\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">長さ・複雑さ・有効期限・再利用禁止</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">security passwords min-length 10</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"72.98387096774194\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"93.48387096774195\" text-anchor=\"start\" style=\"font:800 13.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">login block-for 120 attempts 3 within 60</text><text x=\"24\" y=\"112.48387096774195\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">60秒で3回失敗 → 120秒ログイン禁止（総当たり対策</text><text x=\"24\" y=\"129.48387096774195\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">）</text><rect x=\"10\" y=\"148.48387096774195\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"173.98387096774195\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">enable algorithm-type scrypt secret</text><text x=\"24\" y=\"192.98387096774195\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">type 9（scrypt）で保存</text></svg>",
+   "b": "<b>辞書攻撃や総当たり攻撃</b>には、<b>ログイン失敗の回数を制限し、長く複雑なパスワード</b>にするのが効果的です。<b>login block-for 120 attempts 3 within 60</b> は、<b>60秒以内に3回失敗したら、120秒ログインを禁止する</b>設定です。",
+   "p": "辞書攻撃・総当たり → 失敗回数の制限＋長く複雑なパスワード。"
+  },
+  {
+   "t": "多要素認証",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 250\" role=\"img\" aria-label=\"多要素認証\"><rect x=\"10\" y=\"14\" width=\"108\" height=\"110\" rx=\"12\" fill=\"#0a5cff\" opacity=\".12\"/><text x=\"64\" y=\"44\" text-anchor=\"middle\" style=\"font:800 14px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">知識</text><text x=\"64\" y=\"72\" text-anchor=\"middle\" style=\"font:700 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">パスワード</text><text x=\"64\" y=\"94\" text-anchor=\"middle\" style=\"font:700 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">PIN</text><rect x=\"126\" y=\"14\" width=\"108\" height=\"110\" rx=\"12\" fill=\"#00a05a\" opacity=\".12\"/><text x=\"180\" y=\"44\" text-anchor=\"middle\" style=\"font:800 14px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">所持</text><text x=\"180\" y=\"72\" text-anchor=\"middle\" style=\"font:700 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">スマホ</text><text x=\"180\" y=\"94\" text-anchor=\"middle\" style=\"font:700 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">トークン・OTP</text><rect x=\"242\" y=\"14\" width=\"108\" height=\"110\" rx=\"12\" fill=\"#ffb400\" opacity=\".12\"/><text x=\"296\" y=\"44\" text-anchor=\"middle\" style=\"font:800 14px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">生体</text><text x=\"296\" y=\"72\" text-anchor=\"middle\" style=\"font:700 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">指紋</text><text x=\"296\" y=\"94\" text-anchor=\"middle\" style=\"font:700 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">顔・静脈</text><text x=\"180\" y=\"150\" text-anchor=\"middle\" style=\"font:800 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">違う種類を2つ以上 ＝ 多要素認証（MFA）</text><text x=\"180\" y=\"174\" text-anchor=\"middle\" style=\"font:700 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">パスワード＋スマホのコード ○　パスワード2つ ✕</text><text x=\"180\" y=\"206\" text-anchor=\"middle\" style=\"font:700 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ダイジェスト認証：ノンス＋パスワードのハッシュだけ送る</text><text x=\"180\" y=\"228\" text-anchor=\"middle\" style=\"font:700 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">（チャレンジレスポンス）</text></svg>",
+   "b": "<b>MFA</b>（Multi-Factor Authentication）。<b>PKI</b>（Public Key Infrastructure）のデジタル証明書でも本人確認できます。 MFAの要素は「知っているもの（パスワード）」「<b>所持しているもの（スマホ、トークン）</b>」「<b>身体的な特徴（指紋、顔）</b>」。<b>パスワードとスマホに届くワンタイムコード</b>の組み合わせは多要素認証です。身体的な特徴を使う方法を<b>生体認証（バイオメトリクス）</b>と言います。<b>ダイジェスト認証</b>は、<b>チャレンジレスポンス</b>のしくみでパスワードを平文で送りません。資格情報と<b>サーバーが作るノンス（nonce）</b>を組み合わせてハッシュを作ります。",
+   "p": "ワンタイムパスワード＋ログイン名＋スマホ＝多要素認証。"
+  },
+  {
+   "t": "IPsec",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 344.5\" role=\"img\" aria-label=\"IPsec\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ESP</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">暗号化＋認証（よく使われる）</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#3d4450\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">AH</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">認証だけ（暗号化しない）</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">トンネルモード</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">IPパケット全体を包む（拠点間VPN）</text><rect x=\"10\" y=\"196.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"222.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">トランスポートモード</text><text x=\"24\" y=\"241.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">データ部分だけを守る</text><rect x=\"10\" y=\"260.0\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#8a3ffc\" opacity=\".1\"/><text x=\"24\" y=\"285.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">GRE over IPsec</text><text x=\"24\" y=\"304.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">GREでマルチキャスト（OSPFなど）も運び、IPsecで暗</text><text x=\"24\" y=\"321.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">号化</text></svg>",
+   "b": "<b>IPsec</b>は機密性・完全性・送信元の認証・リプレイ攻撃の防止を提供。<b>IKE</b>は鍵交換、<b>GRE</b>自体には暗号化がありません。 IPsecは<b>データの暗号化（機密性）</b>と<b>改ざんの検知（完全性）</b>などを提供します。<b>GRE over IPsec</b> は、<b>GREがマルチキャスト（ルーティングプロトコルなど）を運べ、それをIPsecで暗号化できる</b>ので使います。",
+   "p": "パケット全体をカプセル化＝トンネルモード。"
+  },
+  {
+   "t": "VPNの種類",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 298.0\" role=\"img\" aria-label=\"VPNの種類\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">サイト間VPN</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">拠点のルーター・FWどうしでトンネル。利用者は意識し</text><text x=\"24\" y=\"67.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ない</text><rect x=\"10\" y=\"86.5\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"112.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">リモートアクセスVPN</text><text x=\"24\" y=\"131.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">PCにVPNクライアント（Cisco Secure Client）を</text><text x=\"24\" y=\"148.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">入れて社外から</text><rect x=\"10\" y=\"167.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"192.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">TLS（SSL）VPN</text><text x=\"24\" y=\"211.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">HTTPSと同じ仕組み。ファイアウォールを通りやすい</text><rect x=\"10\" y=\"230.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#3d4450\" opacity=\".1\"/><text x=\"24\" y=\"256.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ファイアウォールの機能</text><text x=\"24\" y=\"275.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">URLフィルタリング・サイト間VPNの終端</text></svg>",
+   "b": "<b>VPN</b>（Virtual Private Network）。 <b>リモートアクセスVPN</b>は、<b>PCにVPNクライアントを入れて、社外から社内につなぎ</b>、<b>インターネット経由でリモートユーザーと社内ネットワークの間に暗号化されたトンネル</b>を作ります。<b>SSL/TLS VPN</b>は、<b>Webブラウザや専用のクライアントを使い、TLSで暗号化</b>して接続します。企業のファイアウォールは、<b>URLに基づくフィルタリング</b>や、単体で<b>サイト間VPNの終端（エンドポイント）</b>にもなれます。",
+   "p": "テレワーク → リモートアクセスVPN。"
+  },
+  {
+   "t": "小テスト",
+   "quiz": {
+    "q": "IPsecで、データそのものを暗号化するプロトコルは？",
+    "o": [
+     ["ESP", "<g><g transform=\"translate(0,0)\"><rect x=\"-40.0\" y=\"-13\" width=\"80\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#00a05a\">ESP</text></g></g>"],
+     ["AH", "<g><g transform=\"translate(0,0)\"><rect x=\"-40.0\" y=\"-13\" width=\"80\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#3d4450\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#3d4450\">AH</text></g></g>"],
+     ["GRE", "<g><g transform=\"translate(0,0)\"><rect x=\"-40.0\" y=\"-13\" width=\"80\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#0a5cff\">GRE</text></g></g>"]
+    ],
+    "a": 0,
+    "e": "正解は<b>ESP</b>。AHは認証だけ、GRE自体には暗号化がありません。"
+   }
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">長さ・複雑さ・login block-for</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">総当たり対策</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">MFA＝知識・所持・生体の2種類以上</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">生体認証＝体の特徴</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ESP＝暗号化、AH＝認証だけ</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">トンネルモード＝パケット全体</text></svg>",
+   "b": "次回は「ACL（アクセスコントロールリスト）」。",
+   "p": "一問一答の「セキュリティの基礎」で確かめましょう。"
+  }
+ ],
+ "cls": {
+  "a": "audio/l42/",
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "今日は、パスワードのルール、多要素認証、そして通信を暗号化するIPsecとVPNを学びます。", "y": "今日は、パスワードのルール、多要素認証、そして通信を暗号化するアイピーセックとブイピーエヌを学びます。"},
+   {"sc": 1, "sp": "先生", "t": "パスワードポリシーでは、長さ、複雑さ、有効期限、再利用の禁止を決めます。ルーターでは、security passwords min-length 10で、最低の文字数を決められます。", "y": "パスワードポリシーでは、長さ、複雑さ、有効期限、再利用の禁止を決めます。ルーターでは、セキュリティ、パスワーズ、ミンレングス 10で、最低の文字数を決められます。"},
+   {"sc": 1, "sp": "先生", "t": "辞書攻撃は、よく使われる単語を順番に試す攻撃、総当たり攻撃は、考えられる組み合わせを全部試す攻撃です。どちらも何度もログインを試すので、対策は、ログインの失敗回数を制限することです。login block-for 120 attempts 3 within 60は、60秒以内に3回失敗したら、120秒、つまり2分間、ログインを禁止する設定です。", "y": "辞書攻撃は、よく使われる単語を順番に試す攻撃、総当たり攻撃は、考えられる組み合わせを全部試す攻撃です。どちらも何度もログインを試すので、対策は、ログインの失敗回数を制限することです。ログイン、ブロックフォー 120 アテンプツ 3 ウィズイン 60は、60秒以内に3回失敗したら、120秒、つまり2分間、ログインを禁止する設定です。"},
+   {"sc": 1, "sp": "先生", "t": "enable algorithm-type scrypt secretで、type 9の強い方式で保存できます。", "y": "enable algorithm-type エスクリプト シークレットで、タイプナインの強い方式で保存できます。"},
+   {"sc": 2, "sp": "先生", "t": "次は、多要素認証、MFAです。認証の要素は3種類。知っているもの、つまりパスワード。持っているもの、スマホやトークン。そして体の特徴、指紋や顔などの生体認証です。", "y": "次は、多要素認証、エムエフエーです。認証の要素は3種類。知っているもの、つまりパスワード。持っているもの、スマホやトークン。そして体の特徴、指紋や顔などの生体認証です。"},
+   {"sc": 2, "sp": "先生", "t": "違う種類の要素を2つ以上組み合わせるのが、多要素認証です。パスワードと、スマホに届くワンタイムコードは、知識と所持なのでMFAです。", "y": "違う種類の要素を2つ以上組み合わせるのが、多要素認証です。パスワードと、スマホに届くワンタイムコードは、知識と所持なのでエムエフエーです。"},
+   {"sc": 2, "sp": "生徒", "t": "パスワードを2つ入れるのは？"},
+   {"sc": 2, "sp": "先生", "t": "同じ知識の要素なので、多要素認証ではありません。ほかに、デジタル証明書という、信頼できる機関が発行した電子的な身分証明書を使って、本人であることを確かめる方法もあります。この証明書を発行・管理する仕組みをPKIと言います。", "y": "同じ知識の要素なので、多要素認証ではありません。ほかに、デジタル証明書という、信頼できる機関が発行した電子的な身分証明書を使って、本人であることを確かめる方法もあります。この証明書を発行・管理する仕組みをピーケーアイと言います。"},
+   {"sc": 2, "sp": "先生", "t": "ここからは、多要素認証とは別の話です。ダイジェスト認証という方式では、サーバーが毎回違う使い捨ての数字、ノンスを出します。クライアントは、パスワードとノンスを混ぜてハッシュにしたものだけを返します。このように、問題を出して答えを返すやり方を、チャレンジレスポンスと言います。パスワードそのものは、ネットワークに流れません。"},
+   {"sc": 3, "sp": "先生", "t": "次はIPsecです。その前にVPN、バーチャル・プライベート・ネットワークです。インターネットという誰でも通る道の上に、暗号化した専用の通り道を作って、まるで社内の線でつながっているように使う仕組みです。IPsecは、IPの通信を暗号化して、このVPNを作る仕組みです。盗み見の防止、書き換えの検知、送信元の確認、そして、盗んだ通信をあとでそのまま送り直すリプレイ攻撃の防止をしてくれます。", "y": "次はアイピーセックです。その前にブイピーエヌ、バーチャル・プライベート・ネットワークです。インターネットという誰でも通る道の上に、暗号化した専用の通り道を作って、まるで社内の線でつながっているように使う仕組みです。アイピーセックは、アイピーの通信を暗号化して、このブイピーエヌを作る仕組みです。盗み見の防止、書き換えの検知、送信元の確認、そして、盗んだ通信をあとでそのまま送り直すリプレイ攻撃の防止をしてくれます。"},
+   {"sc": 3, "sp": "先生", "t": "IPsecには、データを守るプロトコルが2つあります。1つ目のESPは、暗号化と認証の両方ができます。よく使うのはこちらです。2つ目のAHは、認証だけで、暗号化はしません。それとは別に、IKEという、暗号化に使う鍵を、お互いに安全に決めるための仕組みもあります。", "y": "アイピーセックには、データを守るプロトコルが2つあります。1つ目のイーエスピーは、暗号化と認証の両方ができます。よく使うのはこちらです。2つ目のエーエイチは、認証だけで、暗号化はしません。それとは別に、アイクという、暗号化に使う鍵を、お互いに安全に決めるための仕組みもあります。"},
+   {"sc": 3, "sp": "先生", "t": "モードも2つ。トンネルモードは、IPパケット全体を包んで、新しいヘッダーを付けます。元の宛先まで隠せるので、拠点間のVPNで使います。トランスポートモードは、元のヘッダーはそのままで、中身のデータ部分だけを守ります。パソコンとサーバーのように、端末どうしが直接やりとりするときに使います。", "y": "モードも2つ。トンネルモードは、アイピーパケット全体を包んで、新しいヘッダーを付けます。元の宛先まで隠せるので、拠点間のブイピーエヌで使います。トランスポートモードは、元のヘッダーはそのままで、中身のデータ部分だけを守ります。パソコンとサーバーのように、端末どうしが直接やりとりするときに使います。"},
+   {"sc": 3, "sp": "生徒", "t": "パケット全体を包むのが、トンネルモードですね。"},
+   {"sc": 3, "sp": "先生", "t": "その通り。実は、IPsecだけだと、基本的に1対1のユニキャストしか運べず、OSPFのようなマルチキャストを通せません。GREは、マルチキャストも含めていろいろな通信を運べるトンネルですが、暗号化はしません。そこで、GREで包んでから、その外側をIPsecで暗号化するGRE over IPsecにすると、OSPFも通しながら暗号化できます。", "y": "その通り。実は、アイピーセックだけだと、基本的に1対1のユニキャストしか運べず、オーエスピーエフのようなマルチキャストを通せません。ジーアールイーは、マルチキャストも含めていろいろな通信を運べるトンネルですが、暗号化はしません。そこで、ジーアールイーで包んでから、その外側をアイピーセックで暗号化するジーアールイー over アイピーセックにすると、オーエスピーエフも通しながら暗号化できます。"},
+   {"sc": 4, "sp": "先生", "t": "VPNの種類は2つ。サイト間VPNは、拠点のルーターやファイアウォールどうしで、トンネルを作ります。利用者は、VPNを意識しません。", "y": "ブイピーエヌの種類は2つ。サイト間ブイピーエヌは、拠点のルーターやファイアウォールどうしで、トンネルを作ります。利用者は、ブイピーエヌを意識しません。"},
+   {"sc": 4, "sp": "先生", "t": "リモートアクセスVPNは、家や出張先のPCに、Cisco Secure ClientなどのVPNクライアントを入れて、インターネット越しに会社へ、暗号化したトンネルを作ります。", "y": "リモートアクセスブイピーエヌは、家や出張先のピーシーに、シスコ Secure Clientなどのブイピーエヌクライアントを入れて、インターネット越しに会社へ、暗号化したトンネルを作ります。"},
+   {"sc": 4, "sp": "先生", "t": "TLSは、HTTPSで使われている暗号化の仕組みです。TLSを使うVPNは、普通のWebサイトと同じ443番ポートを使うので、多くのファイアウォールで許可されていて、通りやすいんです。", "y": "ティーエルエスは、エイチティーティーピーエスで使われている暗号化の仕組みです。ティーエルエスを使うブイピーエヌは、普通のWebサイトと同じ443番ポートを使うので、多くのファイアウォールで許可されていて、通りやすいんです。"},
+   {"sc": 4, "sp": "先生", "t": "ファイアウォールは、URLで通信をふるい分けたり、サイト間VPNの出入口になったりもします。", "y": "ファイアウォールは、ユーアールエルで通信をふるい分けたり、サイト間ブイピーエヌの出入口になったりもします。"},
+   {"sc": 5, "sp": "先生", "t": "ここで小テストです。IPsecで、データそのものを暗号化するプロトコルはどれでしょう？画面で選んでください。", "w": 1, "y": "ここで小テストです。アイピーセックで、データそのものを暗号化するプロトコルはどれでしょう？画面で選んでください。"},
+   {"sc": 5, "sp": "先生", "t": "正解はESPです。AHは認証だけでしたね。", "y": "正解はイーエスピーです。エーエイチは認証だけでしたね。"},
+   {"sc": 6, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 6, "sp": "先生", "t": "1つ目。パスワードは長さと複雑さ、login block-forで総当たり対策。", "y": "1つ目。パスワードは長さと複雑さ、ログイン、ブロックフォーで総当たり対策。"},
+   {"sc": 6, "sp": "先生", "t": "2つ目。MFAは、知識、所持、生体のうち違う種類を2つ以上。", "y": "2つ目。エムエフエーは、知識、所持、生体のうち違う種類を2つ以上。"},
+   {"sc": 6, "sp": "先生", "t": "3つ目。IPsecのESPは暗号化と認証、AHは認証だけ。トンネルモードはパケット全体。サイト間とリモートアクセスのVPN。", "y": "3つ目。アイピーセックのイーエスピーは暗号化と認証、エーエイチは認証だけ。トンネルモードはパケット全体。サイト間とリモートアクセスのブイピーエヌ。"},
+   {"sc": 6, "sp": "生徒", "t": "ESPとトンネルモード、覚えました！", "y": "イーエスピーとトンネルモード、覚えました！"},
+   {"sc": 6, "sp": "先生", "t": "いいですね。次回は、通信をふるい分けるACLを学びます。お疲れさまでした。", "y": "いいですね。次回は、通信をふるい分けるエーシーエルを学びます。お疲れさまでした。"}
+  ],
+  "seg": [
+   [0.0, 7.819],
+   [8.169, 14.528],
+   [23.047, 30.24],
+   [53.637, 7.467],
+   [61.454, 14.955],
+   [76.759, 10.763],
+   [87.872, 2.229],
+   [90.451, 18.229333],
+   [109.03, 23.936],
+   [133.316, 32.394667],
+   [166.061, 21.472],
+   [187.883, 22.261333],
+   [210.494, 3.989],
+   [214.833, 28.554667],
+   [243.738, 10.901],
+   [254.989, 13.088],
+   [268.427, 15.381333],
+   [284.158, 7.306667],
+   [291.815, 7.861],
+   [300.026, 4.352],
+   [304.728, 1.835],
+   [306.913, 6.4],
+   [313.663, 6.4],
+   [320.413, 11.083],
+   [331.846, 3.349],
+   [335.545, 6.155]
+  ]
+ }
+}

@@ -1,0 +1,110 @@
+{
+ "r": "TB",
+ "lt": "nl45",
+ "n": 46,
+ "t": "コントローラーとSDN",
+ "pages": [
+  {
+   "t": "3つのプレーン",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"3つのプレーン\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">データプレーン（手足）</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">実際にパケットを転送する</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">コントロールプレーン（頭脳）</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">経路を決める（OSPF・STPなど）</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">管理プレーン</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">機器を管理する（SSH・SNMPなど）</text></svg>",
+   "b": "<b>データプレーン</b>→<b>パケットを転送する</b>、<b>コントロールプレーン</b>→<b>OSPFやSTPで経路や構成を決める</b>、<b>管理プレーン</b>→<b>SSHやSNMPで機器を管理する</b>。SDNの層で言うと、コントロールプレーンとデータプレーンの境目は<b>制御層とインフラストラクチャ層の間</b>です。",
+   "p": "ソフトウェア定義アーキテクチャで分散され、転送を担当＝データプレーン。"
+  },
+  {
+   "t": "従来型とSDN",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 240\" role=\"img\" aria-label=\"従来型とSDN\"><rect x=\"10\" y=\"10\" width=\"164\" height=\"190\" rx=\"12\" fill=\"#3d4450\" opacity=\".07\"/><text x=\"92\" y=\"34\" text-anchor=\"middle\" style=\"font:800 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">従来型（分散）</text><g transform=\"translate(50,90) scale(0.55)\"><g transform=\"translate(0,0)\"><ellipse cx=\"0\" cy=\"22\" rx=\"28\" ry=\"4\" fill=\"var(--ink)\" opacity=\".12\"/><path d=\"M-28-6v14c0 8 12 14 28 14s28-6 28-14v-14\" fill=\"#e6261f\"/><ellipse cy=\"-6\" rx=\"28\" ry=\"12\" fill=\"#e6261f\"/><ellipse cy=\"-6\" rx=\"28\" ry=\"12\" fill=\"#fff\" opacity=\".18\"/><path d=\"M-14-6h28M0-14v16M-10-6l-4-4v8zM10-6l4-4v8z\" stroke=\"#fff\" stroke-width=\"2.4\" fill=\"#fff\" stroke-linecap=\"round\"/></g></g><circle cx=\"50\" cy=\"70\" r=\"7\" fill=\"#00a05a\"/><g transform=\"translate(92,140) scale(0.55)\"><g transform=\"translate(0,0)\"><ellipse cx=\"0\" cy=\"22\" rx=\"28\" ry=\"4\" fill=\"var(--ink)\" opacity=\".12\"/><path d=\"M-28-6v14c0 8 12 14 28 14s28-6 28-14v-14\" fill=\"#e6261f\"/><ellipse cy=\"-6\" rx=\"28\" ry=\"12\" fill=\"#e6261f\"/><ellipse cy=\"-6\" rx=\"28\" ry=\"12\" fill=\"#fff\" opacity=\".18\"/><path d=\"M-14-6h28M0-14v16M-10-6l-4-4v8zM10-6l4-4v8z\" stroke=\"#fff\" stroke-width=\"2.4\" fill=\"#fff\" stroke-linecap=\"round\"/></g></g><circle cx=\"92\" cy=\"120\" r=\"7\" fill=\"#00a05a\"/><g transform=\"translate(134,90) scale(0.55)\"><g transform=\"translate(0,0)\"><ellipse cx=\"0\" cy=\"22\" rx=\"28\" ry=\"4\" fill=\"var(--ink)\" opacity=\".12\"/><path d=\"M-28-6v14c0 8 12 14 28 14s28-6 28-14v-14\" fill=\"#e6261f\"/><ellipse cy=\"-6\" rx=\"28\" ry=\"12\" fill=\"#e6261f\"/><ellipse cy=\"-6\" rx=\"28\" ry=\"12\" fill=\"#fff\" opacity=\".18\"/><path d=\"M-14-6h28M0-14v16M-10-6l-4-4v8zM10-6l4-4v8z\" stroke=\"#fff\" stroke-width=\"2.4\" fill=\"#fff\" stroke-linecap=\"round\"/></g></g><circle cx=\"134\" cy=\"70\" r=\"7\" fill=\"#00a05a\"/><text x=\"92\" y=\"180\" text-anchor=\"middle\" style=\"font:700 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">各機器に頭脳と手足</text><rect x=\"186\" y=\"10\" width=\"164\" height=\"190\" rx=\"12\" fill=\"#0a5cff\" opacity=\".08\"/><text x=\"268\" y=\"34\" text-anchor=\"middle\" style=\"font:800 13.5px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">SDN（集中）</text><g transform=\"translate(268,70) scale(0.6)\"><g transform=\"translate(0,0)\"><ellipse cx=\"0\" cy=\"30\" rx=\"22\" ry=\"4\" fill=\"var(--ink)\" opacity=\".12\"/><rect x=\"-20\" y=\"-28\" width=\"40\" height=\"56\" rx=\"5\" fill=\"#ffb400\"/><path d=\"M-12-16h24M-12-6h24M-12 4h24\" stroke=\"#fff\" stroke-width=\"3\" stroke-linecap=\"round\" opacity=\".85\"/><circle cx=\"10\" cy=\"17\" r=\"3\" fill=\"#fff\"/><path d=\"M-12 14l8 4-8 4z\" fill=\"#fff\"/></g></g><circle cx=\"300\" cy=\"60\" r=\"9\" fill=\"#00a05a\"/><text x=\"268\" y=\"102\" text-anchor=\"middle\" style=\"font:800 11.5px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">コントローラー</text><g transform=\"translate(218,150) scale(0.5)\"><g transform=\"translate(0,0)\"><ellipse cx=\"0\" cy=\"22\" rx=\"28\" ry=\"4\" fill=\"var(--ink)\" opacity=\".12\"/><path d=\"M-28-6v14c0 8 12 14 28 14s28-6 28-14v-14\" fill=\"#e6261f\"/><ellipse cy=\"-6\" rx=\"28\" ry=\"12\" fill=\"#e6261f\"/><ellipse cy=\"-6\" rx=\"28\" ry=\"12\" fill=\"#fff\" opacity=\".18\"/><path d=\"M-14-6h28M0-14v16M-10-6l-4-4v8zM10-6l4-4v8z\" stroke=\"#fff\" stroke-width=\"2.4\" fill=\"#fff\" stroke-linecap=\"round\"/></g></g><path d=\"M268 108L218 136\" stroke=\"var(--ink)\" stroke-width=\"1.5\"/><g transform=\"translate(268,150) scale(0.5)\"><g transform=\"translate(0,0)\"><ellipse cx=\"0\" cy=\"22\" rx=\"28\" ry=\"4\" fill=\"var(--ink)\" opacity=\".12\"/><path d=\"M-28-6v14c0 8 12 14 28 14s28-6 28-14v-14\" fill=\"#e6261f\"/><ellipse cy=\"-6\" rx=\"28\" ry=\"12\" fill=\"#e6261f\"/><ellipse cy=\"-6\" rx=\"28\" ry=\"12\" fill=\"#fff\" opacity=\".18\"/><path d=\"M-14-6h28M0-14v16M-10-6l-4-4v8zM10-6l4-4v8z\" stroke=\"#fff\" stroke-width=\"2.4\" fill=\"#fff\" stroke-linecap=\"round\"/></g></g><path d=\"M268 108L268 136\" stroke=\"var(--ink)\" stroke-width=\"1.5\"/><g transform=\"translate(318,150) scale(0.5)\"><g transform=\"translate(0,0)\"><ellipse cx=\"0\" cy=\"22\" rx=\"28\" ry=\"4\" fill=\"var(--ink)\" opacity=\".12\"/><path d=\"M-28-6v14c0 8 12 14 28 14s28-6 28-14v-14\" fill=\"#e6261f\"/><ellipse cy=\"-6\" rx=\"28\" ry=\"12\" fill=\"#e6261f\"/><ellipse cy=\"-6\" rx=\"28\" ry=\"12\" fill=\"#fff\" opacity=\".18\"/><path d=\"M-14-6h28M0-14v16M-10-6l-4-4v8zM10-6l4-4v8z\" stroke=\"#fff\" stroke-width=\"2.4\" fill=\"#fff\" stroke-linecap=\"round\"/></g></g><path d=\"M268 108L318 136\" stroke=\"var(--ink)\" stroke-width=\"1.5\"/><text x=\"268\" y=\"186\" text-anchor=\"middle\" style=\"font:700 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">頭脳を集め、手足は分散</text><text x=\"180\" y=\"226\" text-anchor=\"middle\" style=\"font:800 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">分解＝コントロールとデータを分ける（コントローラーベースだけ）</text></svg>",
+   "b": "<b>SDN</b>（Software-Defined Networking）ではコントロールプレーンを集中します。従来型はコントロールプレーンが分散。 コントローラー型は、<b>コントロールプレーンをコントローラーに集め（集中管理）</b>、<b>1つの集中ポイントからネットワーク全体の構成と監視</b>ができます。コントロールプレーンとデータプレーンを分ける（<b>分解</b>）のはコントローラー型だけ。従来型は<b>コントロールプレーン・管理プレーンが分散</b>し、手作業で設定するのでミスが起きやすい。コントローラー型は<b>設定の複雑さを減らし</b>、<b>複数の機器に一貫した設定</b>を展開でき、<b>すべての機器で同じセキュリティポリシー</b>を適用できます（<b>統合された制御ポイント</b>）。",
+   "p": "SDNのセキュリティの利点＝全機器でポリシーが一貫する。"
+  },
+  {
+   "t": "ノースとサウス",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 270\" role=\"img\" aria-label=\"ノースバウンドAPIとサウスバウンドAPI\"><rect x=\"80\" y=\"10\" width=\"200\" height=\"44\" rx=\"10\" fill=\"#ffb400\" opacity=\".2\"/><text x=\"180\" y=\"38\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">アプリケーション層</text><rect x=\"80\" y=\"110\" width=\"200\" height=\"44\" rx=\"10\" fill=\"#00a05a\" opacity=\".2\"/><text x=\"180\" y=\"138\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">制御層（コントローラー）</text><rect x=\"80\" y=\"210\" width=\"200\" height=\"44\" rx=\"10\" fill=\"#0a5cff\" opacity=\".2\"/><text x=\"180\" y=\"238\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">インフラ層（ネットワーク機器）</text><path d=\"M180 104L180.0 69.0\" stroke=\"var(--ink)\" stroke-width=\"3\" stroke-linecap=\"round\"/><path d=\"M180 60L175.0 69.0L185.0 69.0z\" fill=\"var(--ink)\"/><path d=\"M180 60L180.0 95.0\" stroke=\"var(--ink)\" stroke-width=\"3\" stroke-linecap=\"round\"/><path d=\"M180 104L185.0 95.0L175.0 95.0z\" fill=\"var(--ink)\"/><text x=\"196\" y=\"78\" text-anchor=\"start\" style=\"font:800 11.5px Figtree,'Hiragino Sans',sans-serif;fill:#b77d00;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ノースバウンドAPI</text><text x=\"196\" y=\"96\" text-anchor=\"start\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">REST API</text><path d=\"M180 204L180.0 169.0\" stroke=\"var(--ink)\" stroke-width=\"3\" stroke-linecap=\"round\"/><path d=\"M180 160L175.0 169.0L185.0 169.0z\" fill=\"var(--ink)\"/><path d=\"M180 160L180.0 195.0\" stroke=\"var(--ink)\" stroke-width=\"3\" stroke-linecap=\"round\"/><path d=\"M180 204L185.0 195.0L175.0 195.0z\" fill=\"var(--ink)\"/><text x=\"196\" y=\"178\" text-anchor=\"start\" style=\"font:800 11.5px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">サウスバウンドAPI</text><text x=\"196\" y=\"196\" text-anchor=\"start\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">NETCONF・OpenFlow</text><text x=\"60\" y=\"85\" text-anchor=\"end\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">北＝上</text><text x=\"60\" y=\"185\" text-anchor=\"end\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">南＝下</text></svg>",
+   "b": "<b>API</b>（Application Programming Interface）。サウスバウンドAPIで、コントローラーがネットワークに動的に変更を加えます。 <b>ノースバウンドAPI</b>は<b>コントローラーとアプリケーションの間</b>の通信、<b>サウスバウンドAPI</b>は<b>コントローラーとネットワーク機器の間</b>の通信で、<b>構成を適用して、ネットワークに動的に変更を加えます</b>。仮想化では、<b>1台の物理サーバーで複数のOSとアプリを独立して動かせ</b>、<b>仮想スイッチ</b>がVMと物理ネットワークの間でトラフィックを運びます。",
+   "p": "JSONはデータ形式、Pythonは言語。"
+  },
+  {
+   "t": "Catalyst Center",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 264.0\" role=\"img\" aria-label=\"Catalyst Center\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Catalyst Center（旧DNA Center）</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">キャンパスをまとめて設定・監視するコントローラー</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">全体ヘルスダッシュボード</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">健康状態と上位10件の重要な問題</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">インテントベースネットワーキング</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">やりたいことを伝えると、設定に変換して実行</text><rect x=\"10\" y=\"196.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#3d4450\" opacity=\".1\"/><text x=\"24\" y=\"222.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">APIはJSONなど構造化データ</text><text x=\"24\" y=\"241.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">CLIの出力よりプログラムで扱いやすい</text></svg>",
+   "b": "<b>Catalyst Center（旧DNA Center）</b>は<b>キャンパスネットワークをまとめて設定・監視するコントローラー</b>で、<b>サードパーティのSDKやクロスドメインのアダプター</b>など拡張もできます。コントローラー型の利点は<b>ネットワーク全体をまとめて自動で設定・管理できる</b>こと、<b>拡張性（スケーラビリティ）</b>、<b>設定作業の自動化</b>。コントローラー型は<b>アプリケーションの要求にオープン</b>、従来型は手作業。<b>インテントベースネットワーキング（IBN）</b>は、<b>管理者が「やりたいこと（目的）」を伝えると、コントローラーが設定に変換して実行</b>する考え方。APIの結果は<b>JSONなどの構造化されたデータ</b>で返るので、CLIの画面を読み取るよりプログラムで扱いやすいです。",
+   "p": "コントローラーベースはアプリの要求にオープン（プログラマビリティ）。"
+  },
+  {
+   "t": "小テスト",
+   "quiz": {
+    "q": "SDNコントローラーとネットワーク機器の間のAPIは？",
+    "o": [
+     ["サウスバウンドAPI", "<g><g transform=\"translate(0,0)\"><rect x=\"-45.0\" y=\"-13\" width=\"90\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#0a5cff\">サウスバウンド</text></g></g>"],
+     ["ノースバウンドAPI", "<g><g transform=\"translate(0,0)\"><rect x=\"-45.0\" y=\"-13\" width=\"90\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#ffb400\">ノースバウンド</text></g></g>"],
+     ["イーストウエストAPI", "<g><g transform=\"translate(0,0)\"><rect x=\"-45.0\" y=\"-13\" width=\"90\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#3d4450\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#3d4450\">イースト</text></g></g>"]
+    ],
+    "a": 0,
+    "e": "正解は<b>サウスバウンドAPI</b>。アプリとの間はノースバウンドAPIです。"
+   }
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">データ＝転送／コントロール＝経路／管理</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">手足・頭脳・管理係</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">SDN＝コントロールを集中・分離</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1か所から全体を設定・監視</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ノース＝アプリ（REST）／サウス＝機器</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">NETCONF・OpenFlow</text></svg>",
+   "b": "次回は「アンダーレイ・オーバーレイ・ファブリック」。",
+   "p": "一問一答の「自動化とプログラマビリティ」で確かめましょう。"
+  }
+ ],
+ "cls": {
+  "a": "audio/l46/",
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "今日から、最後の分野、自動化とプログラマビリティです。最初は、コントローラーとSDNを学びます。", "y": "今日から、最後の分野、自動化とプログラマビリティです。最初は、コントローラーとエスディーエヌを学びます。"},
+   {"sc": 1, "sp": "先生", "t": "ネットワーク機器の仕事は、3つのプレーンに分けて考えます。データプレーンは、実際にパケットを転送する、手足の役割です。"},
+   {"sc": 1, "sp": "先生", "t": "コントロールプレーンは、OSPFやSTPのように、どこへ送るかを決める頭脳の役割。管理プレーンは、SSHやSNMPのように、機器を管理する役割です。", "y": "コントロールプレーンは、オーエスピーエフやエスティーピーのように、どこへ送るかを決める頭脳の役割。管理プレーンは、エスエスエイチやエスエヌエムピーのように、機器を管理する役割です。"},
+   {"sc": 1, "sp": "生徒", "t": "手足と頭脳と、管理係ですね。"},
+   {"sc": 2, "sp": "先生", "t": "従来のネットワークでは、1台1台の機器が、頭脳と手足の両方を持っています。頭脳が分散しているので、設定も1台ずつ手作業です。"},
+   {"sc": 2, "sp": "先生", "t": "SDN、ソフトウェア定義ネットワークでは、コントロールプレーン、つまり頭脳を、コントローラーに集めます。データプレーンは、それぞれの機器に分散したままです。", "y": "エスディーエヌ、ソフトウェア定義ネットワークでは、コントロールプレーン、つまり頭脳を、コントローラーに集めます。データプレーンは、それぞれの機器に分散したままです。"},
+   {"sc": 2, "sp": "先生", "t": "このように、頭脳と手足を別々の場所に分けることを、分解、または分離と言います。コントロールプレーンとデータプレーンを分けるのは、コントローラーベースのネットワークだけです。"},
+   {"sc": 2, "sp": "先生", "t": "利点は、1か所からネットワーク全体を、まとめて設定・監視できることです。設定がそろい、ミスが減り、セキュリティのポリシーも全機器でそろいます。"},
+   {"sc": 3, "sp": "先生", "t": "コントローラーには、2つの方向のAPIがあります。APIは、プログラムどうしがやりとりするための窓口、決まりごとのことです。図で上がノース、北、下がサウス、南です。", "y": "コントローラーには、2つの方向のエーピーアイがあります。エーピーアイは、プログラムどうしがやりとりするための窓口、決まりごとのことです。図で上がノース、北、下がサウス、南です。"},
+   {"sc": 3, "sp": "先生", "t": "ノースバウンドAPIは、コントローラーと、上のアプリケーションの間の通信です。Webの仕組みのHTTPを使う、REST APIがよく使われます。REST APIは、あとの回でくわしく学びます。", "y": "ノースバウンドエーピーアイは、コントローラーと、上のアプリケーションの間の通信です。Webの仕組みのエイチティーティーピーを使う、レスト エーピーアイがよく使われます。レスト エーピーアイは、あとの回でくわしく学びます。"},
+   {"sc": 3, "sp": "先生", "t": "サウスバウンドAPIは、コントローラーと、下のネットワーク機器の間の通信です。機器の設定を変えるためのNETCONFや、転送のルールを機器に教えるOpenFlowなどを使って、コントローラーが機器に変更を加えます。", "y": "サウスバウンドエーピーアイは、コントローラーと、下のネットワーク機器の間の通信です。機器の設定を変えるためのネットコンフや、転送のルールを機器に教えるオープンフローなどを使って、コントローラーが機器に変更を加えます。"},
+   {"sc": 3, "sp": "生徒", "t": "アプリが上、機器が下、ですね。"},
+   {"sc": 3, "sp": "先生", "t": "その通り。SDNでは、上から、アプリケーション層、制御層、インフラストラクチャ層の3つに分けます。これは、前に習ったOSI参照モデルの層とは別のものです。制御層がコントローラー、つまり頭脳で、インフラストラクチャ層がネットワーク機器、つまり手足です。だから、コントロールプレーンとデータプレーンの境目は、制御層とインフラストラクチャ層の間です。", "y": "その通り。エスディーエヌでは、上から、アプリケーション層、制御層、インフラストラクチャ層の3つに分けます。これは、前に習ったOSI参照モデルの層とは別のものです。制御層がコントローラー、つまり頭脳で、インフラストラクチャ層がネットワーク機器、つまり手足です。だから、コントロールプレーンとデータプレーンの境目は、制御層とインフラストラクチャ層の間です。"},
+   {"sc": 3, "sp": "先生", "t": "なお、試験の選択肢に、JSONやPythonが出てくることがあります。JSONはデータの書き方の形式で、詳しくは第48回で学びます。Pythonはプログラミング言語です。どちらもAPIの名前ではないので注意しましょう。", "y": "なお、試験の選択肢に、ジェイソンやパイソンが出てくることがあります。ジェイソンはデータの書き方の形式で、詳しくは第48回で学びます。パイソンはプログラミング言語です。どちらもエーピーアイの名前ではないので注意しましょう。"},
+   {"sc": 4, "sp": "先生", "t": "Ciscoのコントローラーの代表が、Catalyst Center、昔の名前はDNA Centerです。キャンパスのネットワークを、まとめて設定・監視します。", "y": "シスコのコントローラーの代表が、カタリストセンター、昔の名前はディーエヌエーセンターです。キャンパスのネットワークを、まとめて設定・監視します。"},
+   {"sc": 4, "sp": "先生", "t": "全体のヘルスダッシュボードでは、ネットワークの健康状態と、上位10件の重要な問題が、ひと目で分かります。他社製品と連携するための拡張機能も豊富です。"},
+   {"sc": 4, "sp": "先生", "t": "インテントベースネットワーキングは、管理者が、やりたいことを伝えると、コントローラーが具体的な設定に変えて実行する考え方です。"},
+   {"sc": 4, "sp": "先生", "t": "APIを使うと、結果がJSONのような決まった形のデータで返るので、人間向けのCLIの出力より、プログラムで扱いやすくなります。アプリからの要求にオープンなのも、コントローラーベースの特徴です。", "y": "エーピーアイを使うと、結果がジェイソンのような決まった形のデータで返るので、人間向けのシーエルアイの出力より、プログラムで扱いやすくなります。アプリからの要求にオープンなのも、コントローラーベースの特徴です。"},
+   {"sc": 5, "sp": "先生", "t": "ここで小テストです。SDNコントローラーとネットワーク機器の間のAPIはどれでしょう？画面で選んでください。", "w": 1, "y": "ここで小テストです。エスディーエヌコントローラーとネットワーク機器の間のエーピーアイはどれでしょう？画面で選んでください。"},
+   {"sc": 5, "sp": "先生", "t": "正解はサウスバウンドAPIです。", "y": "正解はサウスバウンドエーピーアイです。"},
+   {"sc": 6, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 6, "sp": "先生", "t": "1つ目。データプレーンは転送、コントロールプレーンは経路を決める、管理プレーンは管理。"},
+   {"sc": 6, "sp": "先生", "t": "2つ目。SDNは、コントロールプレーンをコントローラーに集中させ、データプレーンと分離する。1か所から全体を管理できる。", "y": "2つ目。エスディーエヌは、コントロールプレーンをコントローラーに集中させ、データプレーンと分離する。1か所から全体を管理できる。"},
+   {"sc": 6, "sp": "先生", "t": "3つ目。ノースバウンドはアプリとの間でREST API、サウスバウンドは機器との間でNETCONFやOpenFlow。", "y": "3つ目。ノースバウンドはアプリとの間でレスト エーピーアイ、サウスバウンドは機器との間でネットコンフやオープンフロー。"},
+   {"sc": 6, "sp": "生徒", "t": "北はアプリ、南は機器、覚えました！"},
+   {"sc": 6, "sp": "先生", "t": "いいですね。次回は、アンダーレイとオーバーレイを学びます。お疲れさまでした。"}
+  ],
+  "seg": [
+   [0.0, 7.744],
+   [8.094, 9.376],
+   [17.82, 13.056],
+   [31.226, 3.072],
+   [34.648, 10.528],
+   [45.526, 11.851],
+   [57.727, 12.277333],
+   [70.354, 11.253],
+   [81.957, 13.770667],
+   [96.078, 15.765333],
+   [112.193, 15.594667],
+   [128.138, 3.115],
+   [131.603, 27.114667],
+   [159.068, 16.394667],
+   [175.812, 10.656042],
+   [186.818, 11.861],
+   [199.029, 9.504],
+   [208.883, 15.317042],
+   [224.55, 7.989],
+   [232.889, 2.613],
+   [235.852, 1.835],
+   [238.037, 6.752],
+   [245.139, 9.610958],
+   [255.1, 8.448],
+   [263.898, 3.744],
+   [267.992, 5.557]
+  ]
+ }
+}

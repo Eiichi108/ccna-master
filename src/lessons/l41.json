@@ -1,0 +1,90 @@
+{
+ "r": "TB",
+ "lt": "nl40",
+ "n": 41,
+ "t": "パスワードと機器の保護",
+ "pages": [
+  {
+   "t": "enable secret",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 137.0\" role=\"img\" aria-label=\"enable secretとenable password\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">enable secret Str0ng!</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ハッシュ化して保存（推奨）。passwordより優先</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">enable password cisco</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">平文で保存</text></svg>",
+   "b": "両方設定されているときは<b>secretが優先</b>されます。",
+   "p": "secretを使うのが基本。"
+  },
+  {
+   "t": "保存形式",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.33659839715048\" role=\"img\" aria-label=\"パスワードの保存形式\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.33659839715049\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"31.336598397150482\" text-anchor=\"start\" style=\"font:800 14.3px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">type 7（service password-encryption）</text><text x=\"24\" y=\"50.33659839715048\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">平文のパスワードを隠すが、簡単に元に戻せる</text><rect x=\"10\" y=\"69.33659839715048\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"94.83659839715048\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">type 5</text><text x=\"24\" y=\"113.83659839715048\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">MD5のハッシュ</text><rect x=\"10\" y=\"132.83659839715048\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"158.33659839715048\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">type 8・9</text><text x=\"24\" y=\"177.33659839715048\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">より強い方式（9＝scrypt）</text></svg>",
+   "b": "<b>service password-encryption</b>は、設定ファイルの全部の平文パスワードを暗号化して見えなくします（強くはない）。 service password-encryption の保存形式は<b>type 7で、簡単に元に戻せます</b>。enable secret <b>5</b> は<b>MD5でハッシュ化</b>されていることを表します。",
+   "p": "enable secret 5 $1$... の5＝MD5。"
+  },
+  {
+   "t": "その他の設定",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"その他の設定\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">banner motd #Authorized only#</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ログイン時の警告文</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">privilege 15</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">最高の権限（0〜15）</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">transport input ssh</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">SSHだけを許可</text></svg>",
+   "b": "<b>privilege 15</b>＝<b>最高の権限（すべてのコマンドを使える）</b>。ログインを安全にするには、<b>enable secret を使い</b>、<b>transport input ssh でSSHだけを許可</b>します。設定の順番は enable → configure terminal → enable secret … → line vty 0 4。",
+   "p": "SSHだけ＋パスワードを隠す → transport input ssh ＋ service password-encryption。"
+  },
+  {
+   "t": "小テスト",
+   "quiz": {
+    "q": "enable password と enable secret が両方設定されている場合、どうなる？",
+    "o": [
+     ["secretが優先される", "<g><g transform=\"translate(0,0)\"><rect x=\"-45.0\" y=\"-13\" width=\"90\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#00a05a\">secret</text></g></g>"],
+     ["passwordが優先される", "<g><g transform=\"translate(0,0)\"><rect x=\"-45.0\" y=\"-13\" width=\"90\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#e6261f\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#e6261f\">password</text></g></g>"],
+     ["両方入力が必要", "<g><g transform=\"translate(0,0)\"><rect x=\"-45.0\" y=\"-13\" width=\"90\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#3d4450\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#3d4450\">両方</text></g></g>"]
+    ],
+    "a": 0,
+    "e": "正解は<b>secretが優先される</b>。secretはハッシュ化して保存されます。"
+   }
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 197.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">secret＝ハッシュ・優先</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">password＝平文</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">service password-encryption＝type 7</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">5＝MD5、8・9＝より強い</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"54.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"155.5\" text-anchor=\"start\" style=\"font:800 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">banner motd・privilege 15・transport input ssh</text><text x=\"24\" y=\"174.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">警告文・最高権限・SSHだけ</text></svg>",
+   "b": "次回は「パスワードポリシーとIPsec」。",
+   "p": "一問一答の「セキュリティの基礎」で確かめましょう。"
+  }
+ ],
+ "cls": {
+  "a": "audio/l41/",
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "今日は短めの回です。ルーターやスイッチのパスワードを、安全に設定する方法を学びます。"},
+   {"sc": 1, "sp": "先生", "t": "特権EXECモードに入るためのパスワードには、enable passwordとenable secretの2つがあります。", "y": "特権EXECモードに入るためのパスワードには、イネーブル、パスワードとイネーブル、シークレットの2つがあります。"},
+   {"sc": 1, "sp": "先生", "t": "enable secretは、パスワードをハッシュ化して保存します。enable passwordは平文です。両方が設定されているときは、secretが優先されます。だから、secretを使うのがおすすめです。", "y": "イネーブル、シークレットは、パスワードをハッシュ化して保存します。イネーブル、パスワードは平文です。両方が設定されているときは、シークレットが優先されます。だから、シークレットを使うのがおすすめです。"},
+   {"sc": 1, "sp": "生徒", "t": "ハッシュ化って、何ですか？"},
+   {"sc": 1, "sp": "先生", "t": "元に戻せない形に変えることです。設定ファイルを見られても、パスワードそのものは分かりません。"},
+   {"sc": 2, "sp": "先生", "t": "show running-configで設定を見ると、enable secretのすぐ後ろに数字が付いています。これは保存の方式の番号です。5なら、MD5というハッシュの方式で保存されているという意味です。8と9は、MD5よりもっと強い方式です。", "y": "ショー running-configで設定を見ると、イネーブル、シークレットのすぐ後ろに数字が付いています。これは保存の方式の番号です。5なら、エムディーファイブというハッシュの方式で保存されているという意味です。8と9は、エムディーファイブよりもっと強い方式です。"},
+   {"sc": 2, "sp": "先生", "t": "コンソール、つまり機器に直接ケーブルをつないでログインするときのパスワードや、vty、つまりTelnetやSSHでネットワーク越しにログインするときのパスワードは、普通は平文で保存されます。service password-encryptionを設定すると、設定ファイルの中の平文のパスワードを、すべて暗号化して見えなくします。", "y": "コンソール、つまり機器に直接ケーブルをつないでログインするときのパスワードや、vty、つまりテルネットやエスエスエイチでネットワーク越しにログインするときのパスワードは、普通は平文で保存されます。サービス、パスワード、エンクリプションを設定すると、設定ファイルの中の平文のパスワードを、すべて暗号化して見えなくします。"},
+   {"sc": 2, "sp": "先生", "t": "ただし、これはtype 7という弱い方式で、道具を使えば簡単に元に戻せます。肩越しにのぞかれても読めない、くらいの目かくしだと思ってください。元に戻せないハッシュのsecretとは強さが全然違うので、それだけに頼らず、secretを使うのが基本です。", "y": "ただし、これはタイプセブンという弱い方式で、道具を使えば簡単に元に戻せます。肩越しにのぞかれても読めない、くらいの目かくしだと思ってください。元に戻せないハッシュのシークレットとは強さが全然違うので、それだけに頼らず、シークレットを使うのが基本です。"},
+   {"sc": 3, "sp": "先生", "t": "ログイン時の警告文は、banner motdで設定します。許可された人だけ使えます、のような文を表示します。", "y": "ログイン時の警告文は、バナー、モッドで設定します。許可された人だけ使えます、のような文を表示します。"},
+   {"sc": 3, "sp": "先生", "t": "username admin privilege 15 secretのprivilege 15は、最高の権限という意味です。権限は0から15まであります。", "y": "ユーザーネーム admin プリビレッジ、じゅうご シークレットのプリビレッジ、じゅうごは、最高の権限という意味です。権限は0から15まであります。"},
+   {"sc": 3, "sp": "先生", "t": "リモートのログインを安全にするなら、vtyにtransport input sshを設定して、SSHだけを許可します。さらに、設定ファイルの中のパスワードも隠したいなら、service password-encryptionも足します。この2つの組み合わせが、試験でよく問われます。", "y": "リモートのログインを安全にするなら、vtyにトランスポート、インプット、エスエスエイチを設定して、エスエスエイチだけを許可します。さらに、設定ファイルの中のパスワードも隠したいなら、サービス、パスワード、エンクリプションも足します。この2つの組み合わせが、試験でよく問われます。"},
+   {"sc": 4, "sp": "先生", "t": "ここで小テストです。enable passwordとenable secretが両方設定されているとき、どうなるでしょう？画面で選んでください。", "w": 1, "y": "ここで小テストです。イネーブル、パスワードとイネーブル、シークレットが両方設定されているとき、どうなるでしょう？画面で選んでください。"},
+   {"sc": 4, "sp": "先生", "t": "正解は、secretが優先される、です。", "y": "正解は、シークレットが優先される、です。"},
+   {"sc": 5, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 5, "sp": "先生", "t": "1つ目。enable secretはハッシュ化、enable passwordは平文。両方あればsecretが優先。", "y": "1つ目。イネーブル、シークレットはハッシュ化、イネーブル、パスワードは平文。両方あればシークレットが優先。"},
+   {"sc": 5, "sp": "先生", "t": "2つ目。service password-encryptionは、平文のパスワードを隠すが、type 7で弱い。5はMD5。", "y": "2つ目。サービス、パスワード、エンクリプションは、平文のパスワードを隠すが、タイプセブンで弱い。5はエムディーファイブ。"},
+   {"sc": 5, "sp": "先生", "t": "3つ目。banner motdで警告文、privilege 15は最高の権限、transport input sshでSSHだけ。", "y": "3つ目。バナー、モッドで警告文、プリビレッジ、じゅうごは最高の権限、トランスポート、インプット、エスエスエイチでエスエスエイチだけ。"},
+   {"sc": 5, "sp": "生徒", "t": "secretを使う、を習慣にします！", "y": "シークレットを使う、を習慣にします！"},
+   {"sc": 5, "sp": "先生", "t": "いいですね。次回は、パスワードのルールとIPsecを学びます。お疲れさまでした。", "y": "いいですね。次回は、パスワードのルールとアイピーセックを学びます。お疲れさまでした。"}
+  ],
+  "seg": [
+   [0.0, 6.923],
+   [7.273, 8.725],
+   [16.348, 15.04],
+   [31.738, 2.24],
+   [34.328, 6.656],
+   [41.334, 18.848],
+   [60.532, 23.488],
+   [84.37, 18.474667],
+   [103.195, 7.979],
+   [111.524, 11.733],
+   [123.607, 20.448],
+   [144.405, 10.091],
+   [154.846, 3.562958],
+   [158.759, 1.835],
+   [160.944, 8.843],
+   [170.137, 9.387],
+   [179.874, 11.243],
+   [191.467, 3.264],
+   [195.081, 6.101]
+  ]
+ }
+}

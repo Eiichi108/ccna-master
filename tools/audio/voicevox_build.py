@@ -8,15 +8,18 @@
   python tools/audio/voicevox_build.py 3 7 12    # 複数回
   python tools/audio/voicevox_build.py all       # 全50回
 処理:
-  data.json の TB(n).cls.lines を1行ずつ読み上げ（読みは y、なければ t）
+  src/lessons/lNN.json の cls.lines を1行ずつ読み上げ（読みは y、なければ t）
   → 行ごとに音量をそろえる → 0.35秒の間をはさんで1本につなぐ
-  → audio/lNN.mp3 を書き出し、cls.seg（各行の開始秒・長さ）を data.json に保存
+  → audio/lNN.mp3 を書き出し、cls.seg（各行の開始秒・長さ）を src/lessons/lNN.json に保存
+  → 最後に tools/build.py を実行して data.json に反映
 """
 import json, os, sys, io, wave, subprocess, urllib.request, urllib.parse, re
 import numpy as np
 
-ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-DATA = os.path.join(ROOT, "data.json")
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import srcio
+
+ROOT = srcio.ROOT
 API = os.environ.get("VOICEVOX_URL", "http://127.0.0.1:50021")
 SR = 24000          # サンプリングレート
 GAP = 0.35          # 行と行の間（秒）
@@ -91,13 +94,13 @@ def build(rec, ids):
 def main():
     args = sys.argv[1:]
     if not args: sys.exit(__doc__)
-    d = json.load(open(DATA, encoding="utf-8"))
-    tb = {x["n"]: x for x in d if x.get("r") == "TB"}
-    ns = sorted(tb) if args == ["all"] else [int(a) for a in args]
+    ns = list(range(1, 51)) if args == ["all"] else [int(a) for a in args]
     ids = speaker_ids()
     for n in ns:
-        build(tb[n], ids)
-        json.dump(d, open(DATA, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))  # 1回ごとに保存
+        rec = srcio.load(srcio.lesson_path(n))
+        build(rec, ids)
+        srcio.save(srcio.lesson_path(n), rec)  # 1回ごとに保存
+    sys.exit(subprocess.call([sys.executable, "-X", "utf8", os.path.join(ROOT, "tools", "build.py")]))
 
 if __name__ == "__main__":
     main()

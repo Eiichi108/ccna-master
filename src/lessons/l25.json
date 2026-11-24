@@ -1,0 +1,110 @@
+{
+ "r": "TB",
+ "lt": "nl24",
+ "n": 25,
+ "t": "EtherChannel",
+ "pages": [
+  {
+   "t": "EtherChannelとは",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200\" role=\"img\" aria-label=\"EtherChannelのしくみ\"><g transform=\"translate(60,80) scale(0.8)\"><g transform=\"translate(0,0)\"><ellipse cx=\"0\" cy=\"20\" rx=\"32\" ry=\"4\" fill=\"var(--ink)\" opacity=\".12\"/><rect x=\"-32\" y=\"-14\" width=\"64\" height=\"30\" rx=\"5\" fill=\"#00a05a\"/><rect x=\"-24\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"-16\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"-8\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"0\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"8\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"16\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"24\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><path d=\"M-14-6h18l-4-4M14-2h-18l4 4\" stroke=\"#fff\" stroke-width=\"2.2\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></g></g><g transform=\"translate(300,80) scale(0.8)\"><g transform=\"translate(0,0)\"><ellipse cx=\"0\" cy=\"20\" rx=\"32\" ry=\"4\" fill=\"var(--ink)\" opacity=\".12\"/><rect x=\"-32\" y=\"-14\" width=\"64\" height=\"30\" rx=\"5\" fill=\"#00a05a\"/><rect x=\"-24\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"-16\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"-8\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"0\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"8\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"16\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><rect x=\"24\" y=\"3\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fff\"/><path d=\"M-14-6h18l-4-4M14-2h-18l4 4\" stroke=\"#fff\" stroke-width=\"2.2\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></g></g><path d=\"M100 66h160\" stroke=\"var(--ink)\" stroke-width=\"3\"/><path d=\"M100 76h160\" stroke=\"var(--ink)\" stroke-width=\"3\"/><path d=\"M100 86h160\" stroke=\"var(--ink)\" stroke-width=\"3\"/><ellipse cx=\"180\" cy=\"76\" rx=\"34\" ry=\"24\" fill=\"none\" stroke=\"#ffb400\" stroke-width=\"3\"/><text x=\"180\" y=\"40\" text-anchor=\"middle\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:#b77d00;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Port-channel 1（1本として扱う）</text><text x=\"180\" y=\"138\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">STPでブロックされない・帯域が増える</text><text x=\"180\" y=\"162\" text-anchor=\"middle\" style=\"font:700 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1つのフローはハッシュで決めた1本のリンクを使う</text></svg>",
+   "b": "<b>EtherChannel</b>は、複数の物理リンクを束ねて1本の論理リンク（Port-channel）として扱う機能。帯域が増え、STPでブロックされません。",
+   "p": "フローごとにハッシュで使うリンクを決める。"
+  },
+  {
+   "t": "3つの束ね方",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 233.86735572782084\" role=\"img\" aria-label=\"EtherChannelの3つの束ね方\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"73.86735572782084\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"30.867355727820843\" text-anchor=\"start\" style=\"font:800 13.9px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">LACP（IEEE 802.3ad）：active ／ passive</text><text x=\"24\" y=\"49.86735572782084\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">active-active・active-passive ○　passive-</text><text x=\"24\" y=\"66.86735572782084\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">passive ✕</text><rect x=\"10\" y=\"85.86735572782084\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"111.36735572782084\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">PAgP（Cisco独自）：desirable ／ auto</text><text x=\"24\" y=\"130.36735572782084\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">desirable-desirable・desirable-auto ○　au</text><text x=\"24\" y=\"147.36735572782084\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">to-auto ✕</text><rect x=\"10\" y=\"166.36735572782084\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#3d4450\" opacity=\".1\"/><text x=\"24\" y=\"191.86735572782084\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">静的：on</text><text x=\"24\" y=\"210.86735572782084\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">両端とも on</text></svg>",
+   "b": "<b>LACP</b>（Link Aggregation Control Protocol）はIEEE標準、<b>PAgP</b>（Port Aggregation Protocol）はCisco独自。どちらか一方が自分から交渉（active／desirable）すれば成立します。 <b>active と passive</b>、active同士は成立。<b>passive同士</b>は誰も始めないので成立しません。passiveは「相手から誘われたら応えるが、自分からは誘わない」。",
+   "p": "「応答するが開始しない」＝passive。"
+  },
+  {
+   "t": "設定とそろえる項目",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 281.0\" role=\"img\" aria-label=\"設定とそろえる項目\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">channel-group 1 mode active</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">物理ポートで設定。番号は両端で違ってもよい</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">そろえる：速度・デュプレックス</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">アクセス／トランク・許可VLAN・ネイティブVLAN</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#3d4450\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">L3のEtherChannel</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">物理ポートとPort-channelで no switchport、Po</text><text x=\"24\" y=\"194.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">rt-channelにIP</text><rect x=\"10\" y=\"213.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"239.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">アクティブなリンクは最大8本</text><text x=\"24\" y=\"258.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">LACPは16本まで設定でき、残りは待機</text></svg>",
+   "b": "束ねるポートの設定が1つでも違うと、そのポートはバンドルされません。 そろえる項目：<b>速度とデュプレックス</b>、<b>アクセス/トランクの設定と許可するVLAN</b>。新しいポートを追加するときは<b>既存のメンバーと同じ設定</b>にします。L3のEtherChannelは、<b>物理ポートとPort-channelで no switchport を設定し、Port-channelにIPを付けます</b>。",
+   "p": "許可VLANをそろえるときも add を忘れずに。"
+  },
+  {
+   "t": "show etherchannel summary",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 240\" role=\"img\" aria-label=\"show etherchannel summaryの読み方\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"124\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" style=\"font:700 12.5px ui-monospace,Menlo,monospace;fill:#00a05a\">SW1# show etherchannel summary</text><text x=\"22\" y=\"74\" style=\"font:700 12.5px ui-monospace,Menlo,monospace;fill:#3d4450\">Group Port-channel Protocol Ports</text><text x=\"22\" y=\"96\" style=\"font:700 12.5px ui-monospace,Menlo,monospace;fill:#0a5cff\">1     Po1(SU)      LACP  Gi0/1(P)</text><text x=\"22\" y=\"118\" style=\"font:700 12.5px ui-monospace,Menlo,monospace;fill:#e6261f\">                         Gi0/2(I)</text><text x=\"180\" y=\"160\" text-anchor=\"middle\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">S＝Layer2　U＝使用中　R＝Layer3　D＝ダウン</text><text x=\"180\" y=\"186\" text-anchor=\"middle\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">P＝束ねられている</text><text x=\"180\" y=\"210\" text-anchor=\"middle\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:#e6261f;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">I＝単独（stand-alone）：相手にLACPがないなど</text></svg>",
+   "b": "Po1(SU)＝L2のEtherChannelで使用中。ポートの(P)は束ねられている、(I)は単独で動いている状態です。 (I) は<b>束ねられず、単独のポートとして動いている</b>状態です。",
+   "p": "(I)の原因：相手側でLACPが設定されていない、など。"
+  },
+  {
+   "t": "小テスト",
+   "quiz": {
+    "q": "LACPでEtherChannelを組むとき、束になる組み合わせは？",
+    "o": [
+     ["active と passive", "<g><g transform=\"translate(0,0)\"><rect x=\"-55.0\" y=\"-13\" width=\"110\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#00a05a\">active–passive</text></g></g>"],
+     ["passive と passive", "<g><g transform=\"translate(0,0)\"><rect x=\"-55.0\" y=\"-13\" width=\"110\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#e6261f\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#e6261f\">passive–passive</text></g></g>"],
+     ["desirable と auto（LACP）", "<g><g transform=\"translate(0,0)\"><rect x=\"-55.0\" y=\"-13\" width=\"110\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#3d4450\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#3d4450\">desirable–auto</text></g></g>"]
+    ],
+    "a": 0,
+    "e": "正解は<b>active と passive</b>。passive同士では成立しません。desirable/autoはPAgPの言葉です。"
+   }
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 198.01492537313433\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">束ねて1本・STPでブロックされない</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">フローはハッシュで1本に</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"55.01492537313433\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"92.51492537313433\" text-anchor=\"start\" style=\"font:800 12.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">LACP active/passive・PAgP desirable/auto・on</text><text x=\"24\" y=\"111.51492537313433\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">passive同士・auto同士は不成立</text><rect x=\"10\" y=\"130.51492537313433\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"156.01492537313433\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">設定はそろえる</text><text x=\"24\" y=\"175.01492537313433\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Po1(SU)＝L2で使用中、(I)＝単独</text></svg>",
+   "b": "次回は「CDP / LLDP」。",
+   "p": "一問一答の「ネットワークアクセス」で確かめましょう。"
+  }
+ ],
+ "cls": {
+  "a": "audio/l25/",
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "今日は、EtherChannelです。複数の物理リンクを束ねて、1本の論理リンクとして扱う機能です。", "y": "今日は、イーサチャネルです。複数の物理リンクを束ねて、1本の論理リンクとして扱う機能です。"},
+   {"sc": 1, "sp": "先生", "t": "スイッチの間を2本でつなぐと、STPが片方をブロックしてしまいますよね。EtherChannelで束ねると、1本として扱われるので、ブロックされず、帯域も増えます。", "y": "スイッチの間を2本でつなぐと、エスティーピーが片方をブロックしてしまいますよね。イーサチャネルで束ねると、1本として扱われるので、ブロックされず、帯域も増えます。"},
+   {"sc": 1, "sp": "生徒", "t": "2本分の速さが出るんですか？"},
+   {"sc": 1, "sp": "先生", "t": "全体ではそうです。ただし、1つの通信の流れ、フローは、いつも同じ1本の線を通ります。どの線を使うかは、送信元や宛先のMACアドレスやIPアドレスをもとに、決まった計算をして決めます。この計算をハッシュと言います。たくさんのフローを、線に振り分けるイメージです。", "y": "全体ではそうです。ただし、1つの通信の流れ、フローは、いつも同じ1本の線を通ります。どの線を使うかは、送信元や宛先のマックアドレスやアイピーアドレスをもとに、決まった計算をして決めます。この計算をハッシュと言います。たくさんのフローを、線に振り分けるイメージです。"},
+   {"sc": 2, "sp": "先生", "t": "束ね方は3つ。1つ目はLACPです。IEEEという、ネットワークの規格を決める団体が決めた標準の方式で、規格の番号は802.3adです。モードはactiveとpassiveです。", "y": "束ね方は3つ。1つ目はエルエーシーピーです。アイトリプルイーという、ネットワークの規格を決める団体が決めた標準の方式で、規格の番号はハチマルニーテンサンエーディーです。モードはアクティブとパッシブです。"},
+   {"sc": 2, "sp": "先生", "t": "activeは自分から交渉を始める、passiveは相手から始められるのを待つ、です。だから、activeとactive、activeとpassiveは成立しますが、passive同士は成立しません。", "y": "アクティブは自分から交渉を始める、パッシブは相手から始められるのを待つ、です。だから、アクティブとアクティブ、アクティブとパッシブは成立しますが、パッシブ同士は成立しません。"},
+   {"sc": 2, "sp": "先生", "t": "2つ目はPAgP。Cisco独自の方式で、モードはdesirableとautoです。desirableが自分から、autoが待つ側です。", "y": "2つ目はパグプ。シスコ独自の方式で、モードはデザイラブルとオートです。デザイラブルが自分から、オートが待つ側です。"},
+   {"sc": 2, "sp": "先生", "t": "3つ目はmode on。交渉をせずに、静的に束ねます。両端ともonにする必要があります。", "y": "3つ目はモード オン。交渉をせずに、静的に束ねます。両端ともオンにする必要があります。"},
+   {"sc": 2, "sp": "生徒", "t": "LACPの問題で、desirableやautoを選んではいけないんですね。", "y": "エルエーシーピーの問題で、デザイラブルやオートを選んではいけないんですね。"},
+   {"sc": 2, "sp": "先生", "t": "その通り。それはPAgPの言葉です。それから、試験で「相手から誘われたら応えるが、自分からは誘わない」と書いてあったら、それはpassiveのことです。相手がpassiveなら、こちらは必ずactiveにしましょう。", "y": "その通り。それはパグプの言葉です。それから、試験で「相手から誘われたら応えるが、自分からは誘わない」と書いてあったら、それはパッシブのことです。相手がパッシブなら、こちらは必ずアクティブにしましょう。"},
+   {"sc": 3, "sp": "先生", "t": "設定は、束ねたい物理ポートで、channel-group 1 mode activeのように打ちます。チャネルグループの番号は、スイッチの中だけの番号なので、両端で違っていても構いません。", "y": "設定は、束ねたい物理ポートで、チャネルグループ 1 モード アクティブのように打ちます。チャネルグループの番号は、スイッチの中だけの番号なので、両端で違っていても構いません。"},
+   {"sc": 3, "sp": "先生", "t": "大事なのは、束ねるポートの設定を、全部そろえることです。速度とデュプレックス、アクセスかトランクか、許可するVLANなどが1つでも違うと、そのポートは束ねられません。", "y": "大事なのは、束ねるポートの設定を、全部そろえることです。速度とデュプレックス、アクセスかトランクか、許可するブイランなどが1つでも違うと、そのポートは束ねられません。"},
+   {"sc": 3, "sp": "生徒", "t": "もし1本だけ、許可VLANに300が抜けていたら？", "y": "もし1本だけ、許可ブイランに300が抜けていたら？"},
+   {"sc": 3, "sp": "先生", "t": "その1本が仲間外れになります。switchport trunk allowed vlan add 300で、そろえてあげます。addを忘れずに。", "y": "その1本が仲間外れになります。スイッチポート トランク アラウド ブイラン アド 300で、そろえてあげます。アドを忘れずに。"},
+   {"sc": 3, "sp": "先生", "t": "L3のEtherChannelも作れます。束ねた1本の論理的な線は、スイッチの中ではPort-channelという名前のインターフェースになります。L3にするときは、物理ポートとPort-channelの両方でno switchportにして、Port-channelのほうにIPアドレスを付けます。", "y": "エルスリーのイーサチャネルも作れます。束ねた1本の論理的な線は、スイッチの中ではポートチャネルという名前のインターフェースになります。エルスリーにするときは、物理ポートとポートチャネルの両方でノー スイッチポートにして、ポートチャネルのほうにアイピーアドレスを付けます。"},
+   {"sc": 3, "sp": "先生", "t": "LACPでは、アクティブに使えるリンクは最大8本です。最大16本まで設定でき、残りは待機になります。", "y": "エルエーシーピーでは、アクティブに使えるリンクは最大8本です。最大16本まで設定でき、残りは待機になります。"},
+   {"sc": 4, "sp": "先生", "t": "確認は、show etherchannel summaryです。Po1というのは、Port-channel 1の略です。その横のかっこに、SとUの2文字が出ていれば、Sはレイヤー2、Uは使用中なので、正常に動いています。Rならレイヤー3、Dならダウンです。", "y": "確認は、ショー イーサチャネル、サマリーです。Po1というのは、ポートチャネル 1の略です。その横のかっこに、SとUの2文字が出ていれば、Sはレイヤー2、Uは使用中なので、正常に動いています。Rならレイヤー3、Dならダウンです。"},
+   {"sc": 4, "sp": "先生", "t": "ポートの横に、Pが付いていれば束ねられています。Iはスタンドアロンで、束ねられずに単独で動いている状態です。相手側でLACPが設定されていない、などが原因です。", "y": "ポートの横に、Pが付いていれば束ねられています。Iはスタンドアロンで、束ねられずに単独で動いている状態です。相手側でエルエーシーピーが設定されていない、などが原因です。"},
+   {"sc": 5, "sp": "先生", "t": "ここで小テストです。LACPでEtherChannelを組むとき、束になる組み合わせはどれでしょう？画面で選んでください。", "w": 1, "y": "ここで小テストです。エルエーシーピーでイーサチャネルを組むとき、束になる組み合わせはどれでしょう？画面で選んでください。"},
+   {"sc": 5, "sp": "先生", "t": "正解は、activeとpassiveです。", "y": "正解は、アクティブとパッシブです。"},
+   {"sc": 6, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 6, "sp": "先生", "t": "1つ目。EtherChannelは物理リンクを束ねて1本に。STPでブロックされず、フローはハッシュで1本に振り分ける。", "y": "1つ目。イーサチャネルは物理リンクを束ねて1本に。エスティーピーでブロックされず、フローはハッシュで1本に振り分ける。"},
+   {"sc": 6, "sp": "先生", "t": "2つ目。LACPはactiveとpassiveで、passive同士はだめ。PAgPはdesirableとauto。onは両端on。", "y": "2つ目。エルエーシーピーはアクティブとパッシブで、パッシブ同士はだめ。パグプはデザイラブルとオート。オンは両端オン。"},
+   {"sc": 6, "sp": "先生", "t": "3つ目。束ねるポートの設定はそろえる。確認はshow etherchannel summaryで、SUは使用中、Iは単独。", "y": "3つ目。束ねるポートの設定はそろえる。確認はショー イーサチャネル、サマリーで、SUは使用中、Iは単独。"},
+   {"sc": 6, "sp": "生徒", "t": "activeとpassive、もう迷いません！", "y": "アクティブとパッシブ、もう迷いません！"},
+   {"sc": 6, "sp": "先生", "t": "いいですね。次回は、隣の機器を調べる、CDPとLLDPを学びます。お疲れさまでした。", "y": "いいですね。次回は、隣の機器を調べる、シーディーピーとエルエルディーピーを学びます。お疲れさまでした。"}
+  ],
+  "seg": [
+   [0.0, 7.296],
+   [7.646, 12.500958],
+   [20.497, 2.443],
+   [23.29, 20.448],
+   [44.088, 14.314667],
+   [58.753, 12.683],
+   [71.786, 8.395],
+   [80.531, 7.893],
+   [88.774, 5.739],
+   [94.863, 14.976],
+   [110.189, 13.803],
+   [124.342, 12.340958],
+   [137.033, 4.191958],
+   [141.575, 10.901],
+   [152.826, 18.154667],
+   [171.33, 8.64],
+   [180.32, 19.264],
+   [199.934, 13.056],
+   [213.34, 8.299],
+   [221.989, 2.475],
+   [224.814, 1.835],
+   [226.999, 8.372958],
+   [235.722, 8.512],
+   [244.584, 9.589],
+   [254.523, 3.008],
+   [257.881, 7.552]
+  ]
+ }
+}
