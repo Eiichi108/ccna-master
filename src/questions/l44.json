@@ -194,5 +194,44 @@
   "a": 1,
   "e": "DAIは、受け取ったARPを<b>DHCPスヌーピングのバインディングテーブル</b>（DHCPで配った IP と MAC の対応表）と照らし合わせます。手動で設定した機器はこの表に載らないので、別に許可する設定が必要です。",
   "m": "DAIの手本＝DHCPスヌーピングの表"
+ },
+ {
+  "id": "P44-16",
+  "k": "one",
+  "tag": "セキュリティ",
+  "lv": 2,
+  "page": 0,
+  "t": "図を参照してください。SW1を、copy running-config startup-config を実行しないまま再起動しました。再起動後のこのポートについて、正しい説明はどれですか。",
+  "x": "SW1# show running-config interface Fa0/12\ninterface FastEthernet0/12\n switchport mode access\n switchport port-security\n switchport port-security mac-address sticky\n switchport port-security mac-address sticky 0050.56aa.bb01",
+  "rd": "①sticky が有効<br>②学習したMACが sticky の行として書かれている<br>③これは running-config の内容",
+  "rg": "run",
+  "o": ["学習したMACアドレスは消え、最初に通信した機器を新しく学習する", "学習したMACアドレスがそのまま残る", "ポートセキュリティの設定がすべて消える", "ポートが err-disabled になる"],
+  "a": 0,
+  "e": "<b>sticky</b> で学習したMACアドレスは <b>running-config</b> に書き込まれます。保存しないまま再起動すると消えるので、再び最初の機器を学習します。残したいなら startup-config に保存します。",
+  "m": "stickyはrunning-configに書く→保存が必要"
+ },
+ {
+  "id": "P44-17",
+  "k": "one",
+  "tag": "セキュリティ",
+  "lv": 2,
+  "page": 3,
+  "t": "ケーブルの接続ミスでループができ、ブロードキャストが大量に流れてネットワークが止まりかけました。スイッチのポートで、一定の量を超えたブロードキャストなどを止める機能はどれですか。",
+  "o": ["DHCPスヌーピング", "DAI", "ストームコントロール", "IP Source Guard"],
+  "a": 2,
+  "e": "<b>ストームコントロール</b>は、ポートに流れるブロードキャストなどが決めた量を超えたときに止めて、<b>フラッディング</b>からネットワークを守ります。",
+  "m": "流れすぎを止める＝ストームコントロール"
+ },
+ {
+  "id": "P44-18",
+  "k": "one",
+  "tag": "セキュリティ",
+  "lv": 2,
+  "page": 3,
+  "t": "DHCPで配られていないIPアドレスを勝手に設定したPCが、ほかの機器になりすまして通信していました。DHCPスヌーピングのバインディングテーブルと一致しない送信元IPアドレスの通信を、ポートで止める機能はどれですか。",
+  "o": ["IP Source Guard", "ストームコントロール", "ポートセキュリティの sticky", "BPDUガード"],
+  "a": 0,
+  "e": "<b>IP Source Guard</b> は、DHCPスヌーピングの表にない送信元IPアドレスの通信を止め、<b>なりすましの不正なクライアント</b>を防ぎます。",
+  "m": "IPのなりすまし対策＝IP Source Guard"
  }
 ]
