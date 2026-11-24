@@ -386,7 +386,7 @@ function unpackSess(k,o){if(!o)return null;let dom=o.dom||(typeof o.d==="string"
   if(o.ids&&!ng&&!o.seed&&!o.shuf){const done=[...new Set(o.ids.slice(0,o.i).filter(id=>QM[id]))];const ds=new Set(done);ids=done.concat(domIds(dom).filter(id=>!ds.has(id)));o.i=done.length;}
   {const seen=new Set();ids=ids.filter(id=>!seen.has(id)&&seen.add(id));}
   return{dom,ng,shuf:!!o.shuf,seed:o.seed||0,ids,i:Math.min(o.i||0,ids.length),res:{},label:o.label||DM[dom].name+(ng?"の間違えた問題":""),tab:"one"};}
-function packAll(){const ds={};for(const k in S.ds)if(S.ds[k])ds[k]=packSess(S.ds[k]);const st={};for(const k in S.st){const t=S.st[k];st[k]=[t.c||0,t.w||0,t.l===undefined?-1:t.l,t.m?1:0];}return{p:{st,opt:S.opt,cli:S.cli,lab:S.lab,last:S.last||null,cls:S.cls||{},rate:S.rate||1},s:{ds}};}
+function packAll(){const ds={};for(const k in S.ds)if(S.ds[k])ds[k]=packSess(S.ds[k]);const st={};for(const k in S.st){const t=S.st[k];st[k]=[t.c||0,t.w||0,t.l===undefined?-1:t.l,t.m?1:0];}return{p:{st,opt:S.opt,cli:S.cli,lab:S.lab,last:S.last||null,cls:S.cls||{},rate:S.rate||1,sd:S.sd||{}},s:{ds}};}
 function unpackSt(st){const o={};for(const k in st){const v=st[k];o[k]=Array.isArray(v)?Object.assign({c:v[0],w:v[1]},v[2]>=0?{l:v[2]}:{},v[3]?{m:1}:{}):v;}return o;}
 let dbP=null,dbS=null,saving=false,pend=false,tmr=null,lastP="",lastS="";
 function save(){const P=packAll();try{localStorage.setItem(LSK,JSON.stringify(Object.assign({},S,{ds:P.s.ds})));}catch(e){}if(dbP){clearTimeout(tmr);tmr=setTimeout(flush,800);}}
@@ -745,6 +745,7 @@ const TOOLS=[
  {id:"packet",t:"パケットの旅",s:"PCからサーバーまで、パケットが1駅ずつ進みます。MACアドレスが書き換わり、IPアドレスは変わらない様子が見えます。",pic:`<svg viewBox="0 0 72 56"><path d="M6 40h60" stroke="#e6261f" stroke-width="5"/><circle cx="10" cy="40" r="6" fill="#0a5cff"/><circle cx="36" cy="40" r="6" fill="#00a05a"/><circle cx="62" cy="40" r="6" fill="#e6261f"/><rect x="22" y="14" width="20" height="12" rx="3" fill="#ffb400"/></svg>`},
  {id:"route",t:"ルート表ハイライト",s:"宛先IPを入れると「含む → 一番長い → AD → メトリック」の順に、使われる経路が光ります。",pic:`<svg viewBox="0 0 72 56"><rect x="6" y="8" width="60" height="8" rx="2" fill="#c9d1dc"/><rect x="6" y="20" width="60" height="8" rx="2" fill="#00a05a"/><rect x="6" y="32" width="60" height="8" rx="2" fill="#c9d1dc"/><rect x="6" y="44" width="60" height="8" rx="2" fill="#c9d1dc"/></svg>`},
  {id:"subnet",t:"サブネット帯",s:"IPとプレフィックス長を動かすと、ブロックの区切りとネットワーク・ブロードキャストが色で分かります。",pic:`<svg viewBox="0 0 72 56"><rect x="4" y="20" width="16" height="16" fill="#cddcff"/><rect x="20" y="20" width="16" height="16" fill="#0a5cff"/><rect x="36" y="20" width="16" height="16" fill="#cddcff"/><rect x="52" y="20" width="16" height="16" fill="#e6eeff"/></svg>`},
+ {id:"drill",t:"サブネット計算ドリル",s:"ネットワークアドレス・ホスト数・マスクの変換などを、答えを入力して練習します。問題は毎回ランダムで、何問でも解けます。",pic:`<svg viewBox="0 0 72 56"><rect x="6" y="8" width="60" height="40" rx="6" fill="none" stroke="#0a5cff" stroke-width="3"/><path d="M16 22h16M24 14v16" stroke="#0a5cff" stroke-width="3"/><path d="M40 22h16M40 36h16" stroke="#00a05a" stroke-width="3"/><path d="M14 40l6-6M14 34l6 6" stroke="#e6261f" stroke-width="3"/></svg>`},
  {id:"cli",t:"コマンド練習",s:`Ciscoのコマンドを1つずつ入力して覚えます（${0}問）。`,pic:`<svg viewBox="0 0 72 56"><rect x="4" y="6" width="64" height="44" rx="6" fill="#0e1116"/><path d="M14 22l8 6-8 6M28 36h16" stroke="#5fe39a" stroke-width="3" fill="none"/></svg>`},
  {id:"lab",t:"シナリオ演習",s:"「初期設定」「VLAN」「OSPF」など、設定を最初から最後まで打ち込みます。",pic:`<svg viewBox="0 0 72 56"><rect x="4" y="6" width="64" height="44" rx="6" fill="#0e1116"/><path d="M12 18h30M12 28h40M12 38h22" stroke="#8fb4ff" stroke-width="3"/></svg>`}];
 function vTools(){
@@ -766,7 +767,7 @@ function vGuide(){const k=Math.max(0,RG.findIndex(g=>g.id===arg.g)),G=RG[k];ttl.
 <div class="card"><b>読むときのコツ</b><ul style="margin:8px 0 0;padding-left:20px">${G.tips.map(t=>`<li style="margin:4px 0">${esc(t)}</li>`).join("")}</ul></div>
 <div class="row" style="justify-content:space-between;margin-top:12px">${k>0?`<button class="btn sm" id="gp">‹ ${esc(RG[k-1].t)}</button>`:"<span></span>"}${k<RG.length-1?`<button class="btn sm" id="gx">${esc(RG[k+1].t)} ›</button>`:""}</div></div>`;
   const gp=$("#gp"),gx=$("#gx");if(gp)gp.onclick=()=>{arg={g:RG[k-1].id};render();scrollTo(0,0);};if(gx)gx.onclick=()=>{arg={g:RG[k+1].id};render();scrollTo(0,0);};}
-function vTool(){({packet:tPacket,route:tRoute,subnet:tSubnet,cli:tCli,lab:tLab}[arg.t])();}
+function vTool(){({packet:tPacket,route:tRoute,subnet:tSubnet,drill:tSdrill,cli:tCli,lab:tLab}[arg.t])();}
 /* packet journey */
 const PK={pc:{x:30,n:"PC1",ip:"10.0.1.10",mac:"AAAA.0001"},sw:{x:110,n:"SW1"},r1:{x:190,n:"R1",mac1:"1111.0001",mac2:"1111.0002"},r2:{x:270,n:"R2",mac1:"2222.0001",mac2:"2222.0002"},sv:{x:340,n:"サーバー",ip:"10.0.2.20",mac:"BBBB.0001"}};
 const PSTEPS=[
@@ -844,12 +845,76 @@ function tSubnet(){
 <div class="kv ${quiz?"hide":""}" id="kv">${[["ネットワークアドレス",n2ip(net)],["ブロードキャスト",n2ip(bc)],["最初のホスト",len>=31?"-":n2ip(net+1)],["最後のホスト",len>=31?"-":n2ip(bc-1)],["使えるホスト数",len>=31?"-":(size-2).toLocaleString()+"台"],["サブネットマスク",n2ip(mask)],["ワイルドカード",n2ip(size-1)],["ブロックサイズ",bs]].map(x=>`<div><span>${x[0]}</span><b>${x[1]}</b></div>`).join("")}</div>`;}
     app.innerHTML=`<h2>サブネット帯</h2><div class="card"><div class="row"><label for="sip"><b>IP</b></label><input class="inp" id="sip" value="${esc(ip)}" inputmode="decimal" style="width:11em"><b style="font-size:22px">/${len}</b></div>
 <input type="range" id="slen" min="8" max="30" value="${len}" style="width:100%;margin:12px 0;accent-color:var(--acc);height:28px" aria-label="プレフィックス長">
-<div class="row"><button class="btn sm" id="sq">問題を出す</button>${quiz?`<button class="btn sm pri" id="sa">答えを見る</button>`:""}</div>${res}</div>
+<div class="row"><button class="btn sm" id="sq">問題を出す</button><button class="btn sm" id="sdr">計算ドリルへ</button>${quiz?`<button class="btn sm pri" id="sa">答えを見る</button>`:""}</div>${res}</div>
 <p class="sub">ブロックサイズ法：区切りのあるオクテットで「256 − マスクの値」を出し、その倍数で区切ると、IPが入る箱（青）がネットワークになります。</p>`;
     $("#sip").onchange=e=>{ip=e.target.value.trim();arg.ip=ip;draw();};
     $("#slen").oninput=e=>{len=+e.target.value;arg.len=len;draw();};
     $("#sq").onclick=()=>{const r=()=>Math.random()*256|0;ip=[[10,r()],[172,16+(Math.random()*16|0)],[192,168]][Math.random()*3|0].concat([r(),r()]).slice(0,4).join(".");len=17+(Math.random()*13|0);quiz=true;draw();};
-    const sa=$("#sa");if(sa)sa.onclick=()=>{quiz=false;draw();};};
+    const sa=$("#sa");if(sa)sa.onclick=()=>{quiz=false;draw();};$("#sdr").onclick=()=>go("tool",{t:"drill"});};
+  draw();
+}
+/* subnet drill */
+const SDT=[{id:"net",t:"ネットワークアドレス"},{id:"bc",t:"ブロードキャスト"},{id:"first",t:"最初のホスト"},{id:"last",t:"最後のホスト"},{id:"hosts",t:"使えるホスト数"},{id:"p2m",t:"プレフィックス→マスク"},{id:"m2p",t:"マスク→プレフィックス"},{id:"wc",t:"ワイルドカード"},{id:"need",t:"台数からプレフィックス"},{id:"same",t:"同じサブネット？"},{id:"cnt",t:"サブネットの数"}];
+const sdNorm=s=>String(s).replace(/[０-９．／]/g,c=>String.fromCharCode(c.charCodeAt(0)-0xFEE0)).replace(/[\s,，台個]/g,"").replace(/^\//,"");
+function sdBlock(n,len){/* ブロックサイズ法の説明 */
+  const size=2**(32-len),net=Math.floor(n/size)*size,bc=net+size-1;
+  if(len%8===0){const k=len/8;return`/${len} は第${k}オクテットまでがネットワーク部。ホスト部（第${k+1}オクテットから後ろ）を全部0にすると ${n2ip(net)}、全部255にすると ${n2ip(bc)}。`;}
+  const o=Math.floor(len/8),bs=2**((o+1)*8-len),ov=Math.floor(n/2**(24-o*8))%256,st=Math.floor(ov/bs)*bs;
+  return`区切りは第${o+1}オクテット。ブロックサイズは 256−${256-bs}＝<b>${bs}</b>。${ov} は <b>${st}〜${st+bs-1}</b> の箱に入る → ネットワーク ${n2ip(net)}、ブロードキャスト ${n2ip(bc)}。`;}
+function sdMake(ty){
+  const r=k=>Math.random()*k|0,pick=a=>a[r(a.length)],x=Math.random();
+  let len=x<.6?24+r(7):x<.9?16+r(8):8+r(8);if(ty==="same"||ty==="need"||ty==="cnt")len=Math.max(len,17);
+  const b=len<16?[10,r(256)]:pick([[10,r(256)],[172,16+r(16)],[192,168]]),n=b[0]*2**24+b[1]*2**16+r(256)*256+r(256);
+  const size=2**(32-len),net=Math.floor(n/size)*size,bc=net+size-1,mask=n2ip(2**32-size);
+  const as=Math.random()<.5?`${n2ip(n)}/${len}`:`${n2ip(n)}　マスク ${mask}`;
+  const q={ty,k:"ip"};
+  if(ty==="net"){q.t=`${as} が入っている<b>ネットワークアドレス</b>は？`;q.a=n2ip(net);q.e=sdBlock(n,len);}
+  else if(ty==="bc"){q.t=`${as} が入っているサブネットの<b>ブロードキャストアドレス</b>は？`;q.a=n2ip(bc);q.e=sdBlock(n,len);}
+  else if(ty==="first"){q.t=`${as} のサブネットで、<b>最初に使えるホストアドレス</b>は？`;q.a=n2ip(net+1);q.e=sdBlock(n,len)+` 最初のホストはネットワークアドレス＋1。`;}
+  else if(ty==="last"){q.t=`${as} のサブネットで、<b>最後に使えるホストアドレス</b>は？`;q.a=n2ip(bc-1);q.e=sdBlock(n,len)+` 最後のホストはブロードキャスト−1。`;}
+  else if(ty==="hosts"){q.k="num";q.t=`/${len}（${mask}）のサブネットで、<b>使えるホストの数</b>は？`;q.a=String(size-2);q.e=`ホスト部は 32−${len}＝${32-len}ビット。2<sup>${32-len}</sup>＝${size.toLocaleString()}、そこからネットワークとブロードキャストの2つを引いて <b>${(size-2).toLocaleString()}</b>。`;}
+  else if(ty==="p2m"||ty==="m2p"||ty==="wc"){const o=Math.floor((len-1)/8),ones=len-o*8,v=256-2**(8-ones);
+    const why=`/${len} は、左から ${len} 個が 1。第${o+1}オクテットには 1 が ${ones} 個 → ${ones===8?255:`256−${2**(8-ones)}＝${v}`}。`;
+    if(ty==="p2m"){q.t=`/${len} を<b>サブネットマスク</b>（10進数の形）で書くと？`;q.a=mask;q.e=why;}
+    else if(ty==="m2p"){q.k="num";q.t=`サブネットマスク ${mask} は、<b>プレフィックス長</b>で /いくつ？`;q.a=String(len);q.e=why;}
+    else{q.t=`サブネットマスク ${mask}（/${len}）の<b>ワイルドカードマスク</b>は？`;q.a=n2ip(size-1);q.e=`ワイルドカードは「255.255.255.255 − マスク」。各オクテットで 255 から引くと <b>${n2ip(size-1)}</b>。ACL や OSPF の network コマンドで使う。`;}}
+  else if(ty==="need"){q.k="num";const cap=size-2,lo=size/2-2,h=Math.max(1,lo+1+r(cap-lo));
+    q.t=`1つのサブネットに <b>${h}台</b> のホストをつなぎたい。アドレスの無駄が一番少ない<b>プレフィックス長</b>は /いくつ？`;q.a=String(len);
+    q.e=`${h}台＋ネットワーク＋ブロードキャスト＝${h+2}個。${h+2} 以上で一番小さい 2 のべき乗は ${size}（2<sup>${32-len}</sup>）。ホスト部 ${32-len}ビット → 32−${32-len}＝<b>/${len}</b>。`;}
+  else if(ty==="same"){q.k="yn";const same=Math.random()<.5;let m;
+    if(same)m=net+1+r(size-2);else{const nb=Math.random()<.5&&net>=size?net-size:net+size;m=nb+1+r(size-2);}
+    q.t=`${n2ip(n)}/${len} と ${n2ip(m)}/${len} は、<b>同じサブネット</b>？`;q.a=same?"同じ":"違う";
+    const nm=Math.floor(m/size)*size;q.e=sdBlock(n,len)+`<br>${n2ip(m)} のネットワークは ${n2ip(nm)}。`+(same?"ネットワークが同じなので<b>同じサブネット</b>。":"ネットワークが違うので<b>別のサブネット</b>（ルーターを通らないと届かない）。");}
+  else if(ty==="cnt"){q.k="num";const bl=len>24?pick([16,24]):16,bnet=Math.floor(n/2**(32-bl))*2**(32-bl);
+    q.t=`${n2ip(bnet)}/${bl} を /${len} のサブネットに分けると、<b>サブネットはいくつ</b>できる？`;q.a=String(2**(len-bl));
+    q.e=`ネットワーク部が ${bl} → ${len} で ${len-bl}ビット増えた。2<sup>${len-bl}</sup>＝<b>${(2**(len-bl)).toLocaleString()}個</b>。`;}
+  return q;}
+function tSdrill(){
+  ttl.textContent="サブネット計算ドリル";S.sd=S.sd||{};S.sd.s=S.sd.s||{};
+  if(!arg.sc)arg.sc=[0,0];
+  const on=()=>{const f=(S.sd.f||[]).filter(id=>SDT.some(t=>t.id===id));return f.length?f:SDT.map(t=>t.id);};
+  const next=()=>{arg.q=sdMake(pick1(on()));arg.ans=null;arg.t0=Date.now();};
+  const pick1=a=>a[Math.random()*a.length|0];
+  if(!arg.q)next();
+  const draw=()=>{const q=arg.q,T=SDT.find(t=>t.id===q.ty),f=on(),done=arg.ans!==null;
+    const st=S.sd.s,tot=Object.values(st).reduce((a,v)=>[a[0]+v[0],a[1]+v[1]],[0,0]);
+    const box=q.k==="yn"?`<div class="row">${["同じ","違う"].map(v=>`<button class="btn ${done&&v===q.a?"pri":""}" data-yn="${v}" ${done?"disabled":""}>${v}</button>`).join("")}</div>`
+      :`<div class="row"><input class="inp grow" id="sda" inputmode="decimal" autocomplete="off" placeholder="${q.k==="num"?"数字":"例 192.168.1.0"}" ${done?"disabled":""} value="${done?esc(arg.ans):""}">${done?"":`<button class="btn pri" id="sdc">答え合わせ</button>`}</div>`;
+    const res=done?`<div class="res ${arg.ok?"ok":"ng"}" style="margin-top:12px">${arg.ok?"○ 正解":"× 正解は "+esc(q.a)}　<small>${arg.sec}秒</small></div><p class="pl" style="margin-top:8px">${q.e}</p><div class="row"><button class="btn pri" id="sdn">次の問題（Enter）</button></div>`:"";
+    app.innerHTML=`<h2>サブネット計算ドリル</h2><p class="sub">問題は毎回ランダムに作られます。全角の数字でも答えられます。</p>
+<div class="card"><div class="sub">${esc(T.t)}　今回 ${arg.sc[0]}/${arg.sc[1]} 正解</div><div class="qt" style="margin:6px 0 12px">${q.t}</div>${box}${res}</div>
+<details class="card"><summary><b>出す問題の種類</b>（${f.length===SDT.length?"すべて":f.length+"種類"}）</summary><div class="row" style="flex-wrap:wrap;margin-top:10px">${SDT.map(t=>`<button class="btn sm ${f.includes(t.id)&&f.length<SDT.length?"pri":""}" data-ty="${t.id}">${esc(t.t)}</button>`).join("")}<button class="btn sm" data-ty="">すべて</button></div></details>
+<div class="card"><div class="sub">これまでの成績　${tot[0]}/${tot[1]} 正解${tot[1]?`（${Math.round(tot[0]/tot[1]*100)}%）`:""}</div><div class="kv" style="margin-top:8px">${SDT.filter(t=>st[t.id]).map(t=>`<div><span>${esc(t.t)}</span><b>${Math.round(st[t.id][0]/st[t.id][1]*100)}%<small style="font-weight:400;color:var(--sub)">（${st[t.id][0]}/${st[t.id][1]}）</small></b></div>`).join("")||`<p class="sub">まだ記録がありません。</p>`}</div></div>`;
+    const judge=v=>{if(arg.ans!==null)return;const a=sdNorm(v);if(!a)return;let ok;
+      if(q.k==="ip"){const x=ip2n(a);ok=x!==null&&n2ip(x)===q.a;}else ok=a===q.a;
+      arg.ans=v;arg.ok=ok;arg.sec=Math.round((Date.now()-arg.t0)/1000);arg.sc[1]++;if(ok)arg.sc[0]++;
+      const s=st[q.ty]||[0,0];s[1]++;if(ok)s[0]++;st[q.ty]=s;save();draw();};
+    const nx=()=>{next();draw();const i=$("#sda");if(i)i.focus();};
+    const inp=$("#sda");if(inp&&!done){inp.focus();inp.onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();judge(inp.value);}};$("#sdc").onclick=()=>judge(inp.value);}
+    app.querySelectorAll("[data-yn]").forEach(b=>b.onclick=()=>judge(b.dataset.yn));
+    if(done){const n=$("#sdn");n.onclick=nx;n.focus();}
+    app.querySelectorAll("[data-ty]").forEach(b=>b.onclick=()=>{const id=b.dataset.ty;let f=S.sd.f&&S.sd.f.length?S.sd.f.slice():[];
+      if(!id)f=[];else if(f.includes(id))f=f.filter(x=>x!==id);else f.push(id);S.sd.f=f;save();if(!on().includes(arg.q.ty))next();draw();const d=app.querySelector("details");if(d)d.open=true;});};
   draw();
 }
 /* CLI */
@@ -902,7 +967,8 @@ async function boot(){
     let [p2,s2]=await Promise.all([TO(rP.get()),TO(rS.get())]);if(p2==="TO"||s2==="TO")return false;p2=dat(p2);s2=dat(s2);
     if(!p2&&first){const o=dat(await TO(rOld.get()));if(o&&o!=="TO"&&o.st){p2={st:o.st,opt:o.opt,cli:o.cli,lab:o.lab,last:o.last};if(!s2&&o.ds)s2={ds:o.ds};}}
     if(p2&&p2.st){const rst=unpackSt(p2.st);for(const k in rst){const a=S.st[k],b=rst[k];if(!a||((b.c||0)+(b.w||0))>((a.c||0)+(a.w||0)))S.st[k]=Object.assign({},b,a&&a.m?{m:a.m}:{});}
-      ["cli","lab"].forEach(k=>{if(p2[k])S[k]=Object.assign({},p2[k],S[k]);});if(p2.last&&!S.last)S.last=p2.last;if(p2.opt)S.opt=p2.opt;if(p2.cls)S.cls=Object.assign({},p2.cls,S.cls||{});if(p2.rate&&!S.rate)S.rate=p2.rate;}
+      ["cli","lab"].forEach(k=>{if(p2[k])S[k]=Object.assign({},p2[k],S[k]);});if(p2.last&&!S.last)S.last=p2.last;if(p2.opt)S.opt=p2.opt;if(p2.cls)S.cls=Object.assign({},p2.cls,S.cls||{});if(p2.rate&&!S.rate)S.rate=p2.rate;
+      if(p2.sd&&p2.sd.s){S.sd=S.sd||{};S.sd.s=S.sd.s||{};for(const k in p2.sd.s){const a=S.sd.s[k],b=p2.sd.s[k];if(!a||b[1]>a[1])S.sd.s[k]=b;}if(!S.sd.f&&p2.sd.f)S.sd.f=p2.sd.f;}}
     if(s2&&s2.ds)for(const k in s2.ds){const b=unpackSess(k.replace(/^ng:/,"ng_"),s2.ds[k]);if(!b)continue;const kk=skey(b.dom,b.ng),a=S.ds[kk];if(!a||(b.i>(a.i||0)&&!(view==="play"&&arg===a)))S.ds[kk]=b;}
       return true;};
     if(!(await pull(true)))return;
