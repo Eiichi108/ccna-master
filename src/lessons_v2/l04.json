@@ -1,0 +1,165 @@
+{
+ "r": "TB",
+ "n": 4,
+ "t": "ネットワーク機器の役割",
+ "d": "d0",
+ "form": "たとえ話",
+ "need": [3],
+ "goal": ["4つの機器の役割を言える", "スイッチとルーターの違いがわかる", "家庭用ルーターの正体がわかる"],
+ "terms": ["スイッチ", "ルーター", "アクセスポイント", "ファイアウォール"],
+ "pages": [
+  {
+   "t": "家のWi-Fiルーター、中に何人いる？",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 124.0\" role=\"img\" aria-label=\"つかみ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"110\" rx=\"16\" fill=\"#0a5cff\" opacity=\".12\"/><text x=\"180\" y=\"44\" text-anchor=\"middle\" style=\"font:800 15.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">家のWi-Fiルーター、中で何人が働いている？</text><text x=\"180\" y=\"74\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">実は、4つの「係」が1台に入っています</text><text x=\"180\" y=\"94\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">今日は、その係を1人ずつ紹介します</text></svg>",
+   "b": "家にある「Wi-Fiルーター」。1台の小さな箱ですが、実は中で<b>4つの係</b>が別々の仕事をしています。会社のネットワークでは、この4つの係が、それぞれ<b>別の専用の機器</b>になっています。今日は、ネットワークで働く4つの機器を、1つずつ紹介します。"
+  },
+  {
+   "t": "今日のゴール",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のゴール\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1. 4つの機器の役割を言える</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">スイッチ・ルーター・AP・ファイアウォール</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2. スイッチとルーターの違いがわかる</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">何を見て、どこへ運ぶか</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">3. 家庭用ルーターの正体がわかる</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">4つの係が1台に入っている</text></svg>"
+  },
+  {
+   "t": "スイッチ ＝ マンションの管理人",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 218.0\" role=\"img\" aria-label=\"スイッチ\"><path d=\"M60 40L180 90\" stroke=\"#00a05a\" stroke-width=\"3\" opacity=\".7\"/><path d=\"M60 140L180 90\" stroke=\"#00a05a\" stroke-width=\"3\" opacity=\".7\"/><path d=\"M180 90L300 40\" stroke=\"#00a05a\" stroke-width=\"3\" opacity=\".7\"/><path d=\"M180 90L300 140\" stroke=\"#00a05a\" stroke-width=\"3\" opacity=\".7\"/><rect x=\"158\" y=\"77\" width=\"44\" height=\"26\" rx=\"5\" fill=\"#00a05a\"/><path d=\"M168 86h22l-4-3M192 94h-22l4 3\" stroke=\"#fff\" stroke-width=\"2.2\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><text x=\"180\" y=\"64\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">スイッチ</text><rect x=\"44\" y=\"26\" width=\"32\" height=\"21\" rx=\"3\" fill=\"none\" stroke=\"#3d4450\" stroke-width=\"3\"/><path d=\"M51 54h18M60 47v7\" stroke=\"#3d4450\" stroke-width=\"3\" stroke-linecap=\"round\"/><text x=\"60\" y=\"14\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">PC-A</text><rect x=\"44\" y=\"126\" width=\"32\" height=\"21\" rx=\"3\" fill=\"none\" stroke=\"#3d4450\" stroke-width=\"3\"/><path d=\"M51 154h18M60 147v7\" stroke=\"#3d4450\" stroke-width=\"3\" stroke-linecap=\"round\"/><text x=\"60\" y=\"174\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">PC-B</text><rect x=\"284\" y=\"26\" width=\"32\" height=\"21\" rx=\"3\" fill=\"none\" stroke=\"#3d4450\" stroke-width=\"3\"/><path d=\"M291 54h18M300 47v7\" stroke=\"#3d4450\" stroke-width=\"3\" stroke-linecap=\"round\"/><text x=\"300\" y=\"14\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">プリンター</text><rect x=\"284\" y=\"126\" width=\"32\" height=\"21\" rx=\"3\" fill=\"none\" stroke=\"#3d4450\" stroke-width=\"3\"/><path d=\"M291 154h18M300 147v7\" stroke=\"#3d4450\" stroke-width=\"3\" stroke-linecap=\"round\"/><text x=\"300\" y=\"174\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">PC-C</text><text x=\"180\" y=\"190\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">同じネットワークの中で、名札（MAC）を見て届ける</text></svg>",
+   "b": "<b>スイッチ</b>は、<b>同じネットワークの中</b>で、データを相手に届ける機器です。マンションの管理人が、住人の名札を見て、荷物をその部屋にだけ届けるように、スイッチは<b>MACアドレス（名札）</b>を見て、宛先の機器にだけデータを渡します。会社のフロアで、パソコンやプリンターをつないでいるのがスイッチです。",
+   "p": "スイッチ ＝ 同じネットワークの中の配達係。MACアドレスを見る。"
+  },
+  {
+   "t": "ルーター ＝ 町をつなぐ郵便局",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 178.0\" role=\"img\" aria-label=\"ルーター\"><path d=\"M60 80L180 80\" stroke=\"#0a5cff\" stroke-width=\"3\" opacity=\".7\"/><path d=\"M180 80L300 80\" stroke=\"#0a5cff\" stroke-width=\"3\" opacity=\".7\"/><path d=\"M34 90a12 12 0 0 1 4-22a16 16 0 0 1 30-4a12 12 0 0 1 18 14a10 10 0 0 1-4 12z\" fill=\"#00a05a\" opacity=\".85\"/><text x=\"60\" y=\"114\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">本社のネットワーク</text><circle cx=\"180\" cy=\"80\" r=\"18\" fill=\"#0a5cff\"/><path d=\"M171 76h12l-4-4M189 84h-12l4 4\" stroke=\"#fff\" stroke-width=\"2.4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><text x=\"180\" y=\"54\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ルーター</text><path d=\"M274 90a12 12 0 0 1 4-22a16 16 0 0 1 30-4a12 12 0 0 1 18 14a10 10 0 0 1-4 12z\" fill=\"#00a05a\" opacity=\".85\"/><text x=\"300\" y=\"114\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">支店・インターネット</text><text x=\"180\" y=\"150\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">違うネットワークへ、住所（IP）を見て道を選ぶ</text></svg>",
+   "b": "<b>ルーター</b>は、<b>違うネットワークどうし</b>をつなぐ機器です。郵便局が住所を見て、どの町への道を通るかを決めるように、ルーターは<b>IPアドレス（住所）</b>を見て、データを送る道を選びます。会社からインターネットに出るときは、必ずルーターを通ります。",
+   "p": "ルーター ＝ ネットワークの外へ運ぶ郵便局。IPアドレスを見る。"
+  },
+  {
+   "t": "確認の問題 1",
+   "quiz": {
+    "q": "同じネットワークの中で、MACアドレスを見て、宛先の機器にデータを届けるのはどれでしょう？",
+    "o": [
+     ["スイッチ", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["ルーター", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["ファイアウォール", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 0,
+    "e": "同じネットワークの中の配達係は<b>スイッチ</b>です。ルーターは、違うネットワークへ運ぶ係です。"
+   }
+  },
+  {
+   "t": "アクセスポイント ＝ 無線の受付",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 238.0\" role=\"img\" aria-label=\"アクセスポイント\"><path d=\"M180 70L180 150\" stroke=\"#3d4450\" stroke-width=\"3\" opacity=\".7\"/><text x=\"180.0\" y=\"103.0\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ケーブル</text><circle cx=\"180\" cy=\"76\" r=\"5\" fill=\"#00a05a\"/><path d=\"M170 68a14 14 0 0 1 20 0M164 62a22 22 0 0 1 32 0\" stroke=\"#00a05a\" stroke-width=\"3\" fill=\"none\" stroke-linecap=\"round\"/><text x=\"180\" y=\"44\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">アクセスポイント</text><rect x=\"60\" y=\"103\" width=\"20\" height=\"34\" rx=\"4\" fill=\"none\" stroke=\"#3d4450\" stroke-width=\"3\"/><circle cx=\"70\" cy=\"131\" r=\"2\" fill=\"#3d4450\"/><text x=\"70\" y=\"154\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">スマホ</text><rect x=\"274\" y=\"106\" width=\"32\" height=\"21\" rx=\"3\" fill=\"none\" stroke=\"#3d4450\" stroke-width=\"3\"/><path d=\"M281 134h18M290 127v7\" stroke=\"#3d4450\" stroke-width=\"3\" stroke-linecap=\"round\"/><text x=\"290\" y=\"154\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ノートPC</text><rect x=\"158\" y=\"137\" width=\"44\" height=\"26\" rx=\"5\" fill=\"#00a05a\"/><path d=\"M168 146h22l-4-3M192 154h-22l4 3\" stroke=\"#fff\" stroke-width=\"2.2\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><text x=\"180\" y=\"210\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">電波（Wi-Fi）で、スマホやPCをつなぐ</text></svg>",
+   "b": "<b>アクセスポイント</b>は、スマホやノートパソコンを、<b>電波（Wi-Fi）</b>でネットワークにつなぐ機器です。ケーブルを挿さなくてもつながるための、無線の受付窓口だと考えてください。会社では、天井などにいくつも取り付けて、フロアのどこでもつながるようにしています。"
+  },
+  {
+   "t": "ファイアウォール ＝ 入口の警備員",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 178.0\" role=\"img\" aria-label=\"ファイアウォール\"><path d=\"M60 80L180 80\" stroke=\"#3d4450\" stroke-width=\"3\" opacity=\".7\"/><path d=\"M180 80L300 80\" stroke=\"#3d4450\" stroke-width=\"3\" opacity=\".7\"/><path d=\"M34 90a12 12 0 0 1 4-22a16 16 0 0 1 30-4a12 12 0 0 1 18 14a10 10 0 0 1-4 12z\" fill=\"#0a5cff\" opacity=\".85\"/><text x=\"60\" y=\"114\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">インターネット</text><rect x=\"162\" y=\"65\" width=\"36\" height=\"30\" rx=\"4\" fill=\"#e6261f\"/><path d=\"M162 75h36M162 85h36M174 65v10M186 75v10M174 85v10\" stroke=\"#fff\" stroke-width=\"1.8\"/><text x=\"180\" y=\"54\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ファイアウォール</text><path d=\"M274 90a12 12 0 0 1 4-22a16 16 0 0 1 30-4a12 12 0 0 1 18 14a10 10 0 0 1-4 12z\" fill=\"#00a05a\" opacity=\".85\"/><text x=\"300\" y=\"114\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">会社のネットワーク</text><text x=\"180\" y=\"150\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">よい通信は通し、怪しい通信は止めて、会社を守る</text></svg>",
+   "b": "<b>ファイアウォール</b>は、インターネットと会社のネットワークの境目に置く、<b>入口の警備員</b>です。通してよい通信と、だめな通信を見分けて、怪しい通信を止めます。インターネットからの攻撃から、会社のネットワークを守ってくれます。"
+  },
+  {
+   "t": "確認の問題 2",
+   "quiz": {
+    "q": "通してよい通信と、だめな通信を見分けて、怪しい通信を止める機器はどれでしょう？",
+    "o": [
+     ["アクセスポイント", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["ファイアウォール", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["スイッチ", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "入口の警備員は<b>ファイアウォール</b>です。"
+   }
+  },
+  {
+   "t": "家庭用Wi-Fiルーターの正体",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 264.0\" role=\"img\" aria-label=\"家庭用ルーター\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">家のWi-Fiルーター1台の中に…</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">4つの係が全部入っている</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ルーター・スイッチ</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">インターネットへの出口／家の中の配達係</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">アクセスポイント・ファイアウォール</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Wi-Fiの受付／入口の警備員</text><rect x=\"10\" y=\"196.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#8a3ffc\" opacity=\".1\"/><text x=\"24\" y=\"222.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">会社では、それぞれ別の専用機器</text><text x=\"24\" y=\"241.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">台数が多く、速さや安全への要求が高いため</text></svg>",
+   "b": "家のWi-Fiルーターは、<b>ルーター・スイッチ・アクセスポイント・ファイアウォール</b>の4つの係が、1台にまとまった機器です。家なら1台で十分ですが、何百台もの機器がつながる会社では、それぞれを<b>専用の機器</b>にして、性能と安全性を高めています。"
+  },
+  {
+   "t": "確認の問題 3",
+   "quiz": {
+    "q": "会社のPCから、インターネット上のWebサイトを見るとき、必ず通る機器はどれでしょう？",
+    "o": [
+     ["スイッチ", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["ルーター", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["アクセスポイント", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "会社のネットワークから外のネットワーク（インターネット）へ出るので、<b>ルーター</b>を必ず通ります。"
+   }
+  },
+  {
+   "t": "まちがえやすい所：スイッチとルーター",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"スイッチとルーターの違い\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× どちらも機器をつなぐ箱で、同じようなもの</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">見た目が似ているので混ざりやすい</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ スイッチ：同じネットワークの中</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">MACアドレス（名札）を見て届ける</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ ルーター：違うネットワークへ</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">IPアドレス（住所）を見て道を選ぶ</text></svg>",
+   "b": "スイッチとルーターは、どちらも「ケーブルがたくさん挿さった箱」なので、混ざりやすい機器です。違いは、<b>どこへ運ぶか</b>と<b>何を見るか</b>。スイッチは同じネットワークの中で名札（MAC）を、ルーターは違うネットワークへ住所（IP）を見ます。CCNAで一番よく出る区別です。"
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">スイッチ ＝ 管理人</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">同じネットワークの中。MACアドレスを見る</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ルーター ＝ 郵便局</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">違うネットワークへ。IPアドレスを見る</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">アクセスポイント・ファイアウォール</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">無線の受付／入口の警備員</text></svg>",
+   "b": "ネットワークでは、4つの機器がそれぞれの持ち場で働いていました。次回は、ネットワークの話の土台になる<b>2進数</b>を学びます。IPアドレスの計算に必ず使う、コンピューターの数え方です。"
+  }
+ ],
+ "cls": {
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "みなさんの家に、Wi-Fiルーターはありますか？", "y": "みなさんの家に、ワイファイルーターはありますか？"},
+   {"sc": 1, "sp": "生徒", "t": "あります。リビングの棚の上に置いてます。"},
+   {"sc": 1, "sp": "先生", "t": "あの小さな箱の中で、何人が働いていると思いますか？"},
+   {"sc": 1, "sp": "生徒", "t": "え、人？ 1台だから、1人じゃないんですか？"},
+   {"sc": 1, "sp": "先生", "t": "実は、4つの係が、1台の中で別々の仕事をしているんです。"},
+   {"sc": 1, "sp": "生徒", "t": "4人も！"},
+   {"sc": 1, "sp": "先生", "t": "今日は、その4つの係を、1人ずつ紹介します。"},
+   {"sc": 2, "sp": "先生", "t": "今日のゴールは3つです。"},
+   {"sc": 2, "sp": "先生", "t": "1つ目、4つの機器の役割を言えること。"},
+   {"sc": 2, "sp": "先生", "t": "2つ目、スイッチとルーターの違いがわかること。"},
+   {"sc": 2, "sp": "先生", "t": "3つ目、家庭用のWi-Fiルーターの正体がわかることです。", "y": "3つ目、家庭用のワイファイルーターの正体がわかることです。"},
+   {"sc": 2, "sp": "生徒", "t": "正体…なんだか探偵みたいですね。"},
+   {"sc": 3, "sp": "先生", "t": "1人目は、スイッチです。"},
+   {"sc": 3, "sp": "先生", "t": "前回、同じネットワークの中では、何を見て手渡すと学びました？"},
+   {"sc": 3, "sp": "生徒", "t": "名札、MACアドレスです。", "y": "名札、マックアドレスです。"},
+   {"sc": 3, "sp": "先生", "t": "その手渡しをしているのが、スイッチです。"},
+   {"sc": 3, "sp": "先生", "t": "マンションの管理人さんが、名札を見て、荷物をその部屋にだけ届けるイメージです。"},
+   {"sc": 3, "sp": "生徒", "t": "関係ない部屋には、届けないんですね。"},
+   {"sc": 3, "sp": "先生", "t": "そうです。会社のフロアで、パソコンやプリンターをつないでいます。"},
+   {"sc": 4, "sp": "先生", "t": "2人目は、ルーターです。"},
+   {"sc": 4, "sp": "先生", "t": "ルーターは、違うネットワークどうしをつなぎます。"},
+   {"sc": 4, "sp": "生徒", "t": "じゃあ、見るのは住所、IPアドレスですか？", "y": "じゃあ、見るのは住所、アイピーアドレスですか？"},
+   {"sc": 4, "sp": "先生", "t": "正解です。郵便局が、住所を見て、どの町への道を通るか決めるのと同じです。"},
+   {"sc": 4, "sp": "先生", "t": "会社からインターネットに出るときは、必ずルーターを通ります。"},
+   {"sc": 4, "sp": "生徒", "t": "スイッチは建物の中、ルーターは建物の外へ、ですね。"},
+   {"sc": 5, "sp": "先生", "t": "確認です。同じネットワークの中で、MACアドレスを見て届けるのはどれでしょう？", "y": "確認です。同じネットワークの中で、マックアドレスを見て届けるのはどれでしょう？", "w": 1},
+   {"sc": 5, "sp": "生徒", "t": "管理人さんだから、スイッチ！"},
+   {"sc": 5, "sp": "先生", "t": "正解です。"},
+   {"sc": 6, "sp": "先生", "t": "3人目は、アクセスポイントです。"},
+   {"sc": 6, "sp": "先生", "t": "スマホやノートパソコンを、電波でネットワークにつなぐ機器です。"},
+   {"sc": 6, "sp": "生徒", "t": "Wi-Fiの機械ですね。", "y": "ワイファイの機械ですね。"},
+   {"sc": 6, "sp": "先生", "t": "そうです。ケーブルなしでつながるための、無線の受付窓口です。"},
+   {"sc": 6, "sp": "先生", "t": "会社では、天井にいくつも付けて、どこでもつながるようにしています。"},
+   {"sc": 6, "sp": "生徒", "t": "天井の白い丸いやつ、あれかも！"},
+   {"sc": 7, "sp": "先生", "t": "4人目は、ファイアウォールです。"},
+   {"sc": 7, "sp": "先生", "t": "インターネットと会社の境目に置く、入口の警備員です。"},
+   {"sc": 7, "sp": "生徒", "t": "警備員さん？"},
+   {"sc": 7, "sp": "先生", "t": "通してよい通信と、だめな通信を見分けて、怪しい通信を止めます。"},
+   {"sc": 7, "sp": "生徒", "t": "外からの攻撃から、会社を守ってくれるんですね。"},
+   {"sc": 8, "sp": "先生", "t": "確認です。怪しい通信を見分けて止める機器はどれでしょう？", "w": 1},
+   {"sc": 8, "sp": "生徒", "t": "警備員だから、ファイアウォール！"},
+   {"sc": 8, "sp": "先生", "t": "正解です。"},
+   {"sc": 9, "sp": "先生", "t": "では、最初の謎です。家のWi-Fiルーターの中には、だれがいたでしょう？", "y": "では、最初の謎です。家のワイファイルーターの中には、だれがいたでしょう？"},
+   {"sc": 9, "sp": "生徒", "t": "あ、今の4人が、全部入ってるんですか？"},
+   {"sc": 9, "sp": "先生", "t": "その通り。ルーター、スイッチ、アクセスポイント、ファイアウォール。"},
+   {"sc": 9, "sp": "先生", "t": "4つの係が、1台にまとまっているんです。"},
+   {"sc": 9, "sp": "生徒", "t": "じゃあ、会社でも1台で済ませればいいのに。"},
+   {"sc": 9, "sp": "先生", "t": "会社は、何百台もの機器がつながります。1台では、速さも安全も足りません。"},
+   {"sc": 9, "sp": "先生", "t": "だから会社では、それぞれを専用の機器にしています。"},
+   {"sc": 10, "sp": "先生", "t": "確認です。会社のPCから、インターネットのWebサイトを見るとき、必ず通る機器はどれでしょう？", "y": "確認です。会社のピーシーから、インターネットのWebサイトを見るとき、必ず通る機器はどれでしょう？", "w": 1},
+   {"sc": 10, "sp": "生徒", "t": "外のネットワークに出るから、ルーターです。"},
+   {"sc": 10, "sp": "先生", "t": "正解です。"},
+   {"sc": 11, "sp": "生徒", "t": "でも先生、スイッチとルーター、見た目がそっくりで、混ざりそうです。"},
+   {"sc": 11, "sp": "先生", "t": "そうなんです。どちらも、ケーブルがたくさん挿さった箱ですからね。"},
+   {"sc": 11, "sp": "先生", "t": "見分けるポイントは、どこへ運ぶかと、何を見るか、です。"},
+   {"sc": 11, "sp": "生徒", "t": "スイッチは同じネットワークの中で、名札を見る。"},
+   {"sc": 11, "sp": "生徒", "t": "ルーターは違うネットワークへ、住所を見る。"},
+   {"sc": 11, "sp": "先生", "t": "完璧です。CCNAで一番よく出る区別なので、しっかり覚えておきましょう。"},
+   {"sc": 12, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 12, "sp": "先生", "t": "1つ目。スイッチは、同じネットワークの中の管理人。MACアドレスを見る。", "y": "1つ目。スイッチは、同じネットワークの中の管理人。マックアドレスを見る。"},
+   {"sc": 12, "sp": "先生", "t": "2つ目。ルーターは、ほかのネットワークへの郵便局。IPアドレスを見る。", "y": "2つ目。ルーターは、ほかのネットワークへの郵便局。アイピーアドレスを見る。"},
+   {"sc": 12, "sp": "先生", "t": "3つ目。アクセスポイントは無線の受付、ファイアウォールは入口の警備員。"},
+   {"sc": 12, "sp": "生徒", "t": "家のルーターを見る目が変わりそうです。"},
+   {"sc": 12, "sp": "先生", "t": "次回は、IPアドレスの計算に必ず使う、2進数を学びます。お疲れさまでした。", "y": "次回は、アイピーアドレスの計算に必ず使う、2進数を学びます。お疲れさまでした。"}
+  ]
+ }
+}
