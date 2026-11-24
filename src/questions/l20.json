@@ -157,5 +157,68 @@
   ],
   "e": "<b>desirable は誘う側、auto は待つ側</b>です。なお、片方が access、片方が trunk のように両端のモードが合わないと、<b>正しく通信できず、VLANが混ざる</b>などの問題が起きます。",
   "m": "desirable誘う、auto待つ、他は固定"
+ },
+ {
+  "id": "P20-13",
+  "k": "one",
+  "tag": "VLAN",
+  "lv": 2,
+  "page": 3,
+  "t": "SW1の Gi0/24 のトランクでは、VLAN 10 と 20 を通しています。VLAN 30 も通したいと考えて、switchport trunk allowed vlan 30 を入力しました。結果として正しいものはどれですか。",
+  "o": ["VLAN 10・20・30 が通る", "VLAN 30 だけが通り、VLAN 10 と 20 は通らなくなる", "コマンドがエラーになり、何も変わらない", "すべてのVLANが通る"],
+  "a": 1,
+  "e": "<b>add</b> を付けないと、許可するVLANの一覧が<b>置き換わり</b>ます。今の一覧に足すには switchport trunk allowed vlan <b>add</b> 30 と入力します。",
+  "m": "足すときは add を付ける"
+ },
+ {
+  "id": "P20-14",
+  "k": "one",
+  "tag": "VLAN",
+  "lv": 2,
+  "page": 2,
+  "t": "SW1の Gi0/1 と、向かい側のSW2の Gi0/1 は、どちらも switchport mode dynamic auto です。このリンクの状態として正しいものはどれですか。",
+  "o": ["トランクになる", "アクセスポートになる（トランクにならない）", "err-disabled になる", "EtherChannel になる"],
+  "a": 1,
+  "e": "dynamic auto は、相手から誘われればトランクになりますが、<b>自分からは誘いません</b>。両方とも auto だと誰も誘わないので、<b>アクセスポート</b>のままです。",
+  "m": "auto＋auto＝トランクにならない"
+ },
+ {
+  "id": "P20-15",
+  "k": "one",
+  "tag": "VLAN",
+  "lv": 2,
+  "page": 4,
+  "t": "VLAN 10 と VLAN 20 の両方に、同じサブネット 192.168.1.0/24 のアドレスを割り当てる計画が出ました。この計画の問題点として、最も適切なものはどれですか。",
+  "o": ["問題はない", "VLANは別々のネットワーク（L3でも別のサブネット）として扱うので、VLANごとに違うサブネットを割り当てる必要がある", "VLAN 10 と 20 は同じスイッチでは作れない", "VLANには IPv4 アドレスを使えない"],
+  "a": 1,
+  "e": "VLANが違えば別のネットワークなので、VLAN間の通信はルーティングで行います。そのため<b>VLANごとに別のサブネット</b>を割り当てます（1つのVLAN＝1つのサブネット）。",
+  "m": "1つのVLAN＝1つのサブネット"
+ },
+ {
+  "id": "P20-16",
+  "k": "one",
+  "tag": "VLAN",
+  "lv": 2,
+  "page": 3,
+  "t": "図を参照してください。VLAN 30 のPCが、このトランクを越えて通信できません。最も考えられる原因はどれですか。",
+  "x": "SW1# show interfaces trunk\nPort   Mode  Encapsulation  Status    Native vlan\nGi0/1  on    802.1q         trunking  1\n\nPort   Vlans allowed on trunk\nGi0/1  1,10,20,30\n\nPort   Vlans allowed and active in management domain\nGi0/1  1,10,20",
+  "rd": "①Status は trunking<br>②allowed on trunk には 30 がある<br>③allowed and active には 30 がない",
+  "rg": "vlan",
+  "o": ["VLAN 30 がトランクで許可されていない", "SW1 に VLAN 30 が作られていない（または止まっている）", "ネイティブVLANが 30 になっている", "トランクのカプセル化が ISL になっている"],
+  "a": 1,
+  "e": "VLAN 30 は「allowed on trunk」には入っていますが、「<b>allowed and active</b>」に入っていません。許可はされていても、SW1 に VLAN 30 が<b>作られていない（active でない）</b>ためです。",
+  "m": "allowedにあってactiveにない→VLANがない"
+ },
+ {
+  "id": "P20-17",
+  "k": "one",
+  "tag": "VLAN",
+  "lv": 2,
+  "page": 0,
+  "t": "802.1Qで、通常のVLANとして使えるVLAN番号の範囲はどれですか。",
+  "o": ["0〜4095", "1〜4094", "1〜1005 だけ", "2〜4096"],
+  "a": 1,
+  "e": "VLAN ID は12ビットで 0〜4095 ですが、0 と 4095 は予約されているので、使えるのは <b>1〜4094</b> です。",
+  "m": "使えるVLAN＝1〜4094"
  }
 ]

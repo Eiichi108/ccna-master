@@ -209,5 +209,29 @@
   "x": "WLANs > Edit 'FACTORY-RF'\n  General | Security | QoS | Advanced\n  Layer 2 | Layer 3 | AAA Servers\n\n  Layer 2 Security        WPA+WPA2\n  Fast Transition         [ Adaptive  v ]\n  Over the DS             [x]\n  Reassociation Timeout   20\n\n  Authentication Key Management\n    802.1X      [x] Enable\n    FT 802.1X   [x] Enable",
   "rd": "①Securityの中のLayer 2の画面であることを確かめる<br>②Fast TransitionとFT 802.1Xが有効になっている行に注目する<br>③Fast Transitionが何の規格の機能かを思い出して、働きを考える",
   "rg": "wlc"
+ },
+ {
+  "id": "P27-18",
+  "k": "one",
+  "tag": "無線",
+  "lv": 2,
+  "page": 2,
+  "t": "無線の通信を取り込んで、別のPCのパケット解析ソフトで調べたいと考えています。APに設定するモードとして最も適切なものはどれですか。",
+  "o": ["Local", "FlexConnect", "Sniffer", "Bridge"],
+  "a": 2,
+  "e": "<b>Sniffer</b> モードのAPは、無線の通信を<b>キャプチャ</b>して、解析ソフトのあるPCへ送ります。Monitor は電波の監視、Bridge は建物間を無線でつなぐモードです。",
+  "m": "キャプチャ＝Sniffer"
+ },
+ {
+  "id": "P27-19",
+  "k": "one",
+  "tag": "無線",
+  "lv": 2,
+  "page": 4,
+  "t": "WLCを、ふだんのネットワークとは別の管理専用のネットワーク（アウトオブバンド）から管理したいと考えています。使うインターフェースはどれですか。",
+  "o": ["管理インターフェース", "サービスポート", "仮想インターフェース", "動的インターフェース"],
+  "a": 1,
+  "e": "<b>サービスポート</b>は、<b>アウトオブバンドの管理専用</b>のポートです。管理インターフェースはふだんのGUIアクセスとAPとのCAPWAPに使い、仮想インターフェースはDHCPリレーやWeb認証に使います。",
+  "m": "アウトオブバンド管理＝サービスポート"
  }
 ]

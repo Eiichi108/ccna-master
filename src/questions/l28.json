@@ -205,5 +205,17 @@
   "x": "WLANs > Edit 'LAB-NET' > Security > Layer 2\n  Layer 2 Security   [ WPA2+WPA3  v ]\n  WPA2/WPA3 Encryption\n    [ ]CCMP128(AES)   [x]GCMP256\n  Authentication Key Management\n    802.1X     [ ] Enable\n    PSK        [ ] Enable\n    PSK-SHA2   [x] Enable",
   "rd": "①Encryptionの行で、チェックが入っている暗号化方式を読む<br>②Authentication Key Managementで、チェックが入っている項目を読む<br>③802.1XやPSKにはチェックがないことも確かめる",
   "rg": "wlc"
+ },
+ {
+  "id": "P28-17",
+  "k": "one",
+  "tag": "無線",
+  "lv": 2,
+  "page": 4,
+  "t": "WLCで、社内のビデオ会議用のWLANを作ります。QoSのプロファイルとして最も適切なものはどれですか。",
+  "o": ["Platinum", "Gold", "Silver", "Bronze"],
+  "a": 1,
+  "e": "WLCのQoSプロファイルは、<b>Platinum＝音声</b>、<b>Gold＝ビデオ</b>、Silver＝普通（初期値）、Bronze＝低優先です。",
+  "m": "音声＝Platinum、ビデオ＝Gold"
  }
 ]

@@ -119,5 +119,29 @@
   "e": "LACP（IEEE 802.3ad）は<b>active／passive</b>、PAgP（Port Aggregation Protocol、Cisco独自）は<b>desirable／auto</b>です。待つ側どうし（passive同士、auto同士）では成立しません。",
   "m": "LACPはactive系、PAgPはdesirable系",
   "page": 1
+ },
+ {
+  "id": "P25-10",
+  "k": "multi",
+  "tag": "スイッチング",
+  "lv": 2,
+  "page": 1,
+  "t": "LACPでEtherChannelを組むとき、両端のモードの組み合わせで、EtherChannelができるものはどれですか。2つ選んでください。",
+  "o": ["active と active", "passive と passive", "active と passive", "on と active", "desirable と active"],
+  "a": [0, 2],
+  "e": "LACPでは、<b>少なくとも片方が active</b> なら交渉が始まります。passive どうしは誰も始めないのでできません。on は交渉しないので active とは組めず、desirable はPAgPのモードです。",
+  "m": "LACPは片方以上がactive"
+ },
+ {
+  "id": "P25-11",
+  "k": "one",
+  "tag": "STP",
+  "lv": 2,
+  "page": 0,
+  "t": "2本の物理リンクをEtherChannel（Po1）にまとめました。STPは、このEtherChannelをどのように扱いますか。",
+  "o": ["2本の別々のリンクとして扱い、片方をブロックする", "1本の論理的なリンクとして扱い、両方の物理リンクを使える", "EtherChannelではSTPが止まる", "物理リンクのうち速いほうだけを使う"],
+  "a": 1,
+  "e": "STPは、EtherChannelを<b>1本の論理リンク</b>として扱います。そのため物理リンクのどちらもブロックされず、<b>束ねた全部の帯域</b>を使えます。",
+  "m": "STPから見るとEtherChannelは1本"
  }
 ]

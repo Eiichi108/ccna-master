@@ -368,5 +368,32 @@
   "a": 2,
   "e": "\"interfaces\" の値は <b>[ ]</b> の配列で、中に文字列が<b>3つ</b>入っています。配列そのものは1つですが、要素は3つです。",
   "m": "[ ]の中をカンマで区切って数える"
+ },
+ {
+  "id": "P48-28",
+  "k": "one",
+  "tag": "REST API",
+  "lv": 2,
+  "page": 1,
+  "t": "図を参照してください。このリクエストの意味として、最も適切なものはどれですか。",
+  "x": "GET /api/v1/devices?role=access HTTP/1.1\nHost: ctrl.example.com\nAccept: application/json",
+  "rd": "①メソッドは GET<br>②? の前がリソースのURI<br>③? の後ろはクエリパラメーター",
+  "rg": "data",
+  "o": ["role が access の機器を新しく作る", "devices のリソースから、role が access の機器だけを絞り込んで取得する", "role が access の機器を削除する", "すべての機器の role を access に変える"],
+  "a": 1,
+  "e": "メソッドは取得の <b>GET</b> で、URIの devices がリソースです。<b>?role=access</b> は<b>クエリパラメーター</b>で、取得する機器を role が access のものに絞り込んでいます。",
+  "m": "?の後ろ＝絞り込みの条件"
+ },
+ {
+  "id": "P48-29",
+  "k": "one",
+  "tag": "REST API",
+  "lv": 2,
+  "page": 1,
+  "t": "スクリプトが GET でVLANの一覧を問題なく取得できました。このとき返るステータスコードとして最も適切なものはどれですか。",
+  "o": ["200 OK", "201 Created", "401 Unauthorized", "404 Not Found"],
+  "a": 0,
+  "e": "リクエストが成功したときは <b>200 OK</b> が返ります。201 は新しいリソースを<b>作成</b>できたとき（POSTなど）に返ります。",
+  "m": "取得の成功＝200、作成＝201"
  }
 ]

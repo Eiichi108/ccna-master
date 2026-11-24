@@ -233,5 +233,17 @@
   "a": 0,
   "e": "<b>IP Source Guard</b> は、DHCPスヌーピングの表にない送信元IPアドレスの通信を止め、<b>なりすましの不正なクライアント</b>を防ぎます。",
   "m": "IPのなりすまし対策＝IP Source Guard"
+ },
+ {
+  "id": "P44-19",
+  "k": "one",
+  "tag": "セキュリティ",
+  "lv": 2,
+  "page": 2,
+  "t": "スイッチで ip dhcp snooping と ip dhcp snooping vlan 10 を設定しました。ほかに何も設定していないとき、VLAN 10 のポートの状態について正しいものはどれですか。",
+  "o": ["すべてのポートが trust になる", "すべてのポートが untrusted になる", "アップリンクだけが自動で trust になる", "アクセスポートだけが trust になる"],
+  "a": 1,
+  "e": "DHCPスヌーピングでは、<b>初期状態のポートはすべて untrusted</b> です。本物のDHCPサーバーがある方向のポートは、自分で ip dhcp snooping trust を設定します。",
+  "m": "初期状態は全部untrusted"
  }
 ]

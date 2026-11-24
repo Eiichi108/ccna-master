@@ -143,5 +143,29 @@
   "e": "<b>ルートガード</b>は予定外のスイッチがルートになるのを防ぎ、<b>ループガード</b>は片方向のリンク故障によるループを防ぎます。errdisable recoveryの初期値は300秒です。",
   "m": "ルートガード＝inconsistent、ループ＝片方向",
   "page": 3
+ },
+ {
+  "id": "P24-12",
+  "k": "one",
+  "tag": "STP",
+  "lv": 2,
+  "page": 3,
+  "t": "ディストリビューションスイッチの、アクセススイッチにつながるポートで、下からより優先度の高いBPDUが届いても、ルートブリッジが変わらないようにしたいと考えています。使う機能はどれですか。",
+  "o": ["BPDUガード", "ルートガード", "ループガード", "PortFast"],
+  "a": 1,
+  "e": "<b>ルートガード</b>は、より優れたBPDUを受け取るとそのポートを <b>root-inconsistent</b> にしてブロックし、予定外のスイッチがルートになるのを防ぎます。",
+  "m": "ルートを守る＝ルートガード"
+ },
+ {
+  "id": "P24-13",
+  "k": "one",
+  "tag": "STP",
+  "lv": 2,
+  "page": 3,
+  "t": "スイッチのすべてのアクセスポートで、まとめて PortFast を有効にしたいと考えています。グローバル設定モードで入力するコマンドはどれですか。",
+  "o": ["spanning-tree portfast default", "spanning-tree bpduguard enable", "spanning-tree mode rapid-pvst", "spanning-tree vlan 1 root primary"],
+  "a": 0,
+  "e": "<b>spanning-tree portfast default</b> は、すべてのアクセスポートで PortFast を有効にします。トランクのポートには適用されません。",
+  "m": "まとめてPortFast＝portfast default"
  }
 ]

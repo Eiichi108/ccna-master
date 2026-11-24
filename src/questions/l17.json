@@ -102,5 +102,20 @@
   "o": ["ping 127.0.0.1", "ping 自分のIPアドレス", "ping デフォルトゲートウェイ", "ping インターネット上のサーバーのIPアドレス", "ping サーバーの名前（www.example.com）"],
   "e": "自分のTCP/IP、自分のアドレス、ゲートウェイ、外のアドレス、名前の順に確かめると、どこで止まっているかが分かります。",
   "m": "自分 → ゲートウェイ → 外 → 名前"
+ },
+ {
+  "id": "P17-09",
+  "k": "one",
+  "tag": "トラブルシュート",
+  "lv": 2,
+  "page": 5,
+  "t": "図を参照してください。このPCのデフォルトゲートウェイは 10.10.4.1 です。ゲートウェイのMACアドレスはどれですか。",
+  "x": "C:\\> arp -a\nInterface: 10.10.4.25 --- 0x7\n  Internet Address   Physical Address    Type\n  10.10.4.1          00-1a-2b-3c-4d-5e   dynamic\n  10.10.4.255        ff-ff-ff-ff-ff-ff   static",
+  "rd": "①Interface の行は自分のアドレス<br>②Internet Address が相手のIP<br>③同じ行の Physical Address がMAC",
+  "rg": "pc",
+  "o": ["ff-ff-ff-ff-ff-ff", "00-1a-2b-3c-4d-5e", "10.10.4.25", "0x7"],
+  "a": 1,
+  "e": "arp -a は、IPアドレスとMACアドレス（Physical Address）の対応表です。10.10.4.1 の行の <b>00-1a-2b-3c-4d-5e</b> がゲートウェイのMACです。ff-ff-ff-ff-ff-ff はブロードキャストです。",
+  "m": "arp -a＝IPとMACの対応表"
  }
 ]

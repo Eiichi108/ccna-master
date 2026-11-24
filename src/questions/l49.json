@@ -203,5 +203,17 @@
   "a": 0,
   "e": "REST APIでは、リソースを <b>URI</b>（例：/api/v1/devices）で指定し、HTTPメソッドで操作を表します。",
   "m": "対象＝URI、操作＝HTTPメソッド"
+ },
+ {
+  "id": "P49-17",
+  "k": "one",
+  "tag": "REST API",
+  "lv": 2,
+  "page": 1,
+  "t": "REST APIで、リクエストの本文にXMLのデータを入れて送ります。送るデータの形式を伝えるヘッダーとして正しいものはどれですか。",
+  "o": ["Accept: application/xml", "Content-Type: application/xml", "Content-Type: application/json", "Authorization: application/xml"],
+  "a": 1,
+  "e": "今送っているデータの形式は <b>Content-Type</b> で伝えます。XMLなら application/xml です。Accept は返してほしい形式です。",
+  "m": "送る形式＝Content-Type"
  }
 ]

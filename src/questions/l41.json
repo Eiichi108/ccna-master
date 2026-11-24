@@ -115,5 +115,17 @@
   "a": 2,
   "e": "<b>service password-encryption</b> が有効だと、password で設定した平文のパスワードは <b>type 7</b> で隠されて表示されます。secret に変わるわけではありません。",
   "m": "password＋暗号化サービス＝type 7"
+ },
+ {
+  "id": "P41-10",
+  "k": "one",
+  "tag": "セキュリティ",
+  "lv": 2,
+  "page": 2,
+  "t": "ルーターにログインする人に、「許可された人以外の利用を禁止する」という警告文を、ログインの前に表示したいと考えています。使うコマンドはどれですか。",
+  "o": ["banner motd", "privilege 15", "service password-encryption", "transport input ssh"],
+  "a": 0,
+  "e": "<b>banner motd</b> は、ログイン時に表示する警告文を設定します。privilege 15 は最高の権限、transport input ssh はSSHだけを許可する設定です。",
+  "m": "ログイン時の警告文＝banner motd"
  }
 ]
