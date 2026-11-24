@@ -2,3 +2,5 @@ __pycache__/
 *.pyc
 *.wav
 .DS_Store
+preview/
+.claude/settings.local.json
