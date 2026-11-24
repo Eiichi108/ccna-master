@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python tools/build.py)",
+      "Bash(python -X utf8 tools/build.py)",
+      "Bash(python tools/check.py)",
+      "Bash(python -X utf8 tools/check.py)",
+      "Bash(python tools/audio/voicevox_build.py *)",
+      "Bash(python -m http.server*)",
+      "Bash(git status*)",
+      "Bash(git diff*)",
+      "Bash(git log*)",
+      "Bash(git show*)",
+      "PowerShell(python tools/build.py)",
+      "PowerShell(python -X utf8 tools/build.py)",
+      "PowerShell(python tools/check.py)",
+      "PowerShell(python -X utf8 tools/check.py)",
+      "PowerShell(python tools/audio/voicevox_build.py *)",
+      "PowerShell(python -m http.server*)",
+      "PowerShell(git status*)",
+      "PowerShell(git diff*)",
+      "PowerShell(git log*)",
+      "PowerShell(git show*)"
+    ]
+  }
+}
