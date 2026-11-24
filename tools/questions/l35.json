@@ -1,0 +1,167 @@
+[
+ {
+  "id": "P35-01",
+  "k": "one",
+  "tag": "NAT",
+  "t": "家庭用のWi-Fiルーターのように、1つのグローバルIPアドレスを多数の端末で共有し、ポート番号で通信を区別するNAT（Network Address Translation）はどれですか。",
+  "o": [
+   "ダイナミックNAT",
+   "スタティックNAT",
+   "PAT（NATオーバーロード）",
+   "FHRP"
+  ],
+  "a": 2,
+  "e": "<b>PAT（NATオーバーロード）</b>は、1つのグローバルIPを<b>ポート番号</b>で区別して多くの端末で共有します。スタティックNATは1対1の固定、ダイナミックNATはプールから順に割り当てます。",
+  "m": "1つのIPをポートで共有＝PAT",
+  "page": 0
+ },
+ {
+  "id": "P35-02",
+  "k": "one",
+  "tag": "NAT",
+  "t": "NATの用語で、社内の端末に設定されている、変換前の本当のプライベートIPアドレスを表すものはどれですか。",
+  "o": [
+   "inside local",
+   "inside global",
+   "outside local",
+   "outside global"
+  ],
+  "a": 0,
+  "e": "inside は社内側、<b>local は本当のアドレス</b>です。社内の端末の本当のアドレスなので <b>inside local</b> です。",
+  "m": "inside＝社内、local＝本当のアドレス",
+  "page": 1
+ },
+ {
+  "id": "P35-03",
+  "k": "one",
+  "tag": "NAT",
+  "t": "NATで、どの社内アドレスがどのグローバルアドレスに変換されているか（変換表）を確認するコマンドはどれですか。",
+  "o": [
+   "show ip protocols",
+   "show ip route",
+   "show ip nat inside",
+   "show ip nat translations"
+  ],
+  "a": 3,
+  "e": "変換表は <b>show ip nat translations</b> で確認します。スタティックNATの対応は、通信がなくても常に表示されます。",
+  "m": "変換表＝show ip nat translations",
+  "page": 3
+ },
+ {
+  "id": "P35-04",
+  "k": "one",
+  "tag": "NAT",
+  "t": "社内のWebサーバー 192.168.30.20 に、外部からいつも 198.51.100.20 でアクセスできるようにしたいと考えています。設定するコマンドとして正しいものはどれですか。",
+  "o": [
+   "ip nat outside source static 192.168.30.20 198.51.100.20",
+   "ip nat inside source static 192.168.30.20 198.51.100.20",
+   "ip nat inside source list 1 interface g0/1 overload",
+   "ip nat inside source static 198.51.100.20 192.168.30.20"
+  ],
+  "a": 1,
+  "e": "公開サーバー向けの1対1の固定変換は<b>スタティックNAT</b>です。並び順は <b>ip nat inside source static 変換前（社内） 変換後（公開用）</b> です。",
+  "m": "inside source static 社内→公開の順",
+  "page": 2
+ },
+ {
+  "id": "P35-05",
+  "k": "one",
+  "tag": "NAT",
+  "t": "図を参照してください。社内のPCがインターネットへ通信できず、show ip nat translations にも何も表示されません。原因として正しいものはどれですか。",
+  "o": [
+   "access-list でワイルドカードマスクを使っている",
+   "Gi0/1 に ip nat outside が設定されていない",
+   "Gi0/0 に ip nat inside を設定しているのが誤りである",
+   "overload は1つのIPアドレスでは使えない"
+  ],
+  "a": 1,
+  "e": "NATの設定は、まず<b>社内側に ip nat inside、外部側に ip nat outside</b> を設定するところから始めます。外部側の指定が漏れていると変換されません。",
+  "m": "NATはまず inside と outside を決める",
+  "page": 2,
+  "x": "R1# show running-config (一部省略)\ninterface GigabitEthernet0/0\n description LAN\n ip address 192.168.1.1 255.255.255.0\n ip nat inside\n!\ninterface GigabitEthernet0/1\n description INTERNET\n ip address 203.0.113.2 255.255.255.252\n!\naccess-list 1 permit 192.168.1.0 0.0.0.255\nip nat inside source list 1 interface Gi0/1 overload",
+  "rd": "①社内側（LAN）のインターフェースの ip nat の行<br>②外部側（INTERNET）のインターフェースの ip nat の行<br>③ACLと overload の行は形として問題ないか",
+  "rg": "run"
+ },
+ {
+  "id": "P35-06",
+  "k": "one",
+  "tag": "NAT",
+  "t": "図を参照してください。R1の変換表について正しいものはどれですか。",
+  "o": [
+   "198.51.100.7 は社内のPCの本当のアドレス（inside local）で、最後の行は通信中のPATである",
+   "最後の行は、通信が終わるとすぐに消えるダイナミックな対応である",
+   "2台のPCはそれぞれ別のグローバルIPを使っていて、最後の行はPATの対応である",
+   "2台のPCは 198.51.100.7 をポート番号で区別して共有していて、最後の行はスタティックNATの対応である"
+  ],
+  "a": 3,
+  "e": "同じ Inside global をポート番号で区別しているのは<b>PAT</b>です。プロトコルやポートが「---」の行は<b>スタティックNAT</b>の1対1の対応で、通信がなくても表示されます。",
+  "m": "同じIP＋違うポート＝PAT、---＝静的",
+  "page": 3,
+  "x": "R1# show ip nat translations   (Outside の列は省略)\nPro  Inside global        Inside local\ntcp  198.51.100.7:50001   192.168.5.21:50001\ntcp  198.51.100.7:50002   192.168.5.22:50002\n---  198.51.100.30        192.168.5.200",
+  "rd": "①Inside global は外から見えるアドレス、Inside local は本当のアドレス<br>②上の2行で Inside global のIPとポートを比べる<br>③最後の行の Pro とポートの部分を見る",
+  "rg": "nat"
+ },
+ {
+  "id": "P35-07",
+  "k": "one",
+  "tag": "NAT",
+  "t": "プール NETPOOL のグローバルアドレスを、ACL 5 で許可した社内の端末がポート番号で区別して共有するように設定します。正しいコマンドはどれですか。",
+  "o": [
+   "ip nat outside source list 5 pool NETPOOL overload",
+   "ip nat inside source list 5 pool NETPOOL",
+   "ip nat inside source list 5 pool NETPOOL overload",
+   "ip nat inside source static list 5 NETPOOL"
+  ],
+  "a": 2,
+  "e": "ポート番号で共有する<b>PAT</b>にするには、最後に <b>overload</b> を付けます。overload がないと、プールのアドレスを1対1で割り当てるダイナミックNATになります。",
+  "m": "PATは最後にoverload（プールでもOK）",
+  "page": 2
+ },
+ {
+  "id": "P35-08",
+  "k": "multi",
+  "tag": "NAT",
+  "t": "PAT（NATオーバーロード）の特徴として正しいものはどれですか。2つ選んでください。",
+  "o": [
+   "多くの内部の端末が、1つのグローバルIPを共有できる",
+   "ポート番号で通信を区別する",
+   "1対1で固定して変換するので、公開サーバー向けである",
+   "ip nat inside と ip nat outside の設定がいらない",
+   "グローバルIPアドレスをプライベートIPアドレスに変えて社外へ送る"
+  ],
+  "a": [
+   0,
+   1
+  ],
+  "e": "PATは<b>1つのグローバルIP</b>を<b>ポート番号</b>で区別して共有します。1対1の固定はスタティックNATで、どのNATでも inside／outside の指定が必要です。",
+  "m": "PAT＝1つのIPをポート番号で共有",
+  "page": 0
+ },
+ {
+  "id": "P35-09",
+  "k": "match",
+  "tag": "NAT",
+  "t": "NATの用語や設定と、その意味を正しく組み合わせてください。",
+  "o": [
+   [
+    "inside local",
+    "内部の端末の本当のアドレス"
+   ],
+   [
+    "inside global",
+    "内部の端末が外から見えるときのアドレス"
+   ],
+   [
+    "outside global",
+    "外部の相手の本当のアドレス"
+   ],
+   [
+    "overload",
+    "ポート番号を使って1つのアドレスを共有する（PAT）"
+   ]
+  ],
+  "e": "inside／outside は社内側か外部側か、local／global は本当のアドレスか外から見えるアドレスかを表します。",
+  "m": "inside/outside × local/global",
+  "page": 1
+ }
+]

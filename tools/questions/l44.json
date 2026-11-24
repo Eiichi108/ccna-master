@@ -1,0 +1,232 @@
+[
+ {
+  "id": "P44-01",
+  "k": "sel",
+  "tag": "セキュリティ",
+  "t": "ポートセキュリティの違反モードについて、次の説明がどのモードに当てはまるか分類してください。",
+  "rows": [
+   {
+    "l": "違反したフレームを捨てるが、ログもカウンターも残さない",
+    "a": "protect"
+   },
+   {
+    "l": "違反したフレームを捨て、ログを出してカウンターを増やす",
+    "a": "restrict"
+   },
+   {
+    "l": "ポートをerr-disable状態にして止める",
+    "a": "shutdown"
+   },
+   {
+    "l": "何も指定しないときに使われる初期値",
+    "a": "shutdown"
+   },
+   {
+    "l": "show port-security で Secure-shutdown と表示される",
+    "a": "shutdown"
+   }
+  ],
+  "opts": [
+   "protect",
+   "restrict",
+   "shutdown"
+  ],
+  "e": "<b>protect</b>は黙って捨てる、<b>restrict</b>は捨てて記録する、<b>shutdown</b>は初期値でポートをerr-disableにします。protectとrestrictではポートは止まりません。",
+  "m": "黙って捨てる・捨てて記録・止める",
+  "page": 1
+ },
+ {
+  "id": "P44-02",
+  "k": "one",
+  "tag": "セキュリティ",
+  "t": "アクセスポートで <b>switchport port-security mac-address sticky</b> を設定しました。この設定の働きとして正しいものはどれですか。",
+  "o": [
+   "ポートで学習したMACアドレスを、running-configに書き込む",
+   "学習したMACアドレスを、保存操作なしで自動的にstartup-configに書き込む",
+   "すべてのMACアドレスを許可し、制限をなくす",
+   "MACアドレスの代わりにIPアドレスで機器を制限する"
+  ],
+  "a": 0,
+  "e": "<b>sticky</b>は動的に学習したMACアドレスを<b>running-config</b>に書き込みます。copy running-config startup-config などで保存すれば、再起動後も残ります。",
+  "m": "sticky＝学習したMACを設定にくっつける",
+  "page": 0
+ },
+ {
+  "id": "P44-03",
+  "k": "one",
+  "tag": "セキュリティ",
+  "t": "ポートセキュリティを有効にしただけで、許可するMACアドレスの最大数を設定していないとき、そのポートで許可されるMACアドレスの数はいくつですか。",
+  "o": [
+   "1",
+   "2",
+   "5",
+   "上限なし"
+  ],
+  "a": 0,
+  "e": "<b>maximum の初期値は1</b>です。2台目の機器がつながると違反になり、初期値のshutdownではポートが止まります。",
+  "m": "ポートセキュリティの初期値は1台だけ",
+  "page": 0
+ },
+ {
+  "id": "P44-04",
+  "k": "one",
+  "tag": "セキュリティ",
+  "t": "SW3のポートでポートセキュリティを有効にしようとしたところ、「dynamic port」であるというエラーが出て設定できませんでした。先に行うべき設定はどれですか。",
+  "o": [
+   "switchport mode access でアクセスポートに固定する",
+   "switchport mode dynamic desirable に変更する",
+   "spanning-tree portfast を設定する",
+   "no switchport でルーテッドポートにする"
+  ],
+  "a": 0,
+  "e": "ポートセキュリティは、<b>switchport mode access</b>などでモードを固定したポートに設定します。DTPでモードが決まる<b>dynamic</b>のポートには設定できません。",
+  "m": "ポートセキュリティの前にmode access",
+  "page": 0
+ },
+ {
+  "id": "P44-05",
+  "k": "one",
+  "tag": "セキュリティ",
+  "t": "図を参照してください。会議室のポートFa0/7が使えなくなりました。このポートを復旧させる正しい手順はどれですか。",
+  "o": [
+   "許可していない機器を外してから、インターフェースで shutdown、no shutdown を実行する",
+   "機器はそのままで、no switchport port-security violation を入力する",
+   "何も設定せずに待てば、表示が消えて自動で復旧する",
+   "スイッチの running-config をすべて消去して再起動する"
+  ],
+  "a": 0,
+  "e": "Secure-shutdown は違反で<b>err-disable</b>になった状態です。原因の機器を外してから<b>shutdown → no shutdown</b>で復旧します（errdisable recovery を設定していれば自動復旧も可能です）。",
+  "m": "原因を外して shutdown→no shutdown",
+  "page": 1,
+  "x": "SW1#show port-security interface fastethernet0/7\nPort Security              : Enabled\nPort Status                : Secure-shutdown\nViolation Mode             : Shutdown\nMaximum MAC Addresses      : 1\nTotal MAC Addresses        : 1\nSticky MAC Addresses       : 1\nLast Source Address:Vlan   : 00a1.b2c3.d4e5:20\nSecurity Violation Count   : 1",
+  "rd": "①Port Status が Secure-shutdown であることを確かめる<br>②Violation Mode が Shutdown、最大数が1であることを見る<br>③Security Violation Count が1で、違反が起きたと分かる",
+  "rg": "sw"
+ },
+ {
+  "id": "P44-06",
+  "k": "one",
+  "tag": "セキュリティ",
+  "t": "DHCPスヌーピングで、<b>trust（信頼する）ポート</b>に設定すべきなのはどのポートですか。",
+  "o": [
+   "正規のDHCPサーバーがある方向のポート",
+   "一般の利用者のPCがつながるすべてのポート",
+   "使っていない空きポート",
+   "来客用の無線アクセスポイントがつながるポート"
+  ],
+  "a": 0,
+  "e": "初期状態ではすべてのポートが<b>untrusted</b>です。<b>正規のDHCPサーバーがある方向</b>（アップリンクなど）だけをtrustにします。",
+  "m": "本物のDHCPサーバー側だけtrust",
+  "page": 2
+ },
+ {
+  "id": "P44-07",
+  "k": "multi",
+  "tag": "セキュリティ",
+  "t": "DHCPスヌーピングを有効にしたスイッチが、<b>untrusted（信頼しない）ポート</b>から届いたときに偽物とみなして遮断するDHCPメッセージはどれですか。2つ選んでください。",
+  "o": [
+   "DHCP Offer",
+   "DHCP Ack",
+   "DHCP Discover",
+   "DHCP Request",
+   "ARP Request"
+  ],
+  "a": [
+   0,
+   1
+  ],
+  "e": "OfferとAckは<b>DHCPサーバーが送る応答</b>です。クライアント側のポートからサーバーの応答が届くのは不自然なので、偽のDHCPサーバーとみなして遮断します。",
+  "m": "サーバーの返事（Offer・Ack）を見張る",
+  "page": 2
+ },
+ {
+  "id": "P44-08",
+  "k": "one",
+  "tag": "セキュリティ",
+  "t": "SW2で、VLAN 20のDHCPスヌーピングを動かすために必要な設定はどれですか。",
+  "o": [
+   "ip dhcp snooping と ip dhcp snooping vlan 20 の両方",
+   "ip dhcp snooping vlan 20 だけ",
+   "ip dhcp snooping だけ",
+   "ip arp inspection vlan 20 だけ"
+  ],
+  "a": 0,
+  "e": "DHCPスヌーピングは、グローバルの<b>ip dhcp snooping</b>と、対象VLANを指定する<b>ip dhcp snooping vlan 番号</b>の両方がそろって動きます。",
+  "m": "全体ON＋VLAN指定の2つでスヌーピング",
+  "page": 2
+ },
+ {
+  "id": "P44-09",
+  "k": "one",
+  "tag": "セキュリティ",
+  "t": "untrustedポートで <b>ip dhcp snooping limit rate</b> を設定すると、主にどの攻撃を防げますか。",
+  "o": [
+   "DHCPの要求を大量に送って、配れるアドレスを使い切らせる攻撃（DHCPスタベーション）",
+   "偽のARP応答で通信を横取りする攻撃",
+   "パスワードを総当たりで試す攻撃",
+   "ポートにつなぐ機器のMACアドレスを1台に制限する攻撃"
+  ],
+  "a": 0,
+  "e": "limit rateは、ポートが受け取るDHCPメッセージの<b>1秒あたりの数を制限</b>します。大量の要求でアドレスを使い切らせる<b>DHCPスタベーション</b>を防げます。",
+  "m": "limit rate＝大量要求（スタベーション）対策",
+  "page": 2
+ },
+ {
+  "id": "P44-10",
+  "k": "one",
+  "tag": "セキュリティ",
+  "t": "DAI（Dynamic ARP Inspection：ダイナミックARPインスペクション）が、受け取ったARPが正しいかどうかを判断するために照らし合わせるものはどれですか。",
+  "o": [
+   "DHCPスヌーピングで作ったバインディングテーブル",
+   "ポートセキュリティのstickyで保存したMACアドレス",
+   "ルーティングテーブル",
+   "STPのブリッジID"
+  ],
+  "a": 0,
+  "e": "DAIは、DHCPスヌーピングが記録した<b>IPアドレスとMACアドレスの対応表（バインディングテーブル）</b>と照合し、合わないARPを遮断します。そのため先にDHCPスヌーピングが必要です。",
+  "m": "DAIはスヌーピングの表で偽ARPを見抜く",
+  "page": 3
+ },
+ {
+  "id": "P44-11",
+  "k": "one",
+  "tag": "セキュリティ",
+  "t": "SW4でVLAN 30のARPを検査し、上位のディストリビューションスイッチにつながるトランクポートは検査を省きたいと考えています。正しい設定の組み合わせはどれですか。",
+  "o": [
+   "グローバルで ip arp inspection vlan 30、トランクポートで ip arp inspection trust",
+   "グローバルで ip arp inspection vlan 30、PCがつながるポートで ip arp inspection trust",
+   "トランクポートで ip dhcp snooping limit rate 30 だけを設定する",
+   "グローバルで ip arp inspection trust、トランクポートで ip arp inspection vlan 30"
+  ],
+  "a": 0,
+  "e": "DAIは<b>ip arp inspection vlan 番号</b>で有効にします。ほかのスイッチやルーターにつながる<b>信頼できるポート</b>を ip arp inspection trust にして、検査を省きます。",
+  "m": "DAI有効はVLAN指定、スイッチ間はtrust",
+  "page": 3
+ },
+ {
+  "id": "P44-12",
+  "k": "match",
+  "tag": "セキュリティ",
+  "t": "左の攻撃と、それを防ぐスイッチの機能を正しく組み合わせてください。",
+  "o": [
+   [
+    "偽のDHCPサーバーによるIP設定の配布",
+    "DHCPスヌーピング"
+   ],
+   [
+    "ARPのキャッシュポイズニング",
+    "DAI（ダイナミックARPインスペクション）"
+   ],
+   [
+    "大量のブロードキャストなどによるフラッディング",
+    "ストームコントロール"
+   ],
+   [
+    "IPアドレスを偽った不正なクライアント",
+    "IP Source Guard"
+   ]
+  ],
+  "e": "偽DHCPは<b>DHCPスヌーピング</b>、偽ARPは<b>DAI</b>、大量の通信は<b>ストームコントロール</b>、送信元IPのなりすましは<b>IP Source Guard</b>で防ぎます。",
+  "m": "偽DHCP→スヌーピング、偽ARP→DAI",
+  "page": 3
+ }
+]

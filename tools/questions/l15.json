@@ -1,0 +1,92 @@
+[
+ {
+  "id": "P15-01",
+  "k": "one",
+  "tag": "仮想化",
+  "page": 3,
+  "t": "VRF（Virtual Routing and Forwarding：仮想ルーティング＆フォワーディング）の説明として正しいものはどれですか。",
+  "o": [
+   "1台のスイッチを、論理的に複数のブロードキャストドメインに分ける",
+   "1台のルーターの中に、独立したルーティングテーブルを複数持たせる",
+   "2台のルーターを1つの仮想的なゲートウェイとして動かす",
+   "1台の物理サーバーの上で、複数のOSを動かす"
+  ],
+  "a": 1,
+  "e": "<b>VRF</b>は1台のルーターに<b>独立したルーティングテーブルを複数</b>作り、L3を論理的に分ける技術です。テーブルが別々なので、同じIPアドレス範囲を別のVRFで重複して使えます。L2を分けるのはVLANです。",
+  "m": "L3を分ける＝VRF、L2を分ける＝VLAN"
+ },
+ {
+  "id": "P15-02",
+  "k": "one",
+  "tag": "IPv6",
+  "page": 0,
+  "t": "図を参照してください。G0/0側とG0/1側のPCは、それぞれR1のアドレスには ping が届きますが、反対側のLANのPCには届きません。R1に追加すべきコマンドはどれですか。",
+  "x": "R1# show running-config\nhostname R1\n!\ninterface GigabitEthernet0/0\n ipv6 address 2001:db8:a:1::1/64\n!\ninterface GigabitEthernet0/1\n ipv6 address 2001:db8:a:2::1/64\n!\nend",
+  "rd": "①各インターフェースにIPv6アドレスは設定済み<br>②グローバル設定の行を探す<br>③IPv6のルーティングを有効にする行がない",
+  "rg": "run",
+  "o": [
+   "ipv6 enable",
+   "ipv6 unicast-routing",
+   "ipv6 address autoconfig",
+   "ip routing"
+  ],
+  "a": 1,
+  "e": "ルーターがIPv6パケットを別のネットワークへ転送するには、グローバル設定モードで <b>ipv6 unicast-routing</b> が必要です。これがないと、アドレスがあってもIPv6のルーティングは行われません。",
+  "m": "IPv6転送にはipv6 unicast-routing"
+ },
+ {
+  "id": "P15-03",
+  "k": "one",
+  "tag": "IPv6",
+  "page": 1,
+  "t": "R3のG0/2に、プレフィックス 2001:db8:0:4c::/64 を使い、インターフェースIDはMACアドレスから自動で作らせたいと考えています。正しいコマンドはどれですか。",
+  "o": [
+   "ipv6 address 2001:db8:0:4c::1/64",
+   "ipv6 address 2001:db8:0:4c::/64 eui-64",
+   "ipv6 enable",
+   "ipv6 address 2001:db8:0:4c::/64 link-local"
+  ],
+  "a": 1,
+  "e": "プレフィックスだけを書いて最後に <b>eui-64</b> を付けると、後半64ビットがMACアドレスから自動で作られます。アドレスを全部書くのは手動の設定、ipv6 enable はリンクローカルアドレスだけを作ります。",
+  "m": "自動でIDを作る＝プレフィックス＋eui-64"
+ },
+ {
+  "id": "P15-04",
+  "k": "one",
+  "tag": "IPv6",
+  "page": 2,
+  "t": "図を参照してください。R2のG0/1に付くグローバルユニキャストアドレスはどれですか。",
+  "x": "R2# show interfaces g0/1\nGigabitEthernet0/1 is up, line protocol is up\n  Hardware is iGbE, address is 1a2b.3c4d.5e6f\n\nR2# show running-config interface g0/1\ninterface GigabitEthernet0/1\n ipv6 address 2001:db8:9:1::/64 eui-64",
+  "rd": "①address is の後ろがMACアドレス<br>②設定の行からプレフィックスと eui-64 を読む<br>③MACを真ん中で分け、先頭のバイトを2進数にする",
+  "rg": "run",
+  "o": [
+   "2001:db8:9:1:1a2b:3cff:fe4d:5e6f",
+   "2001:db8:9:1:182b:3cff:fe4d:5e6f",
+   "2001:db8:9:1:1b2b:3cff:fe4d:5e6f",
+   "2001:db8:9:1:1a2b:3c4d:fffe:5e6f"
+  ],
+  "a": 1,
+  "e": "MACを 1a2b3c と 4d5e6f に分けて間に <b>FFFE</b> を入れ、1a2b:3cff:fe4d:5e6f にします。先頭の1a は 0001 1010 で、<b>7ビット目を反転</b>すると 0001 1000 ＝ 18 になります。",
+  "m": "EUI-64＝真ん中にFFFE＋7ビット目反転"
+ },
+ {
+  "id": "P15-05",
+  "k": "multi",
+  "tag": "IPv6",
+  "page": 1,
+  "t": "ルーターのIPv6の設定について、正しい説明はどれですか。2つ選んでください。",
+  "o": [
+   "ipv6 enable は、グローバルアドレスを付けずにリンクローカルアドレスだけを自動で作る",
+   "eui-64 を付けると、インターフェースIDをすべて手で書く必要がある",
+   "ipv6 unicast-routing は、インターフェース設定モードで入力する",
+   "ルーターとルーターの1対1の線では、手動で /127 のアドレスを設定することがある",
+   "FE80で始まり真ん中にFFFEがあるアドレスは、DHCPv6サーバーから配られたものである"
+  ],
+  "a": [
+   0,
+   3
+  ],
+  "e": "<b>ipv6 enable</b> はリンクローカルアドレスだけを作り、1対1の線では<b>/127</b>を手動で使うこともあります。ipv6 unicast-routing はグローバル設定のコマンドで、FE80＋FFFE のアドレスはEUI-64で作られたリンクローカルアドレスです。",
+  "m": "enable＝リンクローカルだけ、1対1は/127も"
+ }
+]

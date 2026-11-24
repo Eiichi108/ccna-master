@@ -1,0 +1,170 @@
+[
+ {
+  "id": "P25-01",
+  "k": "one",
+  "tag": "スイッチング",
+  "t": "LACP（Link Aggregation Control Protocol）で1つのEtherChannelを組むとき、同時にアクティブに使える物理リンクは最大何本ですか。",
+  "o": [
+   "8本",
+   "16本",
+   "2本",
+   "4本"
+  ],
+  "a": 0,
+  "e": "LACPでは、アクティブに使えるリンクは<b>最大8本</b>です。16本まで設定できますが、9本目以降は待機（スタンバイ）になります。",
+  "m": "LACPのアクティブは最大8本、残りは待機",
+  "page": 2
+ },
+ {
+  "id": "P25-02",
+  "k": "one",
+  "tag": "スイッチング",
+  "t": "EtherChannelの動きについて、正しい説明はどれですか。",
+  "o": [
+   "束ねたリンクのうち1本だけが使われ、残りはSTPでブロックされる",
+   "1つのフローのフレームは、束ねたすべてのリンクに順番に分けて送られる",
+   "1つのフロー（通信の流れ）は、アドレスなどから計算したハッシュで決まる1本のリンクを使う",
+   "LACPはCisco独自の方式で、他社のスイッチとは束ねられない"
+  ],
+  "a": 2,
+  "e": "EtherChannelは全体として帯域が増えますが、<b>1つのフローはハッシュで決めた1本のリンク</b>だけを流れます。束ねたリンクは1本の論理リンクとして扱われ、STPでブロックされません。",
+  "m": "1フロー＝ハッシュで決めた1本",
+  "page": 0
+ },
+ {
+  "id": "P25-03",
+  "k": "one",
+  "tag": "スイッチング",
+  "t": "図を参照してください。SW1とSW2の間をLACPで束ねます。SW1は図のように設定済みです。SW2のGi1/0/1とGi1/0/2に設定して、EtherChannelが確実に成立するコマンドはどれですか。",
+  "o": [
+   "channel-group 3 mode auto",
+   "channel-group 3 mode passive",
+   "channel-group 3 mode desirable",
+   "channel-group 3 mode active"
+  ],
+  "a": 3,
+  "e": "相手が<b>passive</b>（待つ側）なので、こちらは自分から交渉を始める<b>active</b>にします。passive同士では誰も交渉を始めず、desirableとautoはPAgPのモードです。",
+  "m": "相手がpassiveならこちらはactive",
+  "page": 1,
+  "x": "SW1(config)# interface range gi1/0/1 - 2\nSW1(config-if-range)# channel-group 3 mode passive\n\n  [SW1] Gi1/0/1 ======= Gi1/0/1 [SW2]\n        Gi1/0/2 ======= Gi1/0/2",
+  "rd": "①SW1のchannel-groupの行の、modeの後ろの言葉を見る<br>②その言葉がLACPとPAgPのどちらのモードかを確かめる<br>③待つ側か誘う側かを判断し、SW2に必要な側を考える",
+  "rg": "run"
+ },
+ {
+  "id": "P25-04",
+  "k": "one",
+  "tag": "スイッチング",
+  "t": "図を参照してください。この出力についての説明として正しいものはどれですか。",
+  "o": [
+   "Po5はPAgPで動いており、Gi0/4はエラーで停止している",
+   "Po5はL3のEtherChannelでダウンしており、Gi0/4は束ねられている",
+   "Po5はL2のEtherChannelで使用中、Gi0/3とGi0/4の両方が束ねられている",
+   "Po5はL2のEtherChannelで使用中、Gi0/3は束ねられ、Gi0/4は束ねられずに単独で動いている"
+  ],
+  "a": 3,
+  "e": "Po5の<b>(SU)</b>は、SがLayer2、Uが使用中です。ポートの<b>(P)</b>は束ねられている、<b>(I)</b>は束ねられずに単独（stand-alone）で動いている状態で、相手側でLACPが設定されていないなどが原因です。",
+  "m": "SU＝L2で使用中、P＝束ね、I＝単独",
+  "page": 3,
+  "x": "SW3# show etherchannel summary\nFlags:  D - down   P - bundled in port-channel\n        I - stand-alone  S - Layer2  R - Layer3\n        U - in use\nGroup  Port-channel  Protocol  Ports\n------+-------------+---------+----------------\n5      Po5(SU)       LACP      Gi0/3(P) Gi0/4(I)",
+  "rd": "①Port-channelの欄のかっこの2文字をFlagsの説明と照らし合わせる<br>②Portsの欄で、各ポートの後ろのかっこの文字を確かめる<br>③PとIの違いから、どのポートが束に入っているかを判断する",
+  "rg": "sw"
+ },
+ {
+  "id": "P25-05",
+  "k": "multi",
+  "tag": "スイッチング",
+  "t": "EtherChannelで物理ポートを束ねるとき、すべてのメンバーポートでそろえる必要がある設定はどれですか。2つ選んでください。",
+  "o": [
+   "スイッチのホスト名",
+   "アクセス／トランクの設定と、トランクで許可するVLAN",
+   "ポートのdescription（説明文）",
+   "両端のスイッチで同じチャネルグループ番号",
+   "速度とデュプレックス"
+  ],
+  "a": [
+   1,
+   4
+  ],
+  "e": "<b>速度・デュプレックス</b>や<b>アクセス／トランク・許可VLAN</b>などが1つでも違うと、そのポートは束ねられません。チャネルグループ番号はスイッチの中だけの番号なので、両端で違っても構いません。",
+  "m": "束ねるポートは速度もVLANもそろえる",
+  "page": 2
+ },
+ {
+  "id": "P25-06",
+  "k": "one",
+  "tag": "スイッチング",
+  "t": "図を参照してください。Gi0/3だけがPo1に束ねられません。Gi0/3にどのコマンドを設定すれば、ほかのメンバーとそろいますか。",
+  "o": [
+   "switchport trunk allowed vlan 300",
+   "switchport access vlan 300",
+   "switchport trunk allowed vlan add 300",
+   "switchport trunk allowed vlan remove 300"
+  ],
+  "a": 2,
+  "e": "Gi0/3だけ許可VLANに300がないので、<b>add</b>を付けて300を追加します。addを付けずにallowed vlan 300と打つと、許可VLANが300だけに上書きされてしまいます。",
+  "m": "許可VLANの追加はaddを忘れずに",
+  "page": 2,
+  "x": "SW1# show running-config（一部）\ninterface GigabitEthernet0/2\n switchport mode trunk\n switchport trunk allowed vlan 10,20,300\n channel-group 1 mode active\ninterface GigabitEthernet0/3\n switchport mode trunk\n switchport trunk allowed vlan 10,20\n channel-group 1 mode active",
+  "rd": "①Gi0/2とGi0/3の設定を1行ずつ並べて比べる<br>②違いがあるのはallowed vlanの行だけだと確かめる<br>③Gi0/3に足りないVLANを、今ある許可VLANを残したまま加える方法を考える",
+  "rg": "run"
+ },
+ {
+  "id": "P25-07",
+  "k": "one",
+  "tag": "スイッチング",
+  "t": "L3スイッチどうしを、IPアドレスを持つL3のEtherChannelでつなぎたいと考えています。正しい設定方法はどれですか。",
+  "o": [
+   "物理ポートだけにIPアドレスを付け、Port-channelはswitchportのままにする",
+   "Port-channelにswitchport mode trunkを設定し、物理ポートにIPアドレスを付ける",
+   "channel-group 1 mode onを設定すれば、IPアドレスは自動で割り当てられる",
+   "物理ポートとPort-channelの両方でno switchportを設定し、Port-channelにIPアドレスを付ける"
+  ],
+  "a": 3,
+  "e": "L3のEtherChannelでは、<b>物理ポートとPort-channelの両方でno switchport</b>にし、IPアドレスは<b>Port-channel</b>に付けます。あとから追加するポートも同じ設定にします。",
+  "m": "L3の束＝no switchport＋IPはPo側",
+  "page": 2
+ },
+ {
+  "id": "P25-08",
+  "k": "one",
+  "tag": "スイッチング",
+  "t": "交渉のためのプロトコル（LACPもPAgPも）使わずに、静的にEtherChannelを組みたいと考えています。両端のスイッチに設定するモードはどれですか。",
+  "o": [
+   "active",
+   "on",
+   "passive",
+   "desirable"
+  ],
+  "a": 1,
+  "e": "<b>mode on</b>は交渉をせずに静的に束ねるモードで、<b>両端ともon</b>にする必要があります。activeとpassiveはLACP、desirableはPAgPのモードです。",
+  "m": "交渉なしの静的な束は両端ともmode on",
+  "page": 1
+ },
+ {
+  "id": "P25-09",
+  "k": "match",
+  "tag": "スイッチング",
+  "t": "EtherChannelのモードと、その動きを正しく組み合わせてください。",
+  "o": [
+   [
+    "active",
+    "LACPで、自分から交渉を始める"
+   ],
+   [
+    "passive",
+    "LACPで、相手からの交渉を待つ"
+   ],
+   [
+    "desirable",
+    "PAgPで、自分から交渉を始める"
+   ],
+   [
+    "auto",
+    "PAgPで、相手からの交渉を待つ"
+   ]
+  ],
+  "e": "LACP（IEEE 802.3ad）は<b>active／passive</b>、PAgP（Port Aggregation Protocol、Cisco独自）は<b>desirable／auto</b>です。待つ側どうし（passive同士、auto同士）では成立しません。",
+  "m": "LACPはactive系、PAgPはdesirable系",
+  "page": 1
+ }
+]

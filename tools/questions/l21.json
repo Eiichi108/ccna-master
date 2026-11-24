@@ -1,0 +1,89 @@
+[
+ {
+  "id": "P21-01",
+  "k": "one",
+  "tag": "VLAN",
+  "t": "図を参照してください。R1のG0/0にはサブインターフェースG0/0.30とG0/0.40が設定されています。VLAN 30とVLAN 40のPCが、R1を経由して互いに通信できません。直すべき設定はどれですか。",
+  "o": [
+   "R1のG0/0（物理ポート）にIPアドレスを付ける",
+   "SW1のG0/24でswitchport mode trunkを設定する",
+   "SW1のG0/24でswitchport access vlan 40に変える",
+   "SW1でip routingを有効にする"
+  ],
+  "a": 1,
+  "e": "ルーターオンアスティックでは、ルーターにつながるスイッチのポートで複数VLANのフレームをタグ付きで運ぶ必要があるので、<b>トランク</b>にします。アクセスポートのままでは1つのVLANしか運べません。",
+  "m": "ルーターへの1本はトランクで全VLANを運ぶ",
+  "page": 1,
+  "x": "  [R1] G0/0 ------------ G0/24 [SW1]\n  G0/0.30  dot1Q 30  10.30.0.1/24\n  G0/0.40  dot1Q 40  10.40.0.1/24\n\nSW1# show running-config interface g0/24\ninterface GigabitEthernet0/24\n switchport mode access\n switchport access vlan 30",
+  "rd": "①上の構成で、R1側は2つのVLAN用サブインターフェースがあることを確認<br>②SW1のG0/24の行を見ると、mode accessでVLAN 30だけになっている<br>③R1側と合わせるには、スイッチ側が複数VLANを運べる設定になっているべきだと判断する",
+  "rg": "run"
+ },
+ {
+  "id": "P21-02",
+  "k": "one",
+  "tag": "VLAN",
+  "t": "ルーターのサブインターフェースG0/1.50で、VLAN 50の802.1Qタグ付きフレームを扱うように指定するコマンドはどれですか。",
+  "o": [
+   "switchport access vlan 50",
+   "switchport trunk native vlan 50",
+   "vlan 50",
+   "encapsulation dot1Q 50"
+  ],
+  "a": 3,
+  "e": "サブインターフェースでは<b>encapsulation dot1Q VLAN番号</b>で、どのVLANのタグを扱うかを決めます。switchportで始まるコマンドはスイッチのポート用です。",
+  "m": "サブIFのタグ指定はencapsulation dot1Q",
+  "page": 1
+ },
+ {
+  "id": "P21-03",
+  "k": "one",
+  "tag": "ルーティング",
+  "t": "L3スイッチに interface vlan 100（192.168.100.1/24）と interface vlan 200（192.168.200.1/24）を作り、どちらもup/upになっています。しかし、VLAN 100とVLAN 200のPCは互いに通信できません。足りない設定はどれですか。",
+  "o": [
+   "switchport mode trunk",
+   "encapsulation dot1Q 100",
+   "ip routing",
+   "ip default-gateway 192.168.100.1"
+  ],
+  "a": 2,
+  "e": "L3スイッチでVLAN間ルーティングを行うには、SVIにIPアドレスを付けたうえで<b>ip routing</b>でルーティングを有効にします。",
+  "m": "SVIのIP＋ip routingでVLAN間ルーティング",
+  "page": 2
+ },
+ {
+  "id": "P21-04",
+  "k": "one",
+  "tag": "VLAN",
+  "t": "L3スイッチで interface vlan 70 にIPアドレスを設定しましたが、show ip interface brief でVlan70がdown/downのままです。VLAN 70はvlan 70コマンドで作成済みです。考えられる原因はどれですか。",
+  "o": [
+   "ip routing が設定されていない",
+   "SVIにはサブネットマスク/24しか使えない",
+   "SVIにencapsulation dot1Q 70を設定していない",
+   "VLAN 70に所属するupしたポートも、VLAN 70を通すupしたトランクもない"
+  ],
+  "a": 3,
+  "e": "SVIがupするには、VLANが存在し、そのVLANの<b>upしたアクセスポートか、そのVLANを通すトランク</b>が1つ以上必要です。ip routingはSVIのup/downには関係しません。",
+  "m": "SVIはVLANにupポートがあって初めてup",
+  "page": 2
+ },
+ {
+  "id": "P21-05",
+  "k": "multi",
+  "tag": "VLAN",
+  "t": "VLAN間ルーティングの設定について、正しい説明はどれですか。2つ選んでください。",
+  "o": [
+   "L3スイッチのポートにno switchportを設定すると、IPアドレスを直接付けられるルーテッドポートになる",
+   "サブインターフェースは、encapsulationを設定しなくてもIPアドレスだけで動く",
+   "ルーターオンアスティックでは、スイッチ側のルーターにつながるポートをアクセスポートにする",
+   "ネイティブVLAN用のサブインターフェースには、encapsulation dot1Q 1 native のようにnativeを付ける",
+   "SVIを使えば、ip routingを設定しなくてもVLAN間で通信できる"
+  ],
+  "a": [
+   0,
+   3
+  ],
+  "e": "タグなしで届くネイティブVLANのフレームは、<b>native</b>を付けたサブインターフェースで受け取ります。<b>no switchport</b>はL3スイッチのポートをルーターのポートのように使う設定です。",
+  "m": "ネイティブはnative、IP直付けはno sw",
+  "page": 1
+ }
+]

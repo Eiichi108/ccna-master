@@ -1,0 +1,100 @@
+[
+ {
+  "id": "P41-01",
+  "k": "one",
+  "tag": "セキュリティ",
+  "t": "本社ルーターに <b>enable password Kama2026</b> と <b>enable secret Hira#88</b> の両方が設定されています。管理者が特権EXECモードに入るときに使うパスワードはどれですか。",
+  "o": [
+   "Hira#88（enable secret のパスワード）",
+   "Kama2026（enable password のパスワード）",
+   "どちらを入力しても入れる",
+   "どちらも使えず、パスワードなしで入れる"
+  ],
+  "a": 0,
+  "e": "両方が設定されているときは<b>enable secretが優先</b>され、enable password は使われません。secret はハッシュ化して保存されるので、こちらを使うのが基本です。",
+  "m": "両方あればsecretの勝ち、passwordは無視",
+  "page": 0
+ },
+ {
+  "id": "P41-02",
+  "k": "one",
+  "tag": "セキュリティ",
+  "t": "図を参照してください。R2の設定について、正しい説明はどれですか。",
+  "o": [
+   "enable secret の「5」は、パスワードがMD5でハッシュ化されていることを表す",
+   "line con 0 と line vty 0 4 のパスワードはMD5でハッシュ化されていて、元に戻せない",
+   "enable secret の「5」は、type 7より弱い方式で保存されていることを表す",
+   "service password-encryption を消すと、enable secret のパスワードが平文で表示される"
+  ],
+  "a": 0,
+  "e": "enable secret 5 は<b>MD5のハッシュ</b>です。コンソールとvtyの「7」は service password-encryption による<b>type 7</b>で、隠されてはいますが簡単に元に戻せます。",
+  "m": "5＝MD5のハッシュ、7＝すぐ戻せる弱い暗号",
+  "page": 1,
+  "x": "R2#show running-config\n!\nhostname R2\nservice password-encryption\nenable secret 5 $1$tQ2w$Lp8sV3nXcR6yBz0aKd9eF1\n!\nline con 0\n password 7 045A0F0B062F5D\n login\nline vty 0 4\n password 7 13361211190910\n login",
+  "rd": "①enable secret の行の数字「5」を見る<br>②line con 0 と line vty 0 4 の password の後ろの数字「7」を見る<br>③5はMD5のハッシュ、7は元に戻せる弱い方式と区別する",
+  "rg": "run"
+ },
+ {
+  "id": "P41-03",
+  "k": "multi",
+  "tag": "セキュリティ",
+  "t": "支店スイッチSW2で、vtyへのリモートログインを<b>SSHだけ</b>に限定し、さらに設定ファイルに平文で残っているコンソールやvtyのパスワードを見えなくしたいと考えています。必要なコマンドはどれですか。2つ選んでください。",
+  "o": [
+   "transport input ssh",
+   "service password-encryption",
+   "transport input telnet",
+   "banner motd #Staff only#",
+   "enable password Sw2pass"
+  ],
+  "a": [
+   0,
+   1
+  ],
+  "e": "vtyラインで<b>transport input ssh</b>を設定するとSSHだけを受け付けます。<b>service password-encryption</b>は設定ファイル内の平文パスワードをすべてtype 7で隠します。",
+  "m": "SSHだけ＝transport input ssh",
+  "page": 2
+ },
+ {
+  "id": "P41-04",
+  "k": "match",
+  "tag": "セキュリティ",
+  "t": "左のコマンドやキーワードと、その説明を正しく組み合わせてください。",
+  "o": [
+   [
+    "banner motd",
+    "ログイン時に表示する警告文を設定する"
+   ],
+   [
+    "privilege 15",
+    "すべてのコマンドを使える最高の権限レベル"
+   ],
+   [
+    "service password-encryption",
+    "平文のパスワードをtype 7で隠す（強くはない）"
+   ],
+   [
+    "enable secret",
+    "特権EXECのパスワードをハッシュ化して保存する"
+   ]
+  ],
+  "e": "banner motd は警告文、<b>privilege 15</b> は0〜15のうち最高の権限です。service password-encryption は隠すだけで元に戻せるため、特権EXECには<b>enable secret</b>を使います。",
+  "m": "警告motd・権限15が最高・secretはハッシュ",
+  "page": 2
+ },
+ {
+  "id": "P41-05",
+  "k": "order",
+  "tag": "セキュリティ",
+  "t": "ユーザーEXECモードから始めて、特権パスワードをハッシュ化して設定し、vtyでSSHだけを許可するまでの手順を、正しい順に並べてください。",
+  "o": [
+   "enable",
+   "configure terminal",
+   "enable secret Kn0t#2026",
+   "line vty 0 4",
+   "transport input ssh"
+  ],
+  "e": "まず<b>enable</b>で特権EXEC、<b>configure terminal</b>でグローバル設定モードに入り、パスワードを設定してから<b>line vty 0 4</b>でラインの設定モードに移ります。transport input ssh はラインの設定モードで入力します。",
+  "m": "enable→conf t→secret→line→ssh",
+  "page": 2
+ }
+]

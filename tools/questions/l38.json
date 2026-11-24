@@ -1,0 +1,131 @@
+[
+ {
+  "id": "P38-01",
+  "k": "one",
+  "tag": "QoS",
+  "t": "QoS（Quality of Service）のマーキングで、音声の通信に付けるのが一般的なDSCP（Differentiated Services Code Point）の値はどれですか。",
+  "o": [
+   "EF（DSCP 46）",
+   "BE（ベストエフォート）",
+   "CS1（優先度の低い通信）",
+   "AF41（ビデオ会議向け）"
+  ],
+  "a": 0,
+  "e": "DSCPはIPヘッダーにある6ビットの印です。遅延に弱い音声には、遅延の少ない扱いを表す <b>EF（46）</b> を付けるのが一般的です。",
+  "m": "音声＝EF（46）、印はDSCPに付ける",
+  "page": 0
+ },
+ {
+  "id": "P38-02",
+  "k": "one",
+  "tag": "セキュリティ",
+  "t": "SSH（Secure Shell）の準備で使う crypto key generate rsa の「RSA」について、正しい説明はどれですか。",
+  "o": [
+   "公開鍵と秘密鍵のペアを使う、公開鍵暗号の方式",
+   "IPアドレスを自動で配る方式",
+   "パスワードを平文のまま保存する方式",
+   "送る側と受ける側が同じ鍵を持つ、共通鍵暗号の方式"
+  ],
+  "a": 0,
+  "e": "RSAは<b>鍵のペア</b>を使う<b>公開鍵暗号</b>です。同じ鍵を両方が持つ共通鍵暗号の代表はAESです。",
+  "m": "RSA＝公開鍵（ペア）、AES＝共通鍵",
+  "page": 1
+ },
+ {
+  "id": "P38-03",
+  "k": "one",
+  "tag": "プロトコル",
+  "t": "ユーザー名やパスワードなしで手軽に使え、サーバーからルーターへIOSのイメージをコピーしてアップグレードするのによく使われるファイル転送の方式はどれですか。",
+  "o": [
+   "SFTP",
+   "FTP（TCP 20・21）",
+   "SCP",
+   "TFTP（UDP 69）"
+  ],
+  "a": 3,
+  "e": "<b>TFTP</b> は UDP の69番を使う簡単な方式で、<b>認証がありません</b>。FTP・SCP・SFTP はどれもログインが必要です。",
+  "m": "認証なし・IOSのコピー＝TFTP",
+  "page": 2
+ },
+ {
+  "id": "P38-04",
+  "k": "one",
+  "tag": "プロトコル",
+  "t": "FTP（File Transfer Protocol）の特徴として正しいものはどれですか。",
+  "o": [
+   "ユーザー名もパスワードも暗号化して送る",
+   "TCPを使い、制御用（21）とデータ用（20など）の2つの接続を使う",
+   "UDPの69番だけを使い、認証はない",
+   "1つのUDP接続で、制御とデータの両方を送る"
+  ],
+  "a": 1,
+  "e": "FTPは<b>TCP</b>で、<b>制御用とデータ用の2つの接続</b>を使います。認証はありますが平文です。UDP 69 で認証がないのはTFTPです。",
+  "m": "FTP＝TCP・2つの接続・認証あり（平文）",
+  "page": 2
+ },
+ {
+  "id": "P38-05",
+  "k": "multi",
+  "tag": "セキュリティ",
+  "t": "図を参照してください。SW1に、ローカルのユーザーで認証し、SSHだけでログインできるようにします。あと必要な設定はどれですか。2つ選んでください。",
+  "o": [
+   "SW1(config-line)# transport input ssh（line vty 0 15 の下）",
+   "SW1(config)# ip domain-name lab.example",
+   "SW1(config)# ip dhcp pool SSH",
+   "SW1(config)# crypto key generate rsa modulus 2048",
+   "SW1(config)# username netadmin secret Blu3Sky!"
+  ],
+  "a": [
+   0,
+   4
+  ],
+  "e": "ホスト名・ドメイン名・RSAの鍵・login local は設定済みです。足りないのは、<b>login local で使うユーザー</b>と、Telnetを断って<b>SSHだけを受け付ける</b> transport input ssh です。DHCPプールはSSHに関係ありません。",
+  "m": "SSH＝ユーザー作成＋transport input ssh",
+  "page": 1,
+  "x": "SW1# show running-config (一部省略)\nhostname SW1\nip domain-name lab.example\n!\nline vty 0 15\n login local\n transport input all\n!\nSW1# show crypto key mypubkey rsa\nKey name: SW1.lab.example\nKey type: RSA KEYS\n(鍵のデータは省略)",
+  "rd": "①hostname と ip domain-name があるか見る<br>②username の行があるか探す<br>③vty の transport input の値と、RSAの鍵が表示されるかを見る",
+  "rg": "run"
+ },
+ {
+  "id": "P38-06",
+  "k": "multi",
+  "tag": "セキュリティ",
+  "t": "図を参照してください。R3にSSHだけで接続できるようにします。あと必要な設定はどれですか。2つ選んでください。",
+  "o": [
+   "R3(config)# username ops password ops123",
+   "R3(config)# ip dhcp pool VTY",
+   "R3(config-line)# transport input ssh（line vty 0 4 の下）",
+   "R3(config)# crypto key generate rsa modulus 2048",
+   "R3(config)# hostname R3"
+  ],
+  "a": [
+   2,
+   3
+  ],
+  "e": "show crypto key mypubkey rsa が空なので、<b>RSAの鍵がまだありません</b>。また vty が telnet だけを受け付けているので、<b>transport input ssh</b> に変えます。ユーザーとホスト名は設定済みです。",
+  "m": "鍵がない→crypto key generate rsa",
+  "page": 1,
+  "x": "R3# show running-config (一部省略)\nhostname R3\nip domain-name branch.example\nusername ops privilege 15 secret 9 (暗号化済み)\n!\nline vty 0 4\n login local\n transport input telnet\n!\nR3# show crypto key mypubkey rsa\nR3#",
+  "rd": "①hostname・ip domain-name・username の行を確認<br>②vty の transport input の値を見る<br>③show crypto key mypubkey rsa に何も出ていない",
+  "rg": "run"
+ },
+ {
+  "id": "P38-07",
+  "k": "one",
+  "tag": "セキュリティ",
+  "t": "図を参照してください。SSHでログインしたユーザー admin が、ログインしてすぐに特権モード（#）に入れるようにしたいと考えています。R2に追加する設定として正しいものはどれですか。",
+  "o": [
+   "username admin secret Adm1n#77 と設定し、line vty 0 4 で login",
+   "username admin privilege 15 secret Adm1n#77 と設定し、line vty 0 4 で login local",
+   "enable secret Adm1n#77 と設定し、line vty 0 4 で login local",
+   "username admin privilege 15 secret Adm1n#77 と設定し、line vty 0 4 で no login"
+  ],
+  "a": 1,
+  "e": "<b>privilege 15</b> を付けたユーザーはログインしてすぐ特権モードに入れます。登録したユーザーで認証させるには vty に <b>login local</b> が必要で、password より <b>secret</b> のほうが安全に保存されます。",
+  "m": "すぐ特権＝privilege 15＋login local",
+  "page": 1,
+  "x": "R2# show running-config (一部省略)\nhostname R2\nip domain-name hq.example\n!\nline vty 0 4\n transport input ssh\n!\nR2# show crypto key mypubkey rsa\nKey name: R2.hq.example\n(鍵のデータは省略)",
+  "rd": "①RSAの鍵とドメイン名はすでにある<br>②username の行はまだない<br>③vty には login に関する行がない",
+  "rg": "run"
+ }
+]
