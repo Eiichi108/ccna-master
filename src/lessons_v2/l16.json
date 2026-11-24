@@ -1,0 +1,164 @@
+{
+ "r": "TB",
+ "n": 16,
+ "t": "インターフェースのエラーを読む",
+ "d": "d1",
+ "form": "トラブル解決",
+ "need": [15],
+ "goal": ["CRCエラーの意味がわかる", "コリジョンとレイトコリジョンがわかる", "ブロードキャストドメインがわかる"],
+ "terms": ["CRC", "コリジョン", "レイトコリジョン", "output drops", "ブロードキャストドメイン"],
+ "pages": [
+  {
+   "t": "つながるけど、とにかく遅い",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 124.0\" role=\"img\" aria-label=\"つかみ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"110\" rx=\"16\" fill=\"#0a5cff\" opacity=\".12\"/><text x=\"180\" y=\"44\" text-anchor=\"middle\" style=\"font:800 19.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">つながっている。でも、とにかく遅い</text><text x=\"180\" y=\"74\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ポートの状態は up/up なのに…</text><text x=\"180\" y=\"94\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">今日は「エラーの数」から原因を探します</text></svg>",
+   "b": "前回の方法で調べたら、ポートは up/up で正常でした。それなのに、ファイルのコピーがとても遅い。こういうときは、show interfaces の<b>下のほうに出るエラーの数</b>を見ます。どんな種類のエラーが増えているかで、原因の見当がつくのです。"
+  },
+  {
+   "t": "今日のゴール",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のゴール\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1. CRCエラーの意味がわかる</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">傷ついて届いたフレーム</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2. コリジョンとレイトコリジョンがわかる</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">デュプレックスの不一致のサイン</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">3. ブロードキャストドメインがわかる</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">一斉送信が届く範囲。ルーターで区切られる</text></svg>"
+  },
+  {
+   "t": "エラーの数はここに出る",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 228.0\" role=\"img\" aria-label=\"show interfacesのカウンター\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"144\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\">SW1# show interfaces gi0/8</text><text x=\"22\" y=\"74\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#e8ecf3;white-space:pre\">  ...</text><text x=\"22\" y=\"96\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#e6261f;white-space:pre\">  3108 input errors, 2950 CRC, 0 frame</text><text x=\"22\" y=\"118\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#ffb400;white-space:pre\">  0 output errors, 1784 collisions</text><text x=\"22\" y=\"140\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#ffb400;white-space:pre\">  1520 late collision, 0 deferred</text><text x=\"180\" y=\"176\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">input errors・CRC・collisions などの数</text><text x=\"180\" y=\"200\" text-anchor=\"middle\" style=\"font:700 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">どれが増えているかで、原因を推理する</text></svg>",
+   "b": "show interfaces の下のほうには、<b>エラーの数（カウンター）</b>が並んでいます。正常なポートでは、ほとんど0のままです。この例のように、<b>CRC</b>や<b>collisions</b>、<b>late collision</b> が増えていたら、何かが起きているサインです。それぞれの意味を見ていきましょう。"
+  },
+  {
+   "t": "CRCエラー ＝ 傷ついて届いたフレーム",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 217.5\" role=\"img\" aria-label=\"CRCエラー\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">CRC ＝ 届いたフレームが壊れていないかの検査</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">検査に通らなかった数が CRC エラー</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">増える原因</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ケーブルの傷・コネクタのゆるみ・電気のノイズ</text><text x=\"24\" y=\"131.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">デュプレックスの不一致</text><rect x=\"10\" y=\"150.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"175.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">まず確かめる</text><text x=\"24\" y=\"194.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ケーブルを交換する、両側のデュプレックス設定を見る</text></svg>",
+   "b": "フレームには、途中で壊れていないかを確かめる仕組み（CRC）が付いています。<b>CRCエラー</b>は、届いたフレームが<b>傷ついていた</b>数です。増えるのは、<b>ケーブルの傷やノイズ</b>、コネクタのゆるみ、そして<b>デュプレックスの不一致</b>が主な原因です。まずはケーブルの交換と、両側の設定の確認から始めます。",
+   "p": "CRCが増える → ケーブル・ノイズ・デュプレックスの不一致を疑う。"
+  },
+  {
+   "t": "確認の問題 1",
+   "quiz": {
+    "q": "あるポートで、CRCエラーの数がどんどん増えています。最初に疑うものとして、最も適切なものはどれでしょう？",
+    "o": [
+     ["ケーブルの傷やノイズ", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["DNSサーバーの設定", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["IPアドレスの書きまちがい", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 0,
+    "e": "CRCエラーは、フレームが<b>傷ついて</b>届いた数です。まず<b>ケーブル</b>やノイズ、デュプレックスの設定を疑います。"
+   }
+  },
+  {
+   "t": "コリジョンとレイトコリジョン",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"コリジョン\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">コリジョン ＝ 送信がぶつかること</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">半二重で、両側が同時に送ると起きる</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">全二重なら、ふつうは起きない</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">送る線と受ける線が別だから</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">レイトコリジョン ＝ 遅れてぶつかる</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">デュプレックスの不一致や、長すぎるケーブルのサイン</text></svg>",
+   "b": "<b>コリジョン</b>は、送信がぶつかることです。トランシーバーで2人が同時に話してしまうように、<b>半二重</b>で両側が同時に送ると起きます。全二重なら、ふつうは起きません。特に、送り始めてしばらくしてからぶつかる<b>レイトコリジョン</b>は、<b>デュプレックスの不一致</b>や、規格より長すぎるケーブルの典型的なサインです。"
+  },
+  {
+   "t": "混雑のサイン（output drops）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"出口の混雑\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">output drops ＝ 出口で捨てられた数</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">送りたいデータが多すぎて、出口があふれた</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">たとえるなら、高速道路の出口の渋滞</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">たくさんのポートから、1つのポートに集まる</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">対策の例</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">もっと速いポートにする、ポートを束ねる（あとで学ぶ）</text></svg>",
+   "b": "<b>output drops</b> は、出口のポートで<b>捨てられた</b>データの数です。たくさんのPCから、1台のサーバーへのポートに通信が集まると、出口があふれてしまいます。高速道路の出口の渋滞のようなものです。こちらは壊れているのではなく、<b>混雑</b>のサインです。"
+  },
+  {
+   "t": "確認の問題 2",
+   "quiz": {
+    "q": "あるポートで、late collision（レイトコリジョン）が増えています。最も考えられる原因はどれでしょう？",
+    "o": [
+     ["デュプレックスの不一致", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["DHCPサーバーの故障", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["ポート番号のまちがい", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 0,
+    "e": "レイトコリジョンは、<b>デュプレックスの不一致</b>（片方が全二重、片方が半二重）の典型的なサインです。"
+   }
+  },
+  {
+   "t": "一斉送信が届く範囲（ブロードキャストドメイン）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 178.0\" role=\"img\" aria-label=\"ブロードキャストドメイン\"><path d=\"M70 70L180 70\" stroke=\"#3d4450\" stroke-width=\"3\" opacity=\".7\"/><path d=\"M180 70L290 70\" stroke=\"#3d4450\" stroke-width=\"3\" opacity=\".7\"/><circle cx=\"180\" cy=\"70\" r=\"18\" fill=\"#0a5cff\"/><path d=\"M171 66h12l-4-4M189 74h-12l4 4\" stroke=\"#fff\" stroke-width=\"2.4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><text x=\"180\" y=\"44\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ルーター</text><rect x=\"48\" y=\"57\" width=\"44\" height=\"26\" rx=\"5\" fill=\"#00a05a\"/><path d=\"M58 66h22l-4-3M82 74h-22l4 3\" stroke=\"#fff\" stroke-width=\"2.2\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><text x=\"70\" y=\"44\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">SW1</text><text x=\"74.2\" y=\"104\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ブロードキャストドメイン①</text><rect x=\"268\" y=\"57\" width=\"44\" height=\"26\" rx=\"5\" fill=\"#00a05a\"/><path d=\"M278 66h22l-4-3M302 74h-22l4 3\" stroke=\"#fff\" stroke-width=\"2.2\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><text x=\"290\" y=\"44\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">SW2</text><text x=\"285.8\" y=\"104\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ブロードキャストドメイン②</text><text x=\"180\" y=\"130\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">スイッチは一斉送信を全員に配る → ルーターで止まる</text><text x=\"180\" y=\"150\" text-anchor=\"middle\" style=\"font:600 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ルーターが、ブロードキャストドメインを区切る</text></svg>",
+   "b": "前回学んだ<b>ブロードキャスト</b>（全員あての一斉送信）は、スイッチを通ると全員に配られます。でも、<b>ルーターは一斉送信を先へ通しません</b>。一斉送信が届く範囲を<b>ブロードキャストドメイン</b>と言い、<b>ルーターがその境目</b>になります。なお、broadcasts の数が異常に多いときは、ケーブルのループで一斉送信が回り続けている（ブロードキャストストーム）ことがあります。",
+   "p": "スイッチは一斉送信を通す、ルーターは止める（境目になる）。"
+  },
+  {
+   "t": "確認の問題 3",
+   "quiz": {
+    "q": "ブロードキャストドメインを区切る（一斉送信を先へ通さない）機器はどれでしょう？",
+    "o": [
+     ["スイッチ", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["ルーター", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["UTPケーブル", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "<b>ルーター</b>は一斉送信を通さないので、ブロードキャストドメインの境目になります。"
+   }
+  },
+  {
+   "t": "まちがえやすい所",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 264.0\" role=\"img\" aria-label=\"よくある勘違い\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× エラーがあれば、とにかくケーブルが悪い</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">種類によって原因が違う</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 13.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ CRC → ケーブル、late collision → 不一致</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">output drops → 混雑</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× スイッチがブロードキャストを止める</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">スイッチは全員に配る</text><rect x=\"10\" y=\"196.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"222.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ 一斉送信を止めるのはルーター</text><text x=\"24\" y=\"241.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ルーターがブロードキャストドメインを区切る</text></svg>",
+   "b": "エラーを見て、なんでも「ケーブルが悪い」と決めつけるのは危険です。<b>CRCならケーブルやノイズ</b>、<b>レイトコリジョンならデュプレックスの不一致</b>、<b>output dropsなら混雑</b>と、種類によって疑う場所が違います。また、一斉送信を止めるのはスイッチではなく<b>ルーター</b>です。"
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">CRCエラー</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">傷ついたフレーム。ケーブル・ノイズ・デュプレックス</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">コリジョンとレイトコリジョン</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">半二重でぶつかる。late はデュプレックスの不一致</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ブロードキャストドメイン</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">一斉送信が届く範囲。ルーターが区切る</text></svg>",
+   "b": "これで、ポートの状態とエラーから原因を探せるようになりました。次回からは、いよいよ<b>IPv4アドレス</b>のしくみに入ります。"
+  }
+ ],
+ "cls": {
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "前回の方法で調べたら、ポートはup、upで正常でした。"},
+   {"sc": 1, "sp": "生徒", "t": "じゃあ、問題なしですね。"},
+   {"sc": 1, "sp": "先生", "t": "ところが、ファイルのコピーが、とにかく遅いんです。"},
+   {"sc": 1, "sp": "生徒", "t": "えっ、正常なのに遅い？"},
+   {"sc": 1, "sp": "先生", "t": "こういうときは、show interfacesの下のほうに出る、エラーの数を見ます。", "y": "こういうときは、ショー インターフェーシズの下のほうに出る、エラーの数を見ます。"},
+   {"sc": 1, "sp": "先生", "t": "どんなエラーが増えているかで、原因の見当がつくんです。"},
+   {"sc": 2, "sp": "先生", "t": "今日のゴールは3つです。"},
+   {"sc": 2, "sp": "先生", "t": "1つ目、CRCエラーの意味がわかること。"},
+   {"sc": 2, "sp": "先生", "t": "2つ目、コリジョンとレイトコリジョンがわかること。"},
+   {"sc": 2, "sp": "先生", "t": "3つ目、ブロードキャストドメインがわかることです。"},
+   {"sc": 2, "sp": "生徒", "t": "探偵みたいに、手がかりから推理するんですね。"},
+   {"sc": 3, "sp": "先生", "t": "show interfacesの下のほうには、エラーの数が並んでいます。", "y": "ショー インターフェーシズの下のほうには、エラーの数が並んでいます。"},
+   {"sc": 3, "sp": "先生", "t": "正常なポートでは、ほとんど0のままです。"},
+   {"sc": 3, "sp": "生徒", "t": "この画面だと、CRCが2950、collisionsが1784…いっぱい増えてます。"},
+   {"sc": 3, "sp": "先生", "t": "何かが起きているサインですね。1つずつ見ていきましょう。"},
+   {"sc": 4, "sp": "先生", "t": "フレームには、途中で壊れていないかを確かめる、検査の仕組みが付いています。"},
+   {"sc": 4, "sp": "先生", "t": "その検査に通らなかった数が、CRCエラーです。"},
+   {"sc": 4, "sp": "生徒", "t": "傷ついて届いたフレームの数、ってことですか？"},
+   {"sc": 4, "sp": "先生", "t": "その通り。原因は、ケーブルの傷や、電気のノイズ、コネクタのゆるみなどです。"},
+   {"sc": 4, "sp": "先生", "t": "それから、前回学んだデュプレックスの不一致でも増えます。"},
+   {"sc": 4, "sp": "生徒", "t": "まず、ケーブルを替えてみるのがよさそうですね。"},
+   {"sc": 5, "sp": "先生", "t": "確認です。CRCエラーが増えているとき、最初に疑うのはどれでしょう？", "w": 1},
+   {"sc": 5, "sp": "生徒", "t": "傷ついたフレームだから、ケーブルやノイズ。1つ目です。"},
+   {"sc": 5, "sp": "先生", "t": "正解です。"},
+   {"sc": 6, "sp": "先生", "t": "次は、コリジョンです。送信が、ぶつかることです。"},
+   {"sc": 6, "sp": "生徒", "t": "ぶつかる？"},
+   {"sc": 6, "sp": "先生", "t": "トランシーバーで、2人が同時に話してしまう場面を想像してください。"},
+   {"sc": 6, "sp": "生徒", "t": "あ、半二重で、同時に送っちゃうとぶつかるんだ。"},
+   {"sc": 6, "sp": "先生", "t": "その通り。全二重なら、送る線と受ける線が別なので、ふつうは起きません。"},
+   {"sc": 6, "sp": "先生", "t": "特に、送り始めてしばらくしてからぶつかるのが、レイトコリジョンです。"},
+   {"sc": 6, "sp": "生徒", "t": "レイトは、遅れて、ですね。"},
+   {"sc": 6, "sp": "先生", "t": "はい。デュプレックスの不一致や、長すぎるケーブルの、典型的なサインです。"},
+   {"sc": 7, "sp": "先生", "t": "もう1つ。output dropsは、出口のポートで捨てられた数です。"},
+   {"sc": 7, "sp": "生徒", "t": "捨てられた？ 壊れてるんですか？"},
+   {"sc": 7, "sp": "先生", "t": "いいえ。たくさんのPCから、1つのポートに通信が集まって、あふれたんです。", "y": "いいえ。たくさんのピーシーから、1つのポートに通信が集まって、あふれたんです。"},
+   {"sc": 7, "sp": "生徒", "t": "高速道路の出口が、渋滞してる感じですね。"},
+   {"sc": 7, "sp": "先生", "t": "まさにそうです。こちらは、混雑のサインです。"},
+   {"sc": 8, "sp": "先生", "t": "確認です。late collisionが増えるときに、最も考えられる原因はどれでしょう？", "w": 1},
+   {"sc": 8, "sp": "生徒", "t": "デュプレックスの不一致！"},
+   {"sc": 8, "sp": "先生", "t": "正解です。"},
+   {"sc": 9, "sp": "先生", "t": "最後のかたまりです。全員あての一斉送信、ブロードキャストを覚えていますか？"},
+   {"sc": 9, "sp": "生徒", "t": "スイッチが、全部のポートに配るんでした。"},
+   {"sc": 9, "sp": "先生", "t": "そうです。でも、ルーターは一斉送信を、先へ通しません。"},
+   {"sc": 9, "sp": "生徒", "t": "どこまでも広がるわけじゃないんですね。"},
+   {"sc": 9, "sp": "先生", "t": "一斉送信が届く範囲を、ブロードキャストドメインと言います。"},
+   {"sc": 9, "sp": "先生", "t": "ルーターが、その境目になります。"},
+   {"sc": 9, "sp": "生徒", "t": "broadcastsの数が多すぎるときは？"},
+   {"sc": 9, "sp": "先生", "t": "ケーブルのループで、一斉送信が回り続けていることがあります。あとの回でくわしく学びます。"},
+   {"sc": 10, "sp": "先生", "t": "確認です。ブロードキャストドメインを区切る機器はどれでしょう？", "w": 1},
+   {"sc": 10, "sp": "生徒", "t": "一斉送信を通さないのは、ルーターです。"},
+   {"sc": 10, "sp": "先生", "t": "正解です。"},
+   {"sc": 11, "sp": "生徒", "t": "エラーが出たら、とにかくケーブルを替えればいいと思ってました。"},
+   {"sc": 11, "sp": "先生", "t": "よくある考え方ですが、種類によって原因が違います。"},
+   {"sc": 11, "sp": "生徒", "t": "CRCならケーブルやノイズ、レイトコリジョンならデュプレックス。"},
+   {"sc": 11, "sp": "先生", "t": "output dropsなら、混雑です。"},
+   {"sc": 11, "sp": "生徒", "t": "あと、スイッチがブロードキャストを止めると思いそうでした。"},
+   {"sc": 11, "sp": "先生", "t": "止めるのはルーターです。スイッチは全員に配ります。"},
+   {"sc": 12, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 12, "sp": "先生", "t": "1つ目。CRCエラーは傷ついたフレーム。ケーブル、ノイズ、デュプレックスを疑う。"},
+   {"sc": 12, "sp": "先生", "t": "2つ目。コリジョンは半二重でぶつかること。レイトコリジョンはデュプレックスの不一致。"},
+   {"sc": 12, "sp": "先生", "t": "3つ目。一斉送信が届く範囲がブロードキャストドメイン。ルーターが区切る。"},
+   {"sc": 12, "sp": "生徒", "t": "エラーの数から推理するの、楽しいですね。"},
+   {"sc": 12, "sp": "先生", "t": "次回からは、IPv4アドレスのしくみに入ります。お疲れさまでした。", "y": "次回からは、アイピーブイフォーアドレスのしくみに入ります。お疲れさまでした。"}
+  ]
+ }
+}

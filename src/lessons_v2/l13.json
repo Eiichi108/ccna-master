@@ -1,0 +1,167 @@
+{
+ "r": "TB",
+ "n": 13,
+ "t": "ケーブルの種類",
+ "d": "d1",
+ "form": "対決",
+ "need": [4],
+ "goal": ["UTPケーブルの特徴と限界がわかる", "ストレートとクロスの使い分けがわかる", "光ファイバーの2種類とSFPがわかる"],
+ "terms": ["UTP", "ストレートケーブル", "クロスケーブル", "Auto-MDIX", "シングルモード", "マルチモード", "SFP"],
+ "pages": [
+  {
+   "t": "120m先の倉庫に、LANケーブル1本？",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 124.0\" role=\"img\" aria-label=\"つかみ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"110\" rx=\"16\" fill=\"#0a5cff\" opacity=\".12\"/><text x=\"180\" y=\"44\" text-anchor=\"middle\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">120m先の倉庫まで、LANケーブル1本でつなげる？</text><text x=\"180\" y=\"74\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ホームセンターで長いケーブルを買えば済む？</text><text x=\"180\" y=\"94\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">実は、ケーブルには「届く距離」の限界があります</text></svg>",
+   "b": "事務所から120m離れた倉庫に、PCを置くことになりました。長いLANケーブルを1本買えば済むでしょうか？ 実は、ケーブルには<b>届く距離の限界</b>があり、種類によって使える場所が違います。今日は、ネットワークで使うケーブルの種類と、その選び方を学びます。"
+  },
+  {
+   "t": "今日のゴール",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のゴール\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1. UTPケーブルの特徴と限界がわかる</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">いつものLANケーブル。最大100m</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2. ストレートとクロスの使い分けがわかる</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">つなぐ機器の組み合わせで選ぶ</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">3. 光ファイバーの2種類とSFPがわかる</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">シングルモードとマルチモード</text></svg>"
+  },
+  {
+   "t": "いつものLANケーブル（UTP）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"UTPケーブル\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">UTP（Unshielded Twisted Pair）</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">銅の線を2本ずつより合わせたケーブル</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1本で届くのは 最大100m</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">それより長いと、信号が弱くなって届かない</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">カテゴリー（Cat5e・Cat6 など）で性能が違う</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Cat5e・Cat6 なら 1Gbps を100mまで</text></svg>",
+   "b": "ふだん使うLANケーブルは、<b>UTP</b>（Unshielded Twisted Pair）という、銅の線を2本ずつより合わせたケーブルです。安くて扱いやすいのですが、<b>1本で届くのは最大100m</b>まで。それより長いと信号が弱くなってしまいます。「Cat5e」「Cat6」のような<b>カテゴリー</b>で性能が違い、Cat5eやCat6なら1Gbpsで100mまで使えます。",
+   "p": "UTPは最大100m。冒頭の120mは、UTP1本では届かない。"
+  },
+  {
+   "t": "確認の問題 1",
+   "quiz": {
+    "q": "スイッチから120m離れた倉庫のPCを、UTPケーブル1本で直接つなぐ計画について、正しいものはどれでしょう？",
+    "o": [
+     ["UTPは最大100mなので、このままでは届かない", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["Cat6を使えば、何mでも届く", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["UTPは距離に関係なく使える", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 0,
+    "e": "UTPは<b>最大100m</b>です。間にスイッチを置く、光ファイバーを使う、などの工夫が必要です。"
+   }
+  },
+  {
+   "t": "ストレートケーブルとクロスケーブル",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 171.0\" role=\"img\" aria-label=\"ストレートとクロス\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ストレートケーブル</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">違う種類の機器をつなぐ</text><text x=\"24\" y=\"67.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">例：PC ― スイッチ、ルーター ― スイッチ</text><rect x=\"10\" y=\"86.5\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"112.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">クロスケーブル</text><text x=\"24\" y=\"131.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">同じ種類の機器をつなぐ</text><text x=\"24\" y=\"148.0\" text-anchor=\"start\" style=\"font:600 12.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">例：スイッチ ― スイッチ、PC ― PC、PC ― ルーター</text></svg>",
+   "b": "UTPケーブルには、中の線のつなぎ方で2種類あります。送る線と受ける線をそのままつなぐ<b>ストレートケーブル</b>は、PCとスイッチのように<b>違う種類</b>の機器をつなぐときに使います。途中で送る線と受ける線を<b>入れかえた</b><b>クロスケーブル</b>は、スイッチどうし、PCどうしのように<b>同じ種類</b>の機器をつなぐときに使います。PCとルーターは、送受信の線の使い方が同じなのでクロスです。",
+   "p": "違う種類 ＝ ストレート、同じ種類 ＝ クロス（PC―ルーターも同じ側）。"
+  },
+  {
+   "t": "自動で合わせてくれる（Auto-MDIX）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"Auto-MDIX\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">昔は、まちがえるとつながらなかった</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">スイッチどうしをストレートでつなぐと通信できない</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Auto-MDIX ＝ 自動で送受信を入れかえる機能</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">今のスイッチの多くに付いている</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">試験では「Auto-MDIXがない」前提も出る</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">そのときは、ストレートとクロスを正しく選ぶ</text></svg>",
+   "b": "昔は、ケーブルを選びまちがえると通信できませんでした。今のスイッチの多くには<b>Auto-MDIX</b>という機能があり、どちらのケーブルでも、<b>自動で送受信を入れかえて</b>つないでくれます。ただし、試験では「Auto-MDIXが使えない機器」という問題も出るので、ストレートとクロスの使い分けは覚えておきましょう。"
+  },
+  {
+   "t": "確認の問題 2",
+   "quiz": {
+    "q": "Auto-MDIXが使えない2台のスイッチどうしをつなぎます。使うケーブルはどれでしょう？",
+    "o": [
+     ["ストレートケーブル", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["クロスケーブル", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["どちらでもよい", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "スイッチどうしは<b>同じ種類</b>の機器なので、<b>クロスケーブル</b>を使います。"
+   }
+  },
+  {
+   "t": "遠くまで届く光ファイバー",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 234.5\" role=\"img\" aria-label=\"光ファイバー\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">光で信号を送る。電気のノイズの影響を受けない</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">UTPより、ずっと遠くまで届く</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">マルチモード</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">数百mまで。比べて安い</text><text x=\"24\" y=\"131.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">建物の中や、近い建物どうし</text><rect x=\"10\" y=\"150.0\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"175.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">シングルモード</text><text x=\"24\" y=\"194.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">数km〜数十km。高い</text><text x=\"24\" y=\"211.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">遠く離れた建物どうし</text></svg>",
+   "b": "100mより遠くへつなぐときは、<b>光ファイバー</b>を使います。光で信号を送るので、電気のノイズの影響を受けず、ずっと遠くまで届きます。光ファイバーには2種類あり、<b>マルチモード</b>は数百mまでで比べて安く、建物の中で使います。<b>シングルモード</b>は<b>数km〜数十km</b>も届き、遠く離れた建物どうしをつなぐのに使います。",
+   "p": "近い（数百m）＝ マルチモード、遠い（km単位）＝ シングルモード。"
+  },
+  {
+   "t": "差しかえ口（SFP）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 183.5\" role=\"img\" aria-label=\"SFP\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">SFP ＝ スイッチに挿す、小さな差しかえ部品</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Small Form-factor Pluggable</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">挿す部品を選んで、ケーブルの種類を決める</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">マルチモード用・シングルモード用・銅線用など</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">距離や種類が変わっても、部品の交換で済む</text></svg>",
+   "b": "スイッチには、<b>SFP</b>という小さな部品を挿す口が付いていることがあります。SFPには、マルチモード用・シングルモード用・銅線用などがあり、<b>挿す部品を選ぶことで、使うケーブルの種類を決められます</b>。あとで距離が変わっても、スイッチを買いかえずに部品の交換で済むのです。"
+  },
+  {
+   "t": "確認の問題 3",
+   "quiz": {
+    "q": "8km離れた2つの工場の建物を、スイッチでつなぎます。最も適したケーブルはどれでしょう？",
+    "o": [
+     ["UTP（Cat6）", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["マルチモード光ファイバー", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["シングルモード光ファイバー", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 2,
+    "e": "km単位の長い距離は<b>シングルモード光ファイバー</b>です。UTPは100m、マルチモードは数百mまでです。"
+   }
+  },
+  {
+   "t": "まちがえやすい所",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 264.0\" role=\"img\" aria-label=\"よくある勘違い\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× PCとルーターは違う機器だから、ストレート</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">機器の名前ではなく、線の使い方で決まる</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ PC ― ルーターはクロス</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">PCとルーターは、送受信の線の使い方が同じ</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× 光ファイバーなら、どちらでも遠くまで届く</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">マルチモードは数百mまで</text><rect x=\"10\" y=\"196.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"222.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ km単位ならシングルモード</text><text x=\"24\" y=\"241.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">マルチ＝近い・安い、シングル＝遠い</text></svg>",
+   "b": "まちがえやすいのが<b>PCとルーター</b>の組み合わせです。違う機器なのでストレートと思いがちですが、PCとルーターは送受信の線の使い方が同じなので<b>クロス</b>です。また、光ファイバーでもマルチモードは数百mまで。<b>km単位ならシングルモード</b>と覚えておきましょう。"
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">UTP</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">いつものLANケーブル。最大100m</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ストレートとクロス</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">違う種類はストレート、同じ種類はクロス</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">光ファイバーとSFP</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">近いはマルチ、遠いはシングル。SFPで種類を選ぶ</text></svg>",
+   "b": "次回は、ケーブルの先につながった<b>スイッチの中</b>で、何が起きているのかを実況中継します。スイッチは、どうやって相手の場所を覚えているのでしょう？"
+  }
+ ],
+ "cls": {
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "事務所から120m離れた倉庫に、PCを置くことになりました。", "y": "事務所から120m離れた倉庫に、ピーシーを置くことになりました。"},
+   {"sc": 1, "sp": "生徒", "t": "長いLANケーブルを買って、つなげばいいんじゃないですか？", "y": "長いランケーブルを買って、つなげばいいんじゃないですか？"},
+   {"sc": 1, "sp": "先生", "t": "そう思いますよね。でも、実は届かないかもしれません。"},
+   {"sc": 1, "sp": "生徒", "t": "え、ケーブルなのに、届かないことがあるんですか？"},
+   {"sc": 1, "sp": "先生", "t": "ケーブルには、届く距離の限界があるんです。"},
+   {"sc": 1, "sp": "先生", "t": "今日は、ケーブルの種類と、選び方を学びます。"},
+   {"sc": 2, "sp": "先生", "t": "今日のゴールは3つです。"},
+   {"sc": 2, "sp": "先生", "t": "1つ目、いつものLANケーブル、UTPの特徴と限界。", "y": "1つ目、いつものランケーブル、UTPの特徴と限界。"},
+   {"sc": 2, "sp": "先生", "t": "2つ目、ストレートとクロスの使い分け。"},
+   {"sc": 2, "sp": "先生", "t": "3つ目、光ファイバーの2種類と、SFPという部品です。"},
+   {"sc": 2, "sp": "生徒", "t": "光ファイバーって、家のネット回線のやつですか？"},
+   {"sc": 2, "sp": "先生", "t": "そうです。会社の中でも使われていますよ。"},
+   {"sc": 3, "sp": "先生", "t": "ふだん使うLANケーブルは、UTPという種類です。", "y": "ふだん使うランケーブルは、UTPという種類です。"},
+   {"sc": 3, "sp": "先生", "t": "銅の線を、2本ずつより合わせて作っています。"},
+   {"sc": 3, "sp": "生徒", "t": "より合わせるのには、何か意味があるんですか？"},
+   {"sc": 3, "sp": "先生", "t": "ノイズの影響を減らすためです。でも、届くのは最大100mまでです。"},
+   {"sc": 3, "sp": "生徒", "t": "じゃあ、120mの倉庫には…"},
+   {"sc": 3, "sp": "先生", "t": "1本では届きません。信号が弱くなってしまうんです。"},
+   {"sc": 3, "sp": "先生", "t": "Cat5eやCat6というカテゴリーで性能が違い、どちらも1Gbpsを100mまで送れます。", "y": "Cat5eやCat6というカテゴリーで性能が違い、どちらも1ギガビーピーエスを100mまで送れます。"},
+   {"sc": 4, "sp": "先生", "t": "確認です。120m先の倉庫を、UTP1本でつなぐ計画。正しいものはどれでしょう？", "w": 1},
+   {"sc": 4, "sp": "生徒", "t": "100mまでだから、届かない。1つ目です。"},
+   {"sc": 4, "sp": "先生", "t": "正解です。"},
+   {"sc": 5, "sp": "先生", "t": "次は、UTPの中の線のつなぎ方です。2種類あります。"},
+   {"sc": 5, "sp": "先生", "t": "送る線と受ける線を、そのままつないだのが、ストレートケーブル。"},
+   {"sc": 5, "sp": "先生", "t": "途中で、送る線と受ける線を入れかえたのが、クロスケーブルです。"},
+   {"sc": 5, "sp": "生徒", "t": "どう使い分けるんですか？"},
+   {"sc": 5, "sp": "先生", "t": "PCとスイッチのように、違う種類の機器はストレート。", "y": "ピーシーとスイッチのように、違う種類の機器はストレート。"},
+   {"sc": 5, "sp": "先生", "t": "スイッチどうしのように、同じ種類の機器はクロスです。"},
+   {"sc": 5, "sp": "生徒", "t": "同じ種類だと、お互いの送る線がぶつかっちゃうから、入れかえるんですね。"},
+   {"sc": 5, "sp": "先生", "t": "その通り。いい理解です。"},
+   {"sc": 6, "sp": "先生", "t": "ただ、昔はケーブルを選びまちがえると、通信できませんでした。"},
+   {"sc": 6, "sp": "生徒", "t": "それは困りますね…"},
+   {"sc": 6, "sp": "先生", "t": "そこで今のスイッチの多くには、Auto-MDIXという機能があります。"},
+   {"sc": 6, "sp": "先生", "t": "どちらのケーブルでも、自動で送受信を入れかえてくれるんです。"},
+   {"sc": 6, "sp": "生徒", "t": "じゃあ、使い分けは覚えなくていい？"},
+   {"sc": 6, "sp": "先生", "t": "試験では、Auto-MDIXがない前提の問題も出るので、覚えておきましょう。"},
+   {"sc": 7, "sp": "先生", "t": "確認です。Auto-MDIXがない、スイッチどうしをつなぐケーブルはどれでしょう？", "w": 1},
+   {"sc": 7, "sp": "生徒", "t": "同じ種類だから、クロスです。"},
+   {"sc": 7, "sp": "先生", "t": "正解です。"},
+   {"sc": 8, "sp": "先生", "t": "100mより遠くへつなぐときは、光ファイバーを使います。"},
+   {"sc": 8, "sp": "先生", "t": "光で信号を送るので、電気のノイズの影響を受けず、遠くまで届きます。"},
+   {"sc": 8, "sp": "生徒", "t": "光ファイバーにも、種類があるんですか？"},
+   {"sc": 8, "sp": "先生", "t": "2種類あります。マルチモードは、数百mまで。比べて安く、建物の中で使います。"},
+   {"sc": 8, "sp": "先生", "t": "シングルモードは、数kmから数十kmも届きます。そのぶん高価です。"},
+   {"sc": 8, "sp": "生徒", "t": "近くはマルチ、遠くはシングル、ですね。"},
+   {"sc": 9, "sp": "先生", "t": "スイッチには、SFPという小さな部品を挿す口があることがあります。"},
+   {"sc": 9, "sp": "生徒", "t": "部品を挿す？"},
+   {"sc": 9, "sp": "先生", "t": "マルチモード用、シングルモード用、銅線用などの部品から、選んで挿すんです。"},
+   {"sc": 9, "sp": "生徒", "t": "あとで距離が変わっても、部品を替えればいいんですね。"},
+   {"sc": 9, "sp": "先生", "t": "そうです。スイッチを買いかえなくて済みます。"},
+   {"sc": 10, "sp": "先生", "t": "確認です。8km離れた工場どうしをつなぐのに、最も適したケーブルはどれでしょう？", "w": 1},
+   {"sc": 10, "sp": "生徒", "t": "km単位だから、シングルモード！"},
+   {"sc": 10, "sp": "先生", "t": "正解です。"},
+   {"sc": 11, "sp": "生徒", "t": "先生、PCとルーターって違う機器だから、ストレートですよね？", "y": "先生、ピーシーとルーターって違う機器だから、ストレートですよね？"},
+   {"sc": 11, "sp": "先生", "t": "それ、一番多いまちがいです。答えはクロスです。"},
+   {"sc": 11, "sp": "生徒", "t": "え、違う機器なのに？"},
+   {"sc": 11, "sp": "先生", "t": "機器の名前ではなく、送受信の線の使い方で決まります。PCとルーターは同じ側なんです。", "y": "機器の名前ではなく、送受信の線の使い方で決まります。ピーシーとルーターは同じ側なんです。"},
+   {"sc": 11, "sp": "生徒", "t": "名前で判断しちゃだめなんですね。"},
+   {"sc": 11, "sp": "先生", "t": "もう1つ。光ファイバーでも、マルチモードは数百mまでです。"},
+   {"sc": 12, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 12, "sp": "先生", "t": "1つ目。UTPはいつものLANケーブルで、最大100m。", "y": "1つ目。UTPはいつものランケーブルで、最大100m。"},
+   {"sc": 12, "sp": "先生", "t": "2つ目。違う種類はストレート、同じ種類はクロス。Auto-MDIXなら自動。"},
+   {"sc": 12, "sp": "先生", "t": "3つ目。近くはマルチモード、遠くはシングルモード。SFPで種類を選べる。"},
+   {"sc": 12, "sp": "生徒", "t": "倉庫の件、光ファイバーにすれば解決ですね。"},
+   {"sc": 12, "sp": "先生", "t": "その通り。次回は、スイッチの中で何が起きているかを実況します。お疲れさまでした。"}
+  ]
+ }
+}

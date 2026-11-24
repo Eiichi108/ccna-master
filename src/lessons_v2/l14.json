@@ -1,0 +1,168 @@
+{
+ "r": "TB",
+ "n": 14,
+ "t": "スイッチの中で起きていること",
+ "d": "d1",
+ "form": "実況中継",
+ "need": [10],
+ "goal": ["MACアドレステーブルがわかる", "学習とフラッディングがわかる", "エージングがわかる"],
+ "terms": ["MACアドレステーブル", "学習", "フラッディング", "ブロードキャスト", "エージング"],
+ "pages": [
+  {
+   "t": "買ったばかりのスイッチは、何も知らない",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 124.0\" role=\"img\" aria-label=\"つかみ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"110\" rx=\"16\" fill=\"#0a5cff\" opacity=\".12\"/><text x=\"180\" y=\"44\" text-anchor=\"middle\" style=\"font:800 15.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">新品のスイッチは、だれがどこにいるか知らない</text><text x=\"180\" y=\"74\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">それでも、ちゃんと相手に届けられるのはなぜ？</text><text x=\"180\" y=\"94\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">今日は、スイッチの中を実況中継します</text></svg>",
+   "b": "買ってきたばかりのスイッチにPCを4台つなぐと、すぐに通信できます。でも、スイッチは最初、<b>どのポートの先にだれがいるか</b>を何も知りません。それなのに、なぜ相手に届けられるのでしょう？ 今日は、スイッチの中で起きていることを、1つずつ実況中継していきます。"
+  },
+  {
+   "t": "今日のゴール",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のゴール\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1. MACアドレステーブルがわかる</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">スイッチが持つ「だれがどのポートにいるか」の表</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2. 学習とフラッディングがわかる</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">送信元で覚え、知らない宛先は全員に</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">3. エージングがわかる</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">しばらく通信しないと、表から消える</text></svg>"
+  },
+  {
+   "t": "スイッチが持つ表（MACアドレステーブル）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 206.0\" role=\"img\" aria-label=\"MACアドレステーブル\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"122\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\">SW1# show mac address-table</text><text x=\"22\" y=\"74\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#e8ecf3;white-space:pre\">Vlan  Mac Address     Type     Ports</text><text x=\"22\" y=\"96\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#e8ecf3;white-space:pre\">   1  0050.56aa.0001  DYNAMIC  Gi0/1</text><text x=\"22\" y=\"118\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#e8ecf3;white-space:pre\">   1  0050.56aa.0003  DYNAMIC  Gi0/3</text><text x=\"180\" y=\"154\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">MACアドレスと、その先にいるポートの組</text><text x=\"180\" y=\"178\" text-anchor=\"middle\" style=\"font:700 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Vlan の列は、あとの回で学ぶ</text></svg>",
+   "b": "スイッチは、<b>どのMACアドレスの機器が、どのポートの先にいるか</b>を表にして持っています。これを<b>MACアドレステーブル</b>と言います。宛先のMACアドレスがこの表にあれば、そのポートにだけフレームを送ります。では、新品で表が空っぽのときは、どうするのでしょう？",
+   "p": "MACアドレステーブル ＝ 名札（MAC）とポートの対応表。"
+  },
+  {
+   "t": "実況①：PC-AからPC-Cへ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 280.0\" role=\"img\" aria-label=\"スイッチ\"><path d=\"M60 40L180 100\" stroke=\"#00a05a\" stroke-width=\"3\" opacity=\".7\"/><path d=\"M60 170L180 100\" stroke=\"#00a05a\" stroke-width=\"3\" opacity=\".7\"/><path d=\"M180 100L300 40\" stroke=\"#00a05a\" stroke-width=\"3\" opacity=\".7\"/><path d=\"M180 100L300 170\" stroke=\"#00a05a\" stroke-width=\"3\" opacity=\".7\"/><rect x=\"158\" y=\"87\" width=\"44\" height=\"26\" rx=\"5\" fill=\"#00a05a\"/><path d=\"M168 96h22l-4-3M192 104h-22l4 3\" stroke=\"#fff\" stroke-width=\"2.2\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><text x=\"180\" y=\"74\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">SW1</text><rect x=\"44\" y=\"26\" width=\"32\" height=\"21\" rx=\"3\" fill=\"none\" stroke=\"#0a5cff\" stroke-width=\"3\"/><path d=\"M51 54h18M60 47v7\" stroke=\"#0a5cff\" stroke-width=\"3\" stroke-linecap=\"round\"/><text x=\"60\" y=\"14\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">PC-A</text><text x=\"60\" y=\"74\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Gi0/1</text><rect x=\"44\" y=\"156\" width=\"32\" height=\"21\" rx=\"3\" fill=\"none\" stroke=\"#3d4450\" stroke-width=\"3\"/><path d=\"M51 184h18M60 177v7\" stroke=\"#3d4450\" stroke-width=\"3\" stroke-linecap=\"round\"/><text x=\"60\" y=\"204\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">PC-B</text><text x=\"60\" y=\"218\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Gi0/2</text><rect x=\"284\" y=\"26\" width=\"32\" height=\"21\" rx=\"3\" fill=\"none\" stroke=\"#3d4450\" stroke-width=\"3\"/><path d=\"M291 54h18M300 47v7\" stroke=\"#3d4450\" stroke-width=\"3\" stroke-linecap=\"round\"/><text x=\"300\" y=\"14\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">PC-C</text><text x=\"300\" y=\"74\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Gi0/3</text><rect x=\"284\" y=\"156\" width=\"32\" height=\"21\" rx=\"3\" fill=\"none\" stroke=\"#3d4450\" stroke-width=\"3\"/><path d=\"M291 184h18M300 177v7\" stroke=\"#3d4450\" stroke-width=\"3\" stroke-linecap=\"round\"/><text x=\"300\" y=\"204\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">PC-D</text><text x=\"300\" y=\"218\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Gi0/4</text><text x=\"180\" y=\"232\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">① 送信元 PC-A を学習：PC-A は Gi0/1 の先</text><text x=\"180\" y=\"252\" text-anchor=\"middle\" style=\"font:600 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">② 宛先 PC-C は表にない → Gi0/1 以外の全ポートへ</text></svg>",
+   "b": "PC-AがPC-Cあてにフレームを送りました。スイッチはまず、フレームの<b>送信元MACアドレス</b>を見て「PC-AはGi0/1の先にいる」と<b>表に書き込みます</b>。これを<b>学習</b>と言います。次に宛先のPC-Cを表で探しますが、まだ載っていません。そこで、届いたポート以外の<b>全部のポートに</b>送ります。これを<b>フラッディング</b>と言います。",
+   "p": "学習は送信元MACで。宛先がわからなければフラッディング。"
+  },
+  {
+   "t": "確認の問題 1",
+   "quiz": {
+    "q": "宛先のMACアドレスが、まだMACアドレステーブルに載っていないフレームが届きました。スイッチはどうするでしょう？",
+    "o": [
+     ["フレームを捨てる", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["届いたポート以外の、すべてのポートに送る", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["送信元に送り返す", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "宛先がわからないときは、届いたポート以外の全ポートに送ります（<b>フラッディング</b>）。"
+   }
+  },
+  {
+   "t": "実況②：PC-Cが返事をする",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 280.0\" role=\"img\" aria-label=\"スイッチ\"><path d=\"M60 40L180 100\" stroke=\"#00a05a\" stroke-width=\"3\" opacity=\".7\"/><path d=\"M60 170L180 100\" stroke=\"#00a05a\" stroke-width=\"3\" opacity=\".7\"/><path d=\"M180 100L300 40\" stroke=\"#00a05a\" stroke-width=\"3\" opacity=\".7\"/><path d=\"M180 100L300 170\" stroke=\"#00a05a\" stroke-width=\"3\" opacity=\".7\"/><rect x=\"158\" y=\"87\" width=\"44\" height=\"26\" rx=\"5\" fill=\"#00a05a\"/><path d=\"M168 96h22l-4-3M192 104h-22l4 3\" stroke=\"#fff\" stroke-width=\"2.2\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><text x=\"180\" y=\"74\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">SW1</text><rect x=\"44\" y=\"26\" width=\"32\" height=\"21\" rx=\"3\" fill=\"none\" stroke=\"#3d4450\" stroke-width=\"3\"/><path d=\"M51 54h18M60 47v7\" stroke=\"#3d4450\" stroke-width=\"3\" stroke-linecap=\"round\"/><text x=\"60\" y=\"14\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">PC-A</text><text x=\"60\" y=\"74\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Gi0/1</text><rect x=\"44\" y=\"156\" width=\"32\" height=\"21\" rx=\"3\" fill=\"none\" stroke=\"#3d4450\" stroke-width=\"3\"/><path d=\"M51 184h18M60 177v7\" stroke=\"#3d4450\" stroke-width=\"3\" stroke-linecap=\"round\"/><text x=\"60\" y=\"204\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">PC-B</text><text x=\"60\" y=\"218\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Gi0/2</text><rect x=\"284\" y=\"26\" width=\"32\" height=\"21\" rx=\"3\" fill=\"none\" stroke=\"#0a5cff\" stroke-width=\"3\"/><path d=\"M291 54h18M300 47v7\" stroke=\"#0a5cff\" stroke-width=\"3\" stroke-linecap=\"round\"/><text x=\"300\" y=\"14\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">PC-C</text><text x=\"300\" y=\"74\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Gi0/3</text><rect x=\"284\" y=\"156\" width=\"32\" height=\"21\" rx=\"3\" fill=\"none\" stroke=\"#3d4450\" stroke-width=\"3\"/><path d=\"M291 184h18M300 177v7\" stroke=\"#3d4450\" stroke-width=\"3\" stroke-linecap=\"round\"/><text x=\"300\" y=\"204\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">PC-D</text><text x=\"300\" y=\"218\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Gi0/4</text><text x=\"180\" y=\"232\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">③ 送信元 PC-C を学習：PC-C は Gi0/3 の先</text><text x=\"180\" y=\"252\" text-anchor=\"middle\" style=\"font:600 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">④ 宛先 PC-A は表にある → Gi0/1 にだけ送る</text></svg>",
+   "b": "フラッディングで届いたフレームを、PC-Cは受け取り、PC-BとPC-Dは自分あてではないので捨てます。PC-Cが返事を送ると、スイッチはまた<b>送信元</b>を見て「PC-CはGi0/3の先」と学習します。宛先のPC-Aは、さっき表に書いたので、今度は<b>Gi0/1にだけ</b>送ります。こうして、通信するたびに表が埋まっていくのです。"
+  },
+  {
+   "t": "ブロードキャストは、いつも全員へ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"ブロードキャスト\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ブロードキャスト ＝ 全員あての一斉送信</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">宛先MACが FFFF.FFFF.FFFF</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">スイッチは、届いたポート以外の全部に送る</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">表を見るまでもなく、全員に配る</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">表にない宛先（フラッディング）と、結果は同じ</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">でも理由が違う：「全員あて」と「わからない」</text></svg>",
+   "b": "宛先MACアドレスが FFFF.FFFF.FFFF のフレームは、<b>ブロードキャスト</b>（全員あての一斉送信）です。スイッチはこれを、届いたポート以外の<b>全部のポート</b>に送ります。結果はフラッディングと同じですが、理由が違います。フラッディングは「宛先が<b>わからない</b>から」、ブロードキャストは「<b>全員あて</b>だから」です。"
+  },
+  {
+   "t": "確認の問題 2",
+   "quiz": {
+    "q": "スイッチがMACアドレステーブルに書き込む（学習する）ときに使う情報はどれでしょう？",
+    "o": [
+     ["フレームの宛先MACアドレス", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["フレームの送信元MACアドレスと、届いたポート", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["宛先のIPアドレス", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "スイッチは、<b>送信元MACアドレス</b>と<b>届いたポート</b>を組にして覚えます。宛先MACは、転送先を決めるときに見ます。"
+   }
+  },
+  {
+   "t": "しばらく通信しないと消える（エージング）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"エージング\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">表の行には、寿命がある</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Ciscoのスイッチでは、初期値 300秒（5分）</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">その間に通信がないと、行が消える</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">PCを別の場所に移したときに、古い情報が残らない</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">また通信すれば、すぐに学習し直す</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">だから消えても困らない</text></svg>",
+   "b": "表の行は、ずっと残るわけではありません。その機器から<b>しばらく通信がないと消えます</b>。これを<b>エージング</b>と言い、Ciscoのスイッチでは<b>初期値が300秒（5分）</b>です。PCを別のポートに移したとき、古い情報が残っていると届かなくなるので、こうして整理しているのです。また通信すれば、すぐに学習し直します。"
+  },
+  {
+   "t": "確認の問題 3",
+   "quiz": {
+    "q": "Ciscoのスイッチで、しばらく通信のない機器の行がMACアドレステーブルから消える仕組みと、その初期値の組み合わせはどれでしょう？",
+    "o": [
+     ["エージング・300秒", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["フラッディング・300秒", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["エージング・30秒", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 0,
+    "e": "しばらく通信がない行を消すのは<b>エージング</b>で、Ciscoの初期値は<b>300秒</b>です。"
+   }
+  },
+  {
+   "t": "まちがえやすい所",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 264.0\" role=\"img\" aria-label=\"よくある勘違い\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× スイッチは、宛先MACで学習する</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">宛先はまだ返事をしていないかもしれない</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ 学習は送信元MAC、転送は宛先MAC</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">「送ってきた人の場所」を覚える</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× フラッディングは故障のサイン</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">表が空のときの、ふつうの動き</text><rect x=\"10\" y=\"196.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"222.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ 知らない宛先は、まず全員に聞く</text><text x=\"24\" y=\"241.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">返事が来たら、次からは1つのポートだけ</text></svg>",
+   "b": "まちがえやすいのは「どちらのMACで学習するか」です。スイッチが確実にわかるのは、<b>フレームを送ってきた機器の場所</b>だけ。だから学習は<b>送信元MAC</b>、転送先を決めるのが<b>宛先MAC</b>です。また、フラッディングは故障ではなく、表が空のときの<b>ふつうの動き</b>です。"
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">MACアドレステーブル</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">MACアドレスとポートの対応表</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">学習とフラッディング</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">送信元で学習、知らない宛先は全ポートへ</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">エージング</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">通信がないと消える。Ciscoの初期値は300秒</text></svg>",
+   "b": "次回は、スイッチやルーターの<b>ポートの状態</b>を、show interfaces というコマンドで読み取ります。つながらないとき、まず見るべき場所です。"
+  }
+ ],
+ "cls": {
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "買ったばかりのスイッチに、PCを4台つないだとします。", "y": "買ったばかりのスイッチに、ピーシーを4台つないだとします。"},
+   {"sc": 1, "sp": "生徒", "t": "すぐ通信できますよね。設定もいらないって聞きました。"},
+   {"sc": 1, "sp": "先生", "t": "そうです。でも不思議だと思いませんか？"},
+   {"sc": 1, "sp": "先生", "t": "スイッチは最初、どのポートの先にだれがいるか、何も知らないんです。"},
+   {"sc": 1, "sp": "生徒", "t": "じゃあ、どうやって相手に届けてるんですか？"},
+   {"sc": 1, "sp": "先生", "t": "今日は、スイッチの中を、実況中継していきましょう。"},
+   {"sc": 2, "sp": "先生", "t": "今日のゴールは3つです。"},
+   {"sc": 2, "sp": "先生", "t": "1つ目、MACアドレステーブルという表がわかること。", "y": "1つ目、マックアドレステーブルという表がわかること。"},
+   {"sc": 2, "sp": "先生", "t": "2つ目、学習とフラッディングという動きがわかること。"},
+   {"sc": 2, "sp": "先生", "t": "3つ目、エージングがわかることです。"},
+   {"sc": 2, "sp": "生徒", "t": "実況中継、楽しみです。"},
+   {"sc": 3, "sp": "先生", "t": "スイッチは、だれがどのポートにいるかを、表にして持っています。"},
+   {"sc": 3, "sp": "先生", "t": "これを、MACアドレステーブルと言います。", "y": "これを、マックアドレステーブルと言います。"},
+   {"sc": 3, "sp": "生徒", "t": "名札と、ポートの対応表ですね。"},
+   {"sc": 3, "sp": "先生", "t": "そうです。宛先がこの表にあれば、そのポートにだけ送ります。"},
+   {"sc": 3, "sp": "生徒", "t": "でも、新品のスイッチは、表が空っぽですよね？"},
+   {"sc": 3, "sp": "先生", "t": "そこが今日のポイントです。実況を始めましょう。"},
+   {"sc": 4, "sp": "先生", "t": "PC-Aが、PC-Cあてにフレームを送りました。Gi0/1に届きます。", "y": "ピーシー-Aが、ピーシー-Cあてにフレームを送りました。Gi0スラッシュ1に届きます。"},
+   {"sc": 4, "sp": "先生", "t": "スイッチはまず、送信元のMACアドレスを見ます。", "y": "スイッチはまず、送信元のマックアドレスを見ます。"},
+   {"sc": 4, "sp": "生徒", "t": "送信元は、PC-Aですね。", "y": "送信元は、ピーシー-Aですね。"},
+   {"sc": 4, "sp": "先生", "t": "はい。そこで「PC-AはGi0/1の先にいる」と、表に書き込みます。", "y": "はい。そこで「ピーシー-AはGi0スラッシュ1の先にいる」と、表に書き込みます。"},
+   {"sc": 4, "sp": "先生", "t": "これを、学習と言います。"},
+   {"sc": 4, "sp": "先生", "t": "次に、宛先のPC-Cを表で探します。でも、まだ載っていません。", "y": "次に、宛先のピーシー-Cを表で探します。でも、まだ載っていません。"},
+   {"sc": 4, "sp": "生徒", "t": "わからないときは、どうするんですか？"},
+   {"sc": 4, "sp": "先生", "t": "届いたポート以外の、全部のポートに送ります。これをフラッディングと言います。"},
+   {"sc": 4, "sp": "生徒", "t": "とりあえず全員に配って、本人に受け取ってもらうんですね。"},
+   {"sc": 5, "sp": "先生", "t": "確認です。宛先が表にないフレームが届いたら、スイッチはどうするでしょう？", "w": 1},
+   {"sc": 5, "sp": "生徒", "t": "届いたポート以外の全部に送る。2つ目です。"},
+   {"sc": 5, "sp": "先生", "t": "正解です。"},
+   {"sc": 6, "sp": "先生", "t": "実況の続きです。フラッディングで、PC-B、C、Dに届きました。", "y": "実況の続きです。フラッディングで、ピーシー-B、C、Dに届きました。"},
+   {"sc": 6, "sp": "生徒", "t": "PC-BとPC-Dは、自分あてじゃないから捨てる？", "y": "ピーシー-Bとピーシー-Dは、自分あてじゃないから捨てる？"},
+   {"sc": 6, "sp": "先生", "t": "その通り。PC-Cだけが受け取って、返事を送ります。", "y": "その通り。ピーシー-Cだけが受け取って、返事を送ります。"},
+   {"sc": 6, "sp": "先生", "t": "スイッチはまた、送信元を見て、「PC-CはGi0/3の先」と学習します。", "y": "スイッチはまた、送信元を見て、「ピーシー-CはGi0スラッシュ3の先」と学習します。"},
+   {"sc": 6, "sp": "生徒", "t": "宛先のPC-Aは、さっき表に書いたから…", "y": "宛先のピーシー-Aは、さっき表に書いたから…"},
+   {"sc": 6, "sp": "先生", "t": "今度は、Gi0/1にだけ送ります。", "y": "今度は、Gi0スラッシュ1にだけ送ります。"},
+   {"sc": 6, "sp": "生徒", "t": "通信するたびに、表が埋まっていくんですね！"},
+   {"sc": 7, "sp": "先生", "t": "もう1つ、全員に配るフレームがあります。ブロードキャストです。"},
+   {"sc": 7, "sp": "先生", "t": "宛先のMACアドレスが、FFFF.FFFF.FFFF のフレームです。", "y": "宛先のマックアドレスが、FFFF.FFFF.FFFF のフレームです。"},
+   {"sc": 7, "sp": "生徒", "t": "全員あての一斉送信、でしたっけ。"},
+   {"sc": 7, "sp": "先生", "t": "そうです。スイッチは、届いたポート以外の全部に送ります。"},
+   {"sc": 7, "sp": "生徒", "t": "フラッディングと、同じ動きですね。"},
+   {"sc": 7, "sp": "先生", "t": "結果は同じですが、理由が違います。わからないからか、全員あてだからか、です。"},
+   {"sc": 8, "sp": "先生", "t": "確認です。スイッチが学習するときに使う情報はどれでしょう？", "w": 1},
+   {"sc": 8, "sp": "生徒", "t": "送ってきた人の場所を覚えるから、送信元MACと、届いたポート。2つ目です。", "y": "送ってきた人の場所を覚えるから、送信元マックと、届いたポート。2つ目です。"},
+   {"sc": 8, "sp": "先生", "t": "正解です。"},
+   {"sc": 9, "sp": "先生", "t": "最後のかたまりです。表に書いた行は、ずっと残るでしょうか？"},
+   {"sc": 9, "sp": "生徒", "t": "残ってくれたほうが、便利そうですけど…"},
+   {"sc": 9, "sp": "先生", "t": "でも、PCを別のポートに移したら、どうなります？", "y": "でも、ピーシーを別のポートに移したら、どうなります？"},
+   {"sc": 9, "sp": "生徒", "t": "あ、古い場所が残ってたら、届かなくなっちゃう。"},
+   {"sc": 9, "sp": "先生", "t": "そうです。だから、しばらく通信がない行は消します。これをエージングと言います。"},
+   {"sc": 9, "sp": "先生", "t": "Ciscoのスイッチでは、初期値が300秒、5分です。", "y": "シスコのスイッチでは、初期値が300秒、5分です。"},
+   {"sc": 9, "sp": "生徒", "t": "消えても、また通信すれば、すぐ覚え直すんですね。"},
+   {"sc": 10, "sp": "先生", "t": "確認です。通信がない行が消える仕組みと、Ciscoの初期値の組み合わせはどれでしょう？", "y": "確認です。通信がない行が消える仕組みと、シスコの初期値の組み合わせはどれでしょう？", "w": 1},
+   {"sc": 10, "sp": "生徒", "t": "エージングで、300秒。1つ目です。"},
+   {"sc": 10, "sp": "先生", "t": "正解です。"},
+   {"sc": 11, "sp": "生徒", "t": "先生、最初、宛先のMACで学習すると思ってました。", "y": "先生、最初、宛先のマックで学習すると思ってました。"},
+   {"sc": 11, "sp": "先生", "t": "よくあるまちがいです。宛先は、まだ一度も通信していないかもしれませんよね。"},
+   {"sc": 11, "sp": "先生", "t": "スイッチが確実にわかるのは、送ってきた機器の場所だけです。"},
+   {"sc": 11, "sp": "生徒", "t": "学習は送信元、転送は宛先。"},
+   {"sc": 11, "sp": "先生", "t": "その通り。それから、フラッディングは故障ではありません。"},
+   {"sc": 11, "sp": "生徒", "t": "知らない宛先は、まず全員に聞く。ふつうの動きなんですね。"},
+   {"sc": 12, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 12, "sp": "先生", "t": "1つ目。MACアドレステーブルは、MACアドレスとポートの対応表。", "y": "1つ目。マックアドレステーブルは、マックアドレスとポートの対応表。"},
+   {"sc": 12, "sp": "先生", "t": "2つ目。送信元で学習し、知らない宛先はフラッディング。"},
+   {"sc": 12, "sp": "先生", "t": "3つ目。通信がない行はエージングで消える。初期値300秒。"},
+   {"sc": 12, "sp": "生徒", "t": "スイッチって、すごく賢いんですね。"},
+   {"sc": 12, "sp": "先生", "t": "次回は、ポートの状態を、コマンドで読み取ります。お疲れさまでした。"}
+  ]
+ }
+}
