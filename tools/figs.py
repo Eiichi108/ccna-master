@@ -37,6 +37,13 @@ def T(x, y, s, size=13, weight=700, fill=INK, anchor="start", mono=False, halo=T
     return f'<text x="{x}" y="{y}" text-anchor="{anchor}" style="font:{weight} {size}px {F};fill:{fill}{st}">{_esc(s)}</text>'
 
 
+def _fit(s, size, smallest, room=316):
+    """囲みの中の文字が入りきらないときだけ、smallest まで少しずつ小さくする。"""
+    while _w(s, size) > room and size > smallest:
+        size = round(size - 0.5, 1)
+    return size
+
+
 def svg(h, label, body):
     return f'<svg class="tbfig" viewBox="0 0 360 {h:.1f}" role="img" aria-label="{_esc(label)}">{body}</svg>'
 
@@ -47,9 +54,9 @@ def boxes(label, items):
     for title, subs, col in items:
         h = 40.5 + 17 * len(subs)
         out.append(f'<rect x="10" y="{y}" width="340" height="{h}" rx="12" fill="{col}" opacity=".1"/>')
-        out.append(T(24, y + 25.5, title, 14.5, 800))
+        out.append(T(24, y + 25.5, title, _fit(title, 14.5, 12), 800))
         for i, s in enumerate(subs):
-            out.append(T(24, y + 44.5 + 17 * i, s, 12.5, 600, SUB))
+            out.append(T(24, y + 44.5 + 17 * i, s, _fit(s, 12.5, 11), 600, SUB))
         y += h + 6
     return svg(y + 4, label, "".join(out))
 

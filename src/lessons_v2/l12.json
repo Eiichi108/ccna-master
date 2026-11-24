@@ -1,0 +1,168 @@
+{
+ "r": "TB",
+ "n": 12,
+ "t": "ポート番号",
+ "d": "d1",
+ "form": "対決",
+ "need": [11],
+ "goal": ["ポート番号の役割がわかる", "よく出るポート番号を言える", "FTPとTFTPの違いがわかる"],
+ "terms": ["ポート番号", "FTP", "TFTP"],
+ "pages": [
+  {
+   "t": "建物はわかった。部屋は？",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 124.0\" role=\"img\" aria-label=\"つかみ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"110\" rx=\"16\" fill=\"#0a5cff\" opacity=\".12\"/><text x=\"180\" y=\"44\" text-anchor=\"middle\" style=\"font:800 15.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">パソコン1台で、Webもメールもゲームも同時に</text><text x=\"180\" y=\"74\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">届いたデータは、どのアプリあて？</text><text x=\"180\" y=\"94\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">IPアドレスだけでは決められません</text></svg>",
+   "b": "あなたのパソコンでは、ブラウザ、メール、ゲームが同時に動いていることがありますよね。データが届いたとき、それが<b>どのアプリあて</b>なのか、どうやって見分けているのでしょう？ IPアドレスでわかるのは「どのパソコンか」まで。今日は、その先を見分ける<b>ポート番号</b>を学びます。"
+  },
+  {
+   "t": "今日のゴール",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のゴール\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1. ポート番号の役割がわかる</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">どのアプリあてかを見分ける番号</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2. よく出るポート番号を言える</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">HTTPS 443・SSH 22・DNS 53 など</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">3. FTPとTFTPの違いがわかる</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">TCPで認証あり／UDPで認証なし</text></svg>"
+  },
+  {
+   "t": "ポート番号 ＝ 部屋番号",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"ポート番号\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">IPアドレス ＝ 建物の住所</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">どのパソコン（サーバー）か</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ポート番号 ＝ 部屋番号</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">そのパソコンの中の、どのアプリか</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">例：203.0.113.10 の 443番</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">そのサーバーの、HTTPS（Web）の係あて</text></svg>",
+   "b": "IPアドレスがマンションの<b>住所</b>なら、<b>ポート番号</b>は<b>部屋番号</b>です。同じ住所（同じパソコン）の中でも、部屋番号（ポート番号）で<b>どのアプリあてか</b>を見分けます。ポート番号は、第4層のTCPやUDPの送り状に書かれています。",
+   "p": "IP＝どの機器か、ポート番号＝その中のどのアプリか。"
+  },
+  {
+   "t": "サーバーの番号は決まっている",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"送信元と宛先のポート\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">宛先ポート（サーバー側）</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">サービスごとに決まった番号（例：HTTPS は 443）</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">送信元ポート（クライアント側）</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">通信のたびに、空いている番号を選ぶ（例：51234）</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">返事は、送信元ポートあてに戻ってくる</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">だから同じアプリの複数の画面も見分けられる</text></svg>",
+   "b": "サーバー側の番号は、サービスごとに<b>決まった番号</b>を使います。Webを見せるサーバーなら443番、というようにです。一方、クライアント側は、通信のたびに<b>空いている番号</b>を選んで送信元ポートにします。サーバーの返事はその番号あてに戻ってくるので、ブラウザでタブを何個開いていても、混ざらずに届きます。"
+  },
+  {
+   "t": "確認の問題 1",
+   "quiz": {
+    "q": "ポート番号の役割として、正しいものはどれでしょう？",
+    "o": [
+     ["どのアプリあてのデータかを見分ける", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["どのネットワークにいるかを表す", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["機器に最初から付いている名札", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 0,
+    "e": "ポート番号は、機器の中の<b>どのアプリあてか</b>を見分ける番号です。ネットワークの場所はIPアドレス、機器の名札はMACアドレスです。"
+   }
+  },
+  {
+   "t": "よく出るポート番号（TCP）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 264.0\" role=\"img\" aria-label=\"TCPのポート番号\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">HTTP 80 ／ HTTPS 443</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Webページを見る（HTTPSは暗号化あり）</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">SSH 22 ／ Telnet 23</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">機器にリモートでログイン（SSHは暗号化あり）</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">SMTP 25</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">メールを送る</text><rect x=\"10\" y=\"196.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#8a3ffc\" opacity=\".1\"/><text x=\"24\" y=\"222.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">FTP 20・21</text><text x=\"24\" y=\"241.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ファイルを転送する</text></svg>",
+   "b": "CCNAでよく出るTCPのポート番号です。Webは<b>HTTP 80</b>と<b>HTTPS 443</b>、機器へのリモートログインは<b>SSH 22</b>と<b>Telnet 23</b>、メールの送信は<b>SMTP 25</b>、ファイル転送は<b>FTP 20・21</b>。HTTPSとSSHは通信を暗号化するので、今はこちらを使うのが基本です。"
+  },
+  {
+   "t": "よく出るポート番号（UDP）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 264.0\" role=\"img\" aria-label=\"UDPのポート番号\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">DNS 53</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">名前からIPアドレスを調べる（TCPを使うこともある）</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">DHCP 67・68</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">IPアドレスを自動でもらう</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">TFTP 69</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">かんたんなファイル転送</text><rect x=\"10\" y=\"196.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#8a3ffc\" opacity=\".1\"/><text x=\"24\" y=\"222.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">NTP 123 ／ SNMP 161</text><text x=\"24\" y=\"241.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">時刻を合わせる／機器を監視する</text></svg>",
+   "b": "UDPで使う代表的な番号です。名前を調べる<b>DNS 53</b>、IPアドレスを自動でもらう<b>DHCP 67・68</b>、かんたんなファイル転送の<b>TFTP 69</b>、時刻合わせの<b>NTP 123</b>、機器の監視の<b>SNMP 161</b>。どれも短いやりとりが中心なので、身軽なUDPを使います。"
+  },
+  {
+   "t": "確認の問題 2",
+   "quiz": {
+    "q": "暗号化されたWebページ（HTTPS）を見るときに使う、サーバー側のポート番号はどれでしょう？",
+    "o": [
+     ["80", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["443", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["22", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "HTTPSは <b>TCP 443</b> です。80 は暗号化なしのHTTP、22 はSSHです。"
+   }
+  },
+  {
+   "t": "FTPとTFTP、どう違う？",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 171.0\" role=\"img\" aria-label=\"FTPとTFTP\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">FTP（TCP 20・21）</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ユーザー名とパスワードでログインする</text><text x=\"24\" y=\"67.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">命令用とデータ用の、2つの接続を使う</text><rect x=\"10\" y=\"86.5\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"112.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">TFTP（UDP 69）</text><text x=\"24\" y=\"131.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ログインなし。とてもシンプル</text><text x=\"24\" y=\"148.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ルーターのソフト（IOS）の入れかえなどで使う</text></svg>",
+   "b": "名前が似ている<b>FTP</b>と<b>TFTP</b>は、試験でよく比べられます。FTPは<b>TCP</b>を使い、<b>ユーザー名とパスワード</b>でログインし、命令用（21）とデータ用（20）の2つの接続を使います。TFTPは<b>UDP 69</b>で、<b>ログインなし</b>のシンプルな方式です。ルーターのソフトを入れかえるときなど、社内の決まった場所で使います。",
+   "p": "FTP＝TCP・ログインあり、TFTP＝UDP 69・ログインなし。"
+  },
+  {
+   "t": "確認の問題 3",
+   "quiz": {
+    "q": "ログインなしで使え、UDP 69番を使うファイル転送の方式はどれでしょう？",
+    "o": [
+     ["FTP", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["TFTP", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["SSH", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "UDP 69・ログインなしは<b>TFTP</b>です。FTPはTCPで、ログインが必要です。"
+   }
+  },
+  {
+   "t": "まちがえやすい所",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"2つの「ポート」\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× ポート番号 ＝ スイッチの差し込み口の番号</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">どちらも「ポート」と呼ぶので混ざりやすい</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ ポート番号：アプリを見分ける番号（第4層）</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">例：443番 ＝ HTTPS</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ スイッチのポート：ケーブルを挿す口（第1層）</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">例：Gi0/1 ＝ 1番目の差し込み口</text></svg>",
+   "b": "「ポート」という言葉は、2つの意味で使われます。今日学んだ<b>ポート番号</b>は、アプリを見分ける第4層の番号です。もう1つは、スイッチやルーターの<b>ケーブルを挿す口</b>のことです。たとえば「Gi0/1」はケーブルを挿す口の名前で、443番とはまったく別物です。文の流れで、どちらの意味かを見分けましょう。"
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ポート番号 ＝ 部屋番号</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">IPでどの機器か、ポート番号でどのアプリか</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">よく出る番号</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">HTTP 80・HTTPS 443・SSH 22・Telnet 23・DNS 53</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">FTPとTFTP</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">TCP・ログインあり／UDP 69・ログインなし</text></svg>",
+   "b": "これで、データが「どの機器の、どのアプリに」届くかがわかりました。次回は、データを運ぶ<b>ケーブル</b>の種類を学びます。"
+  }
+ ],
+ "cls": {
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "パソコンで、ブラウザとメールとゲームを、同時に開くことはありますか？"},
+   {"sc": 1, "sp": "生徒", "t": "しょっちゅうです。音楽も流してます。"},
+   {"sc": 1, "sp": "先生", "t": "では、データが届いたとき、どのアプリあてか、どうやって見分けているんでしょう？"},
+   {"sc": 1, "sp": "生徒", "t": "IPアドレス…でも、パソコンは1台だから、IPアドレスは同じですよね。", "y": "アイピーアドレス…でも、パソコンは1台だから、アイピーアドレスは同じですよね。"},
+   {"sc": 1, "sp": "先生", "t": "そうなんです。IPアドレスでわかるのは、どのパソコンか、まで。", "y": "そうなんです。アイピーアドレスでわかるのは、どのパソコンか、まで。"},
+   {"sc": 1, "sp": "生徒", "t": "じゃあ、その先は？"},
+   {"sc": 1, "sp": "先生", "t": "それが、今日のポート番号です。"},
+   {"sc": 2, "sp": "先生", "t": "今日のゴールは3つです。"},
+   {"sc": 2, "sp": "先生", "t": "1つ目、ポート番号の役割がわかること。"},
+   {"sc": 2, "sp": "先生", "t": "2つ目、よく出るポート番号を言えること。"},
+   {"sc": 2, "sp": "先生", "t": "3つ目、名前の似ているFTPとTFTPの違いがわかることです。"},
+   {"sc": 2, "sp": "生徒", "t": "番号の暗記、ちょっと不安です…"},
+   {"sc": 2, "sp": "先生", "t": "よく出るのは限られているので、大丈夫ですよ。"},
+   {"sc": 3, "sp": "先生", "t": "IPアドレスが、マンションの住所だとしましょう。", "y": "アイピーアドレスが、マンションの住所だとしましょう。"},
+   {"sc": 3, "sp": "先生", "t": "ポート番号は、そのマンションの部屋番号です。"},
+   {"sc": 3, "sp": "生徒", "t": "住所で建物まで来て、部屋番号で部屋を見分ける？"},
+   {"sc": 3, "sp": "先生", "t": "その通り。同じパソコンの中の、どのアプリあてかを、ポート番号で見分けます。"},
+   {"sc": 3, "sp": "生徒", "t": "ポート番号は、どこに書いてあるんですか？"},
+   {"sc": 3, "sp": "先生", "t": "第4層の、TCPやUDPの送り状に書いてあります。", "y": "第4層の、ティーシーピーやユーディーピーの送り状に書いてあります。"},
+   {"sc": 4, "sp": "先生", "t": "サーバー側の番号は、サービスごとに決まっています。"},
+   {"sc": 4, "sp": "先生", "t": "たとえば、Webページを見せるサーバーなら、443番です。"},
+   {"sc": 4, "sp": "生徒", "t": "クライアント側、私のパソコンのほうは？"},
+   {"sc": 4, "sp": "先生", "t": "通信のたびに、空いている番号を選んで使います。51234番、のようにです。"},
+   {"sc": 4, "sp": "先生", "t": "サーバーの返事は、その番号あてに戻ってきます。"},
+   {"sc": 4, "sp": "生徒", "t": "だから、タブをたくさん開いても、混ざらないんですね。"},
+   {"sc": 5, "sp": "先生", "t": "確認です。ポート番号の役割として、正しいものはどれでしょう？", "w": 1},
+   {"sc": 5, "sp": "生徒", "t": "どのアプリあてかを見分ける。1つ目です。"},
+   {"sc": 5, "sp": "先生", "t": "正解です。"},
+   {"sc": 6, "sp": "先生", "t": "では、よく出る番号です。まずTCPから。", "y": "では、よく出る番号です。まずティーシーピーから。"},
+   {"sc": 6, "sp": "先生", "t": "Webページは、HTTPが80番、暗号化するHTTPSが443番。", "y": "Webページは、エイチティーティーピーが80番、暗号化するエイチティーティーピーエスが443番。"},
+   {"sc": 6, "sp": "先生", "t": "機器へのリモートログインは、SSHが22番、Telnetが23番。", "y": "機器へのリモートログインは、エスエスエイチが22番、テルネットが23番。"},
+   {"sc": 6, "sp": "生徒", "t": "SSHとTelnetは、どう違うんですか？", "y": "エスエスエイチとテルネットは、どう違うんですか？"},
+   {"sc": 6, "sp": "先生", "t": "SSHは暗号化しますが、Telnetはしません。だから今はSSHを使うのが基本です。", "y": "エスエスエイチは暗号化しますが、テルネットはしません。だから今はエスエスエイチを使うのが基本です。"},
+   {"sc": 6, "sp": "先生", "t": "メールを送るSMTPが25番、ファイル転送のFTPが20番と21番です。", "y": "メールを送るエスエムティーピーが25番、ファイル転送のFTPが20番と21番です。"},
+   {"sc": 6, "sp": "生徒", "t": "FTPだけ、番号が2つあるんですね。"},
+   {"sc": 6, "sp": "先生", "t": "いいところに気づきました。理由は、最後のかたまりで話します。"},
+   {"sc": 7, "sp": "先生", "t": "次は、UDPで使う番号です。", "y": "次は、ユーディーピーで使う番号です。"},
+   {"sc": 7, "sp": "先生", "t": "名前を調べるDNSが53番、IPアドレスを自動でもらうDHCPが67番と68番。", "y": "名前を調べるディーエヌエスが53番、アイピーアドレスを自動でもらうディーエイチシーピーが67番と68番。"},
+   {"sc": 7, "sp": "先生", "t": "かんたんなファイル転送のTFTPが69番です。"},
+   {"sc": 7, "sp": "生徒", "t": "どれも、短いやりとりで済みそうなものばかりですね。"},
+   {"sc": 7, "sp": "先生", "t": "その通り。だから、身軽なUDPを使うんです。", "y": "その通り。だから、身軽なユーディーピーを使うんです。"},
+   {"sc": 8, "sp": "先生", "t": "確認です。HTTPSのポート番号はどれでしょう？", "y": "確認です。エイチティーティーピーエスのポート番号はどれでしょう？", "w": 1},
+   {"sc": 8, "sp": "生徒", "t": "443番です！"},
+   {"sc": 8, "sp": "先生", "t": "正解です。80番は暗号化なしのHTTPですね。", "y": "正解です。80番は暗号化なしのエイチティーティーピーですね。"},
+   {"sc": 9, "sp": "先生", "t": "最後のかたまりです。FTPとTFTP、名前がそっくりですよね。"},
+   {"sc": 9, "sp": "生徒", "t": "Tが付いてるかどうかだけです。"},
+   {"sc": 9, "sp": "先生", "t": "FTPは、TCPを使って、ユーザー名とパスワードでログインします。", "y": "FTPは、ティーシーピーを使って、ユーザー名とパスワードでログインします。"},
+   {"sc": 9, "sp": "先生", "t": "TFTPは、UDPの69番で、ログインなし。とてもシンプルです。", "y": "TFTPは、ユーディーピーの69番で、ログインなし。とてもシンプルです。"},
+   {"sc": 9, "sp": "生徒", "t": "ログインなしって、危なくないですか？"},
+   {"sc": 9, "sp": "先生", "t": "いい疑問です。だから、社内の決まった場所だけで使います。"},
+   {"sc": 9, "sp": "先生", "t": "ルーターのソフトを入れかえるときなどに、よく使われます。"},
+   {"sc": 10, "sp": "先生", "t": "確認です。ログインなしで、UDPの69番を使うのはどれでしょう？", "y": "確認です。ログインなしで、ユーディーピーの69番を使うのはどれでしょう？", "w": 1},
+   {"sc": 10, "sp": "生徒", "t": "TFTPです。"},
+   {"sc": 10, "sp": "先生", "t": "正解です。"},
+   {"sc": 10, "sp": "生徒", "t": "FTPはTCPでログインあり、TFTPはUDPでログインなし。対で覚えます。", "y": "FTPはティーシーピーでログインあり、TFTPはユーディーピーでログインなし。対で覚えます。"},
+   {"sc": 11, "sp": "生徒", "t": "先生、ポートって、スイッチのケーブルを挿す口のことじゃないんですか？"},
+   {"sc": 11, "sp": "先生", "t": "いい質問です。ポートという言葉には、2つの意味があるんです。"},
+   {"sc": 11, "sp": "先生", "t": "今日のポート番号は、アプリを見分ける、第4層の番号です。"},
+   {"sc": 11, "sp": "先生", "t": "スイッチのポートは、ケーブルを挿す口。たとえば、ジー・アイ・ゼロ・スラッシュ・イチ。"},
+   {"sc": 11, "sp": "生徒", "t": "同じポートでも、まったく別物なんですね。"},
+   {"sc": 11, "sp": "先生", "t": "そうです。文の流れで、どちらの意味か見分けましょう。"},
+   {"sc": 12, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 12, "sp": "先生", "t": "1つ目。ポート番号は部屋番号。どのアプリあてかを見分ける。"},
+   {"sc": 12, "sp": "先生", "t": "2つ目。HTTP 80、HTTPS 443、SSH 22、Telnet 23、DNS 53。", "y": "2つ目。エイチティーティーピー 80、エイチティーティーピーエス 443、エスエスエイチ 22、テルネット 23、ディーエヌエス 53。"},
+   {"sc": 12, "sp": "先生", "t": "3つ目。FTPはTCPでログインあり、TFTPはUDP 69でログインなし。", "y": "3つ目。FTPはティーシーピーでログインあり、TFTPはユーディーピー 69でログインなし。"},
+   {"sc": 12, "sp": "生徒", "t": "データが、どの機器のどのアプリに届くか、全部つながりました。"},
+   {"sc": 12, "sp": "先生", "t": "次回は、データを運ぶケーブルの種類を学びます。お疲れさまでした。"}
+  ]
+ }
+}
