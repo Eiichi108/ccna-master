@@ -3,14 +3,10 @@
   "id": "P20-01",
   "k": "one",
   "tag": "VLAN",
+  "lv": 1,
   "page": 0,
   "t": "1台のスイッチで、経理部をVLAN 15、設計部をVLAN 25に分けました。経理部のPCと設計部のPCが通信するために必要な機器はどれですか。",
-  "o": [
-   "リピーターハブ",
-   "ルーターまたはL3スイッチ",
-   "L2スイッチをもう1台",
-   "無線アクセスポイント"
-  ],
+  "o": ["リピーターハブ", "ルーターまたはL3スイッチ", "L2スイッチをもう1台", "無線アクセスポイント"],
   "a": 1,
   "e": "VLANが違えば<b>別のネットワーク</b>（別のブロードキャストドメイン）です。VLANどうしの通信には、<b>ルーターかL3スイッチ</b>でVLAN間ルーティングを行う必要があります。",
   "m": "VLANをまたぐ通信＝L3の機器が必要"
@@ -19,14 +15,10 @@
   "id": "P20-02",
   "k": "one",
   "tag": "VLAN",
+  "lv": 1,
   "page": 1,
   "t": "802.1Qのトランクで、ネイティブVLANに属するフレームはどのように送られますか。",
-  "o": [
-   "8バイトのタグを付けて送る",
-   "タグを付けずに送る",
-   "すべてのVLANのタグを重ねて付けて送る",
-   "トランクでは送られずに破棄される"
-  ],
+  "o": ["8バイトのタグを付けて送る", "タグを付けずに送る", "すべてのVLANのタグを重ねて付けて送る", "トランクでは送られずに破棄される"],
   "a": 1,
   "e": "トランクでは各フレームに<b>802.1Qタグ</b>を付けてVLANを区別しますが、<b>ネイティブVLANのフレームだけはタグを付けずに</b>送ります。ネイティブVLANの初期値はVLAN 1です。",
   "m": "ネイティブVLAN＝タグなし、初期値は1"
@@ -35,14 +27,10 @@
   "id": "P20-03",
   "k": "one",
   "tag": "VLAN",
+  "lv": 2,
   "page": 3,
   "t": "SW5のGi0/24がトランクとして動いているか、またトランクで許可されているVLANとネイティブVLANが何かを確かめたいと考えています。最も適切なコマンドはどれですか。",
-  "o": [
-   "show vlan brief",
-   "show interfaces trunk",
-   "show mac address-table",
-   "show ip interface brief"
-  ],
+  "o": ["show vlan brief", "show interfaces trunk", "show mac address-table", "show ip interface brief"],
   "a": 1,
   "e": "トランクの状態・許可VLAN・ネイティブVLANは <b>show interfaces trunk</b>（または show interfaces g0/24 switchport）で確認します。show vlan brief にはトランクのポートが表示されません。",
   "m": "トランクの確認＝show interfaces trunk"
@@ -51,19 +39,11 @@
   "id": "P20-04",
   "k": "multi",
   "tag": "VLAN",
+  "lv": 1,
   "page": 1,
   "t": "VLANと802.1Qについて、正しい説明はどれですか。2つ選んでください。",
-  "o": [
-   "802.1Qのタグは4バイトで、中に12ビットのVLAN IDが入る",
-   "VLAN 1 は no vlan 1 で削除できる",
-   "通常のVLAN IDとして使えるのは 1〜4094 である",
-   "アクセスポートは、複数のVLANのフレームをタグ付きで運ぶ",
-   "ネイティブVLANの初期値は VLAN 99 である"
-  ],
-  "a": [
-   0,
-   2
-  ],
+  "o": ["802.1Qのタグは4バイトで、中に12ビットのVLAN IDが入る", "VLAN 1 は no vlan 1 で削除できる", "通常のVLAN IDとして使えるのは 1〜4094 である", "アクセスポートは、複数のVLANのフレームをタグ付きで運ぶ", "ネイティブVLANの初期値は VLAN 99 である"],
+  "a": [0, 2],
   "e": "<b>802.1Qタグは4バイト</b>で、送信元MACとタイプの間に入り、12ビットのVLAN IDを持ちます。VLAN IDは<b>1〜4094</b>が使えます。VLAN 1 はデフォルトVLANで削除できず、ネイティブVLANの初期値も VLAN 1 です。",
   "m": "タグ4バイト、ID1〜4094、VLAN1は消せない"
  },
@@ -71,14 +51,10 @@
   "id": "P20-05",
   "k": "one",
   "tag": "VLAN",
+  "lv": 2,
   "page": 2,
   "t": "SW1のGi0/1は switchport mode dynamic desirable、向かい側のSW2のGi0/1は switchport mode dynamic auto に設定されています。このリンクはどうなりますか。",
-  "o": [
-   "トランクになる",
-   "アクセスポートになる",
-   "err-disabled になる",
-   "DTPが止まり、リンクがダウンする"
-  ],
+  "o": ["トランクになる", "アクセスポートになる", "err-disabled になる", "DTPが止まり、リンクがダウンする"],
   "a": 0,
   "e": "<b>desirable</b>は自分からトランクに誘い、<b>auto</b>は誘われたときだけトランクになるので、この組み合わせは<b>トランク</b>になります。auto どうしの場合は、どちらも誘わないのでアクセスポートになります。",
   "m": "desirable＝誘う、auto＝待つ"
@@ -87,17 +63,13 @@
   "id": "P20-06",
   "k": "one",
   "tag": "VLAN",
+  "lv": 2,
   "page": 3,
   "t": "図を参照してください。SW1とSW2はGi0/1どうしのトランクでつながっています。VLAN 10とVLAN 20のPCはスイッチをまたいで通信できますが、新しく作ったVLAN 30のPCどうしは通信できません。原因として正しいものはどれですか。",
   "x": "SW1# show interfaces trunk\nPort   Mode  Encapsulation  Status    Native vlan\nGi0/1  on    802.1q         trunking  1\n\nPort   Vlans allowed on trunk\nGi0/1  10,20\n\nPort   Vlans allowed and active in management domain\nGi0/1  10,20",
   "rd": "①Status は trunking でトランクは成立<br>②Vlans allowed on trunk の行を見る<br>③30 が許可リストに入っていない",
   "rg": "vlan",
-  "o": [
-   "ネイティブVLANが一致していない",
-   "Gi0/1 がアクセスポートになっている",
-   "VLAN 30 がトランクで許可されていない",
-   "DTPが無効になっている"
-  ],
+  "o": ["ネイティブVLANが一致していない", "Gi0/1 がアクセスポートになっている", "VLAN 30 がトランクで許可されていない", "DTPが無効になっている"],
   "a": 2,
   "e": "トランクは成立していますが、<b>許可VLANのリスト</b>が 10,20 だけです。<b>許可リストにないVLANはトランクを通れない</b>ため、VLAN 30 のフレームが相手のスイッチに届きません。",
   "m": "許可リストにないVLANはトランクを通れない"
@@ -106,17 +78,13 @@
   "id": "P20-07",
   "k": "one",
   "tag": "VLAN",
+  "lv": 2,
   "page": 3,
   "t": "図を参照してください。Gi0/2のトランクで、いま通しているVLANはそのままにして、VLAN 40も通るようにしたいと考えています。インターフェース設定モードで入力するコマンドはどれですか。",
   "x": "SW2# show running-config interface g0/2\ninterface GigabitEthernet0/2\n switchport mode trunk\n switchport trunk allowed vlan 10,20,30",
   "rd": "①switchport mode trunk でトランクに固定<br>②allowed vlan の行が現在の許可リスト<br>③このリストを残したまま40を加える",
   "rg": "run",
-  "o": [
-   "switchport trunk allowed vlan 40",
-   "switchport trunk allowed vlan add 40",
-   "switchport access vlan 40",
-   "switchport trunk native vlan 40"
-  ],
+  "o": ["switchport trunk allowed vlan 40", "switchport trunk allowed vlan add 40", "switchport access vlan 40", "switchport trunk native vlan 40"],
   "a": 1,
   "e": "<b>add</b> を付けると、今の許可リストに40が<b>追加</b>されます。add なしで allowed vlan 40 と打つと、リストが40だけに<b>上書き</b>され、10・20・30が通らなくなります。",
   "m": "許可VLANの追加はadd、忘れると上書き"
@@ -125,17 +93,13 @@
   "id": "P20-08",
   "k": "one",
   "tag": "VLAN",
+  "lv": 2,
   "page": 1,
   "t": "図を参照してください。SW1にこのメッセージが表示されました。原因として正しいものはどれですか。",
   "x": "SW1#\n%CDP-4-NATIVE_VLAN_MISMATCH: Native VLAN mismatch\n discovered on GigabitEthernet0/1 (1), with SW2\n GigabitEthernet0/1 (99).\n\nSW1# show interfaces trunk\nPort   Mode  Encapsulation  Status    Native vlan\nGi0/1  on    802.1q         trunking  1",
   "rd": "①メッセージの中の Native VLAN mismatch を読む<br>②かっこの数字はSW1が1、SW2が99<br>③show interfaces trunk でもSW1側は1",
   "rg": "log",
-  "o": [
-   "トランクの両端で、ネイティブVLANが一致していない",
-   "VLAN 99 がSW1で作られていない",
-   "トランクのカプセル化が ISL になっている",
-   "Gi0/1 が shutdown されている"
-  ],
+  "o": ["トランクの両端で、ネイティブVLANが一致していない", "VLAN 99 がSW1で作られていない", "トランクのカプセル化が ISL になっている", "Gi0/1 が shutdown されている"],
   "a": 0,
   "e": "SW1側のネイティブVLANは1、SW2側は99で、<b>ネイティブVLANの不一致</b>が起きています。トランクの両端でネイティブVLANを<b>そろえる</b>必要があり、そろえないとVLANが混ざるおそれがあります。",
   "m": "トランク両端のnative vlanはそろえる"
@@ -144,17 +108,13 @@
   "id": "P20-09",
   "k": "one",
   "tag": "VLAN",
+  "lv": 2,
   "page": 3,
   "t": "図を参照してください。SW3のGi0/24はSW4とつながっていて、up / up で正常に通信できています。それなのに、この出力にGi0/24が表示されない理由として正しいものはどれですか。",
   "x": "SW3# show vlan brief\n\nVLAN Name        Status    Ports\n---- ----------- --------- --------------------\n1    default     active    Gi0/3, Gi0/4\n10   SALES       active    Gi0/1\n20   DEV         active    Gi0/2",
   "rd": "①Ports 列には各VLANのアクセスポートが並ぶ<br>②Gi0/24 はどのVLANの行にもない<br>③Gi0/24 は up / up で動作している",
   "rg": "vlan",
-  "o": [
-   "Gi0/24 がトランクポートだから",
-   "Gi0/24 が err-disabled になっているから",
-   "Gi0/24 が VLAN 1 から削除されたから",
-   "Gi0/24 にIPアドレスが設定されていないから"
-  ],
+  "o": ["Gi0/24 がトランクポートだから", "Gi0/24 が err-disabled になっているから", "Gi0/24 が VLAN 1 から削除されたから", "Gi0/24 にIPアドレスが設定されていないから"],
   "a": 0,
   "e": "<b>show vlan brief</b> は、VLANと<b>アクセスポート</b>の一覧で、<b>トランクポートは表示されません</b>。トランクの状態は show interfaces trunk で確かめます。",
   "m": "show vlan briefにトランクは出ない"
@@ -163,14 +123,10 @@
   "id": "P20-10",
   "k": "one",
   "tag": "VLAN",
+  "lv": 2,
   "page": 2,
   "t": "スイッチ間のポートを switchport mode trunk でトランクに固定しました。さらに、DTP（Dynamic Trunking Protocol）のやり取りを止めて、セキュリティを高めたいと考えています。追加するコマンドはどれですか。",
-  "o": [
-   "switchport mode dynamic auto",
-   "switchport nonegotiate",
-   "switchport trunk native vlan 1",
-   "no switchport"
-  ],
+  "o": ["switchport mode dynamic auto", "switchport nonegotiate", "switchport trunk native vlan 1", "no switchport"],
   "a": 1,
   "e": "<b>switchport nonegotiate</b> は、DTPのメッセージを送らないようにするコマンドです。トランクに固定したポートでは、DTPを止めておくことが推奨されます。",
   "m": "DTPを止める＝switchport nonegotiate"
@@ -179,14 +135,10 @@
   "id": "P20-11",
   "k": "order",
   "tag": "VLAN",
+  "lv": 2,
   "page": 1,
   "t": "VLAN 30 を作って「STOCK」と名前を付け、そのあとポート Gi0/7 をVLAN 30 のアクセスポートにします。グローバル設定モードから入力するコマンドを、正しい順に並べてください。",
-  "o": [
-   "vlan 30",
-   "name STOCK",
-   "interface g0/7",
-   "switchport access vlan 30"
-  ],
+  "o": ["vlan 30", "name STOCK", "interface g0/7", "switchport access vlan 30"],
   "e": "まず <b>vlan 30</b> でVLANを作り、そのVLANの設定モードで <b>name</b> を付けます。次に <b>interface</b> でポートに入り、<b>switchport access vlan 30</b> で所属するVLANを指定します（実際は <b>switchport mode access</b> もあわせて入れます）。",
   "m": "VLAN作成→名前→ポートへ→所属VLAN"
  },
@@ -194,25 +146,14 @@
   "id": "P20-12",
   "k": "match",
   "tag": "VLAN",
+  "lv": 1,
   "page": 2,
   "t": "switchport mode の設定と、そのポートの動きを正しく組み合わせてください。",
   "o": [
-   [
-    "access",
-    "トランクにならず、アクセスポートに固定される"
-   ],
-   [
-    "trunk",
-    "トランクに固定される"
-   ],
-   [
-    "dynamic desirable",
-    "自分からトランクに誘う"
-   ],
-   [
-    "dynamic auto",
-    "誘われたときだけトランクになる"
-   ]
+   ["access", "トランクにならず、アクセスポートに固定される"],
+   ["trunk", "トランクに固定される"],
+   ["dynamic desirable", "自分からトランクに誘う"],
+   ["dynamic auto", "誘われたときだけトランクになる"]
   ],
   "e": "<b>desirable は誘う側、auto は待つ側</b>です。なお、片方が access、片方が trunk のように両端のモードが合わないと、<b>正しく通信できず、VLANが混ざる</b>などの問題が起きます。",
   "m": "desirable誘う、auto待つ、他は固定"

@@ -3,13 +3,9 @@
   "id": "P28-01",
   "k": "one",
   "tag": "無線",
+  "lv": 1,
   "t": "WLCで新しいWLANを作り、その無線クライアントの通信を専用のVLANに流したいと考えています。WLANにひもづけるインターフェースとして、新しく作るものはどれですか。",
-  "o": [
-   "ダイナミックインターフェース",
-   "サービスポート",
-   "仮想インターフェース",
-   "ディストリビューションシステムポート"
-  ],
+  "o": ["ダイナミックインターフェース", "サービスポート", "仮想インターフェース", "ディストリビューションシステムポート"],
   "e": "<b>ダイナミックインターフェース</b>は、WLANの通信を流すVLANの出入口として作るインターフェースです。WLANをこれにひもづけると、そのWLANの通信は指定したVLANへ流れます。サービスポートは帯域外管理用、仮想インターフェースはWeb認証やDHCPリレーの宛先用、ディストリビューションシステムポートはスイッチとつなぐ物理ポートです。",
   "m": "WLAN↔VLANをつなぐのはダイナミックインターフェース",
   "page": 0,
@@ -19,18 +15,10 @@
   "id": "P28-02",
   "k": "multi",
   "tag": "無線",
+  "lv": 1,
   "t": "WLCのWLANsタブで Create New を選び、新しいWLANを作るときに必ず入力する項目はどれですか。2つ選んでください。",
-  "o": [
-   "VLAN ID",
-   "PSKのパスワード",
-   "プロファイル名",
-   "SSID",
-   "RADIUSサーバーのIPアドレス"
-  ],
-  "a": [
-   2,
-   3
-  ],
+  "o": ["VLAN ID", "PSKのパスワード", "プロファイル名", "SSID", "RADIUSサーバーのIPアドレス"],
+  "a": [2, 3],
   "e": "Create Newでは<b>プロファイル名</b>（WLCの中での管理用の名前）と<b>SSID</b>（利用者に見える無線ネットワークの名前）を入れます。VLANやセキュリティはあとから各タブで設定します。",
   "m": "新規WLAN＝プロファイル名＋SSID",
   "page": 1
@@ -39,13 +27,9 @@
   "id": "P28-03",
   "k": "one",
   "tag": "無線",
+  "lv": 2,
   "t": "図を参照してください。WLAN「SHOP-WIFI」を作りましたが、店内のスマートフォンからこのSSIDが一覧に表示されません。原因として最も考えられるものはどれですか。",
-  "o": [
-   "Broadcast SSIDが無効になっているから",
-   "Radio Policyが2.4GHzだけに制限されているから",
-   "プロファイル名とSSIDが同じ文字列だから",
-   "WLANのStatusが無効（Disabled）になっているから"
-  ],
+  "o": ["Broadcast SSIDが無効になっているから", "Radio Policyが2.4GHzだけに制限されているから", "プロファイル名とSSIDが同じ文字列だから", "WLANのStatusが無効（Disabled）になっているから"],
   "a": 3,
   "e": "Generalタブの<b>Status</b>にチェックがないと、WLANが<b>無効</b>のままで電波にSSIDが乗らず、クライアントから見えません。",
   "m": "SSIDが見えない＝まずStatusを確認",
@@ -58,13 +42,9 @@
   "id": "P28-04",
   "k": "one",
   "tag": "無線",
+  "lv": 2,
   "t": "図を参照してください。社員用WLAN「STAFF」に接続した端末が、来客用のサブネットのIPアドレスを受け取ってしまいます。社員用のVLANのインターフェースはdataです。どう直せばよいですか。",
-  "o": [
-   "Interface/Interface Groupのリストで data を選ぶ",
-   "Radio Policyを 802.11a only に変える",
-   "Statusのチェックを外してから付け直す",
-   "SSIDを data に変える"
-  ],
+  "o": ["Interface/Interface Groupのリストで data を選ぶ", "Radio Policyを 802.11a only に変える", "Statusのチェックを外してから付け直す", "SSIDを data に変える"],
   "a": 0,
   "e": "クライアントの通信をどのVLAN（サブネット）に流すかは、Generalタブの<b>インターフェースの割り当て</b>で決まります。guestになっているので<b>data</b>に変えます。",
   "m": "流すVLANはInterfaceの選択で決まる",
@@ -77,13 +57,9 @@
   "id": "P28-05",
   "k": "one",
   "tag": "無線",
+  "lv": 1,
   "t": "WLCのWLANで、IP電話の音声通話用のSSIDを作ります。QoSタブで選ぶプロファイルとして適切なものはどれですか。",
-  "o": [
-   "Platinum",
-   "Silver",
-   "Gold",
-   "Bronze"
-  ],
+  "o": ["Platinum", "Silver", "Gold", "Bronze"],
   "a": 0,
   "e": "WLCのQoSプロファイルは、<b>音声がPlatinum</b>、動画がGold、普通の通信がSilver（初期値）、優先度の低い通信がBronzeです。",
   "m": "音声＝Platinum、動画＝Gold",
@@ -93,13 +69,9 @@
   "id": "P28-06",
   "k": "one",
   "tag": "無線",
+  "lv": 2,
   "t": "WLCの2つのポートを、LAG（Link Aggregation）でスイッチのGi1/0/1とGi1/0/2に束ねてつなぎます。スイッチ側のポートに設定するコマンドはどれですか。",
-  "o": [
-   "channel-group 1 mode active",
-   "channel-group 1 mode on",
-   "channel-group 1 mode desirable",
-   "channel-group 1 mode passive"
-  ],
+  "o": ["channel-group 1 mode active", "channel-group 1 mode on", "channel-group 1 mode desirable", "channel-group 1 mode passive"],
   "a": 1,
   "e": "WLCの<b>LAG</b>は、LACPもPAgPも使いません。交渉なしで束ねるため、スイッチ側は<b>mode on</b>にします。",
   "m": "WLCのLAG＝交渉なし、スイッチはmode on",
@@ -109,18 +81,10 @@
   "id": "P28-07",
   "k": "multi",
   "tag": "無線",
+  "lv": 2,
   "t": "図を参照してください。カフェの客に、全員共通のパスワードでWPA2接続させたいと考えています。この画面でチェックを入れる項目はどれですか。2つ選んでください。",
-  "o": [
-   "WPA Policy と、WPA2 Encryption の TKIP",
-   "Authentication Key Management の PSK",
-   "Authentication Key Management の欄の AES",
-   "WPA2 Policy と、WPA2 Encryption の AES",
-   "Authentication Key Management の 802.1X"
-  ],
-  "a": [
-   1,
-   3
-  ],
+  "o": ["WPA Policy と、WPA2 Encryption の TKIP", "Authentication Key Management の PSK", "Authentication Key Management の欄の AES", "WPA2 Policy と、WPA2 Encryption の AES", "Authentication Key Management の 802.1X"],
+  "a": [1, 3],
   "e": "共通のパスワードで接続させるには、暗号化に<b>WPA2 PolicyとAES</b>を選び、認証キー管理を<b>PSK</b>（事前共有キー）にします。AESは暗号化方式なので、認証キー管理の欄には入りません。",
   "m": "共通パスワード＝WPA2＋AES＋PSK",
   "page": 2,
@@ -132,13 +96,9 @@
   "id": "P28-08",
   "k": "one",
   "tag": "無線",
+  "lv": 1,
   "t": "社員がActive Directoryのユーザー名とパスワードで、1人ずつ無線LANに認証されるようにしたいと考えています。WLANのLayer 2セキュリティの設定として適切なものはどれですか。",
-  "o": [
-   "Layer 2をNoneにし、MACフィルタリングを有効にする",
-   "WPA+WPA2を選び、認証キー管理で802.1Xを有効にする",
-   "WPA+WPA2を選び、認証キー管理でPSKを有効にする",
-   "Layer 3でWebポリシーを有効にし、Layer 2をNoneにする"
-  ],
+  "o": ["Layer 2をNoneにし、MACフィルタリングを有効にする", "WPA+WPA2を選び、認証キー管理で802.1Xを有効にする", "WPA+WPA2を選び、認証キー管理でPSKを有効にする", "Layer 3でWebポリシーを有効にし、Layer 2をNoneにする"],
   "a": 1,
   "e": "会社のIDとパスワードで<b>1人ずつ認証</b>するなら、認証キー管理を<b>802.1X</b>にし、RADIUSサーバーで認証します。PSKは全員共通のパスワードです。",
   "m": "1人ずつ認証＝802.1X、共通＝PSK",
@@ -148,13 +108,9 @@
   "id": "P28-09",
   "k": "one",
   "tag": "無線",
+  "lv": 2,
   "t": "図を参照してください。WLCにRADIUSサーバーを登録しました。管理者のWLCへのログインはこのサーバーで認証できますが、無線クライアントの802.1X認証が失敗します。どう直せばよいですか。",
-  "o": [
-   "Management のチェックを外す",
-   "Server Status を Disabled にする",
-   "Network User の Enable にチェックを入れる",
-   "Port Number を 22 に変える"
-  ],
+  "o": ["Management のチェックを外す", "Server Status を Disabled にする", "Network User の Enable にチェックを入れる", "Port Number を 22 に変える"],
   "a": 2,
   "e": "RADIUSサーバーで<b>無線クライアント</b>を認証するには、サーバーの設定で<b>Network UserのEnable</b>にチェックを入れます。Managementは管理者ログイン用です。",
   "m": "無線利用者の認証＝Network User有効",
@@ -167,13 +123,9 @@
   "id": "P28-10",
   "k": "one",
   "tag": "無線",
+  "lv": 2,
   "t": "WLANをWPA2だけで動かし、63文字のパスフレーズを共通のパスワードとして使いたいと考えています。正しい設定はどれですか。",
-  "o": [
-   "WPAポリシーとWPA暗号化を無効にし、PSKの形式をASCIIにする",
-   "WPAポリシーだけを有効にし、PSKの形式をASCIIにする",
-   "認証キー管理を802.1Xにし、PSKの形式をHEXにする",
-   "WPAポリシーとWPA暗号化を無効にし、PSKの形式をHEXにする"
-  ],
+  "o": ["WPAポリシーとWPA暗号化を無効にし、PSKの形式をASCIIにする", "WPAポリシーだけを有効にし、PSKの形式をASCIIにする", "認証キー管理を802.1Xにし、PSKの形式をHEXにする", "WPAポリシーとWPA暗号化を無効にし、PSKの形式をHEXにする"],
   "a": 0,
   "e": "WPA2だけにするには<b>WPAのポリシーと暗号化を無効</b>にします。PSKは<b>ASCIIなら8〜63文字</b>、HEXなら64文字ちょうどなので、63文字ならASCIIを選びます。",
   "m": "ASCIIは8〜63文字、HEXは64文字",
@@ -183,13 +135,9 @@
   "id": "P28-11",
   "k": "one",
   "tag": "無線",
+  "lv": 1,
   "t": "研究室のWLANに、事前に登録した5台の測定器だけを接続させたいと考えています。WLANで有効にする機能として適切なものはどれですか。",
-  "o": [
-   "Fast Transition",
-   "AAAオーバーライド",
-   "MACフィルタリング",
-   "バンドセレクト"
-  ],
+  "o": ["Fast Transition", "AAAオーバーライド", "MACフィルタリング", "バンドセレクト"],
   "a": 2,
   "e": "<b>MACフィルタリング</b>は、登録したMACアドレスの<b>特定のクライアントだけ</b>を参加させる機能です。",
   "m": "特定の端末だけ参加＝MACフィルタリング",
@@ -199,13 +147,9 @@
   "id": "P28-12",
   "k": "one",
   "tag": "無線",
+  "lv": 1,
   "t": "なりすましの端末から送られる偽のアソシエーション要求を防ぎたいと考えています。WLANで行う設定として適切なものはどれですか。",
-  "o": [
-   "WLANのInterfaceをguestに変える",
-   "QoSプロファイルをPlatinumにする",
-   "PMF（保護された管理フレーム）を有効にし、カムバックタイマーを設定する",
-   "バンドセレクトを有効にする"
-  ],
+  "o": ["WLANのInterfaceをguestに変える", "QoSプロファイルをPlatinumにする", "PMF（保護された管理フレーム）を有効にし、カムバックタイマーを設定する", "バンドセレクトを有効にする"],
   "a": 2,
   "e": "<b>PMF</b>（Protected Management Frames）は管理フレームを保護し、なりすましのアソシエーション要求を防ぎます。再試行まで待たせる時間が<b>カムバックタイマー</b>です。",
   "m": "偽の管理フレーム対策＝PMF＋カムバック",
@@ -215,13 +159,9 @@
   "id": "P28-13",
   "k": "one",
   "tag": "無線",
+  "lv": 1,
   "t": "ホテルの宿泊客用WLANで、接続するとログイン用のWebページを表示し、ログインが終わるまではDHCPとDNSの通信だけを許可したいと考えています。どこで設定しますか。",
-  "o": [
-   "Security → Layer 3 でWebポリシー（Web認証）を有効にする",
-   "Advanced タブでバンドセレクトを有効にする",
-   "QoS タブでBronzeを選ぶ",
-   "Security → Layer 2 で802.1Xを有効にする"
-  ],
+  "o": ["Security → Layer 3 でWebポリシー（Web認証）を有効にする", "Advanced タブでバンドセレクトを有効にする", "QoS タブでBronzeを選ぶ", "Security → Layer 2 で802.1Xを有効にする"],
   "a": 0,
   "e": "Webページでログインさせる<b>Web認証</b>は、<b>Layer 3</b>のセキュリティで<b>Webポリシー</b>として設定します。ログインまではDHCPとDNSだけが通ります。",
   "m": "ログイン画面のWi-Fi＝L3のWeb認証",
@@ -231,13 +171,9 @@
   "id": "P28-14",
   "k": "one",
   "tag": "無線",
+  "lv": 2,
   "t": "ISE（Identity Services Engine）で認証したユーザーごとに、ISEの指示で接続先のVLANを変えたいと考えています。WLANのAdvancedタブで有効にする設定はどれですか。",
-  "o": [
-   "AAAオーバーライドの許可",
-   "MACフィルタリング",
-   "Broadcast SSID",
-   "PMF"
-  ],
+  "o": ["AAAオーバーライドの許可", "MACフィルタリング", "Broadcast SSID", "PMF"],
   "a": 0,
   "e": "<b>AAAオーバーライド</b>を許可すると、ISEなどの認証サーバーの指示で、WLANに設定したVLANなどを<b>人ごとに上書き</b>できます。",
   "m": "サーバーがVLANを決める＝AAAオーバーライド",
@@ -247,13 +183,9 @@
   "id": "P28-15",
   "k": "one",
   "tag": "無線",
+  "lv": 1,
   "t": "2.4GHzと5GHzの両方に対応した端末が、混雑した2.4GHzにばかり接続してしまいます。両対応の端末を5GHzへ誘導する機能はどれですか。",
-  "o": [
-   "LAG",
-   "バンドセレクト",
-   "Fast Transition",
-   "AAAオーバーライド"
-  ],
+  "o": ["LAG", "バンドセレクト", "Fast Transition", "AAAオーバーライド"],
   "a": 1,
   "e": "<b>バンドセレクト</b>（バンド選択）は、両方の周波数に対応した端末を<b>空いている5GHzへ誘導</b>する機能です。",
   "m": "5GHzへ誘導＝バンドセレクト",
@@ -263,13 +195,9 @@
   "id": "P28-16",
   "k": "one",
   "tag": "無線",
+  "lv": 2,
   "t": "図を参照してください。このWLANのLayer 2セキュリティの説明として正しいものはどれですか。",
-  "o": [
-   "暗号化を行わず、誰でも接続できるオープンなWLANである",
-   "GCMP（Galois/Counter Mode Protocol）による強い暗号化と、安全なハッシュを使うPSK（PSK-SHA2）を使う",
-   "802.1Xで1人ずつ認証し、暗号化にはTKIPを使う",
-   "ログイン用のWebページで認証し、暗号化にはWEPを使う"
-  ],
+  "o": ["暗号化を行わず、誰でも接続できるオープンなWLANである", "GCMP（Galois/Counter Mode Protocol）による強い暗号化と、安全なハッシュを使うPSK（PSK-SHA2）を使う", "802.1Xで1人ずつ認証し、暗号化にはTKIPを使う", "ログイン用のWebページで認証し、暗号化にはWEPを使う"],
   "a": 1,
   "e": "<b>GCMP</b>はWPA3などで使う強い暗号化方式で、Layer 2で設定します。認証キー管理の<b>PSK-SHA2</b>は、より安全なハッシュを使うPSKです。",
   "m": "GCMP＝強い暗号、PSK-SHA2＝安全なPSK",

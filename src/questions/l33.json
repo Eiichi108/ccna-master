@@ -3,13 +3,9 @@
   "id": "P33-01",
   "k": "one",
   "tag": "OSPF",
+  "lv": 1,
   "t": "ルーターの GigabitEthernet インターフェースでOSPFを有効にしたとき、OSPFのネットワークタイプの初期値はどれですか。",
-  "o": [
-   "point-to-point",
-   "non-broadcast（NBMA）",
-   "broadcast（ブロードキャスト）",
-   "loopback"
-  ],
+  "o": ["point-to-point", "non-broadcast（NBMA）", "broadcast（ブロードキャスト）", "loopback"],
   "a": 2,
   "e": "イーサネットの初期値は <b>broadcast</b> で、DRとBDRを選び、Hello 10秒／Dead 40秒です。シリアル回線の初期値は point-to-point です。",
   "m": "イーサネット＝broadcast、シリアル＝P2P",
@@ -19,13 +15,9 @@
   "id": "P33-02",
   "k": "one",
   "tag": "OSPF",
+  "lv": 2,
   "t": "2台のルーターだけをイーサネットで直結し、OSPFを動かしています。DR/BDRの選出をなくして、すぐにFullになるようにしたいと考えています。インターフェースで設定するコマンドはどれですか。",
-  "o": [
-   "ip ospf priority 255",
-   "ip ospf network broadcast",
-   "ip ospf network point-to-point",
-   "auto-cost reference-bandwidth 1000"
-  ],
+  "o": ["ip ospf priority 255", "ip ospf network broadcast", "ip ospf network point-to-point", "auto-cost reference-bandwidth 1000"],
   "a": 2,
   "e": "<b>ip ospf network point-to-point</b> にすると<b>DR/BDRの選出がなくなり</b>、相手と直接Fullになります。broadcast のままだと選出の待ち時間がかかります。",
   "m": "2台直結はpoint-to-pointで選出なし",
@@ -35,13 +27,9 @@
   "id": "P33-03",
   "k": "one",
   "tag": "OSPF",
+  "lv": 2,
   "t": "図を参照してください。R5の show ip ospf neighbor の出力です。このネットワークでのR5の役割はどれですか。",
-  "o": [
-   "BDR",
-   "DROTHER",
-   "point-to-point なので役割はない",
-   "DR"
-  ],
+  "o": ["BDR", "DROTHER", "point-to-point なので役割はない", "DR"],
   "a": 1,
   "e": "R5がDRかBDRなら、DROTHERの相手ともFullになるはずです。DROTHERの2台と <b>2WAY</b> で止まっているので、<b>R5もDROTHER</b> です。",
   "m": "DROTHERと2WAY＝自分もDROTHER",
@@ -54,13 +42,9 @@
   "id": "P33-04",
   "k": "one",
   "tag": "OSPF",
+  "lv": 2,
   "t": "図を参照してください。State の欄が「FULL/ -」になっている理由として正しいものはどれですか。",
-  "o": [
-   "相手がDROTHERで、2-Wayのまま止まっているから",
-   "MTUが一致せず、データベースの交換が終わっていないから",
-   "ネットワークタイプが point-to-point で、DR/BDRを選んでいないから",
-   "ネイバーがダウンしているから"
-  ],
+  "o": ["相手がDROTHERで、2-Wayのまま止まっているから", "MTUが一致せず、データベースの交換が終わっていないから", "ネットワークタイプが point-to-point で、DR/BDRを選んでいないから", "ネイバーがダウンしているから"],
   "a": 2,
   "e": "point-to-point では<b>DR/BDRを選ばない</b>ので、役割の部分がハイフンになります。FULL はデータベースの交換が終わって同期した状態です。",
   "m": "FULL/ - ＝point-to-point（DRなし）",
@@ -73,13 +57,9 @@
   "id": "P33-05",
   "k": "one",
   "tag": "OSPF",
+  "lv": 2,
   "t": "図を参照してください。R1の show ip ospf interface の出力です。R1について正しいものはどれですか。",
-  "o": [
-   "R1はDRで、Fullになっている相手は1台だけである",
-   "R1は point-to-point で動いている",
-   "R1はDRで、2台のルーターとFullになっている",
-   "R1はBDRで、2台のルーターとFullになっている"
-  ],
+  "o": ["R1はDRで、Fullになっている相手は1台だけである", "R1は point-to-point で動いている", "R1はDRで、2台のルーターとFullになっている", "R1はBDRで、2台のルーターとFullになっている"],
   "a": 2,
   "e": "State が <b>DR</b> で、Designated Router のIDが自分のルーターIDと同じなので、R1がDRです。<b>Adjacent neighbor count</b> はFullになっている相手の数です。",
   "m": "Adjacent neighbor count＝Fullの数",
@@ -92,13 +72,9 @@
   "id": "P33-06",
   "k": "one",
   "tag": "OSPF",
+  "lv": 2,
   "t": "1つのイーサネットに5台のルーターがあり、OSPFでDRとBDRが選ばれています。DROTHERどうしのネイバーの状態として正常なものはどれですか。",
-  "o": [
-   "Full",
-   "2-Way",
-   "Init",
-   "ExStart"
-  ],
+  "o": ["Full", "2-Way", "Init", "ExStart"],
   "a": 1,
   "e": "DROTHERは、DR・BDRとはFullになりますが、<b>DROTHERどうしは2-Wayで止まる</b>のが正常です。故障ではありません。",
   "m": "DROTHERどうし＝2-Wayで正常",
@@ -108,13 +84,9 @@
   "id": "P33-07",
   "k": "one",
   "tag": "OSPF",
+  "lv": 1,
   "t": "R1の G0/2 にはPCしかつながっていません。R1で passive-interface G0/2 を設定したときの動きとして正しいものはどれですか。",
-  "o": [
-   "G0/2のネットワークの経路も、ほかのルーターへ広告されなくなる",
-   "G0/2からOSPFのHelloを送らなくなるが、G0/2のネットワークの経路はほかのルーターへ広告される",
-   "G0/2が shutdown され、PCが通信できなくなる",
-   "G0/2で受け取ったHelloにだけ応答するようになる"
-  ],
+  "o": ["G0/2のネットワークの経路も、ほかのルーターへ広告されなくなる", "G0/2からOSPFのHelloを送らなくなるが、G0/2のネットワークの経路はほかのルーターへ広告される", "G0/2が shutdown され、PCが通信できなくなる", "G0/2で受け取ったHelloにだけ応答するようになる"],
   "a": 1,
   "e": "passive-interface は<b>Helloを送らなくする</b>設定です。そのインターフェースのネットワークは<b>広告され続ける</b>ので、ほかのルーターからPCのLANへ届きます。",
   "m": "passive＝Helloは止めても経路は広告",
@@ -124,18 +96,10 @@
   "id": "P33-08",
   "k": "multi",
   "tag": "OSPF",
+  "lv": 1,
   "t": "OSPFのHelloパケットの役割として正しいものはどれですか。2つ選んでください。",
-  "o": [
-   "DRとBDRを選ぶ",
-   "デフォルトルートを配る",
-   "経路のコストを計算する",
-   "ネイバーを見つけ、生きているかを確かめる",
-   "ルーティングテーブル全体をネイバーに送る"
-  ],
-  "a": [
-   0,
-   3
-  ],
+  "o": ["DRとBDRを選ぶ", "デフォルトルートを配る", "経路のコストを計算する", "ネイバーを見つけ、生きているかを確かめる", "ルーティングテーブル全体をネイバーに送る"],
+  "a": [0, 3],
   "e": "Helloは<b>ネイバーの発見と維持</b>、<b>DR/BDRの選出</b>に使います。経路の情報はLSAでやりとりし、Helloでルーティングテーブル全体を送ることはありません。",
   "m": "Hello＝ネイバー発見・維持とDR選出",
   "page": 1
@@ -144,14 +108,9 @@
   "id": "P33-09",
   "k": "order",
   "tag": "OSPF",
+  "lv": 1,
   "t": "OSPFのネイバーの状態を、進む順に並べてください（途中の状態は一部省略しています）。",
-  "o": [
-   "Down",
-   "Init",
-   "2-Way",
-   "Exchange",
-   "Full"
-  ],
+  "o": ["Down", "Init", "2-Way", "Exchange", "Full"],
   "e": "状態は <b>Down → Init → 2-Way → ExStart → Exchange → Loading → Full</b> と進みます。Fullはデータベースの交換が終わって同期した状態です。",
   "m": "Down→Init→2-Way→…→Full",
   "page": 1
@@ -160,24 +119,13 @@
   "id": "P33-10",
   "k": "match",
   "tag": "OSPF",
+  "lv": 1,
   "t": "OSPFの設定や値と、その意味を正しく組み合わせてください。",
   "o": [
-   [
-    "passive-interface",
-    "Helloを送らないが、そのネットワークは広告する"
-   ],
-   [
-    "default-information originate",
-    "デフォルトルートをOSPFで配る"
-   ],
-   [
-    "auto-cost reference-bandwidth",
-    "参照帯域幅を変えて、1Gbpsと10Gbpsのコストを区別する"
-   ],
-   [
-    "224.0.0.5",
-    "すべてのOSPFルーター宛てのマルチキャストアドレス"
-   ]
+   ["passive-interface", "Helloを送らないが、そのネットワークは広告する"],
+   ["default-information originate", "デフォルトルートをOSPFで配る"],
+   ["auto-cost reference-bandwidth", "参照帯域幅を変えて、1Gbpsと10Gbpsのコストを区別する"],
+   ["224.0.0.5", "すべてのOSPFルーター宛てのマルチキャストアドレス"]
   ],
   "e": "224.0.0.6 はDRとBDR宛てのアドレスです。auto-cost reference-bandwidth を大きくすると、高速なインターフェースどうしのコストに差が付きます。",
   "m": "passive・originate・auto-cost",
@@ -187,13 +135,9 @@
   "id": "P33-11",
   "k": "one",
   "tag": "OSPF",
+  "lv": 1,
   "t": "OSPFでDR/BDRの選出が行われるネットワークタイプの組み合わせとして正しいものはどれですか。",
-  "o": [
-   "point-to-point だけ",
-   "non-broadcast（NBMA）と point-to-point",
-   "broadcast と non-broadcast（NBMA）",
-   "broadcast と point-to-point"
-  ],
+  "o": ["point-to-point だけ", "non-broadcast（NBMA）と point-to-point", "broadcast と non-broadcast（NBMA）", "broadcast と point-to-point"],
   "a": 2,
   "e": "DR/BDRを選ぶのは、多くのルーターがつながる前提の <b>broadcast</b> と <b>non-broadcast（NBMA）</b> です。point-to-point は相手が1台なので選びません。",
   "m": "DRを選ぶ＝broadcastとNBMA",

@@ -3,17 +3,13 @@
   "id": "P11-01",
   "k": "one",
   "tag": "トラブルシュート",
+  "lv": 2,
   "page": 1,
   "t": "図を参照してください。SW1のポートEthernet0/5に新しいPCをつないでも通信できません。このポートを使えるようにするため、インターフェース設定モードで入力するコマンドはどれですか。",
   "x": "SW1# show interfaces ethernet 0/5\nEthernet0/5 is administratively down, line protocol is down\n  Hardware is Gigabit Ethernet, address is 00aa.11bb.0005\n  reliability 255/255, txload 1/255, rxload 1/255\n  Auto-duplex, Auto-speed, media type is 10/100/1000BaseTX",
   "rd": "①1行目の Status を見る<br>②administratively down は管理者が止めた印<br>③Protocol の down はその結果にすぎない",
   "rg": "intf",
-  "o": [
-   "no shutdown",
-   "speed 1000",
-   "switchport mode access",
-   "clear counters"
-  ],
+  "o": ["no shutdown", "speed 1000", "switchport mode access", "clear counters"],
   "a": 0,
   "e": "<b>administratively down / down</b> は、shutdown コマンドでポートが止められている状態です。<b>no shutdown</b> で有効にすると、ケーブルに問題がなければ up / up になります。",
   "m": "admin down＝no shutdownで有効にする"
@@ -22,17 +18,13 @@
   "id": "P11-02",
   "k": "one",
   "tag": "トラブルシュート",
+  "lv": 2,
   "page": 1,
   "t": "図を参照してください。R1のG0/1にはIPアドレスが設定されていますが、隣のスイッチと通信できません。最も考えられる原因はどれですか。",
   "x": "R1# show interfaces g0/1\nGigabitEthernet0/1 is down, line protocol is down\n  Hardware is iGbE, address is 5254.00c1.7a01\n  Internet address is 172.16.40.1/24\n  reliability 255/255, txload 1/255, rxload 1/255",
   "rd": "①1行目は down / down<br>②administratively の文字はない<br>③Internet address の行があるので IP は設定済み",
   "rg": "intf",
-  "o": [
-   "IPアドレスがまだ設定されていない",
-   "ケーブルが抜けている、または相手のポートが止まっている",
-   "両端でカプセル化の方式が違う",
-   "shutdown コマンドでポートが止められている"
-  ],
+  "o": ["IPアドレスがまだ設定されていない", "ケーブルが抜けている、または相手のポートが止まっている", "両端でカプセル化の方式が違う", "shutdown コマンドでポートが止められている"],
   "a": 1,
   "e": "<b>down / down</b> は物理層（<b>L1</b>）の問題で、ケーブル抜けや相手ポートの停止、速度の不一致などが原因です。IPアドレスの有無はこの状態表示に関係せず、shutdown なら administratively down と表示されます。",
   "m": "down/down＝L1（ケーブル・相手側）を疑う"
@@ -41,17 +33,13 @@
   "id": "P11-03",
   "k": "one",
   "tag": "トラブルシュート",
+  "lv": 2,
   "page": 1,
   "t": "図を参照してください。R1とR2をシリアル回線でつなぎましたが、どちらのインターフェースも同じ状態のまま通信できません。原因として正しいものはどれですか。",
   "x": "R1# show interfaces serial0/1/0\nSerial0/1/0 is up, line protocol is down\n  Encapsulation PPP, loopback not set\n\nR2# show interfaces serial0/1/0\nSerial0/1/0 is up, line protocol is down\n  Encapsulation HDLC, loopback not set",
   "rd": "①両方とも Status は up、Protocol は down<br>②2行目の Encapsulation を左右で比べる<br>③PPP と HDLC で一致していない",
   "rg": "intf",
-  "o": [
-   "ケーブルが抜けている",
-   "インターフェースが shutdown されている",
-   "両端でL2のカプセル化が一致していない",
-   "IPアドレスが同じサブネットにない"
-  ],
+  "o": ["ケーブルが抜けている", "インターフェースが shutdown されている", "両端でL2のカプセル化が一致していない", "IPアドレスが同じサブネットにない"],
   "a": 2,
   "e": "<b>up / down</b> は、物理的にはつながっているのに<b>L2</b>が動いていない状態です。シリアル回線では、両端の<b>カプセル化の不一致</b>（PPP と HDLC など）が代表的な原因です。",
   "m": "up/down＝L2の問題（カプセル化の不一致）"
@@ -60,17 +48,13 @@
   "id": "P11-04",
   "k": "one",
   "tag": "トラブルシュート",
+  "lv": 2,
   "page": 2,
   "t": "図を参照してください。SW2のFa0/8はリンクがつながっていますが、つないだサーバーとの通信がとても遅くなっています。最も考えられる原因はどれですか。",
   "x": "SW2# show interfaces fastEthernet 0/8\nFastEthernet0/8 is up, line protocol is up\n  Half-duplex, 100Mb/s, media type is 10/100BaseTX\n  reliability 251/255, txload 3/255, rxload 2/255\n  0 input errors, 0 CRC, 0 frame\n  1874 collisions, 1532 late collision",
   "rd": "①1行目は up / up でリンクは成立<br>②2行目は Half-duplex<br>③最終行の late collision が大きい",
   "rg": "intf",
-  "o": [
-   "速度の不一致",
-   "デュプレックスの不一致",
-   "ブロードキャストストーム",
-   "ケーブルの断線"
-  ],
+  "o": ["速度の不一致", "デュプレックスの不一致", "ブロードキャストストーム", "ケーブルの断線"],
   "a": 1,
   "e": "リンクはつながるのに遅く、半二重の側で<b>late collisions</b>（遅れた衝突）が増えるのは<b>デュプレックスの不一致</b>の典型です。速度の不一致や断線なら、リンク自体がダウンします。",
   "m": "遅い＋late collision＝二重の不一致"
@@ -79,14 +63,10 @@
   "id": "P11-05",
   "k": "one",
   "tag": "トラブルシュート",
+  "lv": 2,
   "page": 2,
   "t": "SW-AのGi0/1を speed 1000、向かい側のSW-BのGi0/1を speed 100 に、どちらも手動で固定しました。このときのリンクの様子として正しいものはどれですか。",
-  "o": [
-   "リンクはつながるが、半二重側で late collisions が増える",
-   "リンクはダウンし、つながらない",
-   "リンクはつながり、遅い側の100Mbpsにそろう",
-   "ポートが err-disabled になる"
-  ],
+  "o": ["リンクはつながるが、半二重側で late collisions が増える", "リンクはダウンし、つながらない", "リンクはつながり、遅い側の100Mbpsにそろう", "ポートが err-disabled になる"],
   "a": 1,
   "e": "両端の<b>速度が合わないと、リンクはダウン</b>して down / down になります。つながるのに遅くなるのは、デュプレックスだけが合わない場合です。",
   "m": "速度の不一致＝つながらない、二重の不一致＝遅い"
@@ -95,17 +75,13 @@
   "id": "P11-06",
   "k": "one",
   "tag": "トラブルシュート",
+  "lv": 2,
   "page": 4,
   "t": "図を参照してください。R2のG0/0の出力から分かる状態として、最も適切なものはどれですか。",
   "x": "R2# show interfaces g0/0\nGigabitEthernet0/0 is up, line protocol is up\n  reliability 255/255, txload 254/255, rxload 251/255\n  Full-duplex, 1000Mb/s, media type is RJ45\n  0 input errors, 0 CRC, 0 frame, 0 overrun\n  Total output drops: 0\n  0 output errors, 0 collisions",
   "rd": "①reliability は 255/255 で満点<br>②txload と rxload が 255 に近い<br>③エラーやドロップの数はすべて 0",
   "rg": "intf",
-  "o": [
-   "ケーブルの故障でエラーが増えている",
-   "デュプレックスが一致していない",
-   "回線が帯域いっぱいまで使われている（高スループット）",
-   "ポートのセキュリティ機能で止められている"
-  ],
+  "o": ["ケーブルの故障でエラーが増えている", "デュプレックスが一致していない", "回線が帯域いっぱいまで使われている（高スループット）", "ポートのセキュリティ機能で止められている"],
   "a": 2,
   "e": "<b>txload / rxload</b> は回線の混み具合で、255/255 に近いほど帯域いっぱいに使われた<b>高スループット</b>の状態です。エラーが 0 で reliability も満点なので、物理的な故障ではありません。",
   "m": "txload・rxloadが255近い＝高スループット"
@@ -114,17 +90,13 @@
   "id": "P11-07",
   "k": "one",
   "tag": "トラブルシュート",
+  "lv": 2,
   "page": 4,
   "t": "図を参照してください。SW3のGi0/24はサーバー群からの通信をまとめて上位へ送っています。出力から考えられる状態はどれですか。",
   "x": "SW3# show interfaces g0/24\nGigabitEthernet0/24 is up, line protocol is up\n  reliability 255/255, txload 255/255, rxload 12/255\n  Full-duplex, 1000Mb/s\n  Input queue: 0/75/0/0 (size/max/drops/flushes)\n  Total output drops: 2385512\n  Output queue: 40/40 (size/max)\n  0 input errors, 0 CRC, 0 runts, 0 giants\n  0 output errors, 0 collisions",
   "rd": "①エラーと collisions はすべて 0<br>②Output queue が 40/40 で満杯<br>③Total output drops がとても大きい",
   "rg": "intf",
-  "o": [
-   "ケーブルの不良による物理的な障害",
-   "出口の帯域より送りたい量が多すぎる（ポートのオーバーサブスクリプション）",
-   "デュプレックスの不一致",
-   "ループによるブロードキャストストーム"
-  ],
+  "o": ["ケーブルの不良による物理的な障害", "出口の帯域より送りたい量が多すぎる（ポートのオーバーサブスクリプション）", "デュプレックスの不一致", "ループによるブロードキャストストーム"],
   "a": 1,
   "e": "エラーがないのに出力キューが満杯で、<b>Total output drops</b> が非常に多いのは、出口の帯域に対して送る量が多すぎる<b>オーバーサブスクリプション</b>です。キューが溜まるのは順番待ち（キューイング）が起きている印です。",
   "m": "エラー0＋output drops大量＝詰め込みすぎ"
@@ -133,14 +105,10 @@
   "id": "P11-08",
   "k": "one",
   "tag": "トラブルシュート",
+  "lv": 2,
   "page": 4,
   "t": "SW4の show interfaces を確認すると、5分間に受信した約90万個のパケットのうち、約60万個が broadcasts として数えられていました。最も疑うべき状態はどれですか。",
-  "o": [
-   "ブロードキャストストーム",
-   "速度の不一致",
-   "giants の増加",
-   "ポートのシャットダウン"
-  ],
+  "o": ["ブロードキャストストーム", "速度の不一致", "giants の増加", "ポートのシャットダウン"],
   "a": 0,
   "e": "受信パケットの多くを<b>broadcasts</b>が占めるときは、ループなどでブロードキャストが増え続ける<b>ブロードキャストストーム</b>を疑います。",
   "m": "broadcastsが異常に多い＝ストームを疑う"
@@ -149,25 +117,14 @@
   "id": "P11-09",
   "k": "match",
   "tag": "トラブルシュート",
+  "lv": 2,
   "page": 3,
   "t": "show interfaces に表示される項目と、その意味を正しく組み合わせてください。",
   "o": [
-   [
-    "runts",
-    "64バイト未満の短すぎるフレーム"
-   ],
-   [
-    "giants",
-    "1518バイトを超える長すぎるフレーム"
-   ],
-   [
-    "CRC",
-    "中身が壊れて届いたフレーム（ケーブルやノイズを疑う）"
-   ],
-   [
-    "reliability",
-    "255が満点で、下がるとエラーが増えている"
-   ]
+   ["runts", "64バイト未満の短すぎるフレーム"],
+   ["giants", "1518バイトを超える長すぎるフレーム"],
+   ["CRC", "中身が壊れて届いたフレーム（ケーブルやノイズを疑う）"],
+   ["reliability", "255が満点で、下がるとエラーが増えている"]
   ],
   "e": "<b>runts</b>は短すぎ、<b>giants</b>は長すぎのフレームです。<b>CRC</b>（FCSエラー）が多ければケーブル故障やノイズを疑い、<b>reliability</b>が下がっていればエラーが増えていると判断します。",
   "m": "runts短・giants長・CRC＝ケーブルを疑う"
@@ -176,19 +133,11 @@
   "id": "P11-10",
   "k": "multi",
   "tag": "ケーブル",
+  "lv": 1,
   "page": 3,
   "t": "銅線（カッパー）ケーブルの特徴として正しいものはどれですか。2つ選んでください。",
-  "o": [
-   "電磁干渉（ノイズ）の影響を受けやすい",
-   "光パルスで信号を伝える",
-   "信号を傍受されやすい",
-   "光がコアとクラッドの境目で反射・屈折しながら進む",
-   "電気的なノイズの影響をまったく受けない"
-  ],
-  "a": [
-   0,
-   2
-  ],
+  "o": ["電磁干渉（ノイズ）の影響を受けやすい", "光パルスで信号を伝える", "信号を傍受されやすい", "光がコアとクラッドの境目で反射・屈折しながら進む", "電気的なノイズの影響をまったく受けない"],
+  "a": [0, 2],
   "e": "銅線は<b>電気信号</b>で伝えるため、<b>電磁干渉の影響を受けやすく、傍受もされやすい</b>という弱点があります。光パルスやコアとクラッドでの反射は、マルチモードファイバーの特徴です。",
   "m": "銅線＝電気でノイズに弱い、光＝コアとクラッド"
  }

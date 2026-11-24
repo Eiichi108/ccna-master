@@ -11,7 +11,7 @@ import srcio
 sys.stdout.reconfigure(encoding="utf-8")
 
 TAG = re.compile(r"</?(b|br|i|code|small|u|span)\b[^>]*>")
-KEEP = ("tag", "k", "t", "o", "a", "rows", "opts", "x", "e", "m", "rd", "rg")
+KEEP = ("tag", "k", "lv", "t", "o", "a", "rows", "opts", "x", "e", "m", "rd", "rg")
 
 base = {r: srcio.load(srcio.base_path(r)) for r in srcio.BASE}
 TB = {}

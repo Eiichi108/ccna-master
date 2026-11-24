@@ -13,6 +13,8 @@ for q in (x for x in d if x.get("r") == "Q"):
     if k == "multi" and not (isinstance(q.get("a"), list) and len(q["a"]) >= 2 and all(0 <= a < len(q["o"]) for a in q["a"])): ng.append(f"{i}: multi の a が不正")
     if k == "sel" and any(r["a"] not in q["opts"] for r in q["rows"]): ng.append(f"{i}: sel の分類名が opts にない")
     if k == "match" and any(len(p) != 2 for p in q["o"]): ng.append(f"{i}: match の組が不正")
+    if q.get("lv") not in (1, 2): ng.append(f"{i}: lv（難易度 1 か 2）がない")
+    if q.get("lv") == 2 and q["d"] == "d0": ng.append(f"{i}: 入門（第1〜6回）は lv 1 にする")
 for n, b in TB.items():
     c = b.get("cls", {})
     if c.get("seg") and len(c["seg"]) != len(c["lines"]): ng.append(f"第{n}回: seg と lines の数が違う")

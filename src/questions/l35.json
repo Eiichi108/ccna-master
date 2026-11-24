@@ -3,13 +3,9 @@
   "id": "P35-01",
   "k": "one",
   "tag": "NAT",
+  "lv": 1,
   "t": "家庭用のWi-Fiルーターのように、1つのグローバルIPアドレスを多数の端末で共有し、ポート番号で通信を区別するNAT（Network Address Translation）はどれですか。",
-  "o": [
-   "ダイナミックNAT",
-   "スタティックNAT",
-   "PAT（NATオーバーロード）",
-   "FHRP"
-  ],
+  "o": ["ダイナミックNAT", "スタティックNAT", "PAT（NATオーバーロード）", "FHRP"],
   "a": 2,
   "e": "<b>PAT（NATオーバーロード）</b>は、1つのグローバルIPを<b>ポート番号</b>で区別して多くの端末で共有します。スタティックNATは1対1の固定、ダイナミックNATはプールから順に割り当てます。",
   "m": "1つのIPをポートで共有＝PAT",
@@ -19,13 +15,9 @@
   "id": "P35-02",
   "k": "one",
   "tag": "NAT",
+  "lv": 1,
   "t": "NATの用語で、社内の端末に設定されている、変換前の本当のプライベートIPアドレスを表すものはどれですか。",
-  "o": [
-   "inside local",
-   "inside global",
-   "outside local",
-   "outside global"
-  ],
+  "o": ["inside local", "inside global", "outside local", "outside global"],
   "a": 0,
   "e": "inside は社内側、<b>local は本当のアドレス</b>です。社内の端末の本当のアドレスなので <b>inside local</b> です。",
   "m": "inside＝社内、local＝本当のアドレス",
@@ -35,13 +27,9 @@
   "id": "P35-03",
   "k": "one",
   "tag": "NAT",
+  "lv": 1,
   "t": "NATで、どの社内アドレスがどのグローバルアドレスに変換されているか（変換表）を確認するコマンドはどれですか。",
-  "o": [
-   "show ip protocols",
-   "show ip route",
-   "show ip nat inside",
-   "show ip nat translations"
-  ],
+  "o": ["show ip protocols", "show ip route", "show ip nat inside", "show ip nat translations"],
   "a": 3,
   "e": "変換表は <b>show ip nat translations</b> で確認します。スタティックNATの対応は、通信がなくても常に表示されます。",
   "m": "変換表＝show ip nat translations",
@@ -51,13 +39,9 @@
   "id": "P35-04",
   "k": "one",
   "tag": "NAT",
+  "lv": 2,
   "t": "社内のWebサーバー 192.168.30.20 に、外部からいつも 198.51.100.20 でアクセスできるようにしたいと考えています。設定するコマンドとして正しいものはどれですか。",
-  "o": [
-   "ip nat outside source static 192.168.30.20 198.51.100.20",
-   "ip nat inside source static 192.168.30.20 198.51.100.20",
-   "ip nat inside source list 1 interface g0/1 overload",
-   "ip nat inside source static 198.51.100.20 192.168.30.20"
-  ],
+  "o": ["ip nat outside source static 192.168.30.20 198.51.100.20", "ip nat inside source static 192.168.30.20 198.51.100.20", "ip nat inside source list 1 interface g0/1 overload", "ip nat inside source static 198.51.100.20 192.168.30.20"],
   "a": 1,
   "e": "公開サーバー向けの1対1の固定変換は<b>スタティックNAT</b>です。並び順は <b>ip nat inside source static 変換前（社内） 変換後（公開用）</b> です。",
   "m": "inside source static 社内→公開の順",
@@ -67,13 +51,9 @@
   "id": "P35-05",
   "k": "one",
   "tag": "NAT",
+  "lv": 2,
   "t": "図を参照してください。社内のPCがインターネットへ通信できず、show ip nat translations にも何も表示されません。原因として正しいものはどれですか。",
-  "o": [
-   "access-list でワイルドカードマスクを使っている",
-   "Gi0/1 に ip nat outside が設定されていない",
-   "Gi0/0 に ip nat inside を設定しているのが誤りである",
-   "overload は1つのIPアドレスでは使えない"
-  ],
+  "o": ["access-list でワイルドカードマスクを使っている", "Gi0/1 に ip nat outside が設定されていない", "Gi0/0 に ip nat inside を設定しているのが誤りである", "overload は1つのIPアドレスでは使えない"],
   "a": 1,
   "e": "NATの設定は、まず<b>社内側に ip nat inside、外部側に ip nat outside</b> を設定するところから始めます。外部側の指定が漏れていると変換されません。",
   "m": "NATはまず inside と outside を決める",
@@ -86,13 +66,9 @@
   "id": "P35-06",
   "k": "one",
   "tag": "NAT",
+  "lv": 2,
   "t": "図を参照してください。R1の変換表について正しいものはどれですか。",
-  "o": [
-   "198.51.100.7 は社内のPCの本当のアドレス（inside local）で、最後の行は通信中のPATである",
-   "最後の行は、通信が終わるとすぐに消えるダイナミックな対応である",
-   "2台のPCはそれぞれ別のグローバルIPを使っていて、最後の行はPATの対応である",
-   "2台のPCは 198.51.100.7 をポート番号で区別して共有していて、最後の行はスタティックNATの対応である"
-  ],
+  "o": ["198.51.100.7 は社内のPCの本当のアドレス（inside local）で、最後の行は通信中のPATである", "最後の行は、通信が終わるとすぐに消えるダイナミックな対応である", "2台のPCはそれぞれ別のグローバルIPを使っていて、最後の行はPATの対応である", "2台のPCは 198.51.100.7 をポート番号で区別して共有していて、最後の行はスタティックNATの対応である"],
   "a": 3,
   "e": "同じ Inside global をポート番号で区別しているのは<b>PAT</b>です。プロトコルやポートが「---」の行は<b>スタティックNAT</b>の1対1の対応で、通信がなくても表示されます。",
   "m": "同じIP＋違うポート＝PAT、---＝静的",
@@ -105,13 +81,9 @@
   "id": "P35-07",
   "k": "one",
   "tag": "NAT",
+  "lv": 2,
   "t": "プール NETPOOL のグローバルアドレスを、ACL 5 で許可した社内の端末がポート番号で区別して共有するように設定します。正しいコマンドはどれですか。",
-  "o": [
-   "ip nat outside source list 5 pool NETPOOL overload",
-   "ip nat inside source list 5 pool NETPOOL",
-   "ip nat inside source list 5 pool NETPOOL overload",
-   "ip nat inside source static list 5 NETPOOL"
-  ],
+  "o": ["ip nat outside source list 5 pool NETPOOL overload", "ip nat inside source list 5 pool NETPOOL", "ip nat inside source list 5 pool NETPOOL overload", "ip nat inside source static list 5 NETPOOL"],
   "a": 2,
   "e": "ポート番号で共有する<b>PAT</b>にするには、最後に <b>overload</b> を付けます。overload がないと、プールのアドレスを1対1で割り当てるダイナミックNATになります。",
   "m": "PATは最後にoverload（プールでもOK）",
@@ -121,18 +93,10 @@
   "id": "P35-08",
   "k": "multi",
   "tag": "NAT",
+  "lv": 1,
   "t": "PAT（NATオーバーロード）の特徴として正しいものはどれですか。2つ選んでください。",
-  "o": [
-   "多くの内部の端末が、1つのグローバルIPを共有できる",
-   "ポート番号で通信を区別する",
-   "1対1で固定して変換するので、公開サーバー向けである",
-   "ip nat inside と ip nat outside の設定がいらない",
-   "グローバルIPアドレスをプライベートIPアドレスに変えて社外へ送る"
-  ],
-  "a": [
-   0,
-   1
-  ],
+  "o": ["多くの内部の端末が、1つのグローバルIPを共有できる", "ポート番号で通信を区別する", "1対1で固定して変換するので、公開サーバー向けである", "ip nat inside と ip nat outside の設定がいらない", "グローバルIPアドレスをプライベートIPアドレスに変えて社外へ送る"],
+  "a": [0, 1],
   "e": "PATは<b>1つのグローバルIP</b>を<b>ポート番号</b>で区別して共有します。1対1の固定はスタティックNATで、どのNATでも inside／outside の指定が必要です。",
   "m": "PAT＝1つのIPをポート番号で共有",
   "page": 0
@@ -141,27 +105,82 @@
   "id": "P35-09",
   "k": "match",
   "tag": "NAT",
+  "lv": 1,
   "t": "NATの用語や設定と、その意味を正しく組み合わせてください。",
   "o": [
-   [
-    "inside local",
-    "内部の端末の本当のアドレス"
-   ],
-   [
-    "inside global",
-    "内部の端末が外から見えるときのアドレス"
-   ],
-   [
-    "outside global",
-    "外部の相手の本当のアドレス"
-   ],
-   [
-    "overload",
-    "ポート番号を使って1つのアドレスを共有する（PAT）"
-   ]
+   ["inside local", "内部の端末の本当のアドレス"],
+   ["inside global", "内部の端末が外から見えるときのアドレス"],
+   ["outside global", "外部の相手の本当のアドレス"],
+   ["overload", "ポート番号を使って1つのアドレスを共有する（PAT）"]
   ],
   "e": "inside／outside は社内側か外部側か、local／global は本当のアドレスか外から見えるアドレスかを表します。",
   "m": "inside/outside × local/global",
   "page": 1
+ },
+ {
+  "id": "P35-10",
+  "k": "one",
+  "tag": "NAT",
+  "lv": 2,
+  "page": 3,
+  "t": "図を参照してください。R1のNATについて、正しい説明はどれですか。",
+  "x": "R1# show ip nat translations\nPro Inside global      Inside local\ntcp 203.0.113.5:1024   192.168.1.10:51000\ntcp 203.0.113.5:1025   192.168.1.11:51000\n(Outside の列は省略)",
+  "rd": "①Inside global（変換後）は2行とも同じアドレス<br>②後ろのポート番号だけが違う<br>③Inside local（変換前）は別々のPC",
+  "rg": "run",
+  "o": ["1対1の静的NATで、PCごとに別のグローバルアドレスに変換されている", "2台のPCが1つのグローバルアドレスを共有し、ポート番号で区別されている", "2台のPCは同じポート番号を使っているので、片方は通信できない", "Inside global は、社内のPCに設定されているアドレスである"],
+  "a": 1,
+  "e": "Inside global はどちらも <b>203.0.113.5</b> で、ポート番号（1024 と 1025）だけが違います。1つのグローバルアドレスをポート番号で分けて共有する <b>PAT</b> です。",
+  "m": "同じグローバル＋違うポート＝PAT"
+ },
+ {
+  "id": "P35-11",
+  "k": "one",
+  "tag": "NAT",
+  "lv": 2,
+  "page": 2,
+  "t": "図を参照してください。社内のPC（192.168.10.0/24）がインターネットに出られません。直すべき点はどれですか。",
+  "x": "interface GigabitEthernet0/0\n ip address 192.168.10.1 255.255.255.0\n ip nat outside\ninterface GigabitEthernet0/1\n ip address 203.0.113.2 255.255.255.252\n ip nat inside\naccess-list 1 permit 192.168.10.0 0.0.0.255\nip nat inside source list 1 interface Gi0/1 overload",
+  "rd": "①G0/0 は社内LAN（192.168.10.1）なのに outside<br>②G0/1 はインターネット側なのに inside<br>③ACLと変換の行は正しい",
+  "rg": "run",
+  "o": ["access-list 1 のワイルドカードマスクを 255.255.255.0 にする", "overload を消して、1対1の変換にする", "G0/0 を ip nat inside に、G0/1 を ip nat outside に入れ替える", "ip nat inside source の interface を Gi0/0 に変える"],
+  "a": 2,
+  "e": "社内のLAN側（G0/0）が <b>outside</b>、インターネット側（G0/1）が <b>inside</b> と逆になっています。LAN側を <b>ip nat inside</b>、外側を <b>ip nat outside</b> にします。",
+  "m": "LAN側＝inside、インターネット側＝outside"
+ },
+ {
+  "id": "P35-12",
+  "k": "one",
+  "tag": "NAT",
+  "lv": 2,
+  "page": 2,
+  "t": "R1に ip nat pool P 203.0.113.10 203.0.113.12 netmask 255.255.255.0 と ip nat inside source list 1 pool P を設定しました（overload なし）。ACL 1 で許可した社内のPC 5台が、同時にインターネットへ通信しようとしたとき、正しいものはどれですか。",
+  "o": ["5台とも、ポート番号で区別されて通信できる", "3台まではプールのアドレスに変換されるが、残りの2台は変換されず通信できない", "5台とも、203.0.113.10 に変換されて通信できる", "プールのアドレスが足りないので、5台とも通信できない"],
+  "a": 1,
+  "e": "overload がない<b>動的NAT</b>は、プールのアドレスを1台に1つずつ貸します。プールは .10〜.12 の<b>3つ</b>だけなので、4台目以降は空くまで変換できません。",
+  "m": "overloadなし＝1台に1アドレス"
+ },
+ {
+  "id": "P35-13",
+  "k": "one",
+  "tag": "NAT",
+  "lv": 2,
+  "page": 1,
+  "t": "PC（10.1.1.5）が、インターネット上のWebサーバー 198.51.100.9 にアクセスします。R1は外側のインターフェースのアドレス 203.0.113.1 を使ってPATを行っています。Webサーバーが受け取るパケットの送信元IPアドレスはどれですか。",
+  "o": ["10.1.1.5", "198.51.100.9", "203.0.113.1", "R1の内側のインターフェースのアドレス"],
+  "a": 2,
+  "e": "PATで、送信元の 10.1.1.5（<b>Inside local</b>）は、R1の外側のアドレス 203.0.113.1（<b>Inside global</b>）に変わってから送られます。インターネットからは、社内のプライベートアドレスは見えません。",
+  "m": "外から見える送信元＝Inside global"
+ },
+ {
+  "id": "P35-14",
+  "k": "one",
+  "tag": "NAT",
+  "lv": 2,
+  "page": 2,
+  "t": "R1に access-list 1 permit 10.1.0.0 0.0.255.255 と ip nat inside source list 1 interface G0/1 overload を設定しました。ACL 1 に含まれないPC 10.2.2.2 がインターネットのサーバーへ通信したとき、最も考えられる結果はどれですか。",
+  "o": ["10.1.0.0/16 のPCと同じように変換されて通信できる", "R1がNATの設定エラーを表示して、すべての変換が止まる", "変換されないまま送り出され、サーバーからの返事が戻ってこない", "R1が自動で ACL 1 に 10.2.2.2 を追加する"],
+  "a": 2,
+  "e": "NATで変換されるのは <b>ACLで許可した送信元だけ</b>です。10.2.2.2 は変換されずプライベートアドレスのまま出ていくので、インターネットから返事を返せません。",
+  "m": "ACLに入っていない送信元は変換されない"
  }
 ]
