@@ -262,5 +262,47 @@
   "a": 2,
   "e": "<b>*</b> の付いた 10.0.0.1（st が<b>2</b>）と同期しています。NTPでは、同期した相手の stratum に1を足した値が自分の stratum になるので、<b>3</b>です。",
   "m": "自分のstratum＝同期相手＋1"
+ },
+ {
+  "id": "P36-21",
+  "k": "one",
+  "tag": "DHCP",
+  "lv": 2,
+  "page": 3,
+  "t": "図を参照してください。PCで実行した結果について、正しい説明はどれですか。",
+  "x": "C:\\> nslookup www.example.com\nServer:  dns1.corp.example\nAddress:  10.0.0.53\n\nNon-authoritative answer:\nName:    www.example.com\nAddresses:  2001:db8:80::10\n          203.0.113.10",
+  "rd": "①上の Server・Address は問い合わせたDNSサーバー<br>②下の Addresses が答え<br>③IPv6とIPv4が1つずつある",
+  "rg": "pc",
+  "o": ["DNSサーバー 10.0.0.53 が、IPv4とIPv6の両方のアドレスを答えた", "www.example.com のIPv4アドレスは 10.0.0.53 である", "名前を引けなかったので、エラーになった", "DNSサーバーは IPv6 のアドレスだけを答えた"],
+  "a": 0,
+  "e": "Server と Address は、問い合わせた<b>DNSサーバー</b>です。答えには IPv6（<b>AAAAレコード</b>）と IPv4（<b>Aレコード</b>）の両方が入っています。",
+  "m": "Server＝聞いた相手、Addresses＝答え"
+ },
+ {
+  "id": "P36-22",
+  "k": "one",
+  "tag": "管理",
+  "lv": 2,
+  "page": 4,
+  "t": "R2の時刻を、R1（10.0.0.1）の時刻に合わせたいと考えています。R1はすでにNTPサーバーとして動いています。R2で入力するコマンドはどれですか。",
+  "o": ["ntp master 10.0.0.1", "ntp server 10.0.0.1", "clock set 10.0.0.1", "ntp master 3"],
+  "a": 1,
+  "e": "時刻をもらう側は <b>ntp server 相手のアドレス</b> を設定します。<b>ntp master</b> は、自分自身を時刻源にして配る側の設定です。",
+  "m": "もらう側＝ntp server、配る側＝ntp master"
+ },
+ {
+  "id": "P36-23",
+  "k": "one",
+  "tag": "DHCP",
+  "lv": 2,
+  "page": 2,
+  "t": "図を参照してください。MACアドレスが 0050.56a1.d4e5 のPCに配られたIPアドレスはどれですか。",
+  "x": "R1# show ip dhcp binding\nIP address      Client-ID/          Lease expiration\n                Hardware address\n172.16.20.11    0100.5056.a1b2.c3   Mar 05 2026 09:12 AM\n172.16.20.12    0100.5056.a1d4.e5   Mar 05 2026 09:40 AM",
+  "rd": "①左の列が配ったIPアドレス<br>②Client-ID は 01 で始まり、その後ろがMAC<br>③MACが一致する行を探す",
+  "rg": "data",
+  "o": ["172.16.20.11", "172.16.20.12", "0100.5056.a1d4.e5", "このPCにはまだ配られていない"],
+  "a": 1,
+  "e": "Client-ID は、先頭の <b>01</b>（イーサネットの印）のあとにMACアドレスが続きます。0100.5056.a1d4.e5 は 01 ＋ 0050.56a1.d4e5 なので、<b>172.16.20.12</b> が配られています。",
+  "m": "Client-ID＝01＋MACアドレス"
  }
 ]
