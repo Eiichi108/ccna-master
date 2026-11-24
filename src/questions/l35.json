@@ -197,5 +197,75 @@
   "a": 1,
   "e": "NATは、<b>ip nat inside と ip nat outside の両方</b>が設定されたインターフェースの間で変換します。インターネット側の G0/1 に <b>ip nat outside</b> がないので変換されません。",
   "m": "insideとoutsideはセットで必要"
+ },
+ {
+  "id": "P35-16",
+  "k": "one",
+  "tag": "NAT",
+  "lv": 2,
+  "page": 3,
+  "t": "図を参照してください。通信がまったくないときにも表示されている1行目について、正しい説明はどれですか。",
+  "x": "R1# show ip nat translations\nPro Inside global      Inside local\n--- 203.0.113.80       192.168.1.80\ntcp 203.0.113.5:1030   192.168.1.21:53512",
+  "rd": "①1行目はプロトコル・ポートが ---<br>②2行目は tcp とポート番号つき<br>③常に出ている行は固定の対応",
+  "rg": "run",
+  "o": ["PATで変換中の通信", "静的NATの、1対1の固定の対応", "変換に失敗した通信の記録", "ダイナミックNATのプールの空き"],
+  "a": 1,
+  "e": "プロトコルとポートが「<b>---</b>」で、通信がなくても<b>常に表示</b>される行は、<b>静的NAT</b>（スタティックNAT）の固定の対応です。2行目のようにポート番号まで表示されるのは、実際の通信の変換です。",
+  "m": "「---」で常に表示＝静的NAT"
+ },
+ {
+  "id": "P35-17",
+  "k": "order",
+  "tag": "NAT",
+  "lv": 2,
+  "page": 2,
+  "t": "PATの設定を、作業する順に並べてください。",
+  "o": ["内部・外部のインターフェースに ip nat inside と ip nat outside を設定する", "変換する送信元をACLで決める", "ip nat inside source list … overload で変換を有効にする", "show ip nat translations で変換を確かめる"],
+  "e": "最初に<b>内部と外部のインターフェース</b>を決め、次に変換する送信元をACLで決めて、<b>ip nat inside source</b> で変換を有効にします。最後に変換表で確かめます。",
+  "m": "inside/outside → ACL → 変換 → 確認"
+ },
+ {
+  "id": "P35-18",
+  "k": "one",
+  "tag": "NAT",
+  "lv": 2,
+  "page": 0,
+  "t": "ISPから8個のグローバルアドレスを割り当てられました。社員200人のPCが、同時にインターネットを使えるようにしたいと考えています。最も適したNATの設定はどれですか。",
+  "o": ["8個のアドレスで静的NATを8つ作る", "8個のアドレスのプールで、overload なしのダイナミックNATにする", "8個のアドレスのプールを作り、overload を付けてPATにする", "NATは使わず、PCにプライベートアドレスのまま通信させる"],
+  "a": 2,
+  "e": "overload を付けると、プールのアドレスを<b>ポート番号で区別して共有</b>できます（PAT）。overload がないと、同時に使えるのは8台までです。例：ip nat inside source list 1 pool P1 overload。",
+  "m": "台数がアドレスより多い→overload"
+ },
+ {
+  "id": "P35-19",
+  "k": "sel",
+  "tag": "NAT",
+  "lv": 2,
+  "page": 1,
+  "t": "社内のPC 192.168.1.10 が、R1のPATで 203.0.113.5 に変換され、インターネット上のサーバー 198.51.100.9 と通信しています。それぞれのアドレスを、NATの用語に分けてください。",
+  "rows": [
+   {"l": "192.168.1.10（PCに設定されたアドレス）", "a": "Inside local"},
+   {"l": "192.168.1.11（別の社内PCに設定されたアドレス）", "a": "Inside local"},
+   {"l": "203.0.113.5（外から見えるPCのアドレス）", "a": "Inside global"},
+   {"l": "198.51.100.9（サーバーの本当のアドレス）", "a": "Outside global"}
+  ],
+  "opts": ["Inside local", "Inside global", "Outside global"],
+  "e": "inside＝社内側、outside＝外部側。local＝本当のアドレス、global＝外から見えるアドレスです。社内PCの本当のアドレスが <b>Inside local</b>、外から見えるアドレスが <b>Inside global</b>、外の相手の本当のアドレスが <b>Outside global</b> です。",
+  "m": "local＝本当、global＝外から見える"
+ },
+ {
+  "id": "P35-20",
+  "k": "one",
+  "tag": "NAT",
+  "lv": 2,
+  "page": 2,
+  "t": "図を参照してください。社内のPC（192.168.10.0/24）がインターネットに出られず、変換表にも何も表示されません。原因として正しいものはどれですか。",
+  "x": "interface GigabitEthernet0/0\n ip nat inside\ninterface GigabitEthernet0/1\n ip nat outside\n!\naccess-list 1 permit 192.168.10.0 0.0.0.0\nip nat inside source list 1 interface Gi0/1 overload",
+  "rd": "①inside と outside の向きは正しい<br>②overload も付いている<br>③ACL のワイルドカードが 0.0.0.0",
+  "rg": "run",
+  "o": ["ACL 1 のワイルドカードマスクのため、192.168.10.0 という1つのアドレスにしか一致しない", "overload が付いていない", "G0/0 と G0/1 の inside と outside が逆になっている", "標準ACLはNATに使えない"],
+  "a": 0,
+  "e": "ワイルドカード <b>0.0.0.0</b> は「全部のビットが一致」なので、ACL 1 は 192.168.10.0 という1つのアドレスにしか一致しません。/24 全体なら <b>0.0.0.255</b> にします。",
+  "m": "/24 のワイルドカード＝0.0.0.255"
  }
 ]

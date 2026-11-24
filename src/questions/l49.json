@@ -167,5 +167,41 @@
   "a": 1,
   "e": "<b>Content-Type</b> は今送っているデータの形式（JSON）、<b>Accept</b> は返してほしい形式（XML）です。送る形式と受け取る形式は別々に指定できます。",
   "m": "Content-Type＝送る、Accept＝欲しい"
+ },
+ {
+  "id": "P49-14",
+  "k": "one",
+  "tag": "REST API",
+  "lv": 2,
+  "page": 2,
+  "t": "REST APIで、コントローラーから受け取ったトークンを使ってリクエストを送ります。トークンを入れるHTTPヘッダーとして正しいものはどれですか。",
+  "o": ["Accept: Bearer トークン", "Content-Type: Bearer トークン", "Authorization: Bearer トークン", "Host: Bearer トークン"],
+  "a": 2,
+  "e": "トークンは <b>Authorization: Bearer …</b> の形で送ります。Accept は返してほしい形式、Content-Type は送るデータの形式を伝えるヘッダーです。",
+  "m": "トークン＝Authorization: Bearer"
+ },
+ {
+  "id": "P49-15",
+  "k": "multi",
+  "tag": "REST API",
+  "lv": 2,
+  "page": 0,
+  "t": "REST APIで、データのエンコード（形式）として一般に使われるものはどれですか。2つ選んでください。",
+  "o": ["JSON", "MIB", "XML", "HCL", "Syslog"],
+  "a": [0, 2],
+  "e": "REST APIでは、主に <b>JSON</b> と <b>XML</b> でデータをやりとりします。MIB はSNMPの管理情報、HCL はTerraformの書き方、Syslog はログの仕組みです。",
+  "m": "REST APIのデータ＝JSON・XML"
+ },
+ {
+  "id": "P49-16",
+  "k": "one",
+  "tag": "REST API",
+  "lv": 2,
+  "page": 0,
+  "t": "REST APIで、操作の対象（リソース）を指定するのに使うものはどれですか。",
+  "o": ["URI", "MACアドレス", "VLAN番号", "ポートセキュリティ"],
+  "a": 0,
+  "e": "REST APIでは、リソースを <b>URI</b>（例：/api/v1/devices）で指定し、HTTPメソッドで操作を表します。",
+  "m": "対象＝URI、操作＝HTTPメソッド"
  }
 ]

@@ -103,5 +103,20 @@
   "a": 2,
   "e": "<b>SCP</b>（Secure Copy Protocol）はSSHの仕組みを使うので、ログインが必要で通信も暗号化されます。TFTPは認証なし、FTPは認証ありでも平文です。",
   "m": "認証＋暗号化のファイル転送＝SCP"
+ },
+ {
+  "id": "P38-09",
+  "k": "one",
+  "tag": "管理",
+  "lv": 2,
+  "page": 1,
+  "t": "図を参照してください。R1には hostname R1 と ip domain-name example.com が設定済みです。SSHを使えるようにするために、次に必要な設定はどれですか。",
+  "x": "R1# show ip ssh\nSSH Disabled - version 1.99\n%Please create RSA keys to enable SSH",
+  "rd": "①SSH は Disabled<br>②RSA の鍵を作るように表示されている<br>③ホスト名とドメイン名は設定済み",
+  "rg": "run",
+  "o": ["transport input telnet", "crypto key generate rsa", "service password-encryption", "ip ssh disable"],
+  "a": 1,
+  "e": "出力は、<b>RSAの鍵がない</b>ためSSHが無効だと示しています。ホスト名とドメイン名があれば、<b>crypto key generate rsa</b> で鍵を作れます。",
+  "m": "SSH Disabled＋RSA keys→鍵を作る"
  }
 ]
