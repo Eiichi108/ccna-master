@@ -4,12 +4,7 @@
   "k": "one",
   "tag": "VLAN",
   "t": "受付カウンターのポートG0/7に、IP電話とその後ろのPCをつなぎます。PCはVLAN 40、電話はVLAN 150を使います。switchport mode access と switchport access vlan 40 は設定済みです。電話用に追加するコマンドはどれですか。",
-  "o": [
-   "switchport trunk native vlan 150",
-   "switchport voice vlan 150",
-   "switchport voice vlan 40",
-   "switchport access vlan 150"
-  ],
+  "o": ["switchport trunk native vlan 150", "switchport voice vlan 150", "switchport voice vlan 40", "switchport access vlan 150"],
   "a": 1,
   "e": "IP電話が使う音声VLANは<b>switchport voice vlan 番号</b>で指定します。PC用のデータVLANはaccess vlanで決めたVLAN 40のままです。",
   "m": "電話はvoice vlan、PCはaccess vlan",
@@ -20,17 +15,8 @@
   "k": "multi",
   "tag": "VLAN",
   "t": "IP電話の後ろにPCをつなぎ、音声VLANを設定したスイッチポートについて、正しい説明はどれですか。2つ選んでください。",
-  "o": [
-   "音声VLANを使うには、そのポートをswitchport mode trunkにしなければならない",
-   "電話の通信には音声VLANのタグが付き、PCの通信はタグなしでデータVLANに流れる",
-   "PCの通信にも音声VLANのタグが付き、電話と同じVLANに流れる",
-   "電話とPCを分けるため、電話とPCは別々の壁のポートに必ずつなぐ",
-   "Ciscoの電話は、使う音声VLANをスイッチからCDPやLLDP-MED（Link Layer Discovery Protocol - Media Endpoint Discovery）で知らされる"
-  ],
-  "a": [
-   1,
-   4
-  ],
+  "o": ["音声VLANを使うには、そのポートをswitchport mode trunkにしなければならない", "電話の通信には音声VLANのタグが付き、PCの通信はタグなしでデータVLANに流れる", "PCの通信にも音声VLANのタグが付き、電話と同じVLANに流れる", "電話とPCを分けるため、電話とPCは別々の壁のポートに必ずつなぐ", "Ciscoの電話は、使う音声VLANをスイッチからCDPやLLDP-MED（Link Layer Discovery Protocol - Media Endpoint Discovery）で知らされる"],
+  "a": [1, 4],
   "e": "1本のケーブルで、<b>電話はタグ付きの音声VLAN、PCはタグなしのデータVLAN</b>に分かれます。電話はどのVLANを使えばよいかを、スイッチから<b>CDPやLLDP-MED</b>で教えてもらいます。",
   "m": "電話＝タグ付き音声VLAN、PC＝タグなし",
   "page": 0
@@ -40,12 +26,7 @@
   "k": "one",
   "tag": "VLAN",
   "t": "スイッチのポートG0/12について、アクセスVLAN、音声VLAN、実際に動いているモード（アクセスかトランクか）をまとめて確認したいとき、使うコマンドはどれですか。",
-  "o": [
-   "show cdp neighbors",
-   "show mac address-table",
-   "show interfaces g0/12 switchport",
-   "show ip interface brief"
-  ],
+  "o": ["show cdp neighbors", "show mac address-table", "show interfaces g0/12 switchport", "show ip interface brief"],
   "a": 2,
   "e": "<b>show interfaces インターフェース switchport</b>は、そのポートのモード、アクセスVLAN、音声VLANなどのL2の設定と状態をまとめて表示します。",
   "m": "ポートのVLAN設定はshow int switchport",
@@ -56,12 +37,7 @@
   "k": "one",
   "tag": "管理",
   "t": "L2スイッチSW5を、別のネットワークにいる管理用PCからSSHで管理したいと考えています。正しい設定の組み合わせはどれですか。",
-  "o": [
-   "物理ポートG0/1にIPアドレスを付け、ip http server を設定する",
-   "interface vlan 1 にIPアドレスを付け、exec-timeout 5 0 を設定する",
-   "物理ポートG0/1にIPアドレスを付け、ip default-gateway を設定する",
-   "interface vlan 1 にIPアドレスを付け、ip default-gateway を設定する"
-  ],
+  "o": ["物理ポートG0/1にIPアドレスを付け、ip http server を設定する", "interface vlan 1 にIPアドレスを付け、exec-timeout 5 0 を設定する", "物理ポートG0/1にIPアドレスを付け、ip default-gateway を設定する", "interface vlan 1 にIPアドレスを付け、ip default-gateway を設定する"],
   "a": 3,
   "e": "L2スイッチのポートにはIPアドレスを付けられないので、管理用IPは<b>SVI</b>に付けます。別のネットワークの管理PCに返事を返すには<b>ip default-gateway</b>が必要です。",
   "m": "L2スイッチの管理はSVI＋デフォルトGW",
@@ -72,12 +48,7 @@
   "k": "one",
   "tag": "管理",
   "t": "スイッチのWeb管理画面を、暗号化された通信でだけ使えるようにしたいと考えています。正しい設定はどれですか。",
-  "o": [
-   "ip http secure-server を有効にし、no ip http server を設定する",
-   "transport input telnet を設定する",
-   "ip http server と ip http secure-server の両方を無効にする",
-   "ip http server を有効にし、no ip http secure-server を設定する"
-  ],
+  "o": ["ip http secure-server を有効にし、no ip http server を設定する", "transport input telnet を設定する", "ip http server と ip http secure-server の両方を無効にする", "ip http server を有効にし、no ip http secure-server を設定する"],
   "a": 0,
   "e": "<b>ip http secure-server</b>でHTTPSを有効にし、<b>no ip http server</b>で平文のHTTPを止めると、Web管理は暗号化された通信だけになります。",
   "m": "Webは secure-server有効＋http停止",
@@ -89,25 +60,35 @@
   "tag": "管理",
   "t": "機器の管理に関する項目と、その説明を正しく組み合わせてください。",
   "o": [
-   [
-    "Telnet",
-    "通信が平文で、パスワードを盗み見られるおそれがある"
-   ],
-   [
-    "SSH（Secure Shell）",
-    "TCP 22番を使い、通信を暗号化してCLIをリモート操作する"
-   ],
-   [
-    "コンソール接続",
-    "ケーブルで直接つなぎ、ネットワークが落ちていても使える"
-   ],
-   [
-    "line con 0 で exec-timeout 5 0",
-    "5分間操作がなければ自動でログアウトさせる"
-   ]
+   ["Telnet", "通信が平文で、パスワードを盗み見られるおそれがある"],
+   ["SSH（Secure Shell）", "TCP 22番を使い、通信を暗号化してCLIをリモート操作する"],
+   ["コンソール接続", "ケーブルで直接つなぎ、ネットワークが落ちていても使える"],
+   ["line con 0 で exec-timeout 5 0", "5分間操作がなければ自動でログアウトさせる"]
   ],
   "e": "リモートからCLIを操作するなら暗号化される<b>SSH</b>を使います。<b>コンソール</b>はアウトオブバンド管理で、<b>exec-timeout</b>は放置された画面を守る設定です。",
   "m": "Telnet平文・SSH暗号・コンソールは直結",
   "page": 1
+ },
+ {
+  "id": "P22-07",
+  "k": "one",
+  "tag": "管理",
+  "page": 1,
+  "t": "ルーターをリモートから管理するとき、Telnetではなく SSH を使う理由として正しいものはどれですか。",
+  "o": ["SSHはTCPを使わないので速いから", "通信が暗号化され、パスワードを盗み見られにくいから", "SSHなら、IPアドレスがなくても接続できるから", "Telnetは、ルーターでは使えないから"],
+  "a": 1,
+  "e": "Telnet（TCP 23）は通信を<b>平文</b>で送るので、パスワードを盗み見られるおそれがあります。<b>SSH</b>（TCP 22）は通信を暗号化します。",
+  "m": "Telnet＝平文23、SSH＝暗号化22"
+ },
+ {
+  "id": "P22-08",
+  "k": "one",
+  "tag": "管理",
+  "page": 2,
+  "t": "管理者がコンソールでログインしたまま席を離れることが多いため、10分間操作がなければ自動でログアウトさせたいと考えています。line con 0 で設定するコマンドはどれですか。",
+  "o": ["transport input ssh", "login local", "exec-timeout 10 0", "banner motd #Bye#"],
+  "a": 2,
+  "e": "<b>exec-timeout 分 秒</b> で、操作がない時間がそれを超えると自動でログアウトします。exec-timeout 10 0 なら10分です。",
+  "m": "放置対策＝exec-timeout 分 秒"
  }
 ]

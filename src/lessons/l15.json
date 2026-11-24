@@ -29,6 +29,12 @@
    "p": "L2の分離＝VLAN、L3の分離＝VRF。"
   },
   {
+   "t": "IPv6の設定を確かめる",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 250\" role=\"img\" aria-label=\"show ipv6 interface brief の出力\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"166\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\">R1# show ipv6 interface brief</text><text x=\"22\" y=\"74\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#e8ecf3;white-space:pre\">GigabitEthernet0/0   [up/up]</text><text x=\"22\" y=\"96\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">    FE80::211:22FF:FE33:4455</text><text x=\"22\" y=\"118\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#ffb400;white-space:pre\">    2001:DB8:1::1</text><text x=\"22\" y=\"140\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#e8ecf3;white-space:pre\">GigabitEthernet0/1   [administratively down/down]</text><text x=\"22\" y=\"162\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#e8ecf3;white-space:pre\">    unassigned</text><text x=\"180\" y=\"198\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">グローバルを付けると、リンクローカルも自動でできる</text><text x=\"180\" y=\"222\" text-anchor=\"middle\" style=\"font:700 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">FE80::＝リンクローカル／2001:DB8:1::1＝グローバル</text></svg>",
+   "b": "<b>show ipv6 interface brief</b> で、インターフェースごとの状態とIPv6アドレスを確かめます。グローバルユニキャストアドレスを設定すると、<b>リンクローカルアドレス（FE80::で始まる）も自動で作られる</b>ので、1つのインターフェースに2つのアドレスが表示されます。ルーティングテーブルは <b>show ipv6 route</b> で見ます。",
+   "p": "IPv6では、1つのインターフェースに複数のアドレスがあるのがふつう。"
+  },
+  {
    "t": "小テスト",
    "quiz": {
     "q": "IPv6アドレスを設定したのに、ルーターがIPv6パケットを転送しない。足りないコマンドは？",
@@ -70,14 +76,14 @@
    {"sc": 4, "sp": "生徒", "t": "1台なのに、何台ものルーターみたいになるんですか？"},
    {"sc": 4, "sp": "先生", "t": "そうです。物理的には1台でも、L3を論理的に分けられます。テーブルが別々なので、同じIPアドレスの範囲を、別々のVRFで重複して使うこともできます。", "y": "そうです。物理的には1台でも、エルスリーを論理的に分けられます。テーブルが別々なので、同じアイピーアドレスの範囲を、別々のブイアールエフで重複して使うこともできます。"},
    {"sc": 4, "sp": "先生", "t": "ちなみに、L2を分けるのがVLAN、L3を分けるのがVRFです。", "y": "ちなみに、エルツーを分けるのがブイラン、エルスリーを分けるのがブイアールエフです。"},
-   {"sc": 5, "sp": "先生", "t": "ここで小テストです。IPv6アドレスを設定したのに、ルーターがIPv6パケットを転送しません。足りないコマンドはどれでしょう？画面で選んでください。", "w": 1, "y": "ここで小テストです。アイピーブイシックスアドレスを設定したのに、ルーターがアイピーブイシックスパケットを転送しません。足りないコマンドはどれでしょう？画面で選んでください。"},
-   {"sc": 5, "sp": "先生", "t": "正解はipv6 unicast-routingです。", "y": "正解は、アイピーブイシックス、ユニキャストルーティング、です。"},
-   {"sc": 6, "sp": "先生", "t": "では、今日のまとめです。"},
-   {"sc": 6, "sp": "先生", "t": "1つ目。IPv6でルーティングするには、ipv6 unicast-routing。", "y": "1つ目。アイピーブイシックスでルーティングするには、アイピーブイシックス、ユニキャストルーティング。"},
-   {"sc": 6, "sp": "先生", "t": "2つ目。手動はアドレスを全部、自動はeui-64、リンクローカルだけならipv6 enable。", "y": "2つ目。手動はアドレスを全部、自動は、イーユーアイろくじゅうよん、リンクローカルだけなら、アイピーブイシックス、イネーブル。"},
-   {"sc": 6, "sp": "先生", "t": "3つ目。VRFは、1台のルーターで複数のルーティングテーブル。同じアドレスを重複して使える。", "y": "3つ目。ブイアールエフは、1台のルーターで複数のルーティングテーブル。同じアドレスを重複して使える。"},
-   {"sc": 6, "sp": "生徒", "t": "unicast-routingを忘れないようにします！", "y": "ユニキャストルーティングを忘れないようにします！"},
-   {"sc": 6, "sp": "先生", "t": "いいですね。次回は、IPv6の自動設定、NDPやSLAACを学びます。お疲れさまでした。", "y": "いいですね。次回は、アイピーブイシックスの自動設定、エヌディーピーやスラークを学びます。お疲れさまでした。"}
+   {"sc": 6, "sp": "先生", "t": "ここで小テストです。IPv6アドレスを設定したのに、ルーターがIPv6パケットを転送しません。足りないコマンドはどれでしょう？画面で選んでください。", "w": 1, "y": "ここで小テストです。アイピーブイシックスアドレスを設定したのに、ルーターがアイピーブイシックスパケットを転送しません。足りないコマンドはどれでしょう？画面で選んでください。"},
+   {"sc": 6, "sp": "先生", "t": "正解はipv6 unicast-routingです。", "y": "正解は、アイピーブイシックス、ユニキャストルーティング、です。"},
+   {"sc": 7, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 7, "sp": "先生", "t": "1つ目。IPv6でルーティングするには、ipv6 unicast-routing。", "y": "1つ目。アイピーブイシックスでルーティングするには、アイピーブイシックス、ユニキャストルーティング。"},
+   {"sc": 7, "sp": "先生", "t": "2つ目。手動はアドレスを全部、自動はeui-64、リンクローカルだけならipv6 enable。", "y": "2つ目。手動はアドレスを全部、自動は、イーユーアイろくじゅうよん、リンクローカルだけなら、アイピーブイシックス、イネーブル。"},
+   {"sc": 7, "sp": "先生", "t": "3つ目。VRFは、1台のルーターで複数のルーティングテーブル。同じアドレスを重複して使える。", "y": "3つ目。ブイアールエフは、1台のルーターで複数のルーティングテーブル。同じアドレスを重複して使える。"},
+   {"sc": 7, "sp": "生徒", "t": "unicast-routingを忘れないようにします！", "y": "ユニキャストルーティングを忘れないようにします！"},
+   {"sc": 7, "sp": "先生", "t": "いいですね。次回は、IPv6の自動設定、NDPやSLAACを学びます。お疲れさまでした。", "y": "いいですね。次回は、アイピーブイシックスの自動設定、エヌディーピーやスラークを学びます。お疲れさまでした。"}
   ],
   "seg": [
    [0.0, 6.859],

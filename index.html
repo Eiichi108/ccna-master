@@ -854,7 +854,7 @@ function tSubnet(){
   draw();
 }
 /* subnet drill */
-const SDT=[{id:"net",t:"ネットワークアドレス"},{id:"bc",t:"ブロードキャスト"},{id:"first",t:"最初のホスト"},{id:"last",t:"最後のホスト"},{id:"hosts",t:"使えるホスト数"},{id:"p2m",t:"プレフィックス→マスク"},{id:"m2p",t:"マスク→プレフィックス"},{id:"wc",t:"ワイルドカード"},{id:"need",t:"台数からプレフィックス"},{id:"same",t:"同じサブネット？"},{id:"cnt",t:"サブネットの数"}];
+const SDT=[{id:"net",t:"ネットワークアドレス"},{id:"bc",t:"ブロードキャスト"},{id:"first",t:"最初のホスト"},{id:"last",t:"最後のホスト"},{id:"hosts",t:"使えるホスト数"},{id:"p2m",t:"プレフィックス→マスク"},{id:"m2p",t:"マスク→プレフィックス"},{id:"wc",t:"ワイルドカード"},{id:"need",t:"台数からプレフィックス"},{id:"same",t:"同じサブネット？"},{id:"cnt",t:"サブネットの数"},{id:"vlsm",t:"VLSMの割り当て"},{id:"sum",t:"経路集約"}];
 const sdNorm=s=>String(s).replace(/[０-９．／]/g,c=>String.fromCharCode(c.charCodeAt(0)-0xFEE0)).replace(/[\s,，台個]/g,"").replace(/^\//,"");
 function sdBlock(n,len){/* ブロックサイズ法の説明 */
   const size=2**(32-len),net=Math.floor(n/size)*size,bc=net+size-1;
@@ -888,6 +888,20 @@ function sdMake(ty){
   else if(ty==="cnt"){q.k="num";const bl=len>24?pick([16,24]):16,bnet=Math.floor(n/2**(32-bl))*2**(32-bl);
     q.t=`${n2ip(bnet)}/${bl} を /${len} のサブネットに分けると、<b>サブネットはいくつ</b>できる？`;q.a=String(2**(len-bl));
     q.e=`ネットワーク部が ${bl} → ${len} で ${len-bl}ビット増えた。2<sup>${len-bl}</sup>＝<b>${(2**(len-bl)).toLocaleString()}個</b>。`;}
+  else if(ty==="vlsm"){q.k="cidr";const shuf=a=>a.map(v=>[Math.random(),v]).sort((x,y)=>x[0]-y[0]).map(v=>v[1]);
+    const ps=shuf([25,26,27,28,29,30]).slice(0,3+r(2)).sort((a,b)=>a-b),nm=shuf(["営業","開発","総務","倉庫","経理","企画"]);
+    const b0=pick([[192,168,r(256)],[10,r(256),r(256)],[172,16+r(16),r(256)]]).reduce((a,v)=>a*256+v,0)*256;let at=0;
+    const g=ps.map((p,i)=>{const sz=2**(32-p),o={nm:p===30?"ルーター間の線":nm[i]+"部",h:p===30?2:sz/2-1+r(sz/2),p,net:b0+at};at+=sz;return o;}),T=g[1+r(g.length-1)];
+    q.t=`${n2ip(b0)}/24 を VLSM で次の${g.length}つに分けます。ホスト数の多い順に、先頭から詰めて割り当てるとき、<b>${T.nm}</b>の<b>ネットワークアドレスとプレフィックス長</b>は？<br>${shuf(g).map(x=>`${x.nm} ${x.h}台`).join("、")}`;
+    q.a=`${n2ip(T.net)}/${T.p}`;
+    q.e=`多い順に、「台数＋2」が入るいちばん小さいブロックを選び、先頭から詰めます。<br>`+g.map(x=>{const t=`${x.nm} ${x.h}台 → ${x.h+2}個 → /${x.p}（${2**(32-x.p)}個）→ ${n2ip(x.net)}/${x.p}`;return x===T?`<b>${t}</b>`:t;}).join("<br>");}
+  else if(ty==="sum"){q.k="cidr";const k=pick([2,4,4,8,8]),al=Math.random()<.75,v=al?k*r(256/k):k*r(256/k-1)+k/2,ls=v+k-1;
+    const hi=pick([[192,168],[10,r(256)],[172,16+r(16)]]).reduce((a,x)=>a*256+x,0)*65536,ip=x=>n2ip(hi+x*256);
+    let c=0;while(c<8&&(v>>(7-c))===(ls>>(7-c)))c++;const t3=c?(v>>(8-c))<<(8-c):0,len=16+c,bin=x=>{const s=x.toString(2).padStart(8,"0");return`<b>${s.slice(0,c)}</b>${s.slice(c)}`;};
+    q.t=`次の${k}つのネットワークを<b>1つの集約ルート</b>にまとめます。全部を含む、<b>一番小さい集約ルート</b>は？<br>`+(k===2?`${ip(v)}/24、${ip(ls)}/24`:`${ip(v)}/24 〜 ${ip(ls)}/24（第3オクテットが ${v}〜${ls}）`);
+    q.a=`${n2ip(hi+t3*256)}/${len}`;
+    q.e=`第3オクテットを2進数にして、左から同じビットを数えます。<br>${v} ＝ ${bin(v)}<br>${ls} ＝ ${bin(ls)}<br>左から ${c}ビットが共通 → 16＋${c}＝<b>/${len}</b>。共通部分だけ残すと <b>${q.a}</b>。`+
+      (al?`（${k}つなので ${Math.log2(k)}ビット短くなる、とも考えられる。）`:`<br>始まりの ${v} が ${k} の倍数ではないので、${k}つぴったりにはまとまりません。この集約ルートは ${t3}〜${t3+2**(8-c)-1} の ${2**(8-c)}個分を含み、ほかのネットワークまで含んでしまいます。`);}
   return q;}
 function tSdrill(){
   ttl.textContent="サブネット計算ドリル";S.sd=S.sd||{};S.sd.s=S.sd.s||{};
@@ -899,14 +913,15 @@ function tSdrill(){
   const draw=()=>{const q=arg.q,T=SDT.find(t=>t.id===q.ty),f=on(),done=arg.ans!==null;
     const st=S.sd.s,tot=Object.values(st).reduce((a,v)=>[a[0]+v[0],a[1]+v[1]],[0,0]);
     const box=q.k==="yn"?`<div class="row">${["同じ","違う"].map(v=>`<button class="btn ${done&&v===q.a?"pri":""}" data-yn="${v}" ${done?"disabled":""}>${v}</button>`).join("")}</div>`
-      :`<div class="row"><input class="inp grow" id="sda" inputmode="decimal" autocomplete="off" placeholder="${q.k==="num"?"数字":"例 192.168.1.0"}" ${done?"disabled":""} value="${done?esc(arg.ans):""}">${done?"":`<button class="btn pri" id="sdc">答え合わせ</button>`}</div>`;
+      :`<div class="row"><input class="inp grow" id="sda" inputmode="${q.k==="cidr"?"url":"decimal"}" autocomplete="off" autocapitalize="off" placeholder="${q.k==="num"?"数字":q.k==="cidr"?"例 192.168.1.0/24":"例 192.168.1.0"}" ${done?"disabled":""} value="${done?esc(arg.ans):""}">${done?"":`<button class="btn pri" id="sdc">答え合わせ</button>`}</div>`;
     const res=done?`<div class="res ${arg.ok?"ok":"ng"}" style="margin-top:12px">${arg.ok?"○ 正解":"× 正解は "+esc(q.a)}　<small>${arg.sec}秒</small></div><p class="pl" style="margin-top:8px">${q.e}</p><div class="row"><button class="btn pri" id="sdn">次の問題（Enter）</button></div>`:"";
     app.innerHTML=`<h2>サブネット計算ドリル</h2><p class="sub">問題は毎回ランダムに作られます。全角の数字でも答えられます。</p>
 <div class="card"><div class="sub">${esc(T.t)}　今回 ${arg.sc[0]}/${arg.sc[1]} 正解</div><div class="qt" style="margin:6px 0 12px">${q.t}</div>${box}${res}</div>
 <details class="card"><summary><b>出す問題の種類</b>（${f.length===SDT.length?"すべて":f.length+"種類"}）</summary><div class="row" style="flex-wrap:wrap;margin-top:10px">${SDT.map(t=>`<button class="btn sm ${f.includes(t.id)&&f.length<SDT.length?"pri":""}" data-ty="${t.id}">${esc(t.t)}</button>`).join("")}<button class="btn sm" data-ty="">すべて</button></div></details>
 <div class="card"><div class="sub">これまでの成績　${tot[0]}/${tot[1]} 正解${tot[1]?`（${Math.round(tot[0]/tot[1]*100)}%）`:""}</div><div class="kv" style="margin-top:8px">${SDT.filter(t=>st[t.id]).map(t=>`<div><span>${esc(t.t)}</span><b>${Math.round(st[t.id][0]/st[t.id][1]*100)}%<small style="font-weight:400;color:var(--sub)">（${st[t.id][0]}/${st[t.id][1]}）</small></b></div>`).join("")||`<p class="sub">まだ記録がありません。</p>`}</div></div>`;
     const judge=v=>{if(arg.ans!==null)return;const a=sdNorm(v);if(!a)return;let ok;
-      if(q.k==="ip"){const x=ip2n(a);ok=x!==null&&n2ip(x)===q.a;}else ok=a===q.a;
+      if(q.k==="ip"){const x=ip2n(a);ok=x!==null&&n2ip(x)===q.a;}
+      else if(q.k==="cidr"){const m=a.match(/^(.+)\/(\d{1,2})$/),x=m&&ip2n(m[1]);ok=!!m&&x!==null&&`${n2ip(x)}/${+m[2]}`===q.a;}else ok=a===q.a;
       arg.ans=v;arg.ok=ok;arg.sec=Math.round((Date.now()-arg.t0)/1000);arg.sc[1]++;if(ok)arg.sc[0]++;
       const s=st[q.ty]||[0,0];s[1]++;if(ok)s[0]++;st[q.ty]=s;save();draw();};
     const nx=()=>{next();draw();const i=$("#sda");if(i)i.focus();};
