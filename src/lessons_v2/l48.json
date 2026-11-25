@@ -1,0 +1,144 @@
+{
+ "r": "TB",
+ "n": 48,
+ "t": "ルーティングテーブルを読む",
+ "d": "d3",
+ "form": "パケットの旅",
+ "need": [47],
+ "goal": ["ルーティングテーブルの1行を読める", "経路の種類がわかる", "宛先に合う行を探せる"],
+ "terms": ["ルーティングテーブル", "show ip route", "Connected", "Local", "スタティックルート"],
+ "pages": [
+  {
+   "t": "ルーターの地図帳",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 124.0\" role=\"img\" aria-label=\"つかみ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"110\" rx=\"16\" fill=\"#0a5cff\" opacity=\".12\"/><text x=\"180\" y=\"44\" text-anchor=\"middle\" style=\"font:800 19.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ルーターは、どこを見て道を決める？</text><text x=\"180\" y=\"74\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">答えは、ルーティングテーブル</text><text x=\"180\" y=\"94\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ルーターの地図帳を、一緒に読んでみましょう</text></svg>",
+   "b": "前回、R1は「宛先IPを調べて、次はR2へ」と決めていました。そのとき見ているのが<b>ルーティングテーブル</b>です。いわば、ルーターの<b>地図帳</b>です。今日は <b>show ip route</b> の出力を、1行ずつ一緒に読んでいきます。"
+  },
+  {
+   "t": "今日のゴール",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のゴール\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1. ルーティングテーブルの1行を読める</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">どこへ・だれに・どの口から</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2. 経路の種類がわかる</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">C・L・S・O</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">3. 宛先に合う行を探せる</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">パケットの旅の続き</text></svg>"
+  },
+  {
+   "t": "show ip route を見てみよう",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 226.0\" role=\"img\" aria-label=\"show ip route\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"166\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\">R1# show ip route</text><text x=\"22\" y=\"74\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#e8ecf3;white-space:pre\">C   10.1.1.0/24 is directly connected, G0/0</text><text x=\"22\" y=\"96\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#e8ecf3;white-space:pre\">L   10.1.1.1/32 is directly connected, G0/0</text><text x=\"22\" y=\"118\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#e8ecf3;white-space:pre\">C   10.1.2.0/24 is directly connected, G0/1</text><text x=\"22\" y=\"140\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">S   10.3.3.0/24 [1/0] via 10.1.2.2</text><text x=\"22\" y=\"162\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#ffb400;white-space:pre\">O   10.4.4.0/24 [110/2] via 10.1.2.2, G0/1</text><text x=\"180\" y=\"198\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">行の先頭の文字が、経路の種類（どうやって知ったか）</text></svg>",
+   "b": "これが <b>show ip route</b> の出力です。どの行も、<b>先頭の文字</b>が経路の種類、つまり<b>その道をどうやって知ったか</b>を表しています。その後ろに、宛先のネットワークと、次に渡す相手や出口が書かれています。"
+  },
+  {
+   "t": "先頭の文字（C・L・S・O）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 264.0\" role=\"img\" aria-label=\"経路の種類\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">C（Connected）</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">直接つながっているネットワーク</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#3d4450\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">L（Local）</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">インターフェースの自分のアドレス（/32）</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">S（Static）</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">人が手で書いた道（スタティックルート）</text><rect x=\"10\" y=\"196.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"222.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">O（OSPF）</text><text x=\"24\" y=\"241.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">OSPFで、ほかのルーターから教わった道</text></svg>",
+   "b": "<b>C</b> は自分に直接つながっているネットワーク、<b>L</b> はインターフェースに付けた自分のアドレスそのもの（/32）です。インターフェースにIPアドレスを付けて有効にすると、CとLが自動でできます。<b>S</b> は人が手で書いた道（スタティックルート）、<b>O</b> は OSPF でほかのルーターから教わった道です。<b>S*</b> のように * が付くと、デフォルトルートの候補です。",
+   "p": "C＝直結、L＝自分のアドレス、S＝手で書いた道、O＝OSPF。"
+  },
+  {
+   "t": "確認の問題 1",
+   "quiz": {
+    "q": "ルーティングテーブルで、先頭に「L」と付いた /32 の行は何を表しているでしょう？",
+    "o": [
+     ["インターフェースに設定した、自分自身のIPアドレス", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["OSPFで学んだ経路", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["デフォルトルート", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 0,
+    "e": "L（Local）は、インターフェースに付けた<b>自分自身のアドレス</b>です。"
+   }
+  },
+  {
+   "t": "1行を分解する",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 264.0\" role=\"img\" aria-label=\"O 10.4.4.0/24 [110/2] via 10.1.2.2, G0/1\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">10.4.4.0/24</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">宛先のネットワーク（どこへ）</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">[110/2]</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">[AD/メトリック]（次回くわしく）</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">via 10.1.2.2</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ネクストホップ（だれに渡す）</text><rect x=\"10\" y=\"196.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#8a3ffc\" opacity=\".1\"/><text x=\"24\" y=\"222.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">G0/1</text><text x=\"24\" y=\"241.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">出口のインターフェース（どの口から）</text></svg>",
+   "b": "OSPFの行を分解してみましょう。<b>10.4.4.0/24</b> は宛先のネットワーク（どこへ）。<b>[110/2]</b> は、道の信用度（AD）と遠さ（メトリック）で、次回くわしく学びます。<b>via 10.1.2.2</b> は次に渡す相手、<b>ネクストホップ</b>（だれに）。<b>G0/1</b> は出口のインターフェース（どの口から）です。「どこへ・だれに・どの口から」と読みましょう。"
+  },
+  {
+   "t": "確認の問題 2",
+   "quiz": {
+    "q": "「O 10.4.4.0/24 [110/2] via 10.1.2.2, G0/1」で、ネクストホップはどれでしょう？",
+    "o": [
+     ["10.4.4.0", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["10.1.2.2", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["G0/1", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "via のあとの <b>10.1.2.2</b> が、次に渡す相手（ネクストホップ）です。G0/1 は出口のインターフェースです。"
+   }
+  },
+  {
+   "t": "宛先に合う行を探す",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 230.0\" role=\"img\" aria-label=\"宛先 10.3.3.30 のパケットが来たら\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#3d4450\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">10.1.1.0/24 に入る？ → 入らない</text><rect x=\"10\" y=\"52.5\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#3d4450\" opacity=\".1\"/><text x=\"24\" y=\"78.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">10.1.2.0/24 に入る？ → 入らない</text><rect x=\"10\" y=\"99.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"124.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">10.3.3.0/24 に入る？ → 入る！</text><text x=\"24\" y=\"143.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">S … via 10.1.2.2 → R2 へ渡す</text><rect x=\"10\" y=\"162.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"188.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">どの行にも合わなければ、捨てる</text><text x=\"24\" y=\"207.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">デフォルトルートがあれば、そこへ</text></svg>",
+   "b": "宛先 10.3.3.30 のパケットが来たとしましょう。ルーターは、各行のネットワークに<b>宛先が入るかどうか</b>を見ていきます。10.3.3.0/24 の行に入るので、via 10.1.2.2、つまり R2 に渡します。もし<b>どの行にも合わなければ</b>、パケットは<b>捨てられます</b>（デフォルトルートがあれば、そちらへ送ります）。"
+  },
+  {
+   "t": "確認の問題 3",
+   "quiz": {
+    "q": "上のテーブルで、宛先 10.5.5.5 のパケットが届きました。デフォルトルートはありません。R1はどうするでしょう？",
+    "o": [
+     ["10.1.1.0/24 の方へ送る", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["捨てる", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["全部のインターフェースから送る", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "10.5.5.5 に合う行がなく、デフォルトルートもないので、<b>捨てます</b>。スイッチとちがい、ルーターはわからない宛先をあふれさせません。"
+   }
+  },
+  {
+   "t": "まちがえやすい所",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 183.5\" role=\"img\" aria-label=\"よくある勘違い\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× 宛先がわからないと、全部の口から送る</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">それはスイッチ。ルーターは捨てる</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× via のあとは、出口のインターフェース</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">via のあとはネクストホップのIP</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ C と L は、アドレスを付けると自動でできる</text></svg>",
+   "b": "スイッチは、わからない宛先をあふれさせて（フラッディング）送りますが、<b>ルーターは捨てます</b>。また、<b>via のあとはネクストホップのIPアドレス</b>で、出口のインターフェースは最後に書かれています。"
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1行の読み方</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">どこへ・[AD/メトリック]・だれに（via）・どの口から</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">経路の種類</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">C＝直結、L＝自分、S＝手書き、O＝OSPF</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">合う行がなければ</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">捨てる（デフォルトルートがあればそこへ）</text></svg>",
+   "b": "次回は、宛先に<b>合う行が2つ以上あったら</b>どれを選ぶのか、を学びます。"
+  }
+ ],
+ "cls": {
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "前回、R1は、次はR2へと決めていました。"},
+   {"sc": 1, "sp": "生徒", "t": "何を見て決めてるんですか？"},
+   {"sc": 1, "sp": "先生", "t": "ルーティングテーブルです。ルーターの地図帳ですね。"},
+   {"sc": 1, "sp": "先生", "t": "今日は、その地図帳を一緒に読みます。"},
+   {"sc": 2, "sp": "先生", "t": "今日のゴールは3つです。"},
+   {"sc": 2, "sp": "先生", "t": "1つ目、ルーティングテーブルの1行を読めること。"},
+   {"sc": 2, "sp": "先生", "t": "2つ目、経路の種類がわかること。"},
+   {"sc": 2, "sp": "先生", "t": "3つ目、宛先に合う行を探せること。"},
+   {"sc": 2, "sp": "生徒", "t": "地図帳、読めるようになりたいです。"},
+   {"sc": 3, "sp": "先生", "t": "これが、show ip routeの出力です。", "y": "これが、ショー、アイピー、ルートの出力です。"},
+   {"sc": 3, "sp": "生徒", "t": "アルファベットが、先頭に並んでますね。"},
+   {"sc": 3, "sp": "先生", "t": "その文字が、その道をどうやって知ったかを表しています。"},
+   {"sc": 4, "sp": "先生", "t": "Cは、直接つながっているネットワークです。"},
+   {"sc": 4, "sp": "先生", "t": "Lは、インターフェースに付けた、自分のアドレスそのものです。"},
+   {"sc": 4, "sp": "生徒", "t": "CとLは、自分で書くんですか？"},
+   {"sc": 4, "sp": "先生", "t": "アドレスを付けて有効にすると、自動でできます。"},
+   {"sc": 4, "sp": "先生", "t": "Sは手で書いた道、OはOSPFで教わった道です。", "y": "Sは手で書いた道、Oはオーエスピーエフで教わった道です。"},
+   {"sc": 4, "sp": "生徒", "t": "アスタリスクが付くと？"},
+   {"sc": 4, "sp": "先生", "t": "デフォルトルートの候補です。"},
+   {"sc": 5, "sp": "先生", "t": "確認です。先頭にLと付いた/32の行は、何でしょう？", "y": "確認です。先頭にLと付いたスラッシュ32の行は、何でしょう？", "w": 1},
+   {"sc": 5, "sp": "生徒", "t": "自分自身のアドレスです。"},
+   {"sc": 5, "sp": "先生", "t": "正解です。"},
+   {"sc": 6, "sp": "先生", "t": "では、OSPFの行を分解してみましょう。", "y": "では、オーエスピーエフの行を分解してみましょう。"},
+   {"sc": 6, "sp": "先生", "t": "10.4.4.0/24が宛先、[110/2]は道の信用度と遠さです。", "y": "10、4、4、0スラッシュ24が宛先、[110スラッシュ2]は道の信用度と遠さです。"},
+   {"sc": 6, "sp": "先生", "t": "via 10.1.2.2がネクストホップ、G0/1が出口のインターフェースです。", "y": "ヴィア 10、1、2、2がネクストホップ、G0スラッシュ1が出口のインターフェースです。"},
+   {"sc": 6, "sp": "生徒", "t": "どこへ、だれに、どの口から、ですね。"},
+   {"sc": 6, "sp": "先生", "t": "その読み方で、どの行も読めます。"},
+   {"sc": 7, "sp": "先生", "t": "確認です。この行で、ネクストホップはどれでしょう？", "w": 1},
+   {"sc": 7, "sp": "生徒", "t": "viaのあとの10.1.2.2です。", "y": "ヴィアのあとの10、1、2、2です。"},
+   {"sc": 7, "sp": "先生", "t": "正解です。"},
+   {"sc": 8, "sp": "先生", "t": "宛先10.3.3.30のパケットが来ました。合う行を探しましょう。", "y": "宛先10、3、3、30のパケットが来ました。合う行を探しましょう。"},
+   {"sc": 8, "sp": "生徒", "t": "10.1.1.0/24には、入らない。10.1.2.0/24にも入らない。", "y": "10、1、1、0スラッシュ24には、入らない。10、1、2、0スラッシュ24にも入らない。"},
+   {"sc": 8, "sp": "生徒", "t": "10.3.3.0/24には、入ります！", "y": "10、3、3、0スラッシュ24には、入ります！"},
+   {"sc": 8, "sp": "先生", "t": "だから、10.1.2.2、つまりR2に渡します。", "y": "だから、10、1、2、2、つまりR2に渡します。"},
+   {"sc": 8, "sp": "生徒", "t": "どの行にも合わなかったら？"},
+   {"sc": 8, "sp": "先生", "t": "捨てます。デフォルトルートがあれば、そちらに送ります。"},
+   {"sc": 9, "sp": "先生", "t": "確認です。宛先10.5.5.5で、デフォルトルートがないとき、R1はどうするでしょう？", "y": "確認です。宛先10、5、5、5で、デフォルトルートがないとき、R1はどうするでしょう？", "w": 1},
+   {"sc": 9, "sp": "生徒", "t": "合う行がないから、捨てます。"},
+   {"sc": 9, "sp": "先生", "t": "正解です。"},
+   {"sc": 10, "sp": "生徒", "t": "わからないときは、全部の口から送ると思ってました。"},
+   {"sc": 10, "sp": "先生", "t": "それはスイッチです。ルーターは捨てます。"},
+   {"sc": 10, "sp": "生徒", "t": "viaのあとは、出口じゃなくてネクストホップ。", "y": "ヴィアのあとは、出口じゃなくてネクストホップ。"},
+   {"sc": 10, "sp": "先生", "t": "その通り。出口のインターフェースは、行の最後です。"},
+   {"sc": 11, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 11, "sp": "先生", "t": "1つ目。どこへ、だれに、どの口から、と読む。"},
+   {"sc": 11, "sp": "先生", "t": "2つ目。Cは直結、Lは自分、Sは手書き、OはOSPF。", "y": "2つ目。Cは直結、Lは自分、Sは手書き、Oはオーエスピーエフ。"},
+   {"sc": 11, "sp": "先生", "t": "3つ目。合う行がなければ、捨てる。"},
+   {"sc": 11, "sp": "生徒", "t": "地図帳、読めました。"},
+   {"sc": 11, "sp": "先生", "t": "次回は、合う行が2つ以上あるときです。お疲れさまでした。"}
+  ]
+ }
+}

@@ -1,0 +1,144 @@
+{
+ "r": "TB",
+ "n": 49,
+ "t": "経路の選び方",
+ "d": "d3",
+ "form": "パケットの旅",
+ "need": [48],
+ "goal": ["ロンゲストマッチがわかる", "ADがわかる", "メトリックがわかる"],
+ "terms": ["ロンゲストマッチ", "AD", "メトリック", "負荷分散"],
+ "pages": [
+  {
+   "t": "道が2本あったら？",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 124.0\" role=\"img\" aria-label=\"つかみ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"110\" rx=\"16\" fill=\"#0a5cff\" opacity=\".12\"/><text x=\"180\" y=\"44\" text-anchor=\"middle\" style=\"font:800 19.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">宛先に合う行が、2つ以上あったら？</text><text x=\"180\" y=\"74\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">例：10.0.0.0/8 と 10.1.1.0/24 の両方に入る</text><text x=\"180\" y=\"94\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ルーターには、3段階の選び方があります</text></svg>",
+   "b": "宛先 10.1.1.5 のパケットは、10.0.0.0/8 の行にも、10.1.1.0/24 の行にも入ります。こんなふうに、<b>合う行が2つ以上</b>あるとき、ルーターはどれを選ぶのでしょう？ 今日は、ルーターの<b>3段階の選び方</b>を学びます。試験でもよく出るところです。"
+  },
+  {
+   "t": "今日のゴール",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のゴール\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1. ロンゲストマッチがわかる</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">一番くわしい道が勝つ</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2. ADがわかる</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">教えてくれた相手の信用度</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">3. メトリックがわかる</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">同じ教え方どうしなら、近い方</text></svg>"
+  },
+  {
+   "t": "第1段階：一番くわしい道（ロンゲストマッチ）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"宛先 10.1.1.5\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#3d4450\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">10.0.0.0/8 → 合う</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ざっくり（/8）</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">10.1.0.0/16 → 合う</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">もう少しくわしい（/16）</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">10.1.1.0/24 → 合う。これが選ばれる</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">一番くわしい（/24）＝プレフィックスが一番長い</text></svg>",
+   "b": "最初のルールは<b>ロンゲストマッチ</b>です。合う行のうち、<b>プレフィックス長（/の数字）が一番長い</b>、つまり<b>一番くわしい</b>道を選びます。住所でいえば、「東京都」より「東京都新宿区」、それより「新宿区西新宿2丁目」のほうが確かですよね。宛先 10.1.1.5 なら、/8・/16・/24 のうち <b>/24</b> の行が選ばれます。",
+   "p": "まずロンゲストマッチ。/ の数字が大きいほど勝つ。"
+  },
+  {
+   "t": "確認の問題 1",
+   "quiz": {
+    "q": "ルーティングテーブルに 172.16.0.0/16、172.16.4.0/22、172.16.5.0/24 があります。宛先 172.16.5.9 のパケットはどの経路で送られるでしょう？",
+    "o": [
+     ["172.16.0.0/16", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["172.16.4.0/22", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["172.16.5.0/24", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 2,
+    "e": "3つとも合いますが、一番くわしい <b>/24</b> が選ばれます（ロンゲストマッチ）。"
+   }
+  },
+  {
+   "t": "第2段階：教えてくれた相手の信用度（AD）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 213.0\" role=\"img\" aria-label=\"AD（アドミニストレーティブディスタンス）\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Connected 0</text><rect x=\"10\" y=\"52.5\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"78.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Static 1</text><rect x=\"10\" y=\"99.0\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"124.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">EIGRP 90　OSPF 110　RIP 120</text><rect x=\"10\" y=\"145.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#8a3ffc\" opacity=\".1\"/><text x=\"24\" y=\"171.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">小さいほど、信用できる</text><text x=\"24\" y=\"190.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">255 は使わない（信用しない）</text></svg>",
+   "b": "同じネットワーク（同じプレフィックス長）を、<b>ちがう方法で知った</b>とき、たとえばスタティックとOSPFの両方で知ったときは、<b>AD</b>（アドミニストレーティブディスタンス）で比べます。教えてくれた相手の<b>信用度</b>で、<b>小さいほど信用できます</b>。Connected は 0、Static は 1、EIGRP は 90、OSPF は 110、RIP は 120 です。テーブルの [110/2] の、前の数字がADです。"
+  },
+  {
+   "t": "確認の問題 2",
+   "quiz": {
+    "q": "同じ 192.168.10.0/24 への経路を、OSPF と スタティックルート（AD初期値）の両方から知りました。ルーティングテーブルに入るのはどちらでしょう？",
+    "o": [
+     ["OSPF（AD 110）", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["スタティックルート（AD 1）", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["両方とも入って、交互に使う", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "ADが小さいほうが信用されるので、<b>スタティックルート（AD 1）</b>が選ばれます。"
+   }
+  },
+  {
+   "t": "第3段階：同じ教え方なら、近い方（メトリック）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"メトリック\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">同じプロトコルで、2本の道を知ったら</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ADは同じ → メトリックで比べる</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">メトリックは、道の遠さ・かかる手間</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">OSPF ならコスト、RIP ならホップ数</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">小さいほうが選ばれる。同じならどちらも使う</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">等コストの負荷分散</text></svg>",
+   "b": "同じOSPFの中で、2本の道を知ったときは、ADは同じです。そこで <b>メトリック</b>で比べます。メトリックは道の<b>遠さ・手間</b>のことで、OSPF なら<b>コスト</b>、RIP なら<b>ホップ数</b>です。<b>小さいほうが選ばれ</b>、同じならどちらの道も使って<b>負荷分散</b>します。[110/2] の後ろの数字がメトリックです。"
+  },
+  {
+   "t": "3段階の順番",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"ルーターの選び方\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">① ロンゲストマッチ（一番くわしい）</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">プレフィックス長がちがうなら、ここで決まり</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">② AD（信用度、小さいほど勝ち）</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">プレフィックス長が同じで、知り方がちがうとき</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">③ メトリック（近さ、小さいほど勝ち）</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">知り方も同じとき</text></svg>",
+   "b": "順番が大事です。<b>①ロンゲストマッチ</b>が最優先で、プレフィックス長がちがえば、ADやメトリックがどうであれ、くわしいほうが勝ちます。プレフィックス長が同じときだけ <b>②AD</b>、ADも同じときだけ <b>③メトリック</b>を比べます。"
+  },
+  {
+   "t": "確認の問題 3",
+   "quiz": {
+    "q": "「O 10.2.0.0/16 [110/5]」と「S 10.2.2.0/24 [1/0]」と「O 10.2.2.0/24 [110/20]」の候補があります。宛先 10.2.2.7 に使われるのはどれでしょう？",
+    "o": [
+     ["O 10.2.0.0/16", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["S 10.2.2.0/24", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["O 10.2.2.0/24", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "まずロンゲストマッチで /24 の2つにしぼり、次にADで比べると、AD 1 の <b>スタティック</b>が勝ちます。"
+   }
+  },
+  {
+   "t": "まちがえやすい所",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 183.5\" role=\"img\" aria-label=\"よくある勘違い\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× ADが一番小さい経路が、いつも勝つ</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">先にロンゲストマッチ。/ がちがえば AD は比べない</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× メトリックで、プロトコルどうしを比べる</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">プロトコルがちがえば AD で比べる</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ ロンゲストマッチ → AD → メトリック</text></svg>",
+   "b": "一番多いまちがいは、<b>ADから比べてしまう</b>ことです。プレフィックス長がちがえば、AD 110 の /24 が、AD 1 の /16 に勝ちます。また、OSPFのコストとRIPのホップ数のように、<b>プロトコルがちがうメトリックは比べられない</b>ので、その場合はADで決めます。"
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">① ロンゲストマッチ</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">一番くわしい（/ が大きい）道</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">② AD</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">信用度。Connected 0・Static 1・OSPF 110</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">③ メトリック</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">同じプロトコルどうしの近さ。同じなら負荷分散</text></svg>",
+   "b": "次回は、自分で道を書く<b>スタティックルート</b>の設定を、実際にやってみます。"
+  }
+ ],
+ "cls": {
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "宛先10.1.1.5のパケットが来ました。", "y": "宛先10、1、1、5のパケットが来ました。"},
+   {"sc": 1, "sp": "先生", "t": "テーブルには、10.0.0.0/8と、10.1.1.0/24の両方があります。", "y": "テーブルには、10、0、0、0スラッシュ8と、10、1、1、0スラッシュ24の両方があります。"},
+   {"sc": 1, "sp": "生徒", "t": "どっちにも入りますね。"},
+   {"sc": 1, "sp": "先生", "t": "こんなとき、ルーターはどちらを選ぶでしょう？"},
+   {"sc": 1, "sp": "生徒", "t": "うーん、上にあるほう？"},
+   {"sc": 1, "sp": "先生", "t": "実は、3段階のはっきりしたルールがあります。"},
+   {"sc": 2, "sp": "先生", "t": "今日のゴールは3つです。"},
+   {"sc": 2, "sp": "先生", "t": "1つ目、ロンゲストマッチがわかること。"},
+   {"sc": 2, "sp": "先生", "t": "2つ目、ADがわかること。", "y": "2つ目、エーディーがわかること。"},
+   {"sc": 2, "sp": "先生", "t": "3つ目、メトリックがわかること。"},
+   {"sc": 2, "sp": "生徒", "t": "3段階、覚えます。"},
+   {"sc": 3, "sp": "先生", "t": "最初のルールは、ロンゲストマッチです。"},
+   {"sc": 3, "sp": "先生", "t": "合う行のうち、スラッシュの数字が一番大きい、一番くわしい道を選びます。"},
+   {"sc": 3, "sp": "生徒", "t": "くわしいほうが、確かだから？"},
+   {"sc": 3, "sp": "先生", "t": "そうです。東京都より、新宿区西新宿2丁目のほうが確かですよね。"},
+   {"sc": 3, "sp": "生徒", "t": "じゃあ、10.1.1.5なら、/24が選ばれる。", "y": "じゃあ、10、1、1、5なら、スラッシュ24が選ばれる。"},
+   {"sc": 4, "sp": "先生", "t": "確認です。宛先172.16.5.9は、どの経路で送られるでしょう？", "y": "確認です。宛先172、16、5、9は、どの経路で送られるでしょう？", "w": 1},
+   {"sc": 4, "sp": "生徒", "t": "一番くわしい、/24です。", "y": "一番くわしい、スラッシュ24です。"},
+   {"sc": 4, "sp": "先生", "t": "正解です。"},
+   {"sc": 5, "sp": "先生", "t": "次は、同じネットワークを、ちがう方法で知ったときです。"},
+   {"sc": 5, "sp": "先生", "t": "たとえば、スタティックとOSPFの両方で、同じ道を知ったとき。", "y": "たとえば、スタティックとオーエスピーエフの両方で、同じ道を知ったとき。"},
+   {"sc": 5, "sp": "生徒", "t": "スラッシュの数字も同じなら、比べられないですね。"},
+   {"sc": 5, "sp": "先生", "t": "そこでADを使います。教えてくれた相手の、信用度です。", "y": "そこでエーディーを使います。教えてくれた相手の、信用度です。"},
+   {"sc": 5, "sp": "先生", "t": "小さいほど信用できます。Connectedは0、Staticは1、OSPFは110です。", "y": "小さいほど信用できます。Connectedは0、Staticは1、オーエスピーエフは110です。"},
+   {"sc": 5, "sp": "生徒", "t": "手で書いた道のほうが、信用されるんですね。"},
+   {"sc": 6, "sp": "先生", "t": "確認です。OSPFとスタティックの両方で知ったとき、入るのはどちらでしょう？", "y": "確認です。オーエスピーエフとスタティックの両方で知ったとき、入るのはどちらでしょう？", "w": 1},
+   {"sc": 6, "sp": "生徒", "t": "ADが小さい、スタティックです。", "y": "エーディーが小さい、スタティックです。"},
+   {"sc": 6, "sp": "先生", "t": "正解です。"},
+   {"sc": 7, "sp": "先生", "t": "最後は、同じOSPFの中で、2本の道を知ったときです。", "y": "最後は、同じオーエスピーエフの中で、2本の道を知ったときです。"},
+   {"sc": 7, "sp": "生徒", "t": "ADも同じですね。", "y": "エーディーも同じですね。"},
+   {"sc": 7, "sp": "先生", "t": "そこで、メトリック、道の遠さで比べます。OSPFならコストです。", "y": "そこで、メトリック、道の遠さで比べます。オーエスピーエフならコストです。"},
+   {"sc": 7, "sp": "生徒", "t": "同じだったら？"},
+   {"sc": 7, "sp": "先生", "t": "どちらの道も使って、負荷分散します。"},
+   {"sc": 8, "sp": "先生", "t": "順番をまとめます。ロンゲストマッチ、AD、メトリックです。", "y": "順番をまとめます。ロンゲストマッチ、エーディー、メトリックです。"},
+   {"sc": 8, "sp": "生徒", "t": "スラッシュの数字がちがえば、ADは見ない？", "y": "スラッシュの数字がちがえば、エーディーは見ない？"},
+   {"sc": 8, "sp": "先生", "t": "その通り。そこが一番大事です。"},
+   {"sc": 9, "sp": "先生", "t": "確認です。宛先10.2.2.7に使われる経路はどれでしょう？", "y": "確認です。宛先10、2、2、7に使われる経路はどれでしょう？", "w": 1},
+   {"sc": 9, "sp": "生徒", "t": "まず/24の2つにしぼって、ADでスタティックです。", "y": "まずスラッシュ24の2つにしぼって、エーディーでスタティックです。"},
+   {"sc": 9, "sp": "先生", "t": "正解です。"},
+   {"sc": 10, "sp": "生徒", "t": "ADが一番小さいのが、いつも勝つと思ってました。", "y": "エーディーが一番小さいのが、いつも勝つと思ってました。"},
+   {"sc": 10, "sp": "先生", "t": "先にロンゲストマッチです。AD 110の/24が、AD 1の/16に勝ちます。", "y": "先にロンゲストマッチです。エーディー 110のスラッシュ24が、エーディー 1のスラッシュ16に勝ちます。"},
+   {"sc": 10, "sp": "生徒", "t": "OSPFのコストとRIPのホップ数は、比べられないんですね。", "y": "オーエスピーエフのコストとリップのホップ数は、比べられないんですね。"},
+   {"sc": 10, "sp": "先生", "t": "はい。プロトコルがちがえば、ADで決めます。", "y": "はい。プロトコルがちがえば、エーディーで決めます。"},
+   {"sc": 11, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 11, "sp": "先生", "t": "1つ目。ロンゲストマッチ、一番くわしい道。"},
+   {"sc": 11, "sp": "先生", "t": "2つ目。AD、信用度。小さいほど勝ち。", "y": "2つ目。エーディー、信用度。小さいほど勝ち。"},
+   {"sc": 11, "sp": "先生", "t": "3つ目。メトリック、同じプロトコルどうしの近さ。"},
+   {"sc": 11, "sp": "生徒", "t": "くわしさ、信用、近さ、の順ですね。"},
+   {"sc": 11, "sp": "先生", "t": "いい覚え方です。次回は、スタティックルートの設定です。お疲れさまでした。"}
+  ]
+ }
+}
