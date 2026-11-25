@@ -167,6 +167,29 @@ def band(label, title, total, segs, ticks, rows=(), foot=None):
     return svg(y + 4, label, "".join(out))
 
 
+def bits(label, title, rows, foot=None, weights=(128, 64, 32, 16, 8, 4, 2, 1)):
+    """8けたの2進数の表。rows = [(左の見出し, "01000000" のようなビット列, 下に出す説明 or None)]。
+    ビット列に "-" を入れたマスは薄く表示する（使わないけた）。"""
+    out = [T(180, 22, title, 13.5, 800, INK, "middle")]
+    x0, cw = 72, 34
+    for i, w in enumerate(weights):
+        out.append(T(x0 + cw * i + cw / 2, 46, str(w), 11, 700, SUB, "middle"))
+    y = 56
+    for name, b, right in rows:
+        out.append(T(8, y + 21, name, 10.5, 800))
+        for i, c in enumerate(b):
+            on = c == "1"
+            out.append(f'<rect x="{x0 + cw * i + 2}" y="{y}" width="{cw - 4}" height="30" rx="5" fill="{BL if on else "none"}" stroke="{BL}" stroke-width="1.5" opacity="{1 if on else .5}"/>')
+            out.append(f'<text x="{x0 + cw * i + cw / 2}" y="{y + 21}" text-anchor="middle" style="font:800 15px {F};fill:{"#fff" if on else "var(--sub)"}">{c}</text>')
+        y += 38
+        if right:
+            out.append(T(x0, y + 8, right, 12, 700, GR))
+            y += 22
+    if foot:
+        out.append(T(180, y + 14, foot, 12.5, 700, SUB, "middle")); y += 24
+    return svg(y + 6, label, "".join(out))
+
+
 def qopt(letter, col):
     """教科書の小テストの選択肢に付ける小さな印（A・B・C）。"""
     return (f'<g><rect x="-20" y="-20" width="40" height="40" rx="10" fill="var(--card)" stroke="{col}" stroke-width="3"/>'
