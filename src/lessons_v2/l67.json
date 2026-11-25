@@ -1,0 +1,143 @@
+{
+ "r": "TB",
+ "n": 67,
+ "t": "何を守るのか（CIA）",
+ "d": "d5",
+ "form": "事件簿",
+ "need": [4],
+ "goal": ["CIAの3つがわかる", "脆弱性・エクスプロイト・脅威を区別できる", "守る手段の考え方がわかる"],
+ "terms": ["機密性", "完全性", "可用性", "脆弱性", "エクスプロイト", "脅威", "多層防御"],
+ "pages": [
+  {
+   "t": "事件簿：3つの事件",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 149.5\" role=\"img\" aria-label=\"3つの事件\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">事件A：顧客名簿が外にもれた</text><rect x=\"10\" y=\"52.5\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"78.0\" text-anchor=\"start\" style=\"font:800 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">事件B：見積書の金額が、こっそり書きかえられた</text><rect x=\"10\" y=\"99.0\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"124.5\" text-anchor=\"start\" style=\"font:800 14.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">事件C：Webサイトが落ちて、注文を受けられない</text></svg>",
+   "b": "今日から<b>セキュリティ</b>の分野です。まず、3つの事件を見てください。名簿の流出、見積書の書きかえ、Webサイトの停止。どれも困りますが、<b>守れなかったもの</b>がそれぞれちがいます。今日は、セキュリティで守るべき3つのもの、<b>CIA</b> を事件から学びます。"
+  },
+  {
+   "t": "今日のゴール",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のゴール\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1. CIAの3つがわかる</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">機密性・完全性・可用性</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2. 脆弱性・エクスプロイト・脅威を区別できる</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">弱点・攻め方・危険</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">3. 守る手段の考え方がわかる</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">人・ルール・技術</text></svg>"
+  },
+  {
+   "t": "守る3つのもの（CIA）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"CIA\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">C：機密性（Confidentiality）</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">見てよい人だけが見られる → 事件A</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">I：完全性（Integrity）</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">勝手に書きかえられていない → 事件B</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">A：可用性（Availability）</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">使いたいときに使える → 事件C</text></svg>",
+   "b": "<b>機密性</b>（Confidentiality）は、<b>見てよい人だけが見られる</b>こと。名簿の流出は、機密性が破られた事件です。<b>完全性</b>（Integrity）は、<b>勝手に書きかえられていない</b>こと。見積書の書きかえがこれです。<b>可用性</b>（Availability）は、<b>使いたいときに使える</b>こと。サイトの停止がこれにあたります。頭文字で <b>CIA</b> と呼びます。",
+   "p": "C＝見られない、I＝変えられない、A＝止まらない。"
+  },
+  {
+   "t": "確認の問題 1",
+   "quiz": {
+    "q": "攻撃でサーバーが大量の通信を受け、正しい利用者がサービスを使えなくなりました。主に損なわれたのはCIAのどれでしょう？",
+    "o": [
+     ["機密性", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["完全性", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["可用性", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 2,
+    "e": "使いたいときに使えないので、<b>可用性</b>が損なわれています。"
+   }
+  },
+  {
+   "t": "CIAを守る道具",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"それぞれの守り方\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">機密性 → 暗号化、アクセス制御</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">鍵がない人には読めない</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">完全性 → ハッシュ、デジタル署名</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">書きかわったら、値が変わって気づける</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">可用性 → 冗長化、バックアップ</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1つ壊れても止まらない（FHRP・EtherChannel など）</text></svg>",
+   "b": "それぞれ守る道具があります。機密性は<b>暗号化</b>や、だれに見せるかを決める<b>アクセス制御</b>。完全性は<b>ハッシュ</b>で、データから計算した値を比べると、1文字でも変わればすぐ気づけます。可用性は<b>冗長化</b>（二重化）やバックアップ。第57回のFHRPや第41回のEtherChannelも、可用性を守る道具だったのです。"
+  },
+  {
+   "t": "弱点・攻め方・危険",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 264.0\" role=\"img\" aria-label=\"ことばの区別\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">脆弱性（ぜいじゃくせい）</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">システムの弱点。例：古いソフトの不具合</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">エクスプロイト</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">その弱点を突く、具体的な攻め方（プログラム）</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#8a3ffc\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">脅威</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">弱点を突いて被害を出すかもしれない危険（人・できごと）</text><rect x=\"10\" y=\"196.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"222.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">対策（ミティゲーション）</text><text x=\"24\" y=\"241.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">危険を小さくする手段</text></svg>",
+   "b": "セキュリティの用語を区別しましょう。<b>脆弱性</b>は、システムの<b>弱点</b>です。<b>エクスプロイト</b>は、その弱点を突く<b>具体的な攻め方</b>やプログラム。<b>脅威</b>は、弱点を突いて被害を出すかもしれない<b>危険</b>（攻撃者や、できごと）です。家でたとえると、脆弱性は「鍵の壊れた窓」、エクスプロイトは「その窓の開け方」、脅威は「泥棒」です。"
+  },
+  {
+   "t": "確認の問題 2",
+   "quiz": {
+    "q": "ルーターのソフトウェアに、認証を飛ばしてしまう不具合が見つかりました。この不具合そのものは何と呼ぶでしょう？",
+    "o": [
+     ["脆弱性", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["エクスプロイト", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["可用性", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 0,
+    "e": "システムの弱点そのものは<b>脆弱性</b>です。それを突く攻め方がエクスプロイトです。"
+   }
+  },
+  {
+   "t": "守りは3つの面から",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 247.0\" role=\"img\" aria-label=\"セキュリティプログラム\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">人：教育・訓練</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">あやしいメールを開かない。ユーザーの意識を高める</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">物理：入退室の管理</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">サーバー室にカードキー</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">技術：ファイアウォール・暗号化など</text><rect x=\"10\" y=\"179.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#8a3ffc\" opacity=\".1\"/><text x=\"24\" y=\"205.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">どれか1つでは守れない</text><text x=\"24\" y=\"224.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">多層で守る（多層防御）</text></svg>",
+   "b": "守りは、技術だけではありません。<b>人</b>への教育（あやしいメールを開かない）、<b>物理</b>的な管理（サーバー室のカードキー）、そして<b>技術</b>（ファイアウォールや暗号化）。どれか1つでは守り切れないので、何重にも守ります（<b>多層防御</b>）。CCNAでは、ユーザーへの<b>セキュリティ意識の教育</b>も、大事な対策として出てきます。"
+  },
+  {
+   "t": "確認の問題 3",
+   "quiz": {
+    "q": "ファイルが送られる途中で改ざんされていないかを確かめるために使う技術はどれでしょう？",
+    "o": [
+     ["ハッシュ", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["冗長化", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["DHCP", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 0,
+    "e": "<b>ハッシュ</b>の値を比べれば、書きかえ（完全性の侵害）に気づけます。"
+   }
+  },
+  {
+   "t": "まちがえやすい所",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 183.5\" role=\"img\" aria-label=\"よくある勘違い\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× 暗号化すれば、改ざんも防げる</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">暗号化は主に機密性。改ざん検知はハッシュ</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× 脆弱性 ＝ 攻撃</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">脆弱性は弱点。攻め方はエクスプロイト</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ 可用性も、セキュリティで守るもの</text></svg>",
+   "b": "暗号化は主に<b>機密性</b>を守り、改ざんに気づくのは<b>ハッシュ</b>です。<b>脆弱性（弱点）</b>と<b>エクスプロイト（攻め方）</b>と<b>脅威（危険）</b>を区別しましょう。サービスが止まらないこと（可用性）も、立派なセキュリティです。"
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">CIA</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">機密性＝見られない、完全性＝変わらない、可用性</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ことば</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">脆弱性＝弱点、エクスプロイト＝攻め方、脅威＝危険</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">守り方</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">人・物理・技術の多層防御</text></svg>",
+   "b": "次回は、攻撃者が実際に使う<b>攻撃の手口</b>を、事件簿で見ていきます。"
+  }
+ ],
+ "cls": {
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "今日から、セキュリティの分野です。"},
+   {"sc": 1, "sp": "先生", "t": "まず、3つの事件を見てください。名簿の流出、見積書の書きかえ、サイトの停止。"},
+   {"sc": 1, "sp": "生徒", "t": "どれも、大変な事件ですね。"},
+   {"sc": 1, "sp": "先生", "t": "でも、守れなかったものが、それぞれちがうんです。"},
+   {"sc": 1, "sp": "生徒", "t": "え、どうちがうんですか？"},
+   {"sc": 2, "sp": "先生", "t": "今日のゴールは3つです。"},
+   {"sc": 2, "sp": "先生", "t": "1つ目、CIAの3つがわかること。", "y": "1つ目、シーアイエーの3つがわかること。"},
+   {"sc": 2, "sp": "先生", "t": "2つ目、脆弱性・エクスプロイト・脅威を区別できること。"},
+   {"sc": 2, "sp": "先生", "t": "3つ目、守る手段の考え方がわかること。"},
+   {"sc": 2, "sp": "生徒", "t": "3つの事件の、ちがいを知りたいです。"},
+   {"sc": 3, "sp": "先生", "t": "1つ目、機密性。見てよい人だけが見られること。"},
+   {"sc": 3, "sp": "生徒", "t": "名簿の流出は、それが破られた事件ですね。"},
+   {"sc": 3, "sp": "先生", "t": "2つ目、完全性。勝手に書きかえられていないこと。"},
+   {"sc": 3, "sp": "生徒", "t": "見積書の書きかえ！"},
+   {"sc": 3, "sp": "先生", "t": "3つ目、可用性。使いたいときに使えること。"},
+   {"sc": 3, "sp": "生徒", "t": "サイトが落ちた事件ですね。"},
+   {"sc": 3, "sp": "先生", "t": "頭文字で、CIAと呼びます。", "y": "頭文字で、シーアイエーと呼びます。"},
+   {"sc": 4, "sp": "先生", "t": "確認です。サービスが使えなくなったとき、損なわれたのはどれでしょう？", "w": 1},
+   {"sc": 4, "sp": "生徒", "t": "可用性です。"},
+   {"sc": 4, "sp": "先生", "t": "正解です。"},
+   {"sc": 5, "sp": "先生", "t": "それぞれ、守る道具があります。機密性は、暗号化やアクセス制御。"},
+   {"sc": 5, "sp": "先生", "t": "完全性は、ハッシュ。1文字でも変わると、値が変わります。"},
+   {"sc": 5, "sp": "生徒", "t": "可用性は？"},
+   {"sc": 5, "sp": "先生", "t": "冗長化やバックアップ。FHRPやEtherChannelも、可用性の道具だったんです。", "y": "冗長化やバックアップ。エフエイチアールピーやイーサチャネルも、可用性の道具だったんです。"},
+   {"sc": 5, "sp": "生徒", "t": "あれも、セキュリティだったんですね。"},
+   {"sc": 6, "sp": "先生", "t": "次に、ことばを区別しましょう。脆弱性は、システムの弱点です。"},
+   {"sc": 6, "sp": "先生", "t": "エクスプロイトは、その弱点を突く攻め方。脅威は、被害を出すかもしれない危険です。"},
+   {"sc": 6, "sp": "生徒", "t": "ややこしいです…"},
+   {"sc": 6, "sp": "先生", "t": "家でいえば、脆弱性は鍵の壊れた窓、エクスプロイトはその開け方、脅威は泥棒です。"},
+   {"sc": 6, "sp": "生徒", "t": "それなら、わかります！"},
+   {"sc": 7, "sp": "先生", "t": "確認です。認証を飛ばしてしまう不具合そのものは、何と呼ぶでしょう？", "w": 1},
+   {"sc": 7, "sp": "生徒", "t": "弱点だから、脆弱性です。"},
+   {"sc": 7, "sp": "先生", "t": "正解です。"},
+   {"sc": 8, "sp": "先生", "t": "守りは、技術だけではありません。人への教育、物理的な管理、そして技術です。"},
+   {"sc": 8, "sp": "生徒", "t": "あやしいメールを開かない、とかですね。"},
+   {"sc": 8, "sp": "先生", "t": "はい。どれか1つでは守れないので、何重にも守ります。多層防御です。"},
+   {"sc": 9, "sp": "先生", "t": "確認です。改ざんされていないかを確かめる技術はどれでしょう？", "w": 1},
+   {"sc": 9, "sp": "生徒", "t": "ハッシュです。"},
+   {"sc": 9, "sp": "先生", "t": "正解です。"},
+   {"sc": 10, "sp": "生徒", "t": "暗号化すれば、全部守れると思ってました。"},
+   {"sc": 10, "sp": "先生", "t": "暗号化は主に機密性です。改ざんに気づくのは、ハッシュです。"},
+   {"sc": 10, "sp": "生徒", "t": "脆弱性は弱点で、攻め方とは別。"},
+   {"sc": 11, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 11, "sp": "先生", "t": "1つ目。機密性、完全性、可用性。"},
+   {"sc": 11, "sp": "先生", "t": "2つ目。脆弱性は弱点、エクスプロイトは攻め方、脅威は危険。"},
+   {"sc": 11, "sp": "先生", "t": "3つ目。人、物理、技術で何重にも守る。"},
+   {"sc": 11, "sp": "生徒", "t": "3つの事件のちがい、わかりました。"},
+   {"sc": 11, "sp": "先生", "t": "次回は、攻撃の手口です。お疲れさまでした。"}
+  ]
+ }
+}
