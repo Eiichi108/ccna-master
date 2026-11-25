@@ -1,0 +1,151 @@
+{
+ "r": "TB",
+ "n": 38,
+ "t": "STPの選び方",
+ "d": "d2",
+ "form": "実況中継",
+ "need": [37],
+ "goal": ["ルートブリッジの選び方がわかる", "ルートポートと指定ポートがわかる", "ブロックするポートがわかる"],
+ "terms": ["ルートブリッジ", "ブリッジID", "ルートポート", "指定ポート", "コスト"],
+ "pages": [
+  {
+   "t": "どのポートをふさぐか、だれが決める？",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 124.0\" role=\"img\" aria-label=\"つかみ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"110\" rx=\"16\" fill=\"#0a5cff\" opacity=\".12\"/><text x=\"180\" y=\"44\" text-anchor=\"middle\" style=\"font:800 15.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">スイッチたちの話し合いで、ふさぐ場所が決まる</text><text x=\"180\" y=\"74\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">リーダーを1台決めて、そこへの近道を残す</text><text x=\"180\" y=\"94\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">今日は、その話し合いを実況します</text></svg>",
+   "b": "前回、STPはループの1か所をふさぐと学びました。では、<b>どのポートをふさぐか</b>は、どうやって決まるのでしょう？ スイッチたちは、BPDUで話し合いながら、まず<b>リーダー（ルートブリッジ）</b>を1台決め、そこへの<b>近道だけを残して</b>、残りをふさぎます。今日は、その話し合いを1歩ずつ実況します。"
+  },
+  {
+   "t": "今日のゴール",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のゴール\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1. ルートブリッジの選び方がわかる</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ブリッジIDが一番小さいスイッチ</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2. ルートポートと指定ポートがわかる</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">コストの合計で決める</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">3. ブロックするポートがわかる</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">どちらでもないポートを止める</text></svg>"
+  },
+  {
+   "t": "ステップ1：リーダーを決める（ルートブリッジ）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"ブリッジID\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ブリッジID ＝ プライオリティ ＋ MACアドレス</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">スイッチの「背番号」</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">まず、プライオリティが小さいほうが勝ち</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">初期値は 32768（みんな同じことが多い）</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">同じなら、MACアドレスが小さいほうが勝ち</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">一番小さいスイッチが、ルートブリッジ</text></svg>",
+   "b": "最初に、全体のリーダー<b>ルートブリッジ</b>を1台決めます。スイッチは、<b>ブリッジID</b>という背番号をBPDUで伝え合います。ブリッジIDは<b>プライオリティ</b>と<b>MACアドレス</b>の組み合わせで、<b>一番小さいスイッチ</b>がルートブリッジです。プライオリティは初期値が32768でみんな同じことが多いので、そのときは<b>MACアドレスが小さいほう</b>が勝ちます。",
+   "p": "ルートブリッジ ＝ ブリッジIDが一番小さい（まずプライオリティ、次にMAC）。"
+  },
+  {
+   "t": "確認の問題 1",
+   "quiz": {
+    "q": "プライオリティがすべて 32768 の3台のスイッチがあります。ルートブリッジになるのはどれでしょう？",
+    "o": [
+     ["MACアドレスが一番大きいスイッチ", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["MACアドレスが一番小さいスイッチ", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["ポートの数が一番多いスイッチ", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "プライオリティが同じなら、<b>MACアドレスが一番小さい</b>スイッチがルートブリッジになります。"
+   }
+  },
+  {
+   "t": "ステップ2：ルートへの近道（ルートポート）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 254.0\" role=\"img\" aria-label=\"STPの役割\"><path d=\"M180 40L70 150\" stroke=\"#3d4450\" stroke-width=\"3\" opacity=\".7\"/><text x=\"125.0\" y=\"88.0\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">R</text><path d=\"M180 40L290 150\" stroke=\"#3d4450\" stroke-width=\"3\" opacity=\".7\"/><text x=\"235.0\" y=\"88.0\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">R</text><path d=\"M70 150L290 150\" stroke=\"#3d4450\" stroke-width=\"3\" opacity=\".7\"/><rect x=\"158\" y=\"27\" width=\"44\" height=\"26\" rx=\"5\" fill=\"#e6261f\"/><path d=\"M168 36h22l-4-3M192 44h-22l4 3\" stroke=\"#fff\" stroke-width=\"2.2\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><text x=\"180\" y=\"14\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">SW1（ルート）</text><rect x=\"48\" y=\"137\" width=\"44\" height=\"26\" rx=\"5\" fill=\"#00a05a\"/><path d=\"M58 146h22l-4-3M82 154h-22l4 3\" stroke=\"#fff\" stroke-width=\"2.2\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><text x=\"70\" y=\"184\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">SW2</text><rect x=\"268\" y=\"137\" width=\"44\" height=\"26\" rx=\"5\" fill=\"#00a05a\"/><path d=\"M278 146h22l-4-3M302 154h-22l4 3\" stroke=\"#fff\" stroke-width=\"2.2\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><text x=\"290\" y=\"184\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">SW3</text><text x=\"180\" y=\"206\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ルートへのコスト合計が一番小さいポート</text><text x=\"180\" y=\"226\" text-anchor=\"middle\" style=\"font:600 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">＝ ルートポート（R）。各スイッチに1つ</text></svg>",
+   "b": "次に、ルート以外のスイッチは、<b>ルートブリッジへの一番の近道</b>になるポートを1つ選びます。これが<b>ルートポート</b>です。近さは<b>コスト</b>の合計で比べます。コストは回線の速さで決まり、<b>速い回線ほど小さい</b>値です（例：1Gbps は 4、100Mbps は 19）。合計が同じなら、相手のブリッジIDが小さいほうを選びます。",
+   "p": "ルートポート ＝ ルートへのコスト合計が一番小さいポート。各スイッチに1つ。"
+  },
+  {
+   "t": "ステップ3：線ごとの代表（指定ポート）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 254.0\" role=\"img\" aria-label=\"STPの役割\"><path d=\"M180 40L70 150\" stroke=\"#3d4450\" stroke-width=\"3\" opacity=\".7\"/><text x=\"125.0\" y=\"88.0\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">D ― R</text><path d=\"M180 40L290 150\" stroke=\"#3d4450\" stroke-width=\"3\" opacity=\".7\"/><text x=\"235.0\" y=\"88.0\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">D ― R</text><path d=\"M70 150L290 150\" stroke=\"#e6261f\" stroke-width=\"3\" opacity=\".7\"/><text x=\"180.0\" y=\"143.0\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">D ― ブロック</text><rect x=\"158\" y=\"27\" width=\"44\" height=\"26\" rx=\"5\" fill=\"#e6261f\"/><path d=\"M168 36h22l-4-3M192 44h-22l4 3\" stroke=\"#fff\" stroke-width=\"2.2\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><text x=\"180\" y=\"14\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">SW1（ルート）</text><rect x=\"48\" y=\"137\" width=\"44\" height=\"26\" rx=\"5\" fill=\"#00a05a\"/><path d=\"M58 146h22l-4-3M82 154h-22l4 3\" stroke=\"#fff\" stroke-width=\"2.2\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><text x=\"70\" y=\"184\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">SW2</text><rect x=\"268\" y=\"137\" width=\"44\" height=\"26\" rx=\"5\" fill=\"#00a05a\"/><path d=\"M278 146h22l-4-3M302 154h-22l4 3\" stroke=\"#fff\" stroke-width=\"2.2\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><text x=\"290\" y=\"184\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">SW3</text><text x=\"180\" y=\"206\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">線ごとに、ルートに近い側が指定ポート（D）</text><text x=\"180\" y=\"226\" text-anchor=\"middle\" style=\"font:600 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ルートのポートは全部が指定ポート</text></svg>",
+   "b": "最後に、<b>線（セグメント）ごと</b>に、その線の代表になるポートを1つ選びます。これが<b>指定ポート</b>で、ルートに近い側のポートがなります。ルートブリッジ自身のポートは、全部が指定ポートです。そして、<b>ルートポートにも指定ポートにもならなかったポート</b>が<b>ブロック</b>されます。SW2とSW3の間の線では、どちらか一方がブロックになり、ループが切れるのです。",
+   "p": "ルートポートでも指定ポートでもない → ブロック。"
+  },
+  {
+   "t": "確認の問題 2",
+   "quiz": {
+    "q": "STPが落ち着いたあと、ルートブリッジ以外の各スイッチが持つルートポートの数はいくつでしょう？",
+    "o": [
+     ["0", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["1", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["ポートの数だけ", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "ルートポートは、ルートへの一番の近道なので、ルートブリッジ以外の各スイッチに<b>1つだけ</b>です。"
+   }
+  },
+  {
+   "t": "コストが同じときは？",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"同点のとき\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">① ルートへのコストの合計で比べる</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">小さいほうが勝ち</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">② 同じなら、相手のブリッジIDで比べる</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">小さいほうにつながるポートが勝ち</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">③ それも同じなら、相手のポートの番号で比べる</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">同じスイッチに2本つないだとき</text></svg>",
+   "b": "ルートへのコストの合計が同じポートが2つあることもあります。そのときは、<b>相手（つながっている先）のブリッジIDが小さいほう</b>を選びます。それも同じ（同じスイッチに2本つないでいる）なら、<b>相手のポートの番号</b>が小さいほうです。順番に比べていけば、必ず1つに決まります。"
+  },
+  {
+   "t": "確認の問題 3",
+   "quiz": {
+    "q": "SW3 には、ルートへのコストの合計が同じポートが2つあります。Gi0/1 の先は SW1（ブリッジIDが小さい）、Gi0/2 の先は SW2 です。ルートポートになるのはどちらでしょう？",
+    "o": [
+     ["Gi0/1", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["Gi0/2", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["両方", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 0,
+    "e": "コストが同じなら、<b>相手のブリッジIDが小さいほう</b>（SW1につながる Gi0/1）がルートポートです。"
+   }
+  },
+  {
+   "t": "まちがえやすい所",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 230.0\" role=\"img\" aria-label=\"よくある勘違い\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× ブリッジIDは、大きいほうが勝ち</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">STPは、どれも「小さいほうが勝ち」</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ ID・コスト・番号、全部小さいほうが勝ち</text><rect x=\"10\" y=\"116.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"141.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× ルートブリッジにも、ルートポートがある</text><text x=\"24\" y=\"160.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ルートのポートは全部が指定ポート</text><rect x=\"10\" y=\"179.5\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"205.0\" text-anchor=\"start\" style=\"font:800 13.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ ルートポートは、ルート以外のスイッチに1つずつ</text></svg>",
+   "b": "STPの比べ方は、<b>どれも小さいほうが勝ち</b>です。ブリッジIDも、コストも、ポート番号もです。また、ルートブリッジ自身には「ルートへの近道」がいらないので<b>ルートポートはなく</b>、全部が指定ポートになります。"
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ルートブリッジ</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ブリッジIDが一番小さいスイッチ（プライオリティ→MAC）</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ルートポートと指定ポート</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ルートへの近道／線ごとの代表</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ブロック</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">どちらでもないポートを止めて、ループを切る</text></svg>",
+   "b": "次回は、STPの弱点「切りかえに時間がかかる」を改良した <b>RSTP</b> と、VLANごとにSTPを動かす <b>Rapid PVST+</b> を学びます。"
+  }
+ ],
+ "cls": {
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "前回、STPはループの1か所をふさぐ、と学びましたね。", "y": "前回、エスティーピーはループの1か所をふさぐ、と学びましたね。"},
+   {"sc": 1, "sp": "生徒", "t": "ふさぐ場所は、だれが決めるんですか？"},
+   {"sc": 1, "sp": "先生", "t": "スイッチたちが、BPDUで話し合って決めます。", "y": "スイッチたちが、ビーピーディーユーで話し合って決めます。"},
+   {"sc": 1, "sp": "先生", "t": "まずリーダーを1台決めて、そこへの近道だけを残し、残りをふさぎます。"},
+   {"sc": 1, "sp": "生徒", "t": "会議みたいですね。"},
+   {"sc": 1, "sp": "先生", "t": "今日は、その話し合いを1歩ずつ実況します。"},
+   {"sc": 2, "sp": "先生", "t": "今日のゴールは3つです。"},
+   {"sc": 2, "sp": "先生", "t": "1つ目、ルートブリッジの選び方がわかること。"},
+   {"sc": 2, "sp": "先生", "t": "2つ目、ルートポートと指定ポートがわかること。"},
+   {"sc": 2, "sp": "先生", "t": "3つ目、ブロックするポートがわかること。"},
+   {"sc": 2, "sp": "生徒", "t": "3ステップで決まるんですね。"},
+   {"sc": 3, "sp": "先生", "t": "ステップ1は、リーダー、ルートブリッジ選びです。"},
+   {"sc": 3, "sp": "先生", "t": "スイッチは、ブリッジIDという背番号を、BPDUで伝え合います。", "y": "スイッチは、ブリッジIDという背番号を、ビーピーディーユーで伝え合います。"},
+   {"sc": 3, "sp": "生徒", "t": "背番号は、どうやって決まるんですか？"},
+   {"sc": 3, "sp": "先生", "t": "プライオリティという数字と、MACアドレスの組み合わせです。", "y": "プライオリティという数字と、マックアドレスの組み合わせです。"},
+   {"sc": 3, "sp": "先生", "t": "一番小さいスイッチが、ルートブリッジになります。"},
+   {"sc": 3, "sp": "生徒", "t": "大きいほうじゃなくて、小さいほうが勝ち？"},
+   {"sc": 3, "sp": "先生", "t": "はい。プライオリティは初期値が32768で、みんな同じことが多いです。"},
+   {"sc": 3, "sp": "生徒", "t": "同じなら、MACアドレスが小さいほうが勝ち。", "y": "同じなら、マックアドレスが小さいほうが勝ち。"},
+   {"sc": 4, "sp": "先生", "t": "確認です。プライオリティが全部同じとき、ルートブリッジになるのはどれでしょう？", "w": 1},
+   {"sc": 4, "sp": "生徒", "t": "MACアドレスが一番小さいスイッチ。2つ目です。", "y": "マックアドレスが一番小さいスイッチ。2つ目です。"},
+   {"sc": 4, "sp": "先生", "t": "正解です。"},
+   {"sc": 5, "sp": "先生", "t": "ステップ2です。ルート以外のスイッチは、ルートへの一番の近道のポートを選びます。"},
+   {"sc": 5, "sp": "先生", "t": "これを、ルートポートと言います。"},
+   {"sc": 5, "sp": "生徒", "t": "近さは、何で比べるんですか？"},
+   {"sc": 5, "sp": "先生", "t": "コストの合計です。コストは回線の速さで決まり、速いほど小さい値です。"},
+   {"sc": 5, "sp": "先生", "t": "1ギガビーピーエスなら4、100メガなら19です。"},
+   {"sc": 5, "sp": "生徒", "t": "速い道ほど、近いってことですね。"},
+   {"sc": 6, "sp": "先生", "t": "ステップ3です。線ごとに、その線の代表のポートを選びます。これが指定ポートです。"},
+   {"sc": 6, "sp": "先生", "t": "ルートに近い側のポートが、指定ポートになります。"},
+   {"sc": 6, "sp": "生徒", "t": "ルートブリッジのポートは？"},
+   {"sc": 6, "sp": "先生", "t": "全部が指定ポートです。"},
+   {"sc": 6, "sp": "先生", "t": "そして、ルートポートにも指定ポートにもならなかったポートが、ブロックされます。"},
+   {"sc": 6, "sp": "生徒", "t": "SW2とSW3の間の線で、どちらかがブロック。それでループが切れる！"},
+   {"sc": 7, "sp": "先生", "t": "確認です。ルートブリッジ以外の各スイッチが持つルートポートは、いくつでしょう？", "w": 1},
+   {"sc": 7, "sp": "生徒", "t": "一番の近道だから、1つだけです。"},
+   {"sc": 7, "sp": "先生", "t": "正解です。"},
+   {"sc": 8, "sp": "生徒", "t": "先生、コストの合計が同じだったら、どうするんですか？"},
+   {"sc": 8, "sp": "先生", "t": "いい疑問です。そのときは、相手のブリッジIDが小さいほうを選びます。"},
+   {"sc": 8, "sp": "先生", "t": "それも同じなら、相手のポートの番号で比べます。"},
+   {"sc": 8, "sp": "生徒", "t": "順番に比べれば、必ず1つに決まるんですね。"},
+   {"sc": 9, "sp": "先生", "t": "確認です。コストが同じ2つのポートのうち、ルートポートになるのはどちらでしょう？", "w": 1},
+   {"sc": 9, "sp": "生徒", "t": "相手のブリッジIDが小さいSW1につながる、Gi0/1です。", "y": "相手のブリッジIDが小さいSW1につながる、Gi0スラッシュ1です。"},
+   {"sc": 9, "sp": "先生", "t": "正解です。"},
+   {"sc": 10, "sp": "生徒", "t": "ブリッジIDは、大きいほうが強そうな気がしてました。"},
+   {"sc": 10, "sp": "先生", "t": "STPは、どれも小さいほうが勝ちです。コストも、ポート番号もです。", "y": "エスティーピーは、どれも小さいほうが勝ちです。コストも、ポート番号もです。"},
+   {"sc": 10, "sp": "生徒", "t": "ルートブリッジにも、ルートポートがあると思いそうでした。"},
+   {"sc": 10, "sp": "先生", "t": "ルートブリッジは自分がリーダーなので、近道はいりません。全部が指定ポートです。"},
+   {"sc": 11, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 11, "sp": "先生", "t": "1つ目。ルートブリッジは、ブリッジIDが一番小さいスイッチ。"},
+   {"sc": 11, "sp": "先生", "t": "2つ目。ルートポートはルートへの近道、指定ポートは線ごとの代表。"},
+   {"sc": 11, "sp": "先生", "t": "3つ目。どちらでもないポートを、ブロックする。"},
+   {"sc": 11, "sp": "生徒", "t": "スイッチたちの会議、よくわかりました。"},
+   {"sc": 11, "sp": "先生", "t": "次回は、速いSTP、RSTPです。お疲れさまでした。", "y": "次回は、速いエスティーピー、アールエスティーピーです。お疲れさまでした。"}
+  ]
+ }
+}

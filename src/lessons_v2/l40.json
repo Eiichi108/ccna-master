@@ -1,0 +1,146 @@
+{
+ "r": "TB",
+ "n": 40,
+ "t": "STPを守る機能",
+ "d": "d2",
+ "form": "事件簿",
+ "need": [39],
+ "goal": ["PortFastの効果と注意がわかる", "BPDUガードの働きがわかる", "ルートガードの働きがわかる"],
+ "terms": ["PortFast", "BPDUガード", "ルートガード", "err-disabled"],
+ "pages": [
+  {
+   "t": "事件：持ち込みスイッチがリーダーに",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 124.0\" role=\"img\" aria-label=\"つかみ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"110\" rx=\"16\" fill=\"#e6261f\" opacity=\".12\"/><text x=\"180\" y=\"44\" text-anchor=\"middle\" style=\"font:800 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">事件：社員の持ち込みスイッチが、ルートブリッジに</text><text x=\"180\" y=\"74\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">会議室のポートに、小さなスイッチをつないだだけ</text><text x=\"180\" y=\"94\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">なのに、会社中の通信の道が変わってしまった</text></svg>",
+   "b": "社員が、会議室のポートに家から持ってきた小さなスイッチをつなぎました。すると、そのスイッチのブリッジIDがたまたま一番小さく、<b>ルートブリッジになってしまった</b>のです。会社中の通信が、会議室の小さなスイッチを通る道に変わり、とても遅くなりました。今日は、こうした事件からSTPを<b>守る機能</b>を学びます。"
+  },
+  {
+   "t": "今日のゴール",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のゴール\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1. PortFastの効果と注意がわかる</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">端末のポートを、すぐ使えるようにする</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2. BPDUガードの働きがわかる</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">BPDUが来たら、ポートを止める</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">3. ルートガードの働きがわかる</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ルートブリッジを乗っ取らせない</text></svg>"
+  },
+  {
+   "t": "端末のポートは、すぐ使いたい（PortFast）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"PortFast\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">PCをつないでも、すぐには通信できない</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">STPが様子を見るので、しばらく転送しない</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">PortFast ＝ 様子見を飛ばして、すぐ転送する</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">PCやプリンターをつなぐアクセスポート用</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">スイッチどうしのポートには使わない</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">様子見を飛ばすと、ループに気づく前に転送してしまう</text></svg>",
+   "b": "STPは、ポートがつながると、ループにならないか<b>しばらく様子を見て</b>から転送を始めます。でも、PCをつなぐたびに待たされるのは不便ですよね。<b>PortFast</b> を設定すると、様子見を飛ばして<b>すぐに転送</b>します。ただし、PCなど<b>端末をつなぐポート専用</b>です。スイッチどうしのポートに使うと、ループに気づく前に転送してしまい危険です。",
+   "p": "PortFast は端末のポートだけ。スイッチどうしには使わない。"
+  },
+  {
+   "t": "確認の問題 1",
+   "quiz": {
+    "q": "会議室のPCをつなぐアクセスポートに PortFast を設定しました。この設定の効果として正しいものはどれでしょう？",
+    "o": [
+     ["つないですぐに、データを転送できるようになる", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["STPのルートブリッジになる", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["ループが起きなくなる", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 0,
+    "e": "PortFast は、様子見を飛ばして<b>すぐに転送</b>できるようにします。"
+   }
+  },
+  {
+   "t": "BPDUが来たら、止める（BPDUガード）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"BPDUガード\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">PortFastのポートには、ふつうPCしかつながない</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">PCは BPDU を送らない</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 12.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">そこに BPDU が届いた ＝ だれかがスイッチをつないだ</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ループや乗っ取りの危険</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">BPDUガード：BPDUを受けたら止める</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ポートを err-disabled に。冒頭の事件を防げる</text></svg>",
+   "b": "PortFastのポートには、ふつうPCしかつながないので、<b>BPDUは届かないはず</b>です。もし届いたら、だれかがスイッチをつないだ証拠。<b>BPDUガード</b>は、BPDUを受け取ったポートを <b>err-disabled</b>（エラーで止まった状態）にして止めます。冒頭の持ち込みスイッチの事件も、これで防げます。止まったポートは、原因を取り除いてから shutdown → no shutdown で戻します。"
+  },
+  {
+   "t": "ルートを乗っ取らせない（ルートガード）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"ルートガード\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ディストリビューションの、下向きのポートに設定する</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">アクセススイッチがつながる側</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">下から「もっと強い（小さい）」BPDUが来たら</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">そのポートを root-inconsistent にしてブロック</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">予定外のスイッチが、ルートになるのを防ぐ</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ルートは、決めたとおりのまま</text></svg>",
+   "b": "スイッチどうしのポートでは BPDU が来るのはふつうなので、BPDUガードは使えません。そこで<b>ルートガード</b>を使います。ルートガードを設定したポートに、今のルートより<b>強い（ブリッジIDが小さい）BPDU</b>が届くと、そのポートを <b>root-inconsistent</b> にしてブロックします。こうして、<b>予定外のスイッチがルートになる</b>のを防ぎます。"
+  },
+  {
+   "t": "確認の問題 2",
+   "quiz": {
+    "q": "PortFast と BPDUガードを設定したアクセスポートに、社員が小型スイッチをつなぎ、BPDUが届きました。このポートはどうなるでしょう？",
+    "o": [
+     ["そのまま通信を続ける", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["err-disabled になって止まる", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["ルートポートになる", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "BPDUガードは、BPDUを受けたポートを <b>err-disabled</b> にして止めます。"
+   }
+  },
+  {
+   "t": "まとめて設定する",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 206.0\" role=\"img\" aria-label=\"保護機能の設定\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"122\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">(config)# spanning-tree portfast default</text><text x=\"22\" y=\"74\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">(config)# spanning-tree portfast bpduguard default</text><text x=\"22\" y=\"96\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\">SW1(config)# interface gi0/1</text><text x=\"22\" y=\"118\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\">SW1(config-if)# spanning-tree guard root</text><text x=\"180\" y=\"154\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">default ＝ すべてのアクセスポートにまとめて</text><text x=\"180\" y=\"178\" text-anchor=\"middle\" style=\"font:700 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">guard root ＝ そのポートでルートガード</text></svg>",
+   "b": "PortFast は <b>spanning-tree portfast default</b> と打てば、<b>すべてのアクセスポート</b>にまとめて設定できます。BPDUガードも同じように <b>bpduguard default</b> でまとめられます。ルートガードは、ディストリビューションの下向きのポートで <b>spanning-tree guard root</b> と設定します。"
+  },
+  {
+   "t": "確認の問題 3",
+   "quiz": {
+    "q": "ディストリビューションスイッチの下向きのポートで、アクセス側から強いBPDUが来ても、ルートブリッジが変わらないようにしたいとき、使う機能はどれでしょう？",
+    "o": [
+     ["PortFast", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["ルートガード", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["BPDUガード", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "強いBPDUを受けたポートをブロックして、ルートを守るのは<b>ルートガード</b>です。"
+   }
+  },
+  {
+   "t": "まちがえやすい所",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"よくある勘違い\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× PortFast を、スイッチどうしのポートに設定する</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ループに気づく前に転送してしまう</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ PortFast は端末用、ルートガードはスイッチ間用</text><rect x=\"10\" y=\"116.0\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"141.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× BPDUガードとルートガードは、同じ働き</text><text x=\"24\" y=\"160.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">BPDUガード＝BPDUが来たら止める</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ルートガード＝強いBPDUだけ止める</text></svg>",
+   "b": "PortFast は<b>端末用</b>で、スイッチどうしのポートには使いません。BPDUガードとルートガードの違いもよく問われます。<b>BPDUガード</b>は BPDU が来たら<b>どんなものでも</b>止め、<b>ルートガード</b>は<b>ルートより強いBPDU</b>だけを止めます。"
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">PortFast</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">端末のポートを、すぐ転送できるようにする</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">BPDUガード</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">BPDUを受けたら err-disabled で止める</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ルートガード</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">強いBPDUを止めて、ルートを守る</text></svg>",
+   "b": "次回は、スイッチどうしをつなぐ複数のケーブルを<b>1本に束ねる</b> EtherChannel を学びます。"
+  }
+ ],
+ "cls": {
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "今日も、事件から始めます。"},
+   {"sc": 1, "sp": "先生", "t": "社員が、会議室のポートに、家から持ってきた小さなスイッチをつなぎました。"},
+   {"sc": 1, "sp": "生徒", "t": "ポートが足りなかったんですかね。"},
+   {"sc": 1, "sp": "先生", "t": "そのスイッチの背番号が、たまたま一番小さくて、ルートブリッジになってしまったんです。"},
+   {"sc": 1, "sp": "生徒", "t": "えっ、会議室の小さなスイッチが、リーダーに？"},
+   {"sc": 1, "sp": "先生", "t": "会社中の通信が、そこを通る道に変わって、とても遅くなりました。"},
+   {"sc": 2, "sp": "先生", "t": "今日のゴールは3つです。"},
+   {"sc": 2, "sp": "先生", "t": "1つ目、PortFastの効果と注意がわかること。", "y": "1つ目、ポートファストの効果と注意がわかること。"},
+   {"sc": 2, "sp": "先生", "t": "2つ目、BPDUガードの働きがわかること。", "y": "2つ目、ビーピーディーユーガードの働きがわかること。"},
+   {"sc": 2, "sp": "先生", "t": "3つ目、ルートガードの働きがわかること。"},
+   {"sc": 2, "sp": "生徒", "t": "守りの機能、3つですね。"},
+   {"sc": 3, "sp": "先生", "t": "まず、PortFastです。STPは、ポートがつながると、しばらく様子を見てから転送します。", "y": "まず、ポートファストです。エスティーピーは、ポートがつながると、しばらく様子を見てから転送します。"},
+   {"sc": 3, "sp": "生徒", "t": "PCをつなぐたびに、待たされるんですか？", "y": "ピーシーをつなぐたびに、待たされるんですか？"},
+   {"sc": 3, "sp": "先生", "t": "はい。そこでPortFastを設定すると、様子見を飛ばして、すぐ転送します。", "y": "はい。そこでポートファストを設定すると、様子見を飛ばして、すぐ転送します。"},
+   {"sc": 3, "sp": "生徒", "t": "便利！ 全部のポートに設定したいです。"},
+   {"sc": 3, "sp": "先生", "t": "ただし、端末をつなぐポート専用です。"},
+   {"sc": 3, "sp": "先生", "t": "スイッチどうしのポートに使うと、ループに気づく前に転送してしまいます。"},
+   {"sc": 4, "sp": "先生", "t": "確認です。PortFastを設定したアクセスポートの効果はどれでしょう？", "y": "確認です。ポートファストを設定したアクセスポートの効果はどれでしょう？", "w": 1},
+   {"sc": 4, "sp": "生徒", "t": "すぐに転送できる。1つ目です。"},
+   {"sc": 4, "sp": "先生", "t": "正解です。"},
+   {"sc": 5, "sp": "先生", "t": "次は、BPDUガードです。PortFastのポートには、ふつうPCしかつながないので、BPDUは届かないはずです。", "y": "次は、ビーピーディーユーガードです。ポートファストのポートには、ふつうピーシーしかつながないので、ビーピーディーユーは届かないはずです。"},
+   {"sc": 5, "sp": "生徒", "t": "届いたら、だれかがスイッチをつないだ証拠？"},
+   {"sc": 5, "sp": "先生", "t": "その通り。BPDUガードは、BPDUを受けたポートを、err-disabledにして止めます。", "y": "その通り。ビーピーディーユーガードは、ビーピーディーユーを受けたポートを、err-disabledにして止めます。"},
+   {"sc": 5, "sp": "生徒", "t": "冒頭の事件も、これで防げたんですね。"},
+   {"sc": 5, "sp": "先生", "t": "はい。止まったポートは、原因を取り除いてから、shutdown、no shutdownで戻します。", "y": "はい。止まったポートは、原因を取り除いてから、シャットダウン、ノー シャットダウンで戻します。"},
+   {"sc": 6, "sp": "先生", "t": "スイッチどうしのポートでは、BPDUが来るのはふつうですよね。", "y": "スイッチどうしのポートでは、ビーピーディーユーが来るのはふつうですよね。"},
+   {"sc": 6, "sp": "生徒", "t": "じゃあ、BPDUガードは使えない…", "y": "じゃあ、ビーピーディーユーガードは使えない…"},
+   {"sc": 6, "sp": "先生", "t": "そこで、ルートガードを使います。"},
+   {"sc": 6, "sp": "先生", "t": "今のルートより強い、つまりブリッジIDが小さいBPDUが来たら、そのポートをブロックします。", "y": "今のルートより強い、つまりブリッジIDが小さいビーピーディーユーが来たら、そのポートをブロックします。"},
+   {"sc": 6, "sp": "生徒", "t": "強いBPDUだけ止めるんですね。", "y": "強いビーピーディーユーだけ止めるんですね。"},
+   {"sc": 6, "sp": "先生", "t": "はい。予定外のスイッチが、ルートになるのを防ぎます。"},
+   {"sc": 7, "sp": "先生", "t": "確認です。BPDUガードのポートにBPDUが届いたら、どうなるでしょう？", "y": "確認です。ビーピーディーユーガードのポートにビーピーディーユーが届いたら、どうなるでしょう？", "w": 1},
+   {"sc": 7, "sp": "生徒", "t": "err-disabledになって止まる。2つ目です。"},
+   {"sc": 7, "sp": "先生", "t": "正解です。"},
+   {"sc": 8, "sp": "先生", "t": "設定は、spanning-tree portfast defaultで、すべてのアクセスポートにまとめてできます。", "y": "設定は、スパニングツリー ポートファスト デフォルトで、すべてのアクセスポートにまとめてできます。"},
+   {"sc": 8, "sp": "先生", "t": "BPDUガードも、bpduguard defaultでまとめられます。", "y": "ビーピーディーユーガードも、bpduguard デフォルトでまとめられます。"},
+   {"sc": 8, "sp": "生徒", "t": "ルートガードは？"},
+   {"sc": 8, "sp": "先生", "t": "ディストリビューションの下向きのポートで、spanning-tree guard rootと設定します。", "y": "ディストリビューションの下向きのポートで、スパニングツリー guard ルートと設定します。"},
+   {"sc": 9, "sp": "先生", "t": "確認です。下向きのポートでルートを守る機能はどれでしょう？", "w": 1},
+   {"sc": 9, "sp": "生徒", "t": "ルートガードです。"},
+   {"sc": 9, "sp": "先生", "t": "正解です。"},
+   {"sc": 10, "sp": "生徒", "t": "PortFastを、スイッチどうしにも付けちゃいそうです。", "y": "ポートファストを、スイッチどうしにも付けちゃいそうです。"},
+   {"sc": 10, "sp": "先生", "t": "危険です。PortFastは端末用、ルートガードはスイッチ間用です。", "y": "危険です。ポートファストは端末用、ルートガードはスイッチ間用です。"},
+   {"sc": 10, "sp": "生徒", "t": "BPDUガードとルートガードも、混ざりそうです。", "y": "ビーピーディーユーガードとルートガードも、混ざりそうです。"},
+   {"sc": 10, "sp": "先生", "t": "BPDUガードは、どんなBPDUでも止める。ルートガードは、強いBPDUだけ止める、です。", "y": "ビーピーディーユーガードは、どんなビーピーディーユーでも止める。ルートガードは、強いビーピーディーユーだけ止める、です。"},
+   {"sc": 11, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 11, "sp": "先生", "t": "1つ目。PortFastは、端末のポートをすぐ転送できるようにする。", "y": "1つ目。ポートファストは、端末のポートをすぐ転送できるようにする。"},
+   {"sc": 11, "sp": "先生", "t": "2つ目。BPDUガードは、BPDUを受けたらerr-disabledで止める。", "y": "2つ目。ビーピーディーユーガードは、ビーピーディーユーを受けたらerr-disabledで止める。"},
+   {"sc": 11, "sp": "先生", "t": "3つ目。ルートガードは、強いBPDUを止めてルートを守る。", "y": "3つ目。ルートガードは、強いビーピーディーユーを止めてルートを守る。"},
+   {"sc": 11, "sp": "生徒", "t": "持ち込みスイッチ事件、もう起きませんね。"},
+   {"sc": 11, "sp": "先生", "t": "次回は、ケーブルを束ねるEtherChannelです。お疲れさまでした。", "y": "次回は、ケーブルを束ねるイーサチャネルです。お疲れさまでした。"}
+  ]
+ }
+}

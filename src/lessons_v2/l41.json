@@ -1,0 +1,159 @@
+{
+ "r": "TB",
+ "n": 41,
+ "t": "ケーブルを束ねる（EtherChannel）",
+ "d": "d2",
+ "form": "トラブル解決",
+ "need": [38],
+ "goal": ["EtherChannelの利点がわかる", "LACP・PAgP・on のモードがわかる", "束ねられないときの原因を探せる"],
+ "terms": ["EtherChannel", "LACP", "PAgP", "Port-channel"],
+ "pages": [
+  {
+   "t": "2本つないだのに、1本しか使われない",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 124.0\" role=\"img\" aria-label=\"つかみ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"110\" rx=\"16\" fill=\"#0a5cff\" opacity=\".12\"/><text x=\"180\" y=\"44\" text-anchor=\"middle\" style=\"font:800 15.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">スイッチの間を2本でつないだのに、1本は休み</text><text x=\"180\" y=\"74\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">STPが、ループとみなしてブロックしてしまう</text><text x=\"180\" y=\"94\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2本とも使う方法はないの？</text></svg>",
+   "b": "スイッチの間が混んできたので、ケーブルを1本増やして2本でつなぎました。ところが、速くなりません。STPが<b>2本をループとみなし、1本をブロック</b>してしまったからです。せっかくのケーブルが休んでいます。今日は、複数のケーブルを<b>1本に束ねて</b>、全部を使う方法を学びます。"
+  },
+  {
+   "t": "今日のゴール",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のゴール\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1. EtherChannelの利点がわかる</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">束ねて1本として使う</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2. LACP・PAgP・on のモードがわかる</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">組み合わせで束ねられるか決まる</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">3. 束ねられないときの原因を探せる</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">そろえる設定と、show etherchannel summary</text></svg>"
+  },
+  {
+   "t": "束ねて1本にする（EtherChannel）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 168.0\" role=\"img\" aria-label=\"EtherChannel\"><path d=\"M70 70L290 70\" stroke=\"#8a3ffc\" stroke-width=\"3\" opacity=\".7\"/><text x=\"180.0\" y=\"63.0\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Port-channel 1（2本を束ねた1本）</text><rect x=\"48\" y=\"57\" width=\"44\" height=\"26\" rx=\"5\" fill=\"#00a05a\"/><path d=\"M58 66h22l-4-3M82 74h-22l4 3\" stroke=\"#fff\" stroke-width=\"2.2\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><text x=\"70\" y=\"44\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">SW1</text><rect x=\"268\" y=\"57\" width=\"44\" height=\"26\" rx=\"5\" fill=\"#00a05a\"/><path d=\"M278 66h22l-4-3M302 74h-22l4 3\" stroke=\"#fff\" stroke-width=\"2.2\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><text x=\"290\" y=\"44\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">SW2</text><text x=\"180\" y=\"120\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">STPからは1本に見えるので、ブロックされない</text><text x=\"180\" y=\"140\" text-anchor=\"middle\" style=\"font:600 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1本が切れても、残りで通信が続く</text></svg>",
+   "b": "<b>EtherChannel</b> は、複数の物理的なケーブルを<b>1本の論理的なリンク</b>（Port-channel）に束ねる技術です。STPからは1本に見えるので<b>ブロックされず</b>、全部のケーブルを使えます。さらに、1本が切れても残りのケーブルで通信が続くので、<b>冗長化</b>にもなります。",
+   "p": "EtherChannel ＝ 束ねて1本に。速く、切れても続く。"
+  },
+  {
+   "t": "確認の問題 1",
+   "quiz": {
+    "q": "2本の物理リンクを EtherChannel に束ねました。STP は、このEtherChannelをどう扱うでしょう？",
+    "o": [
+     ["2本の別々のリンクとして扱い、片方をブロックする", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["1本の論理リンクとして扱い、両方の物理リンクを使える", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["EtherChannelではSTPが止まる", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "STPからは<b>1本の論理リンク</b>に見えるので、どちらもブロックされず、両方を使えます。"
+   }
+  },
+  {
+   "t": "束ね方は3種類",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"束ね方\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">LACP（業界標準）</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">active：自分から誘う／passive：誘われたら応じる</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">PAgP（Cisco独自）</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">desirable：自分から誘う／auto：誘われたら応じる</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">on（交渉なし）</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">相談せずに束ねる。両側とも on にする</text></svg>",
+   "b": "束ね方には3種類あります。業界標準の <b>LACP</b> は、<b>active</b>（自分から誘う）と <b>passive</b>（誘われたら応じる）。Cisco独自の <b>PAgP</b> は、<b>desirable</b> と <b>auto</b>。そして、相談せずに束ねる <b>on</b> です。第34回のDTPと同じように、<b>どちらかが誘えば</b>束ねられます。"
+  },
+  {
+   "t": "組み合わせで決まる",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"組み合わせ\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">active ＋ active／passive → 束ねられる</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">LACP は、少なくとも片方が active</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">passive ＋ passive → 束ねられない</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">どちらも誘わない</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 13.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">on ＋ on → 束ねられる（on ＋ active は ×）</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">on は相談しないので、相手も on</text></svg>",
+   "b": "LACPなら、<b>少なくとも片方が active</b> なら束ねられます。<b>passive どうし</b>は、どちらも誘わないので束ねられません。PAgPも同じで、auto どうしはだめです。<b>on</b> は相談をしないので、<b>相手も on</b> でなければなりません。on と active のように、交渉するものとしないものは組み合わせられません。",
+   "p": "LACPは片方以上が active。on は両側 on。"
+  },
+  {
+   "t": "確認の問題 2",
+   "quiz": {
+    "q": "LACP で EtherChannel を組むとき、束ねられる組み合わせはどれでしょう？",
+    "o": [
+     ["passive と passive", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["active と passive", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["on と active", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "LACPは<b>少なくとも片方が active</b> なら束ねられます。passive どうし、on と active はだめです。"
+   }
+  },
+  {
+   "t": "設定と、そろえる項目",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 206.0\" role=\"img\" aria-label=\"EtherChannelの設定\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"122\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\">SW1(config)# interface range gi0/1 - 2</text><text x=\"22\" y=\"74\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">SW1(config-if-range)# channel-group 1 mode active</text><text x=\"22\" y=\"96\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#ffb400;white-space:pre\">SW1(config)# interface port-channel 1</text><text x=\"22\" y=\"118\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#ffb400;white-space:pre\">SW1(config-if)# switchport mode trunk</text><text x=\"180\" y=\"154\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">束ねるポートに channel-group 番号 mode</text><text x=\"180\" y=\"178\" text-anchor=\"middle\" style=\"font:700 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">速度・デュプレックス・VLAN・トランクの設定をそろえる</text></svg>",
+   "b": "束ねたいポートに <b>channel-group 1 mode active</b> のように設定すると、<b>Port-channel 1</b> ができます。大事なのは、束ねるポートどうしで<b>設定をそろえる</b>ことです。<b>速度・デュプレックス・アクセスかトランクか・VLANの設定</b>などが1つでも違うと、そのポートは束ねられません。"
+  },
+  {
+   "t": "束ねられないポートを見つける",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 206.0\" role=\"img\" aria-label=\"show etherchannel summary\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"122\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\">SW1# show etherchannel summary</text><text x=\"22\" y=\"74\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#e8ecf3;white-space:pre\">Flags: P - bundled  s - suspended  U - in use</text><text x=\"22\" y=\"96\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#e8ecf3;white-space:pre\">Group Po       Prot  Ports</text><text x=\"22\" y=\"118\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#ffb400;white-space:pre\">1     Po1(SU)  LACP  Gi0/1(P) Gi0/2(P) Gi0/3(s)</text><text x=\"180\" y=\"154\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">P ＝ 束ねられている、s ＝ 外されている</text><text x=\"180\" y=\"178\" text-anchor=\"middle\" style=\"font:700 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Gi0/3 だけ、設定がほかとそろっていない</text></svg>",
+   "b": "状態は <b>show etherchannel summary</b> で確かめます。ポートの後ろの <b>(P)</b> は束ねられている、<b>(s)</b> は外されている（suspended）という意味です。Po1(SU) の U は使われている、S はL2の束という意味です。この例では Gi0/3 だけが外されているので、<b>Gi0/3 の設定がほかとそろっていない</b>と考えて、速度やVLANの設定を比べます。"
+  },
+  {
+   "t": "確認の問題 3",
+   "quiz": {
+    "q": "EtherChannel で物理ポートを束ねるとき、すべてのメンバーポートでそろえる必要があるものはどれでしょう？",
+    "o": [
+     ["速度とデュプレックス", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["ポートの説明文（description）", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["ポートの番号", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 0,
+    "e": "<b>速度・デュプレックス</b>やVLAN・トランクの設定をそろえる必要があります。説明文や番号は関係ありません。"
+   }
+  },
+  {
+   "t": "まちがえやすい所",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"よくある勘違い\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× passive どうしでも束ねられる</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">どちらも誘わない</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× on と active で束ねられる</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">on は交渉しない。相手も on</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ active・passive は LACP</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">desirable・auto は PAgP</text></svg>",
+   "b": "EtherChannelでは、モードの名前で方式を見分けるのが大事です。<b>active・passive は LACP</b>、<b>desirable・auto は PAgP</b>。どちらも、<b>待つ側どうし</b>（passive どうし、auto どうし）では束ねられません。<b>on</b> は相手も on でなければなりません。"
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">EtherChannel</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">複数のケーブルを1本に束ねる。STPにブロックされない</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">モード</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">LACP active/passive、PAgP desirable/auto、on</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">そろえる項目</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">速度・デュプレックス・VLAN。summary で P と s を見る</text></svg>",
+   "b": "次回は、となりにどんな機器がつながっているかを調べる <b>CDP と LLDP</b> を学びます。"
+  }
+ ],
+ "cls": {
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "スイッチの間が混んできたので、ケーブルを1本増やして、2本でつなぎました。"},
+   {"sc": 1, "sp": "生徒", "t": "2倍速くなりますね！"},
+   {"sc": 1, "sp": "先生", "t": "ところが、速くならなかったんです。"},
+   {"sc": 1, "sp": "生徒", "t": "え、どうしてですか？"},
+   {"sc": 1, "sp": "先生", "t": "STPが、2本をループとみなして、1本をブロックしてしまったんです。", "y": "エスティーピーが、2本をループとみなして、1本をブロックしてしまったんです。"},
+   {"sc": 1, "sp": "生徒", "t": "前回までのSTPが、ここではじゃまをしてる…", "y": "前回までのエスティーピーが、ここではじゃまをしてる…"},
+   {"sc": 2, "sp": "先生", "t": "今日のゴールは3つです。"},
+   {"sc": 2, "sp": "先生", "t": "1つ目、EtherChannelの利点がわかること。", "y": "1つ目、イーサチャネルの利点がわかること。"},
+   {"sc": 2, "sp": "先生", "t": "2つ目、LACP・PAgP・on のモードがわかること。", "y": "2つ目、エルエーシーピー・パグプ・オン のモードがわかること。"},
+   {"sc": 2, "sp": "先生", "t": "3つ目、束ねられないときの原因を探せること。"},
+   {"sc": 2, "sp": "生徒", "t": "2本とも使える方法があるんですね。"},
+   {"sc": 3, "sp": "先生", "t": "EtherChannelは、複数のケーブルを、1本の論理的なリンクに束ねる技術です。", "y": "イーサチャネルは、複数のケーブルを、1本の論理的なリンクに束ねる技術です。"},
+   {"sc": 3, "sp": "先生", "t": "束ねたものを、Port-channelと言います。", "y": "束ねたものを、ポートチャネルと言います。"},
+   {"sc": 3, "sp": "生徒", "t": "STPからは、どう見えるんですか？", "y": "エスティーピーからは、どう見えるんですか？"},
+   {"sc": 3, "sp": "先生", "t": "1本に見えるので、ブロックされません。全部のケーブルを使えます。"},
+   {"sc": 3, "sp": "生徒", "t": "1本が切れたら？"},
+   {"sc": 3, "sp": "先生", "t": "残りのケーブルで、通信が続きます。冗長化にもなるんです。"},
+   {"sc": 4, "sp": "先生", "t": "確認です。STPはEtherChannelをどう扱うでしょう？", "y": "確認です。エスティーピーはイーサチャネルをどう扱うでしょう？", "w": 1},
+   {"sc": 4, "sp": "生徒", "t": "1本の論理リンクとして扱う。2つ目です。"},
+   {"sc": 4, "sp": "先生", "t": "正解です。"},
+   {"sc": 5, "sp": "先生", "t": "束ね方は、3種類あります。"},
+   {"sc": 5, "sp": "先生", "t": "業界標準のLACPは、自分から誘うactiveと、誘われたら応じるpassive。", "y": "業界標準のエルエーシーピーは、自分から誘うアクティブと、誘われたら応じるパッシブ。"},
+   {"sc": 5, "sp": "先生", "t": "Cisco独自のPAgPは、desirableとauto。", "y": "シスコ独自のパグプは、デザイラブルとオート。"},
+   {"sc": 5, "sp": "先生", "t": "そして、相談せずに束ねるonです。", "y": "そして、相談せずに束ねるオンです。"},
+   {"sc": 5, "sp": "生徒", "t": "DTPのときと、似てますね。", "y": "ディーティーピーのときと、似てますね。"},
+   {"sc": 5, "sp": "先生", "t": "その通り。どちらかが誘えば、束ねられます。"},
+   {"sc": 6, "sp": "生徒", "t": "じゃあ、passiveどうしだと、だめですか？", "y": "じゃあ、パッシブどうしだと、だめですか？"},
+   {"sc": 6, "sp": "先生", "t": "だめです。どちらも誘わないので、束ねられません。"},
+   {"sc": 6, "sp": "先生", "t": "onは相談しないので、相手もonでなければなりません。", "y": "オンは相談しないので、相手もオンでなければなりません。"},
+   {"sc": 6, "sp": "生徒", "t": "onとactiveは？", "y": "オンとアクティブは？"},
+   {"sc": 6, "sp": "先生", "t": "交渉するものとしないものなので、組み合わせられません。"},
+   {"sc": 7, "sp": "先生", "t": "確認です。LACPで束ねられる組み合わせはどれでしょう？", "y": "確認です。エルエーシーピーで束ねられる組み合わせはどれでしょう？", "w": 1},
+   {"sc": 7, "sp": "生徒", "t": "activeとpassive。2つ目です。", "y": "アクティブとパッシブ。2つ目です。"},
+   {"sc": 7, "sp": "先生", "t": "正解です。"},
+   {"sc": 8, "sp": "先生", "t": "設定は、束ねたいポートに、channel-group 1 mode activeのように入れます。", "y": "設定は、束ねたいポートに、チャネルグループ 1 モード アクティブのように入れます。"},
+   {"sc": 8, "sp": "先生", "t": "するとPort-channel 1ができます。トランクなどの設定は、Port-channelに入れます。", "y": "するとポートチャネル 1ができます。トランクなどの設定は、ポートチャネルに入れます。"},
+   {"sc": 8, "sp": "生徒", "t": "気をつけることはありますか？"},
+   {"sc": 8, "sp": "先生", "t": "束ねるポートどうしで、設定をそろえることです。"},
+   {"sc": 8, "sp": "先生", "t": "速度、デュプレックス、アクセスかトランクか、VLANの設定などです。", "y": "速度、デュプレックス、アクセスかトランクか、ブイランの設定などです。"},
+   {"sc": 8, "sp": "生徒", "t": "1つでも違うと？"},
+   {"sc": 8, "sp": "先生", "t": "そのポートは、束ねられません。"},
+   {"sc": 9, "sp": "先生", "t": "状態は、show etherchannel summaryで確かめます。", "y": "状態は、ショー イーサチャネル、サマリーで確かめます。"},
+   {"sc": 9, "sp": "先生", "t": "ポートの後ろのPは束ねられている、小文字のsは外されている、という意味です。"},
+   {"sc": 9, "sp": "生徒", "t": "Gi0/3だけ、sになってます。", "y": "Gi0スラッシュ3だけ、sになってます。"},
+   {"sc": 9, "sp": "先生", "t": "Gi0/3の設定が、ほかとそろっていないんです。速度やVLANを比べてみましょう。", "y": "Gi0スラッシュ3の設定が、ほかとそろっていないんです。速度やブイランを比べてみましょう。"},
+   {"sc": 10, "sp": "先生", "t": "確認です。すべてのメンバーでそろえる必要があるものはどれでしょう？", "w": 1},
+   {"sc": 10, "sp": "生徒", "t": "速度とデュプレックス。1つ目です。"},
+   {"sc": 10, "sp": "先生", "t": "正解です。"},
+   {"sc": 11, "sp": "生徒", "t": "モードの名前、LACPとPAgPで混ざりそうです。", "y": "モードの名前、エルエーシーピーとパグプで混ざりそうです。"},
+   {"sc": 11, "sp": "先生", "t": "activeとpassiveはLACP、desirableとautoはPAgPです。", "y": "アクティブとパッシブはエルエーシーピー、デザイラブルとオートはパグプです。"},
+   {"sc": 11, "sp": "生徒", "t": "待つ側どうしは、どっちもだめ。"},
+   {"sc": 11, "sp": "先生", "t": "そうです。それから、onは相手もonです。", "y": "そうです。それから、オンは相手もオンです。"},
+   {"sc": 12, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 12, "sp": "先生", "t": "1つ目。EtherChannelは、ケーブルを1本に束ねる。STPにブロックされない。", "y": "1つ目。イーサチャネルは、ケーブルを1本に束ねる。エスティーピーにブロックされない。"},
+   {"sc": 12, "sp": "先生", "t": "2つ目。LACPはactiveとpassive、PAgPはdesirableとauto、それからon。", "y": "2つ目。エルエーシーピーはアクティブとパッシブ、パグプはデザイラブルとオート、それからオン。"},
+   {"sc": 12, "sp": "先生", "t": "3つ目。速度やVLANをそろえる。summaryでPとsを見る。", "y": "3つ目。速度やブイランをそろえる。summaryでPとsを見る。"},
+   {"sc": 12, "sp": "生徒", "t": "休んでいたケーブル、働いてもらえますね。"},
+   {"sc": 12, "sp": "先生", "t": "次回は、CDPとLLDPです。お疲れさまでした。", "y": "次回は、シーディーピーとエルエルディーピーです。お疲れさまでした。"}
+  ]
+ }
+}

@@ -19,6 +19,32 @@ def lines(spec):
         out.append(o)
     return out
 
+GCOL = (BL, GR, YE)
+NUM = ("1つ目", "2つ目", "3つ目")
+
+
+def goal_page(items):
+    """今日のゴールのページ。items = [(ゴール, 補足), ...]（3つまで）"""
+    return {"t": "今日のゴール", "svg": goals("今日のゴール", [(g, [s], GCOL[i]) for i, (g, s) in enumerate(items)])}
+
+
+def goal_lines(sc, items, student):
+    """今日のゴールの場面のセリフ（先生が3つ読み上げ、最後に生徒のひと言）。"""
+    out = [(sc, "T", "今日のゴールは3つです。")]
+    out += [(sc, "T", f"{NUM[i]}、{g}こと。") for i, (g, _) in enumerate(items)]
+    return out + [(sc, "S", student)]
+
+
+def quiz_lines(sc, q, ans, ok="正解です。"):
+    """確認の問題の場面のセリフ（先生が問題を出して止まる → 生徒が答える → 先生が確かめる）。"""
+    return [(sc, "T", f"確認です。{q}", 1), (sc, "S", ans), (sc, "T", ok)]
+
+
+def summary(items, b):
+    """今日のまとめのページ。items = [(見出し, 説明), ...]"""
+    return {"t": "今日のまとめ", "svg": boxes("今日のまとめ", [(h, [s], GCOL[i]) for i, (h, s) in enumerate(items)]), "b": b}
+
+
 def save(n, title, d, form, need, goal, terms, pages, spec):
     L = {"r": "TB", "n": n, "t": title, "d": d, "form": form, "need": need, "goal": goal, "terms": terms,
          "pages": pages, "cls": {"lines": lines(spec)}}
