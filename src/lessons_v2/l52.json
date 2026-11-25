@@ -1,0 +1,138 @@
+{
+ "r": "TB",
+ "n": 52,
+ "t": "IPv6のスタティックルート",
+ "d": "d3",
+ "form": "トラブル解決",
+ "need": [51, 25],
+ "goal": ["ipv6 route を書ける", "リンクローカルの注意がわかる", "IPv6のデフォルトルートを書ける"],
+ "terms": ["ipv6 route", "::/0", "リンクローカル"],
+ "pages": [
+  {
+   "t": "IPv6でも、道を教えたい",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 124.0\" role=\"img\" aria-label=\"つかみ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"110\" rx=\"16\" fill=\"#0a5cff\" opacity=\".12\"/><text x=\"180\" y=\"44\" text-anchor=\"middle\" style=\"font:800 15.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">IPv6 のアドレスを付けたのに、遠くへ届かない</text><text x=\"180\" y=\"74\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">IPv6 にも、ルーティングテーブルがある</text><text x=\"180\" y=\"94\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ip route の IPv6 版を使います</text></svg>",
+   "b": "第25回で、ルーターにIPv6アドレスを付けました。でも、IPv4と同じで、ルーターは<b>知らないネットワーク</b>には送れません。今日は、IPv6のスタティックルート <b>ipv6 route</b> を学びます。考え方はIPv4とほとんど同じなので、<b>ちがう所</b>に注目しましょう。"
+  },
+  {
+   "t": "今日のゴール",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のゴール\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1. ipv6 route を書ける</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">/ で書くプレフィックス</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2. リンクローカルの注意がわかる</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">出口のインターフェースも書く</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">3. IPv6のデフォルトルートを書ける</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">::/0</text></svg>"
+  },
+  {
+   "t": "まず、ルーティングを有効に",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 166.5\" role=\"img\" aria-label=\"IPv6のルーティングの前に\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ipv6 unicast-routing</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">これがないと、ルーターがIPv6のパケットを転送しない</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">IPv4は最初から転送、IPv6は有効にする</text><rect x=\"10\" y=\"116.0\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"141.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">show ipv6 route で、テーブルを見る</text></svg>",
+   "b": "最初に大事な点です。Cisco ルーターは、IPv6のパケットを<b>最初は転送しません</b>。<b>ipv6 unicast-routing</b> を入れて、はじめてルーターとして働きます（第25回でも出てきました）。これを忘れると、道を書いても届きません。テーブルは <b>show ipv6 route</b> で見ます。"
+  },
+  {
+   "t": "ipv6 route の書き方",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 182.0\" role=\"img\" aria-label=\"ipv6 route\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"122\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\">(config)# ipv6 route 2001:db8:3::/64 2001:db8:12::2</text><text x=\"22\" y=\"74\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\">R1# show ipv6 route</text><text x=\"22\" y=\"96\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">S   2001:db8:3::/64 [1/0]</text><text x=\"22\" y=\"118\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">     via 2001:db8:12::2</text><text x=\"180\" y=\"154\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">マスクではなく、/64 のようにプレフィックス長で書く</text></svg>",
+   "b": "書き方は <b>ipv6 route 宛先/プレフィックス長 ネクストホップ</b> です。IPv4 とのちがいは、マスクを 255.255.255.0 のように書かず、<b>/64 のようにスラッシュで書く</b>ことです。設定すると、show ipv6 route に S の行ができます。",
+   "p": "ipv6 route 宛先/長さ ネクストホップ。マスクは / で書く。"
+  },
+  {
+   "t": "確認の問題 1",
+   "quiz": {
+    "q": "2001:db8:a::/64 へ、ネクストホップ 2001:db8:f::1 のスタティックルートを書くコマンドはどれでしょう？",
+    "o": [
+     ["ipv6 route 2001:db8:a::/64 2001:db8:f::1", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["ip route 2001:db8:a:: 64 2001:db8:f::1", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["ipv6 route 2001:db8:f::1 2001:db8:a::/64", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 0,
+    "e": "<b>ipv6 route 宛先/プレフィックス長 ネクストホップ</b> の順です。"
+   }
+  },
+  {
+   "t": "リンクローカルをネクストホップにするとき",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 160.0\" role=\"img\" aria-label=\"リンクローカルのネクストホップ\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"100\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#e6261f;white-space:pre\">ipv6 route 2001:db8:3::/64 fe80::2</text><text x=\"22\" y=\"74\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#e6261f;white-space:pre\">% Interface has to be specified</text><text x=\"22\" y=\"96\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">ipv6 route 2001:db8:3::/64 g0/1 fe80::2</text><text x=\"180\" y=\"132\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">fe80:: はどの口にもあるので、出口も書く</text></svg>",
+   "b": "ネクストホップに、となりのルーターの<b>リンクローカルアドレス</b>（fe80::）を使うこともできます。ただし、リンクローカルは<b>どのインターフェースにも同じ範囲</b>があるので、アドレスだけでは「どの口の先の fe80::2 か」が決まりません。そこで、<b>出口のインターフェースとリンクローカルの両方</b>を書きます。"
+  },
+  {
+   "t": "確認の問題 2",
+   "quiz": {
+    "q": "ネクストホップにリンクローカルアドレス fe80::2 を使ってIPv6のスタティックルートを書くとき、正しいのはどれでしょう？",
+    "o": [
+     ["ipv6 route 2001:db8:3::/64 fe80::2", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["ipv6 route 2001:db8:3::/64 g0/1 fe80::2", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["ipv6 route fe80::2 2001:db8:3::/64", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "リンクローカルをネクストホップにするときは、<b>出口のインターフェース</b>も書きます。"
+   }
+  },
+  {
+   "t": "IPv6のデフォルトルート",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"デフォルトルートの比べ\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">IPv4</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ip route 0.0.0.0 0.0.0.0 ネクストホップ</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">IPv6</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ipv6 route ::/0 ネクストホップ</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">::/0 ＝ どんなIPv6アドレスにも合う</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">浮動・ホストルート（/128）も同じ考え方</text></svg>",
+   "b": "IPv6のデフォルトルートは <b>::/0</b> です。「全部0で、プレフィックス長も0」なので、どんなIPv6アドレスにも合います。<b>ipv6 route ::/0 ネクストホップ</b> と書きます。浮動スタティックルート（最後にAD）や、1台だけへのホストルート（<b>/128</b>）も、IPv4と同じ考え方で書けます。"
+  },
+  {
+   "t": "確認の問題 3",
+   "quiz": {
+    "q": "IPv6のデフォルトルートを、ネクストホップ 2001:db8:ffff::1 に向けて設定するコマンドはどれでしょう？",
+    "o": [
+     ["ipv6 route ::/0 2001:db8:ffff::1", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["ipv6 route 0.0.0.0 0.0.0.0 2001:db8:ffff::1", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["ipv6 route ::/128 2001:db8:ffff::1", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 0,
+    "e": "IPv6のデフォルトルートは <b>::/0</b> です。/128 は1台だけ（ホストルート）です。"
+   }
+  },
+  {
+   "t": "まちがえやすい所",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 183.5\" role=\"img\" aria-label=\"よくある勘違い\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 13.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× ipv6 unicast-routing は、なくても転送する</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ないとIPv6は転送しない</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× リンクローカルだけで、ネクストホップになる</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">出口のインターフェースも書く</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ デフォルトは ::/0、ホストは /128</text></svg>",
+   "b": "IPv6の道が書いてあるのに届かないときは、まず <b>ipv6 unicast-routing</b> を確かめます。リンクローカルをネクストホップにするときは<b>出口も書く</b>。デフォルトは <b>::/0</b>、ホストルートは <b>/128</b> です。"
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ipv6 route</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">宛先/長さ ネクストホップ（先に unicast-routing）</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">リンクローカル</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">出口のインターフェースと一緒に書く</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">デフォルト</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">::/0。ホストルートは /128</text></svg>",
+   "b": "次回からは、ルーターどうしが<b>自動で道を教え合う</b> OSPF に入ります。"
+  }
+ ],
+ "cls": {
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "第25回で、ルーターにIPv6アドレスを付けましたね。", "y": "第25回で、ルーターにアイピーブイシックスアドレスを付けましたね。"},
+   {"sc": 1, "sp": "生徒", "t": "でも、遠くのネットワークには、届かない？"},
+   {"sc": 1, "sp": "先生", "t": "IPv4と同じで、知らないネットワークには送れません。", "y": "アイピーブイフォーと同じで、知らないネットワークには送れません。"},
+   {"sc": 1, "sp": "先生", "t": "今日は、IPv6のスタティックルートです。IPv4とのちがいに注目しましょう。", "y": "今日は、アイピーブイシックスのスタティックルートです。アイピーブイフォーとのちがいに注目しましょう。"},
+   {"sc": 2, "sp": "先生", "t": "今日のゴールは3つです。"},
+   {"sc": 2, "sp": "先生", "t": "1つ目、ipv6 route を書けること。", "y": "1つ目、アイピーブイシックスルート を書けること。"},
+   {"sc": 2, "sp": "先生", "t": "2つ目、リンクローカルの注意がわかること。"},
+   {"sc": 2, "sp": "先生", "t": "3つ目、IPv6のデフォルトルートを書けること。", "y": "3つ目、アイピーブイシックスのデフォルトルートを書けること。"},
+   {"sc": 2, "sp": "生徒", "t": "IPv4と、ほとんど同じなら安心です。", "y": "アイピーブイフォーと、ほとんど同じなら安心です。"},
+   {"sc": 3, "sp": "先生", "t": "最初に大事な点です。ルーターは、IPv6を最初は転送しません。", "y": "最初に大事な点です。ルーターは、アイピーブイシックスを最初は転送しません。"},
+   {"sc": 3, "sp": "生徒", "t": "え、そうなんですか？"},
+   {"sc": 3, "sp": "先生", "t": "ipv6 unicast-routingを入れて、はじめてルーターとして働きます。", "y": "ipv6 unicast-ルーティングを入れて、はじめてルーターとして働きます。"},
+   {"sc": 3, "sp": "生徒", "t": "忘れると、道を書いても届かないんですね。"},
+   {"sc": 4, "sp": "先生", "t": "書き方は、ipv6 route、宛先とプレフィックス長、ネクストホップです。", "y": "書き方は、アイピーブイシックスルート、宛先とプレフィックス長、ネクストホップです。"},
+   {"sc": 4, "sp": "生徒", "t": "マスクは、書かないんですか？"},
+   {"sc": 4, "sp": "先生", "t": "スラッシュ64のように、プレフィックス長で書きます。そこがIPv4とのちがいです。", "y": "スラッシュ64のように、プレフィックス長で書きます。そこがアイピーブイフォーとのちがいです。"},
+   {"sc": 5, "sp": "先生", "t": "確認です。2001:db8:a::/64へのスタティックルートはどれでしょう？", "y": "確認です。2001、ディービーハチ、エー、コロンコロンスラッシュ64へのスタティックルートはどれでしょう？", "w": 1},
+   {"sc": 5, "sp": "生徒", "t": "ipv6 route、宛先、ネクストホップ。1つ目です。", "y": "アイピーブイシックスルート、宛先、ネクストホップ。1つ目です。"},
+   {"sc": 5, "sp": "先生", "t": "正解です。"},
+   {"sc": 6, "sp": "先生", "t": "ネクストホップに、リンクローカルアドレスを使うこともできます。"},
+   {"sc": 6, "sp": "生徒", "t": "fe80で始まる、あれですね。"},
+   {"sc": 6, "sp": "先生", "t": "でも、リンクローカルは、どのインターフェースにも同じ範囲があります。"},
+   {"sc": 6, "sp": "生徒", "t": "どの口の先のfe80::2か、わからない！", "y": "どの口の先のエフイーハチゼロ、コロンコロン、2か、わからない！"},
+   {"sc": 6, "sp": "先生", "t": "その通り。だから、出口のインターフェースも一緒に書きます。"},
+   {"sc": 7, "sp": "先生", "t": "確認です。リンクローカルをネクストホップにするとき、正しいのはどれでしょう？", "w": 1},
+   {"sc": 7, "sp": "生徒", "t": "出口も書いてある、2つ目です。"},
+   {"sc": 7, "sp": "先生", "t": "正解です。"},
+   {"sc": 8, "sp": "先生", "t": "IPv6のデフォルトルートは、コロンコロン、スラッシュ0です。", "y": "アイピーブイシックスのデフォルトルートは、コロンコロン、スラッシュ0です。"},
+   {"sc": 8, "sp": "生徒", "t": "全部0で、長さも0。どこにでも合うんですね。"},
+   {"sc": 8, "sp": "先生", "t": "はい。浮動スタティックや、ホストルートも同じ考え方です。"},
+   {"sc": 8, "sp": "生徒", "t": "IPv6のホストルートは、/128？", "y": "アイピーブイシックスのホストルートは、スラッシュ128？"},
+   {"sc": 8, "sp": "先生", "t": "正解です。アドレスが128ビットだからです。"},
+   {"sc": 9, "sp": "先生", "t": "確認です。IPv6のデフォルトルートのコマンドはどれでしょう？", "y": "確認です。アイピーブイシックスのデフォルトルートのコマンドはどれでしょう？", "w": 1},
+   {"sc": 9, "sp": "生徒", "t": "コロンコロン、スラッシュ0。1つ目です。"},
+   {"sc": 9, "sp": "先生", "t": "正解です。"},
+   {"sc": 10, "sp": "生徒", "t": "道があるのに届かないときは、まずunicast-routing。", "y": "道があるのに届かないときは、まずunicast-ルーティング。"},
+   {"sc": 10, "sp": "先生", "t": "いい習慣です。それから、リンクローカルには出口も書く。"},
+   {"sc": 11, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 11, "sp": "先生", "t": "1つ目。ipv6 route、宛先とプレフィックス長、ネクストホップ。", "y": "1つ目。アイピーブイシックスルート、宛先とプレフィックス長、ネクストホップ。"},
+   {"sc": 11, "sp": "先生", "t": "2つ目。リンクローカルは、出口と一緒に書く。"},
+   {"sc": 11, "sp": "先生", "t": "3つ目。デフォルトはコロンコロン、スラッシュ0。"},
+   {"sc": 11, "sp": "生徒", "t": "IPv6も、怖くなくなりました。", "y": "アイピーブイシックスも、怖くなくなりました。"},
+   {"sc": 11, "sp": "先生", "t": "次回から、OSPFに入ります。お疲れさまでした。", "y": "次回から、オーエスピーエフに入ります。お疲れさまでした。"}
+  ]
+ }
+}

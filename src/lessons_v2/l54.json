@@ -1,0 +1,154 @@
+{
+ "r": "TB",
+ "n": 54,
+ "t": "OSPFの設定と確認",
+ "d": "d3",
+ "form": "トラブル解決",
+ "need": [53],
+ "goal": ["OSPFを設定できる", "ルーターIDの決まり方がわかる", "コストを変えられる"],
+ "terms": ["router ospf", "network", "ワイルドカードマスク", "passive-interface", "ルーターID", "show ip ospf neighbor"],
+ "pages": [
+  {
+   "t": "3台のルーターに、OSPFを入れる",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 168.0\" role=\"img\" aria-label=\"今日の構成\"><path d=\"M70 70L210 70\" stroke=\"#3d4450\" stroke-width=\"3\" opacity=\".7\"/><text x=\"140.0\" y=\"63.0\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">10.12.0.0/30</text><path d=\"M210 70L350 70\" stroke=\"#3d4450\" stroke-width=\"3\" opacity=\".7\"/><text x=\"280.0\" y=\"63.0\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">10.23.0.0/30</text><circle cx=\"70\" cy=\"70\" r=\"18\" fill=\"#0a5cff\"/><path d=\"M61 66h12l-4-4M79 74h-12l4 4\" stroke=\"#fff\" stroke-width=\"2.4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><text x=\"70\" y=\"44\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">R1</text><text x=\"70\" y=\"104\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">10.1.1.0/24</text><circle cx=\"210\" cy=\"70\" r=\"18\" fill=\"#0a5cff\"/><path d=\"M201 66h12l-4-4M219 74h-12l4 4\" stroke=\"#fff\" stroke-width=\"2.4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><text x=\"210\" y=\"44\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">R2</text><circle cx=\"350\" cy=\"70\" r=\"18\" fill=\"#0a5cff\"/><path d=\"M341 66h12l-4-4M359 74h-12l4 4\" stroke=\"#fff\" stroke-width=\"2.4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><text x=\"347.0\" y=\"44\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">R3</text><text x=\"320.5\" y=\"104\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">10.3.3.0/24</text><text x=\"180\" y=\"140\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">R1 の LAN と R3 の LAN を、OSPF でつなぐ</text></svg>",
+   "b": "今日は、R1・R2・R3 の3台にOSPFを入れて、R1のLAN（10.1.1.0/24）とR3のLAN（10.3.3.0/24）を通じさせます。スタティックルートなら、行きと帰りの道を何本も書くところですが、OSPFなら各ルーターに<b>数行</b>書くだけです。"
+  },
+  {
+   "t": "今日のゴール",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のゴール\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1. OSPFを設定できる</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">router ospf と network</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2. ルーターIDの決まり方がわかる</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">手で決める → ループバック → インターフェース</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">3. コストを変えられる</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">auto-cost と ip ospf cost</text></svg>"
+  },
+  {
+   "t": "router ospf と network",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 184.0\" role=\"img\" aria-label=\"R1の設定\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"100\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\">R1(config)# router ospf 1</text><text x=\"22\" y=\"74\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">R1(config-router)# network 10.1.1.0 0.0.0.255 area 0</text><text x=\"22\" y=\"96\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">R1(config-router)# network 10.12.0.0 0.0.0.3 area 0</text><text x=\"180\" y=\"132\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1 はプロセス番号（このルーターの中だけの番号）</text><text x=\"180\" y=\"156\" text-anchor=\"middle\" style=\"font:700 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">network ＝ この範囲のインターフェースで OSPF を動かす</text></svg>",
+   "b": "<b>router ospf 1</b> でOSPFを動かします。1 は<b>プロセス番号</b>で、そのルーターの中だけで使う番号なので、となりと同じでなくてもかまいません。<b>network 10.1.1.0 0.0.0.255 area 0</b> は、「アドレスがこの範囲に入る<b>インターフェースで、OSPFを動かす</b>（エリア0）」という意味です。0.0.0.255 は<b>ワイルドカードマスク</b>で、サブネットマスクの0と1を反対にしたものです。",
+   "p": "network は「どのインターフェースでOSPFを動かすか」を選ぶコマンド。"
+  },
+  {
+   "t": "インターフェースで直接書く方法",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 204.0\" role=\"img\" aria-label=\"もう1つの書き方\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"144\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\">R1(config)# interface g0/0</text><text x=\"22\" y=\"74\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">R1(config-if)# ip ospf 1 area 0</text><text x=\"22\" y=\"96\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\">R1(config-if)# exit</text><text x=\"22\" y=\"118\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\">R1(config)# router ospf 1</text><text x=\"22\" y=\"140\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#ffb400;white-space:pre\">R1(config-router)# passive-interface g0/0</text><text x=\"180\" y=\"176\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">passive ＝ その口からは Hello を出さない</text></svg>",
+   "b": "network の代わりに、インターフェースで <b>ip ospf 1 area 0</b> と書く方法もあります。どの口でOSPFが動くかが、見てすぐわかります。また、PCしかつながっていないLAN側の口では、Hello を出す意味がありません。<b>passive-interface</b> にすると、<b>Hello は出さずに、そのネットワークの道だけは教える</b>ことができます。知らない機器とネイバーになる危険も減ります。"
+  },
+  {
+   "t": "確認の問題 1",
+   "quiz": {
+    "q": "PCだけがつながるLAN側のインターフェースから、OSPFのHelloを送らないようにしつつ、そのネットワークは広告したいとき、使うコマンドはどれでしょう？",
+    "o": [
+     ["passive-interface", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["no network", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["shutdown", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 0,
+    "e": "<b>passive-interface</b> なら、Hello は出さず、そのネットワークの道は教え続けます。"
+   }
+  },
+  {
+   "t": "ルーターの名札（ルーターID）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 213.0\" role=\"img\" aria-label=\"ルーターIDの決まり方\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">① router-id コマンドで、手で決めた値</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">例：router-id 1.1.1.1</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">② なければ、ループバックの一番大きいIP</text><rect x=\"10\" y=\"116.0\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"141.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">③ なければ、動いている口の一番大きいIP</text><rect x=\"10\" y=\"162.5\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#3d4450\" opacity=\".1\"/><text x=\"24\" y=\"188.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">変えたら clear ip ospf process で反映</text></svg>",
+   "b": "OSPFのルーターは、<b>ルーターID</b>という名札を持ちます。IPアドレスの形の32ビットの数です。決まる順番は、<b>①router-id コマンドで手で決めた値</b>、なければ<b>②ループバックの一番大きいIP</b>、それもなければ<b>③動いているインターフェースの一番大きいIP</b>です。途中で変えたときは、<b>clear ip ospf process</b> でOSPFをやり直すと反映されます。"
+  },
+  {
+   "t": "確認の問題 2",
+   "quiz": {
+    "q": "router-id の設定はなく、ループバック0 が 10.0.0.1、G0/0 が 192.168.1.1 のルーターのOSPFルーターIDはどれでしょう？",
+    "o": [
+     ["10.0.0.1", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["192.168.1.1", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["0.0.0.0", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 0,
+    "e": "手で決めた値がなければ、インターフェースより<b>ループバック</b>が優先されます。数が大きい 192.168.1.1 ではありません。"
+   }
+  },
+  {
+   "t": "動いているか確かめる",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 204.0\" role=\"img\" aria-label=\"確認のコマンド\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"144\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\">R1# show ip ospf neighbor</text><text x=\"22\" y=\"74\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#e8ecf3;white-space:pre\">Neighbor ID  Pri  State     Interface</text><text x=\"22\" y=\"96\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">2.2.2.2      1    FULL/  -  G0/1</text><text x=\"22\" y=\"118\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\">R1# show ip route ospf</text><text x=\"22\" y=\"140\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">O  10.3.3.0/24 [110/3] via 10.12.0.2, G0/1</text><text x=\"180\" y=\"176\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">FULL ＝ 地図の交換が終わった</text></svg>",
+   "b": "<b>show ip ospf neighbor</b> で、ネイバーの一覧を見ます。<b>State が FULL</b> なら、地図の交換まで終わっています。<b>show ip route</b> で O の行があれば、OSPFで道を覚えています。R1 は、10.3.3.0/24 を R2 から教わりました。ほかに、<b>show ip protocols</b> でルーターIDや network の設定を、<b>show ip ospf interface</b> で口ごとのコストなどを確かめられます。"
+  },
+  {
+   "t": "コストを変える",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"コストの調整\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">auto-cost reference-bandwidth 10000</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">基準を 10 Gbps に。全ルーターでそろえる</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ip ospf cost 50</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">インターフェースで、コストを直接決める</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">bandwidth を変えても、コストは変わる</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ただし実際の速さは変わらない</text></svg>",
+   "b": "前回の「1 Gbps も 10 Gbps もコスト1」の問題です。<b>auto-cost reference-bandwidth</b> で基準の帯域を上げると、速い回線の差がコストに出ます（<b>全ルーターでそろえる</b>のが大事）。また、インターフェースで <b>ip ospf cost</b> を書けば、コストを直接決められます。わざと遠回りさせたい道があるときに使います。"
+  },
+  {
+   "t": "確認の問題 3",
+   "quiz": {
+    "q": "show ip ospf neighbor で、ネイバーとの地図の交換が完了していることを表す状態はどれでしょう？",
+    "o": [
+     ["DOWN", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["INIT", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["FULL", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 2,
+    "e": "<b>FULL</b> は、地図（LSDB）の交換が終わった状態です。"
+   }
+  },
+  {
+   "t": "まちがえやすい所",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"よくある勘違い\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× プロセス番号は、となりと同じでないとダメ</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ルーターの中だけの番号。ちがってよい</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× network は、広告するネットワークを書くだけ</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">その範囲の口で OSPF が動く</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× ルーターIDは、IPが一番大きい口</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ループバックが先。手で決めた値が最優先</text></svg>",
+   "b": "<b>プロセス番号</b>は、となりとちがってもネイバーになれます（エリア番号は同じでないとダメです）。network は、<b>インターフェースを選ぶ</b>コマンドです。ルーターIDは <b>手で決めた値 → ループバック → インターフェース</b> の順です。"
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">設定</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">router ospf 1 → network … area 0</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ルーターID</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">router-id → ループバック → 口の一番大きいIP</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">確認とコスト</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">neighbor で FULL、auto-cost・ip ospf cost で調整</text></svg>",
+   "b": "次回は、1本のケーブルに何台ものOSPFルーターがいるときの<b>代表ルーター（DR・BDR）</b>を学びます。"
+  }
+ ],
+ "cls": {
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "今日は、3台のルーターにOSPFを入れます。", "y": "今日は、3台のルーターにオーエスピーエフを入れます。"},
+   {"sc": 1, "sp": "先生", "t": "R1のLANと、R3のLANを、通じさせるのが目標です。", "y": "R1のランと、R3のランを、通じさせるのが目標です。"},
+   {"sc": 1, "sp": "生徒", "t": "スタティックだと、行きと帰りで何本も書くところですね。"},
+   {"sc": 1, "sp": "先生", "t": "OSPFなら、各ルーターに数行書くだけです。", "y": "オーエスピーエフなら、各ルーターに数行書くだけです。"},
+   {"sc": 2, "sp": "先生", "t": "今日のゴールは3つです。"},
+   {"sc": 2, "sp": "先生", "t": "1つ目、OSPFを設定できること。", "y": "1つ目、オーエスピーエフを設定できること。"},
+   {"sc": 2, "sp": "先生", "t": "2つ目、ルーターIDの決まり方がわかること。"},
+   {"sc": 2, "sp": "先生", "t": "3つ目、コストを変えられること。"},
+   {"sc": 2, "sp": "生徒", "t": "数行だけなら、すぐできそうです。"},
+   {"sc": 3, "sp": "先生", "t": "まず、router ospf 1で、OSPFを動かします。", "y": "まず、ルーター、オーエスピーエフ 1で、オーエスピーエフを動かします。"},
+   {"sc": 3, "sp": "生徒", "t": "1は、何の番号ですか？"},
+   {"sc": 3, "sp": "先生", "t": "プロセス番号です。そのルーターの中だけの番号なので、となりとちがってもいいんです。"},
+   {"sc": 3, "sp": "先生", "t": "次に、network。この範囲のインターフェースで、OSPFを動かす、という意味です。", "y": "次に、ネットワーク。この範囲のインターフェースで、オーエスピーエフを動かす、という意味です。"},
+   {"sc": 3, "sp": "生徒", "t": "0.0.0.255は、何ですか？", "y": "0、0、0、255は、何ですか？"},
+   {"sc": 3, "sp": "先生", "t": "ワイルドカードマスクです。サブネットマスクの0と1を、反対にしたものです。"},
+   {"sc": 4, "sp": "先生", "t": "もう1つ、インターフェースで、ip ospf 1 area 0と書く方法もあります。", "y": "もう1つ、インターフェースで、アイピー、オーエスピーエフ 1 エリア 0と書く方法もあります。"},
+   {"sc": 4, "sp": "生徒", "t": "どの口で動いているか、見てすぐわかりますね。"},
+   {"sc": 4, "sp": "先生", "t": "それから、PCしかいないLAN側の口では、Helloを出す意味がありません。", "y": "それから、ピーシーしかいないラン側の口では、ハローを出す意味がありません。"},
+   {"sc": 4, "sp": "先生", "t": "passive-interfaceにすると、Helloは出さずに、道だけは教えられます。", "y": "パッシブインターフェースにすると、ハローは出さずに、道だけは教えられます。"},
+   {"sc": 4, "sp": "生徒", "t": "知らない機器と、ネイバーにならずに済む。"},
+   {"sc": 5, "sp": "先生", "t": "確認です。LAN側の口からHelloを出さず、道は教えたいときのコマンドはどれでしょう？", "y": "確認です。ラン側の口からハローを出さず、道は教えたいときのコマンドはどれでしょう？", "w": 1},
+   {"sc": 5, "sp": "生徒", "t": "passive-interfaceです。", "y": "パッシブインターフェースです。"},
+   {"sc": 5, "sp": "先生", "t": "正解です。"},
+   {"sc": 6, "sp": "先生", "t": "OSPFのルーターは、ルーターIDという名札を持ちます。", "y": "オーエスピーエフのルーターは、ルーターIDという名札を持ちます。"},
+   {"sc": 6, "sp": "先生", "t": "決まる順番は、まずrouter-idで手で決めた値です。", "y": "決まる順番は、まずルーターアイディーで手で決めた値です。"},
+   {"sc": 6, "sp": "生徒", "t": "決めてなかったら？"},
+   {"sc": 6, "sp": "先生", "t": "ループバックの一番大きいIP。それもなければ、動いている口の一番大きいIPです。", "y": "ループバックの一番大きいアイピー。それもなければ、動いている口の一番大きいアイピーです。"},
+   {"sc": 6, "sp": "生徒", "t": "ループバックのほうが先なんですね。"},
+   {"sc": 6, "sp": "先生", "t": "はい。ループバックは落ちないので、名札が安定します。"},
+   {"sc": 7, "sp": "先生", "t": "確認です。ループバック10.0.0.1と、G0/0の192.168.1.1があるとき、ルーターIDはどれでしょう？", "y": "確認です。ループバック10、0、0、1と、G0スラッシュ0の192、168、1、1があるとき、ルーターIDはどれでしょう？", "w": 1},
+   {"sc": 7, "sp": "生徒", "t": "ループバックが先だから、10.0.0.1です。", "y": "ループバックが先だから、10、0、0、1です。"},
+   {"sc": 7, "sp": "先生", "t": "正解です。"},
+   {"sc": 8, "sp": "先生", "t": "設定したら、show ip ospf neighborで確かめます。", "y": "設定したら、ショー、アイピー、オーエスピーエフ、ネイバーで確かめます。"},
+   {"sc": 8, "sp": "生徒", "t": "StateがFULLになってます。", "y": "Stateがフルになってます。"},
+   {"sc": 8, "sp": "先生", "t": "地図の交換まで、終わったということです。"},
+   {"sc": 8, "sp": "先生", "t": "show ip routeに、Oの行もできました。R3のLANを、R2から教わっています。", "y": "ショー、アイピー、ルートに、Oの行もできました。R3のランを、R2から教わっています。"},
+   {"sc": 8, "sp": "生徒", "t": "手で書いてないのに、道ができてる！"},
+   {"sc": 9, "sp": "先生", "t": "前回の、1ギガも10ギガもコスト1、の問題です。"},
+   {"sc": 9, "sp": "先生", "t": "auto-cost reference-bandwidthで、基準の帯域を上げます。", "y": "オートコスト、リファレンスバンドウィドスで、基準の帯域を上げます。"},
+   {"sc": 9, "sp": "生徒", "t": "全部のルーターで、そろえるんですね。"},
+   {"sc": 9, "sp": "先生", "t": "はい。ip ospf costで、口ごとに直接決めることもできます。", "y": "はい。アイピー、オーエスピーエフ コストで、口ごとに直接決めることもできます。"},
+   {"sc": 10, "sp": "先生", "t": "確認です。地図の交換が完了したことを表す状態はどれでしょう？", "w": 1},
+   {"sc": 10, "sp": "生徒", "t": "FULLです。", "y": "フルです。"},
+   {"sc": 10, "sp": "先生", "t": "正解です。"},
+   {"sc": 11, "sp": "生徒", "t": "プロセス番号も、そろえないとダメだと思ってました。"},
+   {"sc": 11, "sp": "先生", "t": "ちがってもネイバーになれます。そろえるのは、エリア番号です。"},
+   {"sc": 11, "sp": "生徒", "t": "networkは、インターフェースを選ぶコマンド。", "y": "ネットワークは、インターフェースを選ぶコマンド。"},
+   {"sc": 11, "sp": "先生", "t": "そうです。それと、ルーターIDはループバックが先、でしたね。"},
+   {"sc": 12, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 12, "sp": "先生", "t": "1つ目。router ospfとnetwork、またはip ospf area。", "y": "1つ目。ルーター、オーエスピーエフとネットワーク、またはアイピー、オーエスピーエフ エリア。"},
+   {"sc": 12, "sp": "先生", "t": "2つ目。ルーターIDは、router-id、ループバック、インターフェースの順。", "y": "2つ目。ルーターIDは、ルーターアイディー、ループバック、インターフェースの順。"},
+   {"sc": 12, "sp": "先生", "t": "3つ目。neighborでFULLを確かめ、コストはauto-costやip ospf costで。", "y": "3つ目。neighborでフルを確かめ、コストはオート-コストやアイピー、オーエスピーエフ コストで。"},
+   {"sc": 12, "sp": "生徒", "t": "OSPF、動かせました。", "y": "オーエスピーエフ、動かせました。"},
+   {"sc": 12, "sp": "先生", "t": "次回は、DRとBDRです。お疲れさまでした。", "y": "次回は、ディーアールとビーディーアールです。お疲れさまでした。"}
+  ]
+ }
+}
