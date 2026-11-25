@@ -1,0 +1,141 @@
+{
+ "r": "TB",
+ "n": 62,
+ "t": "時刻をそろえる（NTP）",
+ "d": "d4",
+ "form": "困りごと相談室",
+ "need": [60],
+ "goal": ["時刻をそろえる理由がわかる", "NTPのしくみがわかる", "NTPを設定できる"],
+ "terms": ["NTP", "stratum", "ntp server", "ntp master"],
+ "pages": [
+  {
+   "t": "相談：ログの順番がめちゃくちゃ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 124.0\" role=\"img\" aria-label=\"困りごと相談室\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"110\" rx=\"16\" fill=\"#0a5cff\" opacity=\".12\"/><text x=\"180\" y=\"44\" text-anchor=\"middle\" style=\"font:800 14.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">障害の原因を探したいのに、ログの時刻がバラバラ</text><text x=\"180\" y=\"74\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ルーターA は 10:05、スイッチB は 3年前の 0:12…</text><text x=\"180\" y=\"94\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">どの事件が先に起きたのか、わからない</text></svg>",
+   "b": "相談です。「ネットワークが止まった原因を探したい。ルーターとスイッチのログを並べたいのに、ルーターは10時5分、スイッチは<b>3年前の0時12分</b>。どれが先に起きたのかわからない！」 機器の時計がバラバラだと、こうなります。今日は、時計をそろえる <b>NTP</b> を学びます。"
+  },
+  {
+   "t": "今日のゴール",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のゴール\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1. 時刻をそろえる理由がわかる</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ログを並べて原因を探すため</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2. NTPのしくみがわかる</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">stratum ＝ 時計の元からの距離</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">3. NTPを設定できる</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ntp server・ntp master</text></svg>"
+  },
+  {
+   "t": "時計をそろえる理由",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 166.5\" role=\"img\" aria-label=\"時刻がそろっていないと\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ログを時刻順に並べて、原因を探せない</text><rect x=\"10\" y=\"52.5\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"78.0\" text-anchor=\"start\" style=\"font:800 13.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">証明書の期限チェックや、認証が失敗することがある</text><rect x=\"10\" y=\"99.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"124.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">NTP ＝ ネットワークで時刻をそろえるしくみ</text><text x=\"24\" y=\"143.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">UDP 123番</text></svg>",
+   "b": "時計がずれていると、<b>ログを時刻順に並べて原因を探す</b>ことができません。証明書の期限や認証でも、時刻のずれは失敗の原因になります。そこで使うのが <b>NTP</b>（Network Time Protocol）です。ネットワークを通じて、正確な時計から時刻をもらい、全部の機器の時計をそろえます。<b>UDPの123番</b>を使います。"
+  },
+  {
+   "t": "時計の元からの距離（stratum）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 264.0\" role=\"img\" aria-label=\"stratum（ストラタム）\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#8a3ffc\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">stratum 0</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">原子時計や GPS（大元の時計）</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">stratum 1</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">stratum 0 に直接つながったサーバー</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">stratum 2</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">stratum 1 から時刻をもらう</text><rect x=\"10\" y=\"196.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"222.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">数が小さいほど、大元に近い（信頼できる）</text><text x=\"24\" y=\"241.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">16 は「同期していない」</text></svg>",
+   "b": "NTPでは、時計の元からの距離を <b>stratum</b>（ストラタム）で表します。<b>stratum 0</b> は原子時計やGPSなどの大元。それに直接つながったサーバーが <b>stratum 1</b>、そこから時刻をもらうと <b>stratum 2</b> …と1つずつ増えます。<b>数が小さいほど大元に近く、信頼できます</b>。16 は「同期できていない」という意味です。",
+   "p": "stratum は小さいほど正確。もらうたびに1増える。"
+  },
+  {
+   "t": "確認の問題 1",
+   "quiz": {
+    "q": "stratum 2 のNTPサーバーから時刻をもらったルーターの stratum はいくつになるでしょう？",
+    "o": [
+     ["1", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["2", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["3", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 2,
+    "e": "時刻をもらうたびに1増えるので、2 + 1 ＝ <b>3</b> です。"
+   }
+  },
+  {
+   "t": "NTPの設定",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 206.0\" role=\"img\" aria-label=\"NTPの設定\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"122\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">R1(config)# ntp server 10.1.1.100</text><text x=\"22\" y=\"74\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">R2(config)# ntp server 10.1.1.1</text><text x=\"22\" y=\"96\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#3d4450;white-space:pre\">! no Internet: R1 is the clock source</text><text x=\"22\" y=\"118\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#ffb400;white-space:pre\">R1(config)# ntp master 3</text><text x=\"180\" y=\"154\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ntp server ＝ ここから時刻をもらう（クライアント）</text><text x=\"180\" y=\"178\" text-anchor=\"middle\" style=\"font:700 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ntp master ＝ 自分の時計を元にして配る</text></svg>",
+   "b": "時刻をもらう側は <b>ntp server アドレス</b> で、どのNTPサーバーから時刻をもらうかを指定します。NTPのクライアントになったルーターも、ほかの機器に時刻を配れます。インターネット上の時計に届かない閉じたネットワークでは、<b>ntp master</b> で、そのルーター自身の時計を元にして配ることもできます（数字は stratum）。"
+  },
+  {
+   "t": "確認の問題 2",
+   "quiz": {
+    "q": "R2 が、NTPサーバー 192.0.2.10 から時刻をもらうように設定するコマンドはどれでしょう？",
+    "o": [
+     ["ntp master 192.0.2.10", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["ntp server 192.0.2.10", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["clock set 192.0.2.10", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "時刻をもらう相手は <b>ntp server</b> で指定します。ntp master は自分が時計の元になる設定です。"
+   }
+  },
+  {
+   "t": "確かめる・タイムゾーン",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 182.0\" role=\"img\" aria-label=\"確認\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"122\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\">R2# show ntp status</text><text x=\"22\" y=\"74\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">Clock is synchronized, stratum 3</text><text x=\"22\" y=\"96\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\">R2# show ntp associations</text><text x=\"22\" y=\"118\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#ffb400;white-space:pre\">R2(config)# clock timezone JST 9</text><text x=\"180\" y=\"154\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">synchronized ＝ 同期できている</text></svg>",
+   "b": "<b>show ntp status</b> で <b>Clock is synchronized</b> と出れば、同期できています。どのサーバーと話しているかは <b>show ntp associations</b> で見られます。NTPがそろえるのは世界共通の時刻（UTC）なので、日本の時刻で表示したいときは <b>clock timezone JST 9</b> で時差を設定します。手で時刻を合わせる <b>clock set</b> もありますが、ずれていくので NTP を使うのが基本です。"
+  },
+  {
+   "t": "確認の問題 3",
+   "quiz": {
+    "q": "ルーターがNTPサーバーと同期できているかを確かめるのに最も適したコマンドはどれでしょう？",
+    "o": [
+     ["show ntp status", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["show clock detail だけ", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["show ip route", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 0,
+    "e": "<b>show ntp status</b> で、synchronized かどうかと stratum がわかります。"
+   }
+  },
+  {
+   "t": "まちがえやすい所",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 183.5\" role=\"img\" aria-label=\"よくある勘違い\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× stratum は大きいほど正確</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">小さいほど大元に近い</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× ntp master で、時刻をもらう相手を決める</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">もらう相手は ntp server</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ NTP は UDP 123</text></svg>",
+   "b": "stratum は<b>小さいほど正確</b>です。「1等賞が一番」と覚えましょう。時刻をもらう相手は <b>ntp server</b>、自分が元になるのが <b>ntp master</b> です。"
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">目的</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ログの時刻をそろえて、原因を探せるように</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">stratum</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">大元からの距離。小さいほど正確、もらうと1増える</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">設定</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ntp server でもらう、ntp master で元になる</text></svg>",
+   "b": "次回は、機器の状態を見守る <b>SNMP</b> と、ログを集める <b>Syslog</b> です。"
+  }
+ ],
+ "cls": {
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "相談が届きました。障害の原因を探したいのに、ログの時刻がバラバラだそうです。"},
+   {"sc": 1, "sp": "先生", "t": "ルーターは10時5分、スイッチは3年前の0時12分。"},
+   {"sc": 1, "sp": "生徒", "t": "3年前！ どっちが先かわからないですね。"},
+   {"sc": 1, "sp": "先生", "t": "機器の時計がずれていると、こうなります。"},
+   {"sc": 1, "sp": "生徒", "t": "全部の時計を、手で合わせるんですか？"},
+   {"sc": 1, "sp": "先生", "t": "それを自動でやるのが、NTPです。", "y": "それを自動でやるのが、エヌティーピーです。"},
+   {"sc": 2, "sp": "先生", "t": "今日のゴールは3つです。"},
+   {"sc": 2, "sp": "先生", "t": "1つ目、時刻をそろえる理由がわかること。"},
+   {"sc": 2, "sp": "先生", "t": "2つ目、NTPのしくみがわかること。", "y": "2つ目、エヌティーピーのしくみがわかること。"},
+   {"sc": 2, "sp": "先生", "t": "3つ目、NTPを設定できること。", "y": "3つ目、エヌティーピーを設定できること。"},
+   {"sc": 2, "sp": "生徒", "t": "時計合わせ、自動でできるといいですね。"},
+   {"sc": 3, "sp": "先生", "t": "時計がずれていると、ログを時刻順に並べられません。"},
+   {"sc": 3, "sp": "生徒", "t": "探偵が、証言の時刻を比べられないみたいなものですね。"},
+   {"sc": 3, "sp": "先生", "t": "いいたとえです。証明書や認証で失敗することもあります。"},
+   {"sc": 3, "sp": "先生", "t": "NTPは、正確な時計から時刻をもらって、みんなの時計をそろえます。UDPの123番です。", "y": "エヌティーピーは、正確な時計から時刻をもらって、みんなの時計をそろえます。ユーディーピーの123番です。"},
+   {"sc": 4, "sp": "先生", "t": "NTPでは、時計の元からの距離を、stratumで表します。", "y": "エヌティーピーでは、時計の元からの距離を、ストレイタムで表します。"},
+   {"sc": 4, "sp": "先生", "t": "stratum 0は原子時計やGPS。それにつながったサーバーがstratum 1です。", "y": "ストレイタム 0は原子時計やGPS。それにつながったサーバーがストレイタム 1です。"},
+   {"sc": 4, "sp": "生徒", "t": "そこからもらうと、2？"},
+   {"sc": 4, "sp": "先生", "t": "はい。もらうたびに1増えます。小さいほど正確です。"},
+   {"sc": 4, "sp": "生徒", "t": "伝言ゲームみたいに、元から遠いほど信用が下がるんですね。"},
+   {"sc": 5, "sp": "先生", "t": "確認です。stratum 2からもらったルーターは、stratumいくつでしょう？", "y": "確認です。ストレイタム 2からもらったルーターは、ストレイタムいくつでしょう？", "w": 1},
+   {"sc": 5, "sp": "生徒", "t": "1増えて、3です。"},
+   {"sc": 5, "sp": "先生", "t": "正解です。"},
+   {"sc": 6, "sp": "先生", "t": "時刻をもらう側は、ntp serverで相手を指定します。", "y": "時刻をもらう側は、エヌティーピー、サーバーで相手を指定します。"},
+   {"sc": 6, "sp": "生徒", "t": "もらった側も、ほかに配れるんですか？"},
+   {"sc": 6, "sp": "先生", "t": "配れます。それから、インターネットの時計に届かないときは、ntp masterです。", "y": "配れます。それから、インターネットの時計に届かないときは、エヌティーピー、マスターです。"},
+   {"sc": 6, "sp": "先生", "t": "そのルーター自身の時計を元にして、配ります。"},
+   {"sc": 7, "sp": "先生", "t": "確認です。192.0.2.10から時刻をもらうコマンドはどれでしょう？", "y": "確認です。192、0、2、10から時刻をもらうコマンドはどれでしょう？", "w": 1},
+   {"sc": 7, "sp": "生徒", "t": "ntp serverです。", "y": "エヌティーピー、サーバーです。"},
+   {"sc": 7, "sp": "先生", "t": "正解です。"},
+   {"sc": 8, "sp": "先生", "t": "show ntp statusで、Clock is synchronizedと出れば、同期できています。", "y": "ショー ntp statusで、Clock is synchronizedと出れば、同期できています。"},
+   {"sc": 8, "sp": "生徒", "t": "時刻が、日本の時間とずれてるときは？"},
+   {"sc": 8, "sp": "先生", "t": "NTPは世界共通の時刻をそろえるので、clock timezoneで時差を設定します。", "y": "エヌティーピーは世界共通の時刻をそろえるので、clock timezoneで時差を設定します。"},
+   {"sc": 8, "sp": "生徒", "t": "JST 9、ですね。"},
+   {"sc": 9, "sp": "先生", "t": "確認です。同期できているかを確かめるコマンドはどれでしょう？", "w": 1},
+   {"sc": 9, "sp": "生徒", "t": "show ntp statusです。", "y": "ショー ntp statusです。"},
+   {"sc": 9, "sp": "先生", "t": "正解です。"},
+   {"sc": 10, "sp": "生徒", "t": "stratumは、大きいほうがすごいと思ってました。", "y": "ストレイタムは、大きいほうがすごいと思ってました。"},
+   {"sc": 10, "sp": "先生", "t": "小さいほど正確です。1等賞が一番、と覚えましょう。"},
+   {"sc": 10, "sp": "生徒", "t": "もらうのはntp server、元になるのはntp master。", "y": "もらうのはエヌティーピー、サーバー、元になるのはエヌティーピー、マスター。"},
+   {"sc": 11, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 11, "sp": "先生", "t": "1つ目。時刻をそろえて、ログで原因を探せるように。"},
+   {"sc": 11, "sp": "先生", "t": "2つ目。stratumは小さいほど正確で、もらうと1増える。", "y": "2つ目。ストレイタムは小さいほど正確で、もらうと1増える。"},
+   {"sc": 11, "sp": "先生", "t": "3つ目。ntp serverでもらい、ntp masterで元になる。", "y": "3つ目。エヌティーピー、サーバーでもらい、エヌティーピー、マスターで元になる。"},
+   {"sc": 11, "sp": "生徒", "t": "これで、ログの順番がそろいますね。"},
+   {"sc": 11, "sp": "先生", "t": "次回は、SNMPとSyslogです。お疲れさまでした。", "y": "次回は、エスエヌエムピーとシスログです。お疲れさまでした。"}
+  ]
+ }
+}
