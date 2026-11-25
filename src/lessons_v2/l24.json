@@ -1,0 +1,170 @@
+{
+ "r": "TB",
+ "n": 24,
+ "t": "IPv6アドレスの種類",
+ "d": "d1",
+ "form": "対決",
+ "need": [23],
+ "goal": ["3つのユニキャストを見分けられる", "マルチキャストとエニーキャストがわかる", "/64の意味がわかる"],
+ "terms": ["グローバルユニキャスト", "リンクローカル", "ユニークローカル", "マルチキャスト", "エニーキャスト", "インターフェースID"],
+ "pages": [
+  {
+   "t": "1つのポートに、アドレスが2つ？",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 124.0\" role=\"img\" aria-label=\"つかみ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"110\" rx=\"16\" fill=\"#0a5cff\" opacity=\".12\"/><text x=\"180\" y=\"44\" text-anchor=\"middle\" style=\"font:800 16.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">IPv6では、1つのポートにアドレスが2つ以上</text><text x=\"180\" y=\"74\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">インターネット用と、すぐ隣と話す用</text><text x=\"180\" y=\"94\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">今日は、役割の違うアドレスを見分けます</text></svg>",
+   "b": "IPv4では、1つのポートにアドレスは基本的に1つでした。ところがIPv6では、1つのポートに<b>役割の違うアドレスが2つ以上</b>付くのがふつうです。インターネットで使うアドレスと、すぐ隣の機器と話すためのアドレス…。今日は、そうしたIPv6アドレスの<b>種類</b>を、先頭の文字で見分けられるようにします。"
+  },
+  {
+   "t": "今日のゴール",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のゴール\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1. 3つのユニキャストを見分けられる</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">グローバル・リンクローカル・ユニークローカル</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2. マルチキャストとエニーキャストがわかる</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">IPv6にはブロードキャストがない</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">3. /64 の意味がわかる</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">前半がプレフィックス、後半がインターフェースID</text></svg>"
+  },
+  {
+   "t": "インターネットで使う（グローバルユニキャスト）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 183.5\" role=\"img\" aria-label=\"グローバルユニキャスト\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">グローバルユニキャストアドレス</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">インターネットで使える、世界で1つのアドレス</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2000::/3 ＝ 先頭が 2 か 3 で始まる</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">例：2001:db8:1::10、2600:1f18::25</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">IPv4のふつう（パブリック）のアドレスにあたる</text></svg>",
+   "b": "インターネットで使える、<b>世界で1つ</b>のアドレスが<b>グローバルユニキャストアドレス</b>です。今使われているのは <b>2000::/3</b> の範囲で、<b>先頭が2か3</b>で始まります（2001:… や 2600:… など）。IPv4のふつうのアドレスにあたります。",
+   "p": "2 か 3 で始まる ＝ グローバルユニキャスト（インターネット用）。"
+  },
+  {
+   "t": "すぐ隣と話す（リンクローカル）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"リンクローカル\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">リンクローカルアドレス</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">同じリンク（1本の線の範囲）の中だけで使う</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">FE80::/10 ＝ fe80 で始まる</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">例：fe80::21c:58ff:fe0a:1</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">IPv6を有効にすると、自動で付く</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ルーターを越えて送られることはない</text></svg>",
+   "b": "<b>リンクローカルアドレス</b>は、<b>同じリンク（1本の線でつながった範囲）の中だけ</b>で使うアドレスです。<b>fe80</b> で始まり、IPv6を有効にすると<b>自動で付きます</b>。ルーターを越えて送られることはありません。すぐ隣の機器やルーターと話すための、近所づきあい用の番号です。"
+  },
+  {
+   "t": "確認の問題 1",
+   "quiz": {
+    "q": "同じリンクの中だけで使われ、IPv6を有効にすると自動で付くアドレスは、何で始まるでしょう？",
+    "o": [
+     ["2001", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["fe80", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["ff02", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "<b>fe80</b> で始まるのはリンクローカルアドレスです。2001 はグローバルユニキャスト、ff02 はマルチキャストです。"
+   }
+  },
+  {
+   "t": "社内だけで使う（ユニークローカル）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"ユニークローカル\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#8a3ffc\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ユニークローカルアドレス</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">社内だけで使う。インターネットには出ない</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">FC00::/7 ＝ 実際は fd で始まる</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">例：fd12:3456::7</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">IPv4のプライベートアドレスにあたる</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">10.x・172.16〜31・192.168 の仲間</text></svg>",
+   "b": "<b>ユニークローカルアドレス</b>は、<b>社内だけ</b>で使うアドレスで、インターネットには出ません。範囲は FC00::/7 ですが、実際には <b>fd</b> で始まるものが使われます。IPv4の<b>プライベートアドレス</b>にあたる、と考えるとわかりやすいでしょう。"
+  },
+  {
+   "t": "グループあてと、近い1台あて",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 171.0\" role=\"img\" aria-label=\"マルチキャストとエニーキャスト\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">マルチキャスト（ff で始まる）</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">決まったグループの全員に送る</text><text x=\"24\" y=\"67.5\" text-anchor=\"start\" style=\"font:600 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ff02::1 ＝ リンク上の全員、ff02::2 ＝ ルーター全部</text><rect x=\"10\" y=\"86.5\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"112.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">エニーキャスト</text><text x=\"24\" y=\"131.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">同じアドレスを、何台かが持つ</text><text x=\"24\" y=\"148.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">その中で一番近い1台だけが受け取る</text></svg>",
+   "b": "<b>マルチキャスト</b>は、決まった<b>グループの全員</b>に送るアドレスで、<b>ff</b> で始まります。ff02::1 はリンク上の全員、ff02::2 はリンク上のルーター全部です。<b>エニーキャスト</b>は、同じアドレスを複数の機器が持ち、その中で<b>一番近い1台だけ</b>が受け取るしくみです。"
+  },
+  {
+   "t": "IPv6には、ブロードキャストがない",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 137.0\" role=\"img\" aria-label=\"ブロードキャストがない\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#3d4450\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">IPv4：全員あて（ブロードキャスト）がある</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">関係ない機器まで、全員が受け取ってしまう</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">IPv6：ブロードキャストはない</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">必要な相手だけのマルチキャストで代わりをする</text></svg>",
+   "b": "IPv4には、全員あての<b>ブロードキャスト</b>がありました。でも、関係ない機器まで全員が受け取るのは無駄が多いですよね。そこでIPv6では<b>ブロードキャストをなくし</b>、必要な相手だけのグループに送る<b>マルチキャスト</b>で代わりをしています。",
+   "p": "IPv6 にブロードキャストはない。代わりにマルチキャスト。"
+  },
+  {
+   "t": "確認の問題 2",
+   "quiz": {
+    "q": "宛先が ff02::2 のパケットを受け取るのは、リンク上のどの機器でしょう？",
+    "o": [
+     ["リンク上のすべての機器", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["リンク上のすべてのルーター", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["一番近い1台だけ", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "ff02::2 は、リンク上の<b>ルーター全部</b>あてのマルチキャストです。全員あては ff02::1 です。"
+   }
+  },
+  {
+   "t": "前半と後半（/64）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"/64\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ふつうのIPv6アドレスは /64</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">128ビットを、前半64ビットと後半64ビットに分ける</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">前半64ビット ＝ プレフィックス</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">どのネットワークか（IPv4のネットワーク部）</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">後半64ビット ＝ インターフェースID</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">その中のどの機器か（IPv4のホスト部）</text></svg>",
+   "b": "IPv6のアドレスは、ふつう <b>/64</b> で使います。前半の64ビットが<b>プレフィックス</b>で「どのネットワークか」、後半の64ビットが<b>インターフェースID</b>で「その中のどの機器か」を表します。IPv4のネットワーク部・ホスト部と同じ考え方です。8グループのうち、<b>前の4グループがプレフィックス</b>になります。"
+  },
+  {
+   "t": "確認の問題 3",
+   "quiz": {
+    "q": "PCに 2001:db8:7a:3c0::25/64 が設定されています。このPCがいるネットワークのプレフィックスはどれでしょう？",
+    "o": [
+     ["2001:db8::/64", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["2001:db8:7a:3c0::/64", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["2001:db8:7a:3c0::25/64", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "/64 は前の4グループがプレフィックスです。2001:db8:7a:3c0 までを残して <b>2001:db8:7a:3c0::/64</b> になります。"
+   }
+  },
+  {
+   "t": "まちがえやすい所",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 264.0\" role=\"img\" aria-label=\"よくある勘違い\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 13.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× fe80 のアドレスで、インターネットにつながる</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">リンクローカルは、ルーターを越えない</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ インターネットには 2 か 3 で始まるアドレス</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">グローバルユニキャスト</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× IPv6 にもブロードキャストがある</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">全員あては、ff02::1 のマルチキャスト</text><rect x=\"10\" y=\"196.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"222.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ ff で始まる ＝ マルチキャスト</text><text x=\"24\" y=\"241.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ff02::1 は全員、ff02::2 はルーター</text></svg>",
+   "b": "「fe80 のアドレスが付いたから、インターネットにつながる」というのはまちがいです。リンクローカルは、<b>ルーターを越えません</b>。インターネットに出るには、2か3で始まるグローバルユニキャストが必要です。また、IPv6には<b>ブロードキャストがない</b>ことも、よく問われます。"
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">3つのユニキャスト</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2・3＝グローバル／fe80＝リンク／fd＝ユニーク</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">マルチキャストとエニーキャスト</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ff＝グループあて／近い1台あて。ブロードキャストはない</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">/64</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">前半がプレフィックス、後半がインターフェースID</text></svg>",
+   "b": "次回は、ルーターに実際にIPv6を<b>設定</b>します。後半のインターフェースIDを、MACアドレスから自動で作る<b>EUI-64</b>という方法も学びます。"
+  }
+ ],
+ "cls": {
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "IPv4では、1つのポートに、アドレスは基本的に1つでしたね。", "y": "アイピーブイフォーでは、1つのポートに、アドレスは基本的に1つでしたね。"},
+   {"sc": 1, "sp": "生徒", "t": "はい。192.168.1.10、みたいに1つです。", "y": "はい。192、168、1、10、みたいに1つです。"},
+   {"sc": 1, "sp": "先生", "t": "ところがIPv6では、1つのポートに、アドレスが2つ以上付くのがふつうなんです。", "y": "ところがアイピーブイシックスでは、1つのポートに、アドレスが2つ以上付くのがふつうなんです。"},
+   {"sc": 1, "sp": "生徒", "t": "2つも？ 何に使うんですか？"},
+   {"sc": 1, "sp": "先生", "t": "インターネット用と、すぐ隣の機器と話す用、などです。"},
+   {"sc": 1, "sp": "先生", "t": "今日は、その種類を、先頭の文字で見分けられるようにします。"},
+   {"sc": 2, "sp": "先生", "t": "今日のゴールは3つです。"},
+   {"sc": 2, "sp": "先生", "t": "1つ目、3つのユニキャストアドレスを見分けられること。"},
+   {"sc": 2, "sp": "先生", "t": "2つ目、マルチキャストとエニーキャストがわかること。"},
+   {"sc": 2, "sp": "先生", "t": "3つ目、スラッシュ64の意味がわかることです。"},
+   {"sc": 2, "sp": "生徒", "t": "ユニキャストって、何ですか？"},
+   {"sc": 2, "sp": "先生", "t": "1台の相手に送るアドレス、という意味です。"},
+   {"sc": 3, "sp": "先生", "t": "まず、インターネットで使うアドレス。グローバルユニキャストアドレスです。"},
+   {"sc": 3, "sp": "先生", "t": "世界で1つだけの、インターネットで使えるアドレスです。"},
+   {"sc": 3, "sp": "生徒", "t": "見分け方は？"},
+   {"sc": 3, "sp": "先生", "t": "今使われているのは、先頭が2か3で始まるものです。2001や2600などです。"},
+   {"sc": 3, "sp": "生徒", "t": "2か3で始まったら、インターネット用。"},
+   {"sc": 4, "sp": "先生", "t": "次は、すぐ隣と話すための、リンクローカルアドレスです。"},
+   {"sc": 4, "sp": "先生", "t": "同じリンク、つまり1本の線でつながった範囲の中だけで使います。"},
+   {"sc": 4, "sp": "生徒", "t": "先頭の文字は？"},
+   {"sc": 4, "sp": "先生", "t": "fe80で始まります。IPv6を有効にすると、自動で付きます。", "y": "fe80で始まります。アイピーブイシックスを有効にすると、自動で付きます。"},
+   {"sc": 4, "sp": "生徒", "t": "ルーターの向こうには、届かないんですか？"},
+   {"sc": 4, "sp": "先生", "t": "その通り。ルーターを越えて送られることはありません。近所づきあい用です。"},
+   {"sc": 5, "sp": "先生", "t": "確認です。同じリンクの中だけで使い、自動で付くアドレスは、何で始まるでしょう？", "w": 1},
+   {"sc": 5, "sp": "生徒", "t": "fe80です！"},
+   {"sc": 5, "sp": "先生", "t": "正解です。"},
+   {"sc": 6, "sp": "先生", "t": "3つ目は、ユニークローカルアドレス。社内だけで使うアドレスです。"},
+   {"sc": 6, "sp": "生徒", "t": "IPv4のプライベートアドレスみたいな？", "y": "アイピーブイフォーのプライベートアドレスみたいな？"},
+   {"sc": 6, "sp": "先生", "t": "その通り。インターネットには出ません。実際には、fdで始まるものが使われます。"},
+   {"sc": 6, "sp": "生徒", "t": "2か3がインターネット、fe80が近所、fdが社内。"},
+   {"sc": 6, "sp": "先生", "t": "いいまとめ方です。"},
+   {"sc": 7, "sp": "先生", "t": "次は、1台あて以外のアドレスです。マルチキャストは、グループの全員に送ります。"},
+   {"sc": 7, "sp": "先生", "t": "ffで始まります。ff02::1はリンク上の全員、ff02::2はリンク上のルーター全部です。", "y": "ffで始まります。エフエフゼロニ、コロンコロン、1はリンク上の全員、エフエフゼロニ、コロンコロン、2はリンク上のルーター全部です。"},
+   {"sc": 7, "sp": "生徒", "t": "エニーキャストは？"},
+   {"sc": 7, "sp": "先生", "t": "同じアドレスを何台かが持っていて、一番近い1台だけが受け取るしくみです。"},
+   {"sc": 7, "sp": "生徒", "t": "近くのお店に電話がつながる、代表番号みたいですね。"},
+   {"sc": 7, "sp": "先生", "t": "いいたとえです。"},
+   {"sc": 8, "sp": "生徒", "t": "先生、ブロードキャストはどれですか？"},
+   {"sc": 8, "sp": "先生", "t": "実は、IPv6にはブロードキャストがないんです。", "y": "実は、アイピーブイシックスにはブロードキャストがないんです。"},
+   {"sc": 8, "sp": "生徒", "t": "えっ、全員に送りたいときは？"},
+   {"sc": 8, "sp": "先生", "t": "関係ない機器まで全員が受け取るのは無駄なので、必要な相手だけのマルチキャストで代わりをします。"},
+   {"sc": 8, "sp": "生徒", "t": "全員あては、ff02::1でしたね。", "y": "全員あては、エフエフゼロニ、コロンコロン、1でしたね。"},
+   {"sc": 9, "sp": "先生", "t": "確認です。ff02::2あてのパケットを受け取るのは、どの機器でしょう？", "y": "確認です。エフエフゼロニ、コロンコロン、2あてのパケットを受け取るのは、どの機器でしょう？", "w": 1},
+   {"sc": 9, "sp": "生徒", "t": "ルーター全部。2つ目です。"},
+   {"sc": 9, "sp": "先生", "t": "正解です。"},
+   {"sc": 10, "sp": "先生", "t": "最後に、スラッシュ64の意味です。IPv6は、ふつうスラッシュ64で使います。", "y": "最後に、スラッシュ64の意味です。アイピーブイシックスは、ふつうスラッシュ64で使います。"},
+   {"sc": 10, "sp": "先生", "t": "前半の64ビットがプレフィックス。どのネットワークか、を表します。"},
+   {"sc": 10, "sp": "先生", "t": "後半の64ビットがインターフェースID。その中のどの機器か、を表します。"},
+   {"sc": 10, "sp": "生徒", "t": "IPv4の、ネットワーク部とホスト部と同じですね。", "y": "アイピーブイフォーの、ネットワーク部とホスト部と同じですね。"},
+   {"sc": 10, "sp": "先生", "t": "その通り。8グループのうち、前の4グループがプレフィックスです。"},
+   {"sc": 11, "sp": "先生", "t": "確認です。2001:db8:7a:3c0::25、スラッシュ64のプレフィックスはどれでしょう？", "y": "確認です。2001、ディービーハチ、ナナエー、サンシーゼロ、コロンコロン、25、スラッシュ64のプレフィックスはどれでしょう？", "w": 1},
+   {"sc": 11, "sp": "生徒", "t": "前の4グループだから、2001:db8:7a:3c0、まで。2つ目です。", "y": "前の4グループだから、2001、ディービーハチ、ナナエー、サンシーゼロ、まで。2つ目です。"},
+   {"sc": 11, "sp": "先生", "t": "正解です。"},
+   {"sc": 12, "sp": "生徒", "t": "fe80のアドレスが付いたら、インターネットにつながったと思いそうです。"},
+   {"sc": 12, "sp": "先生", "t": "よくある勘違いです。リンクローカルは、ルーターを越えません。"},
+   {"sc": 12, "sp": "生徒", "t": "インターネットには、2か3で始まるアドレスが必要なんですね。"},
+   {"sc": 12, "sp": "先生", "t": "はい。それから、IPv6にブロードキャストはない、もよく問われます。", "y": "はい。それから、アイピーブイシックスにブロードキャストはない、もよく問われます。"},
+   {"sc": 12, "sp": "生徒", "t": "ffで始まったらマルチキャスト。覚えました。"},
+   {"sc": 13, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 13, "sp": "先生", "t": "1つ目。2か3はグローバル、fe80はリンクローカル、fdはユニークローカル。"},
+   {"sc": 13, "sp": "先生", "t": "2つ目。ffはマルチキャスト、エニーキャストは近い1台。ブロードキャストはない。"},
+   {"sc": 13, "sp": "先生", "t": "3つ目。スラッシュ64は、前半がプレフィックス、後半がインターフェースID。"},
+   {"sc": 13, "sp": "生徒", "t": "先頭の文字で見分けられるの、便利ですね。"},
+   {"sc": 13, "sp": "先生", "t": "次回は、ルーターにIPv6を設定します。お疲れさまでした。", "y": "次回は、ルーターにアイピーブイシックスを設定します。お疲れさまでした。"}
+  ]
+ }
+}
