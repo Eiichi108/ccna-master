@@ -1,0 +1,108 @@
+[
+ {
+  "id": "P26-01",
+  "k": "one",
+  "tag": "管理",
+  "lv": 1,
+  "t": "Cisco機器でLLDP（Link Layer Discovery Protocol）を使って隣の機器を調べたいと考えています。LLDPを有効にするコマンドと、見つけた隣の機器の一覧を表示するコマンドの組み合わせはどれですか。",
+  "o": ["lldp enable ／ show cdp neighbors", "lldp run ／ show lldp neighbors", "cdp run ／ show cdp neighbors", "lldp run ／ show ip interface brief"],
+  "a": 1,
+  "e": "Cisco機器ではLLDPは初期状態で無効なので、グローバル設定の<b>lldp run</b>で有効にし、<b>show lldp neighbors</b>で隣の機器の一覧を確認します。",
+  "m": "LLDPはlldp runで有効、確認はshow lldp",
+  "page": 3
+ },
+ {
+  "id": "P26-02",
+  "k": "one",
+  "tag": "管理",
+  "lv": 1,
+  "t": "隣につながっているルーターのIPアドレスと、動いているIOSのバージョンをCDP（Cisco Discovery Protocol）で確認したいと考えています。使うコマンドはどれですか。",
+  "o": ["show lldp neighbors", "show cdp neighbors detail", "show cdp neighbors", "show cdp"],
+  "a": 1,
+  "e": "<b>detail</b>を付けると、隣の機器の<b>IPアドレス</b>や<b>IOSのバージョン</b>まで表示されます。detailなしの一覧では、機器名やポートなどの概要だけです。",
+  "m": "IPやバージョンまで見るならdetail",
+  "page": 5
+ },
+ {
+  "id": "P26-03",
+  "k": "one",
+  "tag": "管理",
+  "lv": 2,
+  "t": "図を参照してください。DIST-SWで実行した出力です。CORE-Rのどのポートが、DIST-SWにつながっていますか。",
+  "o": ["Gig 1/0/48", "Gig 1/0/47", "Gig 0/0/1", "Gig 0/0/0"],
+  "a": 2,
+  "e": "<b>Port ID</b>は相手（Device IDの機器）側のポート、<b>Local Intrfce</b>は自分側のポートです。CORE-Rの行のPort IDはGig 0/0/1です。",
+  "m": "Local＝自分のポート、Port ID＝相手",
+  "page": 5,
+  "x": "DIST-SW# show cdp neighbors\nDevice ID   Local Intrfce   Holdtme  Platform  Port ID\nCORE-R      Gig 1/0/48      152      ISR4331   Gig 0/0/1\nACC-SW2     Gig 1/0/47      133      C9200     Gig 1/0/1",
+  "rd": "①Device IDがCORE-Rの行を探す<br>②その行のLocal Intrfce（自分＝DIST-SW側）とPort ID（相手側）を区別する<br>③相手側のポートを表す欄の値を読む",
+  "rg": "data"
+ },
+ {
+  "id": "P26-04",
+  "k": "multi",
+  "tag": "管理",
+  "lv": 1,
+  "t": "CDPとLLDPについて、正しい説明はどれですか。2つ選んでください。",
+  "o": ["LLDPはIEEE 802.1ABの標準規格で、Cisco機器では初期状態で無効になっている", "LLDPはCisco機器では初期状態で有効になっている", "CDPはIEEE標準なので、他社の機器ともそのまま情報を交換できる", "CDPは初期値で60秒ごとに送信され、180秒受け取らないとその隣の機器の情報が消える", "CDPの情報は、受け取らなくなってから60秒で消える"],
+  "a": [0, 3],
+  "e": "<b>LLDPはIEEE標準</b>でCisco機器では初期状態で無効、<b>CDPはCisco独自</b>で初期状態で有効です。CDPは<b>60秒ごと</b>に送られ、保持時間の<b>180秒</b>を過ぎると情報が消えます。",
+  "m": "CDP＝60秒送信・180秒で消える",
+  "page": 3
+ },
+ {
+  "id": "P26-05",
+  "k": "one",
+  "tag": "セキュリティ",
+  "lv": 1,
+  "t": "支店ルーターのGi0/0/1は、インターネットサービスプロバイダーにつながっています。管理者はこのポートでno cdp enableを設定しました。主な理由はどれですか。",
+  "o": ["ルーティングテーブルにデフォルトルートを自動で載せるため", "機器名やIOSのバージョンなど、攻撃のヒントになる情報が外部に漏れるのを防ぐため", "STPのループを防ぐため", "インターネットへの通信速度を2倍にするため"],
+  "a": 1,
+  "e": "CDPには<b>機器名やIOSのバージョン</b>など攻撃者が喜ぶ情報が入っています。信頼できない相手とつながるポートでは、情報漏れを防ぐためにCDPを止めます。",
+  "m": "外向きポートはCDPを止めて情報漏れ防止",
+  "page": 7
+ },
+ {
+  "id": "P26-06",
+  "k": "one",
+  "tag": "管理",
+  "lv": 2,
+  "page": 5,
+  "t": "図を参照してください。SW3で実行した出力です。EDGE-R1からのCDPが今から届かなくなった場合、EDGE-R1の行は最大であと何秒で消えますか。",
+  "x": "SW3# show cdp neighbors\nDevice ID   Local Intrfce   Holdtme   Port ID\nEDGE-R1     Gig 1/0/48      152       Gig 0/0/2\nAP-3F-01    Gig 1/0/12      127       Gig 0",
+  "rd": "①EDGE-R1 の行を見る<br>②Holdtme は残りの保持時間（秒）<br>③届くたびに180に戻り、0になると消える",
+  "rg": "data",
+  "o": ["60秒", "152秒", "180秒", "28秒"],
+  "a": 1,
+  "e": "Holdtme は、この情報をあと何秒持っているかを表します。CDPは60秒ごとに届き、届くたびに180秒に戻ります。届かなくなれば、<b>あと152秒</b>で消えます。",
+  "m": "Holdtme＝消えるまでの残りの秒数"
+ },
+ {
+  "id": "P26-07",
+  "k": "one",
+  "tag": "管理",
+  "lv": 1,
+  "page": 3,
+  "t": "ある事業所では、Cisco以外のメーカーのスイッチやIP電話も使っています。メーカーに関係なく、隣の機器の情報を教え合うために使うプロトコルはどれですか。",
+  "o": ["CDP", "LLDP", "STP", "DHCP"],
+  "a": 1,
+  "e": "CDPはCisco独自です。<b>LLDP</b>はIEEE 802.1ABの標準なので、ほかのメーカーの機器とも情報を教え合えます。Cisco機器では lldp run で有効にします。",
+  "m": "CDP＝Cisco独自、LLDP＝標準"
+ },
+ {
+  "id": "P26-08",
+  "k": "match",
+  "tag": "管理",
+  "lv": 1,
+  "page": 5,
+  "t": "show cdp neighbors の出力の列と、その意味を正しく組み合わせてください。",
+  "o": [
+   ["Device ID", "相手の機器の名前"],
+   ["Local Intrfce", "自分の側のポート"],
+   ["Port ID", "相手の側のポート"],
+   ["Holdtme", "この情報を持っておく残りの秒数"]
+  ],
+  "e": "Device ID は相手の名前、<b>Local Intrfce は自分の</b>ポート、<b>Port ID は相手の</b>ポートです。Holdtme が0になると、その行は消えます。",
+  "m": "Local＝自分、Port ID＝相手"
+ }
+]

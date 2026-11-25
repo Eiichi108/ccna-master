@@ -1,0 +1,123 @@
+[
+ {
+  "id": "P20-03",
+  "k": "one",
+  "tag": "VLAN",
+  "lv": 2,
+  "page": 9,
+  "t": "SW5のGi0/24がトランクとして動いているか、またトランクで許可されているVLANとネイティブVLANが何かを確かめたいと考えています。最も適切なコマンドはどれですか。",
+  "o": ["show vlan brief", "show interfaces trunk", "show mac address-table", "show ip interface brief"],
+  "a": 1,
+  "e": "トランクの状態・許可VLAN・ネイティブVLANは <b>show interfaces trunk</b>（または show interfaces g0/24 switchport）で確認します。show vlan brief にはトランクのポートが表示されません。",
+  "m": "トランクの確認＝show interfaces trunk"
+ },
+ {
+  "id": "P20-05",
+  "k": "one",
+  "tag": "VLAN",
+  "lv": 2,
+  "page": 3,
+  "t": "SW1のGi0/1は switchport mode dynamic desirable、向かい側のSW2のGi0/1は switchport mode dynamic auto に設定されています。このリンクはどうなりますか。",
+  "o": ["トランクになる", "アクセスポートになる", "err-disabled になる", "DTPが止まり、リンクがダウンする"],
+  "a": 0,
+  "e": "<b>desirable</b>は自分からトランクに誘い、<b>auto</b>は誘われたときだけトランクになるので、この組み合わせは<b>トランク</b>になります。auto どうしの場合は、どちらも誘わないのでアクセスポートになります。",
+  "m": "desirable＝誘う、auto＝待つ"
+ },
+ {
+  "id": "P20-07",
+  "k": "one",
+  "tag": "VLAN",
+  "lv": 2,
+  "page": 7,
+  "t": "図を参照してください。Gi0/2のトランクで、いま通しているVLANはそのままにして、VLAN 40も通るようにしたいと考えています。インターフェース設定モードで入力するコマンドはどれですか。",
+  "x": "SW2# show running-config interface g0/2\ninterface GigabitEthernet0/2\n switchport mode trunk\n switchport trunk allowed vlan 10,20,30",
+  "rd": "①switchport mode trunk でトランクに固定<br>②allowed vlan の行が現在の許可リスト<br>③このリストを残したまま40を加える",
+  "rg": "run",
+  "o": ["switchport trunk allowed vlan 40", "switchport trunk allowed vlan add 40", "switchport access vlan 40", "switchport trunk native vlan 40"],
+  "a": 1,
+  "e": "<b>add</b> を付けると、今の許可リストに40が<b>追加</b>されます。add なしで allowed vlan 40 と打つと、リストが40だけに<b>上書き</b>され、10・20・30が通らなくなります。",
+  "m": "許可VLANの追加はadd、忘れると上書き"
+ },
+ {
+  "id": "P20-09",
+  "k": "one",
+  "tag": "VLAN",
+  "lv": 2,
+  "page": 9,
+  "t": "図を参照してください。SW3のGi0/24はSW4とつながっていて、up / up で正常に通信できています。それなのに、この出力にGi0/24が表示されない理由として正しいものはどれですか。",
+  "x": "SW3# show vlan brief\n\nVLAN Name        Status    Ports\n---- ----------- --------- --------------------\n1    default     active    Gi0/3, Gi0/4\n10   SALES       active    Gi0/1\n20   DEV         active    Gi0/2",
+  "rd": "①Ports 列には各VLANのアクセスポートが並ぶ<br>②Gi0/24 はどのVLANの行にもない<br>③Gi0/24 は up / up で動作している",
+  "rg": "vlan",
+  "o": ["Gi0/24 がトランクポートだから", "Gi0/24 が err-disabled になっているから", "Gi0/24 が VLAN 1 から削除されたから", "Gi0/24 にIPアドレスが設定されていないから"],
+  "a": 0,
+  "e": "<b>show vlan brief</b> は、VLANと<b>アクセスポート</b>の一覧で、<b>トランクポートは表示されません</b>。トランクの状態は show interfaces trunk で確かめます。",
+  "m": "show vlan briefにトランクは出ない"
+ },
+ {
+  "id": "P20-10",
+  "k": "one",
+  "tag": "VLAN",
+  "lv": 2,
+  "page": 6,
+  "t": "スイッチ間のポートを switchport mode trunk でトランクに固定しました。さらに、DTP（Dynamic Trunking Protocol）のやり取りを止めて、セキュリティを高めたいと考えています。追加するコマンドはどれですか。",
+  "o": ["switchport mode dynamic auto", "switchport nonegotiate", "switchport trunk native vlan 1", "no switchport"],
+  "a": 1,
+  "e": "<b>switchport nonegotiate</b> は、DTPのメッセージを送らないようにするコマンドです。トランクに固定したポートでは、DTPを止めておくことが推奨されます。",
+  "m": "DTPを止める＝switchport nonegotiate"
+ },
+ {
+  "id": "P20-12",
+  "k": "match",
+  "tag": "VLAN",
+  "lv": 1,
+  "page": 3,
+  "t": "switchport mode の設定と、そのポートの動きを正しく組み合わせてください。",
+  "o": [
+   ["access", "トランクにならず、アクセスポートに固定される"],
+   ["trunk", "トランクに固定される"],
+   ["dynamic desirable", "自分からトランクに誘う"],
+   ["dynamic auto", "誘われたときだけトランクになる"]
+  ],
+  "e": "<b>desirable は誘う側、auto は待つ側</b>です。なお、片方が access、片方が trunk のように両端のモードが合わないと、<b>正しく通信できず、VLANが混ざる</b>などの問題が起きます。",
+  "m": "desirable誘う、auto待つ、他は固定"
+ },
+ {
+  "id": "P20-13",
+  "k": "one",
+  "tag": "VLAN",
+  "lv": 2,
+  "page": 7,
+  "t": "SW1の Gi0/24 のトランクでは、VLAN 10 と 20 を通しています。VLAN 30 も通したいと考えて、switchport trunk allowed vlan 30 を入力しました。結果として正しいものはどれですか。",
+  "o": ["VLAN 10・20・30 が通る", "VLAN 30 だけが通り、VLAN 10 と 20 は通らなくなる", "コマンドがエラーになり、何も変わらない", "すべてのVLANが通る"],
+  "a": 1,
+  "e": "<b>add</b> を付けないと、許可するVLANの一覧が<b>置き換わり</b>ます。今の一覧に足すには switchport trunk allowed vlan <b>add</b> 30 と入力します。",
+  "m": "足すときは add を付ける"
+ },
+ {
+  "id": "P20-14",
+  "k": "one",
+  "tag": "VLAN",
+  "lv": 2,
+  "page": 3,
+  "t": "SW1の Gi0/1 と、向かい側のSW2の Gi0/1 は、どちらも switchport mode dynamic auto です。このリンクの状態として正しいものはどれですか。",
+  "o": ["トランクになる", "アクセスポートになる（トランクにならない）", "err-disabled になる", "EtherChannel になる"],
+  "a": 1,
+  "e": "dynamic auto は、相手から誘われればトランクになりますが、<b>自分からは誘いません</b>。両方とも auto だと誰も誘わないので、<b>アクセスポート</b>のままです。",
+  "m": "auto＋auto＝トランクにならない"
+ },
+ {
+  "id": "P20-16",
+  "k": "one",
+  "tag": "VLAN",
+  "lv": 2,
+  "page": 9,
+  "t": "図を参照してください。VLAN 30 のPCが、このトランクを越えて通信できません。最も考えられる原因はどれですか。",
+  "x": "SW1# show interfaces trunk\nPort   Mode  Encapsulation  Status    Native vlan\nGi0/1  on    802.1q         trunking  1\n\nPort   Vlans allowed on trunk\nGi0/1  1,10,20,30\n\nPort   Vlans allowed and active in management domain\nGi0/1  1,10,20",
+  "rd": "①Status は trunking<br>②allowed on trunk には 30 がある<br>③allowed and active には 30 がない",
+  "rg": "vlan",
+  "o": ["VLAN 30 がトランクで許可されていない", "SW1 に VLAN 30 が作られていない（または止まっている）", "ネイティブVLANが 30 になっている", "トランクのカプセル化が ISL になっている"],
+  "a": 1,
+  "e": "VLAN 30 は「allowed on trunk」には入っていますが、「<b>allowed and active</b>」に入っていません。許可はされていても、SW1 に VLAN 30 が<b>作られていない（active でない）</b>ためです。",
+  "m": "allowedにあってactiveにない→VLANがない"
+ }
+]
