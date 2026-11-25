@@ -1,0 +1,170 @@
+{
+ "r": "TB",
+ "n": 35,
+ "t": "VLANどうしをつなぐ",
+ "d": "d2",
+ "form": "実況中継",
+ "need": [33],
+ "goal": ["ルーターオンアスティックを設定できる", "L3スイッチのSVIを設定できる", "SVIがupしない理由がわかる"],
+ "terms": ["VLAN間ルーティング", "ルーターオンアスティック", "サブインターフェース", "SVI"],
+ "pages": [
+  {
+   "t": "VLANで分けたら、メールが届かない",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 124.0\" role=\"img\" aria-label=\"つかみ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"110\" rx=\"16\" fill=\"#0a5cff\" opacity=\".12\"/><text x=\"180\" y=\"44\" text-anchor=\"middle\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">VLANで分けたら、経理と営業でメールが送れない</text><text x=\"180\" y=\"74\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">分けたのは安全のため。でも、話せないと困る</text><text x=\"180\" y=\"94\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">必要な通信だけ、ルーターに中継してもらう</text></svg>",
+   "b": "経理をVLAN 10、営業をVLAN 20に分けたら、一斉送信が混ざらなくなりました。ところが、<b>経理と営業の間で、ファイルの共有もできなくなった</b>と苦情が来ました。VLANが違えば別のネットワークなので、そのままでは話せないのでしたね。今日は、VLANどうしを<b>L3の機器でつなぐ</b>2つの方法を学びます。"
+  },
+  {
+   "t": "今日のゴール",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のゴール\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1. ルーターオンアスティックを設定できる</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">サブインターフェースの3点セット</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2. L3スイッチのSVIを設定できる</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">interface vlan と ip routing</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">3. SVIがupしない理由がわかる</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">VLANに、動いているポートが必要</text></svg>"
+  },
+  {
+   "t": "VLANどうしをつなぐ2つの方法",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 171.0\" role=\"img\" aria-label=\"2つの方法\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ルーターオンアスティック（ROAS）</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ルーターとスイッチを、トランク1本でつなぐ</text><text x=\"24\" y=\"67.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">L3スイッチがなくてもできる</text><rect x=\"10\" y=\"86.5\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"112.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">L3スイッチの SVI</text><text x=\"24\" y=\"131.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">スイッチの中で、VLANどうしをルーティングする</text><text x=\"24\" y=\"148.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">速いが、L3スイッチが必要</text></svg>",
+   "b": "VLANどうしをつなぐ（<b>VLAN間ルーティング</b>）方法は2つあります。1つは、ルーターとスイッチをトランク1本でつなぐ<b>ルーターオンアスティック</b>（ROAS）。もう1つは、ルーターの働きも持つ<b>L3スイッチ</b>の中でつなぐ<b>SVI</b>です。どちらも、VLANごとに<b>ゲートウェイ（出口）</b>を用意する、という考え方は同じです。"
+  },
+  {
+   "t": "1本の線に、ぶら下がるルーター",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 270.0\" role=\"img\" aria-label=\"ROAS\"><path d=\"M180 40L180 140\" stroke=\"#8a3ffc\" stroke-width=\"3\" opacity=\".7\"/><path d=\"M60 150L180 140\" stroke=\"#0a5cff\" stroke-width=\"3\" opacity=\".7\"/><path d=\"M180 140L300 150\" stroke=\"#ffb400\" stroke-width=\"3\" opacity=\".7\"/><circle cx=\"180\" cy=\"40\" r=\"18\" fill=\"#0a5cff\"/><path d=\"M171 36h12l-4-4M189 44h-12l4 4\" stroke=\"#fff\" stroke-width=\"2.4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><text x=\"180\" y=\"14\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">R1</text><rect x=\"158\" y=\"127\" width=\"44\" height=\"26\" rx=\"5\" fill=\"#00a05a\"/><path d=\"M168 136h22l-4-3M192 144h-22l4 3\" stroke=\"#fff\" stroke-width=\"2.2\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><rect x=\"44\" y=\"136\" width=\"32\" height=\"21\" rx=\"3\" fill=\"none\" stroke=\"#0a5cff\" stroke-width=\"3\"/><path d=\"M51 164h18M60 157v7\" stroke=\"#0a5cff\" stroke-width=\"3\" stroke-linecap=\"round\"/><text x=\"60\" y=\"184\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">経理</text><text x=\"60\" y=\"198\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">VLAN 10</text><rect x=\"284\" y=\"136\" width=\"32\" height=\"21\" rx=\"3\" fill=\"none\" stroke=\"#ffb400\" stroke-width=\"3\"/><path d=\"M291 164h18M300 157v7\" stroke=\"#ffb400\" stroke-width=\"3\" stroke-linecap=\"round\"/><text x=\"300\" y=\"184\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">営業</text><text x=\"300\" y=\"198\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">VLAN 20</text><text x=\"180\" y=\"222\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">トランク1本に、ルーターがぶら下がっている形</text><text x=\"180\" y=\"242\" text-anchor=\"middle\" style=\"font:600 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">R1：G0/0.10 ＝ 10.1.10.1、G0/0.20 ＝ 10.1.20.1</text></svg>",
+   "b": "ルーターオンアスティックは、英語で「棒（1本の線）の上のルーター」という意味です。ルーターの<b>1つの物理ポート</b>を、VLANごとの<b>サブインターフェース</b>（仮想のポート）に分けます。G0/0.10 はVLAN 10の出口、G0/0.20 はVLAN 20の出口です。スイッチ側のつなぐポートは、全部のVLANを運ぶ<b>トランク</b>にします。"
+  },
+  {
+   "t": "設定は3点セット",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 250.0\" role=\"img\" aria-label=\"ROASの設定\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"166\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\">R1(config)# interface g0/0.10</text><text x=\"22\" y=\"74\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\">R1(config-subif)# encapsulation dot1Q 10</text><text x=\"22\" y=\"96\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\">R1(config-subif)# ip address 10.1.10.1 255.255.255.0</text><text x=\"22\" y=\"118\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#ffb400;white-space:pre\">R1(config)# interface g0/0.20</text><text x=\"22\" y=\"140\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#ffb400;white-space:pre\">R1(config-subif)# encapsulation dot1Q 20</text><text x=\"22\" y=\"162\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#ffb400;white-space:pre\">R1(config-subif)# ip address 10.1.20.1 255.255.255.0</text><text x=\"180\" y=\"198\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">サブインターフェース ＋ dot1Q ＋ IP の3点セット</text><text x=\"180\" y=\"222\" text-anchor=\"middle\" style=\"font:700 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">物理ポート g0/0 は no shutdown しておく</text></svg>",
+   "b": "設定は<b>3点セット</b>です。①<b>interface g0/0.10</b> でサブインターフェースを作る。②<b>encapsulation dot1Q 10</b> で「VLAN 10のタグを扱う」と決める。③<b>ip address</b> で、VLAN 10のゲートウェイになるアドレスを付ける。VLANごとに、これをくり返します。ネイティブVLAN用は encapsulation dot1Q 1 <b>native</b> のように付けます。",
+   "p": "VLANを決めるのは dot1Q の番号。.10 などの名前は、そろえると分かりやすいだけ。"
+  },
+  {
+   "t": "実況：経理から営業へ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 264.0\" role=\"img\" aria-label=\"パケットの旅\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">① 経理のPC → スイッチ（VLAN 10）</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 11.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">宛先は別のネットワークなので、ゲートウェイ 10.1.10.1 へ</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#8a3ffc\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">② スイッチ → トランクへ「10」のタグを付けて</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">R1 の G0/0.10 が受け取る</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">③ R1 が、宛先を見て G0/0.20 へ</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">「20」のタグを付けて、同じ線で送り返す</text><rect x=\"10\" y=\"196.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"222.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">④ スイッチ → 営業のPC（タグを外して）</text><text x=\"24\" y=\"241.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">同じ1本の線を、行って戻ってくる</text></svg>",
+   "b": "経理のPCが、営業のPCにデータを送る様子を実況します。宛先は別のネットワークなので、まずゲートウェイ（10.1.10.1）あてに送ります。スイッチは「10」のタグを付けてトランクへ。R1の G0/0.10 が受け取り、宛先を見て G0/0.20 から「20」のタグを付けて送り返します。スイッチはタグを外して営業のPCへ。<b>同じ1本の線を、行って戻ってくる</b>のです。"
+  },
+  {
+   "t": "確認の問題 1",
+   "quiz": {
+    "q": "ルーターのサブインターフェース G0/1.50 で、VLAN 50 のタグ付きフレームを扱うように指定するコマンドはどれでしょう？",
+    "o": [
+     ["encapsulation dot1Q 50", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["switchport access vlan 50", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["vlan 50", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 0,
+    "e": "サブインターフェースが扱うVLANは <b>encapsulation dot1Q 50</b> で決めます。"
+   }
+  },
+  {
+   "t": "L3スイッチの中でつなぐ（SVI）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 250.0\" role=\"img\" aria-label=\"SVIの設定\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"166\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#e6261f;white-space:pre\">SW1(config)# ip routing</text><text x=\"22\" y=\"74\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\">SW1(config)# interface vlan 10</text><text x=\"22\" y=\"96\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\">SW1(config-if)# ip address 10.1.10.1 255.255.255.0</text><text x=\"22\" y=\"118\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\">SW1(config-if)# no shutdown</text><text x=\"22\" y=\"140\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#ffb400;white-space:pre\">SW1(config)# interface vlan 20</text><text x=\"22\" y=\"162\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#ffb400;white-space:pre\">SW1(config-if)# ip address 10.1.20.1 255.255.255.0</text><text x=\"180\" y=\"198\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">interface vlan ＝ VLANごとの仮想の出口（SVI）</text><text x=\"180\" y=\"222\" text-anchor=\"middle\" style=\"font:700 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ip routing でルーティングを有効にする</text></svg>",
+   "b": "L3スイッチでは、<b>interface vlan 10</b> のように、VLANごとの仮想のインターフェース <b>SVI</b>（Switch Virtual Interface）を作り、IPアドレスを付けます。これがそのVLANのゲートウェイになります。さらに <b>ip routing</b> で、スイッチの中でのルーティングを有効にします。ルーターまで行って戻る必要がないので、ROASより速く、大きなネットワークで使います。"
+  },
+  {
+   "t": "確認の問題 2",
+   "quiz": {
+    "q": "L3スイッチに interface vlan 100 と interface vlan 200 を作り、どちらも up/up になりました。でも、2つのVLANのPCは通信できません。足りない設定はどれでしょう？",
+    "o": [
+     ["ip routing", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["switchport mode trunk", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["encapsulation dot1Q", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 0,
+    "e": "SVIがあっても、<b>ip routing</b> がないと、スイッチはVLANどうしのルーティングをしません。"
+   }
+  },
+  {
+   "t": "SVIが up しないとき",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"SVIがupする条件\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">そのVLANが、スイッチに作られている</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">vlan 30 で作ってあるか</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">そのVLANに、up しているポートが1つ以上ある</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">またはそのVLANを通すトランク</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">SVI 自体が shutdown されていない</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">作ったばかりの SVI は shutdown のことがある</text></svg>",
+   "b": "SVIを作ったのに down/down のまま、ということがあります。SVIが up するには、<b>そのVLANがスイッチに作られていて</b>、そのVLANに<b>up しているポート</b>（またはそのVLANを通すトランク）が1つ以上必要です。VLANに誰もいなければ、出口を開けても意味がないからです。また、SVI自体が shutdown なら no shutdown します。"
+  },
+  {
+   "t": "確認の問題 3",
+   "quiz": {
+    "q": "VLAN 70 を作り、interface vlan 70 にIPアドレスを付けましたが、down/down のままです。最も考えられる原因はどれでしょう？",
+    "o": [
+     ["VLAN 70 に、up しているポートもトランクもない", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["ip routing が設定されている", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["IPアドレスが /24 である", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 0,
+    "e": "SVIが up するには、そのVLANに<b>up しているポート（またはトランク）</b>が必要です。"
+   }
+  },
+  {
+   "t": "まちがえやすい所",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 247.0\" role=\"img\" aria-label=\"よくあるまちがい\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× ROASで、スイッチ側をアクセスポートにする</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1つのVLANしか届かない</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 13.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ スイッチ側のルーターにつなぐポートはトランク</text><rect x=\"10\" y=\"116.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"141.5\" text-anchor=\"start\" style=\"font:800 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× サブインターフェースの番号で VLAN が決まる</text><text x=\"24\" y=\"160.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">決めるのは encapsulation dot1Q の番号</text><rect x=\"10\" y=\"179.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"205.0\" text-anchor=\"start\" style=\"font:800 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ G0/0.30 でも dot1Q 3 なら VLAN 3 を扱う</text><text x=\"24\" y=\"224.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">番号はそろえておくのが基本</text></svg>",
+   "b": "ROASで多いまちがいは、スイッチ側のつなぐポートを<b>アクセス</b>にしてしまうことです。それでは1つのVLANしか届きません。また、サブインターフェースが扱うVLANは、名前の番号（.30）ではなく、<b>encapsulation dot1Q の番号</b>で決まります。両方をそろえておくのが、まちがえないコツです。"
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ルーターオンアスティック</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 11.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">サブIF ＋ dot1Q ＋ IP の3点セット。スイッチ側はトランク</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">SVI（L3スイッチ）</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">interface vlan ＋ IP、そして ip routing</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">SVIがupしない</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">VLANがない／upしたポートがない／shutdown</text></svg>",
+   "b": "次回は、IP電話とPCを1つのポートにつなぐ<b>音声VLAN</b>と、スイッチを<b>遠くから管理する</b>ための設定を学びます。"
+  }
+ ],
+ "cls": {
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "経理をVLAN 10、営業をVLAN 20に分けました。一斉送信が混ざらなくなりましたね。", "y": "経理をブイラン 10、営業をブイラン 20に分けました。一斉送信が混ざらなくなりましたね。"},
+   {"sc": 1, "sp": "生徒", "t": "安全になって、よかったです。"},
+   {"sc": 1, "sp": "先生", "t": "ところが、経理と営業の間で、ファイルの共有ができなくなったと苦情が来ました。"},
+   {"sc": 1, "sp": "生徒", "t": "VLANが違うと、別のネットワークだから…", "y": "ブイランが違うと、別のネットワークだから…"},
+   {"sc": 1, "sp": "先生", "t": "その通り。そのままでは話せません。"},
+   {"sc": 1, "sp": "先生", "t": "今日は、VLANどうしをL3の機器でつなぐ、2つの方法を学びます。", "y": "今日は、ブイランどうしをエルスリーの機器でつなぐ、2つの方法を学びます。"},
+   {"sc": 2, "sp": "先生", "t": "今日のゴールは3つです。"},
+   {"sc": 2, "sp": "先生", "t": "1つ目、ルーターオンアスティックを設定できること。"},
+   {"sc": 2, "sp": "先生", "t": "2つ目、L3スイッチのSVIを設定できること。", "y": "2つ目、エルスリースイッチのエスブイアイを設定できること。"},
+   {"sc": 2, "sp": "先生", "t": "3つ目、SVIがupしない理由がわかることです。", "y": "3つ目、エスブイアイがupしない理由がわかることです。"},
+   {"sc": 2, "sp": "生徒", "t": "ルーターオンアスティック…変わった名前ですね。"},
+   {"sc": 3, "sp": "先生", "t": "VLANどうしをつなぐことを、VLAN間ルーティングと言います。方法は2つあります。", "y": "ブイランどうしをつなぐことを、ブイラン間ルーティングと言います。方法は2つあります。"},
+   {"sc": 3, "sp": "先生", "t": "1つは、ルーターとスイッチを、トランク1本でつなぐ、ルーターオンアスティック。"},
+   {"sc": 3, "sp": "先生", "t": "もう1つは、ルーターの働きも持つL3スイッチの中でつなぐ、SVIです。", "y": "もう1つは、ルーターの働きも持つエルスリースイッチの中でつなぐ、エスブイアイです。"},
+   {"sc": 3, "sp": "生徒", "t": "どちらも、VLANごとに出口を用意するんですか？", "y": "どちらも、ブイランごとに出口を用意するんですか？"},
+   {"sc": 3, "sp": "先生", "t": "そうです。VLANごとに、ゲートウェイを用意します。", "y": "そうです。ブイランごとに、ゲートウェイを用意します。"},
+   {"sc": 4, "sp": "先生", "t": "ルーターオンアスティックは、棒の上のルーターという意味です。"},
+   {"sc": 4, "sp": "生徒", "t": "1本の線に、ルーターがぶら下がってる形だから？"},
+   {"sc": 4, "sp": "先生", "t": "その通り。ルーターの1つの物理ポートを、VLANごとの仮想のポートに分けます。", "y": "その通り。ルーターの1つの物理ポートを、ブイランごとの仮想のポートに分けます。"},
+   {"sc": 4, "sp": "先生", "t": "これをサブインターフェースと言います。G0/0.10はVLAN 10の出口、G0/0.20はVLAN 20の出口です。", "y": "これをサブインターフェースと言います。G0スラッシュ0、10はブイラン 10の出口、G0スラッシュ0、20はブイラン 20の出口です。"},
+   {"sc": 4, "sp": "生徒", "t": "スイッチ側は？"},
+   {"sc": 4, "sp": "先生", "t": "全部のVLANを運ぶので、トランクにします。", "y": "全部のブイランを運ぶので、トランクにします。"},
+   {"sc": 5, "sp": "先生", "t": "設定は3点セットです。まず、interface g0/0.10で、サブインターフェースを作ります。", "y": "設定は3点セットです。まず、インターフェース g0スラッシュ0、10で、サブインターフェースを作ります。"},
+   {"sc": 5, "sp": "先生", "t": "次に、encapsulation dot1Q 10。VLAN 10のタグを扱う、と決めます。", "y": "次に、エンキャプスレーション ドットワンキュー 10。ブイラン 10のタグを扱う、と決めます。"},
+   {"sc": 5, "sp": "先生", "t": "最後に、ip addressで、VLAN 10のゲートウェイになるアドレスを付けます。", "y": "最後に、アイピー addressで、ブイラン 10のゲートウェイになるアドレスを付けます。"},
+   {"sc": 5, "sp": "生徒", "t": "VLAN 20なら、g0/0.20、dot1Q 20、ip address、の3つですね。", "y": "ブイラン 20なら、g0スラッシュ0、20、ドットワンキュー 20、アイピー address、の3つですね。"},
+   {"sc": 5, "sp": "先生", "t": "完璧です。ネイティブVLAN用は、最後にnativeを付けます。", "y": "完璧です。ネイティブブイラン用は、最後にネイティブを付けます。"},
+   {"sc": 6, "sp": "先生", "t": "では、経理から営業へのデータを、実況してみましょう。"},
+   {"sc": 6, "sp": "先生", "t": "宛先は別のネットワークなので、経理のPCはゲートウェイの10.1.10.1に送ります。", "y": "宛先は別のネットワークなので、経理のピーシーはゲートウェイの10、1、10、1に送ります。"},
+   {"sc": 6, "sp": "生徒", "t": "スイッチは、10のタグを付けて、トランクへ。"},
+   {"sc": 6, "sp": "先生", "t": "R1のG0/0.10が受け取ります。宛先を見て、G0/0.20から送り出します。", "y": "R1のG0スラッシュ0、10が受け取ります。宛先を見て、G0スラッシュ0、20から送り出します。"},
+   {"sc": 6, "sp": "生徒", "t": "今度は20のタグを付けて、同じ線で戻ってくる？"},
+   {"sc": 6, "sp": "先生", "t": "その通り。スイッチはタグを外して、営業のPCに渡します。", "y": "その通り。スイッチはタグを外して、営業のピーシーに渡します。"},
+   {"sc": 6, "sp": "生徒", "t": "1本の線を、行って戻ってくるんですね。"},
+   {"sc": 7, "sp": "先生", "t": "確認です。G0/1.50でVLAN 50を扱うコマンドはどれでしょう？", "y": "確認です。G0スラッシュ1、50でブイラン 50を扱うコマンドはどれでしょう？", "w": 1},
+   {"sc": 7, "sp": "生徒", "t": "encapsulation dot1Q 50です。", "y": "エンキャプスレーション ドットワンキュー 50です。"},
+   {"sc": 7, "sp": "先生", "t": "正解です。"},
+   {"sc": 8, "sp": "先生", "t": "2つ目の方法、L3スイッチのSVIです。", "y": "2つ目の方法、エルスリースイッチのエスブイアイです。"},
+   {"sc": 8, "sp": "先生", "t": "interface vlan 10と打って、IPアドレスを付けます。これがVLAN 10の出口です。", "y": "インターフェース ブイラン 10と打って、アイピーアドレスを付けます。これがブイラン 10の出口です。"},
+   {"sc": 8, "sp": "生徒", "t": "スイッチの中に、出口を作るんですね。"},
+   {"sc": 8, "sp": "先生", "t": "はい。それから、ip routingでルーティングを有効にします。", "y": "はい。それから、アイピー ルーティングでルーティングを有効にします。"},
+   {"sc": 8, "sp": "生徒", "t": "ルーターまで行って戻らなくていいから、速そうです。"},
+   {"sc": 8, "sp": "先生", "t": "その通り。大きなネットワークでは、こちらを使います。"},
+   {"sc": 9, "sp": "先生", "t": "確認です。SVIがup、upなのに通信できないとき、足りない設定はどれでしょう？", "y": "確認です。エスブイアイがup、upなのに通信できないとき、足りない設定はどれでしょう？", "w": 1},
+   {"sc": 9, "sp": "生徒", "t": "ip routingです！", "y": "アイピー ルーティングです！"},
+   {"sc": 9, "sp": "先生", "t": "正解です。"},
+   {"sc": 10, "sp": "先生", "t": "SVIを作ったのに、down、downのままのことがあります。", "y": "エスブイアイを作ったのに、down、downのままのことがあります。"},
+   {"sc": 10, "sp": "生徒", "t": "設定はしたのに？"},
+   {"sc": 10, "sp": "先生", "t": "SVIがupするには、そのVLANがスイッチに作られていて、upしているポートが必要です。", "y": "エスブイアイがupするには、そのブイランがスイッチに作られていて、upしているポートが必要です。"},
+   {"sc": 10, "sp": "生徒", "t": "VLANに誰もいなければ、出口を開けても意味がないから？", "y": "ブイランに誰もいなければ、出口を開けても意味がないから？"},
+   {"sc": 10, "sp": "先生", "t": "いい理解です。そのVLANを通すトランクでもかまいません。", "y": "いい理解です。そのブイランを通すトランクでもかまいません。"},
+   {"sc": 10, "sp": "先生", "t": "それから、作ったばかりのSVIは、shutdownのことがあるので、no shutdownします。", "y": "それから、作ったばかりのエスブイアイは、シャットダウンのことがあるので、ノー シャットダウンします。"},
+   {"sc": 11, "sp": "先生", "t": "確認です。interface vlan 70がdown、downのままの原因はどれでしょう？", "y": "確認です。インターフェース ブイラン 70がdown、downのままの原因はどれでしょう？", "w": 1},
+   {"sc": 11, "sp": "生徒", "t": "VLAN 70に、upしたポートもトランクもない。1つ目です。", "y": "ブイラン 70に、upしたポートもトランクもない。1つ目です。"},
+   {"sc": 11, "sp": "先生", "t": "正解です。"},
+   {"sc": 12, "sp": "生徒", "t": "ROASで、スイッチ側をアクセスにしちゃいそうです。", "y": "ロアスで、スイッチ側をアクセスにしちゃいそうです。"},
+   {"sc": 12, "sp": "先生", "t": "それだと、1つのVLANしか届きません。トランクです。", "y": "それだと、1つのブイランしか届きません。トランクです。"},
+   {"sc": 12, "sp": "生徒", "t": "あと、サブインターフェースの番号でVLANが決まると思ってました。", "y": "あと、サブインターフェースの番号でブイランが決まると思ってました。"},
+   {"sc": 12, "sp": "先生", "t": "決めるのは、dot1Qの番号です。名前の番号は、そろえると分かりやすいだけです。", "y": "決めるのは、ドットワンキューの番号です。名前の番号は、そろえると分かりやすいだけです。"},
+   {"sc": 13, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 13, "sp": "先生", "t": "1つ目。ROASは、サブインターフェース、dot1Q、IPの3点セット。スイッチ側はトランク。", "y": "1つ目。ロアスは、サブインターフェース、ドットワンキュー、アイピーの3点セット。スイッチ側はトランク。"},
+   {"sc": 13, "sp": "先生", "t": "2つ目。SVIは、interface vlanにIPを付けて、ip routing。", "y": "2つ目。エスブイアイは、インターフェース ブイランにアイピーを付けて、アイピー ルーティング。"},
+   {"sc": 13, "sp": "先生", "t": "3つ目。SVIがupしないのは、VLANがない、upしたポートがない、shutdown。", "y": "3つ目。エスブイアイがupしないのは、ブイランがない、upしたポートがない、シャットダウン。"},
+   {"sc": 13, "sp": "生徒", "t": "経理と営業、また話せるようになりますね。"},
+   {"sc": 13, "sp": "先生", "t": "次回は、音声VLANとスイッチの管理です。お疲れさまでした。", "y": "次回は、音声ブイランとスイッチの管理です。お疲れさまでした。"}
+  ]
+ }
+}

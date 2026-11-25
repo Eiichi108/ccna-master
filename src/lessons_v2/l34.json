@@ -1,0 +1,163 @@
+{
+ "r": "TB",
+ "n": 34,
+ "t": "トランクの設定と確認",
+ "d": "d2",
+ "form": "トラブル解決",
+ "need": [33],
+ "goal": ["DTPの組み合わせがわかる", "通すVLANをしぼれる", "show interfaces trunk を読める"],
+ "terms": ["DTP", "allowed vlan", "show interfaces trunk"],
+ "pages": [
+  {
+   "t": "VLAN 30 だけが、向こうへ届かない",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 124.0\" role=\"img\" aria-label=\"つかみ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"110\" rx=\"16\" fill=\"#0a5cff\" opacity=\".12\"/><text x=\"180\" y=\"44\" text-anchor=\"middle\" style=\"font:800 13.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">VLAN 10 と 20 は届くのに、VLAN 30 だけ届かない</text><text x=\"180\" y=\"74\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">トランクはつながっているはずなのに…</text><text x=\"180\" y=\"94\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">今日は、トランクの設定と確かめ方です</text></svg>",
+   "b": "2台のスイッチをトランクでつなぎ、VLAN 10・20・30 を使っています。VLAN 10 と 20 のPCはスイッチをまたいで通信できるのに、<b>VLAN 30 だけが届きません</b>。トランクのどこかの設定が悪そうです。今日は、トランクが作られるしくみ、通すVLANのしぼり方、そして<b>状態の確かめ方</b>を、トラブル解決の形で学びます。"
+  },
+  {
+   "t": "今日のゴール",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のゴール\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1. DTPの組み合わせがわかる</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">トランクを自動で相談するしくみ</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2. 通すVLANをしぼれる</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">switchport trunk allowed vlan</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">3. show interfaces trunk を読める</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">許可されているのに通らない原因を探す</text></svg>"
+  },
+  {
+   "t": "トランクを自動で相談する（DTP）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 264.0\" role=\"img\" aria-label=\"DTP\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">DTP（Dynamic Trunking Protocol）</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">向かいのスイッチと、トランクにするかを相談する</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">dynamic desirable</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">自分から「トランクにしよう」と誘う</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">dynamic auto</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">誘われたら、トランクになる（自分からは誘わない）</text><rect x=\"10\" y=\"196.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#3d4450\" opacity=\".1\"/><text x=\"24\" y=\"222.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">trunk ／ access</text><text x=\"24\" y=\"241.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">相談せずに、トランク／アクセスに固定する</text></svg>",
+   "b": "Ciscoのスイッチには、向かいのスイッチと<b>トランクにするかどうかを相談する</b> <b>DTP</b> というしくみがあります。<b>dynamic desirable</b> は自分から「トランクにしよう」と誘い、<b>dynamic auto</b> は誘われたらトランクになる、待ちの姿勢です。<b>trunk</b> や <b>access</b> と設定すれば、相談せずに固定できます。"
+  },
+  {
+   "t": "組み合わせで決まる",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"DTPの組み合わせ\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">desirable ＋ desirable／auto／trunk</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">→ トランクになる（だれかが誘っている）</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">auto ＋ auto</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">→ アクセスのまま（どちらも誘わない）</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">trunk ＋ auto</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">→ トランクになる（trunk 側が誘う）</text></svg>",
+   "b": "トランクになるかは、両側の組み合わせで決まります。<b>どちらかが誘えば</b>トランクになります。desirable や trunk は誘う側なので、相手が auto でもトランクになります。ところが <b>auto どうし</b>は、どちらも待っているだけなので、<b>トランクになりません</b>（アクセスのまま）。",
+   "p": "auto ＋ auto ＝ だれも誘わない → トランクにならない。"
+  },
+  {
+   "t": "確認の問題 1",
+   "quiz": {
+    "q": "SW1 の Gi0/1 は dynamic auto、向かいの SW2 の Gi0/1 も dynamic auto です。このリンクはどうなるでしょう？",
+    "o": [
+     ["トランクになる", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["アクセスポートのまま", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["err-disabled になる", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "auto どうしは、どちらも誘わないので<b>トランクにならず、アクセスのまま</b>です。"
+   }
+  },
+  {
+   "t": "相談を止めて、固定する",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 184.0\" role=\"img\" aria-label=\"トランクを固定する\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"100\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\">SW1(config)# interface gi0/24</text><text x=\"22\" y=\"74\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">SW1(config-if)# switchport mode trunk</text><text x=\"22\" y=\"96\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#ffb400;white-space:pre\">SW1(config-if)# switchport nonegotiate</text><text x=\"180\" y=\"132\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">trunk に固定し、nonegotiate で DTP を送らない</text><text x=\"180\" y=\"156\" text-anchor=\"middle\" style=\"font:700 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">勝手にトランクにされる危険を減らす</text></svg>",
+   "b": "DTPは便利ですが、知らない機器と勝手にトランクを作られる危険もあります。そこで、スイッチどうしのポートは <b>switchport mode trunk</b> で<b>固定</b>し、<b>switchport nonegotiate</b> で<b>DTPのやりとりを止める</b>のが安全です。PCをつなぐポートは <b>switchport mode access</b> に固定しておきます。"
+  },
+  {
+   "t": "通すVLANをしぼる（allowed vlan）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 184.0\" role=\"img\" aria-label=\"allowed vlan\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"100\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\">(config-if)# switchport trunk allowed vlan 10,20</text><text x=\"22\" y=\"74\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">(config-if)# switchport trunk allowed vlan add 30</text><text x=\"22\" y=\"96\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#ffb400;white-space:pre\">(config-if)# switchport trunk allowed vlan remove 20</text><text x=\"180\" y=\"132\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">初期状態は、全部のVLANを通す</text><text x=\"180\" y=\"156\" text-anchor=\"middle\" style=\"font:700 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">add で足す、remove で外す（add なしは置きかえ）</text></svg>",
+   "b": "トランクは、初期状態では<b>全部のVLAN</b>を通します。必要なVLANだけにしぼるには <b>switchport trunk allowed vlan 10,20</b> のように指定します。あとから足すときは <b>add</b>、外すときは <b>remove</b> を付けます。add を付けずに allowed vlan 30 と打つと、一覧が<b>30だけに置きかわって</b>しまうので注意が必要です。",
+   "p": "足すときは add。付け忘れると、それまでのVLANが通らなくなる。"
+  },
+  {
+   "t": "確認の問題 2",
+   "quiz": {
+    "q": "Gi0/2 のトランクで、今通している VLAN はそのままに、VLAN 40 も通したいとき、入力するコマンドはどれでしょう？",
+    "o": [
+     ["switchport trunk allowed vlan 40", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["switchport trunk allowed vlan add 40", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["switchport access vlan 40", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "今の一覧に足すので <b>add</b> を付けます。add がないと、VLAN 40 だけに置きかわってしまいます。"
+   }
+  },
+  {
+   "t": "トランクの状態を読む",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 272.0\" role=\"img\" aria-label=\"show interfaces trunk\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"188\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\">SW1# show interfaces trunk</text><text x=\"22\" y=\"74\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#e8ecf3;white-space:pre\">Port   Mode  Encapsulation  Status    Native vlan</text><text x=\"22\" y=\"96\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">Gi0/24 on    802.1q         trunking  1</text><text x=\"22\" y=\"118\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#e8ecf3;white-space:pre\">Port   Vlans allowed on trunk</text><text x=\"22\" y=\"140\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#e8ecf3;white-space:pre\">Gi0/24 1,10,20,30</text><text x=\"22\" y=\"162\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#e8ecf3;white-space:pre\">Port   Vlans allowed and active in management domain</text><text x=\"22\" y=\"184\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#e6261f;white-space:pre\">Gi0/24 1,10,20</text><text x=\"180\" y=\"220\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">allowed（許可）に 30 はあるが、active にない</text><text x=\"180\" y=\"244\" text-anchor=\"middle\" style=\"font:700 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">→ SW1 に VLAN 30 が作られていない</text></svg>",
+   "b": "トランクの状態は <b>show interfaces trunk</b> で確かめます。Status が <b>trunking</b> ならトランクとして動いています。次の段の <b>allowed on trunk</b> が許可されているVLAN、その下の <b>allowed and active</b> が、許可されていて<b>実際にスイッチにあるVLAN</b>です。冒頭の謎の答えはここ。VLAN 30 は許可されているのに active にないので、<b>このスイッチに VLAN 30 が作られていない</b>のです。"
+  },
+  {
+   "t": "確認の問題 3",
+   "quiz": {
+    "q": "上の出力で、VLAN 30 のPCがトランクを越えて通信できない理由として、最も考えられるものはどれでしょう？",
+    "o": [
+     ["VLAN 30 がトランクで許可されていない", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["SW1 に VLAN 30 が作られていない", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["ネイティブVLANが 30 になっている", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "allowed on trunk には 30 があるのに、<b>allowed and active</b> にないので、SW1 に VLAN 30 がありません。vlan 30 で作れば通ります。"
+   }
+  },
+  {
+   "t": "まちがえやすい所",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 230.0\" role=\"img\" aria-label=\"よくあるまちがい\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× allowed vlan で、add を付け忘れる</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">それまで通していたVLANが止まる</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ 足すときは add、外すときは remove</text><rect x=\"10\" y=\"116.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"141.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× auto どうしでも、いつかトランクになる</text><text x=\"24\" y=\"160.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">どちらも誘わないので、ならない</text><rect x=\"10\" y=\"179.5\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"205.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ 両側を trunk に固定するのが確実</text></svg>",
+   "b": "トランクの設定で多いのは、<b>add の付け忘れ</b>で、それまで通っていたVLANが止まってしまう事故です。また、<b>auto どうし</b>は待っても決してトランクになりません。スイッチどうしは、両側を trunk に固定しておくのが確実です。"
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">DTP</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">desirable は誘う、auto は待つ（auto どうしは×）</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">allowed vlan</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">通すVLANをしぼる。足すときは add</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">show interfaces trunk</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">active にない → VLANが作られていない</text></svg>",
+   "b": "次回は、VLANで分けたネットワークどうしを<b>つなぐ</b>方法です。ルーターとトランクを組み合わせる方法と、L3スイッチを使う方法を学びます。"
+  }
+ ],
+ "cls": {
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "2台のスイッチを、トランクでつなぎました。VLANは10、20、30の3つです。", "y": "2台のスイッチを、トランクでつなぎました。ブイランは10、20、30の3つです。"},
+   {"sc": 1, "sp": "生徒", "t": "前回やったトランクですね。"},
+   {"sc": 1, "sp": "先生", "t": "VLAN 10と20は、スイッチをまたいで通信できます。", "y": "ブイラン 10と20は、スイッチをまたいで通信できます。"},
+   {"sc": 1, "sp": "先生", "t": "ところが、VLAN 30だけが、向こうへ届かないんです。", "y": "ところが、ブイラン 30だけが、向こうへ届かないんです。"},
+   {"sc": 1, "sp": "生徒", "t": "トランクはつながってるのに？ 不思議ですね。"},
+   {"sc": 1, "sp": "先生", "t": "今日は、トランクの設定と確かめ方を学びながら、この謎を解きます。"},
+   {"sc": 2, "sp": "先生", "t": "今日のゴールは3つです。"},
+   {"sc": 2, "sp": "先生", "t": "1つ目、DTPの組み合わせがわかること。", "y": "1つ目、ディーティーピーの組み合わせがわかること。"},
+   {"sc": 2, "sp": "先生", "t": "2つ目、トランクで通すVLANをしぼれること。", "y": "2つ目、トランクで通すブイランをしぼれること。"},
+   {"sc": 2, "sp": "先生", "t": "3つ目、show interfaces trunkを読めることです。", "y": "3つ目、ショー インターフェーシズ トランクを読めることです。"},
+   {"sc": 2, "sp": "生徒", "t": "最後のコマンドで、謎が解けそうですね。"},
+   {"sc": 3, "sp": "先生", "t": "Ciscoのスイッチには、DTPというしくみがあります。", "y": "シスコのスイッチには、ディーティーピーというしくみがあります。"},
+   {"sc": 3, "sp": "先生", "t": "向かいのスイッチと、トランクにするかを相談するんです。"},
+   {"sc": 3, "sp": "生徒", "t": "相談？ 自動でトランクになるってことですか？"},
+   {"sc": 3, "sp": "先生", "t": "はい。dynamic desirableは、自分から、トランクにしようと誘います。", "y": "はい。ダイナミック デザイラブルは、自分から、トランクにしようと誘います。"},
+   {"sc": 3, "sp": "先生", "t": "dynamic autoは、誘われたらトランクになる、待ちの姿勢です。", "y": "ダイナミック オートは、誘われたらトランクになる、待ちの姿勢です。"},
+   {"sc": 3, "sp": "生徒", "t": "積極的な人と、受け身の人ですね。"},
+   {"sc": 3, "sp": "先生", "t": "上手な言い方です。trunkやaccessにすれば、相談せずに固定できます。", "y": "上手な言い方です。トランクやアクセスにすれば、相談せずに固定できます。"},
+   {"sc": 4, "sp": "先生", "t": "トランクになるかは、両側の組み合わせで決まります。"},
+   {"sc": 4, "sp": "生徒", "t": "どちらかが誘えば、トランクになる？"},
+   {"sc": 4, "sp": "先生", "t": "その通り。では、autoどうしだったら？", "y": "その通り。では、オートどうしだったら？"},
+   {"sc": 4, "sp": "生徒", "t": "どっちも待ってるだけだから…ならない！"},
+   {"sc": 4, "sp": "先生", "t": "正解です。アクセスのままになります。"},
+   {"sc": 5, "sp": "先生", "t": "確認です。両側ともdynamic autoのとき、どうなるでしょう？", "y": "確認です。両側ともダイナミック オートのとき、どうなるでしょう？", "w": 1},
+   {"sc": 5, "sp": "生徒", "t": "アクセスポートのまま。2つ目です。"},
+   {"sc": 5, "sp": "先生", "t": "正解です。"},
+   {"sc": 6, "sp": "先生", "t": "DTPは便利ですが、知らない機器と、勝手にトランクを作られる危険もあります。", "y": "ディーティーピーは便利ですが、知らない機器と、勝手にトランクを作られる危険もあります。"},
+   {"sc": 6, "sp": "生徒", "t": "それは困りますね。"},
+   {"sc": 6, "sp": "先生", "t": "だから、スイッチどうしのポートは、switchport mode trunkで固定します。", "y": "だから、スイッチどうしのポートは、スイッチポート モード トランクで固定します。"},
+   {"sc": 6, "sp": "先生", "t": "さらに、switchport nonegotiateで、DTPのやりとりを止めます。", "y": "さらに、スイッチポート ノーネゴシエートで、ディーティーピーのやりとりを止めます。"},
+   {"sc": 6, "sp": "生徒", "t": "相談しないで、最初から決めておくんですね。"},
+   {"sc": 6, "sp": "先生", "t": "はい。PCをつなぐポートは、accessに固定しておきます。", "y": "はい。ピーシーをつなぐポートは、アクセスに固定しておきます。"},
+   {"sc": 7, "sp": "先生", "t": "次は、トランクで通すVLANをしぼる方法です。", "y": "次は、トランクで通すブイランをしぼる方法です。"},
+   {"sc": 7, "sp": "先生", "t": "トランクは、初期状態では、全部のVLANを通します。", "y": "トランクは、初期状態では、全部のブイランを通します。"},
+   {"sc": 7, "sp": "生徒", "t": "必要ないVLANまで、通しちゃうんですね。", "y": "必要ないブイランまで、通しちゃうんですね。"},
+   {"sc": 7, "sp": "先生", "t": "そこで、switchport trunk allowed vlanで、通すVLANを指定します。", "y": "そこで、スイッチポート トランク アラウド ブイランで、通すブイランを指定します。"},
+   {"sc": 7, "sp": "先生", "t": "あとから足すときはadd、外すときはremoveを付けます。", "y": "あとから足すときはアド、外すときはremoveを付けます。"},
+   {"sc": 7, "sp": "生徒", "t": "addを付け忘れたら？", "y": "アドを付け忘れたら？"},
+   {"sc": 7, "sp": "先生", "t": "一覧が、打った番号だけに置きかわってしまいます。よくある事故です。"},
+   {"sc": 8, "sp": "先生", "t": "確認です。今のVLANはそのままに、VLAN 40も通すコマンドはどれでしょう？", "y": "確認です。今のブイランはそのままに、ブイラン 40も通すコマンドはどれでしょう？", "w": 1},
+   {"sc": 8, "sp": "生徒", "t": "足すから、addを付ける。2つ目です。", "y": "足すから、アドを付ける。2つ目です。"},
+   {"sc": 8, "sp": "先生", "t": "正解です。"},
+   {"sc": 9, "sp": "先生", "t": "では、謎を解きましょう。show interfaces trunkを見てみます。", "y": "では、謎を解きましょう。ショー インターフェーシズ トランクを見てみます。"},
+   {"sc": 9, "sp": "生徒", "t": "Statusがtrunkingだから、トランクにはなってますね。", "y": "ステータスがtrunkingだから、トランクにはなってますね。"},
+   {"sc": 9, "sp": "先生", "t": "次の段、allowed on trunkは、許可されているVLANです。", "y": "次の段、アラウド オン トランクは、許可されているブイランです。"},
+   {"sc": 9, "sp": "生徒", "t": "1、10、20、30。30も許可されてます。"},
+   {"sc": 9, "sp": "先生", "t": "その下、allowed and activeは、許可されていて、実際にスイッチにあるVLANです。", "y": "その下、アラウド and アクティブは、許可されていて、実際にスイッチにあるブイランです。"},
+   {"sc": 9, "sp": "生徒", "t": "1、10、20…30がない！"},
+   {"sc": 9, "sp": "先生", "t": "そうです。このスイッチに、VLAN 30が作られていなかったんです。", "y": "そうです。このスイッチに、ブイラン 30が作られていなかったんです。"},
+   {"sc": 10, "sp": "先生", "t": "確認です。VLAN 30が通らない理由として、最も考えられるのはどれでしょう？", "y": "確認です。ブイラン 30が通らない理由として、最も考えられるのはどれでしょう？", "w": 1},
+   {"sc": 10, "sp": "生徒", "t": "VLAN 30が作られていない。2つ目です。", "y": "ブイラン 30が作られていない。2つ目です。"},
+   {"sc": 10, "sp": "先生", "t": "正解です。vlan 30で作れば、通るようになります。", "y": "正解です。ブイラン 30で作れば、通るようになります。"},
+   {"sc": 11, "sp": "生徒", "t": "allowed vlanで、addを付け忘れそうです…", "y": "アラウド ブイランで、アドを付け忘れそうです…"},
+   {"sc": 11, "sp": "先生", "t": "本番の機器でやると、ほかのVLANが止まる大事故になります。気をつけましょう。", "y": "本番の機器でやると、ほかのブイランが止まる大事故になります。気をつけましょう。"},
+   {"sc": 11, "sp": "生徒", "t": "あと、autoどうしで、いつかトランクになると思ってました。", "y": "あと、オートどうしで、いつかトランクになると思ってました。"},
+   {"sc": 11, "sp": "先生", "t": "決してなりません。スイッチどうしは、両側をtrunkに固定するのが確実です。", "y": "決してなりません。スイッチどうしは、両側をトランクに固定するのが確実です。"},
+   {"sc": 12, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 12, "sp": "先生", "t": "1つ目。DTPは、desirableが誘い、autoが待つ。autoどうしはトランクにならない。", "y": "1つ目。ディーティーピーは、デザイラブルが誘い、オートが待つ。オートどうしはトランクにならない。"},
+   {"sc": 12, "sp": "先生", "t": "2つ目。allowed vlanで、通すVLANをしぼる。足すときはadd。", "y": "2つ目。アラウド ブイランで、通すブイランをしぼる。足すときはアド。"},
+   {"sc": 12, "sp": "先生", "t": "3つ目。allowedにあってactiveにないなら、VLANが作られていない。", "y": "3つ目。アラウドにあってアクティブにないなら、ブイランが作られていない。"},
+   {"sc": 12, "sp": "生徒", "t": "謎、解けました！"},
+   {"sc": 12, "sp": "先生", "t": "次回は、VLANどうしをつなぐ方法です。お疲れさまでした。", "y": "次回は、ブイランどうしをつなぐ方法です。お疲れさまでした。"}
+  ]
+ }
+}
