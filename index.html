@@ -518,7 +518,8 @@ function bindQuiz(P,onAns){if(!P.quiz)return;app.querySelectorAll(".tbq button")
 let AU=null;const BLOBS={};
 function vClass(){
   const B=TBS.find(b=>b.n===arg.n),C=B.cls,l=LM[B.lt],D=DM[l.d],N=C.lines.length;
-  S.cls=S.cls||{};let i=Math.min(S.cls[B.n]||0,N-1),playing=false,rate=S.rate||1,answered=false,waiting=false,pg=-1;
+  S.cls=S.cls||{};let i=Math.min(S.cls[B.n]||0,N-1),playing=false,rate=S.rate||1,waiting=false,pg=-1;
+  const ans=new Set(),isWait=x=>x.w&&!ans.has(x.sc);/* 確認の問題は1回に何問もある。答えた問題（場面番号）ごとに覚える */
   ttl.textContent="授業 第"+B.n+"回";
   if(!AU){AU=new Audio();AU.preload="auto";window.__AU=AU;}
   const src=k=>C.a+String(k+1).padStart(3,"0")+".mp3";
@@ -530,7 +531,7 @@ function vClass(){
 <div class="lns" id="lns">${C.lines.map((x,k)=>`<button class="ln2" data-i="${k}"><b>${x.sp}</b><span>${esc(x.t)}</span></button>`).join("")}</div>
 </div></div></div></div>`;
   {const cs=app.querySelector(".clside"),cw=app.querySelector(".clwrap");if(cs&&window.ResizeObserver){const ro=new ResizeObserver(()=>{if(!cw.isConnected){ro.disconnect();return;}cw.style.setProperty("--subh",(getComputedStyle(cs).position==="fixed"?cs.offsetHeight+8:4)+"px");});ro.observe(cs);}}
-  const showPage=sc=>{const k=Math.min(sc-1,B.pages.length-1);if(k===pg)return;pg=k;const P=B.pages[k];$("#tbp").innerHTML=`<div class="tbhd"><h3>${esc(P.t)}</h3></div>${pageInner(P)}`;if(matchMedia("(prefers-reduced-motion: reduce)").matches)app.querySelectorAll(".mv").forEach(e=>e.remove());bindQuiz(P,()=>{answered=true;if(waiting){waiting=false;$("#wt").innerHTML="";next();}});linkTerms($("#tbp .tbtx")||$("#tbp"));};
+  const showPage=sc=>{const k=Math.min(sc-1,B.pages.length-1);if(k===pg)return;pg=k;const P=B.pages[k];$("#tbp").innerHTML=`<div class="tbhd"><h3>${esc(P.t)}</h3></div>${pageInner(P)}`;if(matchMedia("(prefers-reduced-motion: reduce)").matches)app.querySelectorAll(".mv").forEach(e=>e.remove());bindQuiz(P,()=>{ans.add(k+1);if(waiting){waiting=false;$("#wt").innerHTML="";next();}});linkTerms($("#tbp .tbtx")||$("#tbp"));};
   const draw=()=>{const x=C.lines[i];showPage(x.sc);$("#cur").innerHTML=`<span class="av ${x.sp==="先生"?"t":"s"}">${x.sp}</span><span><span class="who">${x.sp}</span><div class="say">${esc(x.t)}</div></span>`;
     $("#cn").textContent=`${i+1}/${N}`;$("#cbar").style.width=(i+1)/N*100+"%";$("#cpl").textContent=playing?"❚❚":"▶";
     app.querySelectorAll(".ln2").forEach(b=>b.classList.toggle("on",+b.dataset.i===i));const on=app.querySelector(".ln2.on");if(on){const box=$("#lns");box.scrollTop=on.offsetTop-box.offsetTop-box.clientHeight/2+on.clientHeight/2;}
@@ -543,8 +544,8 @@ function vClass(){
   const msState=()=>{if(MS)try{MS.playbackState=playing?"playing":"paused";}catch(e){}};
   const stop=()=>{AU.pause();clearInterval(tick);playing=false;msState();};
   const check=()=>{if(view!=="class"||!playing||!ours())return;const t=AU.currentTime,x=C.lines[i];
-    if(x.w&&!answered&&t>=SG[i][0]+SG[i][1]+0.02){stop();waiting=true;draw();$("#wt").innerHTML=`<div class="wait">教科書の小テストで答えを選ぶと、授業が続きます。</div>`;$("#tbp").scrollIntoView({behavior:"smooth",block:"start"});return;}
-    const k=lineAt(t);if(k!==i&&!(x.w&&!answered)){i=k;draw();}};
+    if(isWait(x)&&t>=SG[i][0]+SG[i][1]+0.02){stop();waiting=true;draw();$("#wt").innerHTML=`<div class="wait">教科書の小テストで答えを選ぶと、授業が続きます。</div>`;$("#tbp").scrollIntoView({behavior:"smooth",block:"start"});return;}
+    const k=lineAt(t);if(k!==i&&!isWait(x)){i=k;draw();}};
   const watch=()=>{clearInterval(tick);tick=setInterval(()=>{if(view!=="class"){clearInterval(tick);return;}check();},100);};
   const play=()=>{const want=BU||FU;if(!ours())AU.src=want;const go2=()=>{AU.currentTime=Math.max(0,SG[i][0]-0.03);AU.playbackRate=rate;const p=AU.play();if(p&&p.catch)p.catch(()=>{playing=false;msState();draw();});watch();};
     AU.readyState>=1&&ours()?go2():AU.addEventListener("loadedmetadata",go2,{once:true});playing=true;$("#wt").innerHTML="";msState();draw();};
@@ -554,7 +555,7 @@ function vClass(){
     const eq=$("#eq");if(eq)eq.onclick=()=>startPlay(c.q.filter(id=>QM[id]),`第${c.n}回「${c.t}」の問題`,"course",{cn:c.n});const en=$("#en");if(en)en.onclick=()=>go("class",{n:nx.n});};
   const next=()=>{if(i<N-1){i++;play();}else finish();};
   AU.ontimeupdate=check;
-  AU.onended=()=>{if(view!=="class")return;clearInterval(tick);if(C.lines[N-1].w&&!answered){check();return;}finish();};
+  AU.onended=()=>{if(view!=="class")return;clearInterval(tick);if(isWait(C.lines[N-1])){check();return;}finish();};
   const prev=()=>{if(i>0){i--;playing?play():draw();}},fwd=()=>{if(i<N-1){i++;playing?play():draw();}};
   $("#cpl").onclick=()=>{if(playing){stop();draw();}else resume();};
   $("#cpv").onclick=prev;$("#cnx").onclick=fwd;
