@@ -1,0 +1,140 @@
+{
+ "r": "TB",
+ "n": 80,
+ "t": "設定を自動で配る（Ansible・Terraform）",
+ "d": "d6",
+ "form": "手作業 vs 自動化",
+ "need": [79],
+ "goal": ["構成管理ツールの考え方がわかる", "AnsibleとTerraformを比べられる", "冪等性がわかる"],
+ "terms": ["IaC", "Ansible", "プレイブック", "YAML", "エージェントレス", "Terraform", "冪等性"],
+ "pages": [
+  {
+   "t": "手作業 vs 自動化：毎週の設定変更",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 124.0\" role=\"img\" aria-label=\"手作業 vs 自動化\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"110\" rx=\"16\" fill=\"#0a5cff\" opacity=\".12\"/><text x=\"180\" y=\"44\" text-anchor=\"middle\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">毎週、50台に同じ設定変更。今週はだれがやる？</text><text x=\"180\" y=\"74\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">手作業：手順書を見ながら打つ。人によってばらつく</text><text x=\"180\" y=\"94\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">自動化：あるべき姿をファイルに書き、ツールが配る</text></svg>",
+   "b": "毎週のように、50台のルーターに同じような設定変更があります。手作業だと、手順書を見ながら打つので、<b>人によってばらつき</b>、打ちまちがいも起こります。今日は、設定の<b>あるべき姿をファイルに書いておき</b>、ツールに配らせる <b>Ansible</b> と <b>Terraform</b> を学びます。"
+  },
+  {
+   "t": "今日のゴール",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のゴール\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1. 構成管理ツールの考え方がわかる</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">あるべき姿を書いておく（IaC）</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2. AnsibleとTerraformを比べられる</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">設定を配る と 土台を作る</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">3. 冪等性がわかる</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">何回やっても同じ結果</text></svg>"
+  },
+  {
+   "t": "あるべき姿をコードに（IaC）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 213.0\" role=\"img\" aria-label=\"Infrastructure as Code\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">設定のあるべき姿を、ファイル（コード）に書く</text><rect x=\"10\" y=\"52.5\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"78.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ツールが、そのとおりにそろえる</text><rect x=\"10\" y=\"99.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"124.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ファイルは Git で管理</text><text x=\"24\" y=\"143.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">だれがいつ何を変えたか、記録が残る・元に戻せる</text><rect x=\"10\" y=\"162.5\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#8a3ffc\" opacity=\".1\"/><text x=\"24\" y=\"188.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">同じファイルから、何度でも同じ環境が作れる</text></svg>",
+   "b": "設定の<b>あるべき姿</b>を、ファイル（コード）に書いておき、ツールにそのとおりにそろえさせる考え方を <b>IaC</b>（Infrastructure as Code、インフラをコードで）と言います。ファイルは <b>Git</b> で管理するので、だれがいつ何を変えたかが残り、まちがえたら元に戻せます。同じファイルから、何度でも同じ環境が作れます。"
+  },
+  {
+   "t": "Ansible",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 248.0\" role=\"img\" aria-label=\"Ansible のプレイブック（YAML）\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"188\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#e8ecf3;white-space:pre\">- name: add VLAN 30</text><text x=\"22\" y=\"74\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\">  hosts: switches</text><text x=\"22\" y=\"96\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#e8ecf3;white-space:pre\">  tasks:</text><text x=\"22\" y=\"118\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">    - cisco.ios.ios_vlans:</text><text x=\"22\" y=\"140\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">        config:</text><text x=\"22\" y=\"162\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">          - vlan_id: 30</text><text x=\"22\" y=\"184\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">            name: GUEST</text><text x=\"180\" y=\"220\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">エージェントレス：機器に専用ソフト不要</text></svg>",
+   "b": "<b>Ansible</b> は、機器の<b>設定を配る</b>のが得意なツールです。やることを <b>YAML</b> という読みやすい形式の<b>プレイブック</b>に書きます。対象の機器の一覧は<b>インベントリー</b>に書きます。Ansibleは、機器に専用のソフトを入れる必要がない<b>エージェントレス</b>で、<b>SSH</b>（やAPI）で機器に入って設定する<b>プッシュ型</b>です。"
+  },
+  {
+   "t": "確認の問題 1",
+   "quiz": {
+    "q": "Ansibleについて正しい説明はどれでしょう？",
+    "o": [
+     ["機器にエージェントを入れる必要があり、機器から設定を取りに来る", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["エージェントレスで、YAMLのプレイブックに書いた設定をSSHなどで機器に送る", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["JSONで書いた設定を、機器が1台ずつ手で読み込む", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "Ansible は<b>エージェントレス</b>で、<b>YAMLのプレイブック</b>を、SSHなどで<b>プッシュ</b>します。"
+   }
+  },
+  {
+   "t": "Terraform",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 183.5\" role=\"img\" aria-label=\"Terraform\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">インフラの土台を作るのが得意</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 11.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">クラウドの仮想マシン・ネットワーク・ファイアウォールなど</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">HCL という形式で、あるべき姿を書く</text><rect x=\"10\" y=\"116.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"141.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">plan で差分を確かめ、apply で作る</text><text x=\"24\" y=\"160.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">今の状態を state ファイルで覚えている</text></svg>",
+   "b": "<b>Terraform</b> は、クラウドの仮想マシンやネットワークなど、<b>インフラの土台を作る</b>のが得意なツールです。<b>HCL</b> という形式で「あるべき姿」を書き、<b>plan</b> で「今とのちがい（何が作られるか）」を確かめてから、<b>apply</b> で実際に作ります。今の状態を<b>stateファイル</b>で覚えているので、ちがいだけを直せます。"
+  },
+  {
+   "t": "何回やっても同じ（冪等性）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 213.0\" role=\"img\" aria-label=\"冪等性（べきとうせい）\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">「VLAN 30 がある状態」と書く</text><rect x=\"10\" y=\"52.5\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"78.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1回目：VLAN 30 がない → 作る</text><rect x=\"10\" y=\"99.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"124.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2回目：もうある → 何もしない</text><text x=\"24\" y=\"143.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">同じものを二重に作らない</text><rect x=\"10\" y=\"162.5\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#8a3ffc\" opacity=\".1\"/><text x=\"24\" y=\"188.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">何回実行しても、結果は同じ</text></svg>",
+   "b": "AnsibleもTerraformも、<b>冪等性</b>（べきとうせい）を大事にします。「VLAN 30 がある状態」と書いておけば、1回目は VLAN 30 を作り、2回目は<b>もうあるので何もしません</b>。何回実行しても、<b>結果は同じ</b>です。「コマンドを打つ」手作業とちがい、「<b>あるべき姿</b>」を書くので、安心して何度でも流せます。",
+   "p": "冪等性 ＝ 何回実行しても、同じ結果。"
+  },
+  {
+   "t": "確認の問題 2",
+   "quiz": {
+    "q": "同じプレイブックを3回実行しても、2回目以降は変更が起きず、結果が変わらない性質を何と呼ぶでしょう？",
+    "o": [
+     ["冪等性", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["ステートレス", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["冗長化", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 0,
+    "e": "何回実行しても同じ結果になるのは<b>冪等性</b>です。"
+   }
+  },
+  {
+   "t": "確認の問題 3",
+   "quiz": {
+    "q": "クラウド上の仮想ネットワークや仮想マシンなどのインフラを、HCLで定義して作るのに主に使われるツールはどれでしょう？",
+    "o": [
+     ["Ansible", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["Terraform", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["Syslog", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "インフラの土台を <b>HCL</b> で定義して作るのは <b>Terraform</b> です。"
+   }
+  },
+  {
+   "t": "まちがえやすい所",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 183.5\" role=\"img\" aria-label=\"よくある勘違い\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× Ansible は機器にエージェントが必要</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">エージェントレス（SSH）</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× 実行するたびに、同じ設定を足していく</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">冪等性。2回目は何もしない</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ Ansible＝YAML、Terraform＝HCL</text></svg>",
+   "b": "Ansible は<b>エージェントレス</b>。自動化ツールは<b>冪等</b>なので、何度流しても二重にはなりません。<b>Ansible＝YAMLで設定を配る</b>、<b>Terraform＝HCLで土台を作る</b>と区別しましょう。"
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">IaC</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">あるべき姿をコードに書き、Git で管理</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Ansible 対 Terraform</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 11.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">YAML・エージェントレスで設定を配る ／ HCL で土台を作る</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">冪等性</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">何回実行しても同じ結果</text></svg>",
+   "b": "次回はいよいよ最終回。<b>AIとネットワーク</b>の関係を、2種類のAIの対決で学びます。"
+  }
+ ],
+ "cls": {
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "毎週のように、50台のルーターに、同じような設定変更があります。"},
+   {"sc": 1, "sp": "生徒", "t": "手順書を見ながら、1台ずつ打つんですよね。"},
+   {"sc": 1, "sp": "先生", "t": "人によってばらついたり、打ちまちがえたりします。"},
+   {"sc": 1, "sp": "生徒", "t": "今週の当番、だれもやりたがらなそう。"},
+   {"sc": 1, "sp": "先生", "t": "今日は、あるべき姿をファイルに書いて、ツールに配らせる方法です。"},
+   {"sc": 2, "sp": "先生", "t": "今日のゴールは3つです。"},
+   {"sc": 2, "sp": "先生", "t": "1つ目、構成管理ツールの考え方がわかること。"},
+   {"sc": 2, "sp": "先生", "t": "2つ目、AnsibleとTerraformを比べられること。", "y": "2つ目、アンシブルとテラフォームを比べられること。"},
+   {"sc": 2, "sp": "先生", "t": "3つ目、冪等性がわかること。"},
+   {"sc": 2, "sp": "生徒", "t": "当番、ツールに任せたいです。"},
+   {"sc": 3, "sp": "先生", "t": "設定のあるべき姿を、ファイルに書いておく。これをIaCと言います。", "y": "設定のあるべき姿を、ファイルに書いておく。これをアイエーシーと言います。"},
+   {"sc": 3, "sp": "先生", "t": "ツールが、そのとおりにそろえてくれます。"},
+   {"sc": 3, "sp": "生徒", "t": "ファイルなら、Gitで管理できますね。", "y": "ファイルなら、ギットで管理できますね。"},
+   {"sc": 3, "sp": "先生", "t": "はい。だれがいつ何を変えたかが残り、元にも戻せます。"},
+   {"sc": 4, "sp": "先生", "t": "Ansibleは、機器の設定を配るのが得意です。", "y": "アンシブルは、機器の設定を配るのが得意です。"},
+   {"sc": 4, "sp": "先生", "t": "やることを、YAMLという形式の、プレイブックに書きます。", "y": "やることを、ヤムルという形式の、プレイブックに書きます。"},
+   {"sc": 4, "sp": "生徒", "t": "機器に、専用のソフトを入れるんですか？"},
+   {"sc": 4, "sp": "先生", "t": "いいえ。エージェントレスで、SSHで入って設定します。", "y": "いいえ。エージェントレスで、エスエスエイチで入って設定します。"},
+   {"sc": 5, "sp": "先生", "t": "確認です。Ansibleの正しい説明はどれでしょう？", "y": "確認です。アンシブルの正しい説明はどれでしょう？", "w": 1},
+   {"sc": 5, "sp": "生徒", "t": "エージェントレスで、YAMLを送る。2つ目です。", "y": "エージェントレスで、ヤムルを送る。2つ目です。"},
+   {"sc": 5, "sp": "先生", "t": "正解です。"},
+   {"sc": 6, "sp": "先生", "t": "Terraformは、クラウドの仮想マシンなど、土台を作るのが得意です。", "y": "テラフォームは、クラウドの仮想マシンなど、土台を作るのが得意です。"},
+   {"sc": 6, "sp": "先生", "t": "HCLという形式で書き、planで差分を確かめてから、applyで作ります。", "y": "エイチシーエルという形式で書き、planで差分を確かめてから、applyで作ります。"},
+   {"sc": 6, "sp": "生徒", "t": "いきなり作らずに、先に確かめられるんですね。"},
+   {"sc": 6, "sp": "先生", "t": "はい。今の状態をstateファイルで覚えているので、ちがいだけ直せます。", "y": "はい。今の状態をステートファイルで覚えているので、ちがいだけ直せます。"},
+   {"sc": 7, "sp": "先生", "t": "どちらも、冪等性を大事にします。"},
+   {"sc": 7, "sp": "生徒", "t": "べきとうせい？"},
+   {"sc": 7, "sp": "先生", "t": "何回実行しても、同じ結果になる性質です。"},
+   {"sc": 7, "sp": "先生", "t": "VLAN 30がある状態と書けば、1回目は作り、2回目はもうあるので何もしません。", "y": "ブイラン 30がある状態と書けば、1回目は作り、2回目はもうあるので何もしません。"},
+   {"sc": 7, "sp": "生徒", "t": "二重に作られたりしないんですね。"},
+   {"sc": 8, "sp": "先生", "t": "確認です。何回実行しても同じ結果になる性質は何でしょう？", "w": 1},
+   {"sc": 8, "sp": "生徒", "t": "冪等性です。"},
+   {"sc": 8, "sp": "先生", "t": "正解です。"},
+   {"sc": 9, "sp": "先生", "t": "確認です。HCLでインフラを作るツールはどれでしょう？", "y": "確認です。エイチシーエルでインフラを作るツールはどれでしょう？", "w": 1},
+   {"sc": 9, "sp": "生徒", "t": "Terraformです。", "y": "テラフォームです。"},
+   {"sc": 9, "sp": "先生", "t": "正解です。"},
+   {"sc": 10, "sp": "生徒", "t": "Ansibleにも、エージェントが要ると思ってました。", "y": "アンシブルにも、エージェントが要ると思ってました。"},
+   {"sc": 10, "sp": "先生", "t": "エージェントレスなのが、Ansibleの特徴です。", "y": "エージェントレスなのが、アンシブルの特徴です。"},
+   {"sc": 10, "sp": "生徒", "t": "AnsibleはYAMLで配る、TerraformはHCLで作る。", "y": "アンシブルはヤムルで配る、テラフォームはエイチシーエルで作る。"},
+   {"sc": 11, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 11, "sp": "先生", "t": "1つ目。IaCは、あるべき姿をコードに書いてGitで管理。", "y": "1つ目。アイエーシーは、あるべき姿をコードに書いてギットで管理。"},
+   {"sc": 11, "sp": "先生", "t": "2つ目。Ansibleは設定を配る、Terraformは土台を作る。", "y": "2つ目。アンシブルは設定を配る、テラフォームは土台を作る。"},
+   {"sc": 11, "sp": "先生", "t": "3つ目。冪等性は、何回実行しても同じ結果。"},
+   {"sc": 11, "sp": "生徒", "t": "毎週の当番、ツールに任せられますね。"},
+   {"sc": 11, "sp": "先生", "t": "次回は最終回、AIとネットワークです。お疲れさまでした。"}
+  ]
+ }
+}

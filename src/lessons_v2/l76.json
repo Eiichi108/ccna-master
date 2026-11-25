@@ -1,0 +1,141 @@
+{
+ "r": "TB",
+ "n": 76,
+ "t": "頭脳を集める（SDN）",
+ "d": "d6",
+ "form": "手作業 vs 自動化",
+ "need": [53],
+ "goal": ["3つのプレーンがわかる", "SDNコントローラーの役割がわかる", "ノースバウンドとサウスバウンドがわかる"],
+ "terms": ["データプレーン", "コントロールプレーン", "管理プレーン", "SDN", "SDNコントローラー", "ノースバウンドAPI", "サウスバウンドAPI"],
+ "pages": [
+  {
+   "t": "手作業 vs 自動化：100台の設定を変える",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 124.0\" role=\"img\" aria-label=\"手作業 vs 自動化\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"110\" rx=\"16\" fill=\"#0a5cff\" opacity=\".12\"/><text x=\"180\" y=\"44\" text-anchor=\"middle\" style=\"font:800 16.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">100台のスイッチに、新しいVLANを追加する</text><text x=\"180\" y=\"74\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">手作業：1台ずつログインして、100回打つ</text><text x=\"180\" y=\"94\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">自動化：1か所の頭脳に命令すると、全部に配られる</text></svg>",
+   "b": "新しいVLANを、100台のスイッチに追加することになりました。<b>手作業</b>なら、1台ずつログインして同じコマンドを100回打ちます。打ちまちがいも心配です。<b>自動化</b>なら、1か所の<b>頭脳</b>に命令するだけで、全部の機器に配られます。今日から最後の分野「<b>自動化とプログラマビリティ</b>」です。まず、その頭脳 <b>SDN</b> のしくみを学びます。"
+  },
+  {
+   "t": "今日のゴール",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のゴール\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1. 3つのプレーンがわかる</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">データ・コントロール・管理</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2. SDNコントローラーの役割がわかる</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">頭脳を1か所に集める</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">3. ノースバウンドとサウスバウンドがわかる</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">上のアプリと、下の機器</text></svg>"
+  },
+  {
+   "t": "機器の中の3つの仕事（プレーン）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 251.5\" role=\"img\" aria-label=\"3つのプレーン\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">データプレーン</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">パケットを実際に転送する（手足）</text><text x=\"24\" y=\"67.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">MACの表・ルーティングテーブルを見て送る</text><rect x=\"10\" y=\"86.5\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"112.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">コントロールプレーン</text><text x=\"24\" y=\"131.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">どこへ送るかを決める（頭脳）</text><text x=\"24\" y=\"148.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">OSPF・STP・ARP など</text><rect x=\"10\" y=\"167.0\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"192.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">管理プレーン</text><text x=\"24\" y=\"211.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">人が機器を管理する入口</text><text x=\"24\" y=\"228.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">SSH・SNMP・Syslog など</text></svg>",
+   "b": "ネットワーク機器の中には、3つの仕事（<b>プレーン</b>）があります。<b>データプレーン</b>は、パケットを実際に送る<b>手足</b>。<b>コントロールプレーン</b>は、OSPFやSTPで「どこへ送るか」を決める<b>頭脳</b>。<b>管理プレーン</b>は、SSHやSNMPで人が機器を管理する<b>入口</b>です。ふつうの機器は、この3つを<b>1台ずつ全部</b>持っています。",
+   "p": "データ＝手足、コントロール＝頭脳、管理＝入口。"
+  },
+  {
+   "t": "確認の問題 1",
+   "quiz": {
+    "q": "OSPFでネイバーと情報を交換し、ルーティングテーブルを作る仕事は、どのプレーンに属するでしょう？",
+    "o": [
+     ["データプレーン", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["コントロールプレーン", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["管理プレーン", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "どこへ送るかを決めるのは<b>コントロールプレーン</b>（頭脳）です。"
+   }
+  },
+  {
+   "t": "頭脳を1か所に集める（SDN）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 183.5\" role=\"img\" aria-label=\"SDN（Software-Defined Networking）\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 13.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">SDNコントローラーが、頭脳の仕事を集めて受け持つ</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">例：Cisco Catalyst Center（旧 DNA Center）</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">機器は、主に手足（データプレーン）を受け持つ</text><rect x=\"10\" y=\"116.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"141.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">全体を見渡して、まとめて設定・確認できる</text><text x=\"24\" y=\"160.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1台ずつログインしなくてよい</text></svg>",
+   "b": "<b>SDN</b>（Software-Defined Networking）は、各機器に分かれていた<b>頭脳（コントロールプレーン）の仕事</b>を、<b>SDNコントローラー</b>に集めます。機器は主に手足として働き、コントローラーが<b>ネットワーク全体を見渡して</b>、まとめて設定や確認をします。オーケストラにたとえると、コントローラーは<b>指揮者</b>です。Ciscoでは Catalyst Center（旧 DNA Center）がその例です。"
+  },
+  {
+   "t": "上と下をつなぐAPI",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 217.5\" role=\"img\" aria-label=\"ノースバウンド と サウスバウンド\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ノースバウンドAPI（上向き）</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">アプリ・自動化スクリプト ⇔ コントローラー</text><text x=\"24\" y=\"67.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">多くは REST API</text><rect x=\"10\" y=\"86.5\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#8a3ffc\" opacity=\".1\"/><text x=\"24\" y=\"112.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">SDNコントローラー</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">サウスバウンドAPI（下向き）</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">コントローラー ⇔ ネットワーク機器</text><text x=\"24\" y=\"194.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">NETCONF・RESTCONF・OpenFlow・SSH など</text></svg>",
+   "b": "コントローラーは、上と下の2つの方向に話します。<b>上</b>のアプリや自動化スクリプトと話すのが <b>ノースバウンドAPI</b>（北向き）で、多くは <b>REST API</b> です。<b>下</b>のネットワーク機器と話すのが <b>サウスバウンドAPI</b>（南向き）で、<b>NETCONF</b>、<b>RESTCONF</b>、<b>OpenFlow</b> などを使います。地図の上が北、下が南、と覚えましょう。"
+  },
+  {
+   "t": "確認の問題 2",
+   "quiz": {
+    "q": "SDNコントローラーが、管理下のスイッチやルーターに設定を送るために使うインターフェースはどれでしょう？",
+    "o": [
+     ["ノースバウンドAPI", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["サウスバウンドAPI", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["コンソールポート", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "下の機器と話すのは<b>サウスバウンドAPI</b>です。ノースバウンドは上のアプリと話します。"
+   }
+  },
+  {
+   "t": "従来の管理 と コントローラーの管理",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 188.0\" role=\"img\" aria-label=\"比べてみよう\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#3d4450\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">従来</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1台ずつ CLI で設定。人によってばらつく</text><text x=\"24\" y=\"67.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">全体の状態は、1台ずつ見て回る</text><rect x=\"10\" y=\"86.5\" width=\"340\" height=\"91.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"112.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">コントローラー</text><text x=\"24\" y=\"131.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1か所から、まとめて同じ設定を配る</text><text x=\"24\" y=\"148.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">全体の状態を、1つの画面で見られる</text><text x=\"24\" y=\"165.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">まちがいが減り、変更が速い</text></svg>",
+   "b": "従来は、1台ずつCLIで設定するので、<b>人によって設定がばらつき</b>、全体の状態を知るにも1台ずつ見て回る必要がありました。コントローラーを使うと、<b>1か所からまとめて同じ設定を配れる</b>ので、まちがいが減り、変更も速くなります。ネットワーク全体の健康状態も、1つの画面で見られます。"
+  },
+  {
+   "t": "確認の問題 3",
+   "quiz": {
+    "q": "コントローラーを使ったネットワーク管理の利点として正しいものはどれでしょう？",
+    "o": [
+     ["1台ずつログインして設定する必要がある", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["設定をまとめて配れるので、まちがいやばらつきが減る", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["パケットの転送が必ず速くなる", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "1か所から<b>まとめて同じ設定を配れる</b>のが大きな利点です。"
+   }
+  },
+  {
+   "t": "まちがえやすい所",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 183.5\" role=\"img\" aria-label=\"よくある勘違い\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× ノースバウンドは、機器と話す</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">機器と話すのはサウスバウンド</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× SDN では、機器がパケットを送らなくなる</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">転送（データプレーン）は機器のまま</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ 経路を決めるのはコントロールプレーン</text></svg>",
+   "b": "<b>北＝上のアプリ</b>、<b>南＝下の機器</b>。SDNになっても、パケットを実際に送るのは機器のデータプレーンです。集めるのは<b>頭脳</b>の仕事です。"
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">3つのプレーン</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 11.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">データ＝転送、コントロール＝経路を決める、管理＝人の入口</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">SDN</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">頭脳をコントローラーに集め、まとめて設定・確認</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">API</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ノース＝上のアプリ、サウス＝下の機器</text></svg>",
+   "b": "次回は、Ciscoのコントローラーで作る <b>SD-Access</b>、物理の道の上に作る仮想の道を、たとえ話で学びます。"
+  }
+ ],
+ "cls": {
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "新しいVLANを、100台のスイッチに追加することになりました。", "y": "新しいブイランを、100台のスイッチに追加することになりました。"},
+   {"sc": 1, "sp": "生徒", "t": "1台ずつログインして、100回打つんですか？"},
+   {"sc": 1, "sp": "先生", "t": "手作業なら、そうです。打ちまちがいも心配ですね。"},
+   {"sc": 1, "sp": "生徒", "t": "考えただけで、疲れます。"},
+   {"sc": 1, "sp": "先生", "t": "自動化なら、1か所の頭脳に命令するだけです。今日から、最後の分野です。"},
+   {"sc": 2, "sp": "先生", "t": "今日のゴールは3つです。"},
+   {"sc": 2, "sp": "先生", "t": "1つ目、3つのプレーンがわかること。"},
+   {"sc": 2, "sp": "先生", "t": "2つ目、SDNコントローラーの役割がわかること。", "y": "2つ目、エスディーエヌコントローラーの役割がわかること。"},
+   {"sc": 2, "sp": "先生", "t": "3つ目、ノースバウンドとサウスバウンドがわかること。"},
+   {"sc": 2, "sp": "生徒", "t": "最後の分野、がんばります。"},
+   {"sc": 3, "sp": "先生", "t": "機器の中には、3つの仕事があります。プレーンと呼びます。"},
+   {"sc": 3, "sp": "先生", "t": "データプレーンは、パケットを実際に送る、手足です。"},
+   {"sc": 3, "sp": "先生", "t": "コントロールプレーンは、OSPFやSTPで、どこへ送るかを決める、頭脳です。", "y": "コントロールプレーンは、オーエスピーエフやエスティーピーで、どこへ送るかを決める、頭脳です。"},
+   {"sc": 3, "sp": "生徒", "t": "管理プレーンは？"},
+   {"sc": 3, "sp": "先生", "t": "SSHやSNMPで、人が機器を管理する、入口です。", "y": "エスエスエイチやエスエヌエムピーで、人が機器を管理する、入口です。"},
+   {"sc": 3, "sp": "生徒", "t": "ふつうの機器は、3つとも持ってるんですね。"},
+   {"sc": 4, "sp": "先生", "t": "確認です。ルーティングテーブルを作る仕事は、どのプレーンでしょう？", "w": 1},
+   {"sc": 4, "sp": "生徒", "t": "頭脳だから、コントロールプレーンです。"},
+   {"sc": 4, "sp": "先生", "t": "正解です。"},
+   {"sc": 5, "sp": "先生", "t": "SDNは、各機器の頭脳の仕事を、コントローラーに集めます。", "y": "エスディーエヌは、各機器の頭脳の仕事を、コントローラーに集めます。"},
+   {"sc": 5, "sp": "生徒", "t": "機器は、手足に専念する？"},
+   {"sc": 5, "sp": "先生", "t": "はい。コントローラーが全体を見渡して、まとめて設定します。"},
+   {"sc": 5, "sp": "生徒", "t": "オーケストラの、指揮者みたいですね。"},
+   {"sc": 5, "sp": "先生", "t": "まさにそうです。CiscoではCatalyst Centerがその例です。", "y": "まさにそうです。シスコではカタリストセンターがその例です。"},
+   {"sc": 6, "sp": "先生", "t": "コントローラーは、上と下の2つの方向に話します。"},
+   {"sc": 6, "sp": "先生", "t": "上のアプリと話すのが、ノースバウンドAPI。多くはREST APIです。", "y": "上のアプリと話すのが、ノースバウンドエーピーアイ。多くはレスト エーピーアイです。"},
+   {"sc": 6, "sp": "先生", "t": "下の機器と話すのが、サウスバウンドAPI。NETCONFやRESTCONFなどです。", "y": "下の機器と話すのが、サウスバウンドエーピーアイ。ネットコンフやレストコンフなどです。"},
+   {"sc": 6, "sp": "生徒", "t": "地図の上が北、下が南ですね。"},
+   {"sc": 7, "sp": "先生", "t": "確認です。コントローラーが機器に設定を送るのはどれでしょう？", "w": 1},
+   {"sc": 7, "sp": "生徒", "t": "下の機器だから、サウスバウンドです。"},
+   {"sc": 7, "sp": "先生", "t": "正解です。"},
+   {"sc": 8, "sp": "先生", "t": "従来は、1台ずつCLIで設定するので、人によってばらつきました。", "y": "従来は、1台ずつシーエルアイで設定するので、人によってばらつきました。"},
+   {"sc": 8, "sp": "生徒", "t": "コントローラーなら、まとめて同じ設定を配れる。"},
+   {"sc": 8, "sp": "先生", "t": "はい。まちがいが減って、変更も速くなります。"},
+   {"sc": 9, "sp": "先生", "t": "確認です。コントローラーで管理する利点はどれでしょう？", "w": 1},
+   {"sc": 9, "sp": "生徒", "t": "まとめて配れて、まちがいが減る。2つ目です。"},
+   {"sc": 9, "sp": "先生", "t": "正解です。"},
+   {"sc": 10, "sp": "生徒", "t": "ノースとサウス、逆に覚えそうです。"},
+   {"sc": 10, "sp": "先生", "t": "北は上のアプリ、南は下の機器。地図で覚えましょう。"},
+   {"sc": 10, "sp": "生徒", "t": "SDNでも、パケットを送るのは機器のまま。", "y": "エスディーエヌでも、パケットを送るのは機器のまま。"},
+   {"sc": 11, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 11, "sp": "先生", "t": "1つ目。データは転送、コントロールは経路を決める、管理は人の入口。"},
+   {"sc": 11, "sp": "先生", "t": "2つ目。SDNは、頭脳をコントローラーに集める。", "y": "2つ目。エスディーエヌは、頭脳をコントローラーに集める。"},
+   {"sc": 11, "sp": "先生", "t": "3つ目。ノースバウンドは上、サウスバウンドは下。"},
+   {"sc": 11, "sp": "生徒", "t": "100台でも、怖くないですね。"},
+   {"sc": 11, "sp": "先生", "t": "次回は、SD-Accessです。お疲れさまでした。", "y": "次回は、エスディーアクセスです。お疲れさまでした。"}
+  ]
+ }
+}
