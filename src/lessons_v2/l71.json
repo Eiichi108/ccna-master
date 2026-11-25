@@ -1,0 +1,142 @@
+{
+ "r": "TB",
+ "n": 71,
+ "t": "離れた場所を安全につなぐ（VPN）",
+ "d": "d5",
+ "form": "困りごと相談室",
+ "need": [70],
+ "goal": ["VPNのしくみがわかる", "2つの形を区別できる", "IPsecとGREの役割がわかる"],
+ "terms": ["VPN", "サイト間VPN", "リモートアクセスVPN", "IPsec", "GRE"],
+ "pages": [
+  {
+   "t": "相談：支店と本社を、安くつなぎたい",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 124.0\" role=\"img\" aria-label=\"困りごと相談室\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"110\" rx=\"16\" fill=\"#0a5cff\" opacity=\".12\"/><text x=\"180\" y=\"44\" text-anchor=\"middle\" style=\"font:800 17.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">支店と本社を、専用線より安くつなぎたい</text><text x=\"180\" y=\"74\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">インターネットなら安い。でも、のぞかれそう</text><text x=\"180\" y=\"94\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">家から社内のシステムも使いたい</text></svg>",
+   "b": "相談です。「支店と本社を専用線でつなぐと高い。インターネットなら安いけれど、通信をのぞかれないか心配。それに、在宅勤務の社員が家から社内のシステムを使えるようにもしたい」。この2つの悩みを両方解決するのが <b>VPN</b> です。"
+  },
+  {
+   "t": "今日のゴール",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のゴール\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1. VPNのしくみがわかる</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">インターネットの中に、暗号のトンネル</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2. 2つの形を区別できる</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">サイト間とリモートアクセス</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">3. IPsecとGREの役割がわかる</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">守る係と、包む係</text></svg>"
+  },
+  {
+   "t": "インターネットの中のトンネル",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 158.0\" role=\"img\" aria-label=\"VPN\"><path d=\"M60 70L210 70\" stroke=\"#8a3ffc\" stroke-width=\"3\" opacity=\".7\"/><path d=\"M210 70L360 70\" stroke=\"#8a3ffc\" stroke-width=\"3\" opacity=\".7\"/><circle cx=\"60\" cy=\"70\" r=\"18\" fill=\"#0a5cff\"/><path d=\"M51 66h12l-4-4M69 74h-12l4 4\" stroke=\"#fff\" stroke-width=\"2.4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><text x=\"60\" y=\"44\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">本社</text><path d=\"M184 80a12 12 0 0 1 4-22a16 16 0 0 1 30-4a12 12 0 0 1 18 14a10 10 0 0 1-4 12z\" fill=\"#3d4450\" opacity=\".85\"/><text x=\"210\" y=\"44\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">インターネット</text><circle cx=\"360\" cy=\"70\" r=\"18\" fill=\"#0a5cff\"/><path d=\"M351 66h12l-4-4M369 74h-12l4 4\" stroke=\"#fff\" stroke-width=\"2.4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><text x=\"342.0\" y=\"44\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">支店</text><text x=\"180\" y=\"130\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">暗号のトンネルの中 → のぞかれても読めない</text></svg>",
+   "b": "<b>VPN</b>（Virtual Private Network）は、インターネットという<b>みんなの道</b>の中に、<b>暗号化したトンネル</b>を作って、まるで専用線のように使うしくみです。途中でパケットをのぞかれても、暗号化されているので読めません。さらに、途中で書きかえられていないか（完全性）、本当に相手からか（認証）も確かめます。"
+  },
+  {
+   "t": "2つの形",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 171.0\" role=\"img\" aria-label=\"サイト間VPN と リモートアクセスVPN\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">サイト間VPN</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">拠点のルーターどうしでトンネルを作る</text><text x=\"24\" y=\"67.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">社員のPCは何もしなくてよい。いつもつながっている</text><rect x=\"10\" y=\"86.5\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"112.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">リモートアクセスVPN</text><text x=\"24\" y=\"131.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">社員のPCのソフトと、会社のVPN装置でトンネルを作る</text><text x=\"24\" y=\"148.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">例：Cisco AnyConnect。TLS や IPsec を使う</text></svg>",
+   "b": "VPNには2つの形があります。<b>サイト間VPN</b>は、本社と支店の<b>ルーターどうし</b>がトンネルを作ります。社員のPCには何も入れなくてよく、いつもつながっています。<b>リモートアクセスVPN</b>は、在宅勤務の社員の<b>PCのソフト</b>（例：Cisco AnyConnect）と、会社のVPN装置の間にトンネルを作ります。必要なときだけつなぎ、<b>TLS</b>（Webの暗号と同じしくみ）や IPsec を使います。",
+   "p": "拠点どうし＝サイト間、1人ずつ＝リモートアクセス。"
+  },
+  {
+   "t": "確認の問題 1",
+   "quiz": {
+    "q": "自宅で働く社員が、ノートPCのソフトを使って会社のネットワークに安全に接続する形のVPNはどれでしょう？",
+    "o": [
+     ["サイト間VPN", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["リモートアクセスVPN", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["VLAN", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "社員1人ずつの端末からつなぐのは<b>リモートアクセスVPN</b>です。"
+   }
+  },
+  {
+   "t": "守る係（IPsec）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 264.0\" role=\"img\" aria-label=\"IPsec\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">暗号化（機密性）</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">AES など</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">改ざんの検知（完全性）</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">SHA などのハッシュ</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">相手の確認（認証）</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">事前共有キーや証明書</text><rect x=\"10\" y=\"196.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"222.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ユニキャストしか運べない</text><text x=\"24\" y=\"241.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">OSPF の Hello などのマルチキャストは苦手</text></svg>",
+   "b": "サイト間VPNでよく使うのが <b>IPsec</b> です。パケットを<b>暗号化</b>し（機密性）、<b>ハッシュ</b>で改ざんを見つけ（完全性）、事前共有キーや証明書で<b>相手を確かめ</b>ます（認証）。前回までのCIAの道具が、全部入っています。ただし、IPsecだけでは、<b>マルチキャスト</b>（OSPFのHelloなど）をうまく運べません。"
+  },
+  {
+   "t": "包む係（GRE）と、組み合わせ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 217.5\" role=\"img\" aria-label=\"GRE over IPsec\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">GRE</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 11.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">どんなパケットでも包んで運ぶトンネル（マルチキャストも）</text><text x=\"24\" y=\"67.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ただし暗号化しない</text><rect x=\"10\" y=\"86.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"112.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">IPsec</text><text x=\"24\" y=\"131.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">暗号化して守る。でもマルチキャストは苦手</text><rect x=\"10\" y=\"150.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"175.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">GRE over IPsec</text><text x=\"24\" y=\"194.5\" text-anchor=\"start\" style=\"font:600 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">GRE で包んでから IPsec で守る → OSPF も安全に通せる</text></svg>",
+   "b": "<b>GRE</b> は、どんなパケットでも<b>包んで運ぶ</b>トンネルです。マルチキャストも運べるので、OSPFもトンネルの中で動かせます。でも、<b>GREは暗号化しません</b>。そこで、<b>GREで包んでから、IPsecで守る</b>（GRE over IPsec）と、両方のよいところを使えます。荷物を段ボール（GRE）に詰めてから、金庫（IPsec）に入れるイメージです。"
+  },
+  {
+   "t": "確認の問題 2",
+   "quiz": {
+    "q": "GREトンネルについて正しい説明はどれでしょう？",
+    "o": [
+     ["自分だけで強力な暗号化をする", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["マルチキャストも運べるが、それ自体は暗号化しない", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["スイッチのポートを束ねる技術", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "GREは何でも包んで運べますが、<b>暗号化はしません</b>。だから IPsec と組み合わせます。"
+   }
+  },
+  {
+   "t": "確認の問題 3",
+   "quiz": {
+    "q": "本社と支店のルーター間に、常に接続されたVPNを作り、支店のPCには特別なソフトを入れずに本社と通信させたいとき、適しているのはどれでしょう？",
+    "o": [
+     ["サイト間VPN", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["リモートアクセスVPN", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["FTP", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 0,
+    "e": "ルーターどうしでつなぎ、PCには何も入れない<b>サイト間VPN</b>です。"
+   }
+  },
+  {
+   "t": "まちがえやすい所",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 183.5\" role=\"img\" aria-label=\"よくある勘違い\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× GRE だけで、安全に運べる</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">GRE は暗号化しない</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× サイト間VPNでは、PCにソフトが要る</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ルーターどうしで作る。PCは何もしない</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ リモートアクセスは TLS（AnyConnect など）</text></svg>",
+   "b": "<b>GREは暗号化しない</b>ことを忘れずに。サイト間VPNは<b>ルーターどうし</b>、リモートアクセスVPNは<b>PCのソフト</b>からつなぎます。"
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">VPN</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">インターネットの中の、暗号化したトンネル</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2つの形</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">サイト間＝ルーターどうし、リモート＝PCから</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">IPsec と GRE</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">IPsec＝守る、GRE＝包む（暗号化なし）</text></svg>",
+   "b": "次回は、通信を<b>通すか止めるか</b>を選ぶ ACL のしくみを、実況中継で見ていきます。"
+  }
+ ],
+ "cls": {
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "相談です。支店と本社を、専用線より安くつなぎたいそうです。"},
+   {"sc": 1, "sp": "生徒", "t": "インターネットなら安いですよね。"},
+   {"sc": 1, "sp": "先生", "t": "でも、のぞかれないか心配。それに、家から社内のシステムも使いたいそうです。"},
+   {"sc": 1, "sp": "生徒", "t": "欲ばりな相談ですね。"},
+   {"sc": 1, "sp": "先生", "t": "実は、その両方を解決できるのが、VPNです。", "y": "実は、その両方を解決できるのが、ブイピーエヌです。"},
+   {"sc": 2, "sp": "先生", "t": "今日のゴールは3つです。"},
+   {"sc": 2, "sp": "先生", "t": "1つ目、VPNのしくみがわかること。", "y": "1つ目、ブイピーエヌのしくみがわかること。"},
+   {"sc": 2, "sp": "先生", "t": "2つ目、2つの形を区別できること。"},
+   {"sc": 2, "sp": "先生", "t": "3つ目、IPsecとGREの役割がわかること。", "y": "3つ目、アイピーセックとジーアールイーの役割がわかること。"},
+   {"sc": 2, "sp": "生徒", "t": "両方できるなら、すごいです。"},
+   {"sc": 3, "sp": "先生", "t": "VPNは、インターネットの中に、暗号化したトンネルを作ります。", "y": "ブイピーエヌは、インターネットの中に、暗号化したトンネルを作ります。"},
+   {"sc": 3, "sp": "生徒", "t": "トンネルの中なら、見られない？"},
+   {"sc": 3, "sp": "先生", "t": "のぞかれても、暗号化されているので読めません。"},
+   {"sc": 3, "sp": "先生", "t": "書きかえられていないか、本当に相手からかも、確かめます。"},
+   {"sc": 4, "sp": "先生", "t": "VPNには、2つの形があります。", "y": "ブイピーエヌには、2つの形があります。"},
+   {"sc": 4, "sp": "先生", "t": "サイト間VPNは、本社と支店のルーターどうしでトンネルを作ります。", "y": "サイト間ブイピーエヌは、本社と支店のルーターどうしでトンネルを作ります。"},
+   {"sc": 4, "sp": "生徒", "t": "PCには、何も入れなくていいんですか？", "y": "ピーシーには、何も入れなくていいんですか？"},
+   {"sc": 4, "sp": "先生", "t": "はい。いつもつながっています。"},
+   {"sc": 4, "sp": "先生", "t": "リモートアクセスVPNは、社員のPCのソフトから、会社につなぎます。", "y": "リモートアクセスブイピーエヌは、社員のピーシーのソフトから、会社につなぎます。"},
+   {"sc": 4, "sp": "生徒", "t": "在宅勤務は、こっちですね。"},
+   {"sc": 5, "sp": "先生", "t": "確認です。家からノートPCのソフトでつなぐVPNはどれでしょう？", "y": "確認です。家からノートピーシーのソフトでつなぐブイピーエヌはどれでしょう？", "w": 1},
+   {"sc": 5, "sp": "生徒", "t": "リモートアクセスVPNです。", "y": "リモートアクセスブイピーエヌです。"},
+   {"sc": 5, "sp": "先生", "t": "正解です。"},
+   {"sc": 6, "sp": "先生", "t": "サイト間VPNでよく使うのが、IPsecです。", "y": "サイト間ブイピーエヌでよく使うのが、アイピーセックです。"},
+   {"sc": 6, "sp": "先生", "t": "暗号化、改ざんの検知、相手の確認。CIAの道具が全部入っています。", "y": "暗号化、改ざんの検知、相手の確認。シーアイエーの道具が全部入っています。"},
+   {"sc": 6, "sp": "生徒", "t": "弱点はないんですか？"},
+   {"sc": 6, "sp": "先生", "t": "マルチキャストが苦手です。OSPFのHelloなどを、うまく運べません。", "y": "マルチキャストが苦手です。オーエスピーエフのハローなどを、うまく運べません。"},
+   {"sc": 7, "sp": "先生", "t": "そこで、GREの出番です。GREは、どんなパケットでも包んで運べます。", "y": "そこで、ジーアールイーの出番です。ジーアールイーは、どんなパケットでも包んで運べます。"},
+   {"sc": 7, "sp": "生徒", "t": "じゃあ、GREだけでいいのでは？", "y": "じゃあ、ジーアールイーだけでいいのでは？"},
+   {"sc": 7, "sp": "先生", "t": "GREは、暗号化しないんです。", "y": "ジーアールイーは、暗号化しないんです。"},
+   {"sc": 7, "sp": "生徒", "t": "だから、GREで包んでから、IPsecで守る！", "y": "だから、ジーアールイーで包んでから、アイピーセックで守る！"},
+   {"sc": 7, "sp": "先生", "t": "その通り。段ボールに詰めてから、金庫に入れるイメージです。"},
+   {"sc": 8, "sp": "先生", "t": "確認です。GREについて正しい説明はどれでしょう？", "y": "確認です。ジーアールイーについて正しい説明はどれでしょう？", "w": 1},
+   {"sc": 8, "sp": "生徒", "t": "マルチキャストも運べるけど、暗号化しない。2つ目です。"},
+   {"sc": 8, "sp": "先生", "t": "正解です。"},
+   {"sc": 9, "sp": "先生", "t": "確認です。PCにソフトを入れず、いつもつながっているVPNはどれでしょう？", "y": "確認です。ピーシーにソフトを入れず、いつもつながっているブイピーエヌはどれでしょう？", "w": 1},
+   {"sc": 9, "sp": "生徒", "t": "サイト間VPNです。", "y": "サイト間ブイピーエヌです。"},
+   {"sc": 9, "sp": "先生", "t": "正解です。"},
+   {"sc": 10, "sp": "生徒", "t": "GREだけで、安全だと思ってました。", "y": "ジーアールイーだけで、安全だと思ってました。"},
+   {"sc": 10, "sp": "先生", "t": "暗号化しないので、IPsecと組み合わせます。", "y": "暗号化しないので、アイピーセックと組み合わせます。"},
+   {"sc": 10, "sp": "生徒", "t": "サイト間はルーターどうし、リモートアクセスはPCから。", "y": "サイト間はルーターどうし、リモートアクセスはピーシーから。"},
+   {"sc": 11, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 11, "sp": "先生", "t": "1つ目。VPNは、インターネットの中の暗号のトンネル。", "y": "1つ目。ブイピーエヌは、インターネットの中の暗号のトンネル。"},
+   {"sc": 11, "sp": "先生", "t": "2つ目。サイト間はルーターどうし、リモートアクセスはPCのソフトから。", "y": "2つ目。サイト間はルーターどうし、リモートアクセスはピーシーのソフトから。"},
+   {"sc": 11, "sp": "先生", "t": "3つ目。IPsecは守る係、GREは包む係。", "y": "3つ目。アイピーセックは守る係、ジーアールイーは包む係。"},
+   {"sc": 11, "sp": "生徒", "t": "相談、両方解決ですね。"},
+   {"sc": 11, "sp": "先生", "t": "次回は、ACLです。お疲れさまでした。", "y": "次回は、エーシーエルです。お疲れさまでした。"}
+  ]
+ }
+}

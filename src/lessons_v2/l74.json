@@ -1,0 +1,141 @@
+{
+ "r": "TB",
+ "n": 74,
+ "t": "スイッチを守る（L2セキュリティ）",
+ "d": "d5",
+ "form": "事件簿",
+ "need": [60, 40],
+ "goal": ["ポートセキュリティがわかる", "DHCPスヌーピングがわかる", "DAIがわかる"],
+ "terms": ["ポートセキュリティ", "sticky", "err-disabled", "DHCPスヌーピング", "DAI"],
+ "pages": [
+  {
+   "t": "事件簿：会議室のポートで起きたこと",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 149.5\" role=\"img\" aria-label=\"3つの事件\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">会議室のポートに、私物のスイッチがつながれた</text><rect x=\"10\" y=\"52.5\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"78.0\" text-anchor=\"start\" style=\"font:800 12.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">社員のPCが、知らないゲートウェイのアドレスをもらった</text><rect x=\"10\" y=\"99.0\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#8a3ffc\" opacity=\".1\"/><text x=\"24\" y=\"124.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">通信が、知らないPCを経由していた</text></svg>",
+   "b": "会議室のLANポートで、3つの事件が起きました。私物のスイッチがつながれ、偽のDHCPサーバーがうそのゲートウェイを配り、うそのARPで通信がのぞかれていました。第68回で学んだ攻撃が、スイッチの<b>すぐそば</b>で起きたのです。今日は、スイッチでこれを防ぐ3つの道具を学びます。"
+  },
+  {
+   "t": "今日のゴール",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のゴール\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1. ポートセキュリティがわかる</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">つないでよいMACアドレスを決める</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2. DHCPスヌーピングがわかる</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">偽のDHCPサーバーを止める</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">3. DAIがわかる</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">うそのARPを止める</text></svg>"
+  },
+  {
+   "t": "つないでよい機器を決める（ポートセキュリティ）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 186.0\" role=\"img\" aria-label=\"ポートセキュリティ\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"166\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\">interface g0/5</text><text x=\"22\" y=\"74\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\"> switchport mode access</text><text x=\"22\" y=\"96\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\"> switchport port-security</text><text x=\"22\" y=\"118\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\"> switchport port-security maximum 2</text><text x=\"22\" y=\"140\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\"> switchport port-security mac-address sticky</text><text x=\"22\" y=\"162\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#ffb400;white-space:pre\"> switchport port-security violation restrict</text></svg>",
+   "b": "<b>ポートセキュリティ</b>は、ポートに<b>つないでよいMACアドレス</b>の数や中身を決めます。<b>maximum</b> で台数の上限（初期値1）、<b>sticky</b> で最初につながった機器のMACを自動で覚えさせます。アクセスポートにしてから有効にするのがポイントです。違反したときの動きは <b>violation</b> で決めます。"
+  },
+  {
+   "t": "違反したときの3つの動き",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 264.0\" role=\"img\" aria-label=\"violation\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">shutdown（初期値）</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ポートを err-disabled にして止める。ログも出る</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">restrict</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">違反した通信だけ捨てる。ログ・カウンターあり</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#3d4450\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">protect</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">違反した通信だけ捨てる。ログなし（静かに）</text><rect x=\"10\" y=\"196.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"222.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">err-disabled から戻すには</text><text x=\"24\" y=\"241.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">shutdown → no shutdown（または自動復旧）</text></svg>",
+   "b": "違反したときの動きは3つです。初期値の <b>shutdown</b> は、ポートを <b>err-disabled</b> にして止めます。<b>restrict</b> は、違反した通信だけを捨てて、ログを出し、回数を数えます。<b>protect</b> も捨てますが、<b>ログを出しません</b>。err-disabled になったポートは、shutdown → no shutdown で戻します。",
+   "p": "shutdown ＝ ポートごと止める、restrict ＝ 捨てて記録、protect ＝ 静かに捨てる。"
+  },
+  {
+   "t": "確認の問題 1",
+   "quiz": {
+    "q": "ポートセキュリティで、違反した通信を捨てつつ、ログを出して違反の回数を数え、ポート自体は止めない動作はどれでしょう？",
+    "o": [
+     ["shutdown", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["restrict", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["protect", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "<b>restrict</b> は、捨てて記録します。protect は記録せず、shutdown はポートを止めます。"
+   }
+  },
+  {
+   "t": "偽のDHCPサーバーを止める（DHCPスヌーピング）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 264.0\" role=\"img\" aria-label=\"DHCPスヌーピング\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">trusted（信頼）ポート</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">本物の DHCPサーバーやルーターへの口</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">untrusted（信頼しない）ポート</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">PC の口。Offer や Ack が来たら捨てる</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 13.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ip dhcp snooping、ip dhcp snooping vlan 10</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">上につながる口に ip dhcp snooping trust</text><rect x=\"10\" y=\"196.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"222.0\" text-anchor=\"start\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">だれにどのアドレスを配ったかの表（バインディング）</text><text x=\"24\" y=\"241.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">DAI でも使う</text></svg>",
+   "b": "<b>DHCPスヌーピング</b>は、ポートを<b>trusted（信頼する）</b>と<b>untrusted（信頼しない）</b>に分けます。本物のDHCPサーバーがいる上の口だけを trusted にし、PCの口は untrusted のまま。untrusted の口から、サーバーしか出さないはずの <b>Offer や Ack</b> が来たら、<b>偽のサーバー</b>なので捨てます。さらに、だれにどのアドレスが配られたかの表（<b>バインディング表</b>）も作ります。"
+  },
+  {
+   "t": "確認の問題 2",
+   "quiz": {
+    "q": "DHCPスヌーピングを有効にしたスイッチで、trusted にすべきポートはどれでしょう？",
+    "o": [
+     ["社員のPCがつながるポート", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["正規のDHCPサーバー（またはそこへ向かう上位）につながるポート", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["すべてのポート", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "<b>本物のDHCPサーバー側</b>の口だけを trusted にします。PCの口は untrusted です。"
+   }
+  },
+  {
+   "t": "うそのARPを止める（DAI）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 213.0\" role=\"img\" aria-label=\"DAI（ダイナミックARPインスペクション）\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">untrusted の口から来た ARP を調べる</text><rect x=\"10\" y=\"52.5\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"78.0\" text-anchor=\"start\" style=\"font:800 12.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">DHCPスヌーピングの表と、IPとMACの組み合わせを比べる</text><rect x=\"10\" y=\"99.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"124.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">合わなければ、うその ARP なので捨てる</text><text x=\"24\" y=\"143.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ARPスプーフィングを防ぐ</text><rect x=\"10\" y=\"162.5\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"188.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ip arp inspection vlan 10</text></svg>",
+   "b": "<b>DAI</b>（Dynamic ARP Inspection）は、untrusted の口から来た<b>ARPを調べます</b>。DHCPスヌーピングが作った<b>バインディング表</b>と、ARPに書かれた「IPとMACの組み合わせ」を比べ、<b>合わなければ捨てます</b>。これで、「私がゲートウェイです」という<b>うそのARP</b>（ARPスプーフィング）を防げます。DHCPスヌーピングとセットで使うのがポイントです。"
+  },
+  {
+   "t": "確認の問題 3",
+   "quiz": {
+    "q": "ARPスプーフィングによる中間者攻撃を防ぐため、DHCPスヌーピングの情報を使ってARPパケットを検査するスイッチの機能はどれでしょう？",
+    "o": [
+     ["ポートセキュリティ", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["DAI（ダイナミックARPインスペクション）", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["PortFast", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "ARPを検査するのは <b>DAI</b> です。DHCPスヌーピングのバインディング表を使います。"
+   }
+  },
+  {
+   "t": "まちがえやすい所",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 183.5\" role=\"img\" aria-label=\"よくある勘違い\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× DHCPスヌーピングでは、PCの口を trusted にする</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">trusted はサーバー側だけ</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× DAI は単独で動く</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">DHCPスヌーピングの表を使う</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ 初期値は shutdown・maximum 1</text></svg>",
+   "b": "trusted にするのは<b>本物のサーバー側</b>だけです。DAI は、<b>DHCPスヌーピングの表</b>を使って判断します。ポートセキュリティの初期値は、<b>1台まで</b>・違反したら<b>shutdown</b> です。"
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ポートセキュリティ</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">つないでよいMAC。shutdown・restrict・protect</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">DHCPスヌーピング</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">サーバー側だけ trusted。偽の Offer を捨てる</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">DAI</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">スヌーピングの表と比べて、うその ARP を捨てる</text></svg>",
+   "b": "次回は、セキュリティの最後として、<b>無線LANを守る</b>しくみを、WPA の世代対決で整理します。"
+  }
+ ],
+ "cls": {
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "会議室のLANポートで、3つの事件が起きました。", "y": "会議室のランポートで、3つの事件が起きました。"},
+   {"sc": 1, "sp": "先生", "t": "私物のスイッチ、偽のDHCPサーバー、うそのARPです。", "y": "私物のスイッチ、偽のディーエイチシーピーサーバー、うそのアープです。"},
+   {"sc": 1, "sp": "生徒", "t": "第68回で習った攻撃ばかりですね。"},
+   {"sc": 1, "sp": "先生", "t": "はい。スイッチのすぐそばで起きたんです。今日は、スイッチでの守り方です。"},
+   {"sc": 2, "sp": "先生", "t": "今日のゴールは3つです。"},
+   {"sc": 2, "sp": "先生", "t": "1つ目、ポートセキュリティがわかること。"},
+   {"sc": 2, "sp": "先生", "t": "2つ目、DHCPスヌーピングがわかること。", "y": "2つ目、ディーエイチシーピースヌーピングがわかること。"},
+   {"sc": 2, "sp": "先生", "t": "3つ目、DAIがわかること。", "y": "3つ目、ダイがわかること。"},
+   {"sc": 2, "sp": "生徒", "t": "事件を、全部防ぎたいです。"},
+   {"sc": 3, "sp": "先生", "t": "1つ目の道具は、ポートセキュリティ。つないでよいMACアドレスを決めます。", "y": "1つ目の道具は、ポートセキュリティ。つないでよいマックアドレスを決めます。"},
+   {"sc": 3, "sp": "先生", "t": "maximumで台数、stickyで最初の機器のMACを自動で覚えます。", "y": "マキシマムで台数、スティッキーで最初の機器のマックを自動で覚えます。"},
+   {"sc": 3, "sp": "生徒", "t": "私物のスイッチをつないだら？"},
+   {"sc": 3, "sp": "先生", "t": "MACが増えたり変わったりするので、違反になります。", "y": "マックが増えたり変わったりするので、違反になります。"},
+   {"sc": 4, "sp": "先生", "t": "違反したときの動きは3つです。初期値のshutdownは、ポートを止めます。", "y": "違反したときの動きは3つです。初期値のシャットダウンは、ポートを止めます。"},
+   {"sc": 4, "sp": "先生", "t": "restrictは、違反した通信だけ捨てて、記録します。", "y": "リストリクトは、違反した通信だけ捨てて、記録します。"},
+   {"sc": 4, "sp": "生徒", "t": "protectは？", "y": "プロテクトは？"},
+   {"sc": 4, "sp": "先生", "t": "捨てますが、記録しません。静かに捨てる、です。"},
+   {"sc": 4, "sp": "生徒", "t": "止まったポートは、どうやって戻すんですか？"},
+   {"sc": 4, "sp": "先生", "t": "shutdownして、no shutdownです。", "y": "シャットダウンして、ノー シャットダウンです。"},
+   {"sc": 5, "sp": "先生", "t": "確認です。捨てて記録し、ポートは止めない動作はどれでしょう？", "w": 1},
+   {"sc": 5, "sp": "生徒", "t": "restrictです。", "y": "リストリクトです。"},
+   {"sc": 5, "sp": "先生", "t": "正解です。"},
+   {"sc": 6, "sp": "先生", "t": "2つ目は、DHCPスヌーピング。ポートを、信頼するとしないに分けます。", "y": "2つ目は、ディーエイチシーピースヌーピング。ポートを、信頼するとしないに分けます。"},
+   {"sc": 6, "sp": "先生", "t": "本物のDHCPサーバー側の口だけをtrustedにします。", "y": "本物のディーエイチシーピーサーバー側の口だけをtrustedにします。"},
+   {"sc": 6, "sp": "生徒", "t": "PCの口から、Offerが来たら？", "y": "ピーシーの口から、オファーが来たら？"},
+   {"sc": 6, "sp": "先生", "t": "PCがOfferを出すはずがないので、偽のサーバーとして捨てます。", "y": "ピーシーがオファーを出すはずがないので、偽のサーバーとして捨てます。"},
+   {"sc": 6, "sp": "生徒", "t": "だれに何を配ったかの表も、作るんですね。"},
+   {"sc": 7, "sp": "先生", "t": "確認です。trustedにすべきポートはどれでしょう？", "w": 1},
+   {"sc": 7, "sp": "生徒", "t": "本物のDHCPサーバー側です。", "y": "本物のディーエイチシーピーサーバー側です。"},
+   {"sc": 7, "sp": "先生", "t": "正解です。"},
+   {"sc": 8, "sp": "先生", "t": "3つ目は、DAI。untrustedの口から来たARPを調べます。", "y": "3つ目は、ダイ。untrustedの口から来たアープを調べます。"},
+   {"sc": 8, "sp": "先生", "t": "スヌーピングの表と、IPとMACの組み合わせを比べます。", "y": "スヌーピングの表と、アイピーとマックの組み合わせを比べます。"},
+   {"sc": 8, "sp": "生徒", "t": "合わなければ、うそのARP！", "y": "合わなければ、うそのアープ！"},
+   {"sc": 8, "sp": "先生", "t": "そうです。私がゲートウェイです、といううそを見破れます。"},
+   {"sc": 9, "sp": "先生", "t": "確認です。ARPを検査するスイッチの機能はどれでしょう？", "y": "確認です。アープを検査するスイッチの機能はどれでしょう？", "w": 1},
+   {"sc": 9, "sp": "生徒", "t": "DAIです。", "y": "ダイです。"},
+   {"sc": 9, "sp": "先生", "t": "正解です。"},
+   {"sc": 10, "sp": "生徒", "t": "PCの口を、trustedにしちゃいそうです。", "y": "ピーシーの口を、trustedにしちゃいそうです。"},
+   {"sc": 10, "sp": "先生", "t": "trustedはサーバー側だけ。PCは信頼しない、です。", "y": "trustedはサーバー側だけ。ピーシーは信頼しない、です。"},
+   {"sc": 10, "sp": "生徒", "t": "DAIは、スヌーピングの表を使う。", "y": "ダイは、スヌーピングの表を使う。"},
+   {"sc": 11, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 11, "sp": "先生", "t": "1つ目。ポートセキュリティは、shutdown、restrict、protect。", "y": "1つ目。ポートセキュリティは、シャットダウン、リストリクト、プロテクト。"},
+   {"sc": 11, "sp": "先生", "t": "2つ目。DHCPスヌーピングは、サーバー側だけtrusted。", "y": "2つ目。ディーエイチシーピースヌーピングは、サーバー側だけtrusted。"},
+   {"sc": 11, "sp": "先生", "t": "3つ目。DAIは、表と比べてうそのARPを捨てる。", "y": "3つ目。ダイは、表と比べてうそのアープを捨てる。"},
+   {"sc": 11, "sp": "生徒", "t": "会議室の事件、全部防げますね。"},
+   {"sc": 11, "sp": "先生", "t": "次回は、無線LANを守るしくみです。お疲れさまでした。", "y": "次回は、無線ランを守るしくみです。お疲れさまでした。"}
+  ]
+ }
+}
