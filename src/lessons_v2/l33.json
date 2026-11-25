@@ -1,0 +1,161 @@
+{
+ "r": "TB",
+ "n": 33,
+ "t": "スイッチをまたぐVLAN（トランク）",
+ "d": "d2",
+ "form": "実況中継",
+ "need": [32],
+ "goal": ["トランクとは何かを言える", "タグ（802.1Q）のしくみがわかる", "ネイティブVLANがわかる"],
+ "terms": ["トランク", "802.1Q", "タグ", "ネイティブVLAN"],
+ "pages": [
+  {
+   "t": "VLANが、2台のスイッチにまたがったら？",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 124.0\" role=\"img\" aria-label=\"つかみ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"110\" rx=\"16\" fill=\"#0a5cff\" opacity=\".12\"/><text x=\"180\" y=\"44\" text-anchor=\"middle\" style=\"font:800 14.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1階と2階のスイッチに、同じVLAN 10の経理がいる</text><text x=\"180\" y=\"74\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">VLANが10種類あったら、ケーブルも10本？</text><text x=\"180\" y=\"94\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1本で済ませる方法があります</text></svg>",
+   "b": "経理部が1階と2階に分かれていて、それぞれのフロアのスイッチにつながっています。どちらもVLAN 10です。スイッチどうしをつなぐとき、VLAN 10用、VLAN 20用…と<b>VLANの数だけケーブル</b>を引くのでしょうか？ VLANが10種類あったら10本です。今日は、<b>1本のケーブルで、全部のVLANを運ぶ</b>方法を学びます。"
+  },
+  {
+   "t": "今日のゴール",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のゴール\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1. トランクとは何かを言える</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1本で、複数のVLANを運ぶポート</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2. タグ（802.1Q）のしくみがわかる</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">どのVLANのフレームかの印</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">3. ネイティブVLANがわかる</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">タグを付けずに運ぶVLAN</text></svg>"
+  },
+  {
+   "t": "1本で全部運ぶ（トランク）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 206.0\" role=\"img\" aria-label=\"トランク\"><path d=\"M30 40L110 80\" stroke=\"#0a5cff\" stroke-width=\"3\" opacity=\".7\"/><path d=\"M30 125L110 80\" stroke=\"#ffb400\" stroke-width=\"3\" opacity=\".7\"/><path d=\"M110 80L250 80\" stroke=\"#8a3ffc\" stroke-width=\"3\" opacity=\".7\"/><text x=\"180.0\" y=\"73.0\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">トランク（1本）</text><path d=\"M250 80L330 40\" stroke=\"#0a5cff\" stroke-width=\"3\" opacity=\".7\"/><path d=\"M250 80L330 125\" stroke=\"#ffb400\" stroke-width=\"3\" opacity=\".7\"/><rect x=\"88\" y=\"67\" width=\"44\" height=\"26\" rx=\"5\" fill=\"#00a05a\"/><path d=\"M98 76h22l-4-3M122 84h-22l4 3\" stroke=\"#fff\" stroke-width=\"2.2\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><text x=\"110\" y=\"54\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">SW1</text><rect x=\"228\" y=\"67\" width=\"44\" height=\"26\" rx=\"5\" fill=\"#00a05a\"/><path d=\"M238 76h22l-4-3M262 84h-22l4 3\" stroke=\"#fff\" stroke-width=\"2.2\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><text x=\"250\" y=\"54\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">SW2</text><rect x=\"14\" y=\"26\" width=\"32\" height=\"21\" rx=\"3\" fill=\"none\" stroke=\"#0a5cff\" stroke-width=\"3\"/><path d=\"M21 54h18M30 47v7\" stroke=\"#0a5cff\" stroke-width=\"3\" stroke-linecap=\"round\"/><text x=\"30\" y=\"14\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">VLAN10</text><rect x=\"14\" y=\"111\" width=\"32\" height=\"21\" rx=\"3\" fill=\"none\" stroke=\"#ffb400\" stroke-width=\"3\"/><path d=\"M21 139h18M30 132v7\" stroke=\"#ffb400\" stroke-width=\"3\" stroke-linecap=\"round\"/><text x=\"30\" y=\"159\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">VLAN20</text><rect x=\"314\" y=\"26\" width=\"32\" height=\"21\" rx=\"3\" fill=\"none\" stroke=\"#0a5cff\" stroke-width=\"3\"/><path d=\"M321 54h18M330 47v7\" stroke=\"#0a5cff\" stroke-width=\"3\" stroke-linecap=\"round\"/><text x=\"330\" y=\"14\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">VLAN10</text><rect x=\"314\" y=\"111\" width=\"32\" height=\"21\" rx=\"3\" fill=\"none\" stroke=\"#ffb400\" stroke-width=\"3\"/><path d=\"M321 139h18M330 132v7\" stroke=\"#ffb400\" stroke-width=\"3\" stroke-linecap=\"round\"/><text x=\"330\" y=\"159\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">VLAN20</text><text x=\"180\" y=\"178\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">トランク1本で、VLAN 10 も 20 も運ぶ</text></svg>",
+   "b": "スイッチどうしをつなぐポートを<b>トランク</b>にすると、<b>1本のケーブルで、複数のVLANのフレーム</b>を運べます。アクセスポートが1つのVLANだけの「専用道路」なら、トランクは<b>いろいろなVLANが走る幹線道路</b>です。スイッチとスイッチ、スイッチとルーターをつなぐ所によく使います。",
+   "p": "アクセスポート ＝ 1つのVLAN、トランク ＝ 複数のVLAN を運ぶ。"
+  },
+  {
+   "t": "どのVLANか、印を付ける（タグ）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"タグ\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">トランクでは、フレームに「タグ」を付ける</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">タグに、どのVLANのフレームかが書いてある</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">タグの決まり ＝ IEEE 802.1Q</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ドット・ワン・キュー（dot1Q）とも呼ぶ</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">タグの中の VLAN番号は 12ビット</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">だから使えるVLANは 1〜4094</text></svg>",
+   "b": "1本のケーブルに、いろいろなVLANのフレームが混ざって流れたら、受け取ったスイッチは「これはどのVLANの？」と困ってしまいます。そこでトランクでは、フレームに<b>どのVLANかを書いた印（タグ）</b>を付けて送ります。このタグの決まりが <b>IEEE 802.1Q</b>（dot1Q）です。VLAN番号は12ビットなので、使えるVLANは <b>1〜4094</b> です。"
+  },
+  {
+   "t": "実況：タグを付けて、外す",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 226.0\" role=\"img\" aria-label=\"トランク\"><path d=\"M30 40L110 80\" stroke=\"#0a5cff\" stroke-width=\"3\" opacity=\".7\"/><path d=\"M30 125L110 80\" stroke=\"#ffb400\" stroke-width=\"3\" opacity=\".7\"/><path d=\"M110 80L250 80\" stroke=\"#8a3ffc\" stroke-width=\"3\" opacity=\".7\"/><text x=\"180.0\" y=\"73.0\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">トランク（1本）</text><path d=\"M250 80L330 40\" stroke=\"#0a5cff\" stroke-width=\"3\" opacity=\".7\"/><path d=\"M250 80L330 125\" stroke=\"#ffb400\" stroke-width=\"3\" opacity=\".7\"/><rect x=\"88\" y=\"67\" width=\"44\" height=\"26\" rx=\"5\" fill=\"#00a05a\"/><path d=\"M98 76h22l-4-3M122 84h-22l4 3\" stroke=\"#fff\" stroke-width=\"2.2\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><text x=\"110\" y=\"54\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">SW1</text><rect x=\"228\" y=\"67\" width=\"44\" height=\"26\" rx=\"5\" fill=\"#00a05a\"/><path d=\"M238 76h22l-4-3M262 84h-22l4 3\" stroke=\"#fff\" stroke-width=\"2.2\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><text x=\"250\" y=\"54\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">SW2</text><rect x=\"14\" y=\"26\" width=\"32\" height=\"21\" rx=\"3\" fill=\"none\" stroke=\"#0a5cff\" stroke-width=\"3\"/><path d=\"M21 54h18M30 47v7\" stroke=\"#0a5cff\" stroke-width=\"3\" stroke-linecap=\"round\"/><text x=\"30\" y=\"14\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">VLAN10</text><rect x=\"14\" y=\"111\" width=\"32\" height=\"21\" rx=\"3\" fill=\"none\" stroke=\"#ffb400\" stroke-width=\"3\"/><path d=\"M21 139h18M30 132v7\" stroke=\"#ffb400\" stroke-width=\"3\" stroke-linecap=\"round\"/><text x=\"30\" y=\"159\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">VLAN20</text><rect x=\"314\" y=\"26\" width=\"32\" height=\"21\" rx=\"3\" fill=\"none\" stroke=\"#0a5cff\" stroke-width=\"3\"/><path d=\"M321 54h18M330 47v7\" stroke=\"#0a5cff\" stroke-width=\"3\" stroke-linecap=\"round\"/><text x=\"330\" y=\"14\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">VLAN10</text><rect x=\"314\" y=\"111\" width=\"32\" height=\"21\" rx=\"3\" fill=\"none\" stroke=\"#ffb400\" stroke-width=\"3\"/><path d=\"M321 139h18M330 132v7\" stroke=\"#ffb400\" stroke-width=\"3\" stroke-linecap=\"round\"/><text x=\"330\" y=\"159\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">VLAN20</text><text x=\"180\" y=\"178\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">① SW1：「10」のタグを付けてトランクへ</text><text x=\"180\" y=\"198\" text-anchor=\"middle\" style=\"font:600 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">② SW2：タグを見て VLAN 10 へ。外してPCへ</text></svg>",
+   "b": "実況しましょう。1階のVLAN 10のPCがフレームを送ります。PCから届いたフレームに、タグはありません。SW1は、トランクに送り出すときに<b>「10」のタグを付けます</b>。SW2はタグを見て「VLAN 10のフレームだ」とわかり、VLAN 10のポートへ。PCに渡すときは<b>タグを外します</b>。PCは、タグのことを何も知らなくてよいのです。"
+  },
+  {
+   "t": "確認の問題 1",
+   "quiz": {
+    "q": "トランクで、フレームにどのVLANかの印（タグ）を付けるときの決まりはどれでしょう？",
+    "o": [
+     ["IEEE 802.1Q", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["IEEE 802.11ax", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["IEEE 802.3at", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 0,
+    "e": "VLANのタグの決まりは <b>IEEE 802.1Q</b> です。802.11ax は無線LAN、802.3at は PoE+ でした。"
+   }
+  },
+  {
+   "t": "タグを付けないVLAN（ネイティブVLAN）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"ネイティブVLAN\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">トランクの中で、1つだけタグを付けずに運ぶVLAN</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">これをネイティブVLANと言う</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">初期値は VLAN 1</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">タグなしは、ネイティブVLANとして扱う</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">両側のスイッチで、同じ番号にそろえる</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">違うと、別のVLANにまぎれ込む（警告も出る）</text></svg>",
+   "b": "実はトランクでも、<b>1つのVLANだけはタグを付けずに</b>運びます。これを<b>ネイティブVLAN</b>と言い、初期値は<b>VLAN 1</b>です。タグなしのフレームが届いたら、ネイティブVLANのものとして扱います。だから、<b>両側のスイッチでネイティブVLANの番号をそろえる</b>必要があります。違っていると、フレームが別のVLANにまぎれ込んでしまいます。"
+  },
+  {
+   "t": "確認の問題 2",
+   "quiz": {
+    "q": "802.1Q のトランクで、ネイティブVLANのフレームはどのように送られるでしょう？",
+    "o": [
+     ["タグを付けずに送る", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["タグを2つ付けて送る", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["送られない", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 0,
+    "e": "ネイティブVLANのフレームは、<b>タグを付けずに</b>送ります。"
+   }
+  },
+  {
+   "t": "トランクにする設定",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 184.0\" role=\"img\" aria-label=\"トランクの設定\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"100\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\">SW1(config)# interface gi0/24</text><text x=\"22\" y=\"74\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">SW1(config-if)# switchport mode trunk</text><text x=\"22\" y=\"96\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#ffb400;white-space:pre\">SW1(config-if)# switchport trunk native vlan 99</text><text x=\"180\" y=\"132\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">switchport mode trunk でトランクにする</text><text x=\"180\" y=\"156\" text-anchor=\"middle\" style=\"font:700 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ネイティブVLANを変えるときは、両側で同じ番号に</text></svg>",
+   "b": "ポートをトランクにするには、<b>switchport mode trunk</b> と設定します。ネイティブVLANを初期値のVLAN 1から変えたいときは、<b>switchport trunk native vlan 99</b> のように設定します（安全のため、使っていない番号にすることが多いです）。変えるときは、<b>両側のスイッチで同じ番号</b>にしましょう。"
+  },
+  {
+   "t": "確認の問題 3",
+   "quiz": {
+    "q": "SW1 のトランクのネイティブVLANを 99 に変えましたが、向かいの SW2 は VLAN 1 のままです。起きることとして正しいものはどれでしょう？",
+    "o": [
+     ["タグなしのフレームが、別のVLANにまぎれ込む", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["通信が速くなる", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["何も起きない", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 0,
+    "e": "ネイティブVLANが<b>一致していない</b>と、タグなしのフレームが別のVLANとして扱われ、まぎれ込んでしまいます。"
+   }
+  },
+  {
+   "t": "まちがえやすい所",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 247.0\" role=\"img\" aria-label=\"よくある勘違い\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× PCにも、タグ付きのフレームが届く</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">PCに渡すとき、スイッチはタグを外す</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ タグが付くのは、トランクの上だけ</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">アクセスポートはタグなし</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× トランクでは、全部のVLANにタグが付く</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ネイティブVLANだけはタグなし</text><rect x=\"10\" y=\"196.5\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"222.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ ネイティブVLANは、両側でそろえる</text></svg>",
+   "b": "タグが付くのは<b>トランクの上だけ</b>です。アクセスポートからPCに渡すときはタグを外すので、PCはタグを意識しません。また、トランクでも<b>ネイティブVLANだけはタグなし</b>で、両側の番号をそろえる必要がある、という点もよく問われます。"
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">トランク</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1本で複数のVLANを運ぶ。switchport mode trunk</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">タグ（802.1Q）</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">どのVLANかの印。トランクで付けて、PCに渡すとき外す</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ネイティブVLAN</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">タグなしで運ぶVLAN。初期値1。両側でそろえる</text></svg>",
+   "b": "次回は、トランクを<b>自動で作る</b>しくみ（DTP）や、トランクで通すVLANを<b>しぼる</b>設定、状態を確かめるコマンドを、トラブル解決の形で学びます。"
+  }
+ ],
+ "cls": {
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "経理部が、1階と2階に分かれているとします。"},
+   {"sc": 1, "sp": "先生", "t": "それぞれのフロアのスイッチにつながっていて、どちらもVLAN 10です。", "y": "それぞれのフロアのスイッチにつながっていて、どちらもブイラン 10です。"},
+   {"sc": 1, "sp": "生徒", "t": "スイッチどうしを、ケーブルでつなげばいいんですよね。"},
+   {"sc": 1, "sp": "先生", "t": "はい。でも、VLAN 20の営業も、両方のフロアにいたら？", "y": "はい。でも、ブイラン 20の営業も、両方のフロアにいたら？"},
+   {"sc": 1, "sp": "生徒", "t": "VLAN 20用のケーブルも、もう1本？", "y": "ブイラン 20用のケーブルも、もう1本？"},
+   {"sc": 1, "sp": "先生", "t": "VLANが10種類あったら、10本です。", "y": "ブイランが10種類あったら、10本です。"},
+   {"sc": 1, "sp": "生徒", "t": "それは大変です…"},
+   {"sc": 1, "sp": "先生", "t": "今日は、1本のケーブルで、全部のVLANを運ぶ方法を学びます。", "y": "今日は、1本のケーブルで、全部のブイランを運ぶ方法を学びます。"},
+   {"sc": 2, "sp": "先生", "t": "今日のゴールは3つです。"},
+   {"sc": 2, "sp": "先生", "t": "1つ目、トランクとは何かを言えること。"},
+   {"sc": 2, "sp": "先生", "t": "2つ目、タグのしくみがわかること。"},
+   {"sc": 2, "sp": "先生", "t": "3つ目、ネイティブVLANがわかることです。", "y": "3つ目、ネイティブブイランがわかることです。"},
+   {"sc": 2, "sp": "生徒", "t": "トランク…車のトランクですか？"},
+   {"sc": 2, "sp": "先生", "t": "ここでは、幹線、太い道路という意味です。"},
+   {"sc": 3, "sp": "先生", "t": "スイッチどうしをつなぐポートを、トランクにします。"},
+   {"sc": 3, "sp": "先生", "t": "すると、1本のケーブルで、いろいろなVLANのフレームを運べます。", "y": "すると、1本のケーブルで、いろいろなブイランのフレームを運べます。"},
+   {"sc": 3, "sp": "生徒", "t": "アクセスポートとは、何が違うんですか？"},
+   {"sc": 3, "sp": "先生", "t": "アクセスポートは、1つのVLANだけの専用道路。トランクは、いろんなVLANが走る幹線道路です。", "y": "アクセスポートは、1つのブイランだけの専用道路。トランクは、いろんなブイランが走る幹線道路です。"},
+   {"sc": 3, "sp": "生徒", "t": "なるほど、だからトランク、幹線なんですね。"},
+   {"sc": 4, "sp": "生徒", "t": "でも、いろんなVLANが混ざって流れたら、受け取った側が困りませんか？", "y": "でも、いろんなブイランが混ざって流れたら、受け取った側が困りませんか？"},
+   {"sc": 4, "sp": "先生", "t": "いい疑問です。そこで、フレームに印を付けます。これをタグと言います。"},
+   {"sc": 4, "sp": "先生", "t": "タグには、どのVLANのフレームかが書いてあります。", "y": "タグには、どのブイランのフレームかが書いてあります。"},
+   {"sc": 4, "sp": "先生", "t": "タグの決まりは、IEEE 802.1Q、ドット・ワン・キューとも呼びます。", "y": "タグの決まりは、アイトリプルイー ハチマルニーテンイチキュー、ドット・ワン・キューとも呼びます。"},
+   {"sc": 4, "sp": "生徒", "t": "番号はいくつまで書けるんですか？"},
+   {"sc": 4, "sp": "先生", "t": "12ビットなので、使えるVLANは1から4094までです。", "y": "12ビットなので、使えるブイランは1から4094までです。"},
+   {"sc": 5, "sp": "先生", "t": "では、実況しましょう。1階のVLAN 10のPCが、フレームを送ります。", "y": "では、実況しましょう。1階のブイラン 10のピーシーが、フレームを送ります。"},
+   {"sc": 5, "sp": "先生", "t": "PCから届いたフレームには、タグはありません。", "y": "ピーシーから届いたフレームには、タグはありません。"},
+   {"sc": 5, "sp": "先生", "t": "SW1は、トランクに送り出すときに、10のタグを付けます。"},
+   {"sc": 5, "sp": "生徒", "t": "SW2は、タグを見て、VLAN 10のフレームだとわかる。", "y": "SW2は、タグを見て、ブイラン 10のフレームだとわかる。"},
+   {"sc": 5, "sp": "先生", "t": "そうです。そしてPCに渡すときは、タグを外します。", "y": "そうです。そしてピーシーに渡すときは、タグを外します。"},
+   {"sc": 5, "sp": "生徒", "t": "PCは、タグのことを知らなくていいんですね。", "y": "ピーシーは、タグのことを知らなくていいんですね。"},
+   {"sc": 6, "sp": "先生", "t": "確認です。VLANのタグの決まりはどれでしょう？", "y": "確認です。ブイランのタグの決まりはどれでしょう？", "w": 1},
+   {"sc": 6, "sp": "生徒", "t": "802.1Qです。", "y": "ハチマルニーテンイチキューです。"},
+   {"sc": 6, "sp": "先生", "t": "正解です。"},
+   {"sc": 7, "sp": "先生", "t": "実は、トランクでも、1つのVLANだけはタグを付けずに運びます。", "y": "実は、トランクでも、1つのブイランだけはタグを付けずに運びます。"},
+   {"sc": 7, "sp": "先生", "t": "これを、ネイティブVLANと言います。初期値はVLAN 1です。", "y": "これを、ネイティブブイランと言います。初期値はブイラン 1です。"},
+   {"sc": 7, "sp": "生徒", "t": "タグなしのフレームが届いたら？"},
+   {"sc": 7, "sp": "先生", "t": "ネイティブVLANのものとして扱います。", "y": "ネイティブブイランのものとして扱います。"},
+   {"sc": 7, "sp": "生徒", "t": "じゃあ、両側で番号が違ったら…"},
+   {"sc": 7, "sp": "先生", "t": "鋭いですね。別のVLANに、まぎれ込んでしまいます。だから、両側でそろえます。", "y": "鋭いですね。別のブイランに、まぎれ込んでしまいます。だから、両側でそろえます。"},
+   {"sc": 8, "sp": "先生", "t": "確認です。ネイティブVLANのフレームは、どう送られるでしょう？", "y": "確認です。ネイティブブイランのフレームは、どう送られるでしょう？", "w": 1},
+   {"sc": 8, "sp": "生徒", "t": "タグを付けずに送る。1つ目です。"},
+   {"sc": 8, "sp": "先生", "t": "正解です。"},
+   {"sc": 9, "sp": "先生", "t": "設定は、switchport mode trunkで、トランクにします。", "y": "設定は、スイッチポート モード トランクで、トランクにします。"},
+   {"sc": 9, "sp": "先生", "t": "ネイティブVLANを変えるときは、switchport trunk native vlan 99のようにします。", "y": "ネイティブブイランを変えるときは、スイッチポート トランク ネイティブ ブイラン 99のようにします。"},
+   {"sc": 9, "sp": "生徒", "t": "どうして、わざわざ変えるんですか？"},
+   {"sc": 9, "sp": "先生", "t": "安全のため、使っていない番号にすることが多いんです。変えるときは、両側で同じ番号にします。"},
+   {"sc": 10, "sp": "先生", "t": "確認です。片方だけネイティブVLANを99に変えたら、どうなるでしょう？", "y": "確認です。片方だけネイティブブイランを99に変えたら、どうなるでしょう？", "w": 1},
+   {"sc": 10, "sp": "生徒", "t": "番号がそろってないから、まぎれ込む。1つ目です。"},
+   {"sc": 10, "sp": "先生", "t": "正解です。"},
+   {"sc": 11, "sp": "生徒", "t": "PCにも、タグ付きのフレームが届くと思ってました。", "y": "ピーシーにも、タグ付きのフレームが届くと思ってました。"},
+   {"sc": 11, "sp": "先生", "t": "よくある勘違いです。タグが付くのは、トランクの上だけです。"},
+   {"sc": 11, "sp": "生徒", "t": "PCに渡すときは、外すんでしたね。", "y": "ピーシーに渡すときは、外すんでしたね。"},
+   {"sc": 11, "sp": "先生", "t": "それから、トランクでも、ネイティブVLANだけはタグなし、もよく問われます。", "y": "それから、トランクでも、ネイティブブイランだけはタグなし、もよく問われます。"},
+   {"sc": 11, "sp": "生徒", "t": "両側でそろえる、も忘れません。"},
+   {"sc": 12, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 12, "sp": "先生", "t": "1つ目。トランクは、1本で複数のVLANを運ぶ。", "y": "1つ目。トランクは、1本で複数のブイランを運ぶ。"},
+   {"sc": 12, "sp": "先生", "t": "2つ目。タグは802.1Q。トランクで付けて、PCに渡すとき外す。", "y": "2つ目。タグはハチマルニーテンイチキュー。トランクで付けて、ピーシーに渡すとき外す。"},
+   {"sc": 12, "sp": "先生", "t": "3つ目。ネイティブVLANはタグなし。初期値は1で、両側でそろえる。", "y": "3つ目。ネイティブブイランはタグなし。初期値は1で、両側でそろえる。"},
+   {"sc": 12, "sp": "生徒", "t": "ケーブル10本は、引かなくて済みますね。"},
+   {"sc": 12, "sp": "先生", "t": "次回は、トランクの設定と確認を、トラブル解決で学びます。お疲れさまでした。"}
+  ]
+ }
+}
