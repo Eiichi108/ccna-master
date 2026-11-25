@@ -1,0 +1,136 @@
+{
+ "r": "TB",
+ "n": 42,
+ "t": "隣の機器を知る（CDP・LLDP）",
+ "d": "d2",
+ "form": "トラブル解決",
+ "need": [15],
+ "goal": ["CDPとLLDPの違いがわかる", "show cdp neighbors を読める", "CDPを止める理由がわかる"],
+ "terms": ["CDP", "LLDP", "show cdp neighbors"],
+ "pages": [
+  {
+   "t": "このケーブルの先に、何がある？",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 124.0\" role=\"img\" aria-label=\"つかみ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"110\" rx=\"16\" fill=\"#0a5cff\" opacity=\".12\"/><text x=\"180\" y=\"44\" text-anchor=\"middle\" style=\"font:800 15.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">このケーブルの先には、どの機器のどのポート？</text><text x=\"180\" y=\"74\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">配線図は古くて、あてにならない</text><text x=\"180\" y=\"94\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ケーブルをたどらずに調べる方法があります</text></svg>",
+   "b": "サーバー室のラックには、ケーブルが何十本も挿さっています。「このポートの先は、どの機器のどのポート？」と聞かれても、配線図は古く、ケーブルを手でたどるのは大変です。今日は、<b>となりにつながった機器の情報を、自動で教え合う</b>しくみを学びます。"
+  },
+  {
+   "t": "今日のゴール",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のゴール\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1. CDPとLLDPの違いがわかる</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Cisco独自と、業界標準</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2. show cdp neighbors を読める</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">自分のポートと、相手のポート</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">3. CDPを止める理由がわかる</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">情報が外にもれるのを防ぐ</text></svg>"
+  },
+  {
+   "t": "となりと名刺交換（CDP・LLDP）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 171.0\" role=\"img\" aria-label=\"CDPとLLDP\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">CDP（Cisco Discovery Protocol）</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Cisco独自。Cisco機器では最初から有効</text><text x=\"24\" y=\"67.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">60秒ごとに送り、180秒届かなければ消す</text><rect x=\"10\" y=\"86.5\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"112.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">LLDP（Link Layer Discovery Protocol）</text><text x=\"24\" y=\"131.0\" text-anchor=\"start\" style=\"font:600 12.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">業界標準（IEEE 802.1AB）。ほかのメーカーとも使える</text><text x=\"24\" y=\"148.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Cisco機器では最初は無効 → lldp run で有効に</text></svg>",
+   "b": "<b>CDP</b> と <b>LLDP</b> は、となりにつながった機器と、<b>名前・機種・ポート・IPアドレス</b>などを教え合うしくみです。名刺交換のようなものです。<b>CDP</b> はCisco独自で、Cisco機器では最初から有効。60秒ごとに送り、180秒届かなければ情報を消します。<b>LLDP</b> は業界標準（IEEE 802.1AB）で、ほかのメーカーとも使えますが、Cisco機器では最初は無効なので <b>lldp run</b> で有効にします。",
+   "p": "CDP＝Cisco独自・最初から有効、LLDP＝標準・lldp run で有効。"
+  },
+  {
+   "t": "確認の問題 1",
+   "quiz": {
+    "q": "Cisco以外のメーカーのスイッチも混ざった環境で、となりの機器の情報を教え合うのに使うのはどれでしょう？",
+    "o": [
+     ["CDP", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["LLDP", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["STP", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "業界標準の <b>LLDP</b> なら、ほかのメーカーの機器とも教え合えます。"
+   }
+  },
+  {
+   "t": "show cdp neighbors を読む",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 206.0\" role=\"img\" aria-label=\"show cdp neighbors\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"122\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\">SW1# show cdp neighbors</text><text x=\"22\" y=\"74\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#e8ecf3;white-space:pre\">Device ID   Local Intrfce   Holdtme   Port ID</text><text x=\"22\" y=\"96\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">R1          Gig 0/1         152       Gig 0/0/0</text><text x=\"22\" y=\"118\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#e8ecf3;white-space:pre\">AP-3F       Gig 0/12        127       Gig 0</text><text x=\"180\" y=\"154\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Local Intrfce ＝ 自分（SW1）側のポート</text><text x=\"180\" y=\"178\" text-anchor=\"middle\" style=\"font:700 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Port ID ＝ 相手側のポート</text></svg>",
+   "b": "<b>show cdp neighbors</b> で、となりの機器の一覧が見られます。<b>Device ID</b> は相手の名前、<b>Local Intrfce</b> は<b>自分の側</b>のポート、<b>Port ID</b> は<b>相手の側</b>のポートです。この例では、SW1 の Gig 0/1 が、R1 の Gig 0/0/0 につながっています。<b>Holdtme</b> は、あと何秒この情報を持っておくかです。IPアドレスやOSのバージョンまで見たいときは <b>show cdp neighbors detail</b> を使います。"
+  },
+  {
+   "t": "確認の問題 2",
+   "quiz": {
+    "q": "上の出力で、R1 のどのポートが SW1 につながっているでしょう？",
+    "o": [
+     ["Gig 0/1", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["Gig 0/0/0", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["Gig 0", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "相手（R1）の側のポートは <b>Port ID</b> の列なので、<b>Gig 0/0/0</b> です。Gig 0/1 は SW1 の側のポートです。"
+   }
+  },
+  {
+   "t": "外向きのポートでは、止める",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"CDPを止める\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">CDPは、機種やOSのバージョンまで教える</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">攻撃者にとっては、弱点を探すヒント</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">信頼できない相手のポートでは止める</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">interface で no cdp enable</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">全体で止めるなら no cdp run</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">LLDPなら no lldp run・no lldp transmit</text></svg>",
+   "b": "便利なCDPですが、機器の名前や機種、<b>OSのバージョン</b>まで教えてしまいます。攻撃者に知られると、「このバージョンには弱点がある」と狙われるかもしれません。だから、<b>インターネットなど信頼できない相手</b>につながるポートでは、<b>no cdp enable</b> でCDPを止めます。"
+  },
+  {
+   "t": "確認の問題 3",
+   "quiz": {
+    "q": "インターネットサービスプロバイダーにつながるポートで no cdp enable を設定する主な理由はどれでしょう？",
+    "o": [
+     ["機器の名前やOSのバージョンなどが外にもれるのを防ぐため", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["通信を速くするため", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["STPを止めるため", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 0,
+    "e": "CDPは攻撃のヒントになる情報を教えてしまうので、<b>外にもれないように</b>止めます。"
+   }
+  },
+  {
+   "t": "まちがえやすい所",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 183.5\" role=\"img\" aria-label=\"よくある勘違い\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× Port ID は、自分のポート</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Port ID は相手の側のポート</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ Local Intrfce ＝ 自分、Port ID ＝ 相手</text><rect x=\"10\" y=\"116.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"141.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× LLDP は、Cisco機器で最初から有効</text><text x=\"24\" y=\"160.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">最初から有効なのは CDP。LLDP は lldp run</text></svg>",
+   "b": "show cdp neighbors で一番まちがえやすいのは、<b>Local Intrfce（自分）</b>と <b>Port ID（相手）</b>の取りちがえです。また、Cisco機器で最初から有効なのは<b>CDP</b>で、LLDPは <b>lldp run</b> で有効にする必要があります。"
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">CDP と LLDP</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Cisco独自で最初から有効／標準で lldp run</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">出力の読み方</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 11.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Local Intrfce＝自分、Port ID＝相手、Holdtme＝残り秒</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">外向きでは止める</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">no cdp enable で情報がもれるのを防ぐ</text></svg>",
+   "b": "次回からは、<b>無線LANの構成</b>に戻ります。たくさんのAPを、どうやってまとめて動かしているのかを学びます。"
+  }
+ ],
+ "cls": {
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "サーバー室のラックに、ケーブルが何十本も挿さっています。"},
+   {"sc": 1, "sp": "先生", "t": "このポートの先は、どの機器のどのポート？ と聞かれたら、どうしますか？"},
+   {"sc": 1, "sp": "生徒", "t": "配線図を見ます。"},
+   {"sc": 1, "sp": "先生", "t": "その配線図が、古くてあてにならなかったら？"},
+   {"sc": 1, "sp": "生徒", "t": "ケーブルを手でたどる…大変そうです。"},
+   {"sc": 1, "sp": "先生", "t": "今日は、ケーブルをたどらずに調べる方法を学びます。"},
+   {"sc": 2, "sp": "先生", "t": "今日のゴールは3つです。"},
+   {"sc": 2, "sp": "先生", "t": "1つ目、CDPとLLDPの違いがわかること。", "y": "1つ目、シーディーピーとエルエルディーピーの違いがわかること。"},
+   {"sc": 2, "sp": "先生", "t": "2つ目、show cdp neighbors を読めること。", "y": "2つ目、ショー cdp ネイバーズ を読めること。"},
+   {"sc": 2, "sp": "先生", "t": "3つ目、CDPを止める理由がわかること。", "y": "3つ目、シーディーピーを止める理由がわかること。"},
+   {"sc": 2, "sp": "生徒", "t": "となりの機器が、自分で教えてくれるんですか？"},
+   {"sc": 3, "sp": "先生", "t": "CDPとLLDPは、となりの機器と、名前や機種、ポートなどを教え合うしくみです。", "y": "シーディーピーとエルエルディーピーは、となりの機器と、名前や機種、ポートなどを教え合うしくみです。"},
+   {"sc": 3, "sp": "生徒", "t": "名刺交換みたいですね。"},
+   {"sc": 3, "sp": "先生", "t": "まさにそうです。CDPはCisco独自で、Cisco機器では最初から有効です。", "y": "まさにそうです。シーディーピーはシスコ独自で、シスコ機器では最初から有効です。"},
+   {"sc": 3, "sp": "先生", "t": "60秒ごとに送って、180秒届かなければ、その情報を消します。"},
+   {"sc": 3, "sp": "先生", "t": "LLDPは業界標準で、ほかのメーカーとも使えます。", "y": "エルエルディーピーは業界標準で、ほかのメーカーとも使えます。"},
+   {"sc": 3, "sp": "生徒", "t": "LLDPも、最初から有効ですか？", "y": "エルエルディーピーも、最初から有効ですか？"},
+   {"sc": 3, "sp": "先生", "t": "Cisco機器では最初は無効なので、lldp runで有効にします。", "y": "シスコ機器では最初は無効なので、エルエルディーピー、ランで有効にします。"},
+   {"sc": 4, "sp": "先生", "t": "確認です。ほかのメーカーの機器とも教え合うのに使うのはどれでしょう？", "w": 1},
+   {"sc": 4, "sp": "生徒", "t": "業界標準のLLDPです。", "y": "業界標準のエルエルディーピーです。"},
+   {"sc": 4, "sp": "先生", "t": "正解です。"},
+   {"sc": 5, "sp": "先生", "t": "show cdp neighborsで、となりの機器の一覧が見られます。", "y": "ショー cdp ネイバーズで、となりの機器の一覧が見られます。"},
+   {"sc": 5, "sp": "先生", "t": "Device IDは相手の名前、Local Intrfceは自分の側のポート、Port IDは相手の側のポートです。", "y": "Device IDは相手の名前、ローカルインターフェースは自分の側のポート、ポートアイディーは相手の側のポートです。"},
+   {"sc": 5, "sp": "生徒", "t": "SW1のGig 0/1が、R1のGig 0/0/0につながってる、ってことですね。", "y": "SW1のGig 0スラッシュ1が、R1のGig 0スラッシュ0スラッシュ0につながってる、ってことですね。"},
+   {"sc": 5, "sp": "先生", "t": "その通り。IPアドレスやOSのバージョンまで見たいときは、detailを付けます。", "y": "その通り。アイピーアドレスやOSのバージョンまで見たいときは、ディテールを付けます。"},
+   {"sc": 6, "sp": "先生", "t": "確認です。R1のどのポートがSW1につながっているでしょう？", "w": 1},
+   {"sc": 6, "sp": "生徒", "t": "相手の側はPort IDだから、Gig 0/0/0です。", "y": "相手の側はポートアイディーだから、Gig 0スラッシュ0スラッシュ0です。"},
+   {"sc": 6, "sp": "先生", "t": "正解です。"},
+   {"sc": 7, "sp": "先生", "t": "便利なCDPですが、OSのバージョンまで教えてしまいます。", "y": "便利なシーディーピーですが、OSのバージョンまで教えてしまいます。"},
+   {"sc": 7, "sp": "生徒", "t": "それって、危なくないですか？"},
+   {"sc": 7, "sp": "先生", "t": "攻撃者に知られると、このバージョンには弱点がある、と狙われるかもしれません。"},
+   {"sc": 7, "sp": "先生", "t": "だから、インターネットなど信頼できない相手のポートでは、no cdp enableで止めます。", "y": "だから、インターネットなど信頼できない相手のポートでは、ノー cdp enableで止めます。"},
+   {"sc": 7, "sp": "生徒", "t": "名刺は、知らない人には渡さないってことですね。"},
+   {"sc": 8, "sp": "先生", "t": "確認です。外向きのポートでCDPを止める主な理由はどれでしょう？", "y": "確認です。外向きのポートでシーディーピーを止める主な理由はどれでしょう？", "w": 1},
+   {"sc": 8, "sp": "生徒", "t": "情報がもれるのを防ぐため。1つ目です。"},
+   {"sc": 8, "sp": "先生", "t": "正解です。"},
+   {"sc": 9, "sp": "生徒", "t": "Port IDを、自分のポートだと思いそうです。", "y": "ポートアイディーを、自分のポートだと思いそうです。"},
+   {"sc": 9, "sp": "先生", "t": "一番多いまちがいです。Local Intrfceが自分、Port IDが相手です。", "y": "一番多いまちがいです。ローカルインターフェースが自分、ポートアイディーが相手です。"},
+   {"sc": 9, "sp": "生徒", "t": "あと、LLDPは最初から動いてると思ってました。", "y": "あと、エルエルディーピーは最初から動いてると思ってました。"},
+   {"sc": 9, "sp": "先生", "t": "Cisco機器で最初から有効なのは、CDPのほうです。", "y": "シスコ機器で最初から有効なのは、シーディーピーのほうです。"},
+   {"sc": 10, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 10, "sp": "先生", "t": "1つ目。CDPはCisco独自で最初から有効、LLDPは標準でlldp runで有効。", "y": "1つ目。シーディーピーはシスコ独自で最初から有効、エルエルディーピーは標準でエルエルディーピー、ランで有効。"},
+   {"sc": 10, "sp": "先生", "t": "2つ目。Local Intrfceは自分、Port IDは相手。", "y": "2つ目。ローカルインターフェースは自分、ポートアイディーは相手。"},
+   {"sc": 10, "sp": "先生", "t": "3つ目。外向きのポートでは、no cdp enableで止める。", "y": "3つ目。外向きのポートでは、ノー cdp enableで止める。"},
+   {"sc": 10, "sp": "生徒", "t": "ケーブルをたどらなくて済みますね。"},
+   {"sc": 10, "sp": "先生", "t": "次回は、無線LANの構成です。お疲れさまでした。", "y": "次回は、無線ランの構成です。お疲れさまでした。"}
+  ]
+ }
+}

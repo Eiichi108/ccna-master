@@ -1,0 +1,145 @@
+{
+ "r": "TB",
+ "n": 43,
+ "t": "無線LANの構成",
+ "d": "d2",
+ "form": "対決",
+ "need": [29],
+ "goal": ["3つの構成の違いがわかる", "CAPWAPがわかる", "スプリットMACがわかる"],
+ "terms": ["自律型AP", "軽量AP", "WLC", "CAPWAP", "スプリットMAC", "クラウド管理型"],
+ "pages": [
+  {
+   "t": "APが3台と、APが300台",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 124.0\" role=\"img\" aria-label=\"つかみ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"110\" rx=\"16\" fill=\"#0a5cff\" opacity=\".12\"/><text x=\"180\" y=\"44\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">APが3台の事務所と、300台の本社</text><text x=\"180\" y=\"74\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">3台なら、1台ずつ設定してもいい</text><text x=\"180\" y=\"94\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">300台を1台ずつ設定するのは無理</text></svg>",
+   "b": "APが3台の小さな事務所なら、1台ずつ設定しても大した手間ではありません。でも、APが300台ある本社で、パスワードを変えるたびに300台を1台ずつ設定するのは無理ですよね。今日は、無線LANの<b>3つの構成</b>を比べ、たくさんのAPをどうまとめて動かすのかを学びます。"
+  },
+  {
+   "t": "今日のゴール",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のゴール\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1. 3つの構成の違いがわかる</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">自律型・軽量AP＋WLC・クラウド管理</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2. CAPWAPがわかる</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">APとWLCをつなぐトンネル</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">3. スプリットMACがわかる</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">APとWLCの仕事の分け方</text></svg>"
+  },
+  {
+   "t": "3つの構成",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 234.5\" role=\"img\" aria-label=\"無線LANの構成\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#3d4450\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">自律型AP</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1台ずつ自分で全部やる。設定も1台ずつ</text><text x=\"24\" y=\"67.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">小さな事務所向け</text><rect x=\"10\" y=\"86.5\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"112.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">軽量AP ＋ WLC</text><text x=\"24\" y=\"131.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">WLC がまとめて管理。APは言われたとおり動く</text><text x=\"24\" y=\"148.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">大きな会社向け</text><rect x=\"10\" y=\"167.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"192.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">クラウド管理型（例：Meraki）</text><text x=\"24\" y=\"211.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">インターネットの向こうの画面から、まとめて管理</text></svg>",
+   "b": "無線LANには3つの構成があります。<b>自律型AP</b>は、1台ずつが自分で全部をこなし、設定も1台ずつです。<b>軽量AP＋WLC</b>は、<b>WLC</b>（無線LANコントローラー）がたくさんのAPをまとめて管理します。<b>クラウド管理型</b>は、Merakiのように、インターネットの向こうの管理画面から、どこにあるAPでもまとめて管理できます。",
+   "p": "自律型＝1台ずつ、軽量AP＝WLCがまとめる、クラウド＝ネット越しにまとめる。"
+  },
+  {
+   "t": "確認の問題 1",
+   "quiz": {
+    "q": "WLCを使わず、APを1台ずつ個別に設定して運用する構成で使うAPはどれでしょう？",
+    "o": [
+     ["自律型AP", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["軽量AP", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["クラウド管理型AP", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 0,
+    "e": "1台ずつ自分で全部こなすのは<b>自律型AP</b>です。"
+   }
+  },
+  {
+   "t": "APとWLCをつなぐトンネル（CAPWAP）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 178.0\" role=\"img\" aria-label=\"CAPWAP\"><path d=\"M60 70L180 70\" stroke=\"#8a3ffc\" stroke-width=\"3\" opacity=\".7\"/><path d=\"M180 70L300 70\" stroke=\"#8a3ffc\" stroke-width=\"3\" opacity=\".7\"/><text x=\"240.0\" y=\"63.0\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">CAPWAP（トンネル）</text><circle cx=\"60\" cy=\"76\" r=\"5\" fill=\"#00a05a\"/><path d=\"M50 68a14 14 0 0 1 20 0M44 62a22 22 0 0 1 32 0\" stroke=\"#00a05a\" stroke-width=\"3\" fill=\"none\" stroke-linecap=\"round\"/><text x=\"60\" y=\"44\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">軽量AP</text><rect x=\"158\" y=\"57\" width=\"44\" height=\"26\" rx=\"5\" fill=\"#3d4450\"/><path d=\"M168 66h22l-4-3M192 74h-22l4 3\" stroke=\"#fff\" stroke-width=\"2.2\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><rect x=\"287\" y=\"52\" width=\"26\" height=\"36\" rx=\"3\" fill=\"#0a5cff\"/><path d=\"M293 61h14M293 69h14M293 77h14\" stroke=\"#fff\" stroke-width=\"2\"/><text x=\"300\" y=\"44\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">WLC</text><text x=\"180\" y=\"130\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">制御用 UDP 5246、データ用 UDP 5247</text><text x=\"180\" y=\"150\" text-anchor=\"middle\" style=\"font:600 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">AP と WLC の間を、トンネルでつなぐ</text></svg>",
+   "b": "軽量APとWLCは、<b>CAPWAP</b> というトンネルでつながります。APとWLCの間にスイッチやルーターがあっても、トンネルの中で直接話しているように見えます。CAPWAPは、<b>制御用（UDP 5246）</b>と<b>データ用（UDP 5247）</b>の2つの通り道を使います。"
+  },
+  {
+   "t": "仕事の分け方（スプリットMAC）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"スプリットMAC\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">軽量APの仕事</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">電波を出す・受ける、暗号化、すぐ返事が必要な仕事</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">WLCの仕事</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">認証、どのAPにつなぐかの管理、設定の配布</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">無線の仕事を、APとWLCで分ける</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">これをスプリットMAC と言う</text></svg>",
+   "b": "軽量APとWLCは、無線の仕事を<b>分け合って</b>います。電波を出したり受けたり、すぐに返事が必要な仕事は<b>AP</b>。端末の認証や、どのAPにつながっているかの管理、設定の配布は<b>WLC</b>。このように仕事を分けることを<b>スプリットMAC</b>と言います。"
+  },
+  {
+   "t": "確認の問題 2",
+   "quiz": {
+    "q": "軽量APとWLCの間で作られるトンネルのプロトコルはどれでしょう？",
+    "o": [
+     ["CAPWAP", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["802.1Q", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["LACP", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 0,
+    "e": "APとWLCは <b>CAPWAP</b>（制御 UDP 5246、データ UDP 5247）でつながります。"
+   }
+  },
+  {
+   "t": "クラウド管理型",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"クラウド管理型\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 13.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">APは、インターネットの向こうの管理画面につながる</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">会社にWLCを置かなくてよい</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">たくさんの拠点を、1つの画面で管理できる</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">支店が多い会社に便利</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">データの通信は、ふつう現地で流れる</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">管理の情報だけがクラウドへ</text></svg>",
+   "b": "<b>クラウド管理型</b>では、APがインターネットの向こうの管理画面につながります。会社にWLCを置く必要がなく、支店がたくさんあっても<b>1つの画面</b>でまとめて管理できます。社員のデータの通信は、ふつう現地のネットワークに流れ、管理の情報だけがクラウドとやりとりされます。"
+  },
+  {
+   "t": "確認の問題 3",
+   "quiz": {
+    "q": "スプリットMACで、WLCが受け持つ仕事はどれでしょう？",
+    "o": [
+     ["電波を出したり受けたりする", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["端末の認証や、設定の配布", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["ケーブルの長さを測る", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "<b>認証や設定の配布</b>はWLC、電波の送受信はAPの仕事です。"
+   }
+  },
+  {
+   "t": "まちがえやすい所",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 183.5\" role=\"img\" aria-label=\"よくある勘違い\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× 軽量APは、1台ずつ設定する</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">設定はWLCがまとめて配る</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ 1台ずつ設定するのは自律型AP</text><rect x=\"10\" y=\"116.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"141.5\" text-anchor=\"start\" style=\"font:800 13.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× CAPWAP は、APとスイッチの間のケーブルの名前</text><text x=\"24\" y=\"160.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">APとWLCの間のトンネル</text></svg>",
+   "b": "軽量APは「軽い」ので、自分では設定を持たず、<b>WLCから設定をもらいます</b>。1台ずつ設定するのは<b>自律型</b>です。また、CAPWAPはケーブルではなく、<b>APとWLCの間のトンネル</b>です。"
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">3つの構成</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">自律型・軽量AP＋WLC・クラウド管理型</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">CAPWAP</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">APとWLCのトンネル（UDP 5246・5247）</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">スプリットMAC</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">電波はAP、認証や管理はWLC</text></svg>",
+   "b": "次回は、軽量APの<b>モード</b>と、APをつなぐ<b>スイッチのポートの設定</b>を学びます。"
+  }
+ ],
+ "cls": {
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "APが3台の小さな事務所と、APが300台の本社を、くらべてみましょう。", "y": "エーピーが3台の小さな事務所と、エーピーが300台の本社を、くらべてみましょう。"},
+   {"sc": 1, "sp": "生徒", "t": "3台なら、1台ずつ設定してもいいですね。"},
+   {"sc": 1, "sp": "先生", "t": "では、300台は？ パスワードを変えるたびに、1台ずつ設定しますか？"},
+   {"sc": 1, "sp": "生徒", "t": "無理です！ 1日がかりになります。"},
+   {"sc": 1, "sp": "先生", "t": "今日は、たくさんのAPを、まとめて動かすしくみを学びます。", "y": "今日は、たくさんのエーピーを、まとめて動かすしくみを学びます。"},
+   {"sc": 2, "sp": "先生", "t": "今日のゴールは3つです。"},
+   {"sc": 2, "sp": "先生", "t": "1つ目、3つの構成の違いがわかること。"},
+   {"sc": 2, "sp": "先生", "t": "2つ目、CAPWAPがわかること。", "y": "2つ目、キャップワップがわかること。"},
+   {"sc": 2, "sp": "先生", "t": "3つ目、スプリットMACがわかること。", "y": "3つ目、スプリットマックがわかること。"},
+   {"sc": 2, "sp": "生徒", "t": "3つの構成を、くらべるんですね。"},
+   {"sc": 3, "sp": "先生", "t": "無線LANには、3つの構成があります。", "y": "無線ランには、3つの構成があります。"},
+   {"sc": 3, "sp": "先生", "t": "1つ目は自律型AP。1台ずつが、自分で全部こなします。設定も1台ずつです。", "y": "1つ目は自律型エーピー。1台ずつが、自分で全部こなします。設定も1台ずつです。"},
+   {"sc": 3, "sp": "先生", "t": "2つ目は軽量APとWLC。WLCが、たくさんのAPをまとめて管理します。", "y": "2つ目は軽量エーピーとダブリューエルシー。ダブリューエルシーが、たくさんのエーピーをまとめて管理します。"},
+   {"sc": 3, "sp": "生徒", "t": "APは、言われたとおり動くだけ？", "y": "エーピーは、言われたとおり動くだけ？"},
+   {"sc": 3, "sp": "先生", "t": "そうです。だから軽量、と呼びます。"},
+   {"sc": 3, "sp": "先生", "t": "3つ目はクラウド管理型。インターネットの向こうの画面から、まとめて管理します。"},
+   {"sc": 3, "sp": "生徒", "t": "Merakiって、聞いたことがあります。", "y": "メラキって、聞いたことがあります。"},
+   {"sc": 4, "sp": "先生", "t": "確認です。APを1台ずつ設定して運用する構成で使うAPはどれでしょう？", "y": "確認です。エーピーを1台ずつ設定して運用する構成で使うエーピーはどれでしょう？", "w": 1},
+   {"sc": 4, "sp": "生徒", "t": "自律型APです。", "y": "自律型エーピーです。"},
+   {"sc": 4, "sp": "先生", "t": "正解です。"},
+   {"sc": 5, "sp": "先生", "t": "軽量APとWLCは、CAPWAPというトンネルでつながります。", "y": "軽量エーピーとダブリューエルシーは、キャップワップというトンネルでつながります。"},
+   {"sc": 5, "sp": "生徒", "t": "間にスイッチやルーターがあっても？"},
+   {"sc": 5, "sp": "先生", "t": "はい。トンネルの中で、直接話しているように見えます。"},
+   {"sc": 5, "sp": "先生", "t": "制御用のUDP 5246と、データ用のUDP 5247の、2つの通り道を使います。", "y": "制御用のユーディーピー 5246と、データ用のユーディーピー 5247の、2つの通り道を使います。"},
+   {"sc": 6, "sp": "先生", "t": "軽量APとWLCは、無線の仕事を分け合っています。", "y": "軽量エーピーとダブリューエルシーは、無線の仕事を分け合っています。"},
+   {"sc": 6, "sp": "先生", "t": "電波を出したり受けたり、すぐ返事が必要な仕事は、AP。", "y": "電波を出したり受けたり、すぐ返事が必要な仕事は、エーピー。"},
+   {"sc": 6, "sp": "先生", "t": "端末の認証や、設定の配布は、WLCです。", "y": "端末の認証や、設定の配布は、ダブリューエルシーです。"},
+   {"sc": 6, "sp": "生徒", "t": "現場の作業はAP、事務の仕事はWLC、みたいですね。", "y": "現場の作業はエーピー、事務の仕事はダブリューエルシー、みたいですね。"},
+   {"sc": 6, "sp": "先生", "t": "いいたとえです。これをスプリットMACと言います。", "y": "いいたとえです。これをスプリットマックと言います。"},
+   {"sc": 7, "sp": "先生", "t": "確認です。APとWLCの間のトンネルのプロトコルはどれでしょう？", "y": "確認です。エーピーとダブリューエルシーの間のトンネルのプロトコルはどれでしょう？", "w": 1},
+   {"sc": 7, "sp": "生徒", "t": "CAPWAPです。", "y": "キャップワップです。"},
+   {"sc": 7, "sp": "先生", "t": "正解です。"},
+   {"sc": 8, "sp": "先生", "t": "最後に、クラウド管理型です。APが、インターネットの向こうの管理画面につながります。", "y": "最後に、クラウド管理型です。エーピーが、インターネットの向こうの管理画面につながります。"},
+   {"sc": 8, "sp": "生徒", "t": "会社に、WLCを置かなくていいんですか？", "y": "会社に、ダブリューエルシーを置かなくていいんですか？"},
+   {"sc": 8, "sp": "先生", "t": "はい。支店がたくさんあっても、1つの画面で管理できます。"},
+   {"sc": 8, "sp": "生徒", "t": "社員のデータも、クラウドを通るんですか？"},
+   {"sc": 8, "sp": "先生", "t": "ふつうは現地のネットワークに流れます。クラウドとやりとりするのは、管理の情報だけです。"},
+   {"sc": 9, "sp": "先生", "t": "確認です。スプリットMACで、WLCの仕事はどれでしょう？", "y": "確認です。スプリットマックで、ダブリューエルシーの仕事はどれでしょう？", "w": 1},
+   {"sc": 9, "sp": "生徒", "t": "認証や設定の配布。2つ目です。"},
+   {"sc": 9, "sp": "先生", "t": "正解です。"},
+   {"sc": 10, "sp": "生徒", "t": "軽量APも、1台ずつ設定するんだと思ってました。", "y": "軽量エーピーも、1台ずつ設定するんだと思ってました。"},
+   {"sc": 10, "sp": "先生", "t": "設定はWLCがまとめて配ります。1台ずつなのは自律型です。", "y": "設定はダブリューエルシーがまとめて配ります。1台ずつなのは自律型です。"},
+   {"sc": 10, "sp": "生徒", "t": "CAPWAPは、ケーブルの名前じゃなくて、トンネル。", "y": "キャップワップは、ケーブルの名前じゃなくて、トンネル。"},
+   {"sc": 10, "sp": "先生", "t": "その通りです。"},
+   {"sc": 11, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 11, "sp": "先生", "t": "1つ目。自律型、軽量APとWLC、クラウド管理型の3つ。", "y": "1つ目。自律型、軽量エーピーとダブリューエルシー、クラウド管理型の3つ。"},
+   {"sc": 11, "sp": "先生", "t": "2つ目。CAPWAPは、APとWLCのトンネル。", "y": "2つ目。キャップワップは、エーピーとダブリューエルシーのトンネル。"},
+   {"sc": 11, "sp": "先生", "t": "3つ目。スプリットMACは、電波はAP、認証や管理はWLC。", "y": "3つ目。スプリットマックは、電波はエーピー、認証や管理はダブリューエルシー。"},
+   {"sc": 11, "sp": "生徒", "t": "300台でも、まとめて設定できますね。"},
+   {"sc": 11, "sp": "先生", "t": "次回は、APのモードとスイッチのポートです。お疲れさまでした。", "y": "次回は、エーピーのモードとスイッチのポートです。お疲れさまでした。"}
+  ]
+ }
+}
