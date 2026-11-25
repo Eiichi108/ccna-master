@@ -1,0 +1,139 @@
+{
+ "r": "TB",
+ "n": 57,
+ "t": "ゲートウェイを二重にする（FHRP）",
+ "d": "d3",
+ "form": "事件簿",
+ "need": [49],
+ "goal": ["FHRPが必要な理由がわかる", "仮想IPのしくみがわかる", "HSRP・VRRP・GLBPを比べられる"],
+ "terms": ["FHRP", "仮想IP", "HSRP", "VRRP", "GLBP", "preempt"],
+ "pages": [
+  {
+   "t": "事件：ルーターが1台壊れて、全員ネットにつながらない",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 178.0\" role=\"img\" aria-label=\"事件の現場\"><path d=\"M60 75L180 75\" stroke=\"#3d4450\" stroke-width=\"3\" opacity=\".7\"/><path d=\"M180 75L310 35\" stroke=\"#e6261f\" stroke-width=\"3\" opacity=\".7\"/><path d=\"M180 75L310 115\" stroke=\"#3d4450\" stroke-width=\"3\" opacity=\".7\"/><rect x=\"44\" y=\"61\" width=\"32\" height=\"21\" rx=\"3\" fill=\"none\" stroke=\"#3d4450\" stroke-width=\"3\"/><path d=\"M51 89h18M60 82v7\" stroke=\"#3d4450\" stroke-width=\"3\" stroke-linecap=\"round\"/><text x=\"60\" y=\"49\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">社員のPC</text><text x=\"60\" y=\"109\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">GW 10.1.1.1</text><rect x=\"158\" y=\"62\" width=\"44\" height=\"26\" rx=\"5\" fill=\"#3d4450\"/><path d=\"M168 71h22l-4-3M192 79h-22l4 3\" stroke=\"#fff\" stroke-width=\"2.2\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><circle cx=\"310\" cy=\"35\" r=\"18\" fill=\"#e6261f\"/><path d=\"M301 31h12l-4-4M319 39h-12l4 4\" stroke=\"#fff\" stroke-width=\"2.4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><text x=\"310\" y=\"9\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">R1（故障）</text><text x=\"310\" y=\"69\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">10.1.1.1</text><circle cx=\"310\" cy=\"115\" r=\"18\" fill=\"#0a5cff\"/><path d=\"M301 111h12l-4-4M319 119h-12l4 4\" stroke=\"#fff\" stroke-width=\"2.4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><text x=\"310\" y=\"89\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">R2</text><text x=\"310\" y=\"149\" text-anchor=\"middle\" style=\"font:700 10.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">10.1.1.2</text><text x=\"180\" y=\"150\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">R2 は生きているのに、PC は R1 しか知らない</text></svg>",
+   "b": "ある朝、R1が故障しました。R2は元気に動いているのに、社員全員がインターネットにつながりません。なぜでしょう？ PCに設定されているデフォルトゲートウェイが <b>10.1.1.1（R1）だけ</b>だからです。PCには、ゲートウェイを1つしか書けません。今日は、この事件を防ぐ <b>FHRP</b> を学びます。"
+  },
+  {
+   "t": "今日のゴール",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のゴール\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1. FHRPが必要な理由がわかる</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ゲートウェイは1つしか書けない</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2. 仮想IPのしくみがわかる</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2台で1つのアドレスを持つ</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">3. HSRP・VRRP・GLBPを比べられる</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">アクティブ/スタンバイと、負荷分散</text></svg>"
+  },
+  {
+   "t": "2台で1つのアドレスを持つ（仮想IP）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 247.0\" role=\"img\" aria-label=\"FHRPのしくみ\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">R1 と R2 で、仮想IP 10.1.1.254 を共有する</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">PC のゲートウェイは 10.1.1.254</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ふだんは R1（アクティブ）が仮想IPを受け持つ</text><rect x=\"10\" y=\"116.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"141.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">R1 が倒れたら、R2 が仮想IPを引き継ぐ</text><text x=\"24\" y=\"160.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">PC の設定は変えなくてよい</text><rect x=\"10\" y=\"179.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#8a3ffc\" opacity=\".1\"/><text x=\"24\" y=\"205.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">仮想MACアドレスも一緒に引き継ぐ</text><text x=\"24\" y=\"224.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">PC の ARP の表も変えずに済む</text></svg>",
+   "b": "<b>FHRP</b>（First Hop Redundancy Protocol、最初の出口を二重にするしくみ）では、R1とR2が<b>1つの仮想IPアドレス</b>（例：10.1.1.254）を共有します。PCのゲートウェイは、この仮想IPにしておきます。ふだんはR1が受け持ち、R1が倒れると<b>R2が仮想IPと仮想MACを引き継ぎます</b>。PCは何も変えずに、通信を続けられます。",
+   "p": "PCのゲートウェイは、実際のルーターではなく仮想IPにする。"
+  },
+  {
+   "t": "確認の問題 1",
+   "quiz": {
+    "q": "FHRPを使うとき、PCのデフォルトゲートウェイには何を設定するでしょう？",
+    "o": [
+     ["R1 の実際のIPアドレス", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["R1 と R2 が共有する仮想IPアドレス", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["R2 の実際のIPアドレス", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "PCのゲートウェイは<b>仮想IP</b>にします。そうすれば、どちらのルーターが受け持っても設定を変えずに済みます。"
+   }
+  },
+  {
+   "t": "HSRP（Cisco独自）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 206.0\" role=\"img\" aria-label=\"HSRPの設定（R1）\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"122\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\">R1(config)# interface g0/0</text><text x=\"22\" y=\"74\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">R1(config-if)# standby 1 ip 10.1.1.254</text><text x=\"22\" y=\"96\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">R1(config-if)# standby 1 priority 110</text><text x=\"22\" y=\"118\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#ffb400;white-space:pre\">R1(config-if)# standby 1 preempt</text><text x=\"180\" y=\"154\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">priority の初期値は 100。高い方がアクティブ</text><text x=\"180\" y=\"178\" text-anchor=\"middle\" style=\"font:700 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">preempt ＝ 復活したら取りもどす</text></svg>",
+   "b": "Cisco独自の <b>HSRP</b> では、受け持つほうを<b>アクティブ</b>、待機するほうを<b>スタンバイ</b>と呼びます。<b>standby 1 ip 10.1.1.254</b> で仮想IPを決め、<b>priority</b>（初期値100）が高いほうがアクティブになります。<b>preempt</b> を付けると、R1が修理されて戻ってきたとき、アクティブを<b>取りもどします</b>。付けないと、R2がアクティブのままです。"
+  },
+  {
+   "t": "確認の問題 2",
+   "quiz": {
+    "q": "HSRPで、R1（priority 110）が故障から復旧したとき、R2からアクティブの役割を取りもどすために必要な設定はどれでしょう？",
+    "o": [
+     ["standby preempt", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["standby timers", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["standby track", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 0,
+    "e": "<b>preempt</b> がないと、優先度が高くても、アクティブを取りもどしません。"
+   }
+  },
+  {
+   "t": "3つのFHRPを比べる",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"HSRP・VRRP・GLBP\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">HSRP（Cisco独自）</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 11.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">アクティブ／スタンバイ。仮想MAC 0000.0c07.acXX（v1）</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">VRRP（業界標準）</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">マスター／バックアップ。仮想MAC 0000.5e00.01XX</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">GLBP（Cisco独自）</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">複数のルーターで同時に負荷分散（AVG と AVF）</text></svg>",
+   "b": "FHRPには3種類あります。<b>HSRP</b> はCisco独自で、アクティブ／スタンバイ。<b>VRRP</b> は業界標準で、ほかのメーカーとも使え、マスター／バックアップと呼びます。<b>GLBP</b> はCisco独自で、1つの仮想IPのまま、<b>複数のルーターに通信を振り分けて同時に使う</b>（負荷分散）ことができます。HSRPとVRRPでは、スタンバイ側はふだん遊んでいます。"
+  },
+  {
+   "t": "確認の問題 3",
+   "quiz": {
+    "q": "1つの仮想IPアドレスを使いながら、複数のルーターで同時にトラフィックを分け合えるFHRPはどれでしょう？",
+    "o": [
+     ["HSRP", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["VRRP", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["GLBP", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 2,
+    "e": "負荷分散ができるのは <b>GLBP</b> です。HSRPとVRRPは、1台が受け持ち、残りは待機します。"
+   }
+  },
+  {
+   "t": "まちがえやすい所",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 183.5\" role=\"img\" aria-label=\"よくある勘違い\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× PC に、ゲートウェイを2つ書けば大丈夫</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ゲートウェイは1つ。だから仮想IP</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× priority が高ければ、復旧後すぐ取りもどす</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">preempt がないと取りもどさない</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ 標準は VRRP、負荷分散は GLBP</text></svg>",
+   "b": "PCには基本的にゲートウェイを1つしか書けないので、<b>仮想IP</b>が必要になります。HSRPで、priority が高くても、<b>preempt がなければ取りもどしません</b>。業界標準は <b>VRRP</b>、負荷分散は <b>GLBP</b> と覚えましょう。"
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">FHRP</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ゲートウェイを二重に。PCは仮想IPをゲートウェイにする</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">HSRP</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">priority 100。preempt で取りもどす</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">VRRP・GLBP</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">VRRP＝業界標準、GLBP＝負荷分散</text></svg>",
+   "b": "次回から、新しい分野<b>「IPのサービス」</b>に入ります。まずは、家や会社のネットワークに欠かせない <b>NAT</b> です。"
+  }
+ ],
+ "cls": {
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "ある朝、R1が故障しました。R2は、元気に動いています。"},
+   {"sc": 1, "sp": "先生", "t": "なのに、社員全員が、インターネットにつながりません。"},
+   {"sc": 1, "sp": "生徒", "t": "R2が生きてるなら、R2を通ればいいのに。"},
+   {"sc": 1, "sp": "先生", "t": "PCのゲートウェイには、R1の10.1.1.1しか書いてないんです。", "y": "ピーシーのゲートウェイには、R1の10、1、1、1しか書いてないんです。"},
+   {"sc": 1, "sp": "生徒", "t": "ゲートウェイって、1つしか書けないんでしたっけ。"},
+   {"sc": 1, "sp": "先生", "t": "そうです。今日は、この事件を防ぐしくみを学びます。"},
+   {"sc": 2, "sp": "先生", "t": "今日のゴールは3つです。"},
+   {"sc": 2, "sp": "先生", "t": "1つ目、FHRPが必要な理由がわかること。", "y": "1つ目、エフエイチアールピーが必要な理由がわかること。"},
+   {"sc": 2, "sp": "先生", "t": "2つ目、仮想IPのしくみがわかること。", "y": "2つ目、仮想アイピーのしくみがわかること。"},
+   {"sc": 2, "sp": "先生", "t": "3つ目、HSRP・VRRP・GLBPを比べられること。", "y": "3つ目、エイチエスアールピー・ブイアールアールピー・ジーエルビーピーを比べられること。"},
+   {"sc": 2, "sp": "生徒", "t": "事件を、未然に防ぎたいです。"},
+   {"sc": 3, "sp": "先生", "t": "FHRPでは、R1とR2が、1つの仮想IPアドレスを共有します。", "y": "エフエイチアールピーでは、R1とR2が、1つの仮想アイピーアドレスを共有します。"},
+   {"sc": 3, "sp": "先生", "t": "PCのゲートウェイは、この仮想IPにしておきます。", "y": "ピーシーのゲートウェイは、この仮想アイピーにしておきます。"},
+   {"sc": 3, "sp": "生徒", "t": "ふだんは、どっちが受け持つんですか？"},
+   {"sc": 3, "sp": "先生", "t": "R1です。R1が倒れたら、R2が仮想IPと仮想MACを引き継ぎます。", "y": "R1です。R1が倒れたら、R2が仮想アイピーと仮想マックを引き継ぎます。"},
+   {"sc": 3, "sp": "生徒", "t": "PCは、何も知らずに通信を続けられる！", "y": "ピーシーは、何も知らずに通信を続けられる！"},
+   {"sc": 3, "sp": "先生", "t": "その通り。お店の代表電話番号みたいなものです。"},
+   {"sc": 4, "sp": "先生", "t": "確認です。FHRPを使うとき、PCのゲートウェイには何を設定するでしょう？", "y": "確認です。エフエイチアールピーを使うとき、ピーシーのゲートウェイには何を設定するでしょう？", "w": 1},
+   {"sc": 4, "sp": "生徒", "t": "仮想IPアドレスです。", "y": "仮想アイピーアドレスです。"},
+   {"sc": 4, "sp": "先生", "t": "正解です。"},
+   {"sc": 5, "sp": "先生", "t": "Cisco独自のHSRPを見てみましょう。", "y": "シスコ独自のエイチエスアールピーを見てみましょう。"},
+   {"sc": 5, "sp": "先生", "t": "受け持つほうがアクティブ、待機するほうがスタンバイです。"},
+   {"sc": 5, "sp": "先生", "t": "standby 1 ipで仮想IPを決めて、priorityが高いほうがアクティブです。", "y": "スタンバイ 1 アイピーで仮想アイピーを決めて、プライオリティが高いほうがアクティブです。"},
+   {"sc": 5, "sp": "生徒", "t": "初期値は？"},
+   {"sc": 5, "sp": "先生", "t": "100です。それから、preemptを付けると、R1が戻ってきたとき、取りもどします。", "y": "100です。それから、プリエンプトを付けると、R1が戻ってきたとき、取りもどします。"},
+   {"sc": 5, "sp": "生徒", "t": "付けないと、R2のまま？"},
+   {"sc": 5, "sp": "先生", "t": "はい。そこが試験によく出ます。"},
+   {"sc": 6, "sp": "先生", "t": "確認です。復旧したR1がアクティブを取りもどすために、必要な設定はどれでしょう？", "w": 1},
+   {"sc": 6, "sp": "生徒", "t": "preemptです。", "y": "プリエンプトです。"},
+   {"sc": 6, "sp": "先生", "t": "正解です。"},
+   {"sc": 7, "sp": "先生", "t": "FHRPには3種類あります。HSRPはCisco独自です。", "y": "エフエイチアールピーには3種類あります。エイチエスアールピーはシスコ独自です。"},
+   {"sc": 7, "sp": "先生", "t": "VRRPは業界標準で、マスターとバックアップと呼びます。", "y": "ブイアールアールピーは業界標準で、マスターとバックアップと呼びます。"},
+   {"sc": 7, "sp": "先生", "t": "GLBPはCisco独自で、複数のルーターを、同時に使えます。", "y": "ジーエルビーピーはシスコ独自で、複数のルーターを、同時に使えます。"},
+   {"sc": 7, "sp": "生徒", "t": "HSRPだと、スタンバイはふだん遊んでるんですね。", "y": "エイチエスアールピーだと、スタンバイはふだん遊んでるんですね。"},
+   {"sc": 7, "sp": "先生", "t": "はい。GLBPなら、その遊んでいるルーターも働かせられます。", "y": "はい。ジーエルビーピーなら、その遊んでいるルーターも働かせられます。"},
+   {"sc": 8, "sp": "先生", "t": "確認です。複数のルーターで同時に分け合えるFHRPはどれでしょう？", "y": "確認です。複数のルーターで同時に分け合えるエフエイチアールピーはどれでしょう？", "w": 1},
+   {"sc": 8, "sp": "生徒", "t": "GLBPです。", "y": "ジーエルビーピーです。"},
+   {"sc": 8, "sp": "先生", "t": "正解です。"},
+   {"sc": 9, "sp": "生徒", "t": "PCにゲートウェイを2つ書けば、と思いました。", "y": "ピーシーにゲートウェイを2つ書けば、と思いました。"},
+   {"sc": 9, "sp": "先生", "t": "基本は1つなので、仮想IPを使うんです。", "y": "基本は1つなので、仮想アイピーを使うんです。"},
+   {"sc": 9, "sp": "生徒", "t": "priorityが高くても、preemptがないと取りもどさない。", "y": "プライオリティが高くても、プリエンプトがないと取りもどさない。"},
+   {"sc": 9, "sp": "先生", "t": "よく覚えていますね。"},
+   {"sc": 9, "sp": "生徒", "t": "業界標準はVRRP、負荷分散はGLBP、ですね。", "y": "業界標準はブイアールアールピー、負荷分散はジーエルビーピー、ですね。"},
+   {"sc": 10, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 10, "sp": "先生", "t": "1つ目。FHRPは、ゲートウェイを二重にする。PCは仮想IPを使う。", "y": "1つ目。エフエイチアールピーは、ゲートウェイを二重にする。ピーシーは仮想アイピーを使う。"},
+   {"sc": 10, "sp": "先生", "t": "2つ目。HSRPは、priority 100、preemptで取りもどす。", "y": "2つ目。エイチエスアールピーは、プライオリティ 100、プリエンプトで取りもどす。"},
+   {"sc": 10, "sp": "先生", "t": "3つ目。VRRPは業界標準、GLBPは負荷分散。", "y": "3つ目。ブイアールアールピーは業界標準、ジーエルビーピーは負荷分散。"},
+   {"sc": 10, "sp": "生徒", "t": "もうR1が壊れても、事件にならないですね。"},
+   {"sc": 10, "sp": "先生", "t": "次回から、IPのサービスに入ります。お疲れさまでした。", "y": "次回から、アイピーのサービスに入ります。お疲れさまでした。"}
+  ]
+ }
+}

@@ -1,0 +1,147 @@
+{
+ "r": "TB",
+ "n": 55,
+ "t": "OSPFの代表ルーター",
+ "d": "d3",
+ "form": "実況中継",
+ "need": [54],
+ "goal": ["DRとBDRがいる理由がわかる", "DRの選ばれ方がわかる", "ネットワークタイプがわかる"],
+ "terms": ["DR", "BDR", "DROTHER", "OSPFプライオリティ", "ネットワークタイプ"],
+ "pages": [
+  {
+   "t": "1つのスイッチに、ルーターが5台",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 208.0\" role=\"img\" aria-label=\"1つのセグメントに5台\"><path d=\"M210 90L60 40\" stroke=\"#3d4450\" stroke-width=\"3\" opacity=\".7\"/><path d=\"M210 90L60 140\" stroke=\"#3d4450\" stroke-width=\"3\" opacity=\".7\"/><path d=\"M210 90L360 40\" stroke=\"#3d4450\" stroke-width=\"3\" opacity=\".7\"/><path d=\"M210 90L360 140\" stroke=\"#3d4450\" stroke-width=\"3\" opacity=\".7\"/><path d=\"M210 90L210 20\" stroke=\"#3d4450\" stroke-width=\"3\" opacity=\".7\"/><rect x=\"188\" y=\"77\" width=\"44\" height=\"26\" rx=\"5\" fill=\"#3d4450\"/><path d=\"M198 86h22l-4-3M222 94h-22l4 3\" stroke=\"#fff\" stroke-width=\"2.2\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><circle cx=\"60\" cy=\"40\" r=\"18\" fill=\"#0a5cff\"/><path d=\"M51 36h12l-4-4M69 44h-12l4 4\" stroke=\"#fff\" stroke-width=\"2.4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><text x=\"60\" y=\"14\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">R1</text><circle cx=\"60\" cy=\"140\" r=\"18\" fill=\"#0a5cff\"/><path d=\"M51 136h12l-4-4M69 144h-12l4 4\" stroke=\"#fff\" stroke-width=\"2.4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><text x=\"60\" y=\"114\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">R2</text><circle cx=\"360\" cy=\"40\" r=\"18\" fill=\"#0a5cff\"/><path d=\"M351 36h12l-4-4M369 44h-12l4 4\" stroke=\"#fff\" stroke-width=\"2.4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><text x=\"347.0\" y=\"14\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">R3</text><circle cx=\"360\" cy=\"140\" r=\"18\" fill=\"#0a5cff\"/><path d=\"M351 136h12l-4-4M369 144h-12l4 4\" stroke=\"#fff\" stroke-width=\"2.4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><text x=\"347.0\" y=\"114\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">R4</text><circle cx=\"210\" cy=\"20\" r=\"18\" fill=\"#0a5cff\"/><path d=\"M201 16h12l-4-4M219 24h-12l4 4\" stroke=\"#fff\" stroke-width=\"2.4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><text x=\"210\" y=\"-6\" text-anchor=\"middle\" style=\"font:800 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">R5</text><text x=\"180\" y=\"180\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">全員どうしで地図を交換すると、10組</text></svg>",
+   "b": "1台のスイッチに、OSPFのルーターが5台つながっているとしましょう。全員が全員と地図を交換すると、組み合わせは<b>10組</b>。10台なら45組です。同じ情報が何度も行き交って、むだが多すぎます。今日は、この問題を解決する<b>代表ルーター</b>のしくみを、選挙の実況中継で見ていきます。"
+  },
+  {
+   "t": "今日のゴール",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のゴール\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1. DRとBDRがいる理由がわかる</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">全員どうしで交換すると多すぎる</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2. DRの選ばれ方がわかる</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">プライオリティ → ルーターID</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">3. ネットワークタイプがわかる</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ブロードキャストとポイントツーポイント</text></svg>"
+  },
+  {
+   "t": "クラスの代表を決める（DR・BDR）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 264.0\" role=\"img\" aria-label=\"DR と BDR\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">DR（代表ルーター）</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">みんなの情報を集めて、みんなに配る</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">BDR（副代表）</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">DR が倒れたら、すぐに代わる</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#3d4450\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">DROTHER（そのほか）</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">DR・BDR とだけ地図を交換する（FULL）</text><text x=\"24\" y=\"194.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">DROTHER どうしは 2WAY のまま</text><rect x=\"10\" y=\"213.5\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"239.0\" text-anchor=\"start\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">DR・BDR あては 224.0.0.6、全員あては 224.0.0.5</text></svg>",
+   "b": "そこでOSPFは、クラスの代表のように <b>DR</b>（代表ルーター）と <b>BDR</b>（副代表）を決めます。ほかのルーター（<b>DROTHER</b>）は、<b>DRとBDRにだけ</b>情報を送り、DRがみんなに配ります。DROTHERどうしは、地図の交換はせず、<b>2WAY</b>（あいさつだけの関係）にとどまります。DROTHERがDR・BDRに送るあて先は <b>224.0.0.6</b>、DRがみんなに配るあて先は <b>224.0.0.5</b> です。",
+   "p": "DROTHER どうしは 2WAY。DR・BDR とは FULL。"
+  },
+  {
+   "t": "確認の問題 1",
+   "quiz": {
+    "q": "DR・BDRがいるセグメントで、DROTHERどうしのネイバーの状態として正常なのはどれでしょう？",
+    "o": [
+     ["FULL", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["2WAY", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["DOWN", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "DROTHERどうしは地図を交換しないので、<b>2WAY</b> のままで正常です。DR・BDR とは FULL になります。"
+   }
+  },
+  {
+   "t": "選挙の実況中継",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 230.0\" role=\"img\" aria-label=\"DRの選び方\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">① プライオリティが一番高いルーターが DR</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">初期値は 1。0〜255</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">② 同じなら、ルーターIDが一番大きいルーター</text><rect x=\"10\" y=\"116.0\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"141.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2番目が BDR</text><rect x=\"10\" y=\"162.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"188.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">プライオリティ 0 は、立候補しない</text><text x=\"24\" y=\"207.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">DR にも BDR にもならない</text></svg>",
+   "b": "さあ、選挙の始まりです！ 最初に比べるのは、インターフェースの<b>OSPFプライオリティ</b>。初期値は<b>1</b>で、<b>一番高いルーターがDR</b>、2番目がBDRです。プライオリティが同じなら、<b>ルーターIDが一番大きい</b>ルーターが勝ちます。プライオリティを <b>0</b> にしたルーターは<b>立候補しません</b>。設定はインターフェースで <b>ip ospf priority 数</b> です。"
+  },
+  {
+   "t": "確認の問題 2",
+   "quiz": {
+    "q": "R1（プライオリティ1、ルーターID 1.1.1.1）、R2（プライオリティ1、ルーターID 3.3.3.3）、R3（プライオリティ10、ルーターID 2.2.2.2）が同時に起動しました。DRになるのはどれでしょう？",
+    "o": [
+     ["R1", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["R2", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["R3", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 2,
+    "e": "まずプライオリティを比べるので、一番高い 10 の <b>R3</b> がDRです。BDRは、残りでルーターIDが大きい R2 です。"
+   }
+  },
+  {
+   "t": "あとから強い人が来ても、交代しない",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 196.0\" role=\"img\" aria-label=\"プリエンプトしない\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#3d4450\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">DR が決まったあと、もっと強いルーターが来ても</text><rect x=\"10\" y=\"52.5\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"78.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">DR は交代しない（横取りしない）</text><rect x=\"10\" y=\"99.0\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"124.5\" text-anchor=\"start\" style=\"font:800 12.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">DR が倒れたら → BDR が DR に、新しい BDR を選ぶ</text><rect x=\"10\" y=\"145.5\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"171.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">やり直したいときは clear ip ospf process</text></svg>",
+   "b": "大事な性質があります。DRが一度決まると、あとから<b>プライオリティが高いルーターが参加しても、DRは交代しません</b>。横取り（プリエンプト）しないのです。DRが倒れたときは、<b>BDRが新しいDRに昇格</b>し、残りから新しいBDRを選びます。だから、DRにしたいルーターのプライオリティを上げたら、<b>clear ip ospf process</b> で選挙をやり直す必要があります。"
+  },
+  {
+   "t": "ネットワークタイプ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"OSPFのネットワークタイプ\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">broadcast（イーサネットの初期値）</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">DR・BDR を選ぶ。Hello 10秒・Dead 40秒</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">point-to-point（シリアルなど）</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">相手は1台だけ。DR・BDR を選ばない</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">イーサネットでも、2台だけなら point-to-point に</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ip ospf network point-to-point</text></svg>",
+   "b": "DRを選ぶかどうかは、<b>ネットワークタイプ</b>で決まります。イーサネットの初期値は <b>broadcast</b> で、DR・BDRを選びます。相手が1台しかいない <b>point-to-point</b> では、代表を選ぶ意味がないので<b>選びません</b>。ルーター2台を直結したイーサネットなら、<b>ip ospf network point-to-point</b> にすると、選挙を省いて早くつながります。"
+  },
+  {
+   "t": "確認の問題 3",
+   "quiz": {
+    "q": "2台のルーターをイーサネットで直結し、OSPFのネットワークタイプを point-to-point に変えました。DRとBDRはどうなるでしょう？",
+    "o": [
+     ["プライオリティの高い方がDRになる", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["DRもBDRも選ばれない", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["両方ともDRになる", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "point-to-point では、<b>DR・BDRを選びません</b>。"
+   }
+  },
+  {
+   "t": "まちがえやすい所",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 183.5\" role=\"img\" aria-label=\"よくある勘違い\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× DROTHER どうしが 2WAY なのは故障</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">正常。DR・BDR とだけ FULL</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× プライオリティを上げれば、すぐ DR になる</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">横取りしない。選挙のやり直しが必要</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ プライオリティ 0 は、DR にも BDR にもならない</text></svg>",
+   "b": "show ip ospf neighbor で <b>2WAY/DROTHER</b> と出ていても、それは<b>正常</b>です。プライオリティを上げても、<b>今のDRは交代しません</b>。プライオリティ <b>0</b> は「立候補しない」という意味です。"
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">DR・BDR</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">代表と副代表。DROTHER どうしは 2WAY</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">選挙</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">プライオリティ → ルーターID。0は不参加</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ネットワークタイプ</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">broadcast は選ぶ、point-to-point は選ばない</text></svg>",
+   "b": "次回は、OSPFの<b>ネイバーになれない</b>ときの原因の探し方を学びます。"
+  }
+ ],
+ "cls": {
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "1台のスイッチに、OSPFのルーターが5台つながっています。", "y": "1台のスイッチに、オーエスピーエフのルーターが5台つながっています。"},
+   {"sc": 1, "sp": "先生", "t": "全員が全員と、地図を交換したら、何組になるでしょう？"},
+   {"sc": 1, "sp": "生徒", "t": "えっと…10組？"},
+   {"sc": 1, "sp": "先生", "t": "正解です。10台なら45組です。"},
+   {"sc": 1, "sp": "生徒", "t": "同じ情報が、何回も飛び交いますね。"},
+   {"sc": 1, "sp": "先生", "t": "今日は、これを解決する代表選挙を、実況中継でお届けします。"},
+   {"sc": 2, "sp": "先生", "t": "今日のゴールは3つです。"},
+   {"sc": 2, "sp": "先生", "t": "1つ目、DRとBDRがいる理由がわかること。", "y": "1つ目、ディーアールとビーディーアールがいる理由がわかること。"},
+   {"sc": 2, "sp": "先生", "t": "2つ目、DRの選ばれ方がわかること。", "y": "2つ目、ディーアールの選ばれ方がわかること。"},
+   {"sc": 2, "sp": "先生", "t": "3つ目、ネットワークタイプがわかること。"},
+   {"sc": 2, "sp": "生徒", "t": "選挙の実況、楽しみです。"},
+   {"sc": 3, "sp": "先生", "t": "OSPFは、クラスの代表のように、DRとBDRを決めます。", "y": "オーエスピーエフは、クラスの代表のように、ディーアールとビーディーアールを決めます。"},
+   {"sc": 3, "sp": "先生", "t": "DRが代表、BDRが副代表です。", "y": "ディーアールが代表、ビーディーアールが副代表です。"},
+   {"sc": 3, "sp": "生徒", "t": "ほかのルーターは？"},
+   {"sc": 3, "sp": "先生", "t": "DROTHERと呼びます。DRとBDRにだけ、情報を送ります。", "y": "ディーアールアザーと呼びます。ディーアールとビーディーアールにだけ、情報を送ります。"},
+   {"sc": 3, "sp": "生徒", "t": "DROTHERどうしは、地図を交換しない？", "y": "ディーアールアザーどうしは、地図を交換しない？"},
+   {"sc": 3, "sp": "先生", "t": "はい。あいさつだけの、2WAYの関係です。", "y": "はい。あいさつだけの、ツーウェイの関係です。"},
+   {"sc": 4, "sp": "先生", "t": "確認です。DROTHERどうしのネイバーの状態として、正常なのはどれでしょう？", "y": "確認です。ディーアールアザーどうしのネイバーの状態として、正常なのはどれでしょう？", "w": 1},
+   {"sc": 4, "sp": "生徒", "t": "2WAYです。", "y": "ツーウェイです。"},
+   {"sc": 4, "sp": "先生", "t": "正解です。"},
+   {"sc": 5, "sp": "先生", "t": "さあ、選挙の始まりです！ まず比べるのは、OSPFプライオリティ。", "y": "さあ、選挙の始まりです！ まず比べるのは、オーエスピーエフプライオリティ。"},
+   {"sc": 5, "sp": "先生", "t": "初期値は1。一番高いルーターがDR、2番目がBDRです。", "y": "初期値は1。一番高いルーターがディーアール、2番目がビーディーアールです。"},
+   {"sc": 5, "sp": "生徒", "t": "みんな1だったら？"},
+   {"sc": 5, "sp": "先生", "t": "ルーターIDが一番大きいルーターが勝ちます。"},
+   {"sc": 5, "sp": "先生", "t": "プライオリティを0にしたルーターは、立候補しません。"},
+   {"sc": 5, "sp": "生徒", "t": "DRになってほしくないルーターは、0にすればいいんですね。", "y": "ディーアールになってほしくないルーターは、0にすればいいんですね。"},
+   {"sc": 6, "sp": "先生", "t": "確認です。同時に起動したとき、DRになるのはどれでしょう？", "y": "確認です。同時に起動したとき、ディーアールになるのはどれでしょう？", "w": 1},
+   {"sc": 6, "sp": "生徒", "t": "プライオリティ10のR3です。"},
+   {"sc": 6, "sp": "先生", "t": "正解です。"},
+   {"sc": 7, "sp": "先生", "t": "ここで大事な性質です。DRが決まったあと、強いルーターが来ても、交代しません。", "y": "ここで大事な性質です。ディーアールが決まったあと、強いルーターが来ても、交代しません。"},
+   {"sc": 7, "sp": "生徒", "t": "横取りしないんですね。"},
+   {"sc": 7, "sp": "先生", "t": "はい。DRが倒れたら、BDRがDRに昇格して、新しいBDRを選びます。", "y": "はい。ディーアールが倒れたら、ビーディーアールがディーアールに昇格して、新しいビーディーアールを選びます。"},
+   {"sc": 7, "sp": "生徒", "t": "プライオリティを上げたあと、すぐDRにしたいときは？", "y": "プライオリティを上げたあと、すぐディーアールにしたいときは？"},
+   {"sc": 7, "sp": "先生", "t": "clear ip ospf processで、選挙をやり直します。", "y": "クリア、アイピー、オーエスピーエフ、プロセスで、選挙をやり直します。"},
+   {"sc": 8, "sp": "先生", "t": "DRを選ぶかどうかは、ネットワークタイプで決まります。", "y": "ディーアールを選ぶかどうかは、ネットワークタイプで決まります。"},
+   {"sc": 8, "sp": "先生", "t": "イーサネットの初期値はbroadcastで、DRとBDRを選びます。", "y": "イーサネットの初期値はブロードキャストで、ディーアールとビーディーアールを選びます。"},
+   {"sc": 8, "sp": "先生", "t": "相手が1台だけのpoint-to-pointでは、選びません。", "y": "相手が1台だけのポイントツーポイントでは、選びません。"},
+   {"sc": 8, "sp": "生徒", "t": "2人しかいないのに、代表を決めてもしかたないですね。"},
+   {"sc": 8, "sp": "先生", "t": "その通り。2台の直結なら、point-to-pointにすると早くつながります。", "y": "その通り。2台の直結なら、ポイントツーポイントにすると早くつながります。"},
+   {"sc": 9, "sp": "先生", "t": "確認です。point-to-pointにしたとき、DRとBDRはどうなるでしょう？", "y": "確認です。ポイントツーポイントにしたとき、ディーアールとビーディーアールはどうなるでしょう？", "w": 1},
+   {"sc": 9, "sp": "生徒", "t": "選ばれません。"},
+   {"sc": 9, "sp": "先生", "t": "正解です。"},
+   {"sc": 10, "sp": "生徒", "t": "2WAYって出たら、故障だと思いそうです。", "y": "ツーウェイって出たら、故障だと思いそうです。"},
+   {"sc": 10, "sp": "先生", "t": "DROTHERどうしなら、正常です。", "y": "ディーアールアザーどうしなら、正常です。"},
+   {"sc": 10, "sp": "生徒", "t": "プライオリティを上げても、すぐには代わらない。"},
+   {"sc": 10, "sp": "先生", "t": "横取りしない、を覚えておきましょう。"},
+   {"sc": 11, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 11, "sp": "先生", "t": "1つ目。DRとBDRは代表と副代表。DROTHERどうしは2WAY。", "y": "1つ目。ディーアールとビーディーアールは代表と副代表。ディーアールアザーどうしはツーウェイ。"},
+   {"sc": 11, "sp": "先生", "t": "2つ目。プライオリティ、次にルーターID。0は不参加で、横取りなし。"},
+   {"sc": 11, "sp": "先生", "t": "3つ目。broadcastは選び、point-to-pointは選ばない。", "y": "3つ目。ブロードキャストは選び、ポイントツーポイントは選ばない。"},
+   {"sc": 11, "sp": "生徒", "t": "選挙、わかりやすかったです。"},
+   {"sc": 11, "sp": "先生", "t": "次回は、ネイバーになれないときです。お疲れさまでした。"}
+  ]
+ }
+}
