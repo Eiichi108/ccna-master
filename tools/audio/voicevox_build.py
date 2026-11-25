@@ -7,13 +7,14 @@
   python tools/audio/voicevox_build.py 12        # 第12回の音声を作り直す
   python tools/audio/voicevox_build.py 3 7 12    # 複数回
   python tools/audio/voicevox_build.py all       # 全50回
+  python tools/audio/voicevox_build.py --v2 all  # 作り直し版の全81回（audio_v2/ へ。できた回はとばす）
 処理:
   src/lessons/lNN.json の cls.lines を1行ずつ読み上げ（読みは y、なければ t）
   → 行ごとに音量をそろえる → 0.35秒の間をはさんで1本につなぐ
   → audio/lNN.mp3 を書き出し、cls.seg（各行の開始秒・長さ）を src/lessons/lNN.json に保存
   → 最後に tools/build.py を実行して data.json に反映
 """
-import json, os, sys, io, wave, subprocess, urllib.request, urllib.parse, re
+import json, os, sys, io, wave, subprocess, shutil, urllib.request, urllib.parse, re
 import numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -76,6 +77,8 @@ def fix(x):
     if pk > 0.95: y = np.tanh(y / 0.95) * 0.95 if pk < 1.3 else y * (0.95 / pk)
     return y
 
+V2 = False          # --v2：作り直し版（src/lessons_v2 → audio_v2/）。切り替えまで公開中の audio/ は触らない
+
 def build(rec, ids):
     n = rec["n"]; c = rec["cls"]; parts, seg, cum = [], [], 0
     gap = np.zeros(int(GAP * SR), np.float32)
@@ -85,21 +88,35 @@ def build(rec, ids):
         parts += [x, gap]; cum += len(x) + len(gap)
         print(f"\r第{n}回 {i}/{len(c['lines'])}", end="", flush=True)
     y = np.concatenate(parts)
-    mp3 = os.path.join(ROOT, "audio", f"l{n:02d}.mp3")
-    subprocess.run(["ffmpeg", "-v", "quiet", "-y", "-f", "f32le", "-ac", "1", "-ar", str(SR), "-i", "-",
-                    "-c:a", "libmp3lame", "-b:a", "48k", mp3], input=y.tobytes(), check=True)
+    d = os.path.join(ROOT, "audio_v2" if V2 else "audio"); os.makedirs(d, exist_ok=True)
+    mp3 = os.path.join(d, f"l{n:02d}.mp3")
+    if shutil.which("ffmpeg"):
+        subprocess.run(["ffmpeg", "-v", "quiet", "-y", "-f", "f32le", "-ac", "1", "-ar", str(SR), "-i", "-",
+                        "-c:a", "libmp3lame", "-b:a", "48k", mp3], input=y.tobytes(), check=True)
+    else:  # ffmpeg がないときは lameenc（例：uv run --with numpy --with lameenc python ...）
+        import lameenc
+        e = lameenc.Encoder(); e.set_bit_rate(48); e.set_in_sample_rate(SR); e.set_channels(1); e.set_quality(2)
+        pcm = (np.clip(y, -1, 1) * 32767).astype(np.int16).tobytes()
+        with open(mp3, "wb") as f: f.write(e.encode(pcm) + e.flush())
     c["seg"] = seg; c["a"] = f"audio/l{n:02d}/"
     print(f"  → audio/l{n:02d}.mp3（{cum / SR / 60:.1f}分）")
 
 def main():
+    global V2
     args = sys.argv[1:]
+    if "--v2" in args: V2 = True; args.remove("--v2")
     if not args: sys.exit(__doc__)
-    ns = list(range(1, 51)) if args == ["all"] else [int(a) for a in args]
+    path = (lambda n: os.path.join(srcio.SRC, "lessons_v2", f"l{n:02d}.json")) if V2 else srcio.lesson_path
+    ns = list(range(1, 82 if V2 else 51)) if args == ["all"] else [int(a) for a in args]
     ids = speaker_ids()
     for n in ns:
-        rec = srcio.load(srcio.lesson_path(n))
+        rec = srcio.load(path(n))
+        mp3 = os.path.join(ROOT, "audio_v2", f"l{n:02d}.mp3")
+        if V2 and args == ["all"] and os.path.exists(mp3) and len(rec["cls"].get("seg", [])) == len(rec["cls"]["lines"]):
+            print(f"第{n}回はできている（とばす）"); continue
         build(rec, ids)
-        srcio.save(srcio.lesson_path(n), rec)  # 1回ごとに保存
+        srcio.save(path(n), rec)  # 1回ごとに保存
+    if V2: return  # 作り直し版は切り替えまで data.json に入れない
     sys.exit(subprocess.call([sys.executable, "-X", "utf8", os.path.join(ROOT, "tools", "build.py")]))
 
 if __name__ == "__main__":
