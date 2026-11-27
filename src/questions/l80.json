@@ -179,7 +179,7 @@
   "x": "- name: Set NTP on access switches\n  hosts: access_switches\n  gather_facts: no\n  tasks:\n    - name: Configure NTP server\n      ios_config:\n        lines:\n          - ntp server 10.0.0.5",
   "rd": "①hosts は、どの機器に対して実行するか<br>②tasks は、何をするか<br>③lines は、入れる設定",
   "rg": "data",
-  "o": ["tasks の name", "hosts: access_switches（インベントリのグループ）", "ios_config の lines", "gather_facts: no"],
+  "o": ["tasks の name（作業の名前）", "hosts: access_switches（インベントリのグループ）", "ios_config の lines（入れる設定の行）", "gather_facts: no（機器の情報を集めない設定）"],
   "a": 1,
   "e": "<b>hosts</b> に書いた access_switches は、<b>インベントリ</b>で定義した機器のグループです。tasks の name は作業の名前、lines は入れる設定の中身です。",
   "m": "対象＝hosts（インベントリのグループ）"

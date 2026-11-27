@@ -133,17 +133,17 @@ def topo(label, nodes, links, height=170, notes=()):
         flat = abs(x2 - x1) >= abs(y2 - y1)
         if txt:
             if flat:
-                out.append(T((x1 + x2) / 2, (y1 + y2) / 2 - 7, txt, 10.5, 700, SUB, "middle"))
+                out.append(T((x1 + x2) / 2, (y1 + y2) / 2 - 7, txt, 11, 700, SUB, "middle"))
             else:  # 縦に近い線は、文字を線の右に置く
-                out.append(T((x1 + x2) / 2 + 7, (y1 + y2) / 2 + 4, txt, 10.5, 700, SUB, "start"))
+                out.append(T((x1 + x2) / 2 + 7, (y1 + y2) / 2 + 4, txt, 11, 700, SUB, "start"))
         for lab, t in zip(pp, (0.3, 0.7) if flat else (0.3, 0.6)):   # 縦の線は、b側の機器名と重ならないよう少し上に
             if not lab:
                 continue
             px, py = x1 + (x2 - x1) * t, y1 + (y2 - y1) * t
             if flat:
-                out.append(T(px, py + 15, lab, 9.5, 700, BL, "middle"))
+                out.append(T(px, py + 16, lab, 11, 800, BL, "middle"))
             else:
-                out.append(T(px - 6, py + 4, lab, 9.5, 700, BL, "end"))
+                out.append(T(px - 6, py + 4, lab, 11, 800, BL, "end"))
     for name, (kind, x, y, col, top, bottom) in nodes.items():
         out.append(_icon(kind, x, y, col))
         if top:

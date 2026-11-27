@@ -461,7 +461,7 @@ function vCourse(){
   app.innerHTML=`<h2>講座</h2><p class="sub">分野ごとの授業の一覧です。▶で先生と生徒の会話の授業、「教科書」でイラスト付きの資料を読めます。授業のあとに「問題」で、その回の範囲を一問一答で確かめられます。</p><div class="row" style="margin-bottom:10px"><button class="btn sm" id="gl">用語集をひらく</button></div>
 ${DOM.map((d,k)=>{const cs=CP.filter(c=>c.d===d.id);if(!cs.length)return"";const made=cs.filter(c=>TB[c.n]&&TB[c.n].cls&&(TB[c.n].cls.seg||c.n<=6)).length;const dn=cs.filter(done).length;const qn=cs.reduce((a,c)=>a+c.q.length,0),qo=cs.reduce((a,c)=>a+ok(c),0);
   return`<details class="ldom" data-dd="${d.id}" style="--c:${d.c}" ${opened[d.id]?"open":""}><summary><span><b style="font-size:16px">${esc(d.name)}</b>${d.w?`<span class="sub">　出題 ${d.w}%</span>`:""}<div class="bar"><i style="width:${qn?qo/qn*100:0}%;background:${d.c}"></i></div></span><span class="num">完了 ${dn}/${cs.length} ▾</span></summary>
-${cs.map(c=>{const b=TB[c.n],has=b&&b.cls&&(b.cls.seg||b.n<=6),sc=ok(c),pos=(S.cls||{})[c.n];const dd=done(c);return`<div class="crow${has?"":" off"}${dd?" done":""}"><span class="cno">${dd?"✓":c.n}</span><span class="ctx"><b>${esc(c.t)}${dd?`<span class="dchip">完了</span>`:""}</b><span class="sub">${has?`授業 約${Math.round(b.cls.lines.length/6)}分・教科書 ${b.pages.length}ページ`:"準備中"}${c.q.length?`・問題 ${sc}/${c.q.length}`:""}${has&&pos?"・途中まで聞いた":""}</span>
+${cs.map(c=>{const b=TB[c.n],has=b&&b.cls&&(b.cls.seg||b.n<=6),sc=ok(c),pos=(S.cls||{})[c.n];const dd=done(c);return`<div class="crow${has?"":" off"}${dd?" done":""}"><span class="cno">${dd?"✓":c.n}</span><span class="ctx"><b>${esc(c.t)}${dd?`<span class="dchip">完了</span>`:""}</b><span class="sub">${has?`授業 約${clsMin(b)}分・教科書 ${b.pages.length}ページ`:"準備中"}${c.q.length?`・問題 ${sc}/${c.q.length}`:""}${has&&pos?"・途中まで聞いた":""}</span>
 ${has?`<span class="row" style="margin-top:6px;gap:6px"><button class="btn sm pri" data-c="${c.n}">▶ 授業</button><button class="btn sm" data-b="${c.n}">教科書</button>${c.q.length?`<button class="btn sm" data-q="${c.n}">問題 ${c.q.length}</button>`:""}</span>`:""}</span></div>`;}).join("")}</details>`;}).join("")}<p class="sub" style="margin-top:18px;text-align:center">授業音声：VOICEVOX:四国めたん / VOICEVOX:ずんだもん<br>問題・教科書はすべてオリジナルです。Cisco、CCNAは Cisco Systems, Inc. の商標です。</p>`;
   $("#gl").onclick=()=>go("gloss");
   app.querySelectorAll("details.ldom").forEach(e=>e.ontoggle=()=>{S.copen=Object.assign({},S.copen,{[e.dataset.dd]:e.open});save();});
@@ -601,6 +601,8 @@ function vGloss(){
 /* ---------- ONE-BY-ONE ---------- */
 const T=(q,s)=>q.h?String(s):`<span class="pl">${esc(s)}</span>`;
 const MK={ok:`<svg class="mk" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="none" stroke="currentColor" stroke-width="5"/></svg>`,ng:`<svg class="mk" viewBox="0 0 40 40"><path d="M8 8l24 24M32 8 8 32" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></svg>`};
+/* 授業の長さ（分）：音声の実際の長さ。音声がまだない回はセリフの数から見積もる */
+const clsMin=b=>{const g=b.cls.seg;return Math.max(1,Math.round(g&&g.length?(g[g.length-1][0]+g[g.length-1][1])/60:b.cls.lines.length/12));};
 function srcLabel(q){return SRC[q.src]||"";}
 let MAINBY={};
 const domIds=d=>ORDER.filter(id=>QM[id].d===d);

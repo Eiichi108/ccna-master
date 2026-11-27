@@ -78,7 +78,7 @@
   "lv": 2,
   "page": 3,
   "t": "出張先のホテルのネットワークでは、IPsecの通信が通りません。HTTPSと同じ仕組みを使い、Webブラウザーや専用のクライアントで社内につなげるVPNはどれですか。",
-  "o": ["サイト間VPN", "GRE", "TLS（SSL）VPN", "AH"],
+  "o": ["サイト間VPN（IPsec）", "GREトンネル", "TLS（SSL）VPN", "IPsec の AH"],
   "a": 2,
   "e": "<b>TLS（SSL）VPN</b> は、HTTPSと同じTLSで暗号化するので、ファイアウォールを通りやすいのが特徴です。GREには暗号化がなく、AHは暗号化をしません。",
   "m": "HTTPSと同じ仕組み＝TLS VPN"

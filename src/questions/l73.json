@@ -40,7 +40,7 @@
   "e": "標準ACLは<b>送信元しか見ない</b>ため、送信元の近くで適用すると宛先に関係なく止めてしまいます。Server-Xだけを止めるなら、R2のG0/1にout方向で適用するように<b>宛先の近く</b>に置きます。",
   "m": "標準ACLを送信元側に置くと全部止まる",
   "page": 6,
-  "x": "PC群 192.168.50.0/24\n   |\n  G0/0\n  [R1]\n  S0/0/0\n   |\n  S0/0/0\n  [R2] G0/1 --- Server-X 10.9.9.10\n       G0/2 --- Server-Y 10.8.8.10\n\nR1(config)#access-list 7 deny 192.168.50.0 0.0.0.255\nR1(config)#access-list 7 permit any\nR1(config)#interface g0/0\nR1(config-if)#ip access-group 7 in",
+  "x": "R1(config)#access-list 7 deny 192.168.50.0 0.0.0.255\nR1(config)#access-list 7 permit any\nR1(config)#interface g0/0\nR1(config-if)#ip access-group 7 in",
   "rd": "①ACL 7が送信元192.168.50.0/24だけを条件にしていることを確かめる<br>②適用場所がPC群に一番近いR1のG0/0（in）であることを見る<br>③R1に入った時点で、宛先がどこでも同じ判定になると考える",
   "rg": "topo"
  },
@@ -114,7 +114,6 @@
   "lv": 2,
   "page": 6,
   "t": "図を参照してください。PC-AからServerへのTelnetだけを拒否し、ほかの通信はすべて許可する拡張ACL 110 を作りました。適用する場所として最も適切なものはどれですか。",
-  "x": "PC-A 10.1.1.10\n   |\n G0/0  [R1]  G0/1 ---- G0/0 [R2] G0/1\n                                   |\n                     Server 10.2.2.20",
   "rd": "①PC-A の出口は R1 の G0/0<br>②PC-A のパケットは G0/0 に入ってくる（in）<br>③Server は R2 の先",
   "rg": "topo",
   "o": ["R1の G0/0 に in 方向", "R1の G0/0 に out 方向", "R1の G0/1 に in 方向", "R2の G0/0 に in 方向"],

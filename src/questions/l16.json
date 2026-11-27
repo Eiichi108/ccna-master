@@ -24,7 +24,7 @@
   "x": "SW3# show interfaces g0/24\nGigabitEthernet0/24 is up, line protocol is up\n  reliability 255/255, txload 255/255, rxload 12/255\n  Full-duplex, 1000Mb/s\n  Input queue: 0/75/0/0 (size/max/drops/flushes)\n  Total output drops: 2385512\n  Output queue: 40/40 (size/max)\n  0 input errors, 0 CRC, 0 runts, 0 giants\n  0 output errors, 0 collisions",
   "rd": "①エラーと collisions はすべて 0<br>②Output queue が 40/40 で満杯<br>③Total output drops がとても大きい",
   "rg": "intf",
-  "o": ["ケーブルの不良による物理的な障害", "出口の帯域より送りたい量が多すぎる（ポートのオーバーサブスクリプション）", "デュプレックスの不一致", "ループによるブロードキャストストーム"],
+  "o": ["ケーブルの不良で、受信側にCRCエラーが出ている", "出口の帯域より送りたい量が多すぎる（ポートのオーバーサブスクリプション）", "デュプレックスの不一致で、レイトコリジョンが出ている", "ループによるブロードキャストストームで、受信が増えている"],
   "a": 1,
   "e": "エラーがないのに出力キューが満杯で、<b>Total output drops</b> が非常に多いのは、出口の帯域に対して送る量が多すぎる<b>オーバーサブスクリプション</b>です。キューが溜まるのは順番待ち（キューイング）が起きている印です。",
   "m": "エラー0＋output drops大量＝詰め込みすぎ"
@@ -56,5 +56,17 @@
   ],
   "e": "<b>runts</b>は短すぎ、<b>giants</b>は長すぎのフレームです。<b>CRC</b>（FCSエラー）が多ければケーブル故障やノイズを疑い、<b>reliability</b>が下がっていればエラーが増えていると判断します。",
   "m": "runts短・giants長・CRC＝ケーブルを疑う"
+ },
+ {
+  "id": "N16-01",
+  "k": "one",
+  "tag": "トラブルシュート",
+  "lv": 1,
+  "page": 3,
+  "t": "あるインターフェースで、CRCエラーの数が増え続けています。最初に疑うべきものはどれですか。",
+  "o": ["ケーブルやコネクターの傷み、まわりの電気的なノイズ", "DNSサーバーの設定", "OSPFのエリア番号", "VLANの名前"],
+  "a": 0,
+  "e": "CRCエラーは、フレームが<b>途中で傷ついて届いた</b>しるしです。まずケーブルやコネクター、ノイズなどの物理的な原因を確かめます。",
+  "m": "CRC＝傷ついて届いた→まずケーブル"
  }
 ]
