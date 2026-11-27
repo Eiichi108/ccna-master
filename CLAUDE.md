@@ -28,6 +28,8 @@ CCNA 200-301 の学習サイト。GitHub Pages で公開している：https://e
 - **問題を直す・追加する**：`src/questions/lNN.json` を編集 → `python tools/build.py`
 - **教科書を直す**：`src/lessons/lNN.json` の `pages` を編集（図は SVG の文字列）→ `python tools/build.py`
 - **授業で扱っていない内容を問題に出すとき**は、`tools/extra_pages.py` の `EXTRA` にその回の「もっとくわしく」のページを書き、`QPAGE` で問題の参照ページをそこに向ける（build が教科書の最後に足す。授業の pages は変えないので音声・字幕はずれない）。構成図は `tools/qfigs.py`
+- 教科書の図（svg）にコマンド例を描いたときは、同じページの `code` に同じコマンドを文字で書く（アプリが「図のコマンドを文字で見る・コピー」として出す。pages の数と並びは変えない）
+- 問題の選択肢はアプリで並べかえないので、新しい問題は正解の位置が偏らないようにする
 - **字幕（t）には読み仮名を書かない**。「/24」「Gi0/1」「::」「192.168.1.1」のように表記で書き、読みは `y`（`tools/rd.py` の `auto()` が作る）に任せる。IPアドレスは「の」でつないで読む（192の168の1の1）
 - **授業のセリフを直す**：`src/lessons/lNN.json` の `cls.lines` を編集（読みが特殊なら `y` も。`tools/rd.py` の `auto()` で作れる）→ 音声を作り直す：
   `python tools/audio/voicevox_build.py NN`（VOICEVOX を起動しておく。ffmpeg と numpy が必要。seg の保存と build まで自動）
