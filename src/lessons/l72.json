@@ -1,0 +1,231 @@
+{
+ "r": "TB",
+ "n": 72,
+ "t": "通信を選ぶ（ACLのしくみ）",
+ "d": "d5",
+ "form": "実況中継",
+ "need": [49],
+ "goal": ["ACLの読まれ方がわかる", "暗黙のdenyがわかる", "標準ACLを書いて置ける"],
+ "terms": ["ACL", "permit", "deny", "暗黙のdeny", "ワイルドカードマスク", "標準ACL", "ip access-group"],
+ "pages": [
+  {
+   "t": "門番のチェックリスト",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 124.0\" role=\"img\" aria-label=\"つかみ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"110\" rx=\"16\" fill=\"#0a5cff\" opacity=\".12\"/><text x=\"180\" y=\"44\" text-anchor=\"middle\" style=\"font:800 15.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">経理のサーバーに、営業部のPCは入れたくない</text><text x=\"180\" y=\"74\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ルーターに、門番のチェックリストを持たせる</text><text x=\"180\" y=\"94\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">それが ACL（アクセスコントロールリスト）</text></svg>",
+   "b": "経理のサーバーには、営業部のPCからは入ってほしくありません。そんなとき、ルーターに<b>門番のチェックリスト</b>を持たせて、通すパケットと止めるパケットを選ばせます。それが <b>ACL</b>（Access Control List）です。今日は、門番がリストをどう読むのかを、実況中継で見ていきます。"
+  },
+  {
+   "t": "今日のゴール",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のゴール\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1. ACLの読まれ方がわかる</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">上から順に、最初に合った行で決まる</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2. 暗黙のdenyがわかる</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">最後に、見えない「全部拒否」</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">3. 標準ACLを書いて置ける</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">送信元だけを見る。宛先の近くに</text></svg>"
+  },
+  {
+   "t": "上から順に、最初に合った行で決まる",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 160.0\" role=\"img\" aria-label=\"ACL 10\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"100\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#e6261f;white-space:pre\">access-list 10 deny 10.1.2.0 0.0.0.255</text><text x=\"22\" y=\"74\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">access-list 10 permit 10.1.0.0 0.0.255.255</text><text x=\"22\" y=\"96\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#3d4450;white-space:pre\">! (deny any)</text><text x=\"180\" y=\"132\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">上から順に比べ、合った行で決まり。下は見ない</text></svg>",
+   "b": "実況です！ パケットがやってきました。門番は、リストを<b>上から順に</b>比べます。<b>最初に合った行</b>で、通す（permit）か止める（deny）かが決まり、<b>その下の行はもう見ません</b>。送信元 10.1.2.5 なら、1行目の deny に合うので止めます。10.1.3.5 なら、1行目には合わず、2行目の permit に合うので通します。",
+   "p": "上から順、最初に合った行で決まり。順番が命。"
+  },
+  {
+   "t": "確認の問題 1",
+   "quiz": {
+    "q": "上の ACL 10 で、送信元 10.1.2.77 のパケットはどうなるでしょう？",
+    "o": [
+     ["1行目で拒否される", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["2行目で許可される", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["どの行にも合わない", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 0,
+    "e": "10.1.2.77 は1行目の 10.1.2.0/24 に入るので、<b>拒否</b>されます。2行目には進みません。"
+   }
+  },
+  {
+   "t": "見えない最後の行（暗黙のdeny）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 183.5\" role=\"img\" aria-label=\"暗黙のdeny\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">どのACLも、最後に「deny any」がある</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">設定には表示されない</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">どの行にも合わなかったパケットは、止められる</text><rect x=\"10\" y=\"116.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"141.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">deny だけのACLは、全部を止めてしまう</text><text x=\"24\" y=\"160.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">最後に permit any を忘れずに</text></svg>",
+   "b": "大事な落とし穴です。どのACLにも、最後に<b>目に見えない「deny any」</b>があります。これを<b>暗黙のdeny</b>と言います。どの行にも合わなかったパケットは、<b>すべて止められます</b>。だから、「この1台だけ止めたい」と deny を1行だけ書くと、ほかの通信も全部止まってしまいます。最後に <b>permit any</b> を書いておきましょう。"
+  },
+  {
+   "t": "ワイルドカードマスク",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 230.0\" role=\"img\" aria-label=\"ワイルドカードマスク\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">0 ＝ ここは同じでないとダメ、1 ＝ 何でもよい</text><rect x=\"10\" y=\"52.5\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"78.0\" text-anchor=\"start\" style=\"font:800 13.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">0.0.0.255 → 最後の8ビットは何でもよい（/24）</text><rect x=\"10\" y=\"99.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"124.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">0.0.0.0 → 1台（host）</text><text x=\"24\" y=\"143.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">255.255.255.255 → 全部（any）</text><rect x=\"10\" y=\"162.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#3d4450\" opacity=\".1\"/><text x=\"24\" y=\"188.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">サブネットマスクの 0 と 1 を反対にしたもの</text><text x=\"24\" y=\"207.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">例：/26 → 0.0.0.63</text></svg>",
+   "b": "ACLでは、範囲を<b>ワイルドカードマスク</b>で書きます（第54回のOSPFでも出てきました）。<b>0 のビットは「同じでないとダメ」</b>、<b>1 のビットは「何でもよい」</b>です。0.0.0.255 なら /24 の範囲、<b>0.0.0.0 は1台だけ</b>（host とも書ける）、<b>255.255.255.255 は全部</b>（any）です。サブネットマスクの0と1を反対にすると求められます。/26 なら 255.255.255.192 → <b>0.0.0.63</b> です。"
+  },
+  {
+   "t": "確認の問題 2",
+   "quiz": {
+    "q": "192.168.5.0/27 の範囲を表すワイルドカードマスクはどれでしょう？",
+    "o": [
+     ["0.0.0.31", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["0.0.0.32", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["255.255.255.224", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 0,
+    "e": "/27 のマスクは 255.255.255.224。0と1を反対にすると 255−224 ＝ <b>0.0.0.31</b> です。"
+   }
+  },
+  {
+   "t": "標準ACLと、置く場所",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 206.0\" role=\"img\" aria-label=\"標準ACLを置く\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"122\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#e6261f;white-space:pre\">access-list 10 deny 10.1.2.0 0.0.0.255</text><text x=\"22\" y=\"74\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">access-list 10 permit any</text><text x=\"22\" y=\"96\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\">interface g0/2</text><text x=\"22\" y=\"118\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\"> ip access-group 10 out</text><text x=\"180\" y=\"154\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">標準ACL（1-99）は送信元だけを見る</text><text x=\"180\" y=\"178\" text-anchor=\"middle\" style=\"font:700 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">→ 宛先の近くに置く</text></svg>",
+   "b": "番号 <b>1〜99</b>（と1300〜1999）は<b>標準ACL</b>で、<b>送信元のアドレスだけ</b>を見ます。作ったACLは、インターフェースに <b>ip access-group 番号 in/out</b> で置いて、はじめて働きます。標準ACLは宛先を見ないので、送信元の近くに置くと、ほかの場所への通信まで止めてしまいます。だから、標準ACLは<b>宛先の近く</b>に置くのが基本です。"
+  },
+  {
+   "t": "確認の問題 3",
+   "quiz": {
+    "q": "「access-list 5 deny host 10.1.1.9」だけを設定したACLをインターフェースに適用しました。どうなるでしょう？",
+    "o": [
+     ["10.1.1.9 だけが止められる", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["すべての通信が止められる", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["すべての通信が通る", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "最後の<b>暗黙のdeny</b>で、ほかの通信も全部止められます。permit any が必要です。"
+   }
+  },
+  {
+   "t": "まちがえやすい所",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 183.5\" role=\"img\" aria-label=\"よくある勘違い\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× 全部の行を見て、一番合う行を選ぶ</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">上から順。最初に合った行で決まり</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× deny を1行書けば、そのほかは通る</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">暗黙の deny で全部止まる</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ 標準ACLは宛先の近くに置く</text></svg>",
+   "b": "ACLは、ルーティングのロンゲストマッチとちがい、<b>上から順に最初に合った行</b>で決まります。最後の<b>暗黙のdeny</b>を忘れずに。標準ACLは<b>宛先の近く</b>です。"
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">読まれ方</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">上から順に、最初に合った行で決まり</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">暗黙のdeny</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">最後に見えない deny any。permit any を忘れずに</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">標準ACL</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1〜99、送信元だけ。宛先の近くに ip access-group</text></svg>",
+   "b": "次回は、宛先やポート番号まで見て、もっと細かく選べる<b>拡張ACL</b>です。"
+  }
+ ],
+ "cls": {
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "経理のサーバーに、営業部のPCからは入ってほしくありません。", "y": "経理のサーバーに、営業部のピーシーからは入ってほしくありません。"},
+   {"sc": 1, "sp": "生徒", "t": "鍵をかけたいですね。"},
+   {"sc": 1, "sp": "先生", "t": "ルーターに、門番のチェックリストを持たせます。それがACLです。", "y": "ルーターに、門番のチェックリストを持たせます。それがエーシーエルです。"},
+   {"sc": 1, "sp": "先生", "t": "今日は、門番がリストをどう読むかを、実況します。"},
+   {"sc": 2, "sp": "先生", "t": "今日のゴールは3つです。"},
+   {"sc": 2, "sp": "先生", "t": "1つ目、ACLの読まれ方がわかること。", "y": "1つ目、エーシーエルの読まれ方がわかること。"},
+   {"sc": 2, "sp": "先生", "t": "2つ目、暗黙のdenyがわかること。", "y": "2つ目、暗黙のデナイがわかること。"},
+   {"sc": 2, "sp": "先生", "t": "3つ目、標準ACLを書いて置けること。", "y": "3つ目、標準エーシーエルを書いて置けること。"},
+   {"sc": 2, "sp": "生徒", "t": "門番の仕事ぶり、見てみたいです。"},
+   {"sc": 3, "sp": "先生", "t": "パケットがやってきました！ 門番は、リストを上から順に比べます。"},
+   {"sc": 3, "sp": "先生", "t": "最初に合った行で、通すか止めるかが決まります。"},
+   {"sc": 3, "sp": "生徒", "t": "その下の行は？"},
+   {"sc": 3, "sp": "先生", "t": "もう見ません。だから順番が命です。"},
+   {"sc": 3, "sp": "生徒", "t": "10.1.3.5なら、1行目には合わなくて、2行目で通る。", "y": "10、1、3、5なら、1行目には合わなくて、2行目で通る。"},
+   {"sc": 3, "sp": "先生", "t": "その通りです。"},
+   {"sc": 3, "sp": "生徒", "t": "順番を入れかえたら、結果も変わるんですか？"},
+   {"sc": 3, "sp": "先生", "t": "変わります。permit anyを先に書くと、全部通ってしまいます。", "y": "変わります。パーミット エニーを先に書くと、全部通ってしまいます。"},
+   {"sc": 3, "sp": "先生", "t": "だから、細かい条件を上に、大きい条件を下に書きます。"},
+   {"sc": 3, "sp": "生徒", "t": "例外を先に書く、ということですね。"},
+   {"sc": 3, "sp": "先生", "t": "その通り。ACLを書くときの一番のコツです。", "y": "その通り。エーシーエルを書くときの一番のコツです。"},
+   {"sc": 4, "sp": "先生", "t": "確認です。送信元10.1.2.77のパケットはどうなるでしょう？", "y": "確認です。送信元10、1、2、77のパケットはどうなるでしょう？", "w": 1},
+   {"sc": 4, "sp": "生徒", "t": "1行目で拒否されます。"},
+   {"sc": 4, "sp": "先生", "t": "正解です。"},
+   {"sc": 4, "sp": "生徒", "t": "ACLは、ルーター自身が出す通信も止めますか？", "y": "エーシーエルは、ルーター自身が出す通信も止めますか？"},
+   {"sc": 4, "sp": "先生", "t": "outのACLは、ルーター自身が作ったパケットは止めません。", "y": "アウトのエーシーエルは、ルーター自身が作ったパケットは止めません。"},
+   {"sc": 4, "sp": "先生", "t": "通りすぎる通信を選ぶもの、と覚えましょう。"},
+   {"sc": 5, "sp": "先生", "t": "大事な落とし穴です。どのACLにも、最後に見えないdeny anyがあります。", "y": "大事な落とし穴です。どのエーシーエルにも、最後に見えないデナイ、エニーがあります。"},
+   {"sc": 5, "sp": "生徒", "t": "見えないのに、あるんですか？"},
+   {"sc": 5, "sp": "先生", "t": "はい。どの行にも合わないパケットは、全部止められます。暗黙のdenyです。", "y": "はい。どの行にも合わないパケットは、全部止められます。暗黙のデナイです。"},
+   {"sc": 5, "sp": "生徒", "t": "だから、最後にpermit anyを書く。", "y": "だから、最後にパーミット エニーを書く。"},
+   {"sc": 5, "sp": "生徒", "t": "暗黙のdenyで止まったかどうか、わかりますか？", "y": "暗黙のデナイで止まったかどうか、わかりますか？"},
+   {"sc": 5, "sp": "先生", "t": "show access-listsの数字には出ません。", "y": "ショー アクセス-listsの数字には出ません。"},
+   {"sc": 5, "sp": "先生", "t": "見たいときは、最後に自分でdeny any logを書きます。", "y": "見たいときは、最後に自分でデナイ、エニー logを書きます。"},
+   {"sc": 5, "sp": "生徒", "t": "見えない行を、見える行にするんですね。"},
+   {"sc": 6, "sp": "先生", "t": "ACLでは、範囲をワイルドカードマスクで書きます。", "y": "エーシーエルでは、範囲をワイルドカードマスクで書きます。"},
+   {"sc": 6, "sp": "先生", "t": "0のビットは同じでないとダメ、1のビットは何でもよい、です。"},
+   {"sc": 6, "sp": "生徒", "t": "0.0.0.0なら1台だけ、255.255.255.255なら全部。", "y": "0、0、0、0なら1台だけ、255、255、255、255なら全部。"},
+   {"sc": 6, "sp": "先生", "t": "はい。サブネットマスクの0と1を、反対にすると求められます。"},
+   {"sc": 6, "sp": "生徒", "t": "0.0.0.255を、まちがえて255.255.255.0と書いたら？", "y": "0、0、0、255を、まちがえて255、255、255、0と書いたら？"},
+   {"sc": 6, "sp": "先生", "t": "全くちがう範囲になります。とても危険です。"},
+   {"sc": 6, "sp": "先生", "t": "ACLでは、マスクではなくワイルドカードと覚えましょう。", "y": "エーシーエルでは、マスクではなくワイルドカードと覚えましょう。"},
+   {"sc": 6, "sp": "生徒", "t": "OSPFのnetworkも、同じでしたね。", "y": "オーエスピーエフのネットワークも、同じでしたね。"},
+   {"sc": 7, "sp": "先生", "t": "確認です。/27の範囲のワイルドカードマスクはどれでしょう？", "y": "確認です。スラッシュ27の範囲のワイルドカードマスクはどれでしょう？", "w": 1},
+   {"sc": 7, "sp": "生徒", "t": "255から224を引いて、0.0.0.31です。", "y": "255から224を引いて、0、0、0、31です。"},
+   {"sc": 7, "sp": "先生", "t": "正解です。"},
+   {"sc": 8, "sp": "先生", "t": "番号1から99は、標準ACL。送信元のアドレスだけを見ます。", "y": "番号1から99は、標準エーシーエル。送信元のアドレスだけを見ます。"},
+   {"sc": 8, "sp": "先生", "t": "ip access-groupで、インターフェースに置いて、はじめて働きます。", "y": "アイピー、アクセスグループで、インターフェースに置いて、はじめて働きます。"},
+   {"sc": 8, "sp": "生徒", "t": "どこに置けばいいんですか？"},
+   {"sc": 8, "sp": "先生", "t": "宛先を見ないので、送信元の近くに置くと、ほかへの通信まで止めてしまいます。"},
+   {"sc": 8, "sp": "生徒", "t": "だから、宛先の近くに置くんですね。"},
+   {"sc": 8, "sp": "生徒", "t": "ACLは、1つの口にいくつでも置けるんですか？", "y": "エーシーエルは、1つの口にいくつでも置けるんですか？"},
+   {"sc": 8, "sp": "先生", "t": "1つの口の、inとoutに1つずつです。", "y": "1つの口の、インとアウトに1つずつです。"},
+   {"sc": 8, "sp": "先生", "t": "inはルーターに入るとき、outは出ていくときです。", "y": "インはルーターに入るとき、アウトは出ていくときです。"},
+   {"sc": 8, "sp": "生徒", "t": "どちら向きかで、止まる通信が変わるんですね。"},
+   {"sc": 9, "sp": "先生", "t": "確認です。deny hostの1行だけのACLを置くと、どうなるでしょう？", "y": "確認です。デナイ ホストの1行だけのエーシーエルを置くと、どうなるでしょう？", "w": 1},
+   {"sc": 9, "sp": "生徒", "t": "暗黙のdenyで、全部止まります。", "y": "暗黙のデナイで、全部止まります。"},
+   {"sc": 9, "sp": "先生", "t": "正解です。"},
+   {"sc": 10, "sp": "生徒", "t": "一番合う行を選ぶんだと思ってました。"},
+   {"sc": 10, "sp": "先生", "t": "それはルーティング。ACLは上から順、最初に合った行です。", "y": "それはルーティング。エーシーエルは上から順、最初に合った行です。"},
+   {"sc": 10, "sp": "生徒", "t": "暗黙のdeny、忘れないようにします。", "y": "暗黙のデナイ、忘れないようにします。"},
+   {"sc": 11, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 11, "sp": "先生", "t": "1つ目。上から順に、最初に合った行で決まる。"},
+   {"sc": 11, "sp": "先生", "t": "2つ目。最後に見えないdeny any。", "y": "2つ目。最後に見えないデナイ、エニー。"},
+   {"sc": 11, "sp": "先生", "t": "3つ目。標準ACLは送信元だけを見て、宛先の近くに置く。", "y": "3つ目。標準エーシーエルは送信元だけを見て、宛先の近くに置く。"},
+   {"sc": 11, "sp": "生徒", "t": "門番の気持ちが、わかりました。"},
+   {"sc": 11, "sp": "先生", "t": "次回は、拡張ACLです。お疲れさまでした。", "y": "次回は、拡張エーシーエルです。お疲れさまでした。"}
+  ],
+  "seg": [
+   [0.0, 4.789333],
+   [5.139, 1.717333],
+   [7.207, 4.704],
+   [12.261, 3.872],
+   [16.483, 1.610667],
+   [18.443, 3.349333],
+   [22.143, 2.72],
+   [25.213, 3.392],
+   [28.955, 3.029333],
+   [32.334, 4.693333],
+   [37.377, 3.498667],
+   [41.226, 1.706667],
+   [43.283, 2.912],
+   [46.545, 7.616],
+   [54.511, 1.056],
+   [55.917, 3.776],
+   [60.043, 5.504],
+   [65.897, 4.490667],
+   [70.737, 3.210667],
+   [74.298, 3.712],
+   [78.36, 6.922667],
+   [85.633, 1.973333],
+   [87.956, 0.992],
+   [89.298, 4.554667],
+   [94.203, 4.512],
+   [99.065, 3.274667],
+   [102.689, 6.176],
+   [109.215, 2.549333],
+   [112.115, 5.621333],
+   [118.086, 3.744],
+   [122.18, 4.010667],
+   [126.541, 3.584],
+   [130.475, 4.789333],
+   [135.614, 3.552],
+   [139.516, 3.712],
+   [143.578, 4.768],
+   [148.696, 10.922667],
+   [159.969, 4.938667],
+   [165.257, 10.816],
+   [176.423, 3.221333],
+   [179.995, 3.946667],
+   [184.291, 3.84],
+   [188.481, 5.056],
+   [193.887, 7.445333],
+   [201.683, 0.992],
+   [203.025, 5.994667],
+   [209.369, 5.418667],
+   [215.138, 2.090667],
+   [217.579, 5.973333],
+   [223.902, 3.104],
+   [227.356, 4.373333],
+   [232.079, 3.114667],
+   [235.544, 3.541333],
+   [239.435, 3.658667],
+   [243.444, 5.792],
+   [249.586, 3.114667],
+   [253.051, 0.992],
+   [254.393, 3.210667],
+   [257.953, 5.184],
+   [263.487, 3.370667],
+   [267.208, 1.834667],
+   [269.393, 4.128],
+   [273.871, 3.253333],
+   [277.474, 5.472],
+   [283.296, 2.762667],
+   [286.409, 3.861333]
+  ],
+  "a": "audio/l72/"
+ },
+ "lt": "nl42"
+}

@@ -1,0 +1,233 @@
+{
+ "r": "TB",
+ "n": 70,
+ "t": "本人確認を強くする（AAA・MFA）",
+ "d": "d5",
+ "form": "対決",
+ "need": [69],
+ "goal": ["AAAの3つがわかる", "RADIUSとTACACS+を比べられる", "多要素認証がわかる"],
+ "terms": ["AAA", "認証", "認可", "アカウンティング", "RADIUS", "TACACS+", "MFA"],
+ "pages": [
+  {
+   "t": "100台の機器、100か所のユーザー",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 124.0\" role=\"img\" aria-label=\"対決\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"110\" rx=\"16\" fill=\"#0a5cff\" opacity=\".12\"/><text x=\"180\" y=\"44\" text-anchor=\"middle\" style=\"font:800 15.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">機器ごとにユーザーを作る 対 1か所にまとめる</text><text x=\"180\" y=\"74\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">100台に、1人ずつユーザーを作る？</text><text x=\"180\" y=\"94\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">辞めた人は、100台から消す？</text></svg>",
+   "b": "前回、username でユーザーを作りました。でも、機器が100台あったら、100台すべてに全員分のユーザーを作るのでしょうか？ 辞めた人がいたら、100台から消す？ 今日は、ユーザーを<b>1か所のサーバーでまとめて管理する AAA</b> と、パスワードだけに頼らない<b>多要素認証</b>を学びます。"
+  },
+  {
+   "t": "今日のゴール",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のゴール\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1. AAAの3つがわかる</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">認証・認可・アカウンティング</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2. RADIUSとTACACS+を比べられる</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ネット接続向けと、機器の管理向け</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">3. 多要素認証がわかる</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">知っている・持っている・本人そのもの</text></svg>"
+  },
+  {
+   "t": "AAA（トリプルエー）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"AAA\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Authentication（認証）</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">あなたはだれ？ 本人かを確かめる</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Authorization（認可）</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">あなたは何をしてよい？ 使えるコマンドなど</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Accounting（アカウンティング）</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">あなたは何をした？ 記録を残す</text></svg>",
+   "b": "<b>AAA</b> は3つのAです。<b>認証</b>（Authentication）は「あなたはだれ？」、本人かどうかを確かめます。<b>認可</b>（Authorization）は「何をしてよい？」、使えるコマンドなどを決めます。<b>アカウンティング</b>（Accounting）は「何をした？」、ログインの時刻や打ったコマンドを記録します。これを <b>AAAサーバー</b>（例：Cisco ISE）にまとめて任せるので、ユーザーの管理が1か所で済みます。",
+   "p": "認証＝だれ？、認可＝何をしてよい？、アカウンティング＝何をした？"
+  },
+  {
+   "t": "確認の問題 1",
+   "quiz": {
+    "q": "AAAのうち、ログインした管理者が、どのコマンドを使ってよいかを決めるのはどれでしょう？",
+    "o": [
+     ["認証（Authentication）", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["認可（Authorization）", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["アカウンティング（Accounting）", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "「何をしてよいか」を決めるのは<b>認可</b>です。"
+   }
+  },
+  {
+   "t": "RADIUS 対 TACACS+",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 205.0\" role=\"img\" aria-label=\"AAAサーバーと話すプロトコル\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"91.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">RADIUS（業界標準）</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">UDP 1812・1813</text><text x=\"24\" y=\"67.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">パスワードだけ暗号化。認証と認可がひとまとめ</text><text x=\"24\" y=\"84.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ネットワークへの接続（802.1X・VPN）向け</text><rect x=\"10\" y=\"103.5\" width=\"340\" height=\"91.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"129.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">TACACS+（Cisco が作った）</text><text x=\"24\" y=\"148.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">TCP 49</text><text x=\"24\" y=\"165.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">パケット全体を暗号化。認証・認可・記録を別々に</text><text x=\"24\" y=\"182.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">機器の管理（コマンドごとの許可）向け</text></svg>",
+   "b": "AAAサーバーと話すプロトコルは2つです。<b>RADIUS</b> は業界標準で <b>UDP</b>（1812・1813）を使い、暗号化するのはパスワードだけ。認証と認可をひとまとめに扱い、Wi-Fiの802.1XやVPNなど、<b>ネットワークへの接続</b>によく使います。<b>TACACS+</b> は <b>TCP 49</b> を使い、<b>パケット全体を暗号化</b>し、3つのAを別々に扱えます。コマンドごとに許可を決められるので、<b>機器の管理者のログイン</b>に向いています。"
+  },
+  {
+   "t": "確認の問題 2",
+   "quiz": {
+    "q": "TCPを使い、パケット全体を暗号化し、認証・認可・アカウンティングを分けて扱えるプロトコルはどれでしょう？",
+    "o": [
+     ["RADIUS", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["TACACS+", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["TFTP", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "<b>TACACS+</b>（TCP 49）です。RADIUS は UDP で、暗号化はパスワードだけです。"
+   }
+  },
+  {
+   "t": "ルーターでAAAを使う",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 204.0\" role=\"img\" aria-label=\"AAAの設定（例）\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"144\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">aaa new-model</text><text x=\"22\" y=\"74\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\">radius server ISE</text><text x=\"22\" y=\"96\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\"> address ipv4 10.1.1.50</text><text x=\"22\" y=\"118\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\"> key MyRadKey</text><text x=\"22\" y=\"140\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">aaa authentication login default group radius local</text><text x=\"180\" y=\"176\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">サーバーに届かないときは local（予備）</text></svg>",
+   "b": "ルーターでは、<b>aaa new-model</b> でAAAを有効にし、RADIUSサーバーのアドレスと、ルーターとサーバーで共有する<b>鍵</b>を登録します。<b>aaa authentication login default group radius local</b> は、「まずRADIUSサーバーで確かめ、<b>サーバーに届かないときだけ</b>機器の中のユーザー（local）で確かめる」という意味です。サーバーが落ちても入れなくならないための予備です。"
+  },
+  {
+   "t": "多要素認証（MFA）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 264.0\" role=\"img\" aria-label=\"認証の3つの要素\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">知っているもの</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">パスワード・暗証番号</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">持っているもの</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">スマホのアプリ・ハードウェアトークン・ICカード</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">本人そのもの</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">指紋・顔</text><rect x=\"10\" y=\"196.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#8a3ffc\" opacity=\".1\"/><text x=\"24\" y=\"222.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ちがう種類を2つ以上 → MFA</text><text x=\"24\" y=\"241.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">パスワード2つは、MFA ではない</text></svg>",
+   "b": "パスワードは、盗まれたら終わりです。そこで<b>ちがう種類</b>の確かめ方を組み合わせるのが <b>多要素認証（MFA）</b>です。要素は、<b>知っているもの</b>（パスワード）、<b>持っているもの</b>（スマホのアプリの番号など）、<b>本人そのもの</b>（指紋や顔）の3種類。<b>ちがう種類を2つ以上</b>組み合わせるのがポイントで、パスワードを2回聞くのは MFA ではありません。"
+  },
+  {
+   "t": "確認の問題 3",
+   "quiz": {
+    "q": "多要素認証になっている組み合わせはどれでしょう？",
+    "o": [
+     ["パスワードと、秘密の質問の答え", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["パスワードと、スマホのアプリに表示される番号", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["パスワードと、別のパスワード", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "知っているもの（パスワード）と<b>持っているもの</b>（スマホ）の、ちがう種類の組み合わせです。秘密の質問は、パスワードと同じ「知っているもの」です。"
+   }
+  },
+  {
+   "t": "まちがえやすい所",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"よくある勘違い\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× 認証と認可は同じ</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">認証＝だれ、認可＝何をしてよい</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× RADIUS はパケット全体を暗号化</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">全体は TACACS+。RADIUS はパスワードだけ</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× パスワード＋秘密の質問 は MFA</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">どちらも「知っているもの」</text></svg>",
+   "b": "<b>認証（だれ）</b>と<b>認可（何をしてよい）</b>を区別しましょう。全体を暗号化するのは <b>TACACS+</b> です。MFA は「<b>ちがう種類</b>」の組み合わせであることが大事です。"
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">AAA</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">認証＝だれ、認可＝何をしてよい、アカウンティング＝記録</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">RADIUS 対 TACACS+</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">UDP・接続向け ／ TCP 49・全体暗号化・機器の管理向け</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">MFA</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 11.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">知っている・持っている・本人そのもの、ちがう種類を2つ以上</text></svg>",
+   "b": "次回は、離れた場所を、インターネットを通して安全につなぐ <b>VPN</b> です。"
+  }
+ ],
+ "cls": {
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "前回は、usernameでユーザーを作りました。", "y": "前回は、ユーザーネームでユーザーを作りました。"},
+   {"sc": 1, "sp": "先生", "t": "でも、機器が100台あったら、どうしましょう？"},
+   {"sc": 1, "sp": "生徒", "t": "100台全部に、全員分のユーザーを…無理です。"},
+   {"sc": 1, "sp": "先生", "t": "辞めた人がいたら、100台から消すことになります。"},
+   {"sc": 1, "sp": "生徒", "t": "絶対、消し忘れが出ます。"},
+   {"sc": 1, "sp": "先生", "t": "今日は、ユーザーを1か所でまとめる方法と、強い本人確認を学びます。"},
+   {"sc": 2, "sp": "先生", "t": "今日のゴールは3つです。"},
+   {"sc": 2, "sp": "先生", "t": "1つ目、AAAの3つがわかること。", "y": "1つ目、トリプルエーの3つがわかること。"},
+   {"sc": 2, "sp": "先生", "t": "2つ目、RADIUSとTACACS+を比べられること。", "y": "2つ目、ラディウスとタカクスプラスを比べられること。"},
+   {"sc": 2, "sp": "先生", "t": "3つ目、多要素認証がわかること。"},
+   {"sc": 2, "sp": "生徒", "t": "1か所にまとめたいです。"},
+   {"sc": 3, "sp": "先生", "t": "AAAは、3つのAです。1つ目、認証。あなたはだれ？", "y": "トリプルエーは、3つのAです。1つ目、認証。あなたはだれ？"},
+   {"sc": 3, "sp": "先生", "t": "2つ目、認可。あなたは何をしてよい？"},
+   {"sc": 3, "sp": "先生", "t": "3つ目、アカウンティング。あなたは何をした？"},
+   {"sc": 3, "sp": "生徒", "t": "入館証で入って、入れる部屋が決まってて、入退室が記録される感じですね。"},
+   {"sc": 3, "sp": "先生", "t": "いいたとえです。これをAAAサーバーにまとめて任せます。", "y": "いいたとえです。これをトリプルエーサーバーにまとめて任せます。"},
+   {"sc": 3, "sp": "生徒", "t": "アカウンティングの記録は、何に役立つんですか？"},
+   {"sc": 3, "sp": "先生", "t": "だれが、いつ、何をしたかを、あとで調べられます。"},
+   {"sc": 3, "sp": "先生", "t": "まちがった設定の犯人探しではなく、原因を探すためです。"},
+   {"sc": 3, "sp": "生徒", "t": "トラブルのとき、時刻の記録と合わせて見るんですね。"},
+   {"sc": 3, "sp": "先生", "t": "はい。NTPで時刻をそろえておくのも大事でしたね。", "y": "はい。エヌティーピーで時刻をそろえておくのも大事でしたね。"},
+   {"sc": 4, "sp": "先生", "t": "確認です。使ってよいコマンドを決めるのはどれでしょう？", "w": 1},
+   {"sc": 4, "sp": "生徒", "t": "認可です。"},
+   {"sc": 4, "sp": "先生", "t": "正解です。"},
+   {"sc": 5, "sp": "先生", "t": "AAAサーバーと話すプロトコルは、RADIUSとTACACS+です。", "y": "トリプルエーサーバーと話すプロトコルは、ラディウスとタカクスプラスです。"},
+   {"sc": 5, "sp": "先生", "t": "RADIUSは業界標準で、UDP。暗号化するのは、パスワードだけです。", "y": "ラディウスは業界標準で、ユーディーピー。暗号化するのは、パスワードだけです。"},
+   {"sc": 5, "sp": "生徒", "t": "Wi-Fiの802.1Xで、出てきましたね。", "y": "ワイファイのハチマルニーテンイチエックスで、出てきましたね。"},
+   {"sc": 5, "sp": "先生", "t": "はい。ネットワークへの接続によく使います。"},
+   {"sc": 5, "sp": "先生", "t": "TACACS+はTCPの49番。パケット全体を暗号化して、3つのAを別々に扱えます。", "y": "タカクスプラスはティーシーピーの49番。パケット全体を暗号化して、3つのAを別々に扱えます。"},
+   {"sc": 5, "sp": "生徒", "t": "コマンドごとに、許可を決められるんですね。"},
+   {"sc": 5, "sp": "先生", "t": "だから、機器の管理者のログインに向いています。"},
+   {"sc": 5, "sp": "生徒", "t": "RADIUSとTACACS+、両方使う会社もあるんですか？", "y": "ラディウスとタカクスプラス、両方使う会社もあるんですか？"},
+   {"sc": 5, "sp": "先生", "t": "あります。Wi-FiはRADIUS、機器の管理はTACACS+です。", "y": "あります。ワイファイはラディウス、機器の管理はタカクスプラスです。"},
+   {"sc": 5, "sp": "先生", "t": "Cisco ISEなら、両方を1台でこなせます。", "y": "シスコ アイエスイーなら、両方を1台でこなせます。"},
+   {"sc": 6, "sp": "先生", "t": "確認です。TCPで全体を暗号化するのはどれでしょう？", "y": "確認です。ティーシーピーで全体を暗号化するのはどれでしょう？", "w": 1},
+   {"sc": 6, "sp": "生徒", "t": "TACACS+です。", "y": "タカクスプラスです。"},
+   {"sc": 6, "sp": "先生", "t": "正解です。"},
+   {"sc": 7, "sp": "先生", "t": "ルーターでは、aaa new-modelでAAAを有効にします。", "y": "ルーターでは、トリプルエー、ニューモデルでトリプルエーを有効にします。"},
+   {"sc": 7, "sp": "先生", "t": "default group radius localは、まずRADIUS、届かないときだけlocal、という意味です。", "y": "デフォルト group radius localは、まずラディウス、届かないときだけlocal、という意味です。"},
+   {"sc": 7, "sp": "生徒", "t": "サーバーが落ちても、入れなくならないように？"},
+   {"sc": 7, "sp": "先生", "t": "その通り。予備の入口です。"},
+   {"sc": 7, "sp": "生徒", "t": "鍵は、ルーターとサーバーで同じものにするんですね。"},
+   {"sc": 7, "sp": "生徒", "t": "localを書き忘れたら、どうなるんですか？"},
+   {"sc": 7, "sp": "先生", "t": "サーバーが止まると、だれもログインできなくなります。"},
+   {"sc": 7, "sp": "先生", "t": "管理者が締め出される、大事件になります。"},
+   {"sc": 7, "sp": "生徒", "t": "予備の入口は、必ず用意しておくんですね。"},
+   {"sc": 8, "sp": "先生", "t": "最後に、多要素認証、MFAです。", "y": "最後に、多要素認証、エムエフエーです。"},
+   {"sc": 8, "sp": "先生", "t": "知っているもの、持っているもの、本人そのもの。ちがう種類を2つ以上組み合わせます。"},
+   {"sc": 8, "sp": "生徒", "t": "パスワードとスマホのアプリ、とか？"},
+   {"sc": 8, "sp": "先生", "t": "はい。パスワードを2回聞くのは、MFAではありません。", "y": "はい。パスワードを2回聞くのは、エムエフエーではありません。"},
+   {"sc": 8, "sp": "生徒", "t": "生体認証は、どんなものがありますか？"},
+   {"sc": 8, "sp": "先生", "t": "指紋や顔、目の虹彩などです。"},
+   {"sc": 8, "sp": "先生", "t": "スマホの顔認証も、本人そのものの要素です。"},
+   {"sc": 8, "sp": "生徒", "t": "証明書は、どの種類ですか？"},
+   {"sc": 8, "sp": "先生", "t": "パソコンなどに入った、持っているものの仲間です。"},
+   {"sc": 9, "sp": "先生", "t": "確認です。多要素認証になっている組み合わせはどれでしょう？", "w": 1},
+   {"sc": 9, "sp": "生徒", "t": "パスワードとスマホの番号です。"},
+   {"sc": 9, "sp": "先生", "t": "正解です。"},
+   {"sc": 10, "sp": "生徒", "t": "秘密の質問も、別の要素だと思ってました。"},
+   {"sc": 10, "sp": "先生", "t": "それも、知っているものです。種類がちがわないといけません。"},
+   {"sc": 10, "sp": "生徒", "t": "全体を暗号化するのは、TACACS+。", "y": "全体を暗号化するのは、タカクスプラス。"},
+   {"sc": 11, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 11, "sp": "先生", "t": "1つ目。認証はだれ、認可は何をしてよい、アカウンティングは記録。"},
+   {"sc": 11, "sp": "先生", "t": "2つ目。RADIUSはUDPで接続向け、TACACS+はTCPで機器の管理向け。", "y": "2つ目。ラディウスはユーディーピーで接続向け、タカクスプラスはティーシーピーで機器の管理向け。"},
+   {"sc": 11, "sp": "先生", "t": "3つ目。MFAは、ちがう種類を2つ以上。", "y": "3つ目。エムエフエーは、ちがう種類を2つ以上。"},
+   {"sc": 11, "sp": "生徒", "t": "100台でも、1か所で管理できますね。"},
+   {"sc": 11, "sp": "先生", "t": "次回は、VPNです。お疲れさまでした。", "y": "次回は、ブイピーエヌです。お疲れさまでした。"}
+  ],
+  "seg": [
+   [0.0, 3.52],
+   [3.87, 3.306667],
+   [7.527, 4.586667],
+   [12.463, 3.370667],
+   [16.184, 2.602667],
+   [19.137, 5.642667],
+   [25.129, 1.610667],
+   [27.09, 2.965333],
+   [30.405, 3.530667],
+   [34.286, 2.858667],
+   [37.495, 1.952],
+   [39.797, 5.248],
+   [45.395, 3.328],
+   [49.073, 3.434667],
+   [52.857, 6.730667],
+   [59.938, 4.074667],
+   [64.363, 4.021333],
+   [68.734, 3.936],
+   [73.02, 4.522667],
+   [77.893, 4.202667],
+   [82.445, 4.128],
+   [86.923, 3.957333],
+   [91.231, 0.970667],
+   [92.551, 0.992],
+   [93.893, 4.458667],
+   [98.702, 6.144],
+   [105.196, 4.394667],
+   [109.941, 3.498667],
+   [113.789, 7.850667],
+   [121.99, 3.317333],
+   [125.657, 3.157333],
+   [129.165, 4.736],
+   [134.251, 4.501333],
+   [139.102, 4.096],
+   [143.548, 4.501333],
+   [148.399, 1.557333],
+   [150.307, 0.992],
+   [151.649, 5.002667],
+   [157.001, 6.858667],
+   [164.21, 3.605333],
+   [168.165, 2.378667],
+   [170.894, 4.064],
+   [175.308, 3.466667],
+   [179.125, 3.509333],
+   [182.984, 3.157333],
+   [186.491, 3.818667],
+   [190.66, 3.541333],
+   [194.551, 6.229333],
+   [201.131, 3.114667],
+   [204.595, 4.576],
+   [209.521, 3.541333],
+   [213.413, 2.538667],
+   [216.301, 3.466667],
+   [220.118, 2.773333],
+   [223.241, 3.306667],
+   [226.898, 4.394667],
+   [231.643, 2.528],
+   [234.521, 0.992],
+   [235.863, 3.946667],
+   [240.159, 4.138667],
+   [244.648, 3.562667],
+   [248.561, 1.834667],
+   [250.745, 5.333333],
+   [256.429, 6.570667],
+   [263.349, 3.968],
+   [267.667, 3.413333],
+   [271.431, 3.477333]
+  ],
+  "a": "audio/l70/"
+ },
+ "lt": "nl39"
+}

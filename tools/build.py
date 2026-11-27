@@ -1,6 +1,6 @@
 """src/ から data.json を作り、続けて check.py で点検する。  python tools/build.py
 - src/lessons/lNN.json    … 各回の教科書（pages）と授業（cls）＝ TB
-- src/questions/lNN.json  … 各回の問題（形式は src/questions/INSTRUCTIONS.md）
+- src/questions/lNN.json  … 各回の問題（形式は src/questions/INSTRUCTIONS.md）。問題IDは旧50回の番号のままで、どの回かはファイルで決まる
 - src/base/*.json         … 用語集・図解レッスン・コマンド練習など
 問題からは Q（問題）, CP の各回の問題リスト, QP（問題→教科書ページ）, O（出題順）, L の確認問題 を作る。
 src/ のファイルは書き換えない（data.json だけを書く）。
@@ -17,12 +17,14 @@ base = {r: srcio.load(srcio.base_path(r)) for r in srcio.BASE}
 TB = {}
 for f in sorted(glob.glob(os.path.join(srcio.SRC, "lessons", "l*.json"))):
     x = srcio.load(f); TB[x["n"]] = x
-assert sorted(TB) == list(range(1, 51)), f"src/lessons の回がそろっていません: {sorted(TB)}"
+assert sorted(TB) == list(range(1, 82)), f"src/lessons の回がそろっていません: {sorted(TB)}"
 
 # ---- 問題 ----
-qs = []
+qs, qn = [], {}   # qn：問題ID → 回（ファイルの番号。IDの番号は旧50回のもので、回とは一致しない）
 for f in sorted(glob.glob(os.path.join(srcio.SRC, "questions", "l*.json"))):
-    qs += srcio.load(f)
+    n = int(re.search(r"l(\d+)\.json$", f).group(1))
+    for q in srcio.load(f):
+        qs.append(q); qn[q["id"]] = n
 qs.sort(key=lambda q: q["id"])
 ids = [q["id"] for q in qs]
 dup = sorted({i for i in ids if ids.count(i) > 1})
@@ -34,7 +36,7 @@ cls = {c["n"]: c for c in CP["list"]}
 
 newQ, byc, qp = [], {}, {}
 for q in qs:
-    n = int(q["id"][1:3]); c = cls[n]
+    n = qn[q["id"]]; c = cls[n]
     lt = next(l for l in c["lt"] if l in LM)
     r = {"r": "Q", "id": q["id"], "d": c["d"]}
     r.update({k: q[k] for k in KEEP if k in q})

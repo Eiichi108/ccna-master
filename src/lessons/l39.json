@@ -1,104 +1,218 @@
 {
  "r": "TB",
- "lt": "nl38",
  "n": 39,
- "t": "QoSのPHB（詳しく）",
+ "t": "速いSTP（RSTP・Rapid PVST+）",
+ "d": "d2",
+ "form": "対決",
+ "need": [38],
+ "goal": ["RSTPのポートの状態と役割がわかる", "代替ポートとバックアップポートがわかる", "Rapid PVST+ とプライオリティを設定できる"],
+ "terms": ["RSTP", "代替ポート", "バックアップポート", "Rapid PVST+", "プライオリティ"],
  "pages": [
   {
-   "t": "分類とマーキング",
-   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"分類とマーキング\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">L2：CoS（802.1Qタグの3ビット・PCP）</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">L3：DSCP（IPヘッダーの6ビット）</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">EF＝音声／AF41＝ビデオ会議</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">CS1＝低優先／BE＝ベストエフォート</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">AFxy：x＝クラス、y＝捨てられやすさ</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">AF43はAF41より先に捨てられる</text></svg>",
-   "b": "<b>PHB</b>（Per-Hop Behavior）は各ルーターでのQoSの動作。QoSマーキングでCisco機器が変更するIPヘッダーのフィールドは<b>DSCP</b>です。<b>CoS</b>（Class of Service）はL2の印。 TCPは<b>受信側への速度を最適化</b>し（フロー制御）、<b>接続を制御</b>して<b>到達を保証</b>します。UDPは<b>マルチキャスト</b>もでき、<b>小さなパケットで遅延が少ない</b>ので<b>ライブ・リアルタイムのデータ</b>向きです。",
-   "p": "後ろの数字が大きいAFほど捨てられやすい。"
+   "t": "切りかえに50秒？",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 124.0\" role=\"img\" aria-label=\"つかみ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"110\" rx=\"16\" fill=\"#0a5cff\" opacity=\".12\"/><text x=\"180\" y=\"44\" text-anchor=\"middle\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ケーブルが切れてから、通信が戻るまで最大50秒</text><text x=\"180\" y=\"74\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">昔のSTPは、慎重すぎて遅かった</text><text x=\"180\" y=\"94\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">今は数秒で切りかわる RSTP が主流です</text></svg>",
+   "b": "昔のSTP（802.1D）は、ループを作らないように慎重に様子を見るので、ケーブルが切れてから予備の道で通信が戻るまで<b>最大50秒</b>ほどかかりました。音声通話なら、とっくに切れてしまいます。そこで生まれたのが、<b>数秒で切りかわる</b> <b>RSTP</b>（Rapid STP）です。今日は、昔のSTPと比べながらRSTPを学びます。"
   },
   {
-   "t": "トラストバウンダリと音声",
-   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 137.0\" role=\"img\" aria-label=\"トラストバウンダリと音声の目安\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">トラストバウンダリ</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">マーキングを信用する境目（IP電話が多い）</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">音声の目安</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">遅延150ms以下・ジッター30ms以下・ロス1%以下</text></svg>",
-   "b": "",
-   "p": "音声は遅延とジッターに弱い。"
+   "t": "今日のゴール",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のゴール\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1. RSTPのポートの状態と役割がわかる</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">discarding・learning・forwarding</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2. 代替ポートとバックアップポートがわかる</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">すぐに代わりになる予備</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">3. Rapid PVST+ とプライオリティを設定できる</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">VLANごとにルートを変える</text></svg>"
   },
   {
-   "t": "キューイング",
-   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 154.0\" role=\"img\" aria-label=\"キューイング\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">LLQ</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">音声用の完全優先キュー＋CBWFQ（帯域保証）</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">WRED（輻輳回避）</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">満杯になる前にTCPのパケットを少しずつ捨てて速度を</text><text x=\"24\" y=\"131.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">下げさせる</text></svg>",
-   "b": "<b>LLQ</b>（Low Latency Queuing）、<b>WRED</b>（Weighted Random Early Detection）。 <b>LLQ</b>は、<b>音声などに使う完全優先キュー</b>を持つキューイングです。",
-   "p": "音声はいつも先に送られる。"
+   "t": "ポートの状態は3つに",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"RSTPの状態\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">discarding（捨てる）</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">データを通さない。昔の blocking・listening にあたる</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">learning（学習）</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">データは通さないが、MACアドレスを覚え始める</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">forwarding（転送）</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">データを通す</text></svg>",
+   "b": "昔のSTPには5つの状態がありましたが、RSTPでは<b>3つ</b>に整理されました。データを通さない<b>discarding</b>、MACアドレスを覚え始める<b>learning</b>、データを通す<b>forwarding</b>です。昔の blocking や listening は、どちらもデータを通さないので、discarding にまとめられました。",
+   "p": "RSTPの状態：discarding → learning → forwarding。"
   },
   {
-   "t": "ポリシングとシェーピング",
-   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 230\" role=\"img\" aria-label=\"ポリシングとシェーピング\"><rect x=\"10\" y=\"10\" width=\"164\" height=\"210\" rx=\"12\" fill=\"#e6261f\" opacity=\".08\"/><text x=\"92\" y=\"36\" text-anchor=\"middle\" style=\"font:800 16px Figtree,'Hiragino Sans',sans-serif;fill:#e6261f;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ポリシング</text><path d=\"M30 100h120\" stroke=\"var(--ink)\" stroke-dasharray=\"5 5\" stroke-width=\"2\"/><rect x=\"34\" y=\"70\" width=\"16\" height=\"30\" fill=\"#0a5cff\" opacity=\".6\"/><rect x=\"56\" y=\"40\" width=\"16\" height=\"60\" fill=\"#e6261f\" opacity=\".6\"/><rect x=\"78\" y=\"75\" width=\"16\" height=\"25\" fill=\"#0a5cff\" opacity=\".6\"/><rect x=\"100\" y=\"30\" width=\"16\" height=\"70\" fill=\"#e6261f\" opacity=\".6\"/><rect x=\"122\" y=\"65\" width=\"16\" height=\"35\" fill=\"#0a5cff\" opacity=\".6\"/><text x=\"92\" y=\"124\" text-anchor=\"middle\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">超えた分を捨てる</text><text x=\"92\" y=\"146\" text-anchor=\"middle\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">（または再マーキング）</text><text x=\"92\" y=\"176\" text-anchor=\"middle\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">遅延は増えない</text><text x=\"92\" y=\"200\" text-anchor=\"middle\" style=\"font:700 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">受信・送信どちらも</text><rect x=\"186\" y=\"10\" width=\"164\" height=\"210\" rx=\"12\" fill=\"#0a5cff\" opacity=\".08\"/><text x=\"268\" y=\"36\" text-anchor=\"middle\" style=\"font:800 16px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">シェーピング</text><path d=\"M206 100h120\" stroke=\"var(--ink)\" stroke-dasharray=\"5 5\" stroke-width=\"2\"/><rect x=\"210\" y=\"60\" width=\"16\" height=\"40\" fill=\"#0a5cff\" opacity=\".6\"/><rect x=\"232\" y=\"60\" width=\"16\" height=\"40\" fill=\"#0a5cff\" opacity=\".6\"/><rect x=\"254\" y=\"60\" width=\"16\" height=\"40\" fill=\"#0a5cff\" opacity=\".6\"/><rect x=\"276\" y=\"60\" width=\"16\" height=\"40\" fill=\"#0a5cff\" opacity=\".6\"/><rect x=\"298\" y=\"60\" width=\"16\" height=\"40\" fill=\"#0a5cff\" opacity=\".6\"/><text x=\"268\" y=\"124\" text-anchor=\"middle\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">超えた分をためてあとで</text><text x=\"268\" y=\"146\" text-anchor=\"middle\" style=\"font:700 11px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">（バッファ・キュー）</text><text x=\"268\" y=\"176\" text-anchor=\"middle\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:#e6261f;paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">遅延が増える</text><text x=\"268\" y=\"200\" text-anchor=\"middle\" style=\"font:700 12px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">主に送信側</text></svg>",
-   "b": "<b>シェーピング</b>は過剰なトラフィックをキューに入れ、遅らせてバーストを平準化します。<b>ポリシング</b>は着信・発信の両方向で使えます。 <b>シェーピング</b>は、<b>上限を超えた分（過剰なトラフィック）をバッファにためて（キューに入れて）</b>後で送るので、<b>遅延が増えます</b>が、<b>バーストを平準化</b>します。<b>ポリシング</b>は超えた分を捨てる（または印を付け直す）方式で、<b>着信と発信の両方向</b>で使えます。",
-   "p": "「シェーピングが捨てる」は逆。"
-  },
-  {
-   "t": "小テスト",
+   "t": "確認の問題 1",
    "quiz": {
-    "q": "ポリシングとシェーピングの違いとして正しいものは？",
+    "q": "RSTP のポートの状態に含まれないものはどれでしょう？",
     "o": [
-     ["シェーピングは超えた分をためるので遅延が増える", "<g><g transform=\"translate(0,0)\"><rect x=\"-45.0\" y=\"-13\" width=\"90\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#0a5cff\">ためる</text></g></g>"],
-     ["シェーピングは超えた分を捨てる", "<g><g transform=\"translate(0,0)\"><rect x=\"-45.0\" y=\"-13\" width=\"90\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#e6261f\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#e6261f\">捨てる</text></g></g>"],
-     ["ポリシングは超えた分をためる", "<g><g transform=\"translate(0,0)\"><rect x=\"-45.0\" y=\"-13\" width=\"90\" height=\"26\" rx=\"6\" fill=\"var(--card)\" stroke=\"#3d4450\" stroke-width=\"2.5\"/><text y=\"5\" text-anchor=\"middle\" style=\"font:800 13.5px ui-monospace,Menlo,monospace;fill:#3d4450\">ポリシング</text></g></g>"]
+     ["discarding", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["learning", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["listening", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
     ],
-    "a": 0,
-    "e": "正解は<b>シェーピングは超えた分をバッファにためるので、遅延が増える</b>。ポリシングは超えた分を破棄（または再マーキング）します。"
+    "a": 2,
+    "e": "<b>listening</b> は昔のSTP（802.1D）の状態です。RSTPでは discarding にまとめられました。"
    }
   },
   {
+   "t": "すぐに代われる予備（代替ポート）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"RSTPの役割\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ルートポート・指定ポート</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">昔と同じ</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">代替ポート（alternate）</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ルートポートの予備。だめになったら、すぐ代わる</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">バックアップポート（backup）</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">同じスイッチの指定ポートの予備</text></svg>",
+   "b": "RSTPが速い秘密は、ブロックしているポートに<b>役割</b>を与えたことです。ルートポートの予備として待っているのが<b>代替ポート</b>（alternate）で、ルートポートがだめになると<b>すぐに</b>代わりになります。同じスイッチの指定ポートの予備が<b>バックアップポート</b>（backup）で、同じハブなどに2本つないだときに出てきます。"
+  },
+  {
+   "t": "VLANごとにSTP（Rapid PVST+）",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"Rapid PVST+\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 13.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Rapid PVST+ ＝ VLANごとに、別々のRSTPを動かす</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Ciscoのスイッチでよく使う</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">VLANごとに、ルートブリッジを変えられる</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">VLAN 10 は DS1、VLAN 20 は DS2 がルート</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">両方の回線を、ムダなく使える</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">VLANによって、ブロックされる線が違うため</text></svg>",
+   "b": "Ciscoのスイッチでよく使うのが <b>Rapid PVST+</b> で、<b>VLANごとに別々のRSTP</b>を動かします。VLANごとにルートブリッジを変えられるので、VLAN 10はDS1を、VLAN 20はDS2をルートにすれば、VLANによってブロックされる線が違い、<b>両方の回線をムダなく</b>使えます。設定は <b>spanning-tree mode rapid-pvst</b> です。"
+  },
+  {
+   "t": "ルートブリッジを自分で決める",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 184.0\" role=\"img\" aria-label=\"プライオリティの設定\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"100\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\">DS1(config)# spanning-tree mode rapid-pvst</text><text x=\"22\" y=\"74\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">DS1(config)# spanning-tree vlan 10 priority 4096</text><text x=\"22\" y=\"96\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#ffb400;white-space:pre\">DS1(config)# spanning-tree vlan 20 root secondary</text><text x=\"180\" y=\"132\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">プライオリティは 4096 の倍数で設定する</text><text x=\"180\" y=\"156\" text-anchor=\"middle\" style=\"font:700 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">root primary／secondary で自動的に小さくする</text></svg>",
+   "b": "ルートブリッジをMACアドレスまかせにせず、<b>自分で決める</b>のが基本です。<b>spanning-tree vlan 10 priority 4096</b> のようにプライオリティを小さくすれば、そのVLANのルートになります。プライオリティは<b>4096の倍数</b>で設定します。<b>root primary</b> と打てば、ルートになれる値に自動で下げてくれます（secondary は2番手）。"
+  },
+  {
+   "t": "確認の問題 2",
+   "quiz": {
+    "q": "コアスイッチ CORE1 を VLAN 30 のルートブリッジにしたいとき、プライオリティを自動で調整するコマンドはどれでしょう？",
+    "o": [
+     ["spanning-tree vlan 30 root primary", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["spanning-tree vlan 30 priority 50000", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["spanning-tree portfast", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 0,
+    "e": "<b>root primary</b> で、ルートになれる値に自動で下げます。プライオリティは4096の倍数なので50000は設定できません。"
+   }
+  },
+  {
+   "t": "出力のプライオリティを読む",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 206.0\" role=\"img\" aria-label=\"show spanning-tree\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"122\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\">SW1# show spanning-tree vlan 10</text><text x=\"22\" y=\"74\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">  Root ID    Priority    4106</text><text x=\"22\" y=\"96\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#e8ecf3;white-space:pre\">             Address     0011.1111.aaaa</text><text x=\"22\" y=\"118\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#ffb400;white-space:pre\">             This bridge is the root</text><text x=\"180\" y=\"154\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">4106 ＝ 設定した 4096 ＋ VLAN番号の 10</text><text x=\"180\" y=\"178\" text-anchor=\"middle\" style=\"font:700 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">This bridge is the root ＝ 自分がルート</text></svg>",
+   "b": "show spanning-tree の出力で、プライオリティが <b>4106</b> のように、4096の倍数でない値になっていることがあります。これは、設定した値に<b>VLAN番号が足されて</b>表示されるからです（4096＋10）。VLANごとにSTPを動かすので、VLAN番号を背番号に含めているのです。「This bridge is the root」は、このスイッチがルートという意味です。"
+  },
+  {
+   "t": "確認の問題 3",
+   "quiz": {
+    "q": "VLAN 20 の show spanning-tree で、ルートのプライオリティが 8212 と表示されました。管理者が設定したプライオリティの値はどれでしょう？",
+    "o": [
+     ["8212", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["8192", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["4096", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "表示は「設定した値＋VLAN番号」です。8212 − 20 ＝ <b>8192</b>（4096の倍数）が設定した値です。"
+   }
+  },
+  {
+   "t": "まちがえやすい所",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"よくある勘違い\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× プライオリティは好きな数にできる</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">4096 の倍数だけ（0〜61440）</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× 出力の 4106 を、そのまま設定値と思う</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">VLAN番号が足されている</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ 代替ポート ＝ ルートポートの予備</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">バックアップ ＝ 同じスイッチの指定ポートの予備</text></svg>",
+   "b": "プライオリティは<b>4096の倍数</b>しか設定できません。出力の値はVLAN番号が足されているので、引いて考えます。また、<b>代替ポート</b>はルートポートの予備、<b>バックアップポート</b>は同じスイッチの指定ポートの予備、と区別しましょう。"
+  },
+  {
    "t": "今日のまとめ",
-   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 217.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">CoS（L2）・DSCP（L3）</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">EF＝音声、AF41＝ビデオ会議、AF43はAF41より先に捨</text><text x=\"24\" y=\"67.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">てられる</text><rect x=\"10\" y=\"86.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"112.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">LLQ・WRED</text><text x=\"24\" y=\"131.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">音声の完全優先／満杯前に少しずつ捨てる</text><rect x=\"10\" y=\"150.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"175.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ポリシング＝捨てる・遅延なし</text><text x=\"24\" y=\"194.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">シェーピング＝ためる・遅延あり</text></svg>",
-   "b": "これで「IPサービス」はおしまい。次回から「セキュリティの基礎」に入ります。",
-   "p": "一問一答の「IPサービス」で確かめましょう。"
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">RSTP</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">数秒で切りかわる。状態は3つ</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">代替・バックアップ</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ルートポートの予備／指定ポートの予備</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Rapid PVST+</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 11.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">VLANごとにRSTP。priority は4096の倍数、root primary</text></svg>",
+   "b": "次回は、STPを<b>守る</b>機能です。勝手につながれたスイッチが、ネットワークを乗っ取る事件から始めます。"
   }
  ],
  "cls": {
-  "a": "audio/l39/",
   "lines": [
-   {"sc": 1, "sp": "先生", "t": "今日は、IPサービスの最後。QoSをくわしく学びます。QoSの各ルーターでの動きを、PHB、ホップごとの動作と言います。", "y": "今日は、アイピーサービスの最後。キューオーエスをくわしく学びます。キューオーエスの各ルーターでの動きを、ピーエイチビー、ホップごとの動作と言います。"},
-   {"sc": 1, "sp": "先生", "t": "まず、分類とマーキング。通信の種類を見分けて、印を付けます。L2では、802.1Qタグの中の3ビット、CoS。L3では、IPヘッダーの6ビット、DSCPです。", "y": "まず、分類とマーキング。通信の種類を見分けて、印を付けます。エルツーでは、ハチマルニーテンイチキュータグの中の3ビット、コス。エルスリーでは、アイピーヘッダーの6ビット、ディーエスシーピーです。"},
-   {"sc": 1, "sp": "先生", "t": "DSCPの値には名前があります。音声はEF、ビデオ会議はAF41。この2つがよく出ます。ほかに、優先度の低い通信はCS1、普通の通信はBE、ベストエフォートです。", "y": "ディーエスシーピーの値には名前があります。音声はイーエフ、ビデオ会議はエーエフよんいち。この2つがよく出ます。ほかに、優先度の低い通信はシーエスワン、普通の通信はビーイー、ベストエフォートです。"},
-   {"sc": 1, "sp": "先生", "t": "AFは、AFのあとに2つの数字が付きます。最初の数字がクラスで、大きいほど優先されます。2つ目が捨てられやすさです。AF41とAF43なら、AF43のほうが、混雑したとき先に捨てられます。", "y": "AFは、AFのあとに2つの数字が付きます。最初の数字がクラスで、大きいほど優先されます。2つ目が捨てられやすさです。エーエフよんいちとエーエフよんさんなら、エーエフよんさんのほうが、混雑したとき先に捨てられます。"},
-   {"sc": 1, "sp": "生徒", "t": "後ろの数字が大きいほど、捨てられやすいんですね。"},
-   {"sc": 2, "sp": "先生", "t": "次は、トラストバウンダリです。PCが勝手に自分の通信を最優先の印にすると困るので、どこから先の印を信用するかの境目を決めます。IP電話の付けた印は信用できるので、IP電話を境目にすることが多いです。", "y": "次は、トラストバウンダリです。ピーシーが勝手に自分の通信を最優先の印にすると困るので、どこから先の印を信用するかの境目を決めます。アイピー電話の付けた印は信用できるので、アイピー電話を境目にすることが多いです。"},
-   {"sc": 2, "sp": "先生", "t": "音声の品質の目安も覚えましょう。片道の遅延150ミリ秒以下、ジッター、つまり遅れのばらつき30ミリ秒以下、パケットロス1パーセント以下です。"},
-   {"sc": 3, "sp": "先生", "t": "次は、キューイング。混雑しているとき、どの順番で送るかを決めます。"},
-   {"sc": 3, "sp": "先生", "t": "LLQは、音声のための特別な列、完全優先キューを持つ方式です。この列にあるものは、いつも一番先に送られます。ほかの通信には、それぞれ最低限の帯域を保証する、CBWFQという仕組みを組み合わせます。", "y": "エルエルキューは、音声のための特別な列、完全優先キューを持つ方式です。この列にあるものは、いつも一番先に送られます。ほかの通信には、それぞれ最低限の帯域を保証する、シービーダブリューエフキューという仕組みを組み合わせます。"},
-   {"sc": 3, "sp": "先生", "t": "混雑、つまり輻輳を防ぐWREDは、キューが満杯になる前に、TCPのパケットを少しずつ捨てます。TCPは、パケットが届かないと、混んでいると判断して自分で送る速度を下げます。その性質を利用するんです。", "y": "混雑、つまり輻輳を防ぐダブリューレッドは、キューが満杯になる前に、ティーシーピーのパケットを少しずつ捨てます。ティーシーピーは、パケットが届かないと、混んでいると判断して自分で送る速度を下げます。その性質を利用するんです。"},
-   {"sc": 4, "sp": "先生", "t": "最後に、ポリシングとシェーピング。どちらも速度を制限しますが、超えた分の扱いが違います。"},
-   {"sc": 4, "sp": "先生", "t": "ポリシングは、超えた分を捨てるか、印を付け直します。ためないので遅延は増えません。受信と送信、どちらの方向でも使えます。"},
-   {"sc": 4, "sp": "先生", "t": "シェーピングは、超えた分をバッファのキューにためて、あとで送ります。一度にどっと来る通信、バーストを平らにならせますが、待たせる分、遅延は増えます。主に送信側で使います。"},
-   {"sc": 4, "sp": "生徒", "t": "捨てるのがポリシング、ためるのがシェーピング、ですね。"},
-   {"sc": 4, "sp": "先生", "t": "その通り。シェーピングが捨てる、という選択肢は逆なので選ばないように。"},
-   {"sc": 5, "sp": "先生", "t": "ここで小テストです。ポリシングとシェーピングの違いとして、正しいものはどれでしょう？画面で選んでください。", "w": 1},
-   {"sc": 5, "sp": "先生", "t": "正解は、シェーピングは超えた分をバッファにためるので、遅延が増える、です。"},
-   {"sc": 6, "sp": "先生", "t": "では、今日のまとめです。"},
-   {"sc": 6, "sp": "先生", "t": "1つ目。L2はCoS、L3はDSCP。音声はEF、ビデオ会議はAF41。AFの後ろの数字が大きいほど捨てられやすい。", "y": "1つ目。エルツーはコス、エルスリーはディーエスシーピー。音声はイーエフ、ビデオ会議はエーエフよんいち。AFの後ろの数字が大きいほど捨てられやすい。"},
-   {"sc": 6, "sp": "先生", "t": "2つ目。LLQは音声の完全優先キュー。WREDは満杯になる前に少しずつ捨てる。", "y": "2つ目。エルエルキューは音声の完全優先キュー。ダブリューレッドは満杯になる前に少しずつ捨てる。"},
-   {"sc": 6, "sp": "先生", "t": "3つ目。ポリシングは捨てて遅延なし、どちらの方向も。シェーピングはためて遅延あり、送信側。"},
-   {"sc": 6, "sp": "生徒", "t": "これでIPサービスの分野も終わりです！", "y": "これでアイピーサービスの分野も終わりです！"},
-   {"sc": 6, "sp": "先生", "t": "よく頑張りました。次回からは、セキュリティの基礎の分野です。お疲れさまでした。"}
+   {"sc": 1, "sp": "先生", "t": "昔のSTPは、ケーブルが切れてから、予備の道で通信が戻るまで、最大50秒ほどかかりました。", "y": "昔のエスティーピーは、ケーブルが切れてから、予備の道で通信が戻るまで、最大50秒ほどかかりました。"},
+   {"sc": 1, "sp": "生徒", "t": "50秒！ 電話なら、切れちゃいますね。"},
+   {"sc": 1, "sp": "先生", "t": "ループを作らないように、慎重に様子を見ていたからです。"},
+   {"sc": 1, "sp": "先生", "t": "そこで生まれたのが、数秒で切りかわるRSTPです。", "y": "そこで生まれたのが、数秒で切りかわるアールエスティーピーです。"},
+   {"sc": 1, "sp": "生徒", "t": "ラピッドって、速いって意味ですね。"},
+   {"sc": 2, "sp": "先生", "t": "今日のゴールは3つです。"},
+   {"sc": 2, "sp": "先生", "t": "1つ目、RSTPのポートの状態と役割がわかること。", "y": "1つ目、アールエスティーピーのポートの状態と役割がわかること。"},
+   {"sc": 2, "sp": "先生", "t": "2つ目、代替ポートとバックアップポートがわかること。"},
+   {"sc": 2, "sp": "先生", "t": "3つ目、Rapid PVST+ とプライオリティを設定できること。", "y": "3つ目、ラピッドピーブイエスティープラス とプライオリティを設定できること。"},
+   {"sc": 2, "sp": "生徒", "t": "昔のSTPと比べると、わかりやすそうです。", "y": "昔のエスティーピーと比べると、わかりやすそうです。"},
+   {"sc": 3, "sp": "先生", "t": "まず、ポートの状態です。昔のSTPには5つありましたが、RSTPでは3つです。", "y": "まず、ポートの状態です。昔のエスティーピーには5つありましたが、アールエスティーピーでは3つです。"},
+   {"sc": 3, "sp": "先生", "t": "データを通さないdiscarding、MACを覚え始めるlearning、データを通すforwarding。", "y": "データを通さないdiscarding、マックを覚え始めるlearning、データを通すforwarding。"},
+   {"sc": 3, "sp": "生徒", "t": "昔のblockingやlisteningは、どこへ行ったんですか？"},
+   {"sc": 3, "sp": "先生", "t": "どちらもデータを通さないので、discardingにまとめられました。"},
+   {"sc": 3, "sp": "生徒", "t": "すっきりしましたね。"},
+   {"sc": 4, "sp": "先生", "t": "確認です。RSTPの状態に含まれないものはどれでしょう？", "y": "確認です。アールエスティーピーの状態に含まれないものはどれでしょう？", "w": 1},
+   {"sc": 4, "sp": "生徒", "t": "listeningは昔のSTPだから、3つ目です。", "y": "listeningは昔のエスティーピーだから、3つ目です。"},
+   {"sc": 4, "sp": "先生", "t": "正解です。"},
+   {"sc": 5, "sp": "先生", "t": "RSTPが速い秘密は、ブロックしているポートに、役割を与えたことです。", "y": "アールエスティーピーが速い秘密は、ブロックしているポートに、役割を与えたことです。"},
+   {"sc": 5, "sp": "先生", "t": "ルートポートの予備として待っているのが、代替ポートです。"},
+   {"sc": 5, "sp": "生徒", "t": "ルートポートがだめになったら？"},
+   {"sc": 5, "sp": "先生", "t": "すぐに代わりになります。だから速いんです。"},
+   {"sc": 5, "sp": "先生", "t": "同じスイッチの指定ポートの予備が、バックアップポートです。"},
+   {"sc": 5, "sp": "生徒", "t": "バックアップは、どんなときに出てくるんですか？"},
+   {"sc": 5, "sp": "先生", "t": "同じハブなどに、1台のスイッチから2本つないだときです。"},
+   {"sc": 6, "sp": "先生", "t": "Ciscoのスイッチでよく使うのが、Rapid PVST+です。", "y": "シスコのスイッチでよく使うのが、ラピッドピーブイエスティープラスです。"},
+   {"sc": 6, "sp": "先生", "t": "VLANごとに、別々のRSTPを動かします。", "y": "ブイランごとに、別々のアールエスティーピーを動かします。"},
+   {"sc": 6, "sp": "生徒", "t": "VLANごとに分けると、何がいいんですか？", "y": "ブイランごとに分けると、何がいいんですか？"},
+   {"sc": 6, "sp": "先生", "t": "VLANごとに、ルートブリッジを変えられるんです。", "y": "ブイランごとに、ルートブリッジを変えられるんです。"},
+   {"sc": 6, "sp": "先生", "t": "VLAN 10はDS1、VLAN 20はDS2をルートにすると、ブロックされる線がVLANで違います。", "y": "ブイラン 10はDS1、ブイラン 20はDS2をルートにすると、ブロックされる線がブイランで違います。"},
+   {"sc": 6, "sp": "生徒", "t": "両方の線を、ムダなく使えるんですね！"},
+   {"sc": 7, "sp": "先生", "t": "ルートブリッジは、MACアドレスまかせにせず、自分で決めるのが基本です。", "y": "ルートブリッジは、マックアドレスまかせにせず、自分で決めるのが基本です。"},
+   {"sc": 7, "sp": "先生", "t": "spanning-tree vlan 10 priority 4096のように、プライオリティを小さくします。", "y": "スパニングツリー ブイラン 10 プライオリティ 4096のように、プライオリティを小さくします。"},
+   {"sc": 7, "sp": "生徒", "t": "4096って、中途半端な数ですね。"},
+   {"sc": 7, "sp": "先生", "t": "プライオリティは、4096の倍数で設定する決まりなんです。"},
+   {"sc": 7, "sp": "先生", "t": "root primaryと打てば、ルートになれる値に自動で下げてくれます。", "y": "ルートプライマリと打てば、ルートになれる値に自動で下げてくれます。"},
+   {"sc": 8, "sp": "先生", "t": "確認です。VLAN 30のルートにしたいとき、自動で調整するコマンドはどれでしょう？", "y": "確認です。ブイラン 30のルートにしたいとき、自動で調整するコマンドはどれでしょう？", "w": 1},
+   {"sc": 8, "sp": "生徒", "t": "root primaryです。1つ目。", "y": "ルートプライマリです。1つ目。"},
+   {"sc": 8, "sp": "先生", "t": "正解です。"},
+   {"sc": 9, "sp": "先生", "t": "show spanning-treeの出力で、プライオリティが4106と出ることがあります。", "y": "ショー スパニングツリーの出力で、プライオリティが4106と出ることがあります。"},
+   {"sc": 9, "sp": "生徒", "t": "4096の倍数じゃないですね。"},
+   {"sc": 9, "sp": "先生", "t": "設定した値に、VLAN番号が足されて表示されるんです。4096足す10です。", "y": "設定した値に、ブイラン番号が足されて表示されるんです。4096足す10です。"},
+   {"sc": 9, "sp": "生徒", "t": "VLAN 10のSTPだから、10が足されてるんですね。", "y": "ブイラン 10のエスティーピーだから、10が足されてるんですね。"},
+   {"sc": 9, "sp": "先生", "t": "その通り。This bridge is the rootは、自分がルートという意味です。", "y": "その通り。This bridge is the ルートは、自分がルートという意味です。"},
+   {"sc": 10, "sp": "先生", "t": "確認です。VLAN 20で8212と表示されたとき、設定した値はどれでしょう？", "y": "確認です。ブイラン 20で8212と表示されたとき、設定した値はどれでしょう？", "w": 1},
+   {"sc": 10, "sp": "生徒", "t": "8212引く20で、8192です。"},
+   {"sc": 10, "sp": "先生", "t": "正解です。"},
+   {"sc": 11, "sp": "生徒", "t": "プライオリティを、5000とかにしちゃいそうです。"},
+   {"sc": 11, "sp": "先生", "t": "4096の倍数しか設定できません。"},
+   {"sc": 11, "sp": "生徒", "t": "あと、出力の数字をそのまま設定値だと思いそうでした。"},
+   {"sc": 11, "sp": "先生", "t": "VLAN番号を引いて考えましょう。代替とバックアップの区別も、よく問われます。", "y": "ブイラン番号を引いて考えましょう。代替とバックアップの区別も、よく問われます。"},
+   {"sc": 12, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 12, "sp": "先生", "t": "1つ目。RSTPは数秒で切りかわる。状態はdiscarding、learning、forwarding。", "y": "1つ目。アールエスティーピーは数秒で切りかわる。状態はdiscarding、learning、forwarding。"},
+   {"sc": 12, "sp": "先生", "t": "2つ目。代替ポートはルートポートの予備、バックアップは指定ポートの予備。"},
+   {"sc": 12, "sp": "先生", "t": "3つ目。Rapid PVST+はVLANごと。プライオリティは4096の倍数。", "y": "3つ目。ラピッドピーブイエスティープラスはブイランごと。プライオリティは4096の倍数。"},
+   {"sc": 12, "sp": "生徒", "t": "50秒から数秒に、すごい進歩です。"},
+   {"sc": 12, "sp": "先生", "t": "次回は、STPを守る機能です。お疲れさまでした。", "y": "次回は、エスティーピーを守る機能です。お疲れさまでした。"}
   ],
   "seg": [
-   [0.0, 10.624],
-   [10.974, 15.328],
-   [26.652, 15.296],
-   [42.298, 16.234667],
-   [58.883, 4.085],
-   [63.318, 16.725333],
-   [80.393, 11.659],
-   [92.402, 5.44],
-   [98.192, 17.248],
-   [115.79, 16.48],
-   [132.62, 6.933],
-   [139.903, 10.197],
-   [150.45, 13.258667],
-   [164.059, 4.523],
-   [168.932, 5.429],
-   [174.711, 7.488],
-   [182.549, 5.931042],
-   [188.83, 1.835],
-   [191.015, 11.467],
-   [202.832, 7.115],
-   [210.297, 7.573],
-   [218.22, 3.115],
-   [221.685, 5.643]
-  ]
- }
+   [0.0, 7.786667],
+   [8.137, 3.477333],
+   [11.964, 3.946667],
+   [16.261, 4.074667],
+   [20.685, 2.837333],
+   [23.873, 1.610667],
+   [25.833, 4.586667],
+   [30.77, 3.722667],
+   [34.843, 5.376],
+   [40.569, 4.202667],
+   [45.121, 7.136],
+   [52.607, 6.410667],
+   [59.368, 4.469333],
+   [64.187, 4.288],
+   [68.825, 1.6],
+   [70.775, 4.842667],
+   [75.968, 4.032],
+   [80.35, 0.992],
+   [81.692, 6.016],
+   [88.058, 3.712],
+   [92.12, 2.336],
+   [94.806, 2.976],
+   [98.132, 3.904],
+   [102.386, 3.573333],
+   [106.309, 4.064],
+   [110.723, 4.448],
+   [115.521, 3.946667],
+   [119.818, 3.68],
+   [123.848, 3.296],
+   [127.494, 8.586667],
+   [136.431, 3.477333],
+   [140.258, 5.141333],
+   [145.749, 8.842667],
+   [154.942, 4.021333],
+   [159.313, 4.789333],
+   [164.453, 4.277333],
+   [169.08, 6.805333],
+   [176.235, 2.624],
+   [179.209, 0.992],
+   [180.551, 6.048],
+   [186.949, 3.04],
+   [190.339, 6.538667],
+   [197.228, 4.896],
+   [202.474, 5.269333],
+   [208.093, 7.210667],
+   [215.654, 4.650667],
+   [220.655, 0.992],
+   [221.997, 3.381333],
+   [225.728, 3.168],
+   [229.246, 4.885333],
+   [234.481, 5.749333],
+   [240.581, 1.834667],
+   [242.765, 7.456],
+   [250.571, 5.354667],
+   [256.276, 6.848],
+   [263.474, 3.434667],
+   [267.259, 4.181333]
+  ],
+  "a": "audio/l39/"
+ },
+ "lt": "nl23"
 }

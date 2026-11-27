@@ -12,8 +12,9 @@ CCNA 200-301 の学習サイト。GitHub Pages で公開している：https://e
 
 ## ファイル構成
 - `src/` … 編集するのはここ
-  - `lessons/lNN.json` … 第NN回の教科書 `pages`（`t` 見出し、`svg` 図、`b` 本文、`p` ポイント、`quiz` 小テスト）と授業 `cls`（`lines`: `sp` 先生/生徒、`t` 字幕、`y` 読み上げ用の読み、`w:1` 小テストで止まる行、`sc` 場面。`seg` 各行の [開始秒, 長さ]、`a` 音声）。セリフは1行＝1つのオブジェクト
-  - `questions/lNN.json` … 第NN回の問題。形式と作り方のルールは `src/questions/INSTRUCTIONS.md`
+  - `lessons/lNN.json` … 第NN回の教科書 `pages`（`t` 見出し、`svg` 図、`b` 本文、`p` ポイント、`quiz` 小テスト）と授業 `cls`（`lines`: `sp` 先生/生徒、`t` 字幕、`y` 読み上げ用の読み、`w:1` 確認の問題で止まる行（1回に何か所あってもよい。止まる場面のページは `quiz`）、`sc` 場面。`seg` 各行の [開始秒, 長さ]、`a` 音声）。セリフは1行＝1つのオブジェクト
+  - `questions/lNN.json` … 第NN回の問題。形式と作り方のルールは `src/questions/INSTRUCTIONS.md`。**問題IDの番号（P13-01 の 13）は旧50回のときのもので、今の回とは一致しない**（進捗がIDで保存されているので変えない）。どの回かはファイルで決まる。旧→新の対応は `map_from_old.json`
+  - `lessons/DESIGN.md` … 授業（全81回）の設計書。新しい回を作るときの決まり（形・長さ・生徒の行30%以上など）
   - `base/` … `glossary`（用語集 G）、`figures`（図解レッスン L）、`commands`（コマンド練習 C）、`labs`（設定演習 B）、`guides`（図・出力の読み方ガイド RG）、`classes`（各回一覧 CP）、`domains`（分野 D）
 - `data.json` … build で作る出力（1行に圧縮）。レコードの種類は `r` で区別し、Q（問題）・O（出題順）・QP（問題→[回, ページ]）と、CP・L の `q`（問題IDの一覧）は問題から自動で作られる（src/base 側の `q` は使われない）
 - `index.html` … アプリ本体（HTML/CSS/JS を1ファイルに）。進捗は localStorage（キー `ccna_master_pub1`）に保存

@@ -1,13 +1,13 @@
 """授業の音声を VOICEVOX から直接作る（GUIの操作は不要）。
 前提:
   - VOICEVOX（アプリ または エンジン）が起動していること（http://127.0.0.1:50021）
-  - ffmpeg がインストールされていて PATH が通っていること
+  - ffmpeg がインストールされていて PATH が通っていること（ないときは lameenc で代わりに書き出す：
+    uv run --no-project --with numpy --with lameenc python tools/audio/voicevox_build.py NN）
   - pip install numpy
 使い方:
   python tools/audio/voicevox_build.py 12        # 第12回の音声を作り直す
   python tools/audio/voicevox_build.py 3 7 12    # 複数回
-  python tools/audio/voicevox_build.py all       # 全50回
-  python tools/audio/voicevox_build.py --v2 all  # 作り直し版の全81回（audio_v2/ へ。できた回はとばす）
+  python tools/audio/voicevox_build.py all       # 全81回
 処理:
   src/lessons/lNN.json の cls.lines を1行ずつ読み上げ（読みは y、なければ t）
   → 行ごとに音量をそろえる → 0.35秒の間をはさんで1本につなぐ
@@ -77,8 +77,6 @@ def fix(x):
     if pk > 0.95: y = np.tanh(y / 0.95) * 0.95 if pk < 1.3 else y * (0.95 / pk)
     return y
 
-V2 = False          # --v2：作り直し版（src/lessons_v2 → audio_v2/）。切り替えまで公開中の audio/ は触らない
-
 def build(rec, ids):
     n = rec["n"]; c = rec["cls"]; parts, seg, cum = [], [], 0
     gap = np.zeros(int(GAP * SR), np.float32)
@@ -88,8 +86,7 @@ def build(rec, ids):
         parts += [x, gap]; cum += len(x) + len(gap)
         print(f"\r第{n}回 {i}/{len(c['lines'])}", end="", flush=True)
     y = np.concatenate(parts)
-    d = os.path.join(ROOT, "audio_v2" if V2 else "audio"); os.makedirs(d, exist_ok=True)
-    mp3 = os.path.join(d, f"l{n:02d}.mp3")
+    mp3 = os.path.join(ROOT, "audio", f"l{n:02d}.mp3")
     if shutil.which("ffmpeg"):
         subprocess.run(["ffmpeg", "-v", "quiet", "-y", "-f", "f32le", "-ac", "1", "-ar", str(SR), "-i", "-",
                         "-c:a", "libmp3lame", "-b:a", "48k", mp3], input=y.tobytes(), check=True)
@@ -102,21 +99,14 @@ def build(rec, ids):
     print(f"  → audio/l{n:02d}.mp3（{cum / SR / 60:.1f}分）")
 
 def main():
-    global V2
     args = sys.argv[1:]
-    if "--v2" in args: V2 = True; args.remove("--v2")
     if not args: sys.exit(__doc__)
-    path = (lambda n: os.path.join(srcio.SRC, "lessons_v2", f"l{n:02d}.json")) if V2 else srcio.lesson_path
-    ns = list(range(1, 82 if V2 else 51)) if args == ["all"] else [int(a) for a in args]
+    ns = list(range(1, 82)) if args == ["all"] else [int(a) for a in args]
     ids = speaker_ids()
     for n in ns:
-        rec = srcio.load(path(n))
-        mp3 = os.path.join(ROOT, "audio_v2", f"l{n:02d}.mp3")
-        if V2 and args == ["all"] and os.path.exists(mp3) and len(rec["cls"].get("seg", [])) == len(rec["cls"]["lines"]):
-            print(f"第{n}回はできている（とばす）"); continue
+        rec = srcio.load(srcio.lesson_path(n))
         build(rec, ids)
-        srcio.save(path(n), rec)  # 1回ごとに保存
-    if V2: return  # 作り直し版は切り替えまで data.json に入れない
+        srcio.save(srcio.lesson_path(n), rec)  # 1回ごとに保存
     sys.exit(subprocess.call([sys.executable, "-X", "utf8", os.path.join(ROOT, "tools", "build.py")]))
 
 if __name__ == "__main__":

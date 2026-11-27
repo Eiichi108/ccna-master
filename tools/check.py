@@ -14,9 +14,12 @@ for q in (x for x in d if x.get("r") == "Q"):
     if k == "sel" and any(r["a"] not in q["opts"] for r in q["rows"]): ng.append(f"{i}: sel の分類名が opts にない")
     if k == "match" and any(len(p) != 2 for p in q["o"]): ng.append(f"{i}: match の組が不正")
     if q.get("lv") not in (1, 2): ng.append(f"{i}: lv（難易度 1 か 2）がない")
-    if q.get("lv") == 2 and q["d"] == "d0": ng.append(f"{i}: 入門（第1〜6回）は lv 1 にする")
+    if q.get("lv") == 2 and q["d"] == "d0": ng.append(f"{i}: 入門（第1〜8回）は lv 1 にする")
 for n, b in TB.items():
     c = b.get("cls", {})
     if c.get("seg") and len(c["seg"]) != len(c["lines"]): ng.append(f"第{n}回: seg と lines の数が違う")
-    if sum(1 for l in c.get("lines", []) if l.get("w")) != 1: ng.append(f"第{n}回: 小テストで止まる行(w)が1つでない")
+    qp = {i + 1 for i, p in enumerate(b.get("pages", [])) if "quiz" in p}
+    wp = {l["sc"] for l in c.get("lines", []) if l.get("w")}
+    if not wp or qp != wp: ng.append(f"第{n}回: 確認の問題のページと、止まる行(w)が合わない")
+    if c.get("lines") and not c.get("seg"): ng.append(f"第{n}回: 音声の seg がない")
 print("\n".join(ng) or "問題なし"); sys.exit(1 if ng else 0)

@@ -376,6 +376,8 @@ let S={st:{},ds:{},opt:{ng:0,shuf:0},cli:{},lab:{},last:null};
 const LSK="ccna_master_pub1";let ORDER=[];
 let RAWDS={};
 try{const v=localStorage.getItem(LSK);if(v){const o=JSON.parse(v);RAWDS=o.ds||{};delete o.ds;S=Object.assign(S,o);}}catch(e){}
+/* 授業を81回に作り直したので、回の番号で覚えていた「途中まで聞いた」位置は一度だけ消す */
+if(S.clsv!==2){S.cls={};S.clsv=2;}
 if(S.mx)S.mx._t=0;/* 閉じていた間の時間は数えない */
 /* sessions are saved compactly: domain, mode, seed and position; question lists are rebuilt from the data */
 const skey=(d,ng)=>(ng?"ng_":"")+d;
@@ -387,7 +389,7 @@ function unpackSess(k,o){if(!o)return null;let dom=o.dom||(typeof o.d==="string"
   if(o.ids&&!ng&&!o.seed&&!o.shuf){const done=[...new Set(o.ids.slice(0,o.i).filter(id=>QM[id]))];const ds=new Set(done);ids=done.concat(domIds(dom).filter(id=>!ds.has(id)));o.i=done.length;}
   {const seen=new Set();ids=ids.filter(id=>!seen.has(id)&&seen.add(id));}
   return{dom,ng,shuf:!!o.shuf,seed:o.seed||0,ids,i:Math.min(o.i||0,ids.length),res:{},label:o.label||DM[dom].name+(ng?"の間違えた問題":""),tab:"one"};}
-function packAll(){const ds={};for(const k in S.ds)if(S.ds[k])ds[k]=packSess(S.ds[k]);const st={};for(const k in S.st){const t=S.st[k];st[k]=[t.c||0,t.w||0,t.l===undefined?-1:t.l,t.m?1:0];}return{p:{st,opt:S.opt,cli:S.cli,lab:S.lab,last:S.last||null,cls:S.cls||{},rate:S.rate||1,sd:S.sd||{},mxh:S.mxh||[]},s:{ds,mx:S.mx?Object.assign({},S.mx,{_t:0}):null}};}
+function packAll(){const ds={};for(const k in S.ds)if(S.ds[k])ds[k]=packSess(S.ds[k]);const st={};for(const k in S.st){const t=S.st[k];st[k]=[t.c||0,t.w||0,t.l===undefined?-1:t.l,t.m?1:0];}return{p:{st,opt:S.opt,cli:S.cli,lab:S.lab,last:S.last||null,cls:S.cls||{},clsv:2,rate:S.rate||1,sd:S.sd||{},mxh:S.mxh||[]},s:{ds,mx:S.mx?Object.assign({},S.mx,{_t:0}):null}};}
 function unpackSt(st){const o={};for(const k in st){const v=st[k];o[k]=Array.isArray(v)?Object.assign({c:v[0],w:v[1]},v[2]>=0?{l:v[2]}:{},v[3]?{m:1}:{}):v;}return o;}
 let dbP=null,dbS=null,saving=false,pend=false,tmr=null,lastP="",lastS="";
 function save(){const P=packAll();try{localStorage.setItem(LSK,JSON.stringify(Object.assign({},S,{ds:P.s.ds})));}catch(e){}if(dbP){clearTimeout(tmr);tmr=setTimeout(flush,800);}}
@@ -1062,7 +1064,7 @@ async function boot(){
     let [p2,s2]=await Promise.all([TO(rP.get()),TO(rS.get())]);if(p2==="TO"||s2==="TO")return false;p2=dat(p2);s2=dat(s2);
     if(!p2&&first){const o=dat(await TO(rOld.get()));if(o&&o!=="TO"&&o.st){p2={st:o.st,opt:o.opt,cli:o.cli,lab:o.lab,last:o.last};if(!s2&&o.ds)s2={ds:o.ds};}}
     if(p2&&p2.st){const rst=unpackSt(p2.st);for(const k in rst){const a=S.st[k],b=rst[k];if(!a||((b.c||0)+(b.w||0))>((a.c||0)+(a.w||0)))S.st[k]=Object.assign({},b,a&&a.m?{m:a.m}:{});}
-      ["cli","lab"].forEach(k=>{if(p2[k])S[k]=Object.assign({},p2[k],S[k]);});if(p2.last&&!S.last)S.last=p2.last;if(p2.opt)S.opt=p2.opt;if(p2.cls)S.cls=Object.assign({},p2.cls,S.cls||{});if(p2.rate&&!S.rate)S.rate=p2.rate;
+      ["cli","lab"].forEach(k=>{if(p2[k])S[k]=Object.assign({},p2[k],S[k]);});if(p2.last&&!S.last)S.last=p2.last;if(p2.opt)S.opt=p2.opt;if(p2.cls&&p2.clsv===2)S.cls=Object.assign({},p2.cls,S.cls||{});if(p2.rate&&!S.rate)S.rate=p2.rate;
       if(p2.mxh&&p2.mxh.length){const m={};(S.mxh||[]).concat(p2.mxh).forEach(h=>m[h.id]=h);S.mxh=Object.values(m).sort((a,b)=>b.end-a.end).slice(0,20);}
       if(p2.sd&&p2.sd.s){S.sd=S.sd||{};S.sd.s=S.sd.s||{};for(const k in p2.sd.s){const a=S.sd.s[k],b=p2.sd.s[k];if(!a||b[1]>a[1])S.sd.s[k]=b;}if(!S.sd.f&&p2.sd.f)S.sd.f=p2.sd.f;}}
     {const fin=new Set((S.mxh||[]).map(h=>h.id)),r=s2&&s2.mx;if(S.mx&&fin.has(S.mx.id)&&view!=="examq")S.mx=null;/* ほかの端末で採点済み */

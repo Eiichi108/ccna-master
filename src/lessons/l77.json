@@ -1,0 +1,229 @@
+{
+ "r": "TB",
+ "n": 77,
+ "t": "物理の上に仮想の道（SD-Access）",
+ "d": "d6",
+ "form": "たとえ話",
+ "need": [76],
+ "goal": ["アンダーレイとオーバーレイがわかる", "ファブリックがわかる", "SD-Accessの部品がわかる"],
+ "terms": ["アンダーレイ", "オーバーレイ", "ファブリック", "VXLAN", "LISP", "Catalyst Center"],
+ "pages": [
+  {
+   "t": "たとえ話：高速道路と、バス路線",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 124.0\" role=\"img\" aria-label=\"たとえ話\"><rect x=\"10\" y=\"6\" width=\"340\" height=\"110\" rx=\"16\" fill=\"#0a5cff\" opacity=\".12\"/><text x=\"180\" y=\"44\" text-anchor=\"middle\" style=\"font:800 13.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">道路はそのまま。上に、いろいろなバス路線を走らせる</text><text x=\"180\" y=\"74\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">道路 ＝ 物理のネットワーク（アンダーレイ）</text><text x=\"180\" y=\"94\" text-anchor=\"middle\" style=\"font:600 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">バス路線 ＝ 用途ごとの仮想の道（オーバーレイ）</text></svg>",
+   "b": "町には、道路が1つしかありません。でも、その道路の上に「社員用バス」「来客用バス」「工場用バス」と、いろいろな<b>バス路線</b>を走らせることができます。道路を作り直さなくても、路線を増やしたり変えたりできます。今日学ぶ <b>SD-Access</b> は、まさにこの考え方でネットワークを作ります。"
+  },
+  {
+   "t": "今日のゴール",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のゴール\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">1. アンダーレイとオーバーレイがわかる</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">物理の道と、その上の仮想の道</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2. ファブリックがわかる</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">まとめて1つに見える網</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">3. SD-Accessの部品がわかる</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">VXLAN・LISP・Catalyst Center</text></svg>"
+  },
+  {
+   "t": "アンダーレイとオーバーレイ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 217.5\" role=\"img\" aria-label=\"2つの層\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#3d4450\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">アンダーレイ（下の層）</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">物理の機器とケーブル。IPでつながっていればよい</text><text x=\"24\" y=\"67.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">道路</text><rect x=\"10\" y=\"86.5\" width=\"340\" height=\"74.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"112.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">オーバーレイ（上の層）</text><text x=\"24\" y=\"131.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">アンダーレイの上に作る、仮想のトンネルの道</text><text x=\"24\" y=\"148.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">バス路線</text><rect x=\"10\" y=\"167.0\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"192.5\" text-anchor=\"start\" style=\"font:800 12.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">オーバーレイは、アンダーレイを気にせず作り変えられる</text></svg>",
+   "b": "<b>アンダーレイ</b>は、物理の機器とケーブルでできた<b>下の層</b>です。機器どうしがIPでつながっていれば十分で、道路にあたります。<b>オーバーレイ</b>は、アンダーレイの上に<b>トンネル</b>で作る<b>仮想の道</b>で、バス路線にあたります。オーバーレイは、下の配線を気にせずに、用途ごとに作ったり変えたりできます。",
+   "p": "アンダーレイ＝物理の道、オーバーレイ＝その上の仮想の道。"
+  },
+  {
+   "t": "確認の問題 1",
+   "quiz": {
+    "q": "SD-Accessで、物理のスイッチどうしをIPでつなぎ、到達できるようにしている下の層を何と呼ぶでしょう？",
+    "o": [
+     ["オーバーレイ", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["アンダーレイ", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["ノースバウンド", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "物理の機器とケーブルでできた下の層は<b>アンダーレイ</b>です。"
+   }
+  },
+  {
+   "t": "ファブリック",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 183.5\" role=\"img\" aria-label=\"ファブリック\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 13.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">たくさんのスイッチを、まとめて1つの網として扱う</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">布（ファブリック）のように編まれたネットワーク</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">どのスイッチにつないでも、同じルールが使われる</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">社員はどこでも社員のネットワーク</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 13.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Catalyst Center が、ファブリック全体を設定する</text></svg>",
+   "b": "SD-Accessでは、たくさんのスイッチを、<b>まとめて1つの網</b>として扱います。これを<b>ファブリック</b>（布）と呼びます。ユーザーがどのスイッチにつないでも、<b>同じルール</b>が使われます。たとえば、社員はどの階のどの口につないでも社員のネットワークに入り、来客はどこでも来客のネットワークです。ファブリック全体は、<b>Catalyst Center</b>（コントローラー）が設定します。"
+  },
+  {
+   "t": "SD-Accessの部品",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 264.0\" role=\"img\" aria-label=\"中で使われているしくみ\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">VXLAN（データ）</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">パケットを包んで、オーバーレイのトンネルを運ぶ</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">LISP（コントロール）</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">「この端末は今どのスイッチにいる？」を覚える係</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Cisco TrustSec（ポリシー）</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.0px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">グループの札（SGT）で、だれとだれが話せるかを決める</text><rect x=\"10\" y=\"196.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#8a3ffc\" opacity=\".1\"/><text x=\"24\" y=\"222.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">Catalyst Center（管理）</text><text x=\"24\" y=\"241.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">全体の設定と見守り</text></svg>",
+   "b": "SD-Accessの中では、いくつかのしくみが分担しています。<b>VXLAN</b> は、パケットを包んでオーバーレイのトンネルを運ぶ<b>データ</b>の係。<b>LISP</b> は「この端末は今どのスイッチにいるか」を覚える<b>コントロール</b>の係。<b>TrustSec</b> は、グループの札で「だれとだれが話せるか」を決める<b>ポリシー</b>の係。そして <b>Catalyst Center</b> が全体を管理します。"
+  },
+  {
+   "t": "確認の問題 2",
+   "quiz": {
+    "q": "SD-Accessのオーバーレイで、パケットをカプセル化して運ぶ（データプレーンの）技術はどれでしょう？",
+    "o": [
+     ["VXLAN", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["LISP", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["SNMP", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 0,
+    "e": "パケットを包んで運ぶのは <b>VXLAN</b> です。LISP は端末の場所を覚えるコントロールプレーンの係です。"
+   }
+  },
+  {
+   "t": "何がうれしいの？",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 166.5\" role=\"img\" aria-label=\"SD-Access のよいところ\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ルールを、場所ではなく「人やグループ」で決められる</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">席がえしても、設定を変えなくてよい</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 13.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">VLAN を何十台ものスイッチに手で広げなくてよい</text><rect x=\"10\" y=\"116.0\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"141.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">全体の設定と状態を、1か所で見られる</text></svg>",
+   "b": "従来は、「この口はこのVLAN」と<b>場所</b>でルールを決めていたので、席がえのたびに設定を直す必要がありました。SD-Accessでは、ルールを<b>人やグループ</b>で決めるので、どこにつないでも同じ扱いになります。VLANをたくさんのスイッチに手で広げる手間もなく、全体を1か所で見られます。"
+  },
+  {
+   "t": "確認の問題 3",
+   "quiz": {
+    "q": "SD-Accessで、端末が今どのスイッチにつながっているかの対応を管理する（コントロールプレーンの）しくみはどれでしょう？",
+    "o": [
+     ["VXLAN", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#0a5cff\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#0a5cff\">A</text></g>"],
+     ["LISP", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#00a05a\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#00a05a\">B</text></g>"],
+     ["STP", "<g><rect x=\"-20\" y=\"-20\" width=\"40\" height=\"40\" rx=\"10\" fill=\"var(--card)\" stroke=\"#ffb400\" stroke-width=\"3\"/><text y=\"7\" text-anchor=\"middle\" style=\"font:800 20px Figtree,'Hiragino Sans',sans-serif;fill:#ffb400\">C</text></g>"]
+    ],
+    "a": 1,
+    "e": "端末の場所を覚える係は <b>LISP</b> です。"
+   }
+  },
+  {
+   "t": "まちがえやすい所",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 183.5\" role=\"img\" aria-label=\"よくある勘違い\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× オーバーレイは、物理のケーブルのこと</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">物理はアンダーレイ</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#e6261f\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">× VXLAN が端末の場所を覚える</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">場所は LISP、運ぶのが VXLAN</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"40.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">○ 下＝アンダー、上＝オーバー</text></svg>",
+   "b": "英語の意味どおり、<b>アンダー（下）＝物理</b>、<b>オーバー（上）＝仮想</b>です。<b>VXLAN＝運ぶ</b>、<b>LISP＝場所を覚える</b>と分けて覚えましょう。"
+  },
+  {
+   "t": "今日のまとめ",
+   "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 200.5\" role=\"img\" aria-label=\"今日のまとめ\"><rect x=\"10\" y=\"6.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#0a5cff\" opacity=\".1\"/><text x=\"24\" y=\"31.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">2つの層</text><text x=\"24\" y=\"50.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">アンダーレイ＝物理の道、オーバーレイ＝上の仮想の道</text><rect x=\"10\" y=\"69.5\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#00a05a\" opacity=\".1\"/><text x=\"24\" y=\"95.0\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ファブリック</text><text x=\"24\" y=\"114.0\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">たくさんのスイッチを1つの網として扱う</text><rect x=\"10\" y=\"133.0\" width=\"340\" height=\"57.5\" rx=\"12\" fill=\"#ffb400\" opacity=\".1\"/><text x=\"24\" y=\"158.5\" text-anchor=\"start\" style=\"font:800 14.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">部品</text><text x=\"24\" y=\"177.5\" text-anchor=\"start\" style=\"font:600 12.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">VXLAN＝運ぶ、LISP＝場所、TrustSec＝ルール</text></svg>",
+   "b": "次回は、プログラムからコントローラーや機器と話す <b>REST API</b> です。"
+  }
+ ],
+ "cls": {
+  "lines": [
+   {"sc": 1, "sp": "先生", "t": "町には、道路が1つしかありません。"},
+   {"sc": 1, "sp": "先生", "t": "でも、その上に、社員用、来客用、工場用と、いろいろなバス路線を走らせられます。"},
+   {"sc": 1, "sp": "生徒", "t": "道路を作り直さなくても、路線は増やせますね。"},
+   {"sc": 1, "sp": "先生", "t": "そうです。今日のSD-Accessは、まさにこの考え方です。", "y": "そうです。今日のエスディーアクセスは、まさにこの考え方です。"},
+   {"sc": 1, "sp": "生徒", "t": "道路を作り直すのは、大変ですもんね。"},
+   {"sc": 1, "sp": "先生", "t": "はい。ネットワークでも、配線のやり直しは大変です。"},
+   {"sc": 2, "sp": "先生", "t": "今日のゴールは3つです。"},
+   {"sc": 2, "sp": "先生", "t": "1つ目、アンダーレイとオーバーレイがわかること。"},
+   {"sc": 2, "sp": "先生", "t": "2つ目、ファブリックがわかること。"},
+   {"sc": 2, "sp": "先生", "t": "3つ目、SD-Accessの部品がわかること。", "y": "3つ目、エスディーアクセスの部品がわかること。"},
+   {"sc": 2, "sp": "生徒", "t": "バス路線のたとえ、わかりやすそうです。"},
+   {"sc": 3, "sp": "先生", "t": "アンダーレイは、物理の機器とケーブルでできた、下の層です。道路ですね。"},
+   {"sc": 3, "sp": "先生", "t": "オーバーレイは、その上にトンネルで作る、仮想の道。バス路線です。"},
+   {"sc": 3, "sp": "生徒", "t": "下の配線を気にせず、路線を作れるんですね。"},
+   {"sc": 3, "sp": "先生", "t": "はい。アンダーレイは、IPでつながっていれば十分です。", "y": "はい。アンダーレイは、アイピーでつながっていれば十分です。"},
+   {"sc": 3, "sp": "生徒", "t": "アンダーレイは、どんな道でもいいんですか？"},
+   {"sc": 3, "sp": "先生", "t": "IPでつながっていて、安定していることが大事です。", "y": "アイピーでつながっていて、安定していることが大事です。"},
+   {"sc": 3, "sp": "先生", "t": "その上の道は、全部この土台に乗っていますからね。"},
+   {"sc": 3, "sp": "生徒", "t": "道路がこわれたら、バスも走れない。"},
+   {"sc": 3, "sp": "先生", "t": "その通り。だから土台はしっかり作ります。"},
+   {"sc": 4, "sp": "先生", "t": "確認です。物理のスイッチをIPでつなぐ下の層は何でしょう？", "y": "確認です。物理のスイッチをアイピーでつなぐ下の層は何でしょう？", "w": 1},
+   {"sc": 4, "sp": "生徒", "t": "アンダーレイです。"},
+   {"sc": 4, "sp": "先生", "t": "正解です。"},
+   {"sc": 5, "sp": "先生", "t": "SD-Accessでは、たくさんのスイッチを、まとめて1つの網として扱います。", "y": "エスディーアクセスでは、たくさんのスイッチを、まとめて1つの網として扱います。"},
+   {"sc": 5, "sp": "生徒", "t": "それが、ファブリック？"},
+   {"sc": 5, "sp": "先生", "t": "はい。布のように編まれた網、という意味です。"},
+   {"sc": 5, "sp": "先生", "t": "どのスイッチにつないでも、同じルールが使われます。"},
+   {"sc": 5, "sp": "生徒", "t": "どの階でつないでも、社員は社員のネットワーク！"},
+   {"sc": 5, "sp": "生徒", "t": "ファブリックの中のスイッチには、役割があるんですか？"},
+   {"sc": 5, "sp": "先生", "t": "端末がつながるエッジ、外とつなぐボーダーなどがあります。"},
+   {"sc": 5, "sp": "先生", "t": "どの役も、Catalyst Centerがまとめて設定します。", "y": "どの役も、カタリストセンターがまとめて設定します。"},
+   {"sc": 5, "sp": "生徒", "t": "1台ずつ設定しなくていいのは、SDNと同じですね。", "y": "1台ずつ設定しなくていいのは、エスディーエヌと同じですね。"},
+   {"sc": 6, "sp": "先生", "t": "中では、いくつかのしくみが分担しています。"},
+   {"sc": 6, "sp": "先生", "t": "VXLANは、パケットを包んで運ぶ係。LISPは、端末が今どこにいるかを覚える係です。", "y": "ブイエックスランは、パケットを包んで運ぶ係。リスプは、端末が今どこにいるかを覚える係です。"},
+   {"sc": 6, "sp": "生徒", "t": "TrustSecは？"},
+   {"sc": 6, "sp": "先生", "t": "グループの札で、だれとだれが話せるかを決める係です。"},
+   {"sc": 6, "sp": "生徒", "t": "VXLANは、VLANと何がちがうんですか？", "y": "ブイエックスランは、ブイランと何がちがうんですか？"},
+   {"sc": 6, "sp": "先生", "t": "VLANは1つの建物の中、VXLANはL3をこえて運べます。", "y": "ブイランは1つの建物の中、ブイエックスランはエルスリーをこえて運べます。"},
+   {"sc": 6, "sp": "先生", "t": "しかも、VLANより、ずっとたくさんの番号を使えます。", "y": "しかも、ブイランより、ずっとたくさんの番号を使えます。"},
+   {"sc": 6, "sp": "生徒", "t": "LISPは、どうして場所を覚える必要があるんですか？", "y": "リスプは、どうして場所を覚える必要があるんですか？"},
+   {"sc": 6, "sp": "先生", "t": "端末は動きます。ノートPCを持って、別の階へ行きますよね。", "y": "端末は動きます。ノートピーシーを持って、別の階へ行きますよね。"},
+   {"sc": 6, "sp": "生徒", "t": "どこへ動いても、届け先がわかるように、なんですね。"},
+   {"sc": 7, "sp": "先生", "t": "確認です。パケットを包んで運ぶ技術はどれでしょう？", "w": 1},
+   {"sc": 7, "sp": "生徒", "t": "VXLANです。", "y": "ブイエックスランです。"},
+   {"sc": 7, "sp": "先生", "t": "正解です。"},
+   {"sc": 8, "sp": "先生", "t": "従来は、この口はこのVLAN、と場所でルールを決めていました。", "y": "従来は、この口はこのブイラン、と場所でルールを決めていました。"},
+   {"sc": 8, "sp": "生徒", "t": "席がえのたびに、設定を直すんですね。"},
+   {"sc": 8, "sp": "先生", "t": "SD-Accessでは、人やグループでルールを決めるので、その手間がありません。", "y": "エスディーアクセスでは、人やグループでルールを決めるので、その手間がありません。"},
+   {"sc": 8, "sp": "生徒", "t": "グループで決めるって、どういうことですか？"},
+   {"sc": 8, "sp": "先生", "t": "たとえば、経理グループは経理サーバーと話せる、と決めます。"},
+   {"sc": 8, "sp": "先生", "t": "その人がどの階にいても、同じルールになります。"},
+   {"sc": 9, "sp": "先生", "t": "確認です。端末の場所を管理するしくみはどれでしょう？", "w": 1},
+   {"sc": 9, "sp": "生徒", "t": "LISPです。", "y": "リスプです。"},
+   {"sc": 9, "sp": "先生", "t": "正解です。"},
+   {"sc": 10, "sp": "生徒", "t": "オーバーレイが、物理のほうだと思いそうです。"},
+   {"sc": 10, "sp": "先生", "t": "アンダーは下、オーバーは上。英語の意味どおりです。"},
+   {"sc": 10, "sp": "生徒", "t": "VXLANは運ぶ、LISPは場所。", "y": "ブイエックスランは運ぶ、リスプは場所。"},
+   {"sc": 10, "sp": "生徒", "t": "SD-AccessとSDNの関係が、少しわかってきました。", "y": "エスディーアクセスとエスディーエヌの関係が、少しわかってきました。"},
+   {"sc": 10, "sp": "先生", "t": "SD-Accessは、SDNの考え方をキャンパスに使った形です。", "y": "エスディーアクセスは、エスディーエヌの考え方をキャンパスに使った形です。"},
+   {"sc": 11, "sp": "先生", "t": "では、今日のまとめです。"},
+   {"sc": 11, "sp": "先生", "t": "1つ目。アンダーレイは物理の道、オーバーレイは上の仮想の道。"},
+   {"sc": 11, "sp": "先生", "t": "2つ目。ファブリックは、たくさんのスイッチを1つの網に。"},
+   {"sc": 11, "sp": "先生", "t": "3つ目。VXLANは運ぶ、LISPは場所、TrustSecはルール。", "y": "3つ目。ブイエックスランは運ぶ、リスプは場所、TrustSecはルール。"},
+   {"sc": 11, "sp": "生徒", "t": "バス路線、イメージできました。"},
+   {"sc": 11, "sp": "先生", "t": "次回は、REST APIです。お疲れさまでした。", "y": "次回は、レスト エーピーアイです。お疲れさまでした。"}
+  ],
+  "seg": [
+   [0.0, 2.645333],
+   [2.995, 7.381333],
+   [10.727, 4.010667],
+   [15.087, 4.448],
+   [19.885, 3.477333],
+   [23.713, 4.352],
+   [28.415, 1.610667],
+   [30.375, 3.232],
+   [33.957, 2.442667],
+   [36.75, 3.36],
+   [40.46, 3.274667],
+   [44.085, 5.450667],
+   [49.885, 5.258667],
+   [55.494, 4.042667],
+   [59.887, 4.213333],
+   [64.45, 3.488],
+   [68.288, 3.722667],
+   [72.361, 3.701333],
+   [76.412, 3.029333],
+   [79.791, 3.082667],
+   [83.224, 4.821333],
+   [88.395, 1.333333],
+   [90.079, 0.992],
+   [91.421, 5.536],
+   [97.307, 2.101333],
+   [99.758, 3.584],
+   [103.692, 3.445333],
+   [107.487, 4.053333],
+   [111.891, 4.426667],
+   [116.667, 4.117333],
+   [121.135, 3.68],
+   [125.165, 4.842667],
+   [130.357, 3.050667],
+   [133.758, 7.285333],
+   [141.393, 1.578667],
+   [143.322, 3.936],
+   [147.608, 4.16],
+   [152.118, 5.248],
+   [157.716, 4.266667],
+   [162.333, 4.224],
+   [166.907, 4.992],
+   [172.249, 4.554667],
+   [177.153, 4.085333],
+   [181.589, 1.653333],
+   [183.592, 0.992],
+   [184.934, 4.64],
+   [189.924, 3.605333],
+   [193.879, 5.354667],
+   [199.584, 3.392],
+   [203.326, 4.522667],
+   [208.199, 3.349333],
+   [211.898, 4.053333],
+   [216.301, 0.981333],
+   [217.633, 0.992],
+   [218.975, 3.52],
+   [222.845, 3.925333],
+   [227.12, 3.392],
+   [230.862, 5.066667],
+   [236.279, 5.056],
+   [241.685, 1.834667],
+   [243.869, 4.864],
+   [249.083, 4.128],
+   [253.561, 5.312],
+   [259.223, 2.848],
+   [262.421, 4.202667]
+  ],
+  "a": "audio/l77/"
+ },
+ "lt": "nl46"
+}

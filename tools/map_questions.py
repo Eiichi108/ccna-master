@@ -1,4 +1,4 @@
-"""問題（旧50回の src/questions/lNN.json）を、作り直し版の81回（src/lessons_v2）に振り分ける。
+"""【使用済み・2026-11-27 に切り替え】問題（旧50回の src/questions/lNN.json）を、作り直し版の81回（src/lessons_v2）に振り分ける。
 1. 旧の回ごとに、入りうる新しい回（候補）を決めておく（CAND）。
 2. 候補の中から、問題文・選択肢・解説に出てくる言葉の数で一番合う回を選ぶ（KW と新しい回の terms）。
 3. 手で決めた問題は FIX で上書きする。
@@ -175,6 +175,7 @@ def page_of(q, L):
 
 
 def main():
+    sys.exit("2026-11-27 に切り替え済み。src/questions はもう新しい81回の番号なので、この道具は使わない（結果は src/questions/map_from_old.json）")
     report = "--report" in sys.argv
     NEW = load_new()
     out, files, weak = {}, {}, []
