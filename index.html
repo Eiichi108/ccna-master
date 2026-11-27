@@ -538,7 +538,8 @@ function vClass(){
     $("#cn").textContent=`${i+1}/${N}`;$("#cbar").style.width=(i+1)/N*100+"%";$("#cpl").textContent=playing?"❚❚":"▶";
     app.querySelectorAll(".ln2").forEach(b=>b.classList.toggle("on",+b.dataset.i===i));const on=app.querySelector(".ln2.on");if(on){const box=$("#lns");box.scrollTop=on.offsetTop-box.offsetTop-box.clientHeight/2+on.clientHeight/2;}
     S.cls[B.n]=i;save();};
-  const SG=C.seg,FU=C.a.replace(/\/$/,"")+".mp3";let tick=null;
+  /* 音声を作り直すと長さが変わるので、長さをURLに付けて古い音声のキャッシュを使わせない */
+  const SG=C.seg,FU=C.a.replace(/\/$/,"")+".mp3?v="+Math.round((SG[SG.length-1][0]+SG[SG.length-1][1])*1000);let tick=null;
   let BU=BLOBS[FU]||null;if(!BU)fetch(FU).then(r=>r.ok?r.blob():null).then(b=>{if(b){BU=BLOBS[FU]=URL.createObjectURL(b);}}).catch(()=>{});
   const ours=()=>AU.src&&(AU.src===BU||AU.src.endsWith(FU));
   const lineAt=t=>{let k=0;while(k<N-1&&t>=SG[k+1][0]-0.05)k++;return k;};
@@ -1050,7 +1051,7 @@ function tLab(){
 }
 /* ---------- boot ---------- */
 async function boot(){
-  try{const r=await fetch("data.json");const A=await r.json();
+  try{const r=await fetch("data.json",{cache:"no-cache"});const A=await r.json();
     A.forEach(o=>{if(o.r==="D")DOM.push(o);else if(o.r==="L")LES.push(o);else if(o.r==="Q")QS.push(o);else if(o.r==="G")GL.push(o);else if(o.r==="C")CLI.push(o);else if(o.r==="B")LABS.push(o);else if(o.r==="O")ORDER=o.ids;else if(o.r==="TB")TBS.push(o);else if(o.r==="CP")CP=o.list;else if(o.r==="QP")QP=o.m;else if(o.r==="RG")RG=o.list;});
   }catch(e){app.innerHTML=`<p class="empty">データを読み込めませんでした。ページを開き直してください。</p>`;return;}
   DOM.forEach(d=>DM[d.id]=d);LES.forEach(l=>LM[l.id]=l);QS.forEach(q=>QM[q.id]=q);buildGloss();
