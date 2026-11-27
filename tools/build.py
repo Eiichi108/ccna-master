@@ -8,6 +8,7 @@ src/ のファイルは書き換えない（data.json だけを書く）。
 import glob, json, os, re, subprocess, sys
 import srcio
 import qfigs   # 問題の構成図（tools/qfigs.py）
+import extra_pages   # 教科書に足す「もっとくわしく」のページ（tools/extra_pages.py）
 
 sys.stdout.reconfigure(encoding="utf-8")
 
@@ -19,6 +20,9 @@ TB = {}
 for f in sorted(glob.glob(os.path.join(srcio.SRC, "lessons", "l*.json"))):
     x = srcio.load(f); TB[x["n"]] = x
 assert sorted(TB) == list(range(1, 82)), f"src/lessons の回がそろっていません: {sorted(TB)}"
+BASE = {n: len(TB[n]["pages"]) for n in TB}   # 授業で使うページの数（足すページはこの後ろ）
+for n, ps in extra_pages.EXTRA.items():
+    TB[n]["pages"] = TB[n]["pages"] + ps
 
 # ---- 問題 ----
 qs, qn = [], {}   # qn：問題ID → 回（ファイルの番号。IDの番号は旧50回のもので、回とは一致しない）
@@ -49,6 +53,10 @@ for q in qs:
         r["fig"] = qfigs.FIG[q["id"]]   # 構成図（SVG）
     newQ.append(r); byc.setdefault(n, []).append(q["id"])
     p = q.get("page")
+    if q["id"] in extra_pages.QPAGE:   # 足したページを参照させる
+        xn, k = extra_pages.QPAGE[q["id"]]
+        assert xn == n, f"{q['id']} は第{n}回の問題なのに、extra_pages では第{xn}回になっている"
+        p = BASE[n] + k
     assert isinstance(p, int) and 0 <= p < len(TB[n]["pages"]), f"{q['id']} の page が教科書の範囲外: {p}"
     qp[q["id"]] = [n, p]
 
