@@ -749,38 +749,52 @@ const twice=(b,msg,fn)=>{b.onclick=()=>{if(b.dataset.c)return fn();b.dataset.c=1
 const mmss=s=>{s=Math.ceil(s);return`${Math.floor(s/60)}:${String(s%60).padStart(2,"0")}`;};
 function exFinish(){exStop();const M=S.mx;if(!M)return;const by={};let ok=0;const ng=[];
   M.ids.forEach(id=>{const q=QM[id];if(!q)return;const b=by[q.d]=by[q.d]||[0,0];b[1]++;if(M.ans[id]){b[0]++;ok++;}else ng.push(id);});
-  const h={id:M.id,end:Date.now(),n:M.ids.length,ok,done:Object.keys(M.ans).length,sec:Math.round(M.used),lim:M.lim,lvo:M.lvo?1:0,by,ng};
+  const h={id:M.id,end:Date.now(),n:M.ids.length,ok,done:Object.keys(M.ans).length,sec:Math.round(M.used),lim:M.lim,lvo:M.lvo?1:0,pr:M.pr?1:0,by,ng};
   S.mxh=[h].concat((S.mxh||[]).filter(x=>x.id!==h.id)).slice(0,20);S.mx=null;save();stack=[];view="exres";arg=h;render();scrollTo(0,0);}
 function vExam(){
-  ttl.textContent="模擬試験";const M=S.mx;let n=arg&&arg.n||S.mxn||50,lvo=S.mxl===undefined?1:S.mxl;
+  ttl.textContent="模擬試験";const M=S.mx;let n=arg&&arg.n||S.mxn||50,lvo=S.mxl===undefined?1:S.mxl,pr=S.mxm?1:0;
   const draw=()=>{const A=exAlloc(n),sec=n*EXSEC;
-    app.innerHTML=`<div class="qwrap"><h2>模擬試験</h2><p class="sub">本番の分野の割合で、ランダムに出題します。答えは最後にまとめて表示されます。前の問題には戻れません。途中でやめても、続きから再開できます（中断中は時間も止まります）。</p>
-${M?`<div class="card" style="border-left:8px solid var(--acc)"><b>前回の続き</b><div class="sub" style="margin:4px 0 10px">${M.i}/${M.ids.length}問 回答済み・残り時間 ${mmss(exLeft(M))}</div><div class="row"><button class="btn pri" id="exc">続きから</button><button class="btn sm" id="exq">ここで終えて採点する</button><button class="btn sm" id="exd">やめて破棄する</button></div></div>`:""}
-<div class="card"><div class="pgh">問題数</div><div class="row" style="flex-wrap:wrap">${[10,25,50,100].map(v=>`<button class="btn sm ${v===n?"pri":""}" data-n="${v}">${v}問</button>`).join("")}<input class="inp" id="exnum" type="number" min="5" max="120" value="${n}" inputmode="numeric" style="width:6em" aria-label="問題数（5〜120）"><span class="sub">問（5〜120）</span></div>
-<p class="sub" style="margin:10px 0 4px">制限時間 <b>${Math.round(sec/60)}分</b>（本番は約100問・120分）</p>
+    app.innerHTML=`<div class="qwrap"><h2>模擬試験</h2><p class="sub">本番の分野の割合で、ランダムに出題します。途中でやめても、続きから再開できます。</p>
+${M?`<div class="card" style="border-left:8px solid var(--acc)"><b>前回の続き（${M.pr?"練習":"本番形式"}）</b><div class="sub" style="margin:4px 0 10px">${M.i}/${M.ids.length}問 回答済み・${M.pr?`経過 ${mmss(M.used)}`:`残り時間 ${mmss(exLeft(M))}`}</div><div class="row"><button class="btn pri" id="exc">続きから</button><button class="btn sm" id="exq">ここで終えて採点する</button><button class="btn sm" id="exd">やめて破棄する</button></div></div>`:""}
+<div class="card"><div class="pgh">形式</div><div class="seg" style="display:flex;margin-bottom:6px"><button data-m="0" class="${pr?"":"on"}" style="flex:1">本番形式</button><button data-m="1" class="${pr?"on":""}" style="flex:1">練習</button></div>
+<p class="sub" style="margin:0 0 12px">${pr?"1問答えるごとに、正解と解説が出ます。制限時間はありません。":"制限時間あり。答えは最後にまとめて表示され、前の問題には戻れません（中断中は時間も止まります）。"}</p><div class="pgh">問題数</div><div class="row" style="flex-wrap:wrap">${[10,25,50,100].map(v=>`<button class="btn sm ${v===n?"pri":""}" data-n="${v}">${v}問</button>`).join("")}<input class="inp" id="exnum" type="number" min="5" max="120" value="${n}" inputmode="numeric" style="width:6em" aria-label="問題数（5〜120）"><span class="sub">問（5〜120）</span></div>
+<p class="sub" style="margin:10px 0 4px">${pr?`時間の目安 ${Math.round(sec/60)}分（制限なし）`:`制限時間 <b>${Math.round(sec/60)}分</b>（本番は約100問・120分）`}</p>
 <div class="pgh" style="margin-top:12px">出題する問題</div><div class="seg" style="display:flex"><button data-l="1" class="${lvo?"on":""}" style="flex:1">本番レベル</button><button data-l="0" class="${lvo?"":"on"}" style="flex:1">すべての問題</button></div>
 <div class="kv" style="margin-top:12px">${exDoms().map(d=>{const has=exPool(d.id,2).length;return`<div><span>${esc(d.name)}（${d.w}%）</span><b>${A[d.id]}問${lvo&&has<A[d.id]?`<small style="font-weight:400;color:var(--sub)">（本番レベル${has}問＋基礎）</small>`:""}</b></div>`;}).join("")}</div>
 <button class="btn pri" id="exs" style="width:100%;min-height:54px;margin-top:14px">${M?"新しく始める（前回の続きは破棄）":"スタート"}</button>
 <p class="sub" style="margin-top:8px">合格ラインは公表されていないため、正答率${EXPASS}%を目安にしています（非公式）。</p></div>
-${(S.mxh||[]).length?`<h3>これまでの結果</h3>${S.mxh.map((h,i)=>{const p=Math.round(h.ok/h.n*100);return`<button class="card" data-h="${i}" style="display:block;width:100%;text-align:left"><b style="color:${p>=EXPASS?"var(--ok)":"var(--ng)"}">${p}%</b>　${h.ok}/${h.n}問 <span class="sub">${new Date(h.end).toLocaleDateString()}・${mmss(h.sec)}</span></button>`;}).join("")}`:""}</div>`;
+${(S.mxh||[]).length?`<h3>これまでの結果</h3>${S.mxh.map((h,i)=>{const p=Math.round(h.ok/h.n*100);return`<button class="card" data-h="${i}" style="display:block;width:100%;text-align:left"><b style="color:${p>=EXPASS?"var(--ok)":"var(--ng)"}">${p}%</b>　${h.ok}/${h.n}問 ${h.pr?`<span class="chip" style="background:var(--sub)">練習</span> `:""}<span class="sub">${new Date(h.end).toLocaleDateString()}・${mmss(h.sec)}</span></button>`;}).join("")}`:""}</div>`;
     app.querySelectorAll("[data-n]").forEach(b=>b.onclick=()=>{n=+b.dataset.n;draw();});
     $("#exnum").onchange=e=>{n=Math.max(5,Math.min(120,Math.round(+e.target.value)||50));draw();};
     app.querySelectorAll("[data-l]").forEach(b=>b.onclick=()=>{lvo=+b.dataset.l;draw();});
-    const startNew=()=>{S.mxn=n;S.mxl=lvo;S.mx={id:Date.now(),ids:exPick(n,lvo),i:0,ans:{},used:0,lim:n*EXSEC,lvo,_t:0};save();go("examq",null);};
+    app.querySelectorAll("[data-m]").forEach(b=>b.onclick=()=>{pr=+b.dataset.m;draw();});
+    const startNew=()=>{S.mxn=n;S.mxl=lvo;S.mxm=pr;S.mx={id:Date.now(),ids:exPick(n,lvo),i:0,ans:{},used:0,lim:n*EXSEC,lvo,pr,_t:0};save();go("examq",null);};
     if(M)twice($("#exs"),"もう一度押すと、前回の続きを破棄して始めます",startNew);else $("#exs").onclick=startNew;
     if(M){$("#exc").onclick=()=>go("examq",null);twice($("#exq"),"もう一度押すと採点（未回答は不正解）",exFinish);twice($("#exd"),"もう一度押すと破棄します",()=>{S.mx=null;save();render();});}
     app.querySelectorAll("[data-h]").forEach(b=>b.onclick=()=>go("exres",S.mxh[+b.dataset.h]));};
   draw();}
 function vExamQ(){
   const M=S.mx;if(!M){view="exam";return render();}
+  if(M.fb)return exFeedback(M);/* 練習：解説を見ている途中で中断した */
   if(M.i>=M.ids.length)return exFinish();
   const q=QM[M.ids[M.i]];if(!q){M.i++;save();return vExamQ();}
-  ttl.textContent="模擬試験";M._t=Date.now();
-  app.innerHTML=`<div class="qwrap cmp"><div class="qtop"><span class="chip" style="background:${DM[q.d].c}">${SHORT[q.d]}</span><span class="grow num">${M.i+1}/${M.ids.length}</span><b class="num" id="exl">残り ${mmss(exLeft(M))}</b><button class="btn sm" id="exp">中断</button></div><div class="qbar"><i style="width:${M.i/M.ids.length*100}%;background:var(--acc)"></i></div><div class="qbox" id="qb"></div></div>`;
-  const tick=()=>{const l=exLeft(M),e=$("#exl");if(e){e.textContent="残り "+mmss(l);e.style.color=l<300?"var(--ng)":"";}if(l<=0){toast("時間になりました。採点します。");exFinish();}};
+  ttl.textContent=M.pr?"模擬試験（練習）":"模擬試験";M._t=Date.now();
+  app.innerHTML=`<div class="qwrap cmp"><div class="qtop"><span class="chip" style="background:${DM[q.d].c}">${SHORT[q.d]}</span><span class="grow num">${M.i+1}/${M.ids.length}</span><b class="num" id="exl">${M.pr?"経過 "+mmss(M.used):"残り "+mmss(exLeft(M))}</b><button class="btn sm" id="exp">中断</button></div><div class="qbar"><i style="width:${M.i/M.ids.length*100}%;background:var(--acc)"></i></div><div class="qbox" id="qb"></div></div>`;
+  const tick=()=>{if(M.pr){const e=$("#exl");if(e)e.textContent="経過 "+mmss(M.used+(M._t?(Date.now()-M._t)/1000:0));return;}const l=exLeft(M),e=$("#exl");if(e){e.textContent="残り "+mmss(l);e.style.color=l<300?"var(--ng)":"";}if(l<=0){toast("時間になりました。採点します。");exFinish();}};
   EXT.iv=setInterval(tick,1000);
-  exWidget($("#qb"),q,ok=>{M.ans[q.id]=ok?1:0;rec(q.id,ok);M.i++;exStop();if(M.i>=M.ids.length)exFinish();else{vExamQ();scrollTo(0,0);}},M.i===M.ids.length-1);
+  exWidget($("#qb"),q,ok=>{M.ans[q.id]=ok?1:0;rec(q.id,ok);M.i++;exStop();if(M.pr){M.fb=q.id;save();exFeedback(M);scrollTo(0,0);return;}if(M.i>=M.ids.length)exFinish();else{vExamQ();scrollTo(0,0);}},M.i===M.ids.length-1&&!M.pr);
   $("#exp").onclick=()=>{exStop();toast("中断しました。続きは「模擬試験」から再開できます。");stack=[];view="exam";arg=null;render();};
+}
+/* 練習：1問ごとの正解と解説 */
+function exFeedback(M){
+  const q=QM[M.fb];if(!q){M.fb=null;save();return vExamQ();}const ok=!!M.ans[q.id],last=M.i>=M.ids.length;
+  ttl.textContent="模擬試験（練習）";
+  app.innerHTML=`<div class="qwrap cmp"><div class="qtop"><span class="chip" style="background:${DM[q.d].c}">${SHORT[q.d]}</span><span class="grow num">${M.i}/${M.ids.length}</span><span class="num sub">正解 ${Object.values(M.ans).filter(v=>v).length}/${Object.keys(M.ans).length}</span><button class="btn sm" id="exp">中断</button></div><div class="qbar"><i style="width:${M.i/M.ids.length*100}%;background:var(--acc)"></i></div>
+<div class="qbox"><div class="res ${ok?"ok":"ng"}" style="margin-top:0">${ok?MK.ok:MK.ng}${ok?"正解！":"不正解"}</div><div class="sub">${T(q,q.t)}</div>${q.fig?`<div class="exh qfig"><div class="h">構成図</div>${q.fig}</div>`:""}<div class="pgh" style="margin-top:10px">正しい答え</div><div class="corr">${corrHtml(q)}</div><div class="ex">${T(q,q.e)}</div>${q.m?`<div class="memo">${T(q,q.m)}</div>`:""}${rdBlock(q)}
+<div style="margin-top:14px"><button class="btn pri" id="exnx" style="width:100%;min-height:50px">${last?"結果を見る":"次の問題へ"}</button></div></div></div>`;
+  app.querySelectorAll("[data-g]").forEach(b=>b.onclick=()=>go("guide",{g:b.dataset.g}));
+  $("#exnx").onclick=()=>{M.fb=null;save();if(last)exFinish();else{vExamQ();scrollTo(0,0);}};
+  $("#exp").onclick=()=>{toast("中断しました。続きは「模擬試験」から再開できます。");stack=[];view="exam";arg=null;render();};
 }
 function exWidget(el,q,onAns,last){
   el.innerHTML=`<div class="qt">${T(q,q.t)}${q.k==="multi"?`<div class="sub">（${q.a.length}つ選ぶ）</div>`:""}</div>${q.fig?`<div class="exh qfig"><div class="h">構成図</div>${q.fig}</div>`:""}${q.x?`<div class="exh"><div class="h">図・出力</div><pre>${esc(q.x)}</pre></div>`:""}<div id="area"></div><div style="margin-top:14px"><button class="btn pri" id="exn" disabled style="width:100%;min-height:50px">${last?"回答して終了":"回答して次へ"}</button></div>`;
@@ -801,10 +815,10 @@ function exWidget(el,q,onAns,last){
   nb.onclick=()=>{nb.disabled=true;onAns(judge());};
 }
 function vExRes(){
-  const h=arg;if(!h)return top("one");ttl.textContent="模擬試験の結果";const p=h.ok/h.n,C=2*Math.PI*52,pass=p*100>=EXPASS;
+  const h=arg;if(!h)return top("one");ttl.textContent=h.pr?"模擬試験（練習）の結果":"模擬試験の結果";const p=h.ok/h.n,C=2*Math.PI*52,pass=p*100>=EXPASS;
   app.innerHTML=`<div style="max-width:760px;margin:0 auto"><div class="card" style="text-align:center"><svg viewBox="0 0 130 130" style="width:150px"><circle cx="65" cy="65" r="52" fill="none" stroke="var(--line)" stroke-width="14"/><circle cx="65" cy="65" r="52" fill="none" stroke="${pass?"var(--ok)":"var(--ng)"}" stroke-width="14" stroke-linecap="round" stroke-dasharray="${C*p} ${C}" transform="rotate(-90 65 65)"/><text x="65" y="74" text-anchor="middle" style="font:800 28px Figtree,sans-serif;fill:var(--ink)">${Math.round(p*100)}%</text></svg>
 <h2 style="margin:6px 0">${h.ok} / ${h.n} 問正解</h2><p style="font-weight:800;color:${pass?"var(--ok)":"var(--ng)"};margin:0 0 6px">${pass?`目安の${EXPASS}%に届きました`:`目安の${EXPASS}%まで、あと${Math.max(1,Math.ceil(h.n*EXPASS/100)-h.ok)}問`}</p>
-<p class="sub">かかった時間 ${mmss(h.sec)}／制限 ${mmss(h.lim)}${h.done<h.n?`・未回答 ${h.n-h.done}問（不正解として採点）`:""}<br>目安は非公式です（合格ラインは公表されていません）。</p>
+<p class="sub">${h.pr?`練習・かかった時間 ${mmss(h.sec)}`:`かかった時間 ${mmss(h.sec)}／制限 ${mmss(h.lim)}`}${h.done<h.n?`・未回答 ${h.n-h.done}問（不正解として採点）`:""}<br>目安は非公式です（合格ラインは公表されていません）。</p>
 <div class="row" style="justify-content:center">${h.ng.length?`<button class="btn pri" id="exr">間違えた${h.ng.length}問を解説つきで復習</button>`:""}<button class="btn" id="exa">模擬試験の画面へ</button></div></div>
 <h3>分野ごとの正答率</h3><div class="card">${exDoms().filter(d=>h.by[d.id]).map(d=>{const b=h.by[d.id],r=b[0]/b[1];return`<div class="row" style="margin:6px 0"><span style="width:10em">${esc(d.name)}</span><span class="grow"><span class="bar" style="display:block"><i style="width:${r*100}%;background:${d.c}"></i></span></span><b class="num" style="width:7em;text-align:right;color:${r*100>=EXPASS?"var(--ok)":"var(--ng)"}">${Math.round(r*100)}%（${b[0]}/${b[1]}）</b></div>`;}).join("")}</div>
 ${h.ng.length?`<h3>間違えた問題</h3>${h.ng.filter(id=>QM[id]).map(id=>{const q=QM[id];return`<button class="card" data-q="${id}" style="display:block;width:100%;text-align:left;border-left:8px solid ${DM[q.d].c}"><span class="sub">${esc(SHORT[q.d])}${q.tag?"・"+esc(q.tag):""}</span><div>${esc(strip(q.t)).slice(0,90)}</div></button>`;}).join("")}`:""}</div>`;
