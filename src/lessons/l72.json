@@ -21,7 +21,8 @@
    "t": "上から順に、最初に合った行で決まる",
    "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 160.0\" role=\"img\" aria-label=\"ACL 10\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"100\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#e6261f;white-space:pre\">access-list 10 deny 10.1.2.0 0.0.0.255</text><text x=\"22\" y=\"74\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">access-list 10 permit 10.1.0.0 0.0.255.255</text><text x=\"22\" y=\"96\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#3d4450;white-space:pre\">! (deny any)</text><text x=\"180\" y=\"132\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">上から順に比べ、合った行で決まり。下は見ない</text></svg>",
    "b": "実況です！ パケットがやってきました。門番は、リストを<b>上から順に</b>比べます。<b>最初に合った行</b>で、通す（permit）か止める（deny）かが決まり、<b>その下の行はもう見ません</b>。送信元 10.1.2.5 なら、1行目の deny に合うので止めます。10.1.3.5 なら、1行目には合わず、2行目の permit に合うので通します。",
-   "p": "上から順、最初に合った行で決まり。順番が命。"
+   "p": "上から順、最初に合った行で決まり。順番が命。",
+   "code": "access-list 10 deny 10.1.2.0 0.0.0.255\naccess-list 10 permit 10.1.0.0 0.0.255.255\n! (deny any)"
   },
   {
    "t": "確認の問題 1",
@@ -62,7 +63,8 @@
   {
    "t": "標準ACLと、置く場所",
    "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 206.0\" role=\"img\" aria-label=\"標準ACLを置く\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"122\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#e6261f;white-space:pre\">access-list 10 deny 10.1.2.0 0.0.0.255</text><text x=\"22\" y=\"74\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">access-list 10 permit any</text><text x=\"22\" y=\"96\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\">interface g0/2</text><text x=\"22\" y=\"118\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\"> ip access-group 10 out</text><text x=\"180\" y=\"154\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">標準ACL（1-99）は送信元だけを見る</text><text x=\"180\" y=\"178\" text-anchor=\"middle\" style=\"font:700 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">→ 宛先の近くに置く</text></svg>",
-   "b": "番号 <b>1〜99</b>（と1300〜1999）は<b>標準ACL</b>で、<b>送信元のアドレスだけ</b>を見ます。作ったACLは、インターフェースに <b>ip access-group 番号 in/out</b> で置いて、はじめて働きます。標準ACLは宛先を見ないので、送信元の近くに置くと、ほかの場所への通信まで止めてしまいます。だから、標準ACLは<b>宛先の近く</b>に置くのが基本です。"
+   "b": "番号 <b>1〜99</b>（と1300〜1999）は<b>標準ACL</b>で、<b>送信元のアドレスだけ</b>を見ます。作ったACLは、インターフェースに <b>ip access-group 番号 in/out</b> で置いて、はじめて働きます。標準ACLは宛先を見ないので、送信元の近くに置くと、ほかの場所への通信まで止めてしまいます。だから、標準ACLは<b>宛先の近く</b>に置くのが基本です。",
+   "code": "access-list 10 deny 10.1.2.0 0.0.0.255\naccess-list 10 permit any\ninterface g0/2\n ip access-group 10 out"
   },
   {
    "t": "確認の問題 3",

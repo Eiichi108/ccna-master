@@ -21,7 +21,8 @@
    "t": "知らない宛先は、全部ここへ",
    "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 206.0\" role=\"img\" aria-label=\"デフォルトルート\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"122\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\">R1(config)# ip route 0.0.0.0 0.0.0.0 203.0.113.1</text><text x=\"22\" y=\"74\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\">R1# show ip route</text><text x=\"22\" y=\"96\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">Gateway of last resort is 203.0.113.1</text><text x=\"22\" y=\"118\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">S*  0.0.0.0/0 [1/0] via 203.0.113.1</text><text x=\"180\" y=\"154\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">0.0.0.0/0 は、どんな宛先にも合う</text><text x=\"180\" y=\"178\" text-anchor=\"middle\" style=\"font:700 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">* は、デフォルトルートのしるし</text></svg>",
    "b": "<b>デフォルトルート</b>は、宛先 <b>0.0.0.0、マスク 0.0.0.0</b>（0.0.0.0/0）の道です。マスクが0なので、<b>どんな宛先にも合います</b>。ただし、プレフィックス長は0で一番短いので、ロンゲストマッチでは<b>一番最後</b>です。つまり「ほかに合う道がなければ、ここへ」という意味になります。設定すると、テーブルに <b>S*</b> と <b>Gateway of last resort</b>（最後の手段の出口）が表示されます。",
-   "p": "0.0.0.0/0 ＝ どこにでも合うが、一番弱い。ほかの道がないときに使う。"
+   "p": "0.0.0.0/0 ＝ どこにでも合うが、一番弱い。ほかの道がないときに使う。",
+   "code": "R1(config)# ip route 0.0.0.0 0.0.0.0 203.0.113.1\nR1# show ip route\nGateway of last resort is 203.0.113.1\nS*  0.0.0.0/0 [1/0] via 203.0.113.1"
   },
   {
    "t": "確認の問題 1",
@@ -44,7 +45,8 @@
   {
    "t": "予備の道（浮動スタティックルート）",
    "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 162.0\" role=\"img\" aria-label=\"浮動スタティックルート\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"78\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">ip route 0.0.0.0 0.0.0.0 203.0.113.1</text><text x=\"22\" y=\"74\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#ffb400;white-space:pre\">ip route 0.0.0.0 0.0.0.0 192.0.2.1 5</text><text x=\"180\" y=\"110\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">最後の 5 は AD。1 より大きいので、ふだんは隠れる</text><text x=\"180\" y=\"134\" text-anchor=\"middle\" style=\"font:700 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">主の道が消えると、テーブルに浮かび上がる</text></svg>",
-   "b": "答えは、予備の道の<b>ADを大きくする</b>ことです。ip route の最後に数字を書くと、それが<b>AD</b>になります。予備の道を AD 5 にすると、ふだんは AD 1 の主の道が勝つので、予備はテーブルに入りません。主の回線が切れて主の道が消えると、予備の道が<b>浮かび上がってきます</b>。だから<b>浮動スタティックルート</b>と呼びます。"
+   "b": "答えは、予備の道の<b>ADを大きくする</b>ことです。ip route の最後に数字を書くと、それが<b>AD</b>になります。予備の道を AD 5 にすると、ふだんは AD 1 の主の道が勝つので、予備はテーブルに入りません。主の回線が切れて主の道が消えると、予備の道が<b>浮かび上がってきます</b>。だから<b>浮動スタティックルート</b>と呼びます。",
+   "code": "ip route 0.0.0.0 0.0.0.0 203.0.113.1\nip route 0.0.0.0 0.0.0.0 192.0.2.1 5"
   },
   {
    "t": "確認の問題 2",
@@ -62,7 +64,8 @@
   {
    "t": "1台だけへの道（ホストルート）",
    "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 162.0\" role=\"img\" aria-label=\"ホストルート\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"78\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\">ip route 10.9.9.9 255.255.255.255 10.1.2.2</text><text x=\"22\" y=\"74\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">S  10.9.9.9/32 [1/0] via 10.1.2.2</text><text x=\"180\" y=\"110\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">/32 ＝ 1台のホストだけ</text><text x=\"180\" y=\"134\" text-anchor=\"middle\" style=\"font:700 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ロンゲストマッチで、ほかのどの道よりも強い</text></svg>",
-   "b": "<b>ホストルート</b>は、マスク <b>255.255.255.255（/32）</b>で、<b>1台のホストだけ</b>への道です。/32 は一番長いプレフィックスなので、ロンゲストマッチで<b>どの道よりも優先</b>されます。「このサーバーへの通信だけは、別の道を通したい」というときに使います。"
+   "b": "<b>ホストルート</b>は、マスク <b>255.255.255.255（/32）</b>で、<b>1台のホストだけ</b>への道です。/32 は一番長いプレフィックスなので、ロンゲストマッチで<b>どの道よりも優先</b>されます。「このサーバーへの通信だけは、別の道を通したい」というときに使います。",
+   "code": "ip route 10.9.9.9 255.255.255.255 10.1.2.2\nS  10.9.9.9/32 [1/0] via 10.1.2.2"
   },
   {
    "t": "確認の問題 3",

@@ -21,7 +21,8 @@
    "t": "文字で操作する画面（CLI）",
    "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 184.0\" role=\"img\" aria-label=\"CLIの画面\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"100\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#e8ecf3;white-space:pre\">Router&gt; enable</text><text x=\"22\" y=\"74\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#e8ecf3;white-space:pre\">Router# configure terminal</text><text x=\"22\" y=\"96\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#ffb400;white-space:pre\">Router(config)#</text><text x=\"180\" y=\"132\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">文字でコマンドを打つ画面 ＝ CLI</text><text x=\"180\" y=\"156\" text-anchor=\"middle\" style=\"font:700 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">行の先頭の Router&gt; などがプロンプト</text></svg>",
    "b": "文字でコマンドを打って操作する画面を、<b>CLI</b>（Command Line Interface）と言います。行の先頭に出ている「Router&gt;」や「Router#」を<b>プロンプト</b>と言い、<b>今どのモードにいるか</b>を教えてくれます。記号が変わったら、いる場所が変わった合図です。",
-   "p": "プロンプトの記号（&gt;・#・(config)#）で、今いるモードがわかる。"
+   "p": "プロンプトの記号（&gt;・#・(config)#）で、今いるモードがわかる。",
+   "code": "Router> enable\nRouter# configure terminal\nRouter(config)#"
   },
   {
    "t": "モードは、建物の部屋",

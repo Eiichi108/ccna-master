@@ -328,6 +328,7 @@ details.ldom summary::-webkit-details-marker{display:none}
 .clwrap .point{margin:6px 0 0;padding:6px 10px;font-size:14px}
 .clwrap .tbq{gap:6px;margin:6px 0}.clwrap .tbq button{min-height:84px;padding:6px 2px}.clwrap .tbq button svg{width:56px;height:46px}
 .exrow{padding:12px 14px}.exrow.ng{background:var(--ngbg)}.exrow .exmk{color:var(--ok)}.exrow.ng .exmk{color:var(--ng)}.exrow .exmk svg{width:22px;height:22px}.exok summary{cursor:pointer;font-weight:800;margin:14px 0 8px}
+.tbcmd{margin:10px 0 0}.tbcmd summary{cursor:pointer;font-weight:800;font-size:14px;color:var(--sub)}.tbcmd .tbcp{white-space:pre;word-break:normal;overflow-x:auto;margin:8px 0}
 .tbq.long{grid-template-columns:1fr}.tbq.long button{display:flex;align-items:center;gap:12px;min-height:56px;padding:8px 14px;text-align:left}.tbq.long button svg{width:42px;height:36px;margin:0;flex:none}
 #app .nb{white-space:nowrap;overflow-wrap:normal}#app .nb6{overflow-wrap:normal;word-break:keep-all}
 .clwrap .credit{margin:6px 2px 0;font-size:12px}
@@ -573,7 +574,10 @@ function pageInner(P){if(P.quiz){const Z=P.quiz;return`<div class="tbtx"><p styl
   /* 図は SVG か、コピーできる文字のコード（code）。本文がないページ（今日のゴールなど）は図だけを出す */
   const fig=P.svg||(P.code?`<pre class="tbcode">${esc(P.code)}</pre>`:"");
   if(!P.b&&!P.p)return`<div class="tbfg tbonly">${fig}</div>`;
-  return`<div class="tbgrid">${fig?`<div class="tbfg">${fig}</div>`:""}<div class="tbtx">${P.b?`<p>${P.b}</p>`:""}${P.p?`<div class="point">${P.p}</div>`:""}</div></div>`;}
+  const cmd=P.svg&&P.code?`<details class="tbcmd"><summary>図のコマンドを文字で見る・コピー</summary><pre class="tbcode tbcp">${esc(P.code)}</pre><button class="btn sm" data-copy>コピー</button></details>`:"";
+  return`<div class="tbgrid">${fig?`<div class="tbfg">${fig}</div>`:""}<div class="tbtx">${P.b?`<p>${P.b}</p>`:""}${P.p?`<div class="point">${P.p}</div>`:""}${cmd}</div></div>`;}
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-copy]");if(!b)return;const t=b.previousElementSibling.textContent;
+  const ng=()=>toast("コピーできませんでした。文字を長押しして選んでください。");try{navigator.clipboard.writeText(t).then(()=>toast("コピーしました"),ng);}catch(_){ng();}});
 function bindQuiz(P,onAns){if(!P.quiz)return;app.querySelectorAll(".tbq button").forEach(b=>b.onclick=()=>{const k=+b.dataset.k,Z=P.quiz;app.querySelectorAll(".tbq button").forEach(x=>{const kk=+x.dataset.k;x.classList.toggle("ok",kk===Z.a);x.classList.toggle("ng",kk===k&&k!==Z.a);x.disabled=true;});$("#tbz").innerHTML=`<div class="res ${k===Z.a?"ok":"ng"}">${k===Z.a?MK.ok:MK.ng}${k===Z.a?"正解！":"不正解"}</div><p>${Z.e}</p>`;if(onAns)onAns();});}
 /* ---------- CLASS (audio lesson) ---------- */
 let AU=null;const BLOBS={};

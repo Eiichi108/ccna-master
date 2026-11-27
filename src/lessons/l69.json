@@ -11,7 +11,8 @@
   {
    "t": "設定ファイルに、パスワードが丸見え",
    "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 182.0\" role=\"img\" aria-label=\"show running-config\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"122\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#e6261f;white-space:pre\">enable password cisco123</text><text x=\"22\" y=\"74\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\">line vty 0 4</text><text x=\"22\" y=\"96\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#e6261f;white-space:pre\"> password letmein</text><text x=\"22\" y=\"118\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\"> login</text><text x=\"180\" y=\"154\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">だれかに画面を見られたら、終わり</text></svg>",
-   "b": "ある会社のルーターの設定を見たら、<b>パスワードがそのまま</b>書かれていました。設定ファイルをバックアップしたり、画面をだれかに見られたりしたら、すぐに入られてしまいます。今日は、この設定を、<b>安全な形に直していく</b>トラブル解決です。"
+   "b": "ある会社のルーターの設定を見たら、<b>パスワードがそのまま</b>書かれていました。設定ファイルをバックアップしたり、画面をだれかに見られたりしたら、すぐに入られてしまいます。今日は、この設定を、<b>安全な形に直していく</b>トラブル解決です。",
+   "code": "enable password cisco123\nline vty 0 4\n password letmein\n login"
   },
   {
    "t": "今日のゴール",
@@ -21,7 +22,8 @@
    "t": "enable password と enable secret",
    "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 182.0\" role=\"img\" aria-label=\"特権モードのパスワード\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"122\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#e6261f;white-space:pre\">enable password cisco123</text><text x=\"22\" y=\"74\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">enable secret Str0ng!Pass</text><text x=\"22\" y=\"96\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#3d4450;white-space:pre\">! show run:</text><text x=\"22\" y=\"118\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">enable secret 9 $9$x8Nk...</text><text x=\"180\" y=\"154\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">両方あるときは secret が使われる</text></svg>",
    "b": "特権モードのパスワードには2つの書き方があります。<b>enable password</b> は、そのまま（平文）で保存されます。<b>enable secret</b> は、元に戻せない<b>ハッシュ</b>にして保存されます。両方あるときは <b>enable secret が使われます</b>。だから、enable password は消して、enable secret だけにします。",
-   "p": "特権モードは enable secret。enable password は使わない。"
+   "p": "特権モードは enable secret。enable password は使わない。",
+   "code": "enable password cisco123\nenable secret Str0ng!Pass\n! show run:\nenable secret 9 $9$x8Nk..."
   },
   {
    "t": "確認の問題 1",
@@ -44,7 +46,8 @@
   {
    "t": "service password-encryption",
    "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 182.0\" role=\"img\" aria-label=\"目隠しをする\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"122\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">R1(config)# service password-encryption</text><text x=\"22\" y=\"74\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#3d4450;white-space:pre\">! show run:</text><text x=\"22\" y=\"96\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\">line vty 0 4</text><text x=\"22\" y=\"118\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#ffb400;white-space:pre\"> password 7 0822455D0A16</text><text x=\"180\" y=\"154\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">type 7 は、道具ですぐ元に戻せる</text></svg>",
-   "b": "<b>service password-encryption</b> を入れると、line の password など、平文のパスワードが <b>type 7</b> になり、画面では読めなくなります。ただし、type 7 は道具を使えば<b>すぐ元に戻せる</b>ので、本当の守りにはなりません。できるだけ <b>secret</b>（ハッシュ）を使う設定にしましょう。"
+   "b": "<b>service password-encryption</b> を入れると、line の password など、平文のパスワードが <b>type 7</b> になり、画面では読めなくなります。ただし、type 7 は道具を使えば<b>すぐ元に戻せる</b>ので、本当の守りにはなりません。できるだけ <b>secret</b>（ハッシュ）を使う設定にしましょう。",
+   "code": "R1(config)# service password-encryption\n! show run:\nline vty 0 4\n password 7 0822455D0A16"
   },
   {
    "t": "確認の問題 2",
@@ -62,7 +65,8 @@
   {
    "t": "1人ずつのユーザーで入る",
    "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 164.0\" role=\"img\" aria-label=\"ログインの守り方\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"144\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">username admin algorithm-type scrypt secret P@ss</text><text x=\"22\" y=\"74\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\">line vty 0 4</text><text x=\"22\" y=\"96\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\"> login local</text><text x=\"22\" y=\"118\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#ffb400;white-space:pre\"> exec-timeout 5 0</text><text x=\"22\" y=\"140\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#ffb400;white-space:pre\">security passwords min-length 10</text></svg>",
-   "b": "vty や console の <b>password + login</b> は、全員で同じ合言葉を使う方式です。<b>username … secret</b> でユーザーを1人ずつ作り、<b>login local</b> にすると、だれが入ったかもわかります。<b>algorithm-type scrypt</b> を付けると type 9 になります。さらに、<b>exec-timeout</b> で放置したら自動でログアウト、<b>security passwords min-length</b> で短すぎるパスワードを禁止できます。"
+   "b": "vty や console の <b>password + login</b> は、全員で同じ合言葉を使う方式です。<b>username … secret</b> でユーザーを1人ずつ作り、<b>login local</b> にすると、だれが入ったかもわかります。<b>algorithm-type scrypt</b> を付けると type 9 になります。さらに、<b>exec-timeout</b> で放置したら自動でログアウト、<b>security passwords min-length</b> で短すぎるパスワードを禁止できます。",
+   "code": "username admin algorithm-type scrypt secret P@ss\nline vty 0 4\n login local\n exec-timeout 5 0\nsecurity passwords min-length 10"
   },
   {
    "t": "確認の問題 3",

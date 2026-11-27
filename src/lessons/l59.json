@@ -11,7 +11,8 @@
   {
    "t": "NATを設定したのに、変換されない",
    "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 138.0\" role=\"img\" aria-label=\"変換表が空っぽ\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"78\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\">R1# show ip nat translations</text><text x=\"22\" y=\"74\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#e8ecf3;white-space:pre\">R1#</text><text x=\"180\" y=\"110\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">PC から外に ping しても、何も出てこない</text></svg>",
-   "b": "NATの設定を入れたのに、PCから外にpingしても、<b>変換表が空っぽ</b>のまま。よくあるのは、<b>どの口が中で、どの口が外か</b>を教え忘れているケースです。今日は、NATの設定の手順を1つずつ確かめながら、静的NAT・動的NAT・PATを設定していきます。"
+   "b": "NATの設定を入れたのに、PCから外にpingしても、<b>変換表が空っぽ</b>のまま。よくあるのは、<b>どの口が中で、どの口が外か</b>を教え忘れているケースです。今日は、NATの設定の手順を1つずつ確かめながら、静的NAT・動的NAT・PATを設定していきます。",
+   "code": "R1# show ip nat translations\nR1#"
   },
   {
    "t": "今日のゴール",
@@ -26,7 +27,8 @@
   {
    "t": "1対1で固定（静的NAT）",
    "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 140.0\" role=\"img\" aria-label=\"静的NAT\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"56\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">ip nat inside source static 192.168.1.5 203.0.113.10</text><text x=\"180\" y=\"88\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">local 192.168.1.5 = global 203.0.113.10</text><text x=\"180\" y=\"112\" text-anchor=\"middle\" style=\"font:700 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">外から 203.0.113.10 にアクセス → 中のサーバーへ</text></svg>",
-   "b": "<b>静的NAT</b>は、<b>ip nat inside source static 中のアドレス 外のアドレス</b> と書きます。順番は「inside local → inside global」です。1対1で固定されるので、外から 203.0.113.10 にアクセスすると、中の Webサーバー 192.168.1.5 に届きます。社内のサーバーを外に公開するときに使います。"
+   "b": "<b>静的NAT</b>は、<b>ip nat inside source static 中のアドレス 外のアドレス</b> と書きます。順番は「inside local → inside global」です。1対1で固定されるので、外から 203.0.113.10 にアクセスすると、中の Webサーバー 192.168.1.5 に届きます。社内のサーバーを外に公開するときに使います。",
+   "code": "ip nat inside source static 192.168.1.5 203.0.113.10\nlocal 192.168.1.5 = global 203.0.113.10"
   },
   {
    "t": "確認の問題 1",
@@ -44,7 +46,8 @@
   {
    "t": "動的NATとPAT",
    "svg": "<svg class=\"tbfig\" viewBox=\"0 0 360 228.0\" role=\"img\" aria-label=\"動的NAT と PAT\"><rect x=\"10\" y=\"10\" width=\"340\" height=\"144\" rx=\"10\" fill=\"#1d2330\"/><circle cx=\"24\" cy=\"23\" r=\"4\" fill=\"#ff5f57\"/><circle cx=\"38\" cy=\"23\" r=\"4\" fill=\"#febc2e\"/><circle cx=\"52\" cy=\"23\" r=\"4\" fill=\"#28c840\"/><text x=\"22\" y=\"52\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#0a5cff;white-space:pre\">access-list 1 permit 192.168.1.0 0.0.0.255</text><text x=\"22\" y=\"74\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">ip nat pool P 192.0.2.1 192.0.2.9 prefix-length 24</text><text x=\"22\" y=\"96\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#00a05a;white-space:pre\">ip nat inside source list 1 pool P</text><text x=\"22\" y=\"118\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#3d4450;white-space:pre\">! PAT: add overload</text><text x=\"22\" y=\"140\" text-anchor=\"start\" xml:space=\"preserve\" style=\"font:700 10.5px ui-monospace,Menlo,monospace;fill:#ffb400;white-space:pre\">ip nat inside source list 1 interface g0/1 overload</text><text x=\"180\" y=\"176\" text-anchor=\"middle\" style=\"font:800 13px Figtree,'Hiragino Sans',sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">ACL ＝ 変換する対象</text><text x=\"180\" y=\"200\" text-anchor=\"middle\" style=\"font:700 11.5px Figtree,'Hiragino Sans',sans-serif;fill:var(--sub);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round\">pool ＝ 貸し出すアドレスの束</text></svg>",
-   "b": "<b>動的NAT</b>は3つの部品でできています。①<b>ACL</b>で変換する対象（社内のアドレス）を選び、②<b>pool</b>で貸し出すグローバルIPの束を決め、③<b>ip nat inside source list … pool …</b> で結びつけます。<b>PAT</b>にするときは、最後に <b>overload</b> を付けます。外向きの口のアドレスを使うなら、pool の代わりに <b>interface g0/1 overload</b> と書けます。"
+   "b": "<b>動的NAT</b>は3つの部品でできています。①<b>ACL</b>で変換する対象（社内のアドレス）を選び、②<b>pool</b>で貸し出すグローバルIPの束を決め、③<b>ip nat inside source list … pool …</b> で結びつけます。<b>PAT</b>にするときは、最後に <b>overload</b> を付けます。外向きの口のアドレスを使うなら、pool の代わりに <b>interface g0/1 overload</b> と書けます。",
+   "code": "access-list 1 permit 192.168.1.0 0.0.0.255\nip nat pool P 192.0.2.1 192.0.2.9 prefix-length 24\nip nat inside source list 1 pool P\n! PAT: add overload\nip nat inside source list 1 interface g0/1 overload"
   },
   {
    "t": "確認の問題 2",
