@@ -7,6 +7,7 @@ src/ のファイルは書き換えない（data.json だけを書く）。
 """
 import glob, json, os, re, subprocess, sys
 import srcio
+import qfigs   # 問題の構成図（tools/qfigs.py）
 
 sys.stdout.reconfigure(encoding="utf-8")
 
@@ -29,6 +30,7 @@ qs.sort(key=lambda q: q["id"])
 ids = [q["id"] for q in qs]
 dup = sorted({i for i in ids if ids.count(i) > 1})
 assert not dup, f"IDが重複しています: {dup}"
+assert not set(qfigs.FIG) - set(ids), f"qfigs.py に、ない問題の図がある: {sorted(set(qfigs.FIG) - set(ids))}"
 
 CP = base["CP"][0]
 LM = {x["id"]: x for x in base["L"]}
@@ -43,6 +45,8 @@ for q in qs:
     if TAG.search(json.dumps({k: q.get(k) for k in ("t", "e", "m", "o", "rows")}, ensure_ascii=False)):
         r["h"] = 1  # HTML（<b>など）をそのまま表示する
     r.update(src="orig", lt=lt, ci=0)
+    if q["id"] in qfigs.FIG:
+        r["fig"] = qfigs.FIG[q["id"]]   # 構成図（SVG）
     newQ.append(r); byc.setdefault(n, []).append(q["id"])
     p = q.get("page")
     assert isinstance(p, int) and 0 <= p < len(TB[n]["pages"]), f"{q['id']} の page が教科書の範囲外: {p}"

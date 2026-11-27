@@ -126,12 +126,24 @@ def topo(label, nodes, links, height=170, notes=()):
     """構成図。nodes = {名前: (種類, x, y, 色, 上の文字, 下の文字)}、links = [(a, b, 線の上の文字, 色)]。
     種類：router・switch・pc・phone・server・cloud・ap・fw。notes は図の下に出す文。"""
     out = []
-    for a, b, txt, col in links:
+    for a, b, txt, col, *pp in links:   # pp = (a側のポート名, b側のポート名)：省略できる
         _, x1, y1, *_ = nodes[a]
         _, x2, y2, *_ = nodes[b]
         out.append(f'<path d="M{x1} {y1}L{x2} {y2}" stroke="{col or GY}" stroke-width="3" opacity=".7"/>')
+        flat = abs(x2 - x1) >= abs(y2 - y1)
         if txt:
-            out.append(T((x1 + x2) / 2, (y1 + y2) / 2 - 7, txt, 10.5, 700, SUB, "middle"))
+            if flat:
+                out.append(T((x1 + x2) / 2, (y1 + y2) / 2 - 7, txt, 10.5, 700, SUB, "middle"))
+            else:  # 縦に近い線は、文字を線の右に置く
+                out.append(T((x1 + x2) / 2 + 7, (y1 + y2) / 2 + 4, txt, 10.5, 700, SUB, "start"))
+        for lab, t in zip(pp, (0.3, 0.7) if flat else (0.3, 0.6)):   # 縦の線は、b側の機器名と重ならないよう少し上に
+            if not lab:
+                continue
+            px, py = x1 + (x2 - x1) * t, y1 + (y2 - y1) * t
+            if flat:
+                out.append(T(px, py + 15, lab, 9.5, 700, BL, "middle"))
+            else:
+                out.append(T(px - 6, py + 4, lab, 9.5, 700, BL, "end"))
     for name, (kind, x, y, col, top, bottom) in nodes.items():
         out.append(_icon(kind, x, y, col))
         if top:

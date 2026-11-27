@@ -275,6 +275,7 @@ details.ldom summary::-webkit-details-marker{display:none}
 .tbhd .k{font-size:13px;color:var(--sub);font-weight:700}
 .tbhd h3{font-size:clamp(22px,5vw,30px);line-height:1.2;margin:2px 0 0;letter-spacing:-.01em}
 .tbfg{background:var(--soft);margin:10px 12px;border-radius:14px;padding:8px}
+.qfig svg{width:100%;max-width:460px;height:auto;display:block;margin:4px auto 0}
 .tbfig{display:block;width:100%;max-width:560px;height:auto;margin:0 auto}
 .tbtx{padding:4px 18px 18px;font-size:16.5px;line-height:1.85}
 .tbtx .point{font-weight:700}
@@ -694,6 +695,7 @@ function vSide(){
 }
 function qWidget(el,q,onDone){
   let html=`<div class="qt">${T(q,q.t)}${q.k==="multi"?`<div class="sub">（${q.a.length}つ選ぶ）</div>`:""}</div>`;
+  if(q.fig)html+=`<div class="exh qfig"><div class="h">構成図</div>${q.fig}</div>`;
   if(q.x)html+=`<div class="exh"><div class="h">図・出力</div><pre>${esc(q.x)}</pre></div>`;
   if(q.nofig)html+=`<p class="sub">※ この問題には図があります（問題集で確認してください）</p>`;
   html+=`<div id="area"></div><div id="after"></div>`;el.innerHTML=html;
@@ -781,7 +783,7 @@ function vExamQ(){
   $("#exp").onclick=()=>{exStop();toast("中断しました。続きは「模擬試験」から再開できます。");stack=[];view="exam";arg=null;render();};
 }
 function exWidget(el,q,onAns,last){
-  el.innerHTML=`<div class="qt">${T(q,q.t)}${q.k==="multi"?`<div class="sub">（${q.a.length}つ選ぶ）</div>`:""}</div>${q.x?`<div class="exh"><div class="h">図・出力</div><pre>${esc(q.x)}</pre></div>`:""}<div id="area"></div><div style="margin-top:14px"><button class="btn pri" id="exn" disabled style="width:100%;min-height:50px">${last?"回答して終了":"回答して次へ"}</button></div>`;
+  el.innerHTML=`<div class="qt">${T(q,q.t)}${q.k==="multi"?`<div class="sub">（${q.a.length}つ選ぶ）</div>`:""}</div>${q.fig?`<div class="exh qfig"><div class="h">構成図</div>${q.fig}</div>`:""}${q.x?`<div class="exh"><div class="h">図・出力</div><pre>${esc(q.x)}</pre></div>`:""}<div id="area"></div><div style="margin-top:14px"><button class="btn pri" id="exn" disabled style="width:100%;min-height:50px">${last?"回答して終了":"回答して次へ"}</button></div>`;
   const area=el.querySelector("#area"),nb=el.querySelector("#exn");let judge=()=>false;
   if(q.k==="one"||q.k==="multi"){const need=q.k==="multi"?q.a:[q.a],pick=new Set();
     area.innerHTML=shuffle(q.o.map((_,k)=>k)).map(k=>`<button class="opt" data-k="${k}">${T(q,q.o[k])}</button>`).join("");
