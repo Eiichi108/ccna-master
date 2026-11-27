@@ -529,9 +529,10 @@ function vClass(){
   if(!AU){AU=new Audio();AU.preload="auto";window.__AU=AU;}
   const src=k=>C.a+String(k+1).padStart(3,"0")+".mp3";
   app.innerHTML=`<div class="clwrap">
-<div class="clgrid"><div><div class="tbp" id="tbp"></div><div class="row" id="clnav" style="gap:8px;flex-wrap:wrap;margin:10px 0 4px"></div></div>
+<div class="clgrid"><div><div class="tbp" id="tbp"></div></div>
 <div class="clside"><div class="sub2"><div class="cur2" id="cur"></div><div id="wt"></div>
 <div class="ctrl"><button id="cpv" aria-label="前のセリフ">‹</button><button class="play" id="cpl" aria-label="再生">▶</button><button id="cnx" aria-label="次のセリフ">›</button><button id="spd" class="spd1" aria-label="再生速度">${rate}倍</button><button id="ltg" class="spd1" aria-label="セリフ一覧">一覧</button></div>
+<div class="row" id="clnav" style="gap:8px;flex-wrap:wrap;margin:8px 0 2px"></div>
 <div class="lns" id="lns">${C.lines.map((x,k)=>`<button class="ln2" data-i="${k}"><b>${x.sp}</b><span>${esc(x.t)}</span></button>`).join("")}</div>
 </div></div></div></div>`;
   {const cs=app.querySelector(".clside"),cw=app.querySelector(".clwrap");if(cs&&window.ResizeObserver){const ro=new ResizeObserver(()=>{if(!cw.isConnected){ro.disconnect();return;}cw.style.setProperty("--subh",(getComputedStyle(cs).position==="fixed"?cs.offsetHeight+8:4)+"px");});ro.observe(cs);}}
