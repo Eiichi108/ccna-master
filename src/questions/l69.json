@@ -1,5 +1,17 @@
 [
  {
+  "id": "P41-03",
+  "k": "multi",
+  "tag": "セキュリティ",
+  "lv": 2,
+  "t": "支店スイッチSW2で、vtyへのリモートログインを<b>SSHだけ</b>に限定し、さらに設定ファイルに平文で残っているコンソールやvtyのパスワードを見えなくしたいと考えています。必要なコマンドはどれですか。2つ選んでください。",
+  "o": ["transport input ssh", "service password-encryption", "transport input telnet", "banner motd #Staff only#", "enable password Sw2pass"],
+  "a": [0, 1],
+  "e": "vtyラインで<b>transport input ssh</b>を設定するとSSHだけを受け付けます。<b>service password-encryption</b>は設定ファイル内の平文パスワードをすべてtype 7で隠します。",
+  "m": "SSHだけ＝transport input ssh",
+  "page": 5
+ },
+ {
   "id": "P41-01",
   "k": "one",
   "tag": "セキュリティ",

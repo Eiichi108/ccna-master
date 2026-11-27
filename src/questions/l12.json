@@ -1,5 +1,17 @@
 [
  {
+  "id": "P09-04",
+  "k": "one",
+  "tag": "プロトコル",
+  "lv": 1,
+  "t": "PCが起動したときに、IPアドレスを自動で受け取るDHCP（Dynamic Host Configuration Protocol）が使うプロトコルとポート番号はどれですか。",
+  "o": ["UDP 67/68番", "TCP 67/68番", "UDP 53番", "TCP 80番"],
+  "a": 0,
+  "e": "DHCPは<b>UDPの67番と68番</b>を使います。53番はDNS、80番はHTTPです。",
+  "m": "DHCP＝UDP67/68、DNS＝53",
+  "page": 12
+ },
+ {
   "id": "P02-03",
   "k": "one",
   "tag": "TCP/UDP",

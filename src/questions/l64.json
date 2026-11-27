@@ -106,17 +106,5 @@
   "a": 1,
   "e": "出力は、<b>RSAの鍵がない</b>ためSSHが無効だと示しています。ホスト名とドメイン名があれば、<b>crypto key generate rsa</b> で鍵を作れます。",
   "m": "SSH Disabled＋RSA keys→鍵を作る"
- },
- {
-  "id": "P41-03",
-  "k": "multi",
-  "tag": "セキュリティ",
-  "lv": 2,
-  "t": "支店スイッチSW2で、vtyへのリモートログインを<b>SSHだけ</b>に限定し、さらに設定ファイルに平文で残っているコンソールやvtyのパスワードを見えなくしたいと考えています。必要なコマンドはどれですか。2つ選んでください。",
-  "o": ["transport input ssh", "service password-encryption", "transport input telnet", "banner motd #Staff only#", "enable password Sw2pass"],
-  "a": [0, 1],
-  "e": "vtyラインで<b>transport input ssh</b>を設定するとSSHだけを受け付けます。<b>service password-encryption</b>は設定ファイル内の平文パスワードをすべてtype 7で隠します。",
-  "m": "SSHだけ＝transport input ssh",
-  "page": 4
  }
 ]
