@@ -667,7 +667,7 @@ ${canMem?`<div style="margin-top:12px"><button class="btn sm" id="mem">${s.m?"�
 <div class="cnav"><button class="btn sm" id="cp" ${ci===0?"disabled":""}>‹</button><span class="num grow" style="text-align:center">カード ${ci+1}/${l.cards.length}</span><button class="btn sm" id="cn" ${ci===l.cards.length-1?"disabled":""}>›</button></div>
 <button class="btn sm" id="lfull" style="margin-top:10px">この講座を最初から読む</button>`;
     wrapTables(cp);linkTerms(cp);const sp=$("#spr");if(sp&&sp._fit)sp._fit();$("#cp").onclick=()=>{ci--;drawCard();};$("#cn").onclick=()=>{ci++;drawCard();};$("#lfull").onclick=()=>go("lesson",{id:l.id,i:0});};
-  drawCard();linkTerms(sv.querySelector(".ex"));sv.querySelectorAll("[data-rg]").forEach(b=>b.onclick=()=>go("guide",{g:b.dataset.rg}));
+  drawCard();linkTerms(sv.querySelector(".ex"));sv.querySelectorAll("[data-rg]").forEach(b=>b.onclick=()=>guideSheet(b.dataset.rg));
   const m=$("#mem");if(m)m.onclick=()=>{const t=S.st[q.id]||{};t.m=t.m?0:1;S.st[q.id]=t;save();m.textContent=t.m?"覚えた ✓":"覚えた";};
   const spr=$("#spr"),tabs=sv.querySelectorAll(".sptabs button");
   tabs.forEach(b=>b.onclick=()=>spr.scrollTo({left:+b.dataset.p*spr.clientWidth,behavior:"smooth"}));
@@ -801,7 +801,7 @@ function exFeedback(M){
   app.innerHTML=`<div class="qwrap cmp"><div class="qtop"><span class="chip" style="background:${DM[q.d].c}">${SHORT[q.d]}</span><span class="grow num">${M.i}/${M.ids.length}</span><span class="num sub">正解 ${Object.values(M.ans).filter(v=>v).length}/${Object.keys(M.ans).length}</span><button class="btn sm" id="exp">中断</button></div><div class="qbar"><i style="width:${M.i/M.ids.length*100}%;background:var(--acc)"></i></div>
 <div class="qbox"><div class="res ${ok?"ok":"ng"}" style="margin-top:0">${ok?MK.ok:MK.ng}${ok?"正解！":"不正解"}</div><div class="sub">${T(q,q.t)}</div>${q.fig?`<div class="exh qfig"><div class="h">構成図</div>${q.fig}</div>`:""}<div class="pgh" style="margin-top:10px">正しい答え</div><div class="corr">${corrHtml(q)}</div><div class="ex">${T(q,q.e)}</div>${q.m?`<div class="memo">${T(q,q.m)}</div>`:""}${rdBlock(q)}
 <div style="margin-top:14px"><button class="btn pri" id="exnx" style="width:100%;min-height:50px">${last?"結果を見る":"次の問題へ"}</button></div></div></div>`;
-  app.querySelectorAll("[data-g]").forEach(b=>b.onclick=()=>go("guide",{g:b.dataset.g}));
+  app.querySelectorAll("[data-rg]").forEach(b=>b.onclick=()=>guideSheet(b.dataset.rg));
   $("#exnx").onclick=()=>{M.fb=null;save();if(last)exFinish();else{vExamQ();scrollTo(0,0);}};
   $("#exp").onclick=()=>{toast("中断しました。続きは「模擬試験」から再開できます。");stack=[];view="exam";arg=null;render();};
 }
@@ -866,13 +866,17 @@ function vTools(){
 
 function rdBlock(q){const G=q.rg&&RG.find(g=>g.id===q.rg);if(!q.x&&!G)return"";
   return`<div class="rdx"><div class="rdh">図・出力の読み方</div>${q.x?`<details class="rdpre"><summary>図・出力をもう一度見る</summary><pre>${esc(q.x)}</pre></details>`:""}${q.rd?`<div class="rdt">${q.rd}</div>`:""}${G?`<button class="btn sm" data-rg="${G.id}">読み方ガイド：${esc(G.t)} ›</button>`:""}</div>`;}
-function vGuide(){const k=Math.max(0,RG.findIndex(g=>g.id===arg.g)),G=RG[k];ttl.textContent="読み方ガイド";
-  const L=G.ex.split("\n"),mk={};G.mk.forEach(m=>(mk[m[0]]=mk[m[0]]||[]).push(m[1]));
+/* 読み方ガイドの中身（画面・重ねて開くパネルの両方で使う） */
+function guideBody(G){const L=G.ex.split("\n"),mk={};G.mk.forEach(m=>(mk[m[0]]=mk[m[0]]||[]).push(m[1]));
   const NUM=n=>"①②③④⑤⑥⑦⑧⑨⑩"[n-1]||n;
-  app.innerHTML=`<div style="max-width:820px;margin:0 auto"><div class="sub">出力・図の読み方 ${k+1}/${RG.length}</div><h2 style="margin:4px 0 6px">${esc(G.t)}</h2><p style="margin:0 0 12px">${esc(G.s)}</p>
+  return`<p style="margin:0 0 12px">${esc(G.s)}</p>
 <div class="gpre">${L.map((l,i)=>`<div class="gl${mk[i]?" on":""}"><span class="gn">${mk[i]?mk[i].map(NUM).join(""):""}</span><span class="gt">${esc(l)||"&nbsp;"}</span></div>`).join("")}</div>
 <ol class="gml">${G.mk.map(m=>`<li><span class="gn">${NUM(m[1])}</span><span>${esc(m[2])}</span></li>`).join("")}</ol>
-<div class="card"><b>読むときのコツ</b><ul style="margin:8px 0 0;padding-left:20px">${G.tips.map(t=>`<li style="margin:4px 0">${esc(t)}</li>`).join("")}</ul></div>
+<div class="card"><b>読むときのコツ</b><ul style="margin:8px 0 0;padding-left:20px">${G.tips.map(t=>`<li style="margin:4px 0">${esc(t)}</li>`).join("")}</ul></div>`;}
+/* 問題の解説から開くときは、画面を移動せずに重ねて開く（閉じても答えと解説が残る） */
+function guideSheet(id){const G=RG.find(g=>g.id===id);if(G)sheet("読み方ガイド："+G.t,guideBody(G));}
+function vGuide(){const k=Math.max(0,RG.findIndex(g=>g.id===arg.g)),G=RG[k];ttl.textContent="読み方ガイド";
+  app.innerHTML=`<div style="max-width:820px;margin:0 auto"><div class="sub">出力・図の読み方 ${k+1}/${RG.length}</div><h2 style="margin:4px 0 6px">${esc(G.t)}</h2>${guideBody(G)}
 <div class="row" style="justify-content:space-between;margin-top:12px">${k>0?`<button class="btn sm" id="gp">‹ ${esc(RG[k-1].t)}</button>`:"<span></span>"}${k<RG.length-1?`<button class="btn sm" id="gx">${esc(RG[k+1].t)} ›</button>`:""}</div></div>`;
   const gp=$("#gp"),gx=$("#gx");if(gp)gp.onclick=()=>{arg={g:RG[k-1].id};render();scrollTo(0,0);};if(gx)gx.onclick=()=>{arg={g:RG[k+1].id};render();scrollTo(0,0);};}
 function vTool(){({packet:tPacket,route:tRoute,subnet:tSubnet,drill:tSdrill,cli:tCli,lab:tLab}[arg.t])();}
