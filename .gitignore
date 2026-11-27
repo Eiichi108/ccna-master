@@ -8,3 +8,6 @@ preview/
 # テスト用の一時ページ
 _t*.html
 _host.html
+
+# 作業用のメモ
+improve*.txt
