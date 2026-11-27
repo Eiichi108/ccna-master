@@ -102,7 +102,7 @@
   "lv": 2,
   "page": 3,
   "t": "図を参照してください。R1とR2はOSPFのネイバーの状態が FULL になりません。エリア番号、タイマー、サブネットは一致しています。最も考えられる原因はどれですか。",
-  "x": "R1# show ip ospf neighbor\nNeighbor ID   Pri  State          Dead Time  Address    Interface\n2.2.2.2         1  EXSTART/DR     00:00:35   10.0.12.2  Gi0/0",
+  "x": "R1# show ip ospf neighbor\nNeighbor ID Pri State      Dead Time Address   Interface\n2.2.2.2       1 EXSTART/DR 00:00:35  10.0.12.2 Gi0/0",
   "rd": "①State の列を見る<br>②EXSTART は2WAYのあとの地図の交換の入口<br>③ここで止まるなら、交換の条件がそろっていない",
   "rg": "ospf",
   "o": ["両方のインターフェースでMTUがちがう", "R2のプライオリティが0になっている", "プロセス番号がちがう", "インターフェースのコストがちがう"],

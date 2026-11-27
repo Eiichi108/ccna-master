@@ -102,7 +102,7 @@
   "lv": 2,
   "page": 5,
   "t": "図を参照してください。SW1でポートの一覧を確認しました。ケーブルの抜けや断線、相手の機器を最初に疑うべきポートはどれですか。",
-  "x": "SW1# show ip interface brief\nInterface  IP-Address  OK? Method Status                Protocol\nGi0/0      unassigned  YES unset  up                    up\nGi0/1      unassigned  YES unset  down                  down\nGi0/2      unassigned  YES unset  administratively down down\nGi0/3      unassigned  YES unset  up                    down",
+  "x": "SW1# show ip interface brief\n（OK? と Method の列は省略）\nInterface IP-Address Status                Protocol\nGi0/0     unassigned up                    up\nGi0/1     unassigned down                  down\nGi0/2     unassigned administratively down down\nGi0/3     unassigned up                    down",
   "rd": "①Status 列（第1層）と Protocol 列（第2層）を並べて見る<br>②administratively down は管理者が止めた印<br>③それ以外で Status が down のポートを探す",
   "rg": "brief",
   "o": ["Gi0/1", "Gi0/0", "Gi0/3", "Gi0/2"],
