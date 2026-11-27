@@ -528,8 +528,7 @@ function vClass(){
   ttl.textContent="授業 第"+B.n+"回";
   if(!AU){AU=new Audio();AU.preload="auto";window.__AU=AU;}
   const src=k=>C.a+String(k+1).padStart(3,"0")+".mp3";
-  app.innerHTML=`<div class="clwrap"><div class="deckhead"><span class="chip" style="background:${D.c}">${SHORT[l.d]}</span><b class="grow" style="font-size:15px">第${B.n}回　${esc(B.t)}</b><span class="num" id="cn"></span></div>
-<div class="qbar"><i id="cbar" style="background:${D.c}"></i></div>
+  app.innerHTML=`<div class="clwrap">
 <div class="clgrid"><div><div class="tbp" id="tbp"></div><div class="row" id="clnav" style="gap:8px;flex-wrap:wrap;margin:10px 0 4px"></div></div>
 <div class="clside"><div class="sub2"><div class="cur2" id="cur"></div><div id="wt"></div>
 <div class="ctrl"><button id="cpv" aria-label="前のセリフ">‹</button><button class="play" id="cpl" aria-label="再生">▶</button><button id="cnx" aria-label="次のセリフ">›</button><button id="spd" class="spd1" aria-label="再生速度">${rate}倍</button><button id="ltg" class="spd1" aria-label="セリフ一覧">一覧</button></div>
@@ -538,7 +537,7 @@ function vClass(){
   {const cs=app.querySelector(".clside"),cw=app.querySelector(".clwrap");if(cs&&window.ResizeObserver){const ro=new ResizeObserver(()=>{if(!cw.isConnected){ro.disconnect();return;}cw.style.setProperty("--subh",(getComputedStyle(cs).position==="fixed"?cs.offsetHeight+8:4)+"px");});ro.observe(cs);}}
   const showPage=sc=>{const k=Math.min(sc-1,B.pages.length-1);if(k===pg)return;pg=k;const P=B.pages[k];$("#tbp").innerHTML=`<div class="tbhd"><h3>${esc(P.t)}</h3></div>${pageInner(P)}`;if(matchMedia("(prefers-reduced-motion: reduce)").matches)app.querySelectorAll(".mv").forEach(e=>e.remove());bindQuiz(P,()=>{ans.add(k+1);if(waiting){waiting=false;$("#wt").innerHTML="";next();}});linkTerms($("#tbp .tbtx")||$("#tbp"));};
   const draw=()=>{const x=C.lines[i];showPage(x.sc);$("#cur").innerHTML=`<span class="av ${x.sp==="先生"?"t":"s"}">${x.sp}</span><span><span class="who">${x.sp}</span><div class="say">${esc(x.t)}</div></span>`;
-    $("#cn").textContent=`${i+1}/${N}`;$("#cbar").style.width=(i+1)/N*100+"%";$("#cpl").textContent=playing?"❚❚":"▶";
+    $("#cpl").textContent=playing?"❚❚":"▶";
     app.querySelectorAll(".ln2").forEach(b=>b.classList.toggle("on",+b.dataset.i===i));const on=app.querySelector(".ln2.on");if(on){const box=$("#lns");box.scrollTop=on.offsetTop-box.offsetTop-box.clientHeight/2+on.clientHeight/2;}
     S.cls[B.n]=i;save();};
   /* 音声を作り直すと長さが変わるので、長さをURLに付けて古い音声のキャッシュを使わせない */
