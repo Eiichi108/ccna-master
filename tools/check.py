@@ -22,4 +22,35 @@ for n, b in TB.items():
     wp = {l["sc"] for l in c.get("lines", []) if l.get("w")}
     if not wp or qp != wp: ng.append(f"第{n}回: 確認の問題のページと、止まる行(w)が合わない")
     if c.get("lines") and not c.get("seg"): ng.append(f"第{n}回: 音声の seg がない")
+# ---- 警告（build は止めない。中身の修正は別に行う）----
+import re
+warn = []
+G = {g["t"].lower() for g in d if g.get("r") == "G"} | {a.lower() for g in d if g.get("r") == "G" for a in g.get("al", [])}
+for n, b in sorted(TB.items()):
+    pg = b.get("pages", [])
+    if not pg or "まとめ" not in pg[-1].get("t", ""):
+        warn.append(f"第{n}回: 最後のページが「まとめ」ではない")
+    for i, p in enumerate(pg):
+        if "quiz" in p:
+            z = p["quiz"]
+            if not all(z.get(f) not in (None, "") for f in ("q", "o", "e")) or not isinstance(z.get("a"), int):
+                warn.append(f"第{n}回 {i + 1}ページ: 確認の問題の項目（q・o・a・e）が欠けている")
+            continue
+        if not p.get("t"):
+            warn.append(f"第{n}回 {i + 1}ページ: 見出し（t）がない")
+        if not (p.get("svg") or p.get("code")):
+            warn.append(f"第{n}回 {i + 1}ページ: 図（svg か code）がない")
+        if "undefined" in json.dumps(p, ensure_ascii=False):
+            warn.append(f"第{n}回 {i + 1}ページ: 「undefined」という文字がある")
+        m = re.search(r'viewBox="([\d.\-]+) [\d.\-]+ ([\d.]+) ', p.get("svg", ""))
+        if m:
+            lo, w = float(m.group(1)), float(m.group(2))
+            for a, r in re.findall(r'<circle cx="([\d.\-]+)" cy="[\d.\-]+" r="([\d.]+)"', p["svg"]):
+                if float(a) - float(r) < lo - 0.5 or float(a) + float(r) > lo + w + 0.5:
+                    warn.append(f"第{n}回 {i + 1}ページ: 図の部品が表示範囲の外にはみ出している"); break
+    miss = [t for t in b.get("terms", []) if t.lower() not in G]
+    if miss:
+        warn.append(f"第{n}回: 用語集にない用語 {len(miss)}個（{'、'.join(miss[:6])}{'…' if len(miss) > 6 else ''}）")
+if warn:
+    print(f"警告 {len(warn)}件（build は止めない）：\n" + "\n".join("  " + w for w in warn))
 print("\n".join(ng) or "問題なし"); sys.exit(1 if ng else 0)
