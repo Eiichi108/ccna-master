@@ -83,6 +83,8 @@ nav.tabs button.on svg{stroke:var(--acc)}
 /* lesson deck */
 .deckhead{display:flex;align-items:center;gap:10px;margin-bottom:10px}
 .deckhead .chip{color:#fff;border-radius:999px;padding:2px 10px;font-size:13px;font-weight:700;white-space:nowrap}
+/* すばやく2回タップしたときの拡大を止める（ピンチでの拡大はそのまま使える） */
+html,button,a,input,select,label{touch-action:manipulation}
 .deck{position:relative;touch-action:pan-y}
 .lcard{background:var(--card);border:1px solid var(--line);border-top:8px solid var(--c);border-radius:16px;padding:18px;min-height:300px;animation:slide .25s ease}
 .lcard.rev{animation-name:slideR}
