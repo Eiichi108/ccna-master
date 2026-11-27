@@ -212,3 +212,25 @@ def quiz(q, opts, a, e):
     """教科書の確認の問題。opts は文字列のリスト（3つ程度）、a は正解の番号。"""
     cols = [BL, GR, YE, PU]
     return {"q": q, "o": [[o, qopt("ABCD"[i], cols[i])] for i, o in enumerate(opts)], "a": a, "e": e}
+
+
+def table(label, head, rows, xs, foot=None, row_h=23):
+    """表。head = 見出しの列名、rows = [(列1, 列2, ...), ...]（行ごとに色を付けるなら最後に色を足す）、xs = 各列の左はしのx。"""
+    out = [f'<rect x="4" y="4" width="352" height="26" rx="6" fill="{BL}" opacity=".9"/>']
+    for x, h in zip(xs, head):
+        out.append(f'<text x="{x}" y="22" style="font:800 12px {F};fill:#fff">{_esc(h)}</text>')
+    y = 30
+    for i, r in enumerate(rows):
+        col = r[len(head)] if len(r) > len(head) else None
+        if i % 2 == 0:
+            out.append(f'<rect x="4" y="{y}" width="352" height="{row_h}" fill="var(--soft)" opacity=".7"/>')
+        if col:
+            out.append(f'<rect x="4" y="{y + 4}" width="4" height="{row_h - 8}" rx="2" fill="{col}"/>')
+        for k, (x, c) in enumerate(zip(xs, r[:len(head)])):
+            out.append(T(x, y + row_h - 7, c, 12 if k == 0 else 11.5, 800 if k == 0 else 600, INK if k != 1 else SUB, mono=(k == 2)))
+        y += row_h
+    if foot:
+        for j, s in enumerate(foot if isinstance(foot, (list, tuple)) else [foot]):
+            out.append(T(10, y + 20 + 17 * j, s, 11.5, 600, SUB))
+        y += 10 + 17 * len(foot if isinstance(foot, (list, tuple)) else [foot])
+    return svg(y + 10, label, "".join(out))
