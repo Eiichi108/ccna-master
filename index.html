@@ -408,6 +408,12 @@ let view="course",arg=null,stack=[];
 const TOP=["course","one","side","tools","review"];
 function go(v,a,push){if(push!==false)stack.push([view,arg]);view=v;arg=a;render();scrollTo(0,0);}
 function top(v){stack=[];view=v;arg=null;if(location.hash!=="#"+v)history.replaceState(null,"","#"+v);render();scrollTo(0,0);}
+/* 授業：PCのキーボードで操作（← 前のセリフ、→ 次のセリフ、スペース 再生・一時停止） */
+let CLSKEY=null;
+document.addEventListener("keydown",e=>{if(view!=="class"||!CLSKEY||e.ctrlKey||e.metaKey||e.altKey)return;
+  if(e.target.closest&&e.target.closest("input,textarea,select,[contenteditable]"))return;if(!$("#sheet").hidden)return;
+  if(e.key==="ArrowLeft"){e.preventDefault();CLSKEY.prev();}else if(e.key==="ArrowRight"){e.preventDefault();CLSKEY.fwd();}
+  else if(e.key===" "||e.code==="Space"){e.preventDefault();CLSKEY.toggle();}});
 backB.onclick=()=>{const p=stack.pop();if(!p)return;[view,arg]=p;render();scrollTo(0,0);};
 document.querySelectorAll("#tabs button").forEach(b=>b.onclick=()=>top(b.dataset.v));
 addEventListener("hashchange",()=>{const h=location.hash.slice(1);if(TOP.includes(h)&&h!==view){stack=[];view=h;arg=null;render();}});
@@ -568,6 +574,7 @@ function vClass(){
   AU.ontimeupdate=check;
   AU.onended=()=>{if(view!=="class")return;clearInterval(tick);if(isWait(C.lines[N-1])){check();return;}finish();};
   const prev=()=>{if(i>0){i--;playing?play():draw();}},fwd=()=>{if(i<N-1){i++;playing?play():draw();}};
+  CLSKEY={prev,fwd,toggle:()=>$("#cpl").click()};
   $("#cpl").onclick=()=>{if(playing){stop();draw();}else resume();};
   $("#cpv").onclick=prev;$("#cnx").onclick=fwd;
   if(MS){try{MS.metadata=new MediaMetadata({title:`第${B.n}回 ${B.t}`,artist:"CCNA Master 授業",album:D.name});
