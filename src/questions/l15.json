@@ -82,5 +82,32 @@
   "a": 1,
   "e": "相手が手動で固定しているとオートネゴシエーションが成り立たず、autoの側は速度だけ合わせて<b>半二重</b>になります。片方が全二重、片方が半二重の<b>デュプレックスの不一致</b>になり、エラーや遅延が出ます。",
   "m": "片方だけ固定→デュプレックス不一致"
+ },
+ {
+  "id": "N15-01",
+  "k": "one",
+  "tag": "スイッチング",
+  "lv": 1,
+  "page": 6,
+  "t": "ポートのデュプレックスが「全二重」のときの説明として正しいものはどれですか。",
+  "o": ["送ることしかできない", "送ると受けるを、同時にできる", "受けることしかできない", "送ると受けるを、一方ずつしかできない"],
+  "a": 1,
+  "e": "<b>全二重</b>は、電話のように<b>送ると受けるを同時に</b>できる状態です。一方ずつしかできないのは、トランシーバーのような半二重です。",
+  "m": "全二重＝電話、半二重＝トランシーバー"
+ },
+ {
+  "id": "N15-02",
+  "k": "one",
+  "tag": "トラブルシュート",
+  "lv": 2,
+  "page": 5,
+  "t": "図を参照してください。SW1でポートの一覧を確認しました。ケーブルの抜けや断線、相手の機器を最初に疑うべきポートはどれですか。",
+  "x": "SW1# show ip interface brief\nInterface  IP-Address  OK? Method Status                Protocol\nGi0/0      unassigned  YES unset  up                    up\nGi0/1      unassigned  YES unset  down                  down\nGi0/2      unassigned  YES unset  administratively down down\nGi0/3      unassigned  YES unset  up                    down",
+  "rd": "①Status 列（第1層）と Protocol 列（第2層）を並べて見る<br>②administratively down は管理者が止めた印<br>③それ以外で Status が down のポートを探す",
+  "rg": "brief",
+  "o": ["Gi0/1", "Gi0/0", "Gi0/3", "Gi0/2"],
+  "a": 0,
+  "e": "Status も Protocol も <b>down</b> で、administratively と出ていない<b>Gi0/1</b>は、ケーブルや相手など<b>第1層</b>の問題です。Gi0/2は shutdown で止めた状態、Gi0/3は第1層は正常で第2層の問題、Gi0/0は正常です。",
+  "m": "ただの down/down はケーブルか相手を疑う"
  }
 ]

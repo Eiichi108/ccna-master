@@ -82,5 +82,32 @@
   "e": "状態は <b>Down → Init → 2-Way → ExStart → Exchange → Loading → Full</b> と進みます。Fullはデータベースの交換が終わって同期した状態です。",
   "m": "Down→Init→2-Way→…→Full",
   "page": 2
+ },
+ {
+  "id": "N56-01",
+  "k": "one",
+  "tag": "OSPF",
+  "lv": 1,
+  "page": 5,
+  "t": "OSPFで、ある口に passive-interface を設定すると、その口ではどうなりますか。",
+  "o": ["コストが0になる", "エリア0に自動で入る", "Helloを出さないので、ネイバーになれない", "Helloの間隔が2倍になる"],
+  "a": 2,
+  "e": "passive-interface の口は<b>Helloを出さない</b>ので、その口では<b>ネイバーになれません</b>。ルーターどうしをつなぐ口をうっかり passive にすると、ネイバーが消えます。",
+  "m": "passive＝Helloを出さない＝ネイバーなし"
+ },
+ {
+  "id": "N56-02",
+  "k": "one",
+  "tag": "OSPF",
+  "lv": 2,
+  "page": 3,
+  "t": "図を参照してください。R1とR2はOSPFのネイバーの状態が FULL になりません。エリア番号、タイマー、サブネットは一致しています。最も考えられる原因はどれですか。",
+  "x": "R1# show ip ospf neighbor\nNeighbor ID   Pri  State          Dead Time  Address    Interface\n2.2.2.2         1  EXSTART/DR     00:00:35   10.0.12.2  Gi0/0",
+  "rd": "①State の列を見る<br>②EXSTART は2WAYのあとの地図の交換の入口<br>③ここで止まるなら、交換の条件がそろっていない",
+  "rg": "ospf",
+  "o": ["両方のインターフェースでMTUがちがう", "R2のプライオリティが0になっている", "プロセス番号がちがう", "インターフェースのコストがちがう"],
+  "a": 0,
+  "e": "2WAYのあと、地図を交換する<b>EXSTART</b>で止まっているので、<b>MTUの不一致</b>を疑います。プロセス番号とコストはちがっていてもネイバーになれ、プライオリティ0はDRにならないだけです。",
+  "m": "EXSTART/EXCHANGEで止まる＝MTUちがい"
  }
 ]

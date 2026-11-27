@@ -64,5 +64,44 @@
   "a": 0,
   "e": "トランクでは、送る側がフレームに<b>802.1Qのタグ</b>を入れて、VLAN番号を書きます。受け取る側はそのタグを見て、どのVLANのフレームかを判断します。",
   "m": "トランク＝タグでVLANを見分ける"
+ },
+ {
+  "id": "N33-02",
+  "k": "one",
+  "tag": "VLAN",
+  "lv": 1,
+  "page": 6,
+  "t": "802.1Qのトランクで、ネイティブVLANの初期値はどれですか。",
+  "o": ["VLAN 0", "VLAN 99", "VLAN 1002", "VLAN 1"],
+  "a": 3,
+  "e": "ネイティブVLANの初期値は<b>VLAN 1</b>です。VLAN 99 は変えるときによく使う例の番号で、初期値ではありません。",
+  "m": "ネイティブVLANの初期値はVLAN 1"
+ },
+ {
+  "id": "N33-03",
+  "k": "one",
+  "tag": "VLAN",
+  "lv": 1,
+  "page": 10,
+  "t": "SW2がトランクで受け取ったVLAN 10のフレームを、VLAN 10のアクセスポートにつながるPCへ渡します。このときSW2はタグをどうしますか。",
+  "o": ["タグを付けたまま渡す", "タグを2つ重ねて渡す", "タグをVLAN 1に書きかえて渡す", "タグを外してから渡す"],
+  "a": 3,
+  "e": "タグが付くのは<b>トランクの上だけ</b>で、アクセスポートからPCに渡すときは<b>タグを外します</b>。だからPCはタグを意識しません。",
+  "m": "タグはトランクの上だけ。PCには外す"
+ },
+ {
+  "id": "N33-04",
+  "k": "one",
+  "tag": "VLAN",
+  "lv": 2,
+  "page": 8,
+  "t": "図を参照してください。SW1のGi0/1は、SW2のGi0/1とつながっています。このリンクをトランクとして正しく動かすために、SW2のGi0/1に入れる設定として最も適切なものはどれですか。",
+  "x": "SW1# show running-config interface gi0/1\ninterface GigabitEthernet0/1\n switchport mode trunk\n switchport trunk native vlan 99",
+  "rd": "①SW1のポートのモードを見る（trunk）<br>②native vlan の番号を見る（99）<br>③SW2も同じモード・同じ番号にする",
+  "rg": "run",
+  "o": ["switchport mode trunk と switchport trunk native vlan 1", "switchport mode access と switchport access vlan 99", "switchport mode trunk だけ", "switchport mode trunk と switchport trunk native vlan 99"],
+  "a": 3,
+  "e": "SW1はトランクで、ネイティブVLANを<b>99</b>に変えているので、SW2も<b>トランクにして、ネイティブVLANを99にそろえます</b>。trunk だけや native vlan 1 では初期値の1のままで食い違い、access ではトランクになりません。",
+  "m": "トランクのネイティブVLANは両側でそろえる"
  }
 ]
