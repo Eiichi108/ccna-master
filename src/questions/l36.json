@@ -96,7 +96,7 @@
   "t": "管理者がコンソールでログインしたまま席を離れることが多いため、10分間操作がなければ自動でログアウトさせたいと考えています。line con 0 で設定するコマンドはどれですか。",
   "o": ["transport input ssh", "login local", "exec-timeout 10 0", "banner motd #Bye#"],
   "a": 2,
-  "e": "<b>exec-timeout 分 秒</b> で、操作がない時間がそれを超えると自動でログアウトします。exec-timeout 10 0 なら10分です。",
+  "e": "<b>exec-timeout 分 秒</b> で、操作がない時間がそれを超えると自動でログアウトし、10 0 なら10分です。transport input ssh は接続方法、login local はログインのしかた、banner motd は表示する文の設定です。",
   "m": "放置対策＝exec-timeout 分 秒"
  }
 ]

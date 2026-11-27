@@ -79,7 +79,7 @@
   "t": "特権EXECモードで conf t と入力しました。どうなりますか。",
   "o": ["コマンドが途中までなので、エラーになる", "設定ファイルが保存される", "configure terminal と同じ意味になり、グローバル設定モードに入る", "ユーザーEXECモードに戻る"],
   "a": 2,
-  "e": "Ciscoのコマンドは、ほかのコマンドと区別できる長さまで<b>省略</b>できます。conf t は configure terminal のことです。",
+  "e": "Ciscoのコマンドは、ほかと区別できる長さまで<b>省略</b>でき、conf t は configure terminal のことです。保存は copy running-config startup-config、ユーザーEXECに戻るのは disable で、エラーにもなりません。",
   "m": "区別できれば省略OK（conf t）"
  },
  {

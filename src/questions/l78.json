@@ -83,7 +83,7 @@
   "t": "図を参照してください。REST APIのリクエストで、URLの「?status=down」の部分を何と呼びますか。",
   "o": ["クエリパラメーター", "ステータスコード", "HTTPメソッド", "HTTPヘッダー"],
   "a": 0,
-  "e": "URLの<b>？以降</b>は<b>クエリパラメーター</b>で、「状態がdownのものだけ」のような条件をサーバーに渡します。",
+  "e": "URLの<b>？以降</b>は<b>クエリパラメーター</b>で、条件をサーバーに渡します。ステータスコードは応答の200や404、HTTPメソッドは GET、HTTPヘッダーは Host: などの行です。",
   "m": "URLの?以降＝条件を渡すクエリ",
   "page": 2,
   "x": "GET /api/v1/interfaces?status=down HTTP/1.1\nHost: 192.0.2.10",
@@ -200,7 +200,7 @@
   "t": "REST APIで、クライアントが「応答はJSON形式で返してほしい」とサーバーに伝えるHTTPヘッダーはどれですか。",
   "o": ["Accept: application/json", "Content-Type: application/json", "Authorization: application/json", "Host: application/json"],
   "a": 0,
-  "e": "<b>Accept</b>は受け取りたい（返してほしい）形式、<b>Content-Type</b>は今送っているデータの形式を表します。",
+  "e": "<b>Accept</b>は返してほしい形式を伝えるヘッダーです。Content-Type は今送っているデータの形式、Authorization は認証の情報、Host は宛先のサーバー名を書くヘッダーです。",
   "m": "欲しい形式＝Accept、送る形式＝Content-Type",
   "page": 2
  },
@@ -239,7 +239,7 @@
   "t": "REST APIで<b>APIキー</b>を使う主な目的として正しいものはどれですか。",
   "o": ["各クライアントアプリケーションを一意に識別し、1分あたりの回数制限（レート制限）などをかけるため", "送るデータをJSON形式に変換するため", "サーバーが前回のやりとりを覚えておくため", "HTTPのメソッドをGETだけに固定するため"],
   "a": 0,
-  "e": "APIキーは、どのアプリからのリクエストかを<b>一意に識別</b>するためのものです。識別できるので、アプリごとに<b>レート制限</b>をかけられます。",
+  "e": "APIキーは、どのアプリからのリクエストかを<b>一意に識別</b>するので、アプリごとに<b>レート制限</b>をかけられます。JSONへの変換やメソッドの固定はせず、RESTはステートレスなので前回のやりとりも覚えません。",
   "m": "APIキー＝アプリの身分証、回数制限にも",
   "page": 2
  },
@@ -292,7 +292,7 @@
   "t": "REST APIで、クライアントがリクエストの本文にJSONのデータを入れて送ります。「今送っているデータはJSONです」と伝えるHTTPヘッダーはどれですか。",
   "o": ["Accept: application/json", "Content-Type: application/json", "Authorization: application/json", "Host: application/json"],
   "a": 1,
-  "e": "<b>Content-Type</b> は、今送っているデータの形式を表します。<b>Accept</b> は、返してほしい形式を伝えるヘッダーです。",
+  "e": "<b>Content-Type</b> は、今送っているデータの形式を表します。Accept は返してほしい形式、Authorization は認証の情報、Host は宛先のサーバー名です。",
   "m": "Content-Type＝送る形式、Accept＝欲しい形式"
  },
  {
@@ -394,7 +394,7 @@
   "t": "REST APIで、操作の対象（リソース）を指定するのに使うものはどれですか。",
   "o": ["URI", "MACアドレス", "VLAN番号", "ポートセキュリティ"],
   "a": 0,
-  "e": "REST APIでは、リソースを <b>URI</b>（例：/api/v1/devices）で指定し、HTTPメソッドで操作を表します。",
+  "e": "REST APIでは、リソースを <b>URI</b>（例：/api/v1/devices）で指定し、HTTPメソッドで操作を表します。MACアドレス・VLAN番号・ポートセキュリティは、LANの話です。",
   "m": "対象＝URI、操作＝HTTPメソッド"
  },
  {

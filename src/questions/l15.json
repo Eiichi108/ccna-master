@@ -11,7 +11,7 @@
   "rg": "intf",
   "o": ["no shutdown", "speed 1000", "switchport mode access", "clear counters"],
   "a": 0,
-  "e": "<b>administratively down / down</b> は、shutdown コマンドでポートが止められている状態です。<b>no shutdown</b> で有効にすると、ケーブルに問題がなければ up / up になります。",
+  "e": "<b>administratively down</b> は shutdown で止められている状態なので、<b>no shutdown</b> で有効にします。speed や switchport mode を変えても、止められたままでは使えず、clear counters は数字を消すだけです。",
   "m": "admin down＝no shutdownで有効にする"
  },
  {
@@ -41,7 +41,7 @@
   "rg": "intf",
   "o": ["ケーブルが抜けている", "インターフェースが shutdown されている", "両端でL2のカプセル化が一致していない", "IPアドレスが同じサブネットにない"],
   "a": 2,
-  "e": "<b>up / down</b> は、物理的にはつながっているのに<b>L2</b>が動いていない状態です。シリアル回線では、両端の<b>カプセル化の不一致</b>（PPP と HDLC など）が代表的な原因です。",
+  "e": "<b>up / down</b> は、物理的にはつながっているのにL2が動いていない状態で、出力では両端の<b>カプセル化</b>（PPP と HDLC）が一致していません。ケーブルが抜けていれば down / down、shutdown なら administratively down、サブネットの不一致は L3 の問題です。",
   "m": "up/down＝L2の問題（カプセル化の不一致）"
  },
  {

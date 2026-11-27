@@ -19,7 +19,7 @@
   "t": "CAPWAPが登場する前に、WLCが軽量APを管理するためにAPへ送っていたパケットのプロトコルはどれですか。",
   "o": ["PAgP", "LWAPP", "SNMP", "LLDP"],
   "a": 1,
-  "e": "<b>LWAPP</b>（Lightweight Access Point Protocol）はCAPWAPの前身で、WLCはLWAPPのパケットをAPに送ってAPを管理していました。",
+  "e": "<b>LWAPP</b>はCAPWAPの前身で、WLCはLWAPPのパケットでAPを管理していました。PAgPはEtherChannel、SNMPは機器の監視、LLDPは隣の機器を知るためのプロトコルです。",
   "m": "CAPWAPの前身はLWAPP",
   "page": 4
  },

@@ -20,7 +20,7 @@
   "t": "SW1のGi0/1は switchport mode dynamic desirable、向かい側のSW2のGi0/1は switchport mode dynamic auto に設定されています。このリンクはどうなりますか。",
   "o": ["トランクになる", "アクセスポートになる", "err-disabled になる", "DTPが止まり、リンクがダウンする"],
   "a": 0,
-  "e": "<b>desirable</b>は自分からトランクに誘い、<b>auto</b>は誘われたときだけトランクになるので、この組み合わせは<b>トランク</b>になります。auto どうしの場合は、どちらも誘わないのでアクセスポートになります。",
+  "e": "<b>desirable</b>は自分からトランクに誘い、<b>auto</b>は誘われたときだけトランクになるので、この組み合わせは<b>トランク</b>になります。アクセスポートになるのは auto どうしのときで、err-disabled やリンクダウンにはなりません。",
   "m": "desirable＝誘う、auto＝待つ"
  },
  {
@@ -102,7 +102,7 @@
   "t": "SW1の Gi0/1 と、向かい側のSW2の Gi0/1 は、どちらも switchport mode dynamic auto です。このリンクの状態として正しいものはどれですか。",
   "o": ["トランクになる", "アクセスポートになる（トランクにならない）", "err-disabled になる", "EtherChannel になる"],
   "a": 1,
-  "e": "dynamic auto は、相手から誘われればトランクになりますが、<b>自分からは誘いません</b>。両方とも auto だと誰も誘わないので、<b>アクセスポート</b>のままです。",
+  "e": "dynamic auto は、相手から誘われればトランクになりますが、<b>自分からは誘いません</b>。両方とも auto だと誰も誘わないので<b>アクセスポート</b>のままで、err-disabled や EtherChannel にはなりません。",
   "m": "auto＋auto＝トランクにならない"
  },
  {

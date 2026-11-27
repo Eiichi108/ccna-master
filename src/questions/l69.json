@@ -86,7 +86,7 @@
   "t": "コンソールの line console 0 に password C0ns! を設定しましたが、ケーブルをつなぐと、パスワードを聞かれずにログインできてしまいます。足りないコマンドはどれですか。",
   "o": ["enable secret", "service password-encryption", "transport input none", "login"],
   "a": 3,
-  "e": "line の password は、<b>login</b> を設定して初めてログインのときに使われます。login がないと、パスワードを聞かれません。",
+  "e": "line の password は、<b>login</b> を設定して初めてログインのときに使われます。enable secret は特権EXECのパスワード、service password-encryption は表示を隠すだけ、transport input none はリモート接続を止める設定です。",
   "m": "line の password と login はセット"
  },
  {
@@ -136,7 +136,7 @@
   "t": "ルーターに <b>login block-for 90 attempts 5 within 30</b> を設定しました。この設定の動作として正しいものはどれですか。",
   "o": ["30秒以内にログインに5回失敗すると、90秒間ログインを受け付けない", "90秒以内にログインに5回失敗すると、30秒間ログインを受け付けない", "ログインに5回失敗すると、30分間ポートを停止する", "5回目のログインから、90秒ごとにパスワードの変更を求める"],
   "a": 0,
-  "e": "block-for の後ろが<b>禁止する秒数</b>、attempts が<b>失敗回数</b>、within が<b>数える期間</b>です。失敗回数を制限し、長く複雑なパスワードと組み合わせると、辞書攻撃や総当たり攻撃に強くなります。",
+  "e": "block-for の後ろが<b>禁止する秒数</b>（90）、attempts が<b>失敗回数</b>（5）、within が<b>数える期間</b>（30秒）です。90 と 30 を逆にしたり、分やポートの停止、パスワードの変更と読んだりするのはまちがいです。",
   "m": "block-for＝禁止時間、within＝数える時間",
   "page": 7
  },
