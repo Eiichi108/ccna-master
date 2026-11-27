@@ -278,6 +278,11 @@ details.ldom summary::-webkit-details-marker{display:none}
 .tbhd h3{font-size:clamp(22px,5vw,30px);line-height:1.2;margin:2px 0 0;letter-spacing:-.01em}
 .tbfg{background:var(--soft);margin:10px 12px;border-radius:14px;padding:8px}
 .tbfg.tbonly{max-width:560px;margin:10px auto}
+.srchb{border:0;background:none;color:var(--ink);padding:6px;margin-left:auto;min-width:40px;min-height:40px;display:flex;align-items:center;justify-content:center}.srchb+.pill{margin-left:4px}
+.cpg{display:flex;align-items:center;gap:8px;margin-top:4px}.cpg .bar{flex:1;max-width:220px;margin:0}.cpg .num{font-size:12.5px}
+.lnk{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:6px 12px 12px}.lnk>b{font-size:13px;color:var(--sub);margin-right:4px}
+.sres h4{margin:14px 0 6px;font-size:14px;color:var(--sub)}.sres button{display:block;width:100%;text-align:left;margin:0 0 6px}
+.lvc{display:inline-block;font-size:11.5px;font-weight:800;padding:1px 7px;border-radius:999px;margin:0 6px;white-space:nowrap}.lvc.lv1{background:var(--soft);color:var(--sub)}.lvc.lv2{background:#ffb40033;color:#b07800}
 .tbcode{margin:0;padding:12px;border-radius:10px;background:#0e1116;color:#e6edf3;font:13px/1.6 ui-monospace,Menlo,Consolas,monospace;white-space:pre-wrap;word-break:break-all;user-select:text;-webkit-user-select:text}
 .qfig svg{width:100%;max-width:460px;height:auto;display:block;margin:4px auto 0}
 .tbfig{display:block;width:100%;max-width:560px;height:auto;margin:0 auto}
@@ -347,7 +352,7 @@ body.incls #tabs{display:none!important}body.incls{padding-bottom:0}@media(max-w
 </style>
 </head>
 <body>
-<header class="top"><button class="back" id="back" hidden>‹ 戻る</button><h1 id="ttl">CCNA Master</h1><span class="pill" id="pill"></span></header>
+<header class="top"><button class="back" id="back" hidden>‹ 戻る</button><h1 id="ttl">CCNA Master</h1><button class="srchb" id="srchB" aria-label="さがす"><svg viewBox="0 0 24 24" width="20" height="20"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button><span class="pill" id="pill"></span></header>
 <main id="app"><p class="empty">読み込み中…</p></main>
 <nav class="tabs" id="tabs">
 <button data-v="course"><svg class="ic" viewBox="0 0 24 24"><circle cx="5" cy="18" r="2.5"/><circle cx="19" cy="6" r="2.5"/><path d="M7 16.5 12 12h4l1.5-4"/></svg>講座</button>
@@ -375,7 +380,7 @@ const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&g
 const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]];}return a;};
 const SHORT={d0:"入門",d1:"基礎",d2:"アクセス",d3:"IP接続",d4:"IPサービス",d5:"セキュリティ",d6:"自動化"};
 const SRC={orig:"オリジナル問題",note:"合格ノート",kl:"基礎講座"};
-let CP=[],QP={},TBS=[],RG=[],DOM=[],DM={},LES=[],LM={},QS=[],QM={},GL=[],CLI=[],LABS=[];
+let QCP={},CP=[],QP={},TBS=[],RG=[],DOM=[],DM={},LES=[],LM={},QS=[],QM={},GL=[],CLI=[],LABS=[];
 /* ---------- state ---------- */
 let S={st:{},ds:{},opt:{ng:0,shuf:0},cli:{},lab:{},last:null};
 const LSK="ccna_master_pub1";let ORDER=[];
@@ -385,15 +390,16 @@ try{const v=localStorage.getItem(LSK);if(v){const o=JSON.parse(v);RAWDS=o.ds||{}
 if(S.clsv!==2){S.cls={};S.clsv=2;}
 if(S.mx)S.mx._t=0;/* 閉じていた間の時間は数えない */
 /* sessions are saved compactly: domain, mode, seed and position; question lists are rebuilt from the data */
-const skey=(d,ng)=>(ng?"ng_":"")+d;
+const skey=(d,ng,lv)=>(ng?"ng_":"")+d+(lv?"_lv"+lv:"");
+const LVN={1:"基礎",2:"本番レベル"};
 function rnd(seed){let x=seed%2147483647||1;return()=>(x=x*16807%2147483647)/2147483647;}
 const sshuffle=(a,seed)=>{const r=rnd(seed);a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
-function packSess(ss){const o={dom:ss.dom,ng:ss.ng?1:0,shuf:ss.shuf?1:0,i:ss.i,label:ss.label};if(ss.ng||!ss.seed&&ss.shuf)o.ids=ss.ids;if(ss.seed)o.seed=ss.seed;return o;}
-function unpackSess(k,o){if(!o)return null;let dom=o.dom||(typeof o.d==="string"?o.d.replace(/^ng[:_]/,""):null);if(!dom||!DM[dom])return null;const ng=o.ng!==undefined?!!o.ng:/^ng[:_]/.test(k)||/^ng[:_]/.test(o.d||"");
-  let ids;if(o.ids&&(ng||!o.seed&&o.shuf))ids=o.ids.filter(id=>QM[id]);else if(o.seed)ids=sshuffle(domIds(dom),o.seed);else ids=domIds(dom);
-  if(o.ids&&!ng&&!o.seed&&!o.shuf){const done=[...new Set(o.ids.slice(0,o.i).filter(id=>QM[id]))];const ds=new Set(done);ids=done.concat(domIds(dom).filter(id=>!ds.has(id)));o.i=done.length;}
+function packSess(ss){const o={dom:ss.dom,ng:ss.ng?1:0,shuf:ss.shuf?1:0,i:ss.i,label:ss.label};if(ss.lv)o.lv=ss.lv;if(ss.ng||!ss.seed&&ss.shuf)o.ids=ss.ids;if(ss.seed)o.seed=ss.seed;return o;}
+function unpackSess(k,o){if(!o)return null;let dom=o.dom||(typeof o.d==="string"?o.d.replace(/^ng[:_]/,""):null);if(!dom||!DM[dom])return null;const ng=o.ng!==undefined?!!o.ng:/^ng[:_]/.test(k)||/^ng[:_]/.test(o.d||"");const lv=o.lv||0;
+  let ids;if(o.ids&&(ng||!o.seed&&o.shuf))ids=o.ids.filter(id=>QM[id]);else if(o.seed)ids=sshuffle(domIds(dom,lv),o.seed);else ids=domIds(dom,lv);
+  if(o.ids&&!ng&&!o.seed&&!o.shuf){const done=[...new Set(o.ids.slice(0,o.i).filter(id=>QM[id]))];const ds=new Set(done);ids=done.concat(domIds(dom,lv).filter(id=>!ds.has(id)));o.i=done.length;}
   {const seen=new Set();ids=ids.filter(id=>!seen.has(id)&&seen.add(id));}
-  return{dom,ng,shuf:!!o.shuf,seed:o.seed||0,ids,i:Math.min(o.i||0,ids.length),res:{},label:o.label||DM[dom].name+(ng?"の間違えた問題":""),tab:"one"};}
+  return{dom,ng,lv,shuf:!!o.shuf,seed:o.seed||0,ids,i:Math.min(o.i||0,ids.length),res:{},label:o.label||DM[dom].name+(ng?"の間違えた問題":""),tab:"one"};}
 function packAll(){const ds={};for(const k in S.ds)if(S.ds[k])ds[k]=packSess(S.ds[k]);const st={};for(const k in S.st){const t=S.st[k];st[k]=[t.c||0,t.w||0,t.l===undefined?-1:t.l,t.m?1:0];}return{p:{st,opt:S.opt,cli:S.cli,lab:S.lab,last:S.last||null,cls:S.cls||{},clsv:2,rate:S.rate||1,sd:S.sd||{},mxh:S.mxh||[]},s:{ds,mx:S.mx?Object.assign({},S.mx,{_t:0}):null}};}
 function unpackSt(st){const o={};for(const k in st){const v=st[k];o[k]=Array.isArray(v)?Object.assign({c:v[0],w:v[1]},v[2]>=0?{l:v[2]}:{},v[3]?{m:1}:{}):v;}return o;}
 let dbP=null,dbS=null,saving=false,pend=false,tmr=null,lastP="",lastS="";
@@ -410,6 +416,29 @@ let view="course",arg=null,stack=[];
 const TOP=["course","one","side","tools","review"];
 function go(v,a,push){if(push!==false)stack.push([view,arg]);view=v;arg=a;render();scrollTo(0,0);}
 function top(v){stack=[];view=v;arg=null;if(location.hash!=="#"+v)history.replaceState(null,"","#"+v);render();scrollTo(0,0);}
+/* 前提と関連する回：「今日のゴール」に前提、「今日のまとめ」に関連する回を出す */
+const REL={28:[43,45],29:[43,45],46:[65,66],40:[74],74:[40]};
+function lessonLinks(B,P){const t=P.t||"",nm=n=>{const c=CP.find(x=>x.n===n);return c?`<button class="btn sm" data-gob="${n}">第${n}回「${esc(c.t)}」</button>`:"";};
+  if(t==="今日のゴール"){const nd=B.need||[];return`<div class="lnk"><b>前提</b>${nd.length?nd.map(nm).join(""):`<span class="sub">なし（ここから始められます）</span>`}</div>`;}
+  if(t.includes("まとめ")&&REL[B.n])return`<div class="lnk"><b>関連</b>${REL[B.n].map(nm).join("")}</div>`;return"";}
+function bindLinks(root){root.querySelectorAll("[data-gob]").forEach(b=>b.onclick=()=>go("book",{n:+b.dataset.gob,i:0}));}
+/* 横断検索：授業（回）・問題・用語を、読み込み済みのデータからさがす */
+function openSearch(){sheet("さがす",`<input class="inp" id="sq" placeholder="例：VLAN、OSPF、サブネット" style="width:100%;margin:0 0 6px" autocomplete="off"><div id="sres" class="sres"><p class="sub">授業の回・問題・用語集をまとめてさがします。</p></div>`);
+  const inp=$("#sq");setTimeout(()=>inp.focus(),50);
+  const draw=()=>{const k=inp.value.trim().toLowerCase(),R=$("#sres");if(!k){R.innerHTML=`<p class="sub">授業の回・問題・用語集をまとめてさがします。</p>`;return;}
+    const has=t=>String(t||"").toLowerCase().includes(k);
+    const ls=CP.filter(c=>has(c.t)||has(`第${c.n}回`)).slice(0,20);
+    const qs=QS.filter(q=>has(strip(q.t))||has(q.tag)).slice(0,30);
+    const gs=GL.filter(g=>has(g.t)||(g.al||[]).some(has)||has(strip(g.s))).slice(0,20);
+    R.innerHTML=(ls.length?`<h4>授業（${ls.length}）</h4>`+ls.map(c=>`<button class="card" data-sl="${c.n}"><b>第${c.n}回 ${esc(c.t)}</b></button>`).join(""):"")
+      +(qs.length?`<h4>問題（${qs.length}${qs.length>=30?"件以上":""}）</h4>`+qs.map(q=>`<button class="card" data-sq="${q.id}"><small class="sub">${qMeta(q)}</small> ${lvChip(q)}<div>${esc(strip(q.t)).slice(0,70)}</div></button>`).join(""):"")
+      +(gs.length?`<h4>用語（${gs.length}）</h4>`+gs.map(g=>`<button class="card" data-sg="${esc(g.t)}"><b>${esc(g.t)}</b><div class="sub">${esc(strip(g.s)).slice(0,60)}</div></button>`).join(""):"")
+      ||`<p class="empty">「${esc(inp.value.trim())}」は見つかりませんでした</p>`;
+    R.querySelectorAll("[data-sl]").forEach(b=>b.onclick=()=>{$("#sheet").hidden=true;go("book",{n:+b.dataset.sl,i:0});});
+    R.querySelectorAll("[data-sq]").forEach(b=>b.onclick=()=>{$("#sheet").hidden=true;startPlay([b.dataset.sq],"1問だけ");});
+    R.querySelectorAll("[data-sg]").forEach(b=>b.onclick=()=>{const g=GL.find(x=>x.t===b.dataset.sg);sheet(g.t,`<div>${g.s}</div>${g.a?`<div class="anal">${esc(g.a)}</div>`:""}<button class="btn sm" id="sback" style="margin-top:12px">‹ 検索に戻る</button>`);$("#sback").onclick=()=>{const v=k;openSearch();$("#sq").value=v;$("#sq").oninput();};});};
+  inp.oninput=draw;}
+document.getElementById("srchB").onclick=openSearch;
 /* 授業：PCのキーボードで操作（← 前のセリフ、→ 次のセリフ、スペース 再生・一時停止） */
 let CLSKEY=null;
 document.addEventListener("keydown",e=>{if(view!=="class"||!CLSKEY||e.ctrlKey||e.metaKey||e.altKey)return;
@@ -470,8 +499,8 @@ function vCourse(){
   const opened=S.copen||{};
   app.innerHTML=`<h2>講座</h2><p class="sub">分野ごとの授業の一覧です。▶で先生と生徒の会話の授業、「教科書」でイラスト付きの資料を読めます。授業のあとに「問題」で、その回の範囲を一問一答で確かめられます。</p><div class="row" style="margin-bottom:10px"><button class="btn sm" id="gl">用語集をひらく</button></div>
 ${DOM.map((d,k)=>{const cs=CP.filter(c=>c.d===d.id);if(!cs.length)return"";const made=cs.filter(c=>TB[c.n]&&TB[c.n].cls&&(TB[c.n].cls.seg||c.n<=6)).length;const dn=cs.filter(done).length;const qn=cs.reduce((a,c)=>a+c.q.length,0),qo=cs.reduce((a,c)=>a+ok(c),0);
-  return`<details class="ldom" data-dd="${d.id}" style="--c:${d.c}" ${opened[d.id]?"open":""}><summary><span><b style="font-size:16px">${esc(d.name)}</b>${d.w?`<span class="sub">　出題 ${d.w}%</span>`:""}<div class="bar"><i style="width:${qn?qo/qn*100:0}%;background:${d.c}"></i></div></span><span class="num">完了 ${dn}/${cs.length} ▾</span></summary>
-${cs.map(c=>{const b=TB[c.n],has=b&&b.cls&&(b.cls.seg||b.n<=6),sc=ok(c),pos=(S.cls||{})[c.n];const dd=done(c);return`<div class="crow${has?"":" off"}${dd?" done":""}"><span class="cno">${dd?"✓":c.n}</span><span class="ctx"><b>${esc(c.t)}${dd?`<span class="dchip">完了</span>`:""}</b><span class="sub">${has?`授業 約${clsMin(b)}分・教科書 ${b.pages.length}ページ`:"準備中"}${c.q.length?`・問題 ${sc}/${c.q.length}`:""}${has&&pos?"・途中まで聞いた":""}</span>
+  return`<details class="ldom" data-dd="${d.id}" style="--c:${d.c}" ${opened[d.id]?"open":""}><summary><span><b style="font-size:16px">${esc(d.name)}</b>${d.w?`<span class="sub">　出題 ${d.w}%</span>`:""}<div class="bar"><i style="width:${qn?qo/qn*100:0}%;background:${d.c}"></i></div></span><span class="num">完了 ${dn}/${cs.length} ▾</span></summary><p class="sub" style="margin:2px 0 8px">その回の問題に全部正解すると「完了」になります。</p>
+${cs.map(c=>{const b=TB[c.n],has=b&&b.cls&&(b.cls.seg||b.n<=6),sc=ok(c),pos=(S.cls||{})[c.n];const dd=done(c);return`<div class="crow${has?"":" off"}${dd?" done":""}"><span class="cno">${dd?"✓":c.n}</span><span class="ctx"><b>${esc(c.t)}${dd?`<span class="dchip">完了</span>`:""}</b><span class="sub">${has?`授業 約${clsMin(b)}分・教科書 ${b.pages.length}ページ`:"準備中"}${has&&pos?"・途中まで聞いた":""}</span>${c.q.length?`<span class="cpg"><span class="bar"><i style="width:${sc/c.q.length*100}%;background:${d.c}"></i></span><span class="num">正解 ${sc}/${c.q.length}（${Math.round(sc/c.q.length*100)}%）</span></span>`:""}
 ${has?`<span class="row" style="margin-top:6px;gap:6px"><button class="btn sm pri" data-c="${c.n}">▶ 授業</button><button class="btn sm" data-b="${c.n}">教科書</button>${c.q.length?`<button class="btn sm" data-q="${c.n}">問題 ${c.q.length}</button>`:""}</span>`:""}</span></div>`;}).join("")}</details>`;}).join("")}<p class="sub" style="margin-top:18px;text-align:center">授業音声：VOICEVOX:四国めたん / VOICEVOX:ずんだもん<br>問題・教科書はすべてオリジナルです。Cisco、CCNAは Cisco Systems, Inc. の商標です。</p>`;
   $("#gl").onclick=()=>go("gloss");
   app.querySelectorAll("details.ldom").forEach(e=>e.ontoggle=()=>{S.copen=Object.assign({},S.copen,{[e.dataset.dd]:e.open});save();});
@@ -547,7 +576,7 @@ function vClass(){
 <div class="lns" id="lns">${C.lines.map((x,k)=>`<button class="ln2" data-i="${k}"><b>${x.sp}</b><span>${esc(x.t)}</span></button>`).join("")}</div>
 </div></div></div></div>`;
   {const cs=app.querySelector(".clside"),cw=app.querySelector(".clwrap");if(cs&&window.ResizeObserver){const ro=new ResizeObserver(()=>{if(!cw.isConnected){ro.disconnect();return;}cw.style.setProperty("--subh",(getComputedStyle(cs).position==="fixed"?cs.offsetHeight+8:4)+"px");});ro.observe(cs);}}
-  const showPage=sc=>{const k=Math.min(sc-1,B.pages.length-1);if(k===pg)return;pg=k;const P=B.pages[k];$("#tbp").innerHTML=`<div class="tbhd"><h3>${esc(P.t)}</h3></div>${pageInner(P)}`;if(matchMedia("(prefers-reduced-motion: reduce)").matches)app.querySelectorAll(".mv").forEach(e=>e.remove());bindQuiz(P,()=>{ans.add(k+1);if(waiting){waiting=false;$("#wt").innerHTML="";next();}});linkTerms($("#tbp .tbtx")||$("#tbp"));};
+  const showPage=sc=>{const k=Math.min(sc-1,B.pages.length-1);if(k===pg)return;pg=k;const P=B.pages[k];$("#tbp").innerHTML=`<div class="tbhd"><h3>${esc(P.t)}</h3></div>${pageInner(P)}${lessonLinks(B,P)}`;bindLinks($("#tbp"));if(matchMedia("(prefers-reduced-motion: reduce)").matches)app.querySelectorAll(".mv").forEach(e=>e.remove());bindQuiz(P,()=>{ans.add(k+1);if(waiting){waiting=false;$("#wt").innerHTML="";next();}});linkTerms($("#tbp .tbtx")||$("#tbp"));};
   const draw=()=>{const x=C.lines[i];showPage(x.sc);$("#cur").innerHTML=`<span class="av ${x.sp==="先生"?"t":"s"}">${x.sp}</span><span><span class="who">${x.sp}</span><div class="say">${esc(x.t)}</div></span>`;
     $("#cpl").textContent=playing?"❚❚":"▶";
     app.querySelectorAll(".ln2").forEach(b=>b.classList.toggle("on",+b.dataset.i===i));const on=app.querySelector(".ln2.on");if(on){const box=$("#lns");box.scrollTop=on.offsetTop-box.offsetTop-box.clientHeight/2+on.clientHeight/2;}
@@ -595,11 +624,11 @@ function vBook(){
   ttl.textContent="教科書 第"+B.n+"回";
   const draw=dir=>{const P=B.pages[i];const inner=pageInner(P);
     app.innerHTML=`<div style="max-width:1100px;margin:0 auto"><div class="deckhead"><span class="chip" style="background:${D.c}">${SHORT[l.d]}</span><b class="grow" style="font-size:15px">第${B.n}回　${esc(B.t)}</b><span class="num">${i+1}/${n}</span></div>
-${B.cls?`<button class="btn sm pri" id="gocls" style="margin-bottom:10px">▶ 音声つきの授業で受ける</button>`:""}<div class="tbp ${dir<0?"rev":""}" id="tbp"><div class="tbhd"><div class="k">${i+1}ページ目</div><h3>${esc(P.t)}</h3></div>${inner}</div>
+${B.cls?`<button class="btn sm pri" id="gocls" style="margin-bottom:10px">▶ 音声つきの授業で受ける</button>`:""}<div class="tbp ${dir<0?"rev":""}" id="tbp"><div class="tbhd"><div class="k">${i+1}ページ目</div><h3>${esc(P.t)}</h3></div>${inner}${lessonLinks(B,P)}</div>
 <div class="dots" style="--c:${D.c}">${B.pages.map((_,k)=>`<button aria-label="${k+1}ページ目" class="${k===i?"on":""}" data-k="${k}"></button>`).join("")}</div>
 <div class="decknav"><button class="btn" id="pv" ${i===0?"disabled":""}>‹ 前のページ</button><button class="btn pri" id="nx">${i===n-1?"一問一答で確かめる":"次のページ ›"}</button></div></div>`;
     if(matchMedia("(prefers-reduced-motion: reduce)").matches)app.querySelectorAll(".mv").forEach(e=>e.remove());
-    linkTerms($("#tbp .tbtx")||$("#tbp"));
+    linkTerms($("#tbp .tbtx")||$("#tbp"));bindLinks($("#tbp"));
     const mv=d=>{const j=i+d;if(j<0||j>=n)return;i=j;arg.i=i;draw(d);scrollTo(0,0);};
     $("#pv").onclick=()=>mv(-1);$("#nx").onclick=()=>{if(i===n-1){setup(l.d);return;}mv(1);};
     app.querySelectorAll(".dots button").forEach(b=>b.onclick=()=>{const k=+b.dataset.k;const d=k>i?1:-1;i=k;arg.i=i;draw(d);});
@@ -623,20 +652,28 @@ const MK={ok:`<svg class="mk" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16"
 /* 授業の長さ（分）：音声の実際の長さ。音声がまだない回はセリフの数から見積もる */
 const clsMin=b=>{const g=b.cls.seg;return Math.max(1,Math.round(g&&g.length?(g[g.length-1][0]+g[g.length-1][1])/60:b.cls.lines.length/12));};
 function srcLabel(q){return SRC[q.src]||"";}
+/* 問題の出どころ：回の番号とタイトル・トピック・難易度（回は問題ファイルの番号から。IDの番号は使わない） */
+function qMeta(q){const c=QCP[q.id];return`${c?`第${c.n}回 ${esc(c.t)}`:esc(srcLabel(q))}${q.tag?"・"+esc(q.tag):""}`;}
+/* 復習マップのマス：説明（aria-label・title）と、タップしたときの中身のパネル */
+const qAria=q=>{const c=QCP[q.id];return`${c?`第${c.n}回 ${c.t}`:""}${q.tag?"・"+q.tag:""}・${strip(q.t).slice(0,30)}`;};
+function qPeek(id){const q=QM[id],st=stOf(id);sheet(QCP[id]?`第${QCP[id].n}回 ${QCP[id].t}`:"問題",`<p class="sub" style="margin:0 0 6px">${q.tag?esc(q.tag):""} ${lvChip(q)} ${st.l===0?"・前回は不正解":st.l?"・前回は正解":"・まだ解いていない"}</p><p style="margin:0 0 14px">${esc(strip(q.t))}</p><button class="btn pri" id="qpk" style="width:100%;min-height:50px">この問題を解く</button>`);
+  $("#qpk").onclick=()=>{$("#sheet").hidden=true;startPlay([id],"1問だけ");};}
+const lvChip=q=>q.lv?`<span class="lvc lv${q.lv}">${LVN[q.lv]}</span>`:"";
 let MAINBY={};
-const domIds=d=>ORDER.filter(id=>QM[id].d===d);
-const ngIds=d=>domIds(d).filter(id=>stOf(id).l===0);
+const domIds=(d,lv)=>ORDER.filter(id=>QM[id].d===d&&(!lv||QM[id].lv===lv));
+const ngIds=(d,lv)=>domIds(d,lv).filter(id=>stOf(id).l===0);
 const live=ss=>ss&&ss.i>0&&ss.i<ss.ids.length;
-function begin(d,ng,shuf){const k=skey(d,ng);let ids=ng?ngIds(d):domIds(d);if(!ids.length)return;const seed=shuf&&!ng?1+Math.floor(Math.random()*2147483000):0;if(shuf)ids=ng?shuffle(ids):sshuffle(ids,seed);S.ds[k]={dom:d,ng:!!ng,shuf:!!shuf,seed,ids,i:0,res:{},label:DM[d].name+(ng?"の間違えた問題":""),tab:"one"};S.opt={ng,shuf};save();$("#sheet").hidden=true;go("play",S.ds[k]);}
-function setup(d){const o=S.opt||{ng:0,shuf:0};let ng=o.ng&&ngIds(d).length?1:0,shuf=o.shuf||0;
-  const draw=()=>{const k=skey(d,ng),ss=S.ds[k],n=domIds(d).length,nn=ngIds(d).length;
-    sheet(DM[d].name,`<div class="pgh">範囲</div><div class="seg" style="display:flex;margin-bottom:12px"><button data-g="0" class="${ng?"":"on"}" style="flex:1">全部（${n}問）</button><button data-g="1" class="${ng?"on":""}" style="flex:1" ${nn?"":"disabled"}>間違えた問題だけ（${nn}問）</button></div>
+function begin(d,ng,shuf,lv){lv=lv||0;const k=skey(d,ng,lv);let ids=ng?ngIds(d,lv):domIds(d,lv);if(!ids.length)return;const seed=shuf&&!ng?1+Math.floor(Math.random()*2147483000):0;if(shuf)ids=ng?shuffle(ids):sshuffle(ids,seed);S.ds[k]={dom:d,ng:!!ng,lv,shuf:!!shuf,seed,ids,i:0,res:{},label:DM[d].name+(lv?"（"+LVN[lv]+"）":"")+(ng?"の間違えた問題":""),tab:"one"};S.opt={ng,shuf,lv};save();$("#sheet").hidden=true;go("play",S.ds[k]);}
+function setup(d){const o=S.opt||{ng:0,shuf:0};let lv=o.lv||0,ng=o.ng&&ngIds(d,lv).length?1:0,shuf=o.shuf||0;
+  const draw=()=>{if(!domIds(d,lv).length)lv=0;if(ng&&!ngIds(d,lv).length)ng=0;const k=skey(d,ng,lv),ss=S.ds[k],n=domIds(d,lv).length,nn=ngIds(d,lv).length;
+    sheet(DM[d].name,`<div class="pgh">難易度</div><div class="seg" style="display:flex;margin-bottom:12px">${[0,1,2].map(v=>`<button data-l="${v}" class="${lv===v?"on":""}" style="flex:1" ${domIds(d,v).length?"":"disabled"}>${v?LVN[v]:"すべて"}（${domIds(d,v).length}）</button>`).join("")}</div><div class="pgh">範囲</div><div class="seg" style="display:flex;margin-bottom:12px"><button data-g="0" class="${ng?"":"on"}" style="flex:1">全部（${n}問）</button><button data-g="1" class="${ng?"on":""}" style="flex:1" ${nn?"":"disabled"}>間違えた問題だけ（${nn}問）</button></div>
 <div class="pgh">順番</div><div class="seg" style="display:flex;margin-bottom:16px"><button data-s="0" class="${shuf?"":"on"}" style="flex:1">順番どおり</button><button data-s="1" class="${shuf?"on":""}" style="flex:1">シャッフル</button></div>
 <button class="btn pri" id="stt" style="width:100%;min-height:54px">スタート</button>
 ${live(ss)?`<button class="btn" id="cnt" style="width:100%;min-height:48px;margin-top:8px">前回の続きから（${ss.i}/${ss.ids.length}問${ss.shuf?"・シャッフル":""}）</button>`:""}`);
     const b=$("#shB");b.querySelectorAll("[data-g]").forEach(x=>x.onclick=()=>{ng=+x.dataset.g;draw();});
     b.querySelectorAll("[data-s]").forEach(x=>x.onclick=()=>{shuf=+x.dataset.s;draw();});
-    $("#stt").onclick=()=>begin(d,ng,shuf);const c=$("#cnt");if(c)c.onclick=()=>{$("#sheet").hidden=true;go("play",S.ds[k]);};};
+    b.querySelectorAll("[data-l]").forEach(x=>x.onclick=()=>{lv=+x.dataset.l;draw();});
+    $("#stt").onclick=()=>begin(d,ng,shuf,lv);const c=$("#cnt");if(c)c.onclick=()=>{$("#sheet").hidden=true;go("play",S.ds[k]);};};
   draw();}
 
 function vOne(){
@@ -697,7 +734,7 @@ function vPlay(){
   const P=arg;if(P.i>=P.ids.length)return vResult();
   const q=QM[P.ids[P.i]],D=DM[q.d];ttl.textContent=P.tab==="one"?"一問一答":P.label;
   const again=!!q.sim;
-  const head=`<div class="qtop"><span class="chip" style="background:${D.c}">${SHORT[q.d]}</span><span class="grow">${esc(srcLabel(q))}${q.tag?"・"+esc(q.tag):""}</span><span class="num">${P.i+1}/${P.ids.length}</span></div><div class="qbar"><i style="width:${P.i/P.ids.length*100}%;background:${D.c}"></i></div>`;
+  const head=`<div class="qtop"><span class="chip" style="background:${D.c}">${SHORT[q.d]}</span><span class="grow">${qMeta(q)}</span>${lvChip(q)}<span class="num">${P.i+1}/${P.ids.length}</span></div><div class="qbar"><i style="width:${P.i/P.ids.length*100}%;background:${D.c}"></i></div>`;
   qScreen(q,head,()=>{const cur=P.ids[P.i];P.i++;while(P.i<P.ids.length&&P.ids[P.i]===cur)P.i++;save();vPlay();scrollTo(0,0);},ok=>{P.res[q.id]=ok;if(P.tab==="one")save();});
 }
 const sortIds=ids=>{const di={},li={};DOM.forEach((d,i)=>di[d.id]=i);LES.forEach((l,i)=>li[l.id]=i);return ids.slice().sort((a,b)=>{const x=QM[a],y=QM[b];return di[x.d]-di[y.d]||li[x.lt]-li[y.lt]||(x.ci||0)-(y.ci||0);});};
@@ -800,7 +837,7 @@ function vExamQ(){
   if(M.i>=M.ids.length)return exFinish();
   const q=QM[M.ids[M.i]];if(!q){M.i++;save();return vExamQ();}
   ttl.textContent=M.pr?"模擬試験（練習）":"模擬試験";M._t=Date.now();
-  app.innerHTML=`<div class="qwrap cmp"><div class="qtop"><span class="chip" style="background:${DM[q.d].c}">${SHORT[q.d]}</span><span class="grow num">${M.i+1}/${M.ids.length}</span><b class="num" id="exl">${M.pr?"経過 "+mmss(M.used):"残り "+mmss(exLeft(M))}</b><button class="btn sm" id="exp">中断</button></div><div class="qbar"><i style="width:${M.i/M.ids.length*100}%;background:var(--acc)"></i></div><div class="qbox" id="qb"></div></div>`;
+  app.innerHTML=`<div class="qwrap cmp"><div class="qtop"><span class="chip" style="background:${DM[q.d].c}">${SHORT[q.d]}</span><span class="grow"><small class="sub">${q.tag?esc(q.tag):""}</small> ${lvChip(q)}</span><span class="num">${M.i+1}/${M.ids.length}</span><b class="num" id="exl">${M.pr?"経過 "+mmss(M.used):"残り "+mmss(exLeft(M))}</b><button class="btn sm" id="exp">中断</button></div><div class="qbar"><i style="width:${M.i/M.ids.length*100}%;background:var(--acc)"></i></div><div class="qbox" id="qb"></div></div>`;
   const tick=()=>{if(M.pr){const e=$("#exl");if(e)e.textContent="経過 "+mmss(M.used+(M._t?(Date.now()-M._t)/1000:0));return;}const l=exLeft(M),e=$("#exl");if(e){e.textContent="残り "+mmss(l);e.style.color=l<300?"var(--ng)":"";}if(l<=0){toast("時間になりました。採点します。");exFinish();}};
   EXT.iv=setInterval(tick,1000);
   exWidget($("#qb"),q,ok=>{M.ans[q.id]=ok?1:0;rec(q.id,ok);M.i++;exStop();if(M.pr){M.fb=q.id;save();exFeedback(M);scrollTo(0,0);return;}if(M.i>=M.ids.length)exFinish();else{vExamQ();scrollTo(0,0);}},M.i===M.ids.length-1&&!M.pr);
@@ -810,7 +847,7 @@ function vExamQ(){
 function exFeedback(M){
   const q=QM[M.fb];if(!q){M.fb=null;save();return vExamQ();}const ok=!!M.ans[q.id],last=M.i>=M.ids.length;
   ttl.textContent="模擬試験（練習）";
-  app.innerHTML=`<div class="qwrap cmp"><div class="qtop"><span class="chip" style="background:${DM[q.d].c}">${SHORT[q.d]}</span><span class="grow num">${M.i}/${M.ids.length}</span><span class="num sub">正解 ${Object.values(M.ans).filter(v=>v).length}/${Object.keys(M.ans).length}</span><button class="btn sm" id="exp">中断</button></div><div class="qbar"><i style="width:${M.i/M.ids.length*100}%;background:var(--acc)"></i></div>
+  app.innerHTML=`<div class="qwrap cmp"><div class="qtop"><span class="chip" style="background:${DM[q.d].c}">${SHORT[q.d]}</span><span class="grow"><small class="sub">${qMeta(q)}</small> ${lvChip(q)}</span><span class="num">${M.i}/${M.ids.length}</span><span class="num sub">正解 ${Object.values(M.ans).filter(v=>v).length}/${Object.keys(M.ans).length}</span><button class="btn sm" id="exp">中断</button></div><div class="qbar"><i style="width:${M.i/M.ids.length*100}%;background:var(--acc)"></i></div>
 <div class="qbox"><div class="res ${ok?"ok":"ng"}" style="margin-top:0">${ok?MK.ok:MK.ng}${ok?"正解！":"不正解"}</div><div class="sub">${T(q,q.t)}</div>${q.fig?`<div class="exh qfig"><div class="h">構成図</div>${q.fig}</div>`:""}<div class="pgh" style="margin-top:10px">正しい答え</div><div class="corr">${corrHtml(q)}</div><div class="ex">${T(q,q.e)}</div>${q.m?`<div class="memo">${T(q,q.m)}</div>`:""}${rdBlock(q)}
 <div style="margin-top:14px"><button class="btn pri" id="exnx" style="width:100%;min-height:50px">${last?"結果を見る":"次の問題へ"}</button></div></div></div>`;
   app.querySelectorAll("[data-rg]").forEach(b=>b.onclick=()=>guideSheet(b.dataset.rg));
@@ -842,7 +879,7 @@ function vExRes(){
 <p class="sub">${h.pr?`練習・かかった時間 ${mmss(h.sec)}`:`かかった時間 ${mmss(h.sec)}／制限 ${mmss(h.lim)}`}${h.done<h.n?`・未回答 ${h.n-h.done}問（不正解として採点）`:""}<br>目安は非公式です（合格ラインは公表されていません）。</p>
 <div class="row" style="justify-content:center">${h.ng.length?`<button class="btn pri" id="exr">間違えた${h.ng.length}問を解説つきで復習</button>`:""}<button class="btn" id="exa">模擬試験の画面へ</button></div></div>
 <h3>分野ごとの正答率</h3><div class="card">${exDoms().filter(d=>h.by[d.id]).map(d=>{const b=h.by[d.id],r=b[0]/b[1];return`<div class="row" style="margin:6px 0"><span style="width:10em">${esc(d.name)}</span><span class="grow"><span class="bar" style="display:block"><i style="width:${r*100}%;background:${d.c}"></i></span></span><b class="num" style="width:7em;text-align:right;color:${r*100>=EXPASS?"var(--ok)":"var(--ng)"}">${Math.round(r*100)}%（${b[0]}/${b[1]}）</b></div>`;}).join("")}</div>
-${h.ng.length?`<h3>間違えた問題</h3>${h.ng.filter(id=>QM[id]).map(id=>{const q=QM[id];return`<button class="card" data-q="${id}" style="display:block;width:100%;text-align:left;border-left:8px solid ${DM[q.d].c}"><span class="sub">${esc(SHORT[q.d])}${q.tag?"・"+esc(q.tag):""}</span><div>${esc(strip(q.t)).slice(0,90)}</div></button>`;}).join("")}`:""}</div>`;
+${h.ng.length?`<h3>間違えた問題</h3>${h.ng.filter(id=>QM[id]).map(id=>{const q=QM[id];return`<button class="card" data-q="${id}" style="display:block;width:100%;text-align:left;border-left:8px solid ${DM[q.d].c}"><span class="sub">${esc(SHORT[q.d])}・${qMeta(q)}</span> ${lvChip(q)}<div>${esc(strip(q.t)).slice(0,90)}</div></button>`;}).join("")}`:""}</div>`;
   const r=$("#exr");if(r)r.onclick=()=>startPlay(h.ng,"模擬試験の復習");$("#exa").onclick=()=>{stack=[];view="exam";arg=null;render();};
   app.querySelectorAll("[data-q]").forEach(b=>b.onclick=()=>startPlay([b.dataset.q],"1問だけ"));
 }
@@ -850,12 +887,12 @@ ${h.ng.length?`<h3>間違えた問題</h3>${h.ng.filter(id=>QM[id]).map(id=>{con
 function vReview(){
   ttl.textContent="復習";
   const wrong=QS.filter(q=>stOf(q.id).l===0),todo=QS.filter(q=>!S.st[q.id]);
-  app.innerHTML=`<h2>問題マップ</h2><p class="sub">1マスが1問です。タップするとその問題を解けます。</p>
+  app.innerHTML=`<h2>問題マップ</h2><p class="sub">1マスが1問です。マスを押すと、どの回のどんな問題かが見られます（そこから解けます）。</p>
 <div class="legend"><span><i style="background:var(--ok)"></i>正解（色は分野の色）</span><span><i style="background:var(--ink)"></i>間違えた</span><span><i style="background:var(--line)"></i>まだ解いていない</span></div>
 <div class="row" style="margin:8px 0 6px"><span class="sub">分野から10問：</span>${DOM.map(d=>`<button class="chp" data-d10="${d.id}" style="border-color:${d.c}">${SHORT[d.id]}</button>`).join("")}</div>
 <div class="row" style="margin:8px 0 14px"><button class="btn sm pri" id="rw" ${wrong.length?"":"disabled"}>間違えた問題を解く（${wrong.length}）</button><button class="btn sm" id="rt" ${todo.length?"":"disabled"}>まだの問題から10問</button></div>
-${DOM.map(d=>{const qs=QS.filter(q=>q.d===d.id);const s=domStat(d.id);return`<div class="row"><span style="width:12px;height:12px;border-radius:50%;background:${d.c}"></span><b class="grow">${esc(d.name)}</b><span class="num">正解 ${s.ok}/${s.n}</span></div><div class="qmap">${qs.map(q=>{const st=stOf(q.id);return`<button data-q="${q.id}" class="${st.l===0?"w":""}" style="${st.l?"background:"+d.c:""}" aria-label="${esc(srcLabel(q))}"></button>`;}).join("")}</div>`;}).join("")}`;
-  app.querySelectorAll("[data-q]").forEach(b=>b.onclick=()=>startPlay([b.dataset.q],"1問だけ"));
+${DOM.map(d=>{const qs=QS.filter(q=>q.d===d.id);const s=domStat(d.id);return`<div class="row"><span style="width:12px;height:12px;border-radius:50%;background:${d.c}"></span><b class="grow">${esc(d.name)}</b><span class="num">正解 ${s.ok}/${s.n}</span></div><div class="qmap">${qs.map(q=>{const st=stOf(q.id);return`<button data-q="${q.id}" class="${st.l===0?"w":""}" style="${st.l?"background:"+d.c:""}" aria-label="${esc(qAria(q))}" title="${esc(qAria(q))}"></button>`;}).join("")}</div>`;}).join("")}`;
+  app.querySelectorAll("[data-q]").forEach(b=>b.onclick=()=>qPeek(b.dataset.q));
   $("#rw").onclick=()=>startPlay(shuffle(wrong.map(q=>q.id)),"間違えた問題");
   $("#rt").onclick=()=>startPlay(shuffle(todo.map(q=>q.id)).slice(0,10),"まだの問題から10問");
   app.querySelectorAll("[data-d10]").forEach(b=>b.onclick=()=>startPlay(shuffle(QS.filter(q=>q.d===b.dataset.d10).map(q=>q.id)).slice(0,10),DM[b.dataset.d10].name+"から10問"));
@@ -1095,8 +1132,8 @@ async function boot(){
   try{const r=await fetch("data.json",{cache:"no-cache"});const A=await r.json();
     A.forEach(o=>{if(o.r==="D")DOM.push(o);else if(o.r==="L")LES.push(o);else if(o.r==="Q")QS.push(o);else if(o.r==="G")GL.push(o);else if(o.r==="C")CLI.push(o);else if(o.r==="B")LABS.push(o);else if(o.r==="O")ORDER=o.ids;else if(o.r==="TB")TBS.push(o);else if(o.r==="CP")CP=o.list;else if(o.r==="QP")QP=o.m;else if(o.r==="RG")RG=o.list;});
   }catch(e){app.innerHTML=`<p class="empty">データを読み込めませんでした。ページを開き直してください。</p>`;return;}
-  DOM.forEach(d=>DM[d.id]=d);LES.forEach(l=>LM[l.id]=l);QS.forEach(q=>QM[q.id]=q);buildGloss();
-  ORDER=ORDER.filter(id=>QM[id]);{const g={};QS.forEach(q=>{const k=strip(q.t).replace(/\s+/g,"");(g[k]=g[k]||[]).push(q);});Object.values(g).forEach(a=>{if(a.length>1)a.forEach(q=>q.sim=a.length);});}for(const k in RAWDS){const nk=k.replace(/^ng:/,"ng_");const ss=unpackSess(nk,RAWDS[k]);if(ss)S.ds[skey(ss.dom,ss.ng)]=ss;}ORDER.forEach(id=>{const l=QM[id].lt;(MAINBY[l]=MAINBY[l]||[]).push(id);});const h=location.hash.slice(1);view=TOP.includes(h)?h:"course";render();
+  DOM.forEach(d=>DM[d.id]=d);LES.forEach(l=>LM[l.id]=l);QS.forEach(q=>QM[q.id]=q);CP.forEach(c=>(c.q||[]).forEach(id=>QCP[id]=c));buildGloss();
+  ORDER=ORDER.filter(id=>QM[id]);{const g={};QS.forEach(q=>{const k=strip(q.t).replace(/\s+/g,"");(g[k]=g[k]||[]).push(q);});Object.values(g).forEach(a=>{if(a.length>1)a.forEach(q=>q.sim=a.length);});}for(const k in RAWDS){const nk=k.replace(/^ng:/,"ng_");const ss=unpackSess(nk,RAWDS[k]);if(ss)S.ds[skey(ss.dom,ss.ng,ss.lv)]=ss;}ORDER.forEach(id=>{const l=QM[id].lt;(MAINBY[l]=MAINBY[l]||[]).push(id);});const h=location.hash.slice(1);view=TOP.includes(h)?h:"course";render();
   try{if(!window.claude||!claude.use)return;
     const [db,user]=await Promise.all([claude.use("db"),claude.use("user")]);if(!db||!user)return;
     const id=await user.id();if(!id)return;const col=db.collection("data/users/"+id);const rP=col.doc("progress2"),rS=col.doc("sessions"),rOld=col.doc("progress");
@@ -1111,7 +1148,7 @@ async function boot(){
       if(p2.sd&&p2.sd.s){S.sd=S.sd||{};S.sd.s=S.sd.s||{};for(const k in p2.sd.s){const a=S.sd.s[k],b=p2.sd.s[k];if(!a||b[1]>a[1])S.sd.s[k]=b;}if(!S.sd.f&&p2.sd.f)S.sd.f=p2.sd.f;}}
     {const fin=new Set((S.mxh||[]).map(h=>h.id)),r=s2&&s2.mx;if(S.mx&&fin.has(S.mx.id)&&view!=="examq")S.mx=null;/* ほかの端末で採点済み */
       if(r&&r.ids&&!fin.has(r.id)&&view!=="examq"&&(!S.mx||r.id>S.mx.id||(r.id===S.mx.id&&r.i>S.mx.i)))S.mx=Object.assign({},r,{_t:0});}
-    if(s2&&s2.ds)for(const k in s2.ds){const b=unpackSess(k.replace(/^ng:/,"ng_"),s2.ds[k]);if(!b)continue;const kk=skey(b.dom,b.ng),a=S.ds[kk];if(!a||(b.i>(a.i||0)&&!(view==="play"&&arg===a)))S.ds[kk]=b;}
+    if(s2&&s2.ds)for(const k in s2.ds){const b=unpackSess(k.replace(/^ng:/,"ng_"),s2.ds[k]);if(!b)continue;const kk=skey(b.dom,b.ng,b.lv),a=S.ds[kk];if(!a||(b.i>(a.i||0)&&!(view==="play"&&arg===a)))S.ds[kk]=b;}
       return true;};
     if(!(await pull(true)))return;
     let lastPull=Date.now();document.addEventListener("visibilitychange",async()=>{if(document.hidden||Date.now()-lastPull<5000)return;lastPull=Date.now();if(saving)return;
