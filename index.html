@@ -277,6 +277,8 @@ details.ldom summary::-webkit-details-marker{display:none}
 .tbhd .k{font-size:13px;color:var(--sub);font-weight:700}
 .tbhd h3{font-size:clamp(22px,5vw,30px);line-height:1.2;margin:2px 0 0;letter-spacing:-.01em}
 .tbfg{background:var(--soft);margin:10px 12px;border-radius:14px;padding:8px}
+.tbfg.tbonly{max-width:560px;margin:10px auto}
+.tbcode{margin:0;padding:12px;border-radius:10px;background:#0e1116;color:#e6edf3;font:13px/1.6 ui-monospace,Menlo,Consolas,monospace;white-space:pre-wrap;word-break:break-all;user-select:text;-webkit-user-select:text}
 .qfig svg{width:100%;max-width:460px;height:auto;display:block;margin:4px auto 0}
 .tbfig{display:block;width:100%;max-width:560px;height:auto;margin:0 auto}
 .tbtx{padding:4px 18px 18px;font-size:16.5px;line-height:1.85}
@@ -522,8 +524,11 @@ ${nx?`<div style="margin-top:16px"><button class="btn sm" id="lnx">次の駅へ�
   draw(1);
 }
 /* ---------- TEXTBOOK ---------- */
-function pageInner(P){if(P.quiz){const Z=P.quiz;return`<div class="tbtx"><p style="font-weight:800;font-size:17px">${Z.q}</p><div class="tbq">${shuffle([...Z.o.keys()]).map(k=>Z.o[k]).map((o,_i,_a,k=Z.o.indexOf(o))=>`<button data-k="${k}"><svg viewBox="-42 -36 84 72">${o[1]}</svg>${o[0]}</button>`).join("")}</div><div id="tbz"></div></div>`;}
-  return`<div class="tbgrid"><div class="tbfg">${P.svg}</div><div class="tbtx"><p>${P.b}</p>${P.p?`<div class="point">${P.p}</div>`:""}</div></div>`;}
+function pageInner(P){if(P.quiz){const Z=P.quiz;return`<div class="tbtx"><p style="font-weight:800;font-size:17px">${Z.q}</p><div class="tbq">${Z.o.map((o,k)=>`<button data-k="${k}"><svg viewBox="-42 -36 84 72">${o[1]}</svg>${o[0]}</button>`).join("")}</div><div id="tbz"></div></div>`;}
+  /* 図は SVG か、コピーできる文字のコード（code）。本文がないページ（今日のゴールなど）は図だけを出す */
+  const fig=P.svg||(P.code?`<pre class="tbcode">${esc(P.code)}</pre>`:"");
+  if(!P.b&&!P.p)return`<div class="tbfg tbonly">${fig}</div>`;
+  return`<div class="tbgrid">${fig?`<div class="tbfg">${fig}</div>`:""}<div class="tbtx">${P.b?`<p>${P.b}</p>`:""}${P.p?`<div class="point">${P.p}</div>`:""}</div></div>`;}
 function bindQuiz(P,onAns){if(!P.quiz)return;app.querySelectorAll(".tbq button").forEach(b=>b.onclick=()=>{const k=+b.dataset.k,Z=P.quiz;app.querySelectorAll(".tbq button").forEach(x=>{const kk=+x.dataset.k;x.classList.toggle("ok",kk===Z.a);x.classList.toggle("ng",kk===k&&k!==Z.a);x.disabled=true;});$("#tbz").innerHTML=`<div class="res ${k===Z.a?"ok":"ng"}">${k===Z.a?MK.ok:MK.ng}${k===Z.a?"正解！":"不正解"}</div><p>${Z.e}</p>`;if(onAns)onAns();});}
 /* ---------- CLASS (audio lesson) ---------- */
 let AU=null;const BLOBS={};

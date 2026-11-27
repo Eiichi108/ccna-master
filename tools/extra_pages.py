@@ -5,8 +5,12 @@ EXTRA = {回: [ページ, ...]}、QPAGE = {問題ID: (回, EXTRA の何番目)}�
 from figs import boxes, table, term, BL, GR, YE, RD, PU, GY, CY, TERM_FG
 
 
-def P(t, svg, b, p=None):
-    d = {"t": "もっとくわしく：" + t, "svg": svg, "b": b}
+def P(t, svg, b, p=None, code=None):
+    d = {"t": "もっとくわしく：" + t, "b": b}
+    if svg:
+        d["svg"] = svg
+    if code:
+        d["code"] = code
     if p:
         d["p"] = p
     return d
@@ -246,14 +250,10 @@ EXTRA = {
     "SDNは、上から<b>アプリケーション層・制御層・インフラストラクチャ層</b>の3つに分けて考えます。コントローラーは<b>制御層</b>、ネットワーク機器は<b>インフラストラクチャ層</b>で、その間がサウスバウンドAPIです。頭脳（コントロールプレーン）と手足（データプレーン）を分けることを<b>分解（disaggregation）</b>とも言います。管理者が「来客は社内サーバーに入れない」のように<b>目的だけ</b>を伝えると、コントローラーが設定に変えて実行する考え方を<b>インテントベースネットワーキング（IBN）</b>と言います。Catalyst Center は、ほかの会社の製品と連携する拡張（SDKなど）もできます。",
     "コントローラー＝制御層、目的で動かす＝IBN")],
 78: [P("HTTPのヘッダーと、URIの読み方",
-    term("REST API のリクエストの例", [
-        ("GET /api/v1/devices?status=down", BL),
-        ("Accept: application/json", GR),
-        ("Content-Type: application/json", GR),
-        ("Authorization: Bearer eyJhbGci...", YE)],
-        ["/api/v1/devices ＝ URI、?status=down ＝ クエリ", "Accept ＝ ほしい形式、Content-Type ＝ 送る形式"]),
+    None,
     "REST APIでは、操作の対象（リソース）を<b>URI</b>（例：/api/v1/devices）で指定します。URLの「?」より後ろは<b>クエリパラメーター</b>で、「状態がdownのものだけ」のような条件を渡します。リクエストには<b>ヘッダー</b>を付けます。<b>Content-Type</b>は今送っているデータの形式、<b>Accept</b>は返してほしい形式です。JSONなら application/json、XMLなら application/xml と書きます。トークンは <b>Authorization: Bearer トークン</b> の形で送ります。",
-    "Content-Type＝送る形式、Accept＝ほしい形式"),
+    "Content-Type＝送る形式、Accept＝ほしい形式",
+    code='curl -X GET \\\n  "https://ctrl.example.com/api/v1/devices?status=down" \\\n  -H "Accept: application/json" \\\n  -H "Content-Type: application/json" \\\n  -H "Authorization: Bearer eyJhbGciOi..."\n\n# /api/v1/devices ＝ URI（何を）\n# ?status=down    ＝ クエリパラメーター（条件）'),
      P("APIの認証の方法",
     boxes("REST API の認証", [("Basic 認証", ["ユーザー名:パスワードを Base64 にするだけ", "暗号化ではない → 必ず HTTPS と一緒に"], RD),
                           ("トークン（Bearer）", ["最初にログインしてもらい、Authorization ヘッダーで送る"], BL),
