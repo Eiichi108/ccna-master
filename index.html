@@ -327,6 +327,7 @@ details.ldom summary::-webkit-details-marker{display:none}
 .clwrap .tbtx{padding:2px 12px 10px;font-size:15px;line-height:1.7}.clwrap .tbtx p{margin:4px 0}
 .clwrap .point{margin:6px 0 0;padding:6px 10px;font-size:14px}
 .clwrap .tbq{gap:6px;margin:6px 0}.clwrap .tbq button{min-height:84px;padding:6px 2px}.clwrap .tbq button svg{width:56px;height:46px}
+.exrow{padding:12px 14px}.exrow.ng{background:var(--ngbg)}.exrow .exmk{color:var(--ok)}.exrow.ng .exmk{color:var(--ng)}.exrow .exmk svg{width:22px;height:22px}.exok summary{cursor:pointer;font-weight:800;margin:14px 0 8px}
 .tbq.long{grid-template-columns:1fr}.tbq.long button{display:flex;align-items:center;gap:12px;min-height:56px;padding:8px 14px;text-align:left}.tbq.long button svg{width:42px;height:36px;margin:0;flex:none}
 #app .nb{white-space:nowrap;overflow-wrap:normal}#app .nb6{overflow-wrap:normal;word-break:keep-all}
 .clwrap .credit{margin:6px 2px 0;font-size:12px}
@@ -823,7 +824,7 @@ const mmss=s=>{s=Math.ceil(s);return`${Math.floor(s/60)}:${String(s%60).padStart
 function exFinish(){exStop();const M=S.mx;if(!M)return;const by={};let ok=0;const ng=[];
   M.ids.forEach(id=>{const q=QM[id];if(!q)return;const b=by[q.d]=by[q.d]||[0,0];b[1]++;if(M.ans[id]){b[0]++;ok++;}else ng.push(id);});
   const h={id:M.id,end:Date.now(),n:M.ids.length,ok,done:Object.keys(M.ans).length,sec:Math.round(M.used),lim:M.lim,lvo:M.lvo?1:0,pr:M.pr?1:0,by,ng};
-  S.mxh=[h].concat((S.mxh||[]).filter(x=>x.id!==h.id)).slice(0,20);S.mx=null;save();stack=[];view="exres";arg=h;render();scrollTo(0,0);}
+  S.mxh=[h].concat((S.mxh||[]).filter(x=>x.id!==h.id)).slice(0,20);const ids=M.ids.slice();S.mx=null;save();stack=[];view="exres";arg=Object.assign({},h,{ids});render();scrollTo(0,0);}
 function vExam(){
   ttl.textContent="模擬試験";const M=S.mx;let n=arg&&arg.n||S.mxn||50,lvo=S.mxl===undefined?1:S.mxl,pr=S.mxm?1:0;
   const draw=()=>{const A=exAlloc(n),sec=n*EXSEC;
@@ -852,7 +853,7 @@ function vExamQ(){
   if(M.i>=M.ids.length)return exFinish();
   const q=QM[M.ids[M.i]];if(!q){M.i++;save();return vExamQ();}
   ttl.textContent=M.pr?"模擬試験（練習）":"模擬試験";M._t=Date.now();
-  app.innerHTML=`<div class="qwrap cmp"><div class="qtop"><span class="chip" style="background:${DM[q.d].c}">${SHORT[q.d]}</span><span class="grow"><small class="sub">${q.tag?esc(q.tag):""}</small> ${lvChip(q)}</span><span class="num">${M.i+1}/${M.ids.length}</span><b class="num" id="exl">${M.pr?"経過 "+mmss(M.used):"残り "+mmss(exLeft(M))}</b><button class="btn sm" id="exp">中断</button></div><div class="qbar"><i style="width:${M.i/M.ids.length*100}%;background:var(--acc)"></i></div><div class="qbox" id="qb"></div></div>`;
+  app.innerHTML=`<div class="qwrap cmp"><div class="qtop"><span class="chip" style="background:${DM[q.d].c}">${SHORT[q.d]}</span><span class="grow"></span><span class="num">${M.i+1}/${M.ids.length}</span><b class="num" id="exl">${M.pr?"経過 "+mmss(M.used):"残り "+mmss(exLeft(M))}</b><button class="btn sm" id="exp">中断</button></div><div class="sub" style="font-size:13px;margin:0 0 6px">${qMeta(q)} ${lvChip(q)}</div><div class="qbar"><i style="width:${M.i/M.ids.length*100}%;background:var(--acc)"></i></div><div class="qbox" id="qb"></div></div>`;
   const tick=()=>{if(M.pr){const e=$("#exl");if(e)e.textContent="経過 "+mmss(M.used+(M._t?(Date.now()-M._t)/1000:0));return;}const l=exLeft(M),e=$("#exl");if(e){e.textContent="残り "+mmss(l);e.style.color=l<300?"var(--ng)":"";}if(l<=0){toast("時間になりました。採点します。");exFinish();}};
   EXT.iv=setInterval(tick,1000);
   exWidget($("#qb"),q,ok=>{M.ans[q.id]=ok?1:0;rec(q.id,ok);M.i++;exStop();if(M.pr){M.fb=q.id;save();exFeedback(M);scrollTo(0,0);return;}if(M.i>=M.ids.length)exFinish();else{vExamQ();scrollTo(0,0);}},M.i===M.ids.length-1&&!M.pr);
@@ -894,10 +895,13 @@ function vExRes(){
 <p class="sub">${h.pr?`練習・かかった時間 ${mmss(h.sec)}`:`かかった時間 ${mmss(h.sec)}／制限 ${mmss(h.lim)}`}${h.done<h.n?`・未回答 ${h.n-h.done}問（不正解として採点）`:""}<br>目安は非公式です（合格ラインは公表されていません）。</p>
 <div class="row" style="justify-content:center">${h.ng.length?`<button class="btn pri" id="exr">間違えた${h.ng.length}問を解説つきで復習</button>`:""}<button class="btn" id="exa">模擬試験の画面へ</button></div></div>
 <h3>分野ごとの正答率</h3><div class="card">${exDoms().filter(d=>h.by[d.id]).map(d=>{const b=h.by[d.id],r=b[0]/b[1];return`<div class="row" style="margin:6px 0"><span style="width:10em">${esc(d.name)}</span><span class="grow"><span class="bar" style="display:block"><i style="width:${r*100}%;background:${d.c}"></i></span></span><b class="num" style="width:7em;text-align:right;color:${r*100>=EXPASS?"var(--ok)":"var(--ng)"}">${Math.round(r*100)}%（${b[0]}/${b[1]}）</b></div>`;}).join("")}</div>
-${h.ng.length?`<h3>間違えた問題</h3>${h.ng.filter(id=>QM[id]).map(id=>{const q=QM[id];return`<button class="card" data-q="${id}" style="display:block;width:100%;text-align:left;border-left:8px solid ${DM[q.d].c}"><span class="sub">${esc(SHORT[q.d])}・${qMeta(q)}</span> ${lvChip(q)}<div>${esc(strip(q.t)).slice(0,90)}</div></button>`;}).join("")}`:""}</div>`;
+${h.ng.length?`<h3>間違えた問題（${h.ng.length}）</h3>${h.ng.filter(id=>QM[id]).map(id=>exRow(id,0)).join("")}`:""}${h.ids?(()=>{const ng=new Set(h.ng),ok=h.ids.filter(id=>QM[id]&&!ng.has(id));return ok.length?`<details class="exok"><summary>正解した問題（${ok.length}）</summary>${ok.map(id=>exRow(id,1)).join("")}</details>`:"";})():""}</div>`;
   const r=$("#exr");if(r)r.onclick=()=>startPlay(h.ng,"模擬試験の復習");$("#exa").onclick=()=>{stack=[];view="exam";arg=null;render();};
   app.querySelectorAll("[data-q]").forEach(b=>b.onclick=()=>startPlay([b.dataset.q],"1問だけ"));
+  app.querySelectorAll("[data-tb]").forEach(b=>b.onclick=()=>{const p=QP[b.dataset.tb];go("book",{n:p[0],i:p[1]});});
 }
+/* 模擬試験の結果：1問の行（分野・回・タグ、解き直す、教科書の該当ページへ） */
+function exRow(id,ok){const q=QM[id],p=QP[id];return`<div class="card exrow${ok?"":" ng"}" style="border-left:8px solid ${DM[q.d].c}"><div class="row" style="gap:8px;align-items:flex-start"><b class="exmk">${ok?MK.ok:MK.ng}</b><span class="grow"><span class="sub">${esc(SHORT[q.d])}・${qMeta(q)}</span> ${lvChip(q)}<span style="display:block">${esc(strip(q.t)).slice(0,90)}</span></span></div><div class="row" style="gap:8px;margin-top:8px;flex-wrap:wrap"><button class="btn sm" data-q="${id}">解き直す</button>${p?`<button class="btn sm" data-tb="${id}">教科書 第${p[0]}回 ${p[1]+1}ページ目へ</button>`:""}</div></div>`;}
 /* ---------- REVIEW ---------- */
 function vReview(){
   ttl.textContent="復習";
