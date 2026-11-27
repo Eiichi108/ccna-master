@@ -4,3 +4,7 @@ __pycache__/
 .DS_Store
 preview/
 .claude/settings.local.json
+
+# テスト用の一時ページ
+_t*.html
+_host.html
